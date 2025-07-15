@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>On Systems – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./podman.rjs.html.rjs.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00_intro.html">On Systems</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">On Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./podman.rjs.html.rjs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Podman</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
+  <li><a href="#about-me" id="toc-about-me" class="nav-link" data-scroll-target="#about-me">About Me</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#background-1" id="toc-background-1" class="nav-link" data-scroll-target="#background-1">Background</a></li>
+  </ul></li>
+  <li><a href="#modality" id="toc-modality" class="nav-link" data-scroll-target="#modality">Modality</a>
+  <ul class="collapse">
+  <li><a href="#general-expectations" id="toc-general-expectations" class="nav-link" data-scroll-target="#general-expectations">General Expectations</a></li>
+  <li><a href="#classexercises" id="toc-classexercises" class="nav-link" data-scroll-target="#classexercises">Class/Exercises</a></li>
+  <li><a href="#feedback-structure" id="toc-feedback-structure" class="nav-link" data-scroll-target="#feedback-structure">Feedback Structure</a></li>
+  <li><a href="#projectwebsite" id="toc-projectwebsite" class="nav-link" data-scroll-target="#projectwebsite">Project/Website</a></li>
+  </ul></li>
+  <li><a href="#group-exercise" id="toc-group-exercise" class="nav-link" data-scroll-target="#group-exercise">Group Exercise:</a>
+  <ul class="collapse">
+  <li><a href="#aims-of-education" id="toc-aims-of-education" class="nav-link" data-scroll-target="#aims-of-education">Aims of Education</a></li>
+  <li><a href="#question-0" id="toc-question-0" class="nav-link" data-scroll-target="#question-0">Question 0</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  </ul></li>
+  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing Thoughts</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="00_intro.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">On Systems</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<ul>
+<li>Welcome to Willamette!</li>
+<li>Welcome to <em>Thinking Machines</em></li>
+<li>We will learn:
+<ul>
+<li>Scientific computing, to learn…</li>
+<li>Machine learning and artifical intelligence</li>
+</ul></li>
+</ul>
+<section id="course-description" class="level2">
+<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<blockquote class="blockquote">
+<p>Artifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think.</p>
+</blockquote>
+</section>
+<section id="about-me" class="level2">
+<h2 class="anchored" data-anchor-id="about-me">About Me</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>About</th>
+<th>Me</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Name</strong>:</td>
+<td>Calvin (Deutschbein)</td>
+</tr>
+<tr class="even">
+<td><strong>Say</strong>:</td>
+<td>(Professor) Calvin</td>
+</tr>
+<tr class="odd">
+<td><strong>Pronoun</strong>:</td>
+<td>they/them</td>
+</tr>
+<tr class="even">
+<td><strong>Office</strong>:</td>
+<td>Discord calvin2501</td>
+</tr>
+<tr class="odd">
+<td><strong>Email</strong>:</td>
+<td><a href="@mailto:ckdeutschbein@willamette.edu">ckdeutschbein@willamette.edu</a></td>
+</tr>
+<tr class="even">
+<td><strong>Website</strong>:</td>
+<td><a href="https://cd-public.github.io">cd-public.github.io</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<ul>
+<li><strong>Thesis Title</strong>: <a href="https://cd-public.github.io/papers/2021/CD2021.pdf">Mining Secure Behavior of Hardware Designs</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>Specification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs.</p>
+</blockquote>
+</section>
+<section id="background-1" class="level2">
+<h2 class="anchored" data-anchor-id="background-1">Background</h2>
+<ul>
+<li><strong>Plain English</strong>:<br>
+Just as there are bugs in code that make <strong>software</strong>, modern <strong>hardware</strong> is also written in code and therefore may contain bugs. I find these bugs.<br>
+</li>
+<li>Of note: I found those bugs <em>using scientific computing</em> (thinking machines).</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="modality" class="level1">
+<h1>Modality</h1>
+<ul>
+<li>Lecture (Talk)
+<ul>
+<li>Monday &amp; Wednesday</li>
+</ul></li>
+<li>Exercise (Code)
+<ul>
+<li>Friday</li>
+</ul></li>
+<li>Projects (Write-ups)
+<ul>
+<li>Friday, 10 Oct</li>
+<li>Friday, 14 Nov</li>
+</ul></li>
+</ul>
+<hr>
+<section id="general-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="general-expectations">General Expectations</h2>
+<ul>
+<li><strong>Students will begin the course with a grade of an “A”.</strong>
+<ul>
+<li>Students will be expected to:
+<ul>
+<li>Follow lecture.</li>
+<li>Treat fellow students with respect.</li>
+<li>Complete exercises.</li>
+<li>Complete projects.</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="classexercises" class="level2">
+<h2 class="anchored" data-anchor-id="classexercises">Class/Exercises</h2>
+<ul>
+<li>For an A (10/10)
+<ul>
+<li>Code that meets requirements.</li>
+<li>On time.</li>
+</ul></li>
+<li>For a B (9/10)
+<ul>
+<li>Code that runs without error.</li>
+<li>On time</li>
+</ul></li>
+<li>Erroneous code is an F (6/10)</li>
+<li>Late work is a zero (0/10)</li>
+</ul>
+<hr>
+</section>
+<section id="feedback-structure" class="level2">
+<h2 class="anchored" data-anchor-id="feedback-structure">Feedback Structure</h2>
+<ul>
+<li>Students collectively within the class as a whole will receive feedback..
+<ul>
+<li>Individual feedback will be provided in limited and unique cases.</li>
+<li>Students are expected to provide respectfully collaborate on exercises.</li>
+<li>Students may request individual feedback from the instructor at any time.</li>
+<li>Students will receive narrative rather than quantitative feedback.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="projectwebsite" class="level2">
+<h2 class="anchored" data-anchor-id="projectwebsite">Project/Website</h2>
+<ul>
+<li>Students will create a public-facing scientific publication via:
+<ul>
+<li>Midterm: GitHub, Markdown, Python</li>
+<li>Final: Quarto, GitHub Pages, Python</li>
+</ul></li>
+<li>Graded on the <a href="https://apcentral.collegeboard.org/media/pdf/ap-english-language-and-composition-frqs-1-2-3-scoring-rubrics.pdf">AP Scale</a> as an argument essay and then curved.</li>
+</ul>
+</section>
+</section>
+<section id="group-exercise" class="level1">
+<h1>Group Exercise:</h1>
+<ul>
+<li>Let’s start the class off right away with an exercise designed for:
+<ul>
+<li>Groups<br>
+</li>
+<li>Discussion<br>
+</li>
+<li>Disagreement<br>
+</li>
+<li>Deep critical thinking</li>
+</ul></li>
+</ul>
+<hr>
+<section id="aims-of-education" class="level2">
+<h2 class="anchored" data-anchor-id="aims-of-education">Aims of Education</h2>
+<ul>
+<li>Before starting my first degree, we went to a lecture titled “Aims of Education”</li>
+<li>I completed all remaining degrees during shutdowns/other crises!</li>
+<li>I remember it fondly.</li>
+<li>We will review “Explainable AI for Climate Science” by Elizabeth Barnes.
+<ul>
+<li>And then discuss.</li>
+</ul></li>
+</ul>
+<hr>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=XEGDdB8tpa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+<br> <a href="https://www.youtube.com/watch?v=XEGDdB8tpa0">Source</a>
+</center>
+<hr>
+</section>
+<section id="question-0" class="level2">
+<h2 class="anchored" data-anchor-id="question-0">Question 0</h2>
+<blockquote class="blockquote">
+<p><strong>What are the goals of a college education?</strong></p>
+</blockquote>
+<ul>
+<li><strong>Think</strong>: about a possible answer individually.<br>
+</li>
+<li><strong>Discuss</strong>: answers within the group.<br>
+</li>
+<li><strong>Record</strong>: a summary of the discussion.</li>
+</ul>
+</section>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<blockquote class="blockquote">
+<p><strong>How does a scientist learn something new?</strong></p>
+</blockquote>
+<ul>
+<li><strong>Think</strong>: about a possible answer individually.<br>
+</li>
+<li><strong>Discuss</strong>: answers within the group.<br>
+</li>
+<li><strong>Record</strong>: a summary of the discussion.</li>
+</ul>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<blockquote class="blockquote">
+<p><strong>What do you reasonably expect to remember from your courses in 20 years?</strong></p>
+</blockquote>
+<ul>
+<li><strong>Think</strong>: about a possible answer individually.<br>
+</li>
+<li><strong>Discuss</strong>: answers within the group.<br>
+</li>
+<li><strong>Record</strong>: a summary of the discussion.</li>
+</ul>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<blockquote class="blockquote">
+<p><strong>What is the value of making mistakes in the learning process?</strong></p>
+</blockquote>
+<ul>
+<li><strong>Think</strong>: about a possible answer individually.<br>
+</li>
+<li><strong>Discuss</strong>: answers within the group.<br>
+</li>
+<li><strong>Record</strong>: a summary of the discussion.</li>
+</ul>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<blockquote class="blockquote">
+<p><strong>How do we create a safe environment where risk-taking is encouraged and productive failure is valued?</strong></p>
+</blockquote>
+<ul>
+<li><strong>Think</strong>: about a possible answer individually.<br>
+</li>
+<li><strong>Discuss</strong>: answers within the group.<br>
+</li>
+<li><strong>Record</strong>: a summary of the discussion.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="closing-thoughts" class="level1">
+<h1>Closing Thoughts</h1>
+<ul>
+<li><strong>Try!</strong> Hard work leads to innovative thinking.<br>
+</li>
+<li><strong>Fail!</strong> Don’t fear failure. Be ready to redo from scratch.<br>
+</li>
+<li><strong>Collaborate!</strong> Work with peers to succeed at this course and succeed at collaboration.</li>
+<li><strong>Enjoy!</strong> Experience the fun of being a scientist through hard work and exploration.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./podman.rjs.html.rjs.html" class="pagination-link" aria-label="Podman">
+        <span class="nav-page-text">Podman</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "On Systems"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu"># Introduction</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ss">- </span>Welcome to Willamette!</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="ss">- </span>Welcome to *Thinking Machines*</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="ss">- </span>We will learn:</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ss">    - </span>Scientific computing, to learn...</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="ss">    - </span>Machine learning and artifical intelligence</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">## Course Description</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="at">&gt; Artifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think.</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="fu">## About Me</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>|About|Me|</span>
+<span id="cb1-21"><a href="#cb1-21"></a>|-|-|</span>
+<span id="cb1-22"><a href="#cb1-22"></a>|  **Name**:      |Calvin (Deutschbein) |  </span>
+<span id="cb1-23"><a href="#cb1-23"></a>|  **Say**:   |(Professor) Calvin |  </span>
+<span id="cb1-24"><a href="#cb1-24"></a>|  **Pronoun**:  |they/them  |</span>
+<span id="cb1-25"><a href="#cb1-25"></a>|  **Office**:    |Discord calvin2501 |</span>
+<span id="cb1-26"><a href="#cb1-26"></a>|  **Email**:     |<span class="co">[</span><span class="ot">ckdeutschbein@willamette.edu</span><span class="co">](@mailto:ckdeutschbein@willamette.edu)</span> |</span>
+<span id="cb1-27"><a href="#cb1-27"></a>|  **Website**:   |<span class="co">[</span><span class="ot">cd-public.github.io</span><span class="co">](https://cd-public.github.io)</span>|</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>---</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="fu">## Background</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a></span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="ss">- </span>**Thesis Title**: <span class="co">[</span><span class="ot">Mining Secure Behavior of Hardware Designs</span><span class="co">](https://cd-public.github.io/papers/2021/CD2021.pdf)</span>  </span>
+<span id="cb1-36"><a href="#cb1-36"></a></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="at">&gt;  Specification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs.</span>  </span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a></span>
+<span id="cb1-40"><a href="#cb1-40"></a></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="fu">## Background</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="ss">- </span>**Plain English**:  </span>
+<span id="cb1-43"><a href="#cb1-43"></a>  Just as there are bugs in code that make **software**, modern **hardware** is also written in code and therefore may contain bugs. I find these bugs.  </span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="ss">- </span>Of note: I found those bugs *using scientific computing* (thinking machines).</span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a>---</span>
+<span id="cb1-47"><a href="#cb1-47"></a></span>
+<span id="cb1-48"><a href="#cb1-48"></a><span class="fu"># Modality</span></span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-50"><a href="#cb1-50"></a><span class="ss">- </span>Lecture (Talk)</span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="ss">    - </span>Monday &amp; Wednesday</span>
+<span id="cb1-52"><a href="#cb1-52"></a><span class="ss">- </span>Exercise (Code)</span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="ss">    - </span>Friday</span>
+<span id="cb1-54"><a href="#cb1-54"></a><span class="ss">- </span>Projects (Write-ups)</span>
+<span id="cb1-55"><a href="#cb1-55"></a><span class="ss">    - </span>Friday, 10 Oct</span>
+<span id="cb1-56"><a href="#cb1-56"></a><span class="ss">    - </span>Friday, 14 Nov</span>
+<span id="cb1-57"><a href="#cb1-57"></a>    </span>
+<span id="cb1-58"><a href="#cb1-58"></a>---</span>
+<span id="cb1-59"><a href="#cb1-59"></a></span>
+<span id="cb1-60"><a href="#cb1-60"></a><span class="fu">## General Expectations</span></span>
+<span id="cb1-61"><a href="#cb1-61"></a></span>
+<span id="cb1-62"><a href="#cb1-62"></a><span class="ss">- </span>**Students will begin the course with a grade of an "A".**</span>
+<span id="cb1-63"><a href="#cb1-63"></a><span class="ss">  - </span>Students will be expected to:</span>
+<span id="cb1-64"><a href="#cb1-64"></a><span class="ss">    - </span>Follow lecture.</span>
+<span id="cb1-65"><a href="#cb1-65"></a><span class="ss">    - </span>Treat fellow students with respect.</span>
+<span id="cb1-66"><a href="#cb1-66"></a><span class="ss">    - </span>Complete exercises.</span>
+<span id="cb1-67"><a href="#cb1-67"></a><span class="ss">    - </span>Complete projects.</span>
+<span id="cb1-68"><a href="#cb1-68"></a></span>
+<span id="cb1-69"><a href="#cb1-69"></a>---</span>
+<span id="cb1-70"><a href="#cb1-70"></a></span>
+<span id="cb1-71"><a href="#cb1-71"></a><span class="fu">## Class/Exercises</span></span>
+<span id="cb1-72"><a href="#cb1-72"></a></span>
+<span id="cb1-73"><a href="#cb1-73"></a><span class="ss">- </span>For an A (10/10)</span>
+<span id="cb1-74"><a href="#cb1-74"></a><span class="ss">    - </span>Code that meets requirements.</span>
+<span id="cb1-75"><a href="#cb1-75"></a><span class="ss">    - </span>On time.</span>
+<span id="cb1-76"><a href="#cb1-76"></a><span class="ss">- </span>For a B (9/10)</span>
+<span id="cb1-77"><a href="#cb1-77"></a><span class="ss">    - </span>Code that runs without error.</span>
+<span id="cb1-78"><a href="#cb1-78"></a><span class="ss">    - </span>On time</span>
+<span id="cb1-79"><a href="#cb1-79"></a><span class="ss">- </span>Erroneous code is an F (6/10)</span>
+<span id="cb1-80"><a href="#cb1-80"></a><span class="ss">- </span>Late work is a zero (0/10)</span>
+<span id="cb1-81"><a href="#cb1-81"></a></span>
+<span id="cb1-82"><a href="#cb1-82"></a>---</span>
+<span id="cb1-83"><a href="#cb1-83"></a></span>
+<span id="cb1-84"><a href="#cb1-84"></a><span class="fu">## Feedback Structure</span></span>
+<span id="cb1-85"><a href="#cb1-85"></a></span>
+<span id="cb1-86"><a href="#cb1-86"></a><span class="ss">- </span>Students collectively within the class as a whole will receive feedback..</span>
+<span id="cb1-87"><a href="#cb1-87"></a><span class="ss">  - </span>Individual feedback will be provided in limited and unique cases.</span>
+<span id="cb1-88"><a href="#cb1-88"></a><span class="ss">  - </span>Students are expected to provide respectfully collaborate on exercises.</span>
+<span id="cb1-89"><a href="#cb1-89"></a><span class="ss">  - </span>Students may request individual feedback from the instructor at any time.</span>
+<span id="cb1-90"><a href="#cb1-90"></a><span class="ss">  - </span>Students will receive narrative rather than quantitative feedback.</span>
+<span id="cb1-91"><a href="#cb1-91"></a></span>
+<span id="cb1-92"><a href="#cb1-92"></a>---</span>
+<span id="cb1-93"><a href="#cb1-93"></a></span>
+<span id="cb1-94"><a href="#cb1-94"></a><span class="fu">## Project/Website</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="ss">- </span>Students will create a public-facing scientific publication via:</span>
+<span id="cb1-97"><a href="#cb1-97"></a><span class="ss">    - </span>Midterm: GitHub, Markdown, Python</span>
+<span id="cb1-98"><a href="#cb1-98"></a><span class="ss">    - </span>Final: Quarto, GitHub Pages, Python</span>
+<span id="cb1-99"><a href="#cb1-99"></a><span class="ss">- </span>Graded on the <span class="co">[</span><span class="ot">AP Scale</span><span class="co">](https://apcentral.collegeboard.org/media/pdf/ap-english-language-and-composition-frqs-1-2-3-scoring-rubrics.pdf)</span> as an argument essay and then curved.</span>
+<span id="cb1-100"><a href="#cb1-100"></a></span>
+<span id="cb1-101"><a href="#cb1-101"></a><span class="fu"># Group Exercise:</span></span>
+<span id="cb1-102"><a href="#cb1-102"></a></span>
+<span id="cb1-103"><a href="#cb1-103"></a><span class="ss">- </span>Let’s start the class off right away with an exercise designed for:</span>
+<span id="cb1-104"><a href="#cb1-104"></a><span class="ss">  - </span>Groups  </span>
+<span id="cb1-105"><a href="#cb1-105"></a><span class="ss">  - </span>Discussion  </span>
+<span id="cb1-106"><a href="#cb1-106"></a><span class="ss">  - </span>Disagreement  </span>
+<span id="cb1-107"><a href="#cb1-107"></a><span class="ss">  - </span>Deep critical thinking  </span>
+<span id="cb1-108"><a href="#cb1-108"></a></span>
+<span id="cb1-109"><a href="#cb1-109"></a>---</span>
+<span id="cb1-110"><a href="#cb1-110"></a></span>
+<span id="cb1-111"><a href="#cb1-111"></a><span class="fu">## Aims of Education</span></span>
+<span id="cb1-112"><a href="#cb1-112"></a></span>
+<span id="cb1-113"><a href="#cb1-113"></a><span class="ss">- </span>Before starting my first degree, we went to a lecture titled "Aims of Education"</span>
+<span id="cb1-114"><a href="#cb1-114"></a><span class="ss">- </span>I completed all remaining degrees during shutdowns/other crises!</span>
+<span id="cb1-115"><a href="#cb1-115"></a><span class="ss">- </span>I remember it fondly.</span>
+<span id="cb1-116"><a href="#cb1-116"></a><span class="ss">- </span>We will review "Explainable AI for Climate Science" by Elizabeth Barnes.</span>
+<span id="cb1-117"><a href="#cb1-117"></a><span class="ss">  - </span>And then discuss.</span>
+<span id="cb1-118"><a href="#cb1-118"></a></span>
+<span id="cb1-119"><a href="#cb1-119"></a>---</span>
+<span id="cb1-120"><a href="#cb1-120"></a></span>
+<span id="cb1-121"><a href="#cb1-121"></a>&lt;center&gt;&lt;iframe width="560" height="315" src="https://www.youtube.com/watch?v=XEGDdB8tpa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span>
+<span id="cb1-122"><a href="#cb1-122"></a>&lt;br&gt;</span>
+<span id="cb1-123"><a href="#cb1-123"></a><span class="co">[</span><span class="ot">Source</span><span class="co">](https://www.youtube.com/watch?v=XEGDdB8tpa0)</span></span>
+<span id="cb1-124"><a href="#cb1-124"></a>&lt;/center&gt;</span>
+<span id="cb1-125"><a href="#cb1-125"></a></span>
+<span id="cb1-126"><a href="#cb1-126"></a>---</span>
+<span id="cb1-127"><a href="#cb1-127"></a></span>
+<span id="cb1-128"><a href="#cb1-128"></a><span class="fu">## Question 0</span></span>
+<span id="cb1-129"><a href="#cb1-129"></a><span class="at">&gt; **What are the goals of a college education?**</span></span>
+<span id="cb1-130"><a href="#cb1-130"></a></span>
+<span id="cb1-131"><a href="#cb1-131"></a><span class="ss">- </span>**Think**: about a possible answer individually.  </span>
+<span id="cb1-132"><a href="#cb1-132"></a><span class="ss">- </span>**Discuss**: answers within the group.  </span>
+<span id="cb1-133"><a href="#cb1-133"></a><span class="ss">- </span>**Record**: a summary of the discussion.</span>
+<span id="cb1-134"><a href="#cb1-134"></a></span>
+<span id="cb1-135"><a href="#cb1-135"></a><span class="fu">## Question 1</span></span>
+<span id="cb1-136"><a href="#cb1-136"></a><span class="at">&gt; **How does a scientist learn something new?**</span></span>
+<span id="cb1-137"><a href="#cb1-137"></a></span>
+<span id="cb1-138"><a href="#cb1-138"></a><span class="ss">- </span>**Think**: about a possible answer individually.  </span>
+<span id="cb1-139"><a href="#cb1-139"></a><span class="ss">- </span>**Discuss**: answers within the group.  </span>
+<span id="cb1-140"><a href="#cb1-140"></a><span class="ss">- </span>**Record**: a summary of the discussion.</span>
+<span id="cb1-141"><a href="#cb1-141"></a></span>
+<span id="cb1-142"><a href="#cb1-142"></a><span class="fu">## Question 2</span></span>
+<span id="cb1-143"><a href="#cb1-143"></a><span class="at">&gt; **What do you reasonably expect to remember from your courses in 20 years?**</span></span>
+<span id="cb1-144"><a href="#cb1-144"></a></span>
+<span id="cb1-145"><a href="#cb1-145"></a><span class="ss">- </span>**Think**: about a possible answer individually.  </span>
+<span id="cb1-146"><a href="#cb1-146"></a><span class="ss">- </span>**Discuss**: answers within the group.  </span>
+<span id="cb1-147"><a href="#cb1-147"></a><span class="ss">- </span>**Record**: a summary of the discussion.</span>
+<span id="cb1-148"><a href="#cb1-148"></a></span>
+<span id="cb1-149"><a href="#cb1-149"></a><span class="fu">## Question 3</span></span>
+<span id="cb1-150"><a href="#cb1-150"></a><span class="at">&gt; **What is the value of making mistakes in the learning process?**</span></span>
+<span id="cb1-151"><a href="#cb1-151"></a></span>
+<span id="cb1-152"><a href="#cb1-152"></a><span class="ss">- </span>**Think**: about a possible answer individually.  </span>
+<span id="cb1-153"><a href="#cb1-153"></a><span class="ss">- </span>**Discuss**: answers within the group.  </span>
+<span id="cb1-154"><a href="#cb1-154"></a><span class="ss">- </span>**Record**: a summary of the discussion.</span>
+<span id="cb1-155"><a href="#cb1-155"></a></span>
+<span id="cb1-156"><a href="#cb1-156"></a><span class="fu">## Question 4</span></span>
+<span id="cb1-157"><a href="#cb1-157"></a><span class="at">&gt; **How do we create a safe environment where risk-taking is encouraged and productive failure is valued?**</span></span>
+<span id="cb1-158"><a href="#cb1-158"></a></span>
+<span id="cb1-159"><a href="#cb1-159"></a><span class="ss">- </span>**Think**: about a possible answer individually.  </span>
+<span id="cb1-160"><a href="#cb1-160"></a><span class="ss">- </span>**Discuss**: answers within the group.  </span>
+<span id="cb1-161"><a href="#cb1-161"></a><span class="ss">- </span>**Record**: a summary of the discussion.</span>
+<span id="cb1-162"><a href="#cb1-162"></a></span>
+<span id="cb1-163"><a href="#cb1-163"></a>---</span>
+<span id="cb1-164"><a href="#cb1-164"></a></span>
+<span id="cb1-165"><a href="#cb1-165"></a><span class="fu"># Closing Thoughts</span></span>
+<span id="cb1-166"><a href="#cb1-166"></a><span class="ss">- </span>**Try!** Hard work leads to innovative thinking.  </span>
+<span id="cb1-167"><a href="#cb1-167"></a><span class="ss">- </span>**Fail!** Don't fear failure. Be ready to redo from scratch.  </span>
+<span id="cb1-168"><a href="#cb1-168"></a><span class="ss">- </span>**Collaborate!** Work with peers to succeed at this course and succeed at collaboration.</span>
+<span id="cb1-169"><a href="#cb1-169"></a><span class="ss">- </span>**Enjoy!** Experience the fun of being a scientist through hard work and exploration.  </span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

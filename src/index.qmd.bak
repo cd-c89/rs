@@ -1,0 +1,44 @@
+---
+title: Systems in Rust
+author: ""
+subtitle: ""
+format: html
+---
+
+# CS 271
+
+- Called:
+    - CS 271: Systems Programming
+    - CS 271: Sys Programming, Computer Arch
+- The first semester class in a:
+    - Compiled language, with
+    - No garbage collector.
+- Term these "systems" languages.
+    - Suitable to write an operating system.
+- Taught this year in Rust.
+    - So to me, "Systems in Rust"
+
+### MWThF 12:00-01:00, Ford 201
+
+### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)
+
+
+[Syllabus](syllabus/syllabus.pdf)
+
+# Calendar
+
+|Week|Date (M) |Lecture (M)|Lab (W)|
+|:--:|:---|:----|:-------|
+|01|08/25|[Neovim](02_neovim.qmd)|[Arguments](02_neovim.qmd#exercise)|
+|02|09/01|[Shell](03_shell.qmd)|[Intercepts](03_shell.qmd#exercise)|
+|03|09/08|[Git](04_git.qmd)|[Repository](04_git.qmd#exercise)|
+|04|09/15|[NumPy](05_numpy.qmd)|[Vectors](05_numpy.qmd#exercise)|
+|05|09/22|[Matplotlib](06_matplotlib.qmd)|[Orbitals](06_matplotlib.qmd#exercise)|
+|06|09/29|[Markdown](07_md.qmd)|*Midterm Consultation*|
+|07|10/06|[**pandas**](08_pandas.qmd)|*Midterm Due*|
+|08|10/13|[SciPy](09_scipy.qmd)|[Technetium](09_scipy.qmd#exercise)|
+|09|10/20|[SymPy](0A_sympy.qmd)|[ODEs](0A_sympy.qmd#exercise)|
+|10|10/27|[Sklearn](0B_sklearn.qmd)|[$k$-means](0B_sklearn.qmd#exercise)|
+|11|11/03|Quarto|*Final Consultation*||
+|12|11/10|Pages|*Final Due*|
+

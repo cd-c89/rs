@@ -1,0 +1,169 @@
+---
+title: "Aims"
+
+---
+
+# Introduction
+
+- Welcome to Willamette!
+- Welcome to *Thinking Machines*
+- We will learn:
+    - Scientific computing, to learn...
+    - Machine learning and artifical intelligence
+
+## Course Description
+
+> Artifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think.
+
+## About Me
+
+|About|Me|
+|-|-|
+|  **Name**:      |Calvin (Deutschbein) |  
+|  **Say**:   |(Professor) Calvin |  
+|  **Pronoun**:  |they/them  |
+|  **Office**:    |Discord calvin2501 |
+|  **Email**:     |[ckdeutschbein@willamette.edu](@mailto:ckdeutschbein@willamette.edu) |
+|  **Website**:   |[cd-public.github.io](https://cd-public.github.io)|
+
+
+---
+
+## Background
+
+
+- **Thesis Title**: [Mining Secure Behavior of Hardware Designs](https://cd-public.github.io/papers/2021/CD2021.pdf)  
+
+>  Specification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs.  
+
+
+
+## Background
+- **Plain English**:  
+  Just as there are bugs in code that make **software**, modern **hardware** is also written in code and therefore may contain bugs. I find these bugs.  
+- Of note: I found those bugs *using scientific computing* (thinking machines).
+
+---
+
+# Modality
+
+- Lecture (Talk)
+    - Monday & Wednesday
+- Exercise (Code)
+    - Friday
+- Projects (Write-ups)
+    - Friday, 10 Oct
+    - Friday, 14 Nov
+    
+---
+
+## General Expectations
+
+- **Students will begin the course with a grade of an "A".**
+  - Students will be expected to:
+    - Follow lecture.
+    - Treat fellow students with respect.
+    - Complete exercises.
+    - Complete projects.
+
+---
+
+## Class/Exercises
+
+- For an A (10/10)
+    - Code that meets requirements.
+    - On time.
+- For a B (9/10)
+    - Code that runs without error.
+    - On time
+- Erroneous code is an F (6/10)
+- Late work is a zero (0/10)
+
+---
+
+## Feedback Structure
+
+- Students collectively within the class as a whole will receive feedback..
+  - Individual feedback will be provided in limited and unique cases.
+  - Students are expected to provide respectfully collaborate on exercises.
+  - Students may request individual feedback from the instructor at any time.
+  - Students will receive narrative rather than quantitative feedback.
+
+---
+
+## Project/Website
+
+- Students will create a public-facing scientific publication via:
+    - Midterm: GitHub, Markdown, Python
+    - Final: Quarto, GitHub Pages, Python
+- Graded on the [AP Scale](https://apcentral.collegeboard.org/media/pdf/ap-english-language-and-composition-frqs-1-2-3-scoring-rubrics.pdf) as an argument essay and then curved.
+
+# Group Exercise:
+
+- Let’s start the class off right away with an exercise designed for:
+  - Groups  
+  - Discussion  
+  - Disagreement  
+  - Deep critical thinking  
+
+---
+
+## Aims of Education
+
+- Before starting my first degree, we went to a lecture titled "Aims of Education"
+- I completed all remaining degrees during shutdowns/other crises!
+- I remember it fondly.
+- We will review "Explainable AI for Climate Science" by Elizabeth Barnes.
+  - And then discuss.
+
+---
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/watch?v=XEGDdB8tpa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br>
+[Source](https://www.youtube.com/watch?v=XEGDdB8tpa0)
+</center>
+
+---
+
+## Question 0
+> **What are the goals of a college education?**
+
+- **Think**: about a possible answer individually.  
+- **Discuss**: answers within the group.  
+- **Record**: a summary of the discussion.
+
+## Question 1
+> **How does a scientist learn something new?**
+
+- **Think**: about a possible answer individually.  
+- **Discuss**: answers within the group.  
+- **Record**: a summary of the discussion.
+
+## Question 2
+> **What do you reasonably expect to remember from your courses in 20 years?**
+
+- **Think**: about a possible answer individually.  
+- **Discuss**: answers within the group.  
+- **Record**: a summary of the discussion.
+
+## Question 3
+> **What is the value of making mistakes in the learning process?**
+
+- **Think**: about a possible answer individually.  
+- **Discuss**: answers within the group.  
+- **Record**: a summary of the discussion.
+
+## Question 4
+> **How do we create a safe environment where risk-taking is encouraged and productive failure is valued?**
+
+- **Think**: about a possible answer individually.  
+- **Discuss**: answers within the group.  
+- **Record**: a summary of the discussion.
+
+---
+
+# Closing Thoughts
+- **Try!** Hard work leads to innovative thinking.  
+- **Fail!** Don't fear failure. Be ready to redo from scratch.  
+- **Collaborate!** Work with peers to succeed at this course and succeed at collaboration.
+- **Enjoy!** Experience the fun of being a scientist through hard work and exploration.  

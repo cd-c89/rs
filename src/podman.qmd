@@ -1,0 +1,787 @@
+---
+title: Podman
+author: Prof. Calvin
+subtitle: "0x0.0"
+institute: Crypto
+format: 
+    revealjs: 
+        code-fold: true
+        theme: dark
+        mainfont: monospace
+        slide-number: true
+        show-slide-number: all
+        width: 1050
+        height: 700
+        footer: "[Home](../index.html)"
+  
+execute:
+    echo: false
+---
+
+# Announcements
+
+- **Welcome** to Computing Security
+
+  - What is in point of fact a systems cryptography course.
+- **Action Items**:
+  - Access the [course webpage](https://cd-public.github.io/crypto/)
+  - Join the Discord!
+    - You should have gotten an email...
+  - Spin up a GitHub acct if you don't have one.
+
+# Homework
+
+- The first homework, "Enigma", is ready after this class.
+  - Due Monday, 14 Jul at midnight AOE
+  - The infamous CS1 hw, now in a good language!
+  - Mostly just get the toolchain working.
+
+# Enigma
+
+:::: {.columns}
+
+::: {.column width="45%"}
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ # in
+    |
+BDFHJLCPRTXVZNYEIWGAKMUSQO # fast
+    >>>>>>
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+         |
+AJDKSIRUXBLHWTMCQGZNPYFVOE # mid
+ <<<<<<<<<
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ |
+BDFHJLCPRTXVZNYEIWGAKMUSQO # slow
+```
+:::
+
+::: {.column width="10%"}
+&rarr;
+:::
+
+::: {.column width="45%"}
+```
+BDFHJLCPRTXVZNYEIWGAKMUSQO
+ >>>
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+   |
+IXUHFEZDAOMTKQJWNSRLCYPBVG # reflect
+   |
+BDFHJLCPRTXVZNYEIWGAKMUSQO # slow
+   >>>>>
+ABCDEFGHIJKLMNOPQRSTUVWXYZ # out
+
+# etc etc   
+```
+:::
+
+::::
+
+
+# Today
+
+- Introduce the course
+  - The C Programming Language
+  - Cryptography + Cryptocurrency
+- Introduce the technologies
+  - `podman`
+  - `vim`
+  - `gcc`
+  - `git`
+  
+# Pre-reqs
+
+- These things:
+  - `podman`
+  - `vim`
+  - `gcc`
+  - `git`
+- Are commands at the command line
+- If you are afraid of the command line, drop this class.
+
+# It me
+
+- **Name** 
+  - Calvin (Deutschbein) 
+- **Call me**
+  - (Professor) Calvin 
+- **Pronouns** 
+  - _pronouns or big frowns_ - me
+  - they/them 
+
+# The Great Work
+
+- Thesis Title
+  - Mining Secure Behavior of Hardware Designs 
+- Plain English
+  - Just as there are bugs in code that makes software, modern hardware is also written in code and therefore may contain bugs. I find these bugs. 
+
+# How To Do It
+
+- After ~10 years of systems research I've convinced myself [only two things](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/) that really matter:
+
+  - Pointers, and
+  - Recursion 
+
+- Recursion isn't too bad... 
+
+```py
+>>> exp = lambda b, n : b if n == 1 else b*exp(b,n-1)
+>>> exp(2,8)
+256
+```
+
+# Pointers
+
+- Pointers are a beast, but without them nothing makes sense! 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```py
+>>> x = 1
+>>> def addx():
+...     x += 1
+...
+>>> addx()
+UnboundLocalError:
+<blah blah blah error messages>
+```
+::: 
+
+::: {.column width="50%"}
+
+```py
+>>> x = [1]
+>>> def addx():
+...     x[0] += 1
+...
+>>> addx()
+>>> x
+[2]
+```
+:::
+
+::::
+
+# Insight
+
+- **Definition:**
+  - Pointers: Variables that store memory addresses.
+  - Recursion: Functions calling themselves to solve sub-problems.
+- **Importance:**
+  - Core to efficient algorithms and memory management in low-level programming.
+  
+
+# Python and Pointers
+
+- **Why not .py (.js, .java, .cs, .cpp, etc)?**
+  - These languages _abstract_ memory.
+  - This abstraction makes computation **unclear**
+  - This lack of clarity:
+    - Adversely impacts education
+    - Complicates low-level design
+    - Leads to low performance
+  - Good languages (except Java) but not for us
+
+# C and Pointers
+
+- **Why C?**
+  - Everyone hates C because it makes us think...
+  - And thinking is **hard**.
+  - But there exist problems (security) for which careful thought is necessary.
+  - Learning C makes us better [Blub](https://paulgraham.com/avg.html) programmers.
+- **I claim:** You needn't use C in real life.
+
+## Kennedy is my middle name
+
+![Not an endorsement; I voted for ******* **** ****** ********!](https://www.azquotes.com/picture-quotes/quote-we-choose-to-go-to-the-moon-in-this-decade-and-do-the-other-things-not-because-they-john-f-kennedy-34-98-64.jpg)
+
+
+# C is for Clear
+
+- C does not _obscure_ what a computer is doing.
+- This lack of obscurity allows for greater precision.
+- This greater precision can be used to achieve security goals.
+- **Advantages of C:**
+  - Fine-grained control over memory.
+  - Essential for systems programming.
+
+# This class
+
+- I am a systems security researcher and I discerned two core gaps in Willamette CS education:
+  - Systems, and
+  - Security
+- Teaching systems alone can be boring or tedious.
+- Teaching security alone can be defuse and ethereal.
+
+# Learning Objectives
+
+
+-  Differentiate confidentiality, integrity, and availability.
+-  Apply modular arithmetic to computational systems.
+-  Apply recursion and a pointers to programming problems.
+-  Articulate the impossibility of distributed consensus.
+-  Understand a low-level systems language. 
+
+# Sketch
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A( ) --> B(SHA)
+  A --> C(RSA)
+  B --> E(Block Chain)
+  C --> F(Merkle Tree)
+  B --> F
+  E --> G(Nakamoto'08)
+  F --> G
+  G --> I((Capstone))
+```
+
+# SHA
+
+- **SHA Basics:**
+  - Cryptographic hash function family.
+  - Input data into fixed-size hash values.
+- **Use Cases:**
+  - Data integrity.
+- **Learning Objectives:**
+  - Reason about bits and bytes.
+
+# RSA
+
+- **RSA Basics:**
+  - Public-key cryptography algorithm.
+  - Based on prime factorization being hard.
+- **Use Cases:**
+  - Data confidentiality.
+- **Learning Objectives:**
+  - Reason about numerical computing.
+
+# RSA + SHA = BTC
+
+- **Facilitating Blockchain:**
+  - SHA & RSA in play
+    - RSA: Keep wallet keys _confidential_
+    - SHA: Maintain wallet content _integrity_
+- But we need some techniques to implement...
+  - Pointers & Recursion
+
+# Blockchain
+
+- **Blockchain:**
+  - Blockchain structure resembles linked lists.
+    - Linked lists use **pointers**
+    - **Pointers** are used **recursively**
+  - Pointers are validated with **SHA**
+    - That is, they have integrity
+
+# Merkle Trees
+
+- **Merkle Trees:**
+  - Tree structure using SHA for data integrity.
+  - Hashes stored as nodes; pointers link them.
+  - Leaf nodes are RSA signatures!
+- Merkle Trees are **balanced**
+  - We get to see a way to implement complex data structures in a low level language in a way that solves a real problem.
+
+# Final
+
+- **Implement Full-Custom BTC**
+  - Under absolutely no circumstances use it
+    - It'll be insecure for reasons out-of-scope
+  - CS 540:
+    - Must add some improvement
+    - Must conduct evaluative experiments
+    - Must document as a whitepaper
+
+# Today
+
+- &check; Introduce the course
+  - &check; The C Programming Language
+  - &check; Cryptography + Cryptocurrency
+- Introduce the technologies
+  - `podman`
+  - `vim`
+  - `gcc`
+  - `git`
+
+# What is Podman?
+
+- **Definition:**
+  - Platform to develop, ship, and run applications in isolated containers.
+- **Benefits:**
+  - Portability, consistency across environments.
+- **Editorializing:**
+  - Probably all code should be written in a container now that they exist.
+
+# In practice:
+
+- **Windows** only
+  - Run `wsl --install -d ubuntu` command once
+- **Windows+Mac:**
+  - Use Podman Installer once
+  - Launch Podman Desktop each time you code
+  - Use `podman` commands
+- **Linux:**
+  - Have fun with your package manager.
+
+# Circa ~2013
+
+- **The problem:**
+  - We want to run code.
+  - We want the code to create programs
+  - We want the programs to work on more than one computer.
+- **The solution:**
+  - Realistically, the Java Virtual Machine
+  - But then you have to write Java (this is pre-Scala, pre-Kotlin)
+  
+  
+# Circa ~2008
+
+- **The setting:**
+  - Cloud is taking off, mainly Amazon + Google
+  - They already have to run everything in virtual machine.
+  - They needed a lightweight solution.
+- **The solution:**
+  - Docker is written in the Google C-like, Go
+  - It is a lightweight pretend computer.
+  
+# Docker&rarr;Podman
+
+- Docker is closed-source (bad)
+- Docker is critical infastructre in most code bases
+- The Redhat team (from <span style="color:#4B9CD3">CAROLINA</span>) stepped into solve the problem
+- They make Podman - completely compatible, completely open-source
+- We use Podman in this class
+
+# Podman
+
+- Podman solves the problem of writing code on one computer and running it another.
+- Simply specify a Podman image
+  - a description of a imaginary computer
+- Podman will pretend to be that computer
+- We can run code "inside" Podman
+  - Code in the container can't tell it's running inside Podman
+
+# Podman & Python
+
+- **Windows, Mac, Linux:**
+  - Win tends to refer to Python3 as "python"
+  - Mac tends to refer to Python2 as "python"
+  - Linux, because its good, makes you specify:
+  
+```bash
+user@DESKTOP-THMS2PJ:~$ python
+Command 'python' not found, did you mean:
+  command 'python3' from deb python3
+  command 'python' from deb python-is-python3
+```
+
+# Bugs
+
+- This can lead to bugs pretty quickly
+  - Say I write and test a .py file on Mac
+  - I email it to my prof for help
+  - SyntaxError on my prof's Linux device:
+  
+```bash
+user@DESKTOP-THMS2PJ:~$ python2 -c "print 'hello world'"
+hello world
+user@DESKTOP-THMS2PJ:~$ python3 -c "print 'hello world'"
+  File "<string>", line 1
+    print 'hello world'
+    ^^^^^^^^^^^^^^^^^^^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+```
+
+# Versioning
+
+- Python2/3 is just an extreme example
+  - Most of code reuse has versioning problems
+  - Many CS1 headaches are Win/Mac python'ing
+  - But really: everything breaks all the time
+- Solution: Just run in podman:
+```bash
+C:\Users\cd-desk>podman run -it python:alpine python
+Python 3.13.1 (main, Dec  4 2024, 20:31:31) [GCC 13.2.1 20240309] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("hello world")
+hello world
+>>> exit()
+```
+
+# Images
+
+- Something we `podman run -it` is an _image_
+  - It is a template that correspond to many possible pretend computers
+  - I think of them like object oriented class
+  - They define something that could be
+
+# Containers
+
+- Each time we run said command, we have a different _container_
+  - They have different file systems
+  - Things we install don't persist to future `run` instances.
+  - I think of them like objects of a class
+  - Like '1' instead of 'integer'
+  - They actually existing, running code.
+
+
+
+# Today
+
+- &check; Introduce the course
+  - &check; The C Programming Language
+  - &check; Cryptography + Cryptocurrency
+- Introduce the technologies
+  - &check; `podman`
+  - `vim`
+  - `gcc`
+  - `git`
+
+# IDEs
+
+- At some point in time, code started being written in IDEs.
+  - Integrated design environments.
+  - To me, the first one was Eclipse (for Java)
+- VS Code is the ascendent IDE, and is everywhere.
+  - Google Cloud has **browser based** VS Code clone
+- VS Code has some nice things - including good `git` and `docker` (less so `podman`) integration.
+  
+  
+# Integration
+
+- VS Code has some nice things 
+  - Works with `git`/`docker` (less so `podman`).
+  - You know what else can do that?
+  - The command line
+  - Which you don't have to install
+- IDEs are ~new, the was command line utilities
+  - Vi(m)
+  - Emacs
+  - Nano
+  
+# Why Vim?
+
+- While IDEs are ascendent...
+  - The are not installed on every system
+  - They can be hard to use in cloud
+  - They can start costing money at any time
+  - They seem slower and to produce worse code
+- Like Python, IDEs are easy!
+  - This is good for new coders
+  - It is a design decision thereafter
+  
+# Vim
+
+- Vim isn't too bad
+  - It can basically be used as a keyboard navigated text editor.
+  - It has really good keyboard shortcuts and modes that we learn over time.
+  - It seems to be the pound-for-pound productivity champion of all time.
+- It is hard to find people who have learned `vim` who don't prefer it.
+
+# Podvim
+
+- We can install and run `vim` inside a container (which happens to run Debian & &there4; `apt`)
+- Even directly from Python...
+```py
+>>> import os
+>>> os.system("apt update") # update the registry of packages
+<blah blah blah>
+>>> os.system("apt install vim -y") # -y saves us from having to say "yes" to any prompts
+<blah blah blah>
+>>> os.system("vim") # a vim window will open
+```
+- This is `vim` inside `python` inside `podman`
+  - Don't do this, it's a proof-of-concept
+
+# Vim
+- It looks like this:
+```bash
+~               VIM - Vi IMproved
+~                  version 9.1
+~            by Bram Moolenaar et al.
+~   Vim is open source and freely distributable
+~
+~          Become a registered Vim user!
+~  type  :help register<Enter>   for information
+~
+~  type  :q<Enter>              to exit
+~  type  :help<Enter>  or  <F1> for on-line help
+~  type  :help version9<Enter>  for version info
+```
+
+# Usage
+
+- I usually use vim as `vim filename.py`
+  - When `vim` opens I type `i` (for "insert")
+  - Then I write code.
+  - ESC &rarr; `:x` &rarr; ENTER to save+quit
+- Learn `vim` incrementally by using it for this class - for code, for notes, for whatever.
+
+
+# Today
+
+- &check; Introduce the course
+  - &check; The C Programming Language
+  - &check; Cryptography + Cryptocurrency
+- Introduce the technologies
+  - &check; `podman`
+  - &check; `vim`
+  - `gcc`
+  - `git`
+
+# GCC
+
+- Developed for the C language to make an open source operating system in 1987.
+- Mainly around today for the C language to make an open source operating system (Linux)
+- (The C language was invented to write an operating system).
+- `python` is written in GCC C
+```python
+C:\Users\cd-desk>podman run -it python
+Python 3.13.1 (main, Dec  4 2024, 20:40:27) [GCC 12.2.0] on linux
+```
+
+# Great freeware
+
+- Many legendary programs created using GCC:
+  - HTTPD & NGINX, which serve a majority of webtraffic
+  - Every major Linux and FreeBSD distribution
+  - Major browsers like Firefox and Chromium
+    - Firefox is on `clang` now but that's new
+  - GNU Bash and Coreutils, like `cat`, `ls`, `rm`
+  - Bitcoin Core
+  
+# Compilation
+
+- Like `python` or `podman` or `vim`, GCC is a command - `gcc`
+- `gcc` takes at least one argument: a filename, usually of a C file
+- GCC takes this C file and makes an executable 
+  - a program, sort of
+- Executables run as command with `./` prefix
+  - This differs from `python` which runs a script **without** creating a corresponding program.
+
+# .py vs .c
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(Python) --> B[fname.py file]
+  B --> C[python fname.py]
+  C --> D{hello world}
+  E(C) --> F[fname.c  file]
+  F --> G[gcc fname.c -o ename]
+  G --> H[./ename]
+  H --> I{hello world}
+```
+
+- _You only have to compile once to have the executable forever._
+- _Most programs are executables, not scripts._
+
+# Today
+
+- &check; Introduce the course
+  - &check; The C Programming Language
+  - &check; Cryptography + Cryptocurrency
+- Introduce the technologies
+  - &check; `podman`
+  - &check; `vim`
+  - &check; `gcc`
+  - `git`
+  
+# Git
+
+<ul>
+<li> Git was invented... to store the C language source code for an open source operating system (Linux)</li>
+<li> It is de facto the only way in the universe to store code other than "on my HDD/SSD"</li>
+<li> It is also a very good way to
+    <ul>
+    <ol>
+    <li> Keep track of podman images</li>
+    <li> Keep track of podman containers</li>
+    <li> Keep track of code used inside containers</li>
+    </ol>
+    </ul>
+</li>
+
+# As a command
+
+- Git corresponds, like the others, to a command: `git`
+  - It is common now to use other techniques, but the command remains extremely **stable**
+- Quoth GitHub, the first and greatest of the collaboration tools:
+
+<a href="https://docs.github.com/en/get-started/using-github/connecting-to-github"><blockquote>
+If you want a lot of control and flexibility, you can use the command line.
+</blockquote></a>
+
+
+# As a technology
+
+- So basically, you have things called repositories or "repos"
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(My ️‍🔥 code repo)
+```
+
+# As a technology
+
+- Then you realize you wrote an infinite loop so you update it
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(My ️‍🔥 code repo v0 ) --> B(My ️‍🔥 code repo v1)
+```
+
+# As a technology
+
+- Then you come to class and realize your code is on your gaming rig in your apartment.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(<s>My ️‍🔥 code repo v0</s>) --> B(<s>My ️‍🔥 code repo v1</s>)
+```
+
+# As a technology
+
+- So you save your code on GitHub
+  - GH = GitHub, GR = Gaming Rig
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GH.‍🔥 v0)
+```
+
+# As a technology
+
+- But you realize you didn't sanitize your inputs so you update again.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+```
+
+# As a technology
+
+- Then you have class again and grab the GitHub version onto your LT = Laptop
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+```
+
+# As a technology
+
+- You notice it has the bug so you fix it again on your laptop in almost the same way
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+```
+
+# As a technology
+
+- And save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+```
+
+# As a technology
+
+- You realize you also added some ASCII art and try to send that to GitHub
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H(GH.‍🔥 v2)
+  C --> H
+```
+
+# As a technology
+
+- Two arrows into one thing is a merge conflict and out-of-scope for now.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H{💥}
+  C --> H
+```
+
+# As a technology
+
+- Basically versions of code can live in more than one place.
+  - Ah, versions, our old friend...
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H{💥}
+  C --> H
+```
+
+# In Brief
+
+- Generally create repositories + tokens in browser
+- Use command line and use 'git clone <name>' once.
+- Authenticate via access token from browser
+- Then use 'git add', 'git commit', 'git push' to save work
+- Use 'git pull' to grab saved work
+- Use a ".gitignore" file so only code (**NOT** executables) live on GitHub
+
+# Today
+
+- &check; Introduce the course
+  - &check; The C Programming Language
+  - &check; Cryptography + Cryptocurrency
+- &check; Introduce the technologies
+  - &check; `podman`
+  - &check; `vim`
+  - &check; `gcc`
+  - &check; `git`

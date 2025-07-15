@@ -1,0 +1,264 @@
+[
+  {
+    "objectID": "podman.rjs.html#kennedy-is-my-middle-name",
+    "href": "podman.rjs.html#kennedy-is-my-middle-name",
+    "title": "Podman",
+    "section": "Kennedy is my middle name",
+    "text": "Kennedy is my middle name\n\nNot an endorsement; I voted for ******* **** ****** ********!"
+  },
+  {
+    "objectID": "00_intro.html",
+    "href": "00_intro.html",
+    "title": "On Systems",
+    "section": "",
+    "text": "Welcome to Willamette!\nWelcome to Thinking Machines\nWe will learn:\n\nScientific computing, to learn…\nMachine learning and artifical intelligence\n\n\n\n\n\nArtifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think.\n\n\n\n\n\n\n\nAbout\nMe\n\n\n\n\nName:\nCalvin (Deutschbein)\n\n\nSay:\n(Professor) Calvin\n\n\nPronoun:\nthey/them\n\n\nOffice:\nDiscord calvin2501\n\n\nEmail:\nckdeutschbein@willamette.edu\n\n\nWebsite:\ncd-public.github.io\n\n\n\n\n\n\n\n\nThesis Title: Mining Secure Behavior of Hardware Designs\n\n\nSpecification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs.\n\n\n\n\n\nPlain English:\nJust as there are bugs in code that make software, modern hardware is also written in code and therefore may contain bugs. I find these bugs.\n\nOf note: I found those bugs using scientific computing (thinking machines).",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#course-description",
+    "href": "00_intro.html#course-description",
+    "title": "On Systems",
+    "section": "",
+    "text": "Artifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#about-me",
+    "href": "00_intro.html#about-me",
+    "title": "On Systems",
+    "section": "",
+    "text": "About\nMe\n\n\n\n\nName:\nCalvin (Deutschbein)\n\n\nSay:\n(Professor) Calvin\n\n\nPronoun:\nthey/them\n\n\nOffice:\nDiscord calvin2501\n\n\nEmail:\nckdeutschbein@willamette.edu\n\n\nWebsite:\ncd-public.github.io",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#background",
+    "href": "00_intro.html#background",
+    "title": "On Systems",
+    "section": "",
+    "text": "Thesis Title: Mining Secure Behavior of Hardware Designs\n\n\nSpecification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#background-1",
+    "href": "00_intro.html#background-1",
+    "title": "On Systems",
+    "section": "",
+    "text": "Plain English:\nJust as there are bugs in code that make software, modern hardware is also written in code and therefore may contain bugs. I find these bugs.\n\nOf note: I found those bugs using scientific computing (thinking machines).",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#general-expectations",
+    "href": "00_intro.html#general-expectations",
+    "title": "On Systems",
+    "section": "General Expectations",
+    "text": "General Expectations\n\nStudents will begin the course with a grade of an “A”.\n\nStudents will be expected to:\n\nFollow lecture.\nTreat fellow students with respect.\nComplete exercises.\nComplete projects.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#classexercises",
+    "href": "00_intro.html#classexercises",
+    "title": "On Systems",
+    "section": "Class/Exercises",
+    "text": "Class/Exercises\n\nFor an A (10/10)\n\nCode that meets requirements.\nOn time.\n\nFor a B (9/10)\n\nCode that runs without error.\nOn time\n\nErroneous code is an F (6/10)\nLate work is a zero (0/10)",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#feedback-structure",
+    "href": "00_intro.html#feedback-structure",
+    "title": "On Systems",
+    "section": "Feedback Structure",
+    "text": "Feedback Structure\n\nStudents collectively within the class as a whole will receive feedback..\n\nIndividual feedback will be provided in limited and unique cases.\nStudents are expected to provide respectfully collaborate on exercises.\nStudents may request individual feedback from the instructor at any time.\nStudents will receive narrative rather than quantitative feedback.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#projectwebsite",
+    "href": "00_intro.html#projectwebsite",
+    "title": "On Systems",
+    "section": "Project/Website",
+    "text": "Project/Website\n\nStudents will create a public-facing scientific publication via:\n\nMidterm: GitHub, Markdown, Python\nFinal: Quarto, GitHub Pages, Python\n\nGraded on the AP Scale as an argument essay and then curved.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#aims-of-education",
+    "href": "00_intro.html#aims-of-education",
+    "title": "On Systems",
+    "section": "Aims of Education",
+    "text": "Aims of Education\n\nBefore starting my first degree, we went to a lecture titled “Aims of Education”\nI completed all remaining degrees during shutdowns/other crises!\nI remember it fondly.\nWe will review “Explainable AI for Climate Science” by Elizabeth Barnes.\n\nAnd then discuss.\n\n\n\n\n\n\n Source",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#question-0",
+    "href": "00_intro.html#question-0",
+    "title": "On Systems",
+    "section": "Question 0",
+    "text": "Question 0\n\nWhat are the goals of a college education?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#question-1",
+    "href": "00_intro.html#question-1",
+    "title": "On Systems",
+    "section": "Question 1",
+    "text": "Question 1\n\nHow does a scientist learn something new?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#question-2",
+    "href": "00_intro.html#question-2",
+    "title": "On Systems",
+    "section": "Question 2",
+    "text": "Question 2\n\nWhat do you reasonably expect to remember from your courses in 20 years?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#question-3",
+    "href": "00_intro.html#question-3",
+    "title": "On Systems",
+    "section": "Question 3",
+    "text": "Question 3\n\nWhat is the value of making mistakes in the learning process?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.html#question-4",
+    "href": "00_intro.html#question-4",
+    "title": "On Systems",
+    "section": "Question 4",
+    "text": "Question 4\n\nHow do we create a safe environment where risk-taking is encouraged and productive failure is valued?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion.",
+    "crumbs": [
+      "On Systems"
+    ]
+  },
+  {
+    "objectID": "00_intro.rjs.html#course-description",
+    "href": "00_intro.rjs.html#course-description",
+    "title": "On Systems",
+    "section": "Course Description",
+    "text": "Course Description\n\nArtifical intelligence, machine learning, big data, and large scale computing have captured the collective imaginations of millions people across a range of technical expertise. Yet each of these buzzwords is rooted in a central promise: that machines may think."
+  },
+  {
+    "objectID": "00_intro.rjs.html#about-me",
+    "href": "00_intro.rjs.html#about-me",
+    "title": "On Systems",
+    "section": "About Me",
+    "text": "About Me\n\n\n\nAbout\nMe\n\n\n\n\nName:\nCalvin (Deutschbein)\n\n\nSay:\n(Professor) Calvin\n\n\nPronoun:\nthey/them\n\n\nOffice:\nDiscord calvin2501\n\n\nEmail:\nckdeutschbein@willamette.edu\n\n\nWebsite:\ncd-public.github.io"
+  },
+  {
+    "objectID": "00_intro.rjs.html#background",
+    "href": "00_intro.rjs.html#background",
+    "title": "On Systems",
+    "section": "Background",
+    "text": "Background\n\nThesis Title: Mining Secure Behavior of Hardware Designs\n\n\nSpecification mining can discover properties that can verify the secure behavior of closed-source CISC CPU designs, the temporal correctness of CPU designs, and hyperproperties for secure information flow in modules, SoCs, and CPUs."
+  },
+  {
+    "objectID": "00_intro.rjs.html#background-1",
+    "href": "00_intro.rjs.html#background-1",
+    "title": "On Systems",
+    "section": "Background",
+    "text": "Background\n\nPlain English:\nJust as there are bugs in code that make software, modern hardware is also written in code and therefore may contain bugs. I find these bugs.\n\nOf note: I found those bugs using scientific computing (thinking machines)."
+  },
+  {
+    "objectID": "00_intro.rjs.html#general-expectations",
+    "href": "00_intro.rjs.html#general-expectations",
+    "title": "On Systems",
+    "section": "General Expectations",
+    "text": "General Expectations\n\nStudents will begin the course with a grade of an “A”.\n\nStudents will be expected to:\n\nFollow lecture.\nTreat fellow students with respect.\nComplete exercises.\nComplete projects."
+  },
+  {
+    "objectID": "00_intro.rjs.html#classexercises",
+    "href": "00_intro.rjs.html#classexercises",
+    "title": "On Systems",
+    "section": "Class/Exercises",
+    "text": "Class/Exercises\n\nFor an A (10/10)\n\nCode that meets requirements.\nOn time.\n\nFor a B (9/10)\n\nCode that runs without error.\nOn time\n\nErroneous code is an F (6/10)\nLate work is a zero (0/10)"
+  },
+  {
+    "objectID": "00_intro.rjs.html#feedback-structure",
+    "href": "00_intro.rjs.html#feedback-structure",
+    "title": "On Systems",
+    "section": "Feedback Structure",
+    "text": "Feedback Structure\n\nStudents collectively within the class as a whole will receive feedback..\n\nIndividual feedback will be provided in limited and unique cases.\nStudents are expected to provide respectfully collaborate on exercises.\nStudents may request individual feedback from the instructor at any time.\nStudents will receive narrative rather than quantitative feedback."
+  },
+  {
+    "objectID": "00_intro.rjs.html#projectwebsite",
+    "href": "00_intro.rjs.html#projectwebsite",
+    "title": "On Systems",
+    "section": "Project/Website",
+    "text": "Project/Website\n\nStudents will create a public-facing scientific publication via:\n\nMidterm: GitHub, Markdown, Python\nFinal: Quarto, GitHub Pages, Python\n\nGraded on the AP Scale as an argument essay and then curved."
+  },
+  {
+    "objectID": "00_intro.rjs.html#aims-of-education",
+    "href": "00_intro.rjs.html#aims-of-education",
+    "title": "On Systems",
+    "section": "Aims of Education",
+    "text": "Aims of Education\n\nBefore starting my first degree, we went to a lecture titled “Aims of Education”\nI completed all remaining degrees during shutdowns/other crises!\nI remember it fondly.\nWe will review “Explainable AI for Climate Science” by Elizabeth Barnes.\n\nAnd then discuss."
+  },
+  {
+    "objectID": "00_intro.rjs.html#question-0",
+    "href": "00_intro.rjs.html#question-0",
+    "title": "On Systems",
+    "section": "Question 0",
+    "text": "Question 0\n\nWhat are the goals of a college education?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion."
+  },
+  {
+    "objectID": "00_intro.rjs.html#question-1",
+    "href": "00_intro.rjs.html#question-1",
+    "title": "On Systems",
+    "section": "Question 1",
+    "text": "Question 1\n\nHow does a scientist learn something new?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion."
+  },
+  {
+    "objectID": "00_intro.rjs.html#question-2",
+    "href": "00_intro.rjs.html#question-2",
+    "title": "On Systems",
+    "section": "Question 2",
+    "text": "Question 2\n\nWhat do you reasonably expect to remember from your courses in 20 years?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion."
+  },
+  {
+    "objectID": "00_intro.rjs.html#question-3",
+    "href": "00_intro.rjs.html#question-3",
+    "title": "On Systems",
+    "section": "Question 3",
+    "text": "Question 3\n\nWhat is the value of making mistakes in the learning process?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion."
+  },
+  {
+    "objectID": "00_intro.rjs.html#question-4",
+    "href": "00_intro.rjs.html#question-4",
+    "title": "On Systems",
+    "section": "Question 4",
+    "text": "Question 4\n\nHow do we create a safe environment where risk-taking is encouraged and productive failure is valued?\n\n\nThink: about a possible answer individually.\n\nDiscuss: answers within the group.\n\nRecord: a summary of the discussion."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Systems in Rust",
+    "section": "",
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMWThF 12:00-01:00, Ford 201\n\n\nProf. Calvin\n\n\nSyllabus\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nIntro\nRustup\n\n\n\n0x1\n09/01\nOff\nCargo\nHello\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
+  }
+]
