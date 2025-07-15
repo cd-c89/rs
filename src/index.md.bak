@@ -18,11 +18,14 @@ format: html
 - Taught this year in Rust.
     - So to me, "Systems in Rust"
 
-### MWThF 12:00-01:00, Ford 201
+### MW 1310-1440
 
 ### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)
 
-### [Syllabus](syllabus/syllabus.pdf)
+### Syllabus TBD
+
+- Ungrade++
+- Lec/Lab
 
 # Calendar
 
@@ -41,8 +44,8 @@ format: html
 |0xA|11/03|Graphs|BFS|Djikstra|
 |0xB|11/10|Merkle|||
 |0xC|11/17|VCS||
-|0xC|11/24|Spectre|*Off*|
-|0xC|11/24|Meltdown|Hypers|VCS.rs|
+|0xD|11/24|Spectre|*Off*|
+|0xE|11/24|Meltdown|Hypers|VCS.rs|
 
 Think I need string edit distance or patches somewhere. 
 

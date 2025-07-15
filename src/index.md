@@ -18,11 +18,14 @@ format: html
 - Taught this year in Rust.
     - So to me, "Systems in Rust"
 
-### MWThF 12:00-01:00, Ford 201
+### MW 1310-1440
 
 ### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)
 
-### [Syllabus](syllabus/syllabus.pdf)
+### Syllabus TBD
+
+- Ungrade++
+- Lec/Lab/HW
 
 # Calendar
 
