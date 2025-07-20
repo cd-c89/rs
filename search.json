@@ -4,329 +4,7 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\n\n\n\n0x1\n09/01\nOff\nCargo\nHello\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#announcements",
-    "href": "00_welcome.rjs.html#announcements",
-    "title": "Welcome",
-    "section": "Announcements",
-    "text": "Announcements\n\nWelcome to Systems in Rust\n\nWhat is in point of fact a systems cryptography course.\nBut it’s in Rust so you have to take it.\n\nAction Items:\n\nAccess the course webpage\nJoin the Discord!\n\nYou should have gotten an email…\n\nSet up Linux/Rust/Git."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#homework",
-    "href": "00_welcome.rjs.html#homework",
-    "title": "Welcome",
-    "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hello”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#today",
-    "href": "00_welcome.rjs.html#today",
-    "title": "Welcome",
-    "section": "Today",
-    "text": "Today\n\nLogistics\nOn Systems\nOn Rust\nOn Git\nCourse Sketch"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#it-me",
-    "href": "00_welcome.rjs.html#it-me",
-    "title": "Welcome",
-    "section": "It me",
-    "text": "It me\n\nName\n\n(Prof. )?Calvin\n\nCredentials\n\nB.A. Mathematics\nB.S., M.S., Ph.D. Computer Science\n\nPronouns\n\nthey/them"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#the-great-work",
-    "href": "00_welcome.rjs.html#the-great-work",
-    "title": "Welcome",
-    "section": "The Great Work",
-    "text": "The Great Work\n\nThesis Title\n\nMining Secure Behavior of Hardware Designs\n\nPlain English\n\nJust as there are bugs in code that makes software, modern hardware is also written in code and therefore may contain bugs. I find these bugs."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#course-format",
-    "href": "00_welcome.rjs.html#course-format",
-    "title": "Welcome",
-    "section": "Course Format",
-    "text": "Course Format\n\nLecture Monday\nLab Wednesday\nHomework due Friday\nIn-class midterm week of 10/06\nFinal project due whenever the final is scheduled."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#ungrading",
-    "href": "00_welcome.rjs.html#ungrading",
-    "title": "Welcome",
-    "section": "Ungrading++",
-    "text": "Ungrading++\n\nYour voices have been heard:\n\n\nI think failing my systems class was the best thing that happened to me.\n\n\nThis course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#proposal",
-    "href": "00_welcome.rjs.html#proposal",
-    "title": "Welcome",
-    "section": "Proposal",
-    "text": "Proposal\n\nI will offer two option\n\nUngrading\nSpecification Grading\n\nVote as a class (anonymously)\nI update syllabus before add/drop ends."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#ungrading-1",
-    "href": "00_welcome.rjs.html#ungrading-1",
-    "title": "Welcome",
-    "section": "1. Ungrading",
-    "text": "1. Ungrading\n\nI provide autograders for all assignments except final.\n\nOr a reference solution with a rubric, if automated testing is too weird.\nI will have a final reference solution but will at most share snippets individually.\n\nYou do whatever you want.\nEnrolled students get an A."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#specification-grading",
-    "href": "00_welcome.rjs.html#specification-grading",
-    "title": "Welcome",
-    "section": "2. Specification Grading",
-    "text": "2. Specification Grading\n\nAll the rage. I was never fan but tell me what you think.\nBasically, I will assign some stuff but you don’t have to do all of it perfectly.\n\nNo partial credit, everything is yes/no grading.\n\nI took distributions over final, midterm, and Lab/HW"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#it-pays-to-get-as",
-    "href": "00_welcome.rjs.html#it-pays-to-get-as",
-    "title": "Welcome",
-    "section": "It pays to get A’s",
-    "text": "It pays to get A’s\n\n\n\nGrade\nRequirements\n\n\n\n\nA\nFinal meets spec\n\n\nA\n90% ave HW/Lab/Midterm, Final compiles\n\n\nA-\n90% ave HW/Lab, Midterm/Final compile\n\n\nA-\nMidterm meets spec, Final compiles"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#but-bs-are-the-knees",
-    "href": "00_welcome.rjs.html#but-bs-are-the-knees",
-    "title": "Welcome",
-    "section": "But B’s are the Knees",
-    "text": "But B’s are the Knees\n\n\n\nGrade\nRequirements\n\n\n\n\nB+\n90% ave HW/Lab, Midterm compiles\n\n\nB\n80% ave HW/Lab, Midterm compiles\n\n\nB-\n80% ave HW/Lab"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#these-may-earn-degrees",
-    "href": "00_welcome.rjs.html#these-may-earn-degrees",
-    "title": "Welcome",
-    "section": "These may (???) earn degrees",
-    "text": "These may (???) earn degrees\n\n\n\nGrade\nRequirements\n\n\n\n\nC\n80% ave Lab\n\n\nD\n60% ave Lab\n\n\nF\nAnything else"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#lab-grading",
-    "href": "00_welcome.rjs.html#lab-grading",
-    "title": "Welcome",
-    "section": "Lab Grading",
-    "text": "Lab Grading\n\nA (=100%)\n\nMeets spec by end of class\n\nB (=90%)\n\nCompiles at end of class\n\nCan be turned into an executable.\n\n\nF (=0%)\n\nAnything else"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#hw-grading",
-    "href": "00_welcome.rjs.html#hw-grading",
-    "title": "Welcome",
-    "section": "HW Grading",
-    "text": "HW Grading\n\nA (=100%)\n\nOn time\nPasses autograder.\n\nB (=90%)\n\nOn time\nCompiles\n\nCan be turned into an executable.\n\n\nF (=0%)\n\nAnything else"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#final",
-    "href": "00_welcome.rjs.html#final",
-    "title": "Welcome",
-    "section": "Final",
-    "text": "Final\n\nCreate, document, and publish a self-hosting version control system.\nEntire codebase in Rust.\nMinimum specifications:\n\nSupport nested directory structures.\nSupport text-based files (.rs, .py, .txt)\nAllow reverting to named changes (commits).\nCompleted by you and at most a partner."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#late-work-policy",
-    "href": "00_welcome.rjs.html#late-work-policy",
-    "title": "Welcome",
-    "section": "Late Work Policy",
-    "text": "Late Work Policy\n\nLate work is not accepted.\n\nTurning in anything at all for on 90% of assignments yields B.\nMiss 100% of assignments and midterm but do the final for an A."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#ai-policy",
-    "href": "00_welcome.rjs.html#ai-policy",
-    "title": "Welcome",
-    "section": "AI Policy",
-    "text": "AI Policy\n\nI would be shocked if it is helpful to you.\nIf you think it is helpful, that is probably not a good sign.\nYou can use it (I wouldn’t)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#collaboration-policy",
-    "href": "00_welcome.rjs.html#collaboration-policy",
-    "title": "Welcome",
-    "section": "Collaboration Policy",
-    "text": "Collaboration Policy\n\nNon-final:\n\nAny size group via enthusiastic consent.\nTurn in your own code/copy.\n\nFinal:\n\nPartners via enthusiastic consent.\nTurn in your own code/copy."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#vote",
-    "href": "00_welcome.rjs.html#vote",
-    "title": "Welcome",
-    "section": "Vote",
-    "text": "Vote\n\nIf there’s not a Forms link here I should add one quickly."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#the-hard-part",
-    "href": "00_welcome.rjs.html#the-hard-part",
-    "title": "Welcome",
-    "section": "The Hard Part",
-    "text": "The Hard Part\n\nAfter ~10 years of systems research I’ve convinced myself only two things really matter:\n\nPointers, and\nRecursion\n\nRecursion isn’t too bad…\n\n&gt;&gt;&gt; exp = lambda b, n : b if n == 1 else b*exp(b,n-1)\n&gt;&gt;&gt; exp(2,8)\n256"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#pointers",
-    "href": "00_welcome.rjs.html#pointers",
-    "title": "Welcome",
-    "section": "Pointers",
-    "text": "Pointers\n\nPointers are a beast, but without them nothing makes sense!\n\n\n\n&gt;&gt;&gt; x = 1\n&gt;&gt;&gt; def addx():\n...     x += 1\n...\n&gt;&gt;&gt; addx()\nUnboundLocalError:\n&lt;blah blah blah error messages&gt;\n\n&gt;&gt;&gt; x = [1]\n&gt;&gt;&gt; def addx():\n...     x[0] += 1\n...\n&gt;&gt;&gt; addx()\n&gt;&gt;&gt; x\n[2]"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#insight",
-    "href": "00_welcome.rjs.html#insight",
-    "title": "Welcome",
-    "section": "Insight",
-    "text": "Insight\n\nDefinition:\n\nPointers: Variables that store memory addresses.\nRecursion: Functions calling themselves to solve sub-problems.\n\nImportance:\n\nCore to efficient algorithms and memory management in low-level programming."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#python-and-pointers",
-    "href": "00_welcome.rjs.html#python-and-pointers",
-    "title": "Welcome",
-    "section": "Python and Pointers",
-    "text": "Python and Pointers\n\nWhy not .py (.js, .java, .cs, .cpp, etc)?\n\nThese languages abstract memory.\nThis abstraction makes computation unclear\nThis lack of clarity:\n\nAdversely impacts education\nComplicates low-level design\nLeads to low performance\n\nGood languages (except Java) but not for us"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#rust-and-pointers",
-    "href": "00_welcome.rjs.html#rust-and-pointers",
-    "title": "Welcome",
-    "section": "Rust and Pointers",
-    "text": "Rust and Pointers\n\nRust:\n\nObscures pointers, but…\nDoes not obscure memory.\n\nThis is good!\n\nMemory matters, but pointers are historical accident.\n\nYou should probably use Rust in every application where correctness or performance matters."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#rust-and-recursion",
-    "href": "00_welcome.rjs.html#rust-and-recursion",
-    "title": "Welcome",
-    "section": "Rust and Recursion",
-    "text": "Rust and Recursion\n\nSeparately, Rust is built on one of the most exciting ongoing computer science research efforts:\nLLVM (stands for LLVM)\nBasically, a way of turning human-readable code into machine-executable code.\n\nVery good at turning recursion into iteration and/or vice versa.\n\nSo Rust experiences less costs on recursion than many other languages."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git",
-    "href": "00_welcome.rjs.html#git",
-    "title": "Welcome",
-    "section": "Git",
-    "text": "Git\n\nIf you don’t know git, you should soon.\nGit corresponds, like the others, to a command: git\n\nIt is common now to use other techniques, but the command remains extremely stable\n\nQuoth GitHub, the first and greatest of the collaboration tools:\n\n\nIf you want a lot of control and flexibility, you can use the command line."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example",
-    "href": "00_welcome.rjs.html#git-example",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nSo basically, you have things called repositories or “repos”\n\n\n\n\n\n\nflowchart LR\n  A(My ️‍🔥 code repo)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-1",
-    "href": "00_welcome.rjs.html#git-example-1",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nThen you realize you wrote an infinite loop so you update it\n\n\n\n\n\n\nflowchart LR\n  A(My ️‍🔥 code repo v0 ) --&gt; B(My ️‍🔥 code repo v1)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-2",
-    "href": "00_welcome.rjs.html#git-example-2",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nThen you come to class and realize your code is on your gaming rig in your apartment.\n\n\n\n\n\n\nflowchart LR\n  A(&lt;s&gt;My ️‍🔥 code repo v0&lt;/s&gt;) --&gt; B(&lt;s&gt;My ️‍🔥 code repo v1&lt;/s&gt;)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-3",
-    "href": "00_welcome.rjs.html#git-example-3",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nSo you save your code on GitHub\n\nGH = GitHub, GR = Gaming Rig\n\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GH.‍🔥 v0)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-4",
-    "href": "00_welcome.rjs.html#git-example-4",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nBut you realize you didn’t sanitize your inputs so you update again.\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-5",
-    "href": "00_welcome.rjs.html#git-example-5",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nThen you have class again and grab the GitHub version onto your LT = Laptop\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-6",
-    "href": "00_welcome.rjs.html#git-example-6",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nYou notice it has the bug so you fix it again on your laptop in almost the same way\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-7",
-    "href": "00_welcome.rjs.html#git-example-7",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nAnd save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-8",
-    "href": "00_welcome.rjs.html#git-example-8",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nYou realize you also added some ASCII art and try to send that to GitHub\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H(GH.‍🔥 v2)\n  C --&gt; H"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-9",
-    "href": "00_welcome.rjs.html#git-example-9",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nTwo arrows into one thing is a merge conflict and out-of-scope for now.\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H{💥}\n  C --&gt; H"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#git-example-10",
-    "href": "00_welcome.rjs.html#git-example-10",
-    "title": "Welcome",
-    "section": "Git Example",
-    "text": "Git Example\n\nBasically versions of code can live in more than one place.\n\nAh, versions, our old friend…\n\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H{💥}\n  C --&gt; H"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#visually",
-    "href": "00_welcome.rjs.html#visually",
-    "title": "Welcome",
-    "section": "Visually",
-    "text": "Visually\n\n\n\n\n\nflowchart LR\n  B(Wordle)\n  B --&gt; C(SHA512)\n  C --&gt; D(Ed25519)\n  B --&gt; F(Graphs)\n  C --&gt; H(Merkle)\n  F --&gt; H\n  F --&gt; G(LCS)\n  H --&gt; I(VCS)\n  G --&gt; I\n  D --&gt; I\n\n\n\n\n\n\n\nLCS = Longest common subsequence, like diff\nVCS = Version Control System, like git"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#sha",
-    "href": "00_welcome.rjs.html#sha",
-    "title": "Welcome",
-    "section": "SHA",
-    "text": "SHA\n\nSHA Basics:\n\nCryptographic hash function family.\nInput data into fixed-size hash values.\n\nUse Cases:\n\nData integrity.\n\nLearning Objectives:\n\nReason about bits and bytes."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#ed25519",
-    "href": "00_welcome.rjs.html#ed25519",
-    "title": "Welcome",
-    "section": "Ed25519",
-    "text": "Ed25519\n\nEd25519 Basics:\n\nPublic-key signature system.\nBased on elliptic curve cryptography (specifically, Edwards curves).\nUses SHA-512 and Curve25519.\n\nUse Cases:\n\nConfidentiality and authentication.\n\nLearning Objectives:\n\nReason about numerical computing."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#graphs",
-    "href": "00_welcome.rjs.html#graphs",
-    "title": "Welcome",
-    "section": "Graphs",
-    "text": "Graphs\n\nIntroduce graphs as a way to:\n\nOrganize files\nCompare files\nTrack changes."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#longest-common-subseq.-lcs",
-    "href": "00_welcome.rjs.html#longest-common-subseq.-lcs",
-    "title": "Welcome",
-    "section": "Longest Common Subseq. (LCS)",
-    "text": "Longest Common Subseq. (LCS)\n\nLCS Basics:\n\nFind longest sequence of characters in the same relative order in two or more sequences, but not necessarily contiguously.\nOften solved using dynamic programming.\n\nUse Cases:\n\nFile comparison (e.g., diff utility).\n\nLearning Objectives:\n\nLinear data structure."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#merkle-trees",
-    "href": "00_welcome.rjs.html#merkle-trees",
-    "title": "Welcome",
-    "section": "Merkle Trees",
-    "text": "Merkle Trees\n\nMerkle Trees:\n\nTree structure using SHA for data integrity.\nHashes stored as nodes; pointers link them.\nLeaf nodes are RSA signatures!\n\nMerkle Trees are balanced\n\nHierarchical data structure embedded in linear data structure."
-  },
-  {
-    "objectID": "00_welcome.rjs.html#file-system",
-    "href": "00_welcome.rjs.html#file-system",
-    "title": "Welcome",
-    "section": "File System",
-    "text": "File System\n\nThe file system a tree that cannot (easily) be embedded in a linear data structure.\n\nr\n├── DESCRIPTION\n├── Makefile\n├── NAMESPACE\n├── R\n│   └── vcd2df.R\n├── man\n│   └── vcd2df.Rd\n├── r\n├── vcd2df.Rcheck\n│   ├── 00_pkg_src\n│   │   └── vcd2df\n│   │       ├── DESCRIPTION\n│   │       ├── NAMESPACE\n│   │       ├── R\n│   │       │   └── vcd2df.R\n│   │       ├── build\n│   │       │   └── vignette.rds\n│   │       ├── inst\n│   │       │   └── doc\n│   │       │       ├── index.R\n│   │       │       ├── index.html\n│   │       │       └── index.qmd\n│   │       ├── man\n│   │       │   └── vcd2df.Rd\n│   │       └── vignettes\n│   │           └── index.qmd\n│   ├── 00check.log\n│   ├── 00install.out\n│   ├── Rdlatex.log\n│   ├── vcd2df\n│   │   ├── DESCRIPTION\n│   │   ├── INDEX\n│   │   ├── Meta\n│   │   │   ├── Rd.rds\n│   │   │   ├── features.rds\n│   │   │   ├── hsearch.rds\n│   │   │   ├── links.rds\n│   │   │   ├── nsInfo.rds\n│   │   │   ├── package.rds\n│   │   │   └── vignette.rds\n│   │   ├── NAMESPACE\n│   │   ├── R\n│   │   │   ├── vcd2df\n│   │   │   ├── vcd2df.rdb\n│   │   │   └── vcd2df.rdx\n│   │   ├── doc\n│   │   │   ├── index.R\n│   │   │   ├── index.html\n│   │   │   └── index.qmd\n│   │   ├── help\n│   │   │   ├── AnIndex\n│   │   │   ├── aliases.rds\n│   │   │   ├── paths.rds\n│   │   │   ├── vcd2df.rdb\n│   │   │   └── vcd2df.rdx\n│   │   └── html\n│   │       ├── 00Index.html\n│   │       └── R.css\n│   ├── vcd2df-Ex.R\n│   ├── vcd2df-Ex.Rout\n│   ├── vcd2df-Ex.pdf\n│   ├── vcd2df-manual.log\n│   └── vcd2df-manual.pdf\n├── vcd2df_1.0.1.tar.gz\n└── vignettes\n    └── index.qmd"
-  },
-  {
-    "objectID": "00_welcome.rjs.html#vim",
-    "href": "00_welcome.rjs.html#vim",
-    "title": "Welcome",
-    "section": "Vim",
-    "text": "Vim\n\nYou should use vim or another console-based editor as a component of your learning in this class.\nThis will not be assessed (how can it be) but will likely be expected in a non-trivial subset of settings this course material will be useful.\nI will live-code in either vim or helix"
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nOff\nCargo\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
   },
   {
     "objectID": "00_welcome.html",
@@ -393,7 +71,7 @@
     "href": "00_welcome.html#course-format",
     "title": "Welcome",
     "section": "Course Format",
-    "text": "Course Format\n\nLecture Monday\nLab Wednesday\nHomework due Friday\nIn-class midterm week of 10/06\nFinal project due whenever the final is scheduled.",
+    "text": "Course Format\n\nLecture Monday\nLab Wednesday\nHomework due Friday 1440 PM ET\nIn-class midterm week of 10/06\nFinal project due whenever the final is scheduled.",
     "crumbs": [
       "Welcome"
     ]
@@ -403,7 +81,7 @@
     "href": "00_welcome.html#ungrading",
     "title": "Welcome",
     "section": "Ungrading++",
-    "text": "Ungrading++\n\nYour voices have been heard:\n\n\nI think failing my systems class was the best thing that happened to me.\n\n\nThis course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more.",
+    "text": "Ungrading++\n\nYour voices have been heard: &gt; I think failing my systems class was the best thing that happened to me.\n\n\nThis course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more.",
     "crumbs": [
       "Welcome"
     ]
@@ -796,6 +474,508 @@
     "text": "Vim\n\nYou should use vim or another console-based editor as a component of your learning in this class.\nThis will not be assessed (how can it be) but will likely be expected in a non-trivial subset of settings this course material will be useful.\nI will live-code in either vim or helix",
     "crumbs": [
       "Welcome"
+    ]
+  },
+  {
+    "objectID": "00_welcome.rjs.html#announcements",
+    "href": "00_welcome.rjs.html#announcements",
+    "title": "Welcome",
+    "section": "Announcements",
+    "text": "Announcements\n\nWelcome to Systems in Rust\n\nWhat is in point of fact a systems cryptography course.\nBut it’s in Rust so you have to take it.\n\nAction Items:\n\nAccess the course webpage\nJoin the Discord!\n\nYou should have gotten an email…\n\nSet up Linux/Rust/Git."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#homework",
+    "href": "00_welcome.rjs.html#homework",
+    "title": "Welcome",
+    "section": "Homework",
+    "text": "Homework\n\nThe first homework, “Hello”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#today",
+    "href": "00_welcome.rjs.html#today",
+    "title": "Welcome",
+    "section": "Today",
+    "text": "Today\n\nLogistics\nOn Systems\nOn Rust\nOn Git\nCourse Sketch"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#it-me",
+    "href": "00_welcome.rjs.html#it-me",
+    "title": "Welcome",
+    "section": "It me",
+    "text": "It me\n\nName\n\n(Prof. )?Calvin\n\nCredentials\n\nB.A. Mathematics\nB.S., M.S., Ph.D. Computer Science\n\nPronouns\n\nthey/them"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#the-great-work",
+    "href": "00_welcome.rjs.html#the-great-work",
+    "title": "Welcome",
+    "section": "The Great Work",
+    "text": "The Great Work\n\nThesis Title\n\nMining Secure Behavior of Hardware Designs\n\nPlain English\n\nJust as there are bugs in code that makes software, modern hardware is also written in code and therefore may contain bugs. I find these bugs."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#course-format",
+    "href": "00_welcome.rjs.html#course-format",
+    "title": "Welcome",
+    "section": "Course Format",
+    "text": "Course Format\n\nLecture Monday\nLab Wednesday\nHomework due Friday 1440 PM ET\nIn-class midterm week of 10/06\nFinal project due whenever the final is scheduled."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#ungrading",
+    "href": "00_welcome.rjs.html#ungrading",
+    "title": "Welcome",
+    "section": "Ungrading++",
+    "text": "Ungrading++\n\nYour voices have been heard: &gt; I think failing my systems class was the best thing that happened to me.\n\n\nThis course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#proposal",
+    "href": "00_welcome.rjs.html#proposal",
+    "title": "Welcome",
+    "section": "Proposal",
+    "text": "Proposal\n\nI will offer two option\n\nUngrading\nSpecification Grading\n\nVote as a class (anonymously)\nI update syllabus before add/drop ends."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#ungrading-1",
+    "href": "00_welcome.rjs.html#ungrading-1",
+    "title": "Welcome",
+    "section": "1. Ungrading",
+    "text": "1. Ungrading\n\nI provide autograders for all assignments except final.\n\nOr a reference solution with a rubric, if automated testing is too weird.\nI will have a final reference solution but will at most share snippets individually.\n\nYou do whatever you want.\nEnrolled students get an A."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#specification-grading",
+    "href": "00_welcome.rjs.html#specification-grading",
+    "title": "Welcome",
+    "section": "2. Specification Grading",
+    "text": "2. Specification Grading\n\nAll the rage. I was never fan but tell me what you think.\nBasically, I will assign some stuff but you don’t have to do all of it perfectly.\n\nNo partial credit, everything is yes/no grading.\n\nI took distributions over final, midterm, and Lab/HW"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#it-pays-to-get-as",
+    "href": "00_welcome.rjs.html#it-pays-to-get-as",
+    "title": "Welcome",
+    "section": "It pays to get A’s",
+    "text": "It pays to get A’s\n\n\n\nGrade\nRequirements\n\n\n\n\nA\nFinal meets spec\n\n\nA\n90% ave HW/Lab/Midterm, Final compiles\n\n\nA-\n90% ave HW/Lab, Midterm/Final compile\n\n\nA-\nMidterm meets spec, Final compiles"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#but-bs-are-the-knees",
+    "href": "00_welcome.rjs.html#but-bs-are-the-knees",
+    "title": "Welcome",
+    "section": "But B’s are the Knees",
+    "text": "But B’s are the Knees\n\n\n\nGrade\nRequirements\n\n\n\n\nB+\n90% ave HW/Lab, Midterm compiles\n\n\nB\n80% ave HW/Lab, Midterm compiles\n\n\nB-\n80% ave HW/Lab"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#these-may-earn-degrees",
+    "href": "00_welcome.rjs.html#these-may-earn-degrees",
+    "title": "Welcome",
+    "section": "These may (???) earn degrees",
+    "text": "These may (???) earn degrees\n\n\n\nGrade\nRequirements\n\n\n\n\nC\n80% ave Lab\n\n\nD\n60% ave Lab\n\n\nF\nAnything else"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#lab-grading",
+    "href": "00_welcome.rjs.html#lab-grading",
+    "title": "Welcome",
+    "section": "Lab Grading",
+    "text": "Lab Grading\n\nA (=100%)\n\nMeets spec by end of class\n\nB (=90%)\n\nCompiles at end of class\n\nCan be turned into an executable.\n\n\nF (=0%)\n\nAnything else"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#hw-grading",
+    "href": "00_welcome.rjs.html#hw-grading",
+    "title": "Welcome",
+    "section": "HW Grading",
+    "text": "HW Grading\n\nA (=100%)\n\nOn time\nPasses autograder.\n\nB (=90%)\n\nOn time\nCompiles\n\nCan be turned into an executable.\n\n\nF (=0%)\n\nAnything else"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#final",
+    "href": "00_welcome.rjs.html#final",
+    "title": "Welcome",
+    "section": "Final",
+    "text": "Final\n\nCreate, document, and publish a self-hosting version control system.\nEntire codebase in Rust.\nMinimum specifications:\n\nSupport nested directory structures.\nSupport text-based files (.rs, .py, .txt)\nAllow reverting to named changes (commits).\nCompleted by you and at most a partner."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#late-work-policy",
+    "href": "00_welcome.rjs.html#late-work-policy",
+    "title": "Welcome",
+    "section": "Late Work Policy",
+    "text": "Late Work Policy\n\nLate work is not accepted.\n\nTurning in anything at all for on 90% of assignments yields B.\nMiss 100% of assignments and midterm but do the final for an A."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#ai-policy",
+    "href": "00_welcome.rjs.html#ai-policy",
+    "title": "Welcome",
+    "section": "AI Policy",
+    "text": "AI Policy\n\nI would be shocked if it is helpful to you.\nIf you think it is helpful, that is probably not a good sign.\nYou can use it (I wouldn’t)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#collaboration-policy",
+    "href": "00_welcome.rjs.html#collaboration-policy",
+    "title": "Welcome",
+    "section": "Collaboration Policy",
+    "text": "Collaboration Policy\n\nNon-final:\n\nAny size group via enthusiastic consent.\nTurn in your own code/copy.\n\nFinal:\n\nPartners via enthusiastic consent.\nTurn in your own code/copy."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#vote",
+    "href": "00_welcome.rjs.html#vote",
+    "title": "Welcome",
+    "section": "Vote",
+    "text": "Vote\n\nIf there’s not a Forms link here I should add one quickly."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#the-hard-part",
+    "href": "00_welcome.rjs.html#the-hard-part",
+    "title": "Welcome",
+    "section": "The Hard Part",
+    "text": "The Hard Part\n\nAfter ~10 years of systems research I’ve convinced myself only two things really matter:\n\nPointers, and\nRecursion\n\nRecursion isn’t too bad…\n\n&gt;&gt;&gt; exp = lambda b, n : b if n == 1 else b*exp(b,n-1)\n&gt;&gt;&gt; exp(2,8)\n256"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#pointers",
+    "href": "00_welcome.rjs.html#pointers",
+    "title": "Welcome",
+    "section": "Pointers",
+    "text": "Pointers\n\nPointers are a beast, but without them nothing makes sense!\n\n\n\n&gt;&gt;&gt; x = 1\n&gt;&gt;&gt; def addx():\n...     x += 1\n...\n&gt;&gt;&gt; addx()\nUnboundLocalError:\n&lt;blah blah blah error messages&gt;\n\n&gt;&gt;&gt; x = [1]\n&gt;&gt;&gt; def addx():\n...     x[0] += 1\n...\n&gt;&gt;&gt; addx()\n&gt;&gt;&gt; x\n[2]"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#insight",
+    "href": "00_welcome.rjs.html#insight",
+    "title": "Welcome",
+    "section": "Insight",
+    "text": "Insight\n\nDefinition:\n\nPointers: Variables that store memory addresses.\nRecursion: Functions calling themselves to solve sub-problems.\n\nImportance:\n\nCore to efficient algorithms and memory management in low-level programming."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#python-and-pointers",
+    "href": "00_welcome.rjs.html#python-and-pointers",
+    "title": "Welcome",
+    "section": "Python and Pointers",
+    "text": "Python and Pointers\n\nWhy not .py (.js, .java, .cs, .cpp, etc)?\n\nThese languages abstract memory.\nThis abstraction makes computation unclear\nThis lack of clarity:\n\nAdversely impacts education\nComplicates low-level design\nLeads to low performance\n\nGood languages (except Java) but not for us"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#rust-and-pointers",
+    "href": "00_welcome.rjs.html#rust-and-pointers",
+    "title": "Welcome",
+    "section": "Rust and Pointers",
+    "text": "Rust and Pointers\n\nRust:\n\nObscures pointers, but…\nDoes not obscure memory.\n\nThis is good!\n\nMemory matters, but pointers are historical accident.\n\nYou should probably use Rust in every application where correctness or performance matters."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#rust-and-recursion",
+    "href": "00_welcome.rjs.html#rust-and-recursion",
+    "title": "Welcome",
+    "section": "Rust and Recursion",
+    "text": "Rust and Recursion\n\nSeparately, Rust is built on one of the most exciting ongoing computer science research efforts:\nLLVM (stands for LLVM)\nBasically, a way of turning human-readable code into machine-executable code.\n\nVery good at turning recursion into iteration and/or vice versa.\n\nSo Rust experiences less costs on recursion than many other languages."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git",
+    "href": "00_welcome.rjs.html#git",
+    "title": "Welcome",
+    "section": "Git",
+    "text": "Git\n\nIf you don’t know git, you should soon.\nGit corresponds, like the others, to a command: git\n\nIt is common now to use other techniques, but the command remains extremely stable\n\nQuoth GitHub, the first and greatest of the collaboration tools:\n\n\nIf you want a lot of control and flexibility, you can use the command line."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example",
+    "href": "00_welcome.rjs.html#git-example",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nSo basically, you have things called repositories or “repos”\n\n\n\n\n\n\nflowchart LR\n  A(My ️‍🔥 code repo)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-1",
+    "href": "00_welcome.rjs.html#git-example-1",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nThen you realize you wrote an infinite loop so you update it\n\n\n\n\n\n\nflowchart LR\n  A(My ️‍🔥 code repo v0 ) --&gt; B(My ️‍🔥 code repo v1)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-2",
+    "href": "00_welcome.rjs.html#git-example-2",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nThen you come to class and realize your code is on your gaming rig in your apartment.\n\n\n\n\n\n\nflowchart LR\n  A(&lt;s&gt;My ️‍🔥 code repo v0&lt;/s&gt;) --&gt; B(&lt;s&gt;My ️‍🔥 code repo v1&lt;/s&gt;)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-3",
+    "href": "00_welcome.rjs.html#git-example-3",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nSo you save your code on GitHub\n\nGH = GitHub, GR = Gaming Rig\n\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GH.‍🔥 v0)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-4",
+    "href": "00_welcome.rjs.html#git-example-4",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nBut you realize you didn’t sanitize your inputs so you update again.\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-5",
+    "href": "00_welcome.rjs.html#git-example-5",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nThen you have class again and grab the GitHub version onto your LT = Laptop\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-6",
+    "href": "00_welcome.rjs.html#git-example-6",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nYou notice it has the bug so you fix it again on your laptop in almost the same way\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-7",
+    "href": "00_welcome.rjs.html#git-example-7",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nAnd save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-8",
+    "href": "00_welcome.rjs.html#git-example-8",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nYou realize you also added some ASCII art and try to send that to GitHub\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H(GH.‍🔥 v2)\n  C --&gt; H"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-9",
+    "href": "00_welcome.rjs.html#git-example-9",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nTwo arrows into one thing is a merge conflict and out-of-scope for now.\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H{💥}\n  C --&gt; H"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#git-example-10",
+    "href": "00_welcome.rjs.html#git-example-10",
+    "title": "Welcome",
+    "section": "Git Example",
+    "text": "Git Example\n\nBasically versions of code can live in more than one place.\n\nAh, versions, our old friend…\n\n\n\n\n\n\n\nflowchart LR\n  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)\n  B --&gt; C(GR.️‍🔥 v2)\n  B --&gt; D(GH.‍🔥 v0)\n  D --&gt; E(LT.‍🔥 v0)\n  E --&gt; F(LT.‍🔥 v1)\n  F --&gt; G(GH.‍🔥 v1)\n  G --&gt; H{💥}\n  C --&gt; H"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#visually",
+    "href": "00_welcome.rjs.html#visually",
+    "title": "Welcome",
+    "section": "Visually",
+    "text": "Visually\n\n\n\n\n\nflowchart LR\n  B(Wordle)\n  B --&gt; C(SHA512)\n  C --&gt; D(Ed25519)\n  B --&gt; F(Graphs)\n  C --&gt; H(Merkle)\n  F --&gt; H\n  F --&gt; G(LCS)\n  H --&gt; I(VCS)\n  G --&gt; I\n  D --&gt; I\n\n\n\n\n\n\n\nLCS = Longest common subsequence, like diff\nVCS = Version Control System, like git"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#sha",
+    "href": "00_welcome.rjs.html#sha",
+    "title": "Welcome",
+    "section": "SHA",
+    "text": "SHA\n\nSHA Basics:\n\nCryptographic hash function family.\nInput data into fixed-size hash values.\n\nUse Cases:\n\nData integrity.\n\nLearning Objectives:\n\nReason about bits and bytes."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#ed25519",
+    "href": "00_welcome.rjs.html#ed25519",
+    "title": "Welcome",
+    "section": "Ed25519",
+    "text": "Ed25519\n\nEd25519 Basics:\n\nPublic-key signature system.\nBased on elliptic curve cryptography (specifically, Edwards curves).\nUses SHA-512 and Curve25519.\n\nUse Cases:\n\nConfidentiality and authentication.\n\nLearning Objectives:\n\nReason about numerical computing."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#graphs",
+    "href": "00_welcome.rjs.html#graphs",
+    "title": "Welcome",
+    "section": "Graphs",
+    "text": "Graphs\n\nIntroduce graphs as a way to:\n\nOrganize files\nCompare files\nTrack changes."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#longest-common-subseq.-lcs",
+    "href": "00_welcome.rjs.html#longest-common-subseq.-lcs",
+    "title": "Welcome",
+    "section": "Longest Common Subseq. (LCS)",
+    "text": "Longest Common Subseq. (LCS)\n\nLCS Basics:\n\nFind longest sequence of characters in the same relative order in two or more sequences, but not necessarily contiguously.\nOften solved using dynamic programming.\n\nUse Cases:\n\nFile comparison (e.g., diff utility).\n\nLearning Objectives:\n\nLinear data structure."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#merkle-trees",
+    "href": "00_welcome.rjs.html#merkle-trees",
+    "title": "Welcome",
+    "section": "Merkle Trees",
+    "text": "Merkle Trees\n\nMerkle Trees:\n\nTree structure using SHA for data integrity.\nHashes stored as nodes; pointers link them.\nLeaf nodes are RSA signatures!\n\nMerkle Trees are balanced\n\nHierarchical data structure embedded in linear data structure."
+  },
+  {
+    "objectID": "00_welcome.rjs.html#file-system",
+    "href": "00_welcome.rjs.html#file-system",
+    "title": "Welcome",
+    "section": "File System",
+    "text": "File System\n\nThe file system a tree that cannot (easily) be embedded in a linear data structure.\n\nr\n├── DESCRIPTION\n├── Makefile\n├── NAMESPACE\n├── R\n│   └── vcd2df.R\n├── man\n│   └── vcd2df.Rd\n├── r\n├── vcd2df.Rcheck\n│   ├── 00_pkg_src\n│   │   └── vcd2df\n│   │       ├── DESCRIPTION\n│   │       ├── NAMESPACE\n│   │       ├── R\n│   │       │   └── vcd2df.R\n│   │       ├── build\n│   │       │   └── vignette.rds\n│   │       ├── inst\n│   │       │   └── doc\n│   │       │       ├── index.R\n│   │       │       ├── index.html\n│   │       │       └── index.qmd\n│   │       ├── man\n│   │       │   └── vcd2df.Rd\n│   │       └── vignettes\n│   │           └── index.qmd\n│   ├── 00check.log\n│   ├── 00install.out\n│   ├── Rdlatex.log\n│   ├── vcd2df\n│   │   ├── DESCRIPTION\n│   │   ├── INDEX\n│   │   ├── Meta\n│   │   │   ├── Rd.rds\n│   │   │   ├── features.rds\n│   │   │   ├── hsearch.rds\n│   │   │   ├── links.rds\n│   │   │   ├── nsInfo.rds\n│   │   │   ├── package.rds\n│   │   │   └── vignette.rds\n│   │   ├── NAMESPACE\n│   │   ├── R\n│   │   │   ├── vcd2df\n│   │   │   ├── vcd2df.rdb\n│   │   │   └── vcd2df.rdx\n│   │   ├── doc\n│   │   │   ├── index.R\n│   │   │   ├── index.html\n│   │   │   └── index.qmd\n│   │   ├── help\n│   │   │   ├── AnIndex\n│   │   │   ├── aliases.rds\n│   │   │   ├── paths.rds\n│   │   │   ├── vcd2df.rdb\n│   │   │   └── vcd2df.rdx\n│   │   └── html\n│   │       ├── 00Index.html\n│   │       └── R.css\n│   ├── vcd2df-Ex.R\n│   ├── vcd2df-Ex.Rout\n│   ├── vcd2df-Ex.pdf\n│   ├── vcd2df-manual.log\n│   └── vcd2df-manual.pdf\n├── vcd2df_1.0.1.tar.gz\n└── vignettes\n    └── index.qmd"
+  },
+  {
+    "objectID": "00_welcome.rjs.html#vim",
+    "href": "00_welcome.rjs.html#vim",
+    "title": "Welcome",
+    "section": "Vim",
+    "text": "Vim\n\nYou should use vim or another console-based editor as a component of your learning in this class.\nThis will not be assessed (how can it be) but will likely be expected in a non-trivial subset of settings this course material will be useful.\nI will live-code in either vim or helix"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#announcements",
+    "href": "01_rustup.rjs.html#announcements",
+    "title": "Rustup",
+    "section": "Announcements",
+    "text": "Announcements\n\nLab Day\n\nSet up environment"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#homework",
+    "href": "01_rustup.rjs.html#homework",
+    "title": "Rustup",
+    "section": "Homework",
+    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#today",
+    "href": "01_rustup.rjs.html#today",
+    "title": "Rustup",
+    "section": "Today",
+    "text": "Today\n\nSet up your operating system, if it is not UNIX-based.\nInstall Rust.\nInstall Git\nBonus!\n\nInstall Vim, Neovim, or Helix."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#windows",
+    "href": "01_rustup.rjs.html#windows",
+    "title": "Rustup",
+    "section": "Windows",
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#macos",
+    "href": "01_rustup.rjs.html#macos",
+    "title": "Rustup",
+    "section": "MacOS",
+    "text": "MacOS\n\nMacOS should mostly work out-of-the-box.\nYou need one thing: XCode"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#rustup",
+    "href": "01_rustup.rjs.html#rustup",
+    "title": "Rustup",
+    "section": "Rustup",
+    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#verify",
+    "href": "01_rustup.rjs.html#verify",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#git-installation",
+    "href": "01_rustup.rjs.html#git-installation",
+    "title": "Rustup",
+    "section": "Git Installation",
+    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#verify-1",
+    "href": "01_rustup.rjs.html#verify-1",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#account",
+    "href": "01_rustup.rjs.html#account",
+    "title": "Rustup",
+    "section": "Account",
+    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More"
+  },
+  {
+    "objectID": "01_rustup.html",
+    "href": "01_rustup.html",
+    "title": "Rustup",
+    "section": "",
+    "text": "Lab Day\n\nSet up environment",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#announcements",
+    "href": "01_rustup.html#announcements",
+    "title": "Rustup",
+    "section": "",
+    "text": "Lab Day\n\nSet up environment",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#homework",
+    "href": "01_rustup.html#homework",
+    "title": "Rustup",
+    "section": "Homework",
+    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#today",
+    "href": "01_rustup.html#today",
+    "title": "Rustup",
+    "section": "Today",
+    "text": "Today\n\nSet up your operating system, if it is not UNIX-based.\nInstall Rust.\nInstall Git\nBonus!\n\nInstall Vim, Neovim, or Helix.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#windows",
+    "href": "01_rustup.html#windows",
+    "title": "Rustup",
+    "section": "Windows",
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)\n\n\n\n\nWSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter\nType wsl\n\n\n\n\n\n\nDocker or Podman\n\nBoth will require WSL 2, but install for you\nDocker has better Windows support, I believe Podman is seeing more use.\nFollow this guide.\nNotes:\n\nUse WSL 2 backend.\nYou are responsible for teaching yourself containers.\nSlides for last year.\n\n\n\n\n\nGit Bash\n\nI have set up guide for Git Bash for another course\nThis seemed like it could work. I won’t be checking.\n\n\n\n\nCygwin\n\nI have no idea how Cygwin works but it’s pretty cool.\nBasically no longer in use due to WSL 2 and Docker.\nFollow this guide",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#macos",
+    "href": "01_rustup.html#macos",
+    "title": "Rustup",
+    "section": "MacOS",
+    "text": "MacOS\n\nMacOS should mostly work out-of-the-box.\nYou need one thing: XCode",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#rustup",
+    "href": "01_rustup.html#rustup",
+    "title": "Rustup",
+    "section": "Rustup",
+    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#verify",
+    "href": "01_rustup.html#verify",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#git-installation",
+    "href": "01_rustup.html#git-installation",
+    "title": "Rustup",
+    "section": "Git Installation",
+    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#verify-1",
+    "href": "01_rustup.html#verify-1",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#account",
+    "href": "01_rustup.html#account",
+    "title": "Rustup",
+    "section": "Account",
+    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More",
+    "crumbs": [
+      "Rustup"
     ]
   }
 ]

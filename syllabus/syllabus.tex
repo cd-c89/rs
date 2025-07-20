@@ -1,0 +1,174 @@
+% Don't touch this %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in,headheight=3ex,headsep=3ex]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{quoting}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\newcommand{\blankline}{\quad\pagebreak[2]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Modify Course title, instructor name, semester here %%%%%%%%
+
+\title{CS-271 System Programming, Computer Architecture}
+\author{Calvin Deutschbein}
+\date{Willamette University, Fall 2025}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't touch this %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[sc]{mathpazo}
+\linespread{1.05} % Palatino needs more leading (space between lines)
+\usepackage[T1]{fontenc}
+\usepackage[mmddyyyy]{datetime}% http://ctan.org/pkg/datetime
+\usepackage{advdate}% http://ctan.org/pkg/advdate
+\newdateformat{syldate}{\twodigit{\THEMONTH}/\twodigit{\THEDAY}}
+\newsavebox{\MONDAY}\savebox{\MONDAY}{Mon}% Mon
+\newcommand{\week}[1]{%
+%  \cleardate{mydate}% Clear date
+% \newdate{mydate}{\the\day}{\the\month}{\the\year}% Store date
+  \paragraph*{\kern-2ex\quad #1, \syldate{\today} - \AdvanceDate[4]\syldate{\today}:}% Set heading  \quad #1
+%  \setbox1=\hbox{\shortdayofweekname{\getdateday{mydate}}{\getdatemonth{mydate}}{\getdateyear{mydate}}}%
+  \ifdim\wd1=\wd\MONDAY
+    \AdvanceDate[7]
+  \else
+    \AdvanceDate[7]
+  \fi%
+}
+\usepackage{setspace}
+\usepackage{multicol}
+%\usepackage{indentfirst}
+\usepackage{fancyhdr,lastpage}
+\usepackage{url}
+\pagestyle{fancy}
+\usepackage{hyperref}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{layout}
+
+\lhead{}
+\chead{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Modify header here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\rhead{\footnotesize Thinking Machines}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Don't touch this %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lfoot{}
+\cfoot{\small \thepage/\pageref*{LastPage}}
+\rfoot{}
+
+\usepackage{array, xcolor}
+\usepackage{color,hyperref}
+\definecolor{clemsonorange}{HTML}{EA6A20}
+\hypersetup{colorlinks,breaklinks,linkcolor=clemsonorange,urlcolor=clemsonorange,anchorcolor=clemsonorange,citecolor=black}
+
+\begin{document}
+
+\maketitle
+
+\blankline
+
+\begin{tabular*}{.93\textwidth}{@{\extracolsep{\fill}}lr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Modify information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+E-mail: \texttt{ckdeutschbein@willamette.edu} & Web: \href{https://cd-public.github.io/courses/soc}{\tt\bf cd-public.github.io/}  \\
+
+ Office Hours: MWF 11:30-12:00 \& Discord TTh  &  Lecture: MWF 12:00-1:00 \\
+
+ Office: Ford 307 & Chase Hour: Th 12:00-1:00  \\
+ & \\
+\hline
+\end{tabular*}
+
+\vspace{5 mm}
+
+% First Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Course Description}
+
+\subsection*{College Colloquium}
+
+Systems programmers study the boundary between abstractions in language and implementation at engineering and physical levels. This course will prepare computer scientists to reason at and across this abstraction boundary to more fully embrace the power of computation. Students will learn the systems language of Rust, systems libraries such as POSIX, and about UNIX-based systems such as Linux.
+
+\section*{About Me}
+Calvin Deutschbein is a 
+fifth-year professor of computer science and colloquia instructor.
+
+% Second Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Required Materials}
+
+Required materials for a given class will be available on the \href{https://cd-public.github.io/scicom}{course webpage}. All course materials will be made available at no cost to the student.
+
+\subsection*{Supplementary Text}
+
+\href{https://doc.rust-lang.org/book/}{The Rust Programming Language} will be provided to students in electronic copy.
+
+
+% Third Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{Accessability}
+
+I will make every effort to ensure all coursework and materials are accessible to all students, including working with on-campus specialists. However, there is always room for improvement. I always appreciate hearing from students about how I can make the course more accessible, so please reach out if there is something I can be doing better!
+
+% Fourth Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Course Objectives}
+
+\begin{itemize}
+\item Write memory-safe code in compiled, non-garbage collected language.
+\item Implement and use linear and hierarchical data structures and the basis of performant associative data structures.
+\item Learn modern development practices in a state-of-the-art coding framework.
+\item Utilize the command line and command line tools to create executables, including command line tools of your own.
+\item Learn fundamental algorithms and use cases of major cryptographic technologies.
+\item Survey number, set, graph, and automata theory in an applied setting.
+\item See examples of cybersecurity principles including the CIA triad and threat models.
+\end{itemize}
+
+% Fifth Section %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Course Structure}
+
+The course will be composed of lecture, labs, and hoemwork on systems c computing.
+
+\subsection*{Class Structure}
+
+Classes are scheduled for Monday and Wednesday at 13:10 PM. The lecture schedule is on the \href{https://cd-c89.github.io/rs}{course webpage}.
+
+\subsubsection*{Midterm}
+
+There will be an in-class code-based midterm, which will be ``open-everything" (except other students.
+
+\subsubsection*{Final}
+
+The final is the individual or partner development of a version control system command line tool in Rust.
+
+\subsection*{Feedback and Grading}
+
+\subsubsection*{Grading Scale}
+
+We will vote in the first week of class whether to use ungrading or specification grading. Both candidates are described on the \href{https://cd-c89.github.io/rs}{course webpage}
+
+\section*{Course Policies}
+
+\subsection*{Collaboration Policy}
+
+All collaboration is by mutual enthusiastic consent. Any collaboration is permitted on homeworks and labs, none on the midterm, and partners on the final. This will conducted via honor system unless I receive a (anonymous) student complaint.
+
+\subsection*{AI Policy}
+
+Use of anything considered AI is allowed but not recommended as I've tried using it and thought it was horrible. There are variety of good tools that actually work I would recommend instead, beginning with the tools installed in the first week of class.
+
+\input{college}
+
+\end{document}
+

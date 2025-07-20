@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.30">
 
   <meta name="author" content="Prof.&nbsp;Calvin">
-  <title>Systems in Rust – Welcome</title>
+  <title>Systems in Rust – Rustup</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -384,16 +384,13 @@
       margin-right: 0; 
     }
   </style>
-  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Welcome</h1>
+  <h1 class="title">Rustup</h1>
   <p class="subtitle">Systems in Rust</p>
 
 <div class="quarto-title-authors">
@@ -408,26 +405,16 @@ Prof.&nbsp;Calvin
 <section id="announcements" class="slide level2">
 <h2>Announcements</h2>
 <ul>
-<li><strong>Welcome</strong> to Systems in Rust
+<li>Lab Day
 <ul>
-<li>What is in point of fact a systems cryptography course.</li>
-<li>But it’s in Rust so you have to take it.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Access the <a href="https://cd-c89.github.io/rs/">course webpage</a></li>
-<li>Join the Discord!
-<ul>
-<li>You should have gotten an email…</li>
-</ul></li>
-<li>Set up Linux/Rust/Git.</li>
+<li>Set up environment</li>
 </ul></li>
 </ul>
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>
 <ul>
-<li>The first homework, “Hello”, is ready after this class.
+<li>The first homework, “Hi world”, is ready after this class.
 <ul>
 <li>It is comically trivial.</li>
 <li>Mostly makes sure you have everything set up.</li>
@@ -438,881 +425,175 @@ Prof.&nbsp;Calvin
 <section id="today" class="slide level2">
 <h2>Today</h2>
 <ul>
-<li>Logistics</li>
-<li>On Systems</li>
-<li>On Rust</li>
-<li>On Git</li>
-<li>Course Sketch</li>
+<li>Set up your operating system, if it is not UNIX-based.</li>
+<li>Install Rust.</li>
+<li>Install Git</li>
+<li>Bonus!
+<ul>
+<li>Install Vim, Neovim, or Helix.</li>
+</ul></li>
 </ul>
 </section>
 <section>
-<section id="logistics" class="title-slide slide level1 center">
-<h1>Logistics</h1>
+<section id="systems" class="title-slide slide level1 center">
+<h1>Systems</h1>
 
 </section>
-<section id="it-me" class="slide level2">
-<h2>It me</h2>
+<section id="windows" class="slide level2">
+<h2>Windows</h2>
 <ul>
-<li><strong>Name</strong>
+<li>Windows usage is not supported in the course.</li>
+<li>If you are using Windows, you must:
 <ul>
-<li>(Prof.&nbsp;)?Calvin</li>
-</ul></li>
-<li><strong>Credentials</strong>
-<ul>
-<li>B.A. Mathematics</li>
-<li>B.S., M.S., Ph.D.&nbsp;Computer Science</li>
-</ul></li>
-<li><strong>Pronouns</strong>
-<ul>
-<li>they/them</li>
+<li>Use Windows Subsystem for Linux (Recommended)</li>
+<li>Use Docker or Podman</li>
+<li>Use Git Bash or Mingw in some other way (Discouraged)</li>
+<li>Use Cygwin (Discouraged)</li>
 </ul></li>
 </ul>
 </section>
-<section id="the-great-work" class="slide level2">
-<h2>The Great Work</h2>
+<section class="slide level2">
+
+<h3 id="wsl-2">WSL 2</h3>
 <ul>
-<li>Thesis Title
+<li>Windows Subsystem for Linux</li>
+<li>Follow <a href="https://learn.microsoft.com/en-us/windows/wsl/install">this guide</a></li>
+<li>Notes:
 <ul>
-<li>Mining Secure Behavior of Hardware Designs</li>
+<li>Use WSL 2. It is the default.</li>
+<li>I recommend using Ubuntu distribution. You will be asked.</li>
+<li>I prefer <a href="https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-US&amp;gl=US">Windows Terminal</a>.
+<ul>
+<li>Windows key -&gt; “Terminal” -&gt; Enter</li>
+<li>Type <code>wsl</code></li>
 </ul></li>
-<li>Plain English
-<ul>
-<li>Just as there are bugs in code that makes software, modern hardware is also written in code and therefore may contain bugs. I find these bugs.</li>
 </ul></li>
 </ul>
 </section>
-<section id="course-format" class="slide level2">
-<h2>Course Format</h2>
+<section class="slide level2">
+
+<h3 id="docker-or-podman">Docker or Podman</h3>
 <ul>
-<li>Lecture Monday</li>
-<li>Lab Wednesday</li>
-<li>Homework due Friday 1440 PM ET</li>
-<li>In-class midterm week of 10/06</li>
-<li>Final project due whenever the final is scheduled.</li>
-</ul>
-</section>
-<section id="ungrading" class="slide level2">
-<h2>Ungrading++</h2>
+<li>Both will require WSL 2, but install for you</li>
+<li>Docker has better Windows support, I believe Podman is seeing more use.</li>
+<li>Follow <a href="https://docs.docker.com/desktop/setup/install/windows-install/">this guide</a>.</li>
+<li>Notes:
 <ul>
-<li>Your voices have been heard: &gt; I think failing my systems class was the best thing that happened to me.</li>
-</ul>
-<blockquote>
-<p>This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more.</p>
-</blockquote>
-</section>
-<section id="proposal" class="slide level2">
-<h2>Proposal</h2>
-<ul>
-<li>I will offer two option
-<ul>
-<li>Ungrading</li>
-<li>Specification Grading</li>
-</ul></li>
-<li>Vote as a class (anonymously)</li>
-<li>I update syllabus before add/drop ends.</li>
-</ul>
-</section>
-<section id="ungrading-1" class="slide level2">
-<h2>1. Ungrading</h2>
-<ul>
-<li>I provide autograders for all assignments except final.
-<ul>
-<li>Or a reference solution with a rubric, if automated testing is too weird.</li>
-<li>I will have a final reference solution but will at most share snippets individually.</li>
-</ul></li>
-<li>You do whatever you want.</li>
-<li>Enrolled students get an A.</li>
-</ul>
-</section>
-<section id="specification-grading" class="slide level2">
-<h2>2. Specification Grading</h2>
-<ul>
-<li>All the rage. I was never fan but tell me what you think.</li>
-<li>Basically, I will assign some stuff but you don’t have to do all of it perfectly.
-<ul>
-<li>No partial credit, everything is yes/no grading.</li>
-</ul></li>
-<li>I took distributions over final, midterm, and Lab/HW</li>
-</ul>
-</section>
-<section id="it-pays-to-get-as" class="slide level2">
-<h2>It pays to get A’s</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Grade</th>
-<th>Requirements</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">A</td>
-<td>Final meets spec</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">A</td>
-<td>90% ave HW/Lab/Midterm, Final compiles</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">A-</td>
-<td>90% ave HW/Lab, Midterm/Final compile</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">A-</td>
-<td>Midterm meets spec, Final compiles</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="but-bs-are-the-knees" class="slide level2">
-<h2>But B’s are the Knees</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Grade</th>
-<th>Requirements</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">B+</td>
-<td>90% ave HW/Lab, Midterm compiles</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">B</td>
-<td>80% ave HW/Lab, Midterm compiles</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">B-</td>
-<td>80% ave HW/Lab</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="these-may-earn-degrees" class="slide level2">
-<h2>These may (???) earn degrees</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Grade</th>
-<th>Requirements</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">C</td>
-<td>80% ave Lab</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">D</td>
-<td>60% ave Lab</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">F</td>
-<td>Anything else</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="lab-grading" class="slide level2">
-<h2>Lab Grading</h2>
-<ul>
-<li>A (=100%)
-<ul>
-<li>Meets spec by end of class</li>
-</ul></li>
-<li>B (=90%)
-<ul>
-<li>Compiles at end of class
-<ul>
-<li>Can be turned into an executable.</li>
-</ul></li>
-</ul></li>
-<li>F (=0%)
-<ul>
-<li>Anything else</li>
+<li>Use WSL 2 backend.</li>
+<li>You are responsible for teaching yourself containers.</li>
+<li><a href="https://cd-public.github.io/courses/old/c89s25/qmd/podman.html#/what-is-podman">Slides for last year.</a></li>
 </ul></li>
 </ul>
 </section>
-<section id="hw-grading" class="slide level2">
-<h2>HW Grading</h2>
+<section class="slide level2">
+
+<h3 id="git-bash">Git Bash</h3>
 <ul>
-<li>A (=100%)
-<ul>
-<li>On time</li>
-<li>Passes autograder.</li>
-</ul></li>
-<li>B (=90%)
-<ul>
-<li>On time</li>
-<li>Compiles
-<ul>
-<li>Can be turned into an executable.</li>
-</ul></li>
-</ul></li>
-<li>F (=0%)
-<ul>
-<li>Anything else</li>
-</ul></li>
+<li>I have set up guide for Git Bash for <a href="https://cd-public.github.io/scicom/qmd/A1_gitbash.html">another course</a></li>
+<li>This seemed like it could work. I won’t be checking.</li>
 </ul>
 </section>
-<section id="final" class="slide level2">
-<h2>Final</h2>
+<section class="slide level2">
+
+<h3 id="cygwin">Cygwin</h3>
 <ul>
-<li>Create, document, and publish a self-hosting version control system.</li>
-<li>Entire codebase in Rust.</li>
-<li>Minimum specifications:
-<ul>
-<li>Support nested directory structures.</li>
-<li>Support text-based files (.rs, .py, .txt)</li>
-<li>Allow reverting to named changes (commits).</li>
-<li>Completed by you and at most a partner.</li>
-</ul></li>
+<li>I have no idea how Cygwin works but it’s pretty cool.</li>
+<li>Basically no longer in use due to WSL 2 and Docker.</li>
+<li>Follow <a href="https://www.cygwin.com/install.html">this guide</a></li>
 </ul>
 </section>
-<section id="late-work-policy" class="slide level2">
-<h2>Late Work Policy</h2>
+<section id="macos" class="slide level2">
+<h2>MacOS</h2>
 <ul>
-<li>Late work is not accepted.
-<ul>
-<li>Turning in anything at all for on 90% of assignments yields B.</li>
-<li>Miss 100% of assignments and midterm but do the final for an A.</li>
-</ul></li>
-</ul>
-</section>
-<section id="ai-policy" class="slide level2">
-<h2>AI Policy</h2>
-<ul>
-<li>I would be shocked if it is helpful to you.</li>
-<li>If you think it is helpful, that is probably not a good sign.</li>
-<li>You can use it (I wouldn’t)</li>
-</ul>
-</section>
-<section id="collaboration-policy" class="slide level2">
-<h2>Collaboration Policy</h2>
-<ul>
-<li>Non-final:
-<ul>
-<li>Any size group via enthusiastic consent.</li>
-<li>Turn in your own code/copy.</li>
-</ul></li>
-<li>Final:
-<ul>
-<li>Partners via enthusiastic consent.</li>
-<li>Turn in your own code/copy.</li>
-</ul></li>
-</ul>
-</section>
-<section id="vote" class="slide level2">
-<h2>Vote</h2>
-<ul>
-<li>If there’s not a Forms link here I should add one quickly.</li>
+<li>MacOS should mostly work out-of-the-box.</li>
+<li>You need one thing: XCode</li>
 </ul>
 </section></section>
 <section>
-<section id="on-systems" class="title-slide slide level1 center">
-<h1>On Systems</h1>
+<section id="rust" class="title-slide slide level1 center">
+<h1>Rust</h1>
 
 </section>
-<section id="the-hard-part" class="slide level2">
-<h2>The Hard Part</h2>
+<section id="rustup" class="slide level2">
+<h2>Rustup</h2>
 <ul>
-<li><p>After ~10 years of systems research I’ve convinced myself <a href="https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/">only two things</a> really matter:</p>
+<li>On your UNIX-based OS:
 <ul>
-<li>Pointers, and</li>
-<li>Recursion</li>
+<li>Linux</li>
+<li>MacOS</li>
+<li>WSL 2</li>
+<li>FreeBSD</li>
 </ul></li>
-<li><p>Recursion isn’t too bad…</p></li>
+<li>Open the command line and run the following:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> exp <span class="op">=</span> <span class="kw">lambda</span> b, n : b <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> b<span class="op">*</span>exp(b,n<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-2"><a></a><span class="op">&gt;&gt;&gt;</span> exp(<span class="dv">2</span>,<span class="dv">8</span>)</span>
-<span id="cb1-3"><a></a><span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="pointers" class="slide level2">
-<h2>Pointers</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">curl</span> <span class="at">--proto</span> <span class="st">'=https'</span> <span class="at">--tlsv1.2</span> https://sh.rustup.rs <span class="at">-sSf</span> <span class="kw">|</span> <span class="fu">sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Pointers are a beast, but without them nothing makes sense!</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb2-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
-<span id="cb2-3"><a></a>...     x <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-4"><a></a>...</span>
-<span id="cb2-5"><a></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
-<span id="cb2-6"><a></a><span class="pp">UnboundLocalError</span>:</span>
-<span id="cb2-7"><a></a><span class="op">&lt;</span>blah blah blah error messages<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:50%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> [<span class="dv">1</span>]</span>
-<span id="cb3-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
-<span id="cb3-3"><a></a>...     x[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-4"><a></a>...</span>
-<span id="cb3-5"><a></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
-<span id="cb3-6"><a></a><span class="op">&gt;&gt;&gt;</span> x</span>
-<span id="cb3-7"><a></a>[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div>
-</section>
-<section id="insight" class="slide level2">
-<h2>Insight</h2>
-<ul>
-<li><strong>Definition:</strong>
-<ul>
-<li>Pointers: Variables that store memory addresses.</li>
-<li>Recursion: Functions calling themselves to solve sub-problems.</li>
-</ul></li>
-<li><strong>Importance:</strong>
-<ul>
-<li>Core to efficient algorithms and memory management in low-level programming.</li>
-</ul></li>
+<li><a href="https://doc.rust-lang.org/book/ch01-01-installation.html">Read more</a></li>
 </ul>
 </section>
-<section id="python-and-pointers" class="slide level2">
-<h2>Python and Pointers</h2>
+<section id="verify" class="slide level2">
+<h2>Verify</h2>
 <ul>
-<li><strong>Why not .py (.js, .java, .cs, .cpp, etc)?</strong>
-<ul>
-<li>These languages <em>abstract</em> memory.</li>
-<li>This abstraction makes computation <strong>unclear</strong></li>
-<li>This lack of clarity:
-<ul>
-<li>Adversely impacts education</li>
-<li>Complicates low-level design</li>
-<li>Leads to low performance</li>
-</ul></li>
-<li>Good languages (except Java) but not for us</li>
-</ul></li>
+<li>To ensure you have a Rust installation, run:</li>
 </ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">rustc</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>At time of slide creation, I saw this version:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="ex">rustc</span> 1.87.0 <span class="er">(</span><span class="ex">17067e9ac</span> 2025-05-09<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="on-rust" class="title-slide slide level1 center">
-<h1>On Rust</h1>
+<section id="git" class="title-slide slide level1 center">
+<h1>Git</h1>
 
 </section>
-<section id="rust-and-pointers" class="slide level2">
-<h2>Rust and Pointers</h2>
+<section id="git-installation" class="slide level2">
+<h2>Git Installation</h2>
 <ul>
-<li>Rust:
+<li>Ensure you have a Git installation:
 <ul>
-<li>Obscures pointers, but…</li>
-<li><em>Does not</em> obscure memory.</li>
+<li>Windows:
+<ul>
+<li>Launch WSL</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a></a>wsl <span class="op">~</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Install <code>git</code> within WSL</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="fu">sudo</span> apt install git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>MacOS:
+<ul>
+<li><a href="https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac">Launch the terminal</a> and then:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource zsh number-lines code-with-copy"><code class="sourceCode zsh"><span id="cb6-1"><a></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
-<li>This is good!
-<ul>
-<li>Memory matters, but pointers are historical accident.</li>
-</ul></li>
-<li>You should probably use Rust in every application where correctness or performance matters.</li>
 </ul>
 </section>
-<section id="rust-and-recursion" class="slide level2">
-<h2>Rust and Recursion</h2>
+<section id="verify-1" class="slide level2">
+<h2>Verify</h2>
 <ul>
-<li>Separately, Rust is built on one of the most exciting ongoing computer science research efforts:</li>
-<li><strong>LLVM</strong> (stands for LLVM)</li>
-<li>Basically, a way of turning human-readable code into machine-executable code.
-<ul>
-<li>Very good at turning recursion into iteration and/or vice versa.</li>
-</ul></li>
-<li>So Rust experiences less costs on recursion than many other languages.</li>
+<li>Verify install via:</li>
 </ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a></a><span class="fu">git</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I had:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="fu">git</span> version 2.34.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="on-git" class="title-slide slide level1 center">
-<h1>On Git</h1>
+<section id="github" class="title-slide slide level1 center">
+<h1>GitHub</h1>
 
 </section>
-<section id="git" class="slide level2">
-<h2>Git</h2>
+<section id="account" class="slide level2">
+<h2>Account</h2>
 <ul>
-<li>If you don’t know <code>git</code>, you should soon.</li>
-<li>Git corresponds, like the others, to a command: <code>git</code>
-<ul>
-<li>It is common now to use other techniques, but the command remains extremely <strong>stable</strong></li>
-</ul></li>
-<li>Quoth GitHub, the first and greatest of the collaboration tools:</li>
+<li>Ensure you have an account on GitHub.</li>
+<li><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">Read More</a></li>
 </ul>
-<blockquote>
-<p><a href="https://docs.github.com/en/get-started/using-github/connecting-to-github">If you want a lot of control and flexibility, you can use the command line.</a></p>
-</blockquote>
-</section>
-<section id="git-example" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>So basically, you have things called repositories or “repos”</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(My ️‍🔥 code repo)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-1" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>Then you realize you wrote an infinite loop so you update it</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(My ️‍🔥 code repo v0 ) --&gt; B(My ️‍🔥 code repo v1)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-2" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>Then you come to class and realize your code is on your gaming rig in your apartment.</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(&lt;s&gt;My ️‍🔥 code repo v0&lt;/s&gt;) --&gt; B(&lt;s&gt;My ️‍🔥 code repo v1&lt;/s&gt;)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-3" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>So you save your code on GitHub
-<ul>
-<li>GH = GitHub, GR = Gaming Rig</li>
-</ul></li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GH.‍🔥 v0)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-4" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>But you realize you didn’t sanitize your inputs so you update again.</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-5" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>Then you have class again and grab the GitHub version onto your LT = Laptop</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-6" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>You notice it has the bug so you fix it again on your laptop in almost the same way</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-  E --&gt; F(LT.‍🔥 v1)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-7" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>And save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-  E --&gt; F(LT.‍🔥 v1)
-  F --&gt; G(GH.‍🔥 v1)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-8" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>You realize you also added some ASCII art and try to send that to GitHub</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-  E --&gt; F(LT.‍🔥 v1)
-  F --&gt; G(GH.‍🔥 v1)
-  G --&gt; H(GH.‍🔥 v2)
-  C --&gt; H
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-9" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>Two arrows into one thing is a merge conflict and out-of-scope for now.</li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-  E --&gt; F(LT.‍🔥 v1)
-  F --&gt; G(GH.‍🔥 v1)
-  G --&gt; H{💥}
-  C --&gt; H
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="git-example-10" class="slide level2">
-<h2>Git Example</h2>
-<ul>
-<li>Basically versions of code can live in more than one place.
-<ul>
-<li>Ah, versions, our old friend…</li>
-</ul></li>
-</ul>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)
-  B --&gt; C(GR.️‍🔥 v2)
-  B --&gt; D(GH.‍🔥 v0)
-  D --&gt; E(LT.‍🔥 v0)
-  E --&gt; F(LT.‍🔥 v1)
-  F --&gt; G(GH.‍🔥 v1)
-  G --&gt; H{💥}
-  C --&gt; H
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+
+
 </section></section>
-<section id="in-brief" class="title-slide slide level1 center">
-<h1>In Brief</h1>
-<ul>
-<li>Generally create repositories + tokens in browser on GitHub</li>
-<li>Use command line to configure a repository</li>
-<li>Authenticate via access token from browser</li>
-<li>Then use <code>git add</code>, <code>git commit</code>, <code>git push</code> to save work</li>
-<li>Use <code>git pull</code> to grab saved work</li>
-<li>Use a <code>.gitignore</code> file so only code (<strong>NOT</strong> executables) live on GitHub</li>
-</ul>
-</section>
-
-<section>
-<section id="course-sketch" class="title-slide slide level1 center">
-<h1>Course Sketch</h1>
-
-</section>
-<section id="visually" class="slide level2">
-<h2>Visually</h2>
-<div class="cell" data-reveal="true" data-theme="Darkly" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  B(Wordle)
-  B --&gt; C(SHA512)
-  C --&gt; D(Ed25519)
-  B --&gt; F(Graphs)
-  C --&gt; H(Merkle)
-  F --&gt; H
-  F --&gt; G(LCS)
-  H --&gt; I(VCS)
-  G --&gt; I
-  D --&gt; I
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<ul>
-<li>LCS = Longest common subsequence, like <code>diff</code></li>
-<li>VCS = Version Control System, like <code>git</code></li>
-</ul>
-</section>
-<section id="sha" class="slide level2">
-<h2>SHA</h2>
-<ul>
-<li><strong>SHA Basics:</strong>
-<ul>
-<li>Cryptographic hash function family.</li>
-<li>Input data into fixed-size hash values.</li>
-</ul></li>
-<li><strong>Use Cases:</strong>
-<ul>
-<li>Data integrity.</li>
-</ul></li>
-<li><strong>Learning Objectives:</strong>
-<ul>
-<li>Reason about bits and bytes.</li>
-</ul></li>
-</ul>
-</section>
-<section id="ed25519" class="slide level2">
-<h2>Ed25519</h2>
-<ul>
-<li><strong>Ed25519 Basics:</strong>
-<ul>
-<li>Public-key signature system.</li>
-<li>Based on elliptic curve cryptography (specifically, Edwards curves).</li>
-<li>Uses SHA-512 and Curve25519.</li>
-</ul></li>
-<li><strong>Use Cases:</strong>
-<ul>
-<li>Confidentiality and authentication.</li>
-</ul></li>
-<li><strong>Learning Objectives:</strong>
-<ul>
-<li>Reason about numerical computing.</li>
-</ul></li>
-</ul>
-</section>
-<section id="graphs" class="slide level2">
-<h2>Graphs</h2>
-<ul>
-<li>Introduce graphs as a way to:
-<ul>
-<li>Organize files</li>
-<li>Compare files</li>
-<li>Track changes.</li>
-</ul></li>
-</ul>
-</section>
-<section id="longest-common-subseq.-lcs" class="slide level2">
-<h2>Longest Common Subseq. (LCS)</h2>
-<ul>
-<li><strong>LCS Basics:</strong>
-<ul>
-<li>Find longest sequence of characters in the same relative order in two or more sequences, but not necessarily contiguously.</li>
-<li>Often solved using dynamic programming.</li>
-</ul></li>
-<li><strong>Use Cases:</strong>
-<ul>
-<li>File comparison (e.g., <code>diff</code> utility).</li>
-</ul></li>
-<li><strong>Learning Objectives:</strong>
-<ul>
-<li>Linear data structure.</li>
-</ul></li>
-</ul>
-</section>
-<section id="merkle-trees" class="slide level2">
-<h2>Merkle Trees</h2>
-<ul>
-<li><strong>Merkle Trees:</strong>
-<ul>
-<li>Tree structure using SHA for data integrity.</li>
-<li>Hashes stored as nodes; pointers link them.</li>
-<li>Leaf nodes are RSA signatures!</li>
-</ul></li>
-<li>Merkle Trees are <strong>balanced</strong>
-<ul>
-<li>Hierarchical data structure embedded in linear data structure.</li>
-</ul></li>
-</ul>
-</section>
-<section id="file-system" class="slide level2">
-<h2>File System</h2>
-<ul>
-<li>The file system a tree that cannot (easily) be embedded in a linear data structure.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="ex">r</span></span>
-<span id="cb4-2"><a></a><span class="ex">├──</span> DESCRIPTION</span>
-<span id="cb4-3"><a></a><span class="ex">├──</span> Makefile</span>
-<span id="cb4-4"><a></a><span class="ex">├──</span> NAMESPACE</span>
-<span id="cb4-5"><a></a><span class="ex">├──</span> R</span>
-<span id="cb4-6"><a></a><span class="ex">│&nbsp;&nbsp;</span> └── vcd2df.R</span>
-<span id="cb4-7"><a></a><span class="ex">├──</span> man</span>
-<span id="cb4-8"><a></a><span class="ex">│&nbsp;&nbsp;</span> └── vcd2df.Rd</span>
-<span id="cb4-9"><a></a><span class="ex">├──</span> r</span>
-<span id="cb4-10"><a></a><span class="ex">├──</span> vcd2df.Rcheck</span>
-<span id="cb4-11"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── 00_pkg_src</span>
-<span id="cb4-12"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── vcd2df</span>
-<span id="cb4-13"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── DESCRIPTION</span>
-<span id="cb4-14"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── NAMESPACE</span>
-<span id="cb4-15"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── R</span>
-<span id="cb4-16"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.R</span>
-<span id="cb4-17"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── build</span>
-<span id="cb4-18"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vignette.rds</span>
-<span id="cb4-19"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── inst</span>
-<span id="cb4-20"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp; └── doc</span>
-<span id="cb4-21"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.R</span>
-<span id="cb4-22"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.html</span>
-<span id="cb4-23"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp;     └── index.qmd</span>
-<span id="cb4-24"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── man</span>
-<span id="cb4-25"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.Rd</span>
-<span id="cb4-26"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     └── vignettes</span>
-<span id="cb4-27"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;         └── index.qmd</span>
-<span id="cb4-28"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── 00check.log</span>
-<span id="cb4-29"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── 00install.out</span>
-<span id="cb4-30"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── Rdlatex.log</span>
-<span id="cb4-31"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── vcd2df</span>
-<span id="cb4-32"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── DESCRIPTION</span>
-<span id="cb4-33"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── INDEX</span>
-<span id="cb4-34"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── Meta</span>
-<span id="cb4-35"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── Rd.rds</span>
-<span id="cb4-36"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── features.rds</span>
-<span id="cb4-37"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── hsearch.rds</span>
-<span id="cb4-38"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── links.rds</span>
-<span id="cb4-39"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── nsInfo.rds</span>
-<span id="cb4-40"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── package.rds</span>
-<span id="cb4-41"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; └── vignette.rds</span>
-<span id="cb4-42"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── NAMESPACE</span>
-<span id="cb4-43"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── R</span>
-<span id="cb4-44"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df</span>
-<span id="cb4-45"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span>
-<span id="cb4-46"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span>
-<span id="cb4-47"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── doc</span>
-<span id="cb4-48"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.R</span>
-<span id="cb4-49"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.html</span>
-<span id="cb4-50"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; └── index.qmd</span>
-<span id="cb4-51"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── help</span>
-<span id="cb4-52"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── AnIndex</span>
-<span id="cb4-53"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── aliases.rds</span>
-<span id="cb4-54"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── paths.rds</span>
-<span id="cb4-55"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span>
-<span id="cb4-56"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span>
-<span id="cb4-57"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── html</span>
-<span id="cb4-58"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     ├── 00Index.html</span>
-<span id="cb4-59"><a></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     └── R.css</span>
-<span id="cb4-60"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── vcd2df-Ex.R</span>
-<span id="cb4-61"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── vcd2df-Ex.Rout</span>
-<span id="cb4-62"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── vcd2df-Ex.pdf</span>
-<span id="cb4-63"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── vcd2df-manual.log</span>
-<span id="cb4-64"><a></a><span class="ex">│&nbsp;&nbsp;</span> └── vcd2df-manual.pdf</span>
-<span id="cb4-65"><a></a><span class="ex">├──</span> vcd2df_1.0.1.tar.gz</span>
-<span id="cb4-66"><a></a><span class="ex">└──</span> vignettes</span>
-<span id="cb4-67"><a></a>    <span class="ex">└──</span> index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section id="final-1" class="title-slide slide level1 center">
-<h1>Final</h1>
-<ul>
-<li><strong>Implement Minimal <code>git</code> in Rust</strong>
-<ul>
-<li>Must be <em>self-hosted</em> - able to track versions of itself.</li>
-</ul></li>
-</ul>
-</section>
-
-<section>
-<section id="on-vim" class="title-slide slide level1 center">
-<h1>On <code>vim</code></h1>
-
-</section>
-<section id="vim" class="slide level2">
-<h2>Vim</h2>
-<ul>
-<li>You should use <code>vim</code> or another console-based editor as a component of your learning in this class.</li>
-<li>This will not be assessed (how can it be) but will <em>likely</em> be expected in a non-trivial subset of settings this course material will be useful.</li>
-<li>I will live-code in either <code>vim</code> or <code>helix</code></li>
-</ul>
-</section></section>
-<section id="fin" class="title-slide slide level1 center">
-<h1>Fin</h1>
-
-
-</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

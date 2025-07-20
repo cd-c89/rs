@@ -51,14 +51,13 @@ title: Welcome
 
 - Lecture Monday
 - Lab Wednesday
-- Homework due Friday
+- Homework due Friday 1440 PM ET
 - In-class midterm week of 10/06
 - Final project due whenever the final is scheduled.
 
 ## Ungrading++
 
 - Your voices have been heard:
-
 > I think failing my systems class was the best thing that happened to me.
 
 > This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn't learn as much as I might've if grading mattered more.

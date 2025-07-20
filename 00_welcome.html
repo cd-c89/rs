@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./01_rustup.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -146,6 +147,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./00_welcome.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
   </div>
 </li>
     </ul>
@@ -335,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Lecture Monday</li>
 <li>Lab Wednesday</li>
-<li>Homework due Friday</li>
+<li>Homework due Friday 1440 PM ET</li>
 <li>In-class midterm week of 10/06</li>
 <li>Final project due whenever the final is scheduled.</li>
 </ul>
@@ -343,11 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ungrading" class="level2">
 <h2 class="anchored" data-anchor-id="ungrading">Ungrading++</h2>
 <ul>
-<li>Your voices have been heard:</li>
+<li>Your voices have been heard: &gt; I think failing my systems class was the best thing that happened to me.</li>
 </ul>
-<blockquote class="blockquote">
-<p>I think failing my systems class was the best thing that happened to me.</p>
-</blockquote>
 <blockquote class="blockquote">
 <p>This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn’t learn as much as I might’ve if grading mattered more.</p>
 </blockquote>
@@ -1629,7 +1633,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01_rustup.html" class="pagination-link" aria-label="Rustup">
+        <span class="nav-page-text">Rustup</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> Welcome</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">---</span></span>
@@ -1683,538 +1696,537 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-51"><a href="#cb5-51"></a></span>
 <span id="cb5-52"><a href="#cb5-52"></a><span class="ss">- </span>Lecture Monday</span>
 <span id="cb5-53"><a href="#cb5-53"></a><span class="ss">- </span>Lab Wednesday</span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="ss">- </span>Homework due Friday</span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="ss">- </span>Homework due Friday 1440 PM ET</span>
 <span id="cb5-55"><a href="#cb5-55"></a><span class="ss">- </span>In-class midterm week of 10/06</span>
 <span id="cb5-56"><a href="#cb5-56"></a><span class="ss">- </span>Final project due whenever the final is scheduled.</span>
 <span id="cb5-57"><a href="#cb5-57"></a></span>
 <span id="cb5-58"><a href="#cb5-58"></a><span class="fu">## Ungrading++</span></span>
 <span id="cb5-59"><a href="#cb5-59"></a></span>
 <span id="cb5-60"><a href="#cb5-60"></a><span class="ss">- </span>Your voices have been heard:</span>
-<span id="cb5-61"><a href="#cb5-61"></a></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="at">&gt; I think failing my systems class was the best thing that happened to me.</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="at">&gt; This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn't learn as much as I might've if grading mattered more.</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="fu">## Proposal</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="ss">- </span>I will offer two option</span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="ss">    - </span>Ungrading</span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="ss">    - </span>Specification Grading</span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="ss">- </span>Vote as a class (anonymously)</span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="ss">- </span>I update syllabus before add/drop ends.</span>
-<span id="cb5-73"><a href="#cb5-73"></a></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="fu">## 1. Ungrading</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a></span>
-<span id="cb5-76"><a href="#cb5-76"></a><span class="ss">- </span>I provide autograders for all assignments except final.</span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="ss">    - </span>Or a reference solution with a rubric, if automated testing is too weird.</span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="ss">    - </span>I will have a final reference solution but will at most share snippets individually.</span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="ss">- </span>You do whatever you want.</span>
-<span id="cb5-80"><a href="#cb5-80"></a><span class="ss">- </span>Enrolled students get an A.</span>
-<span id="cb5-81"><a href="#cb5-81"></a></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="fu">## 2. Specification Grading</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="ss">- </span>All the rage. I was never fan but tell me what you think.</span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="ss">- </span>Basically, I will assign some stuff but you don't have to do all of it perfectly.</span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="ss">    - </span>No partial credit, everything is yes/no grading.</span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="ss">- </span>I took distributions over final, midterm, and Lab/HW</span>
-<span id="cb5-88"><a href="#cb5-88"></a></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="fu">## It pays to get A's</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a></span>
-<span id="cb5-91"><a href="#cb5-91"></a>|Grade|Requirements|</span>
-<span id="cb5-92"><a href="#cb5-92"></a>|:----------:|------|</span>
-<span id="cb5-93"><a href="#cb5-93"></a>|A|Final meets spec|</span>
-<span id="cb5-94"><a href="#cb5-94"></a>|A|90% ave HW/Lab/Midterm, Final compiles|</span>
-<span id="cb5-95"><a href="#cb5-95"></a>|A-|90% ave HW/Lab, Midterm/Final compile|</span>
-<span id="cb5-96"><a href="#cb5-96"></a>|A-|Midterm meets spec, Final compiles|</span>
-<span id="cb5-97"><a href="#cb5-97"></a></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="fu">## But B's are the Knees</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a></span>
-<span id="cb5-100"><a href="#cb5-100"></a>|Grade|Requirements|</span>
-<span id="cb5-101"><a href="#cb5-101"></a>|:----------:|------|</span>
-<span id="cb5-102"><a href="#cb5-102"></a>|B+|90% ave HW/Lab, Midterm compiles|</span>
-<span id="cb5-103"><a href="#cb5-103"></a>|B| 80% ave HW/Lab, Midterm compiles|</span>
-<span id="cb5-104"><a href="#cb5-104"></a>|B-|80% ave HW/Lab|</span>
-<span id="cb5-105"><a href="#cb5-105"></a></span>
-<span id="cb5-106"><a href="#cb5-106"></a><span class="fu">## These may (???) earn degrees</span></span>
-<span id="cb5-107"><a href="#cb5-107"></a></span>
-<span id="cb5-108"><a href="#cb5-108"></a>|Grade|Requirements|</span>
-<span id="cb5-109"><a href="#cb5-109"></a>|:----------:|------|</span>
-<span id="cb5-110"><a href="#cb5-110"></a>|C|80% ave Lab|</span>
-<span id="cb5-111"><a href="#cb5-111"></a>|D|60% ave Lab|</span>
-<span id="cb5-112"><a href="#cb5-112"></a>|F|Anything else|</span>
-<span id="cb5-113"><a href="#cb5-113"></a></span>
-<span id="cb5-114"><a href="#cb5-114"></a><span class="fu">## Lab Grading</span></span>
-<span id="cb5-115"><a href="#cb5-115"></a></span>
-<span id="cb5-116"><a href="#cb5-116"></a><span class="ss">- </span>A (=100%)</span>
-<span id="cb5-117"><a href="#cb5-117"></a><span class="ss">    - </span>Meets spec by end of class</span>
-<span id="cb5-118"><a href="#cb5-118"></a><span class="ss">- </span>B (=90%)</span>
-<span id="cb5-119"><a href="#cb5-119"></a><span class="ss">    - </span>Compiles at end of class</span>
-<span id="cb5-120"><a href="#cb5-120"></a><span class="ss">        - </span>Can be turned into an executable.</span>
-<span id="cb5-121"><a href="#cb5-121"></a><span class="ss">- </span>F (=0%)</span>
-<span id="cb5-122"><a href="#cb5-122"></a><span class="ss">    - </span>Anything else</span>
-<span id="cb5-123"><a href="#cb5-123"></a>    </span>
-<span id="cb5-124"><a href="#cb5-124"></a><span class="fu">## HW Grading</span></span>
-<span id="cb5-125"><a href="#cb5-125"></a></span>
-<span id="cb5-126"><a href="#cb5-126"></a><span class="ss">- </span>A (=100%)</span>
-<span id="cb5-127"><a href="#cb5-127"></a><span class="ss">    - </span>On time</span>
-<span id="cb5-128"><a href="#cb5-128"></a><span class="ss">    - </span>Passes autograder.</span>
-<span id="cb5-129"><a href="#cb5-129"></a><span class="ss">- </span>B (=90%)</span>
-<span id="cb5-130"><a href="#cb5-130"></a><span class="ss">    - </span>On time</span>
-<span id="cb5-131"><a href="#cb5-131"></a><span class="ss">    - </span>Compiles</span>
-<span id="cb5-132"><a href="#cb5-132"></a><span class="ss">        - </span>Can be turned into an executable.</span>
-<span id="cb5-133"><a href="#cb5-133"></a><span class="ss">- </span>F (=0%)</span>
-<span id="cb5-134"><a href="#cb5-134"></a><span class="ss">    - </span>Anything else</span>
-<span id="cb5-135"><a href="#cb5-135"></a>    </span>
-<span id="cb5-136"><a href="#cb5-136"></a><span class="fu">## Final</span></span>
-<span id="cb5-137"><a href="#cb5-137"></a></span>
-<span id="cb5-138"><a href="#cb5-138"></a><span class="ss">- </span>Create, document, and publish a self-hosting version control system.</span>
-<span id="cb5-139"><a href="#cb5-139"></a><span class="ss">- </span>Entire codebase in Rust.</span>
-<span id="cb5-140"><a href="#cb5-140"></a><span class="ss">- </span>Minimum specifications:</span>
-<span id="cb5-141"><a href="#cb5-141"></a><span class="ss">    - </span>Support nested directory structures.</span>
-<span id="cb5-142"><a href="#cb5-142"></a><span class="ss">    - </span>Support text-based files (.rs, .py, .txt)</span>
-<span id="cb5-143"><a href="#cb5-143"></a><span class="ss">    - </span>Allow reverting to named changes (commits).</span>
-<span id="cb5-144"><a href="#cb5-144"></a><span class="ss">    - </span>Completed by you and at most a partner.</span>
-<span id="cb5-145"><a href="#cb5-145"></a>    </span>
-<span id="cb5-146"><a href="#cb5-146"></a><span class="fu">## Late Work Policy</span></span>
-<span id="cb5-147"><a href="#cb5-147"></a></span>
-<span id="cb5-148"><a href="#cb5-148"></a><span class="ss">- </span>Late work is not accepted.</span>
-<span id="cb5-149"><a href="#cb5-149"></a><span class="ss">    - </span>Turning in anything at all for on 90% of assignments yields B.</span>
-<span id="cb5-150"><a href="#cb5-150"></a><span class="ss">    - </span>Miss 100% of assignments and midterm but do the final for an A.</span>
-<span id="cb5-151"><a href="#cb5-151"></a></span>
-<span id="cb5-152"><a href="#cb5-152"></a><span class="fu">## AI Policy</span></span>
-<span id="cb5-153"><a href="#cb5-153"></a></span>
-<span id="cb5-154"><a href="#cb5-154"></a><span class="ss">- </span>I would be shocked if it is helpful to you.</span>
-<span id="cb5-155"><a href="#cb5-155"></a><span class="ss">- </span>If you think it is helpful, that is probably not a good sign.</span>
-<span id="cb5-156"><a href="#cb5-156"></a><span class="ss">- </span>You can use it (I wouldn't)</span>
-<span id="cb5-157"><a href="#cb5-157"></a></span>
-<span id="cb5-158"><a href="#cb5-158"></a><span class="fu">## Collaboration Policy</span></span>
-<span id="cb5-159"><a href="#cb5-159"></a></span>
-<span id="cb5-160"><a href="#cb5-160"></a><span class="ss">- </span>Non-final:</span>
-<span id="cb5-161"><a href="#cb5-161"></a><span class="ss">    - </span>Any size group via enthusiastic consent.</span>
-<span id="cb5-162"><a href="#cb5-162"></a><span class="ss">    - </span>Turn in your own code/copy.</span>
-<span id="cb5-163"><a href="#cb5-163"></a><span class="ss">- </span>Final:</span>
-<span id="cb5-164"><a href="#cb5-164"></a><span class="ss">    - </span>Partners via enthusiastic consent.</span>
-<span id="cb5-165"><a href="#cb5-165"></a><span class="ss">    - </span>Turn in your own code/copy.</span>
-<span id="cb5-166"><a href="#cb5-166"></a></span>
-<span id="cb5-167"><a href="#cb5-167"></a><span class="fu">## Vote</span></span>
-<span id="cb5-168"><a href="#cb5-168"></a></span>
-<span id="cb5-169"><a href="#cb5-169"></a><span class="ss">- </span>If there's not a Forms link here I should add one quickly.</span>
-<span id="cb5-170"><a href="#cb5-170"></a></span>
-<span id="cb5-171"><a href="#cb5-171"></a><span class="fu"># On Systems</span></span>
-<span id="cb5-172"><a href="#cb5-172"></a></span>
-<span id="cb5-173"><a href="#cb5-173"></a><span class="fu">## The Hard Part</span></span>
-<span id="cb5-174"><a href="#cb5-174"></a></span>
-<span id="cb5-175"><a href="#cb5-175"></a><span class="ss">- </span>After ~10 years of systems research I've convinced myself <span class="co">[</span><span class="ot">only two things</span><span class="co">](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/)</span> really matter:</span>
-<span id="cb5-176"><a href="#cb5-176"></a></span>
-<span id="cb5-177"><a href="#cb5-177"></a><span class="ss">  - </span>Pointers, and</span>
-<span id="cb5-178"><a href="#cb5-178"></a><span class="ss">  - </span>Recursion </span>
-<span id="cb5-179"><a href="#cb5-179"></a></span>
-<span id="cb5-180"><a href="#cb5-180"></a><span class="ss">- </span>Recursion isn't too bad... </span>
-<span id="cb5-181"><a href="#cb5-181"></a></span>
-<span id="cb5-182"><a href="#cb5-182"></a><span class="in">```py</span></span>
-<span id="cb5-183"><a href="#cb5-183"></a><span class="op">&gt;&gt;&gt;</span> exp <span class="op">=</span> <span class="kw">lambda</span> b, n : b <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> b<span class="op">*</span>exp(b,n<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb5-184"><a href="#cb5-184"></a><span class="op">&gt;&gt;&gt;</span> exp(<span class="dv">2</span>,<span class="dv">8</span>)</span>
-<span id="cb5-185"><a href="#cb5-185"></a><span class="dv">256</span></span>
-<span id="cb5-186"><a href="#cb5-186"></a><span class="in">```</span></span>
-<span id="cb5-187"><a href="#cb5-187"></a></span>
-<span id="cb5-188"><a href="#cb5-188"></a><span class="fu">## Pointers</span></span>
-<span id="cb5-189"><a href="#cb5-189"></a></span>
-<span id="cb5-190"><a href="#cb5-190"></a><span class="ss">- </span>Pointers are a beast, but without them nothing makes sense! </span>
-<span id="cb5-191"><a href="#cb5-191"></a></span>
-<span id="cb5-192"><a href="#cb5-192"></a>:::: {.columns}</span>
-<span id="cb5-193"><a href="#cb5-193"></a></span>
-<span id="cb5-194"><a href="#cb5-194"></a>::: {.column width="50%"}</span>
-<span id="cb5-195"><a href="#cb5-195"></a><span class="in">```py</span></span>
-<span id="cb5-196"><a href="#cb5-196"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb5-197"><a href="#cb5-197"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
-<span id="cb5-198"><a href="#cb5-198"></a>...     x <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-199"><a href="#cb5-199"></a>...</span>
-<span id="cb5-200"><a href="#cb5-200"></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
-<span id="cb5-201"><a href="#cb5-201"></a><span class="pp">UnboundLocalError</span>:</span>
-<span id="cb5-202"><a href="#cb5-202"></a><span class="op">&lt;</span>blah blah blah error messages<span class="op">&gt;</span></span>
-<span id="cb5-203"><a href="#cb5-203"></a><span class="in">```</span></span>
-<span id="cb5-204"><a href="#cb5-204"></a>::: </span>
-<span id="cb5-205"><a href="#cb5-205"></a></span>
-<span id="cb5-206"><a href="#cb5-206"></a>::: {.column width="50%"}</span>
-<span id="cb5-207"><a href="#cb5-207"></a></span>
-<span id="cb5-208"><a href="#cb5-208"></a><span class="in">```py</span></span>
-<span id="cb5-209"><a href="#cb5-209"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> [<span class="dv">1</span>]</span>
-<span id="cb5-210"><a href="#cb5-210"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
-<span id="cb5-211"><a href="#cb5-211"></a>...     x[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-212"><a href="#cb5-212"></a>...</span>
-<span id="cb5-213"><a href="#cb5-213"></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
-<span id="cb5-214"><a href="#cb5-214"></a><span class="op">&gt;&gt;&gt;</span> x</span>
-<span id="cb5-215"><a href="#cb5-215"></a>[<span class="dv">2</span>]</span>
-<span id="cb5-216"><a href="#cb5-216"></a><span class="in">```</span></span>
-<span id="cb5-217"><a href="#cb5-217"></a>:::</span>
-<span id="cb5-218"><a href="#cb5-218"></a></span>
-<span id="cb5-219"><a href="#cb5-219"></a>::::</span>
-<span id="cb5-220"><a href="#cb5-220"></a></span>
-<span id="cb5-221"><a href="#cb5-221"></a><span class="fu">## Insight</span></span>
-<span id="cb5-222"><a href="#cb5-222"></a></span>
-<span id="cb5-223"><a href="#cb5-223"></a><span class="ss">- </span>**Definition:**</span>
-<span id="cb5-224"><a href="#cb5-224"></a><span class="ss">  - </span>Pointers: Variables that store memory addresses.</span>
-<span id="cb5-225"><a href="#cb5-225"></a><span class="ss">  - </span>Recursion: Functions calling themselves to solve sub-problems.</span>
-<span id="cb5-226"><a href="#cb5-226"></a><span class="ss">- </span>**Importance:**</span>
-<span id="cb5-227"><a href="#cb5-227"></a><span class="ss">  - </span>Core to efficient algorithms and memory management in low-level programming.</span>
-<span id="cb5-228"><a href="#cb5-228"></a></span>
-<span id="cb5-229"><a href="#cb5-229"></a><span class="fu">## Python and Pointers</span></span>
-<span id="cb5-230"><a href="#cb5-230"></a></span>
-<span id="cb5-231"><a href="#cb5-231"></a><span class="ss">- </span>**Why not .py (.js, .java, .cs, .cpp, etc)?**</span>
-<span id="cb5-232"><a href="#cb5-232"></a><span class="ss">  - </span>These languages _abstract_ memory.</span>
-<span id="cb5-233"><a href="#cb5-233"></a><span class="ss">  - </span>This abstraction makes computation **unclear**</span>
-<span id="cb5-234"><a href="#cb5-234"></a><span class="ss">  - </span>This lack of clarity:</span>
-<span id="cb5-235"><a href="#cb5-235"></a><span class="ss">    - </span>Adversely impacts education</span>
-<span id="cb5-236"><a href="#cb5-236"></a><span class="ss">    - </span>Complicates low-level design</span>
-<span id="cb5-237"><a href="#cb5-237"></a><span class="ss">    - </span>Leads to low performance</span>
-<span id="cb5-238"><a href="#cb5-238"></a><span class="ss">  - </span>Good languages (except Java) but not for us</span>
-<span id="cb5-239"><a href="#cb5-239"></a></span>
-<span id="cb5-240"><a href="#cb5-240"></a><span class="fu"># On Rust</span></span>
-<span id="cb5-241"><a href="#cb5-241"></a></span>
-<span id="cb5-242"><a href="#cb5-242"></a><span class="fu">## Rust and Pointers</span></span>
-<span id="cb5-243"><a href="#cb5-243"></a></span>
-<span id="cb5-244"><a href="#cb5-244"></a><span class="ss">- </span>Rust:</span>
-<span id="cb5-245"><a href="#cb5-245"></a><span class="ss">    - </span>Obscures pointers, but...</span>
-<span id="cb5-246"><a href="#cb5-246"></a><span class="ss">    - </span>*Does not* obscure memory.</span>
-<span id="cb5-247"><a href="#cb5-247"></a><span class="ss">- </span>This is good!</span>
-<span id="cb5-248"><a href="#cb5-248"></a><span class="ss">    - </span>Memory matters, but pointers are historical accident.</span>
-<span id="cb5-249"><a href="#cb5-249"></a><span class="ss">- </span>You should probably use Rust in every application where correctness or performance matters.</span>
-<span id="cb5-250"><a href="#cb5-250"></a></span>
-<span id="cb5-251"><a href="#cb5-251"></a><span class="fu">## Rust and Recursion</span></span>
-<span id="cb5-252"><a href="#cb5-252"></a></span>
-<span id="cb5-253"><a href="#cb5-253"></a><span class="ss">- </span>Separately, Rust is built on one of the most exciting ongoing computer science research efforts:</span>
-<span id="cb5-254"><a href="#cb5-254"></a><span class="ss">- </span>**LLVM** (stands for LLVM)</span>
-<span id="cb5-255"><a href="#cb5-255"></a><span class="ss">- </span>Basically, a way of turning human-readable code into machine-executable code.</span>
-<span id="cb5-256"><a href="#cb5-256"></a><span class="ss">    - </span>Very good at turning recursion into iteration and/or vice versa.</span>
-<span id="cb5-257"><a href="#cb5-257"></a><span class="ss">- </span>So Rust experiences less costs on recursion than many other languages.</span>
-<span id="cb5-258"><a href="#cb5-258"></a></span>
-<span id="cb5-259"><a href="#cb5-259"></a><span class="fu"># On Git</span></span>
-<span id="cb5-260"><a href="#cb5-260"></a></span>
-<span id="cb5-261"><a href="#cb5-261"></a><span class="fu">## Git</span></span>
-<span id="cb5-262"><a href="#cb5-262"></a></span>
-<span id="cb5-263"><a href="#cb5-263"></a><span class="ss">- </span>If you don't know <span class="in">`git`</span>, you should soon.</span>
-<span id="cb5-264"><a href="#cb5-264"></a><span class="ss">- </span>Git corresponds, like the others, to a command: <span class="in">`git`</span></span>
-<span id="cb5-265"><a href="#cb5-265"></a><span class="ss">  - </span>It is common now to use other techniques, but the command remains extremely **stable**</span>
-<span id="cb5-266"><a href="#cb5-266"></a><span class="ss">- </span>Quoth GitHub, the first and greatest of the collaboration tools:</span>
-<span id="cb5-267"><a href="#cb5-267"></a></span>
-<span id="cb5-268"><a href="#cb5-268"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">If you want a lot of control and flexibility, you can use the command line.</span><span class="co">](https://docs.github.com/en/get-started/using-github/connecting-to-github)</span></span>
-<span id="cb5-269"><a href="#cb5-269"></a></span>
-<span id="cb5-270"><a href="#cb5-270"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-271"><a href="#cb5-271"></a></span>
-<span id="cb5-272"><a href="#cb5-272"></a><span class="ss">- </span>So basically, you have things called repositories or "repos"</span>
-<span id="cb5-273"><a href="#cb5-273"></a></span>
-<span id="cb5-276"><a href="#cb5-276"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-277"><a href="#cb5-277"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-278"><a href="#cb5-278"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-279"><a href="#cb5-279"></a><span class="in">  A(My ️‍🔥 code repo)</span></span>
-<span id="cb5-280"><a href="#cb5-280"></a><span class="in">```</span></span>
-<span id="cb5-281"><a href="#cb5-281"></a></span>
-<span id="cb5-282"><a href="#cb5-282"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-283"><a href="#cb5-283"></a></span>
-<span id="cb5-284"><a href="#cb5-284"></a><span class="ss">- </span>Then you realize you wrote an infinite loop so you update it</span>
-<span id="cb5-285"><a href="#cb5-285"></a></span>
-<span id="cb5-288"><a href="#cb5-288"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-289"><a href="#cb5-289"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-290"><a href="#cb5-290"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-291"><a href="#cb5-291"></a><span class="in">  A(My ️‍🔥 code repo v0 ) --&gt; B(My ️‍🔥 code repo v1)</span></span>
-<span id="cb5-292"><a href="#cb5-292"></a><span class="in">```</span></span>
-<span id="cb5-293"><a href="#cb5-293"></a></span>
-<span id="cb5-294"><a href="#cb5-294"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-295"><a href="#cb5-295"></a></span>
-<span id="cb5-296"><a href="#cb5-296"></a><span class="ss">- </span>Then you come to class and realize your code is on your gaming rig in your apartment.</span>
-<span id="cb5-297"><a href="#cb5-297"></a></span>
-<span id="cb5-300"><a href="#cb5-300"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-301"><a href="#cb5-301"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-302"><a href="#cb5-302"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-303"><a href="#cb5-303"></a><span class="in">  A(&lt;s&gt;My ️‍🔥 code repo v0&lt;/s&gt;) --&gt; B(&lt;s&gt;My ️‍🔥 code repo v1&lt;/s&gt;)</span></span>
-<span id="cb5-304"><a href="#cb5-304"></a><span class="in">```</span></span>
-<span id="cb5-305"><a href="#cb5-305"></a></span>
-<span id="cb5-306"><a href="#cb5-306"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-307"><a href="#cb5-307"></a></span>
-<span id="cb5-308"><a href="#cb5-308"></a><span class="ss">- </span>So you save your code on GitHub</span>
-<span id="cb5-309"><a href="#cb5-309"></a><span class="ss">  - </span>GH = GitHub, GR = Gaming Rig</span>
-<span id="cb5-310"><a href="#cb5-310"></a></span>
-<span id="cb5-313"><a href="#cb5-313"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-314"><a href="#cb5-314"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-315"><a href="#cb5-315"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-316"><a href="#cb5-316"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-317"><a href="#cb5-317"></a><span class="in">  B --&gt; C(GH.‍🔥 v0)</span></span>
-<span id="cb5-318"><a href="#cb5-318"></a><span class="in">```</span></span>
-<span id="cb5-319"><a href="#cb5-319"></a></span>
-<span id="cb5-320"><a href="#cb5-320"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-321"><a href="#cb5-321"></a></span>
-<span id="cb5-322"><a href="#cb5-322"></a><span class="ss">- </span>But you realize you didn't sanitize your inputs so you update again.</span>
-<span id="cb5-323"><a href="#cb5-323"></a></span>
-<span id="cb5-326"><a href="#cb5-326"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-327"><a href="#cb5-327"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-328"><a href="#cb5-328"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-329"><a href="#cb5-329"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-330"><a href="#cb5-330"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-331"><a href="#cb5-331"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-332"><a href="#cb5-332"></a><span class="in">```</span></span>
-<span id="cb5-333"><a href="#cb5-333"></a></span>
-<span id="cb5-334"><a href="#cb5-334"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-335"><a href="#cb5-335"></a></span>
-<span id="cb5-336"><a href="#cb5-336"></a><span class="ss">- </span>Then you have class again and grab the GitHub version onto your LT = Laptop</span>
-<span id="cb5-337"><a href="#cb5-337"></a></span>
-<span id="cb5-340"><a href="#cb5-340"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-341"><a href="#cb5-341"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-342"><a href="#cb5-342"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-343"><a href="#cb5-343"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-344"><a href="#cb5-344"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-345"><a href="#cb5-345"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-346"><a href="#cb5-346"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-347"><a href="#cb5-347"></a><span class="in">```</span></span>
-<span id="cb5-348"><a href="#cb5-348"></a></span>
-<span id="cb5-349"><a href="#cb5-349"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-350"><a href="#cb5-350"></a></span>
-<span id="cb5-351"><a href="#cb5-351"></a><span class="ss">- </span>You notice it has the bug so you fix it again on your laptop in almost the same way</span>
-<span id="cb5-352"><a href="#cb5-352"></a></span>
-<span id="cb5-355"><a href="#cb5-355"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-356"><a href="#cb5-356"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-357"><a href="#cb5-357"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-358"><a href="#cb5-358"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-359"><a href="#cb5-359"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-360"><a href="#cb5-360"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-361"><a href="#cb5-361"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-362"><a href="#cb5-362"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
-<span id="cb5-363"><a href="#cb5-363"></a><span class="in">```</span></span>
-<span id="cb5-364"><a href="#cb5-364"></a></span>
-<span id="cb5-365"><a href="#cb5-365"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-366"><a href="#cb5-366"></a></span>
-<span id="cb5-367"><a href="#cb5-367"></a><span class="ss">- </span>And save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC</span>
-<span id="cb5-368"><a href="#cb5-368"></a></span>
-<span id="cb5-371"><a href="#cb5-371"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-372"><a href="#cb5-372"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-373"><a href="#cb5-373"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-374"><a href="#cb5-374"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-375"><a href="#cb5-375"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-376"><a href="#cb5-376"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-377"><a href="#cb5-377"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-378"><a href="#cb5-378"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
-<span id="cb5-379"><a href="#cb5-379"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
-<span id="cb5-380"><a href="#cb5-380"></a><span class="in">```</span></span>
-<span id="cb5-381"><a href="#cb5-381"></a></span>
-<span id="cb5-382"><a href="#cb5-382"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-383"><a href="#cb5-383"></a></span>
-<span id="cb5-384"><a href="#cb5-384"></a><span class="ss">- </span>You realize you also added some ASCII art and try to send that to GitHub</span>
-<span id="cb5-385"><a href="#cb5-385"></a></span>
-<span id="cb5-388"><a href="#cb5-388"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-389"><a href="#cb5-389"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-390"><a href="#cb5-390"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-391"><a href="#cb5-391"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-392"><a href="#cb5-392"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-393"><a href="#cb5-393"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-394"><a href="#cb5-394"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-395"><a href="#cb5-395"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
-<span id="cb5-396"><a href="#cb5-396"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
-<span id="cb5-397"><a href="#cb5-397"></a><span class="in">  G --&gt; H(GH.‍🔥 v2)</span></span>
-<span id="cb5-398"><a href="#cb5-398"></a><span class="in">  C --&gt; H</span></span>
-<span id="cb5-399"><a href="#cb5-399"></a><span class="in">```</span></span>
-<span id="cb5-400"><a href="#cb5-400"></a></span>
-<span id="cb5-401"><a href="#cb5-401"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-402"><a href="#cb5-402"></a></span>
-<span id="cb5-403"><a href="#cb5-403"></a><span class="ss">- </span>Two arrows into one thing is a merge conflict and out-of-scope for now.</span>
-<span id="cb5-404"><a href="#cb5-404"></a></span>
-<span id="cb5-407"><a href="#cb5-407"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-408"><a href="#cb5-408"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-409"><a href="#cb5-409"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-410"><a href="#cb5-410"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-411"><a href="#cb5-411"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-412"><a href="#cb5-412"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-413"><a href="#cb5-413"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-414"><a href="#cb5-414"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
-<span id="cb5-415"><a href="#cb5-415"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
-<span id="cb5-416"><a href="#cb5-416"></a><span class="in">  G --&gt; H{💥}</span></span>
-<span id="cb5-417"><a href="#cb5-417"></a><span class="in">  C --&gt; H</span></span>
-<span id="cb5-418"><a href="#cb5-418"></a><span class="in">```</span></span>
-<span id="cb5-419"><a href="#cb5-419"></a></span>
-<span id="cb5-420"><a href="#cb5-420"></a><span class="fu">## Git Example</span></span>
-<span id="cb5-421"><a href="#cb5-421"></a></span>
-<span id="cb5-422"><a href="#cb5-422"></a><span class="ss">- </span>Basically versions of code can live in more than one place.</span>
-<span id="cb5-423"><a href="#cb5-423"></a><span class="ss">  - </span>Ah, versions, our old friend...</span>
-<span id="cb5-424"><a href="#cb5-424"></a></span>
-<span id="cb5-427"><a href="#cb5-427"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-428"><a href="#cb5-428"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-429"><a href="#cb5-429"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-430"><a href="#cb5-430"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
-<span id="cb5-431"><a href="#cb5-431"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
-<span id="cb5-432"><a href="#cb5-432"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
-<span id="cb5-433"><a href="#cb5-433"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
-<span id="cb5-434"><a href="#cb5-434"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
-<span id="cb5-435"><a href="#cb5-435"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
-<span id="cb5-436"><a href="#cb5-436"></a><span class="in">  G --&gt; H{💥}</span></span>
-<span id="cb5-437"><a href="#cb5-437"></a><span class="in">  C --&gt; H</span></span>
-<span id="cb5-438"><a href="#cb5-438"></a><span class="in">```</span></span>
-<span id="cb5-439"><a href="#cb5-439"></a></span>
-<span id="cb5-440"><a href="#cb5-440"></a><span class="fu"># In Brief</span></span>
-<span id="cb5-441"><a href="#cb5-441"></a></span>
-<span id="cb5-442"><a href="#cb5-442"></a><span class="ss">- </span>Generally create repositories + tokens in browser on GitHub</span>
-<span id="cb5-443"><a href="#cb5-443"></a><span class="ss">- </span>Use command line to configure a repository</span>
-<span id="cb5-444"><a href="#cb5-444"></a><span class="ss">- </span>Authenticate via access token from browser</span>
-<span id="cb5-445"><a href="#cb5-445"></a><span class="ss">- </span>Then use <span class="in">`git add`</span>, <span class="in">`git commit`</span>, <span class="in">`git push`</span> to save work</span>
-<span id="cb5-446"><a href="#cb5-446"></a><span class="ss">- </span>Use <span class="in">`git pull`</span> to grab saved work</span>
-<span id="cb5-447"><a href="#cb5-447"></a><span class="ss">- </span>Use a <span class="in">`.gitignore`</span> file so only code (**NOT** executables) live on GitHub</span>
-<span id="cb5-448"><a href="#cb5-448"></a></span>
-<span id="cb5-449"><a href="#cb5-449"></a><span class="fu"># Course Sketch</span></span>
-<span id="cb5-450"><a href="#cb5-450"></a></span>
-<span id="cb5-451"><a href="#cb5-451"></a><span class="fu">## Visually</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="at">&gt; I think failing my systems class was the best thing that happened to me.</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a></span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="at">&gt; This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn't learn as much as I might've if grading mattered more.</span></span>
+<span id="cb5-64"><a href="#cb5-64"></a></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="fu">## Proposal</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="ss">- </span>I will offer two option</span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="ss">    - </span>Ungrading</span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="ss">    - </span>Specification Grading</span>
+<span id="cb5-70"><a href="#cb5-70"></a><span class="ss">- </span>Vote as a class (anonymously)</span>
+<span id="cb5-71"><a href="#cb5-71"></a><span class="ss">- </span>I update syllabus before add/drop ends.</span>
+<span id="cb5-72"><a href="#cb5-72"></a></span>
+<span id="cb5-73"><a href="#cb5-73"></a><span class="fu">## 1. Ungrading</span></span>
+<span id="cb5-74"><a href="#cb5-74"></a></span>
+<span id="cb5-75"><a href="#cb5-75"></a><span class="ss">- </span>I provide autograders for all assignments except final.</span>
+<span id="cb5-76"><a href="#cb5-76"></a><span class="ss">    - </span>Or a reference solution with a rubric, if automated testing is too weird.</span>
+<span id="cb5-77"><a href="#cb5-77"></a><span class="ss">    - </span>I will have a final reference solution but will at most share snippets individually.</span>
+<span id="cb5-78"><a href="#cb5-78"></a><span class="ss">- </span>You do whatever you want.</span>
+<span id="cb5-79"><a href="#cb5-79"></a><span class="ss">- </span>Enrolled students get an A.</span>
+<span id="cb5-80"><a href="#cb5-80"></a></span>
+<span id="cb5-81"><a href="#cb5-81"></a><span class="fu">## 2. Specification Grading</span></span>
+<span id="cb5-82"><a href="#cb5-82"></a></span>
+<span id="cb5-83"><a href="#cb5-83"></a><span class="ss">- </span>All the rage. I was never fan but tell me what you think.</span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="ss">- </span>Basically, I will assign some stuff but you don't have to do all of it perfectly.</span>
+<span id="cb5-85"><a href="#cb5-85"></a><span class="ss">    - </span>No partial credit, everything is yes/no grading.</span>
+<span id="cb5-86"><a href="#cb5-86"></a><span class="ss">- </span>I took distributions over final, midterm, and Lab/HW</span>
+<span id="cb5-87"><a href="#cb5-87"></a></span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="fu">## It pays to get A's</span></span>
+<span id="cb5-89"><a href="#cb5-89"></a></span>
+<span id="cb5-90"><a href="#cb5-90"></a>|Grade|Requirements|</span>
+<span id="cb5-91"><a href="#cb5-91"></a>|:----------:|------|</span>
+<span id="cb5-92"><a href="#cb5-92"></a>|A|Final meets spec|</span>
+<span id="cb5-93"><a href="#cb5-93"></a>|A|90% ave HW/Lab/Midterm, Final compiles|</span>
+<span id="cb5-94"><a href="#cb5-94"></a>|A-|90% ave HW/Lab, Midterm/Final compile|</span>
+<span id="cb5-95"><a href="#cb5-95"></a>|A-|Midterm meets spec, Final compiles|</span>
+<span id="cb5-96"><a href="#cb5-96"></a></span>
+<span id="cb5-97"><a href="#cb5-97"></a><span class="fu">## But B's are the Knees</span></span>
+<span id="cb5-98"><a href="#cb5-98"></a></span>
+<span id="cb5-99"><a href="#cb5-99"></a>|Grade|Requirements|</span>
+<span id="cb5-100"><a href="#cb5-100"></a>|:----------:|------|</span>
+<span id="cb5-101"><a href="#cb5-101"></a>|B+|90% ave HW/Lab, Midterm compiles|</span>
+<span id="cb5-102"><a href="#cb5-102"></a>|B| 80% ave HW/Lab, Midterm compiles|</span>
+<span id="cb5-103"><a href="#cb5-103"></a>|B-|80% ave HW/Lab|</span>
+<span id="cb5-104"><a href="#cb5-104"></a></span>
+<span id="cb5-105"><a href="#cb5-105"></a><span class="fu">## These may (???) earn degrees</span></span>
+<span id="cb5-106"><a href="#cb5-106"></a></span>
+<span id="cb5-107"><a href="#cb5-107"></a>|Grade|Requirements|</span>
+<span id="cb5-108"><a href="#cb5-108"></a>|:----------:|------|</span>
+<span id="cb5-109"><a href="#cb5-109"></a>|C|80% ave Lab|</span>
+<span id="cb5-110"><a href="#cb5-110"></a>|D|60% ave Lab|</span>
+<span id="cb5-111"><a href="#cb5-111"></a>|F|Anything else|</span>
+<span id="cb5-112"><a href="#cb5-112"></a></span>
+<span id="cb5-113"><a href="#cb5-113"></a><span class="fu">## Lab Grading</span></span>
+<span id="cb5-114"><a href="#cb5-114"></a></span>
+<span id="cb5-115"><a href="#cb5-115"></a><span class="ss">- </span>A (=100%)</span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="ss">    - </span>Meets spec by end of class</span>
+<span id="cb5-117"><a href="#cb5-117"></a><span class="ss">- </span>B (=90%)</span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="ss">    - </span>Compiles at end of class</span>
+<span id="cb5-119"><a href="#cb5-119"></a><span class="ss">        - </span>Can be turned into an executable.</span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="ss">- </span>F (=0%)</span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="ss">    - </span>Anything else</span>
+<span id="cb5-122"><a href="#cb5-122"></a>    </span>
+<span id="cb5-123"><a href="#cb5-123"></a><span class="fu">## HW Grading</span></span>
+<span id="cb5-124"><a href="#cb5-124"></a></span>
+<span id="cb5-125"><a href="#cb5-125"></a><span class="ss">- </span>A (=100%)</span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="ss">    - </span>On time</span>
+<span id="cb5-127"><a href="#cb5-127"></a><span class="ss">    - </span>Passes autograder.</span>
+<span id="cb5-128"><a href="#cb5-128"></a><span class="ss">- </span>B (=90%)</span>
+<span id="cb5-129"><a href="#cb5-129"></a><span class="ss">    - </span>On time</span>
+<span id="cb5-130"><a href="#cb5-130"></a><span class="ss">    - </span>Compiles</span>
+<span id="cb5-131"><a href="#cb5-131"></a><span class="ss">        - </span>Can be turned into an executable.</span>
+<span id="cb5-132"><a href="#cb5-132"></a><span class="ss">- </span>F (=0%)</span>
+<span id="cb5-133"><a href="#cb5-133"></a><span class="ss">    - </span>Anything else</span>
+<span id="cb5-134"><a href="#cb5-134"></a>    </span>
+<span id="cb5-135"><a href="#cb5-135"></a><span class="fu">## Final</span></span>
+<span id="cb5-136"><a href="#cb5-136"></a></span>
+<span id="cb5-137"><a href="#cb5-137"></a><span class="ss">- </span>Create, document, and publish a self-hosting version control system.</span>
+<span id="cb5-138"><a href="#cb5-138"></a><span class="ss">- </span>Entire codebase in Rust.</span>
+<span id="cb5-139"><a href="#cb5-139"></a><span class="ss">- </span>Minimum specifications:</span>
+<span id="cb5-140"><a href="#cb5-140"></a><span class="ss">    - </span>Support nested directory structures.</span>
+<span id="cb5-141"><a href="#cb5-141"></a><span class="ss">    - </span>Support text-based files (.rs, .py, .txt)</span>
+<span id="cb5-142"><a href="#cb5-142"></a><span class="ss">    - </span>Allow reverting to named changes (commits).</span>
+<span id="cb5-143"><a href="#cb5-143"></a><span class="ss">    - </span>Completed by you and at most a partner.</span>
+<span id="cb5-144"><a href="#cb5-144"></a>    </span>
+<span id="cb5-145"><a href="#cb5-145"></a><span class="fu">## Late Work Policy</span></span>
+<span id="cb5-146"><a href="#cb5-146"></a></span>
+<span id="cb5-147"><a href="#cb5-147"></a><span class="ss">- </span>Late work is not accepted.</span>
+<span id="cb5-148"><a href="#cb5-148"></a><span class="ss">    - </span>Turning in anything at all for on 90% of assignments yields B.</span>
+<span id="cb5-149"><a href="#cb5-149"></a><span class="ss">    - </span>Miss 100% of assignments and midterm but do the final for an A.</span>
+<span id="cb5-150"><a href="#cb5-150"></a></span>
+<span id="cb5-151"><a href="#cb5-151"></a><span class="fu">## AI Policy</span></span>
+<span id="cb5-152"><a href="#cb5-152"></a></span>
+<span id="cb5-153"><a href="#cb5-153"></a><span class="ss">- </span>I would be shocked if it is helpful to you.</span>
+<span id="cb5-154"><a href="#cb5-154"></a><span class="ss">- </span>If you think it is helpful, that is probably not a good sign.</span>
+<span id="cb5-155"><a href="#cb5-155"></a><span class="ss">- </span>You can use it (I wouldn't)</span>
+<span id="cb5-156"><a href="#cb5-156"></a></span>
+<span id="cb5-157"><a href="#cb5-157"></a><span class="fu">## Collaboration Policy</span></span>
+<span id="cb5-158"><a href="#cb5-158"></a></span>
+<span id="cb5-159"><a href="#cb5-159"></a><span class="ss">- </span>Non-final:</span>
+<span id="cb5-160"><a href="#cb5-160"></a><span class="ss">    - </span>Any size group via enthusiastic consent.</span>
+<span id="cb5-161"><a href="#cb5-161"></a><span class="ss">    - </span>Turn in your own code/copy.</span>
+<span id="cb5-162"><a href="#cb5-162"></a><span class="ss">- </span>Final:</span>
+<span id="cb5-163"><a href="#cb5-163"></a><span class="ss">    - </span>Partners via enthusiastic consent.</span>
+<span id="cb5-164"><a href="#cb5-164"></a><span class="ss">    - </span>Turn in your own code/copy.</span>
+<span id="cb5-165"><a href="#cb5-165"></a></span>
+<span id="cb5-166"><a href="#cb5-166"></a><span class="fu">## Vote</span></span>
+<span id="cb5-167"><a href="#cb5-167"></a></span>
+<span id="cb5-168"><a href="#cb5-168"></a><span class="ss">- </span>If there's not a Forms link here I should add one quickly.</span>
+<span id="cb5-169"><a href="#cb5-169"></a></span>
+<span id="cb5-170"><a href="#cb5-170"></a><span class="fu"># On Systems</span></span>
+<span id="cb5-171"><a href="#cb5-171"></a></span>
+<span id="cb5-172"><a href="#cb5-172"></a><span class="fu">## The Hard Part</span></span>
+<span id="cb5-173"><a href="#cb5-173"></a></span>
+<span id="cb5-174"><a href="#cb5-174"></a><span class="ss">- </span>After ~10 years of systems research I've convinced myself <span class="co">[</span><span class="ot">only two things</span><span class="co">](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/)</span> really matter:</span>
+<span id="cb5-175"><a href="#cb5-175"></a></span>
+<span id="cb5-176"><a href="#cb5-176"></a><span class="ss">  - </span>Pointers, and</span>
+<span id="cb5-177"><a href="#cb5-177"></a><span class="ss">  - </span>Recursion </span>
+<span id="cb5-178"><a href="#cb5-178"></a></span>
+<span id="cb5-179"><a href="#cb5-179"></a><span class="ss">- </span>Recursion isn't too bad... </span>
+<span id="cb5-180"><a href="#cb5-180"></a></span>
+<span id="cb5-181"><a href="#cb5-181"></a><span class="in">```py</span></span>
+<span id="cb5-182"><a href="#cb5-182"></a><span class="op">&gt;&gt;&gt;</span> exp <span class="op">=</span> <span class="kw">lambda</span> b, n : b <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> b<span class="op">*</span>exp(b,n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb5-183"><a href="#cb5-183"></a><span class="op">&gt;&gt;&gt;</span> exp(<span class="dv">2</span>,<span class="dv">8</span>)</span>
+<span id="cb5-184"><a href="#cb5-184"></a><span class="dv">256</span></span>
+<span id="cb5-185"><a href="#cb5-185"></a><span class="in">```</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a></span>
+<span id="cb5-187"><a href="#cb5-187"></a><span class="fu">## Pointers</span></span>
+<span id="cb5-188"><a href="#cb5-188"></a></span>
+<span id="cb5-189"><a href="#cb5-189"></a><span class="ss">- </span>Pointers are a beast, but without them nothing makes sense! </span>
+<span id="cb5-190"><a href="#cb5-190"></a></span>
+<span id="cb5-191"><a href="#cb5-191"></a>:::: {.columns}</span>
+<span id="cb5-192"><a href="#cb5-192"></a></span>
+<span id="cb5-193"><a href="#cb5-193"></a>::: {.column width="50%"}</span>
+<span id="cb5-194"><a href="#cb5-194"></a><span class="in">```py</span></span>
+<span id="cb5-195"><a href="#cb5-195"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-196"><a href="#cb5-196"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
+<span id="cb5-197"><a href="#cb5-197"></a>...     x <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-198"><a href="#cb5-198"></a>...</span>
+<span id="cb5-199"><a href="#cb5-199"></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
+<span id="cb5-200"><a href="#cb5-200"></a><span class="pp">UnboundLocalError</span>:</span>
+<span id="cb5-201"><a href="#cb5-201"></a><span class="op">&lt;</span>blah blah blah error messages<span class="op">&gt;</span></span>
+<span id="cb5-202"><a href="#cb5-202"></a><span class="in">```</span></span>
+<span id="cb5-203"><a href="#cb5-203"></a>::: </span>
+<span id="cb5-204"><a href="#cb5-204"></a></span>
+<span id="cb5-205"><a href="#cb5-205"></a>::: {.column width="50%"}</span>
+<span id="cb5-206"><a href="#cb5-206"></a></span>
+<span id="cb5-207"><a href="#cb5-207"></a><span class="in">```py</span></span>
+<span id="cb5-208"><a href="#cb5-208"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> [<span class="dv">1</span>]</span>
+<span id="cb5-209"><a href="#cb5-209"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> addx():</span>
+<span id="cb5-210"><a href="#cb5-210"></a>...     x[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-211"><a href="#cb5-211"></a>...</span>
+<span id="cb5-212"><a href="#cb5-212"></a><span class="op">&gt;&gt;&gt;</span> addx()</span>
+<span id="cb5-213"><a href="#cb5-213"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb5-214"><a href="#cb5-214"></a>[<span class="dv">2</span>]</span>
+<span id="cb5-215"><a href="#cb5-215"></a><span class="in">```</span></span>
+<span id="cb5-216"><a href="#cb5-216"></a>:::</span>
+<span id="cb5-217"><a href="#cb5-217"></a></span>
+<span id="cb5-218"><a href="#cb5-218"></a>::::</span>
+<span id="cb5-219"><a href="#cb5-219"></a></span>
+<span id="cb5-220"><a href="#cb5-220"></a><span class="fu">## Insight</span></span>
+<span id="cb5-221"><a href="#cb5-221"></a></span>
+<span id="cb5-222"><a href="#cb5-222"></a><span class="ss">- </span>**Definition:**</span>
+<span id="cb5-223"><a href="#cb5-223"></a><span class="ss">  - </span>Pointers: Variables that store memory addresses.</span>
+<span id="cb5-224"><a href="#cb5-224"></a><span class="ss">  - </span>Recursion: Functions calling themselves to solve sub-problems.</span>
+<span id="cb5-225"><a href="#cb5-225"></a><span class="ss">- </span>**Importance:**</span>
+<span id="cb5-226"><a href="#cb5-226"></a><span class="ss">  - </span>Core to efficient algorithms and memory management in low-level programming.</span>
+<span id="cb5-227"><a href="#cb5-227"></a></span>
+<span id="cb5-228"><a href="#cb5-228"></a><span class="fu">## Python and Pointers</span></span>
+<span id="cb5-229"><a href="#cb5-229"></a></span>
+<span id="cb5-230"><a href="#cb5-230"></a><span class="ss">- </span>**Why not .py (.js, .java, .cs, .cpp, etc)?**</span>
+<span id="cb5-231"><a href="#cb5-231"></a><span class="ss">  - </span>These languages _abstract_ memory.</span>
+<span id="cb5-232"><a href="#cb5-232"></a><span class="ss">  - </span>This abstraction makes computation **unclear**</span>
+<span id="cb5-233"><a href="#cb5-233"></a><span class="ss">  - </span>This lack of clarity:</span>
+<span id="cb5-234"><a href="#cb5-234"></a><span class="ss">    - </span>Adversely impacts education</span>
+<span id="cb5-235"><a href="#cb5-235"></a><span class="ss">    - </span>Complicates low-level design</span>
+<span id="cb5-236"><a href="#cb5-236"></a><span class="ss">    - </span>Leads to low performance</span>
+<span id="cb5-237"><a href="#cb5-237"></a><span class="ss">  - </span>Good languages (except Java) but not for us</span>
+<span id="cb5-238"><a href="#cb5-238"></a></span>
+<span id="cb5-239"><a href="#cb5-239"></a><span class="fu"># On Rust</span></span>
+<span id="cb5-240"><a href="#cb5-240"></a></span>
+<span id="cb5-241"><a href="#cb5-241"></a><span class="fu">## Rust and Pointers</span></span>
+<span id="cb5-242"><a href="#cb5-242"></a></span>
+<span id="cb5-243"><a href="#cb5-243"></a><span class="ss">- </span>Rust:</span>
+<span id="cb5-244"><a href="#cb5-244"></a><span class="ss">    - </span>Obscures pointers, but...</span>
+<span id="cb5-245"><a href="#cb5-245"></a><span class="ss">    - </span>*Does not* obscure memory.</span>
+<span id="cb5-246"><a href="#cb5-246"></a><span class="ss">- </span>This is good!</span>
+<span id="cb5-247"><a href="#cb5-247"></a><span class="ss">    - </span>Memory matters, but pointers are historical accident.</span>
+<span id="cb5-248"><a href="#cb5-248"></a><span class="ss">- </span>You should probably use Rust in every application where correctness or performance matters.</span>
+<span id="cb5-249"><a href="#cb5-249"></a></span>
+<span id="cb5-250"><a href="#cb5-250"></a><span class="fu">## Rust and Recursion</span></span>
+<span id="cb5-251"><a href="#cb5-251"></a></span>
+<span id="cb5-252"><a href="#cb5-252"></a><span class="ss">- </span>Separately, Rust is built on one of the most exciting ongoing computer science research efforts:</span>
+<span id="cb5-253"><a href="#cb5-253"></a><span class="ss">- </span>**LLVM** (stands for LLVM)</span>
+<span id="cb5-254"><a href="#cb5-254"></a><span class="ss">- </span>Basically, a way of turning human-readable code into machine-executable code.</span>
+<span id="cb5-255"><a href="#cb5-255"></a><span class="ss">    - </span>Very good at turning recursion into iteration and/or vice versa.</span>
+<span id="cb5-256"><a href="#cb5-256"></a><span class="ss">- </span>So Rust experiences less costs on recursion than many other languages.</span>
+<span id="cb5-257"><a href="#cb5-257"></a></span>
+<span id="cb5-258"><a href="#cb5-258"></a><span class="fu"># On Git</span></span>
+<span id="cb5-259"><a href="#cb5-259"></a></span>
+<span id="cb5-260"><a href="#cb5-260"></a><span class="fu">## Git</span></span>
+<span id="cb5-261"><a href="#cb5-261"></a></span>
+<span id="cb5-262"><a href="#cb5-262"></a><span class="ss">- </span>If you don't know <span class="in">`git`</span>, you should soon.</span>
+<span id="cb5-263"><a href="#cb5-263"></a><span class="ss">- </span>Git corresponds, like the others, to a command: <span class="in">`git`</span></span>
+<span id="cb5-264"><a href="#cb5-264"></a><span class="ss">  - </span>It is common now to use other techniques, but the command remains extremely **stable**</span>
+<span id="cb5-265"><a href="#cb5-265"></a><span class="ss">- </span>Quoth GitHub, the first and greatest of the collaboration tools:</span>
+<span id="cb5-266"><a href="#cb5-266"></a></span>
+<span id="cb5-267"><a href="#cb5-267"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">If you want a lot of control and flexibility, you can use the command line.</span><span class="co">](https://docs.github.com/en/get-started/using-github/connecting-to-github)</span></span>
+<span id="cb5-268"><a href="#cb5-268"></a></span>
+<span id="cb5-269"><a href="#cb5-269"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-270"><a href="#cb5-270"></a></span>
+<span id="cb5-271"><a href="#cb5-271"></a><span class="ss">- </span>So basically, you have things called repositories or "repos"</span>
+<span id="cb5-272"><a href="#cb5-272"></a></span>
+<span id="cb5-275"><a href="#cb5-275"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-276"><a href="#cb5-276"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-277"><a href="#cb5-277"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-278"><a href="#cb5-278"></a><span class="in">  A(My ️‍🔥 code repo)</span></span>
+<span id="cb5-279"><a href="#cb5-279"></a><span class="in">```</span></span>
+<span id="cb5-280"><a href="#cb5-280"></a></span>
+<span id="cb5-281"><a href="#cb5-281"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-282"><a href="#cb5-282"></a></span>
+<span id="cb5-283"><a href="#cb5-283"></a><span class="ss">- </span>Then you realize you wrote an infinite loop so you update it</span>
+<span id="cb5-284"><a href="#cb5-284"></a></span>
+<span id="cb5-287"><a href="#cb5-287"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-288"><a href="#cb5-288"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-289"><a href="#cb5-289"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-290"><a href="#cb5-290"></a><span class="in">  A(My ️‍🔥 code repo v0 ) --&gt; B(My ️‍🔥 code repo v1)</span></span>
+<span id="cb5-291"><a href="#cb5-291"></a><span class="in">```</span></span>
+<span id="cb5-292"><a href="#cb5-292"></a></span>
+<span id="cb5-293"><a href="#cb5-293"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-294"><a href="#cb5-294"></a></span>
+<span id="cb5-295"><a href="#cb5-295"></a><span class="ss">- </span>Then you come to class and realize your code is on your gaming rig in your apartment.</span>
+<span id="cb5-296"><a href="#cb5-296"></a></span>
+<span id="cb5-299"><a href="#cb5-299"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-300"><a href="#cb5-300"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-301"><a href="#cb5-301"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-302"><a href="#cb5-302"></a><span class="in">  A(&lt;s&gt;My ️‍🔥 code repo v0&lt;/s&gt;) --&gt; B(&lt;s&gt;My ️‍🔥 code repo v1&lt;/s&gt;)</span></span>
+<span id="cb5-303"><a href="#cb5-303"></a><span class="in">```</span></span>
+<span id="cb5-304"><a href="#cb5-304"></a></span>
+<span id="cb5-305"><a href="#cb5-305"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-306"><a href="#cb5-306"></a></span>
+<span id="cb5-307"><a href="#cb5-307"></a><span class="ss">- </span>So you save your code on GitHub</span>
+<span id="cb5-308"><a href="#cb5-308"></a><span class="ss">  - </span>GH = GitHub, GR = Gaming Rig</span>
+<span id="cb5-309"><a href="#cb5-309"></a></span>
+<span id="cb5-312"><a href="#cb5-312"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-313"><a href="#cb5-313"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-314"><a href="#cb5-314"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-315"><a href="#cb5-315"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-316"><a href="#cb5-316"></a><span class="in">  B --&gt; C(GH.‍🔥 v0)</span></span>
+<span id="cb5-317"><a href="#cb5-317"></a><span class="in">```</span></span>
+<span id="cb5-318"><a href="#cb5-318"></a></span>
+<span id="cb5-319"><a href="#cb5-319"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-320"><a href="#cb5-320"></a></span>
+<span id="cb5-321"><a href="#cb5-321"></a><span class="ss">- </span>But you realize you didn't sanitize your inputs so you update again.</span>
+<span id="cb5-322"><a href="#cb5-322"></a></span>
+<span id="cb5-325"><a href="#cb5-325"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-326"><a href="#cb5-326"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-327"><a href="#cb5-327"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-328"><a href="#cb5-328"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-329"><a href="#cb5-329"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-330"><a href="#cb5-330"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-331"><a href="#cb5-331"></a><span class="in">```</span></span>
+<span id="cb5-332"><a href="#cb5-332"></a></span>
+<span id="cb5-333"><a href="#cb5-333"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-334"><a href="#cb5-334"></a></span>
+<span id="cb5-335"><a href="#cb5-335"></a><span class="ss">- </span>Then you have class again and grab the GitHub version onto your LT = Laptop</span>
+<span id="cb5-336"><a href="#cb5-336"></a></span>
+<span id="cb5-339"><a href="#cb5-339"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-340"><a href="#cb5-340"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-341"><a href="#cb5-341"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-342"><a href="#cb5-342"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-343"><a href="#cb5-343"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-344"><a href="#cb5-344"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-345"><a href="#cb5-345"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-346"><a href="#cb5-346"></a><span class="in">```</span></span>
+<span id="cb5-347"><a href="#cb5-347"></a></span>
+<span id="cb5-348"><a href="#cb5-348"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-349"><a href="#cb5-349"></a></span>
+<span id="cb5-350"><a href="#cb5-350"></a><span class="ss">- </span>You notice it has the bug so you fix it again on your laptop in almost the same way</span>
+<span id="cb5-351"><a href="#cb5-351"></a></span>
+<span id="cb5-354"><a href="#cb5-354"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-355"><a href="#cb5-355"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-356"><a href="#cb5-356"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-357"><a href="#cb5-357"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-358"><a href="#cb5-358"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-359"><a href="#cb5-359"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-360"><a href="#cb5-360"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-361"><a href="#cb5-361"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
+<span id="cb5-362"><a href="#cb5-362"></a><span class="in">```</span></span>
+<span id="cb5-363"><a href="#cb5-363"></a></span>
+<span id="cb5-364"><a href="#cb5-364"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-365"><a href="#cb5-365"></a></span>
+<span id="cb5-366"><a href="#cb5-366"></a><span class="ss">- </span>And save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC</span>
+<span id="cb5-367"><a href="#cb5-367"></a></span>
+<span id="cb5-370"><a href="#cb5-370"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-371"><a href="#cb5-371"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-372"><a href="#cb5-372"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-373"><a href="#cb5-373"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-374"><a href="#cb5-374"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-375"><a href="#cb5-375"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-376"><a href="#cb5-376"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-377"><a href="#cb5-377"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
+<span id="cb5-378"><a href="#cb5-378"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
+<span id="cb5-379"><a href="#cb5-379"></a><span class="in">```</span></span>
+<span id="cb5-380"><a href="#cb5-380"></a></span>
+<span id="cb5-381"><a href="#cb5-381"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-382"><a href="#cb5-382"></a></span>
+<span id="cb5-383"><a href="#cb5-383"></a><span class="ss">- </span>You realize you also added some ASCII art and try to send that to GitHub</span>
+<span id="cb5-384"><a href="#cb5-384"></a></span>
+<span id="cb5-387"><a href="#cb5-387"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-388"><a href="#cb5-388"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-389"><a href="#cb5-389"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-390"><a href="#cb5-390"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-391"><a href="#cb5-391"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-392"><a href="#cb5-392"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-393"><a href="#cb5-393"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-394"><a href="#cb5-394"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
+<span id="cb5-395"><a href="#cb5-395"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
+<span id="cb5-396"><a href="#cb5-396"></a><span class="in">  G --&gt; H(GH.‍🔥 v2)</span></span>
+<span id="cb5-397"><a href="#cb5-397"></a><span class="in">  C --&gt; H</span></span>
+<span id="cb5-398"><a href="#cb5-398"></a><span class="in">```</span></span>
+<span id="cb5-399"><a href="#cb5-399"></a></span>
+<span id="cb5-400"><a href="#cb5-400"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-401"><a href="#cb5-401"></a></span>
+<span id="cb5-402"><a href="#cb5-402"></a><span class="ss">- </span>Two arrows into one thing is a merge conflict and out-of-scope for now.</span>
+<span id="cb5-403"><a href="#cb5-403"></a></span>
+<span id="cb5-406"><a href="#cb5-406"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-407"><a href="#cb5-407"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-408"><a href="#cb5-408"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-409"><a href="#cb5-409"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-410"><a href="#cb5-410"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-411"><a href="#cb5-411"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-412"><a href="#cb5-412"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-413"><a href="#cb5-413"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
+<span id="cb5-414"><a href="#cb5-414"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
+<span id="cb5-415"><a href="#cb5-415"></a><span class="in">  G --&gt; H{💥}</span></span>
+<span id="cb5-416"><a href="#cb5-416"></a><span class="in">  C --&gt; H</span></span>
+<span id="cb5-417"><a href="#cb5-417"></a><span class="in">```</span></span>
+<span id="cb5-418"><a href="#cb5-418"></a></span>
+<span id="cb5-419"><a href="#cb5-419"></a><span class="fu">## Git Example</span></span>
+<span id="cb5-420"><a href="#cb5-420"></a></span>
+<span id="cb5-421"><a href="#cb5-421"></a><span class="ss">- </span>Basically versions of code can live in more than one place.</span>
+<span id="cb5-422"><a href="#cb5-422"></a><span class="ss">  - </span>Ah, versions, our old friend...</span>
+<span id="cb5-423"><a href="#cb5-423"></a></span>
+<span id="cb5-426"><a href="#cb5-426"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-427"><a href="#cb5-427"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-428"><a href="#cb5-428"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-429"><a href="#cb5-429"></a><span class="in">  A(GR.️‍🔥 v0) --&gt; B(GR.️‍🔥 v1)</span></span>
+<span id="cb5-430"><a href="#cb5-430"></a><span class="in">  B --&gt; C(GR.️‍🔥 v2)</span></span>
+<span id="cb5-431"><a href="#cb5-431"></a><span class="in">  B --&gt; D(GH.‍🔥 v0)</span></span>
+<span id="cb5-432"><a href="#cb5-432"></a><span class="in">  D --&gt; E(LT.‍🔥 v0)</span></span>
+<span id="cb5-433"><a href="#cb5-433"></a><span class="in">  E --&gt; F(LT.‍🔥 v1)</span></span>
+<span id="cb5-434"><a href="#cb5-434"></a><span class="in">  F --&gt; G(GH.‍🔥 v1)</span></span>
+<span id="cb5-435"><a href="#cb5-435"></a><span class="in">  G --&gt; H{💥}</span></span>
+<span id="cb5-436"><a href="#cb5-436"></a><span class="in">  C --&gt; H</span></span>
+<span id="cb5-437"><a href="#cb5-437"></a><span class="in">```</span></span>
+<span id="cb5-438"><a href="#cb5-438"></a></span>
+<span id="cb5-439"><a href="#cb5-439"></a><span class="fu"># In Brief</span></span>
+<span id="cb5-440"><a href="#cb5-440"></a></span>
+<span id="cb5-441"><a href="#cb5-441"></a><span class="ss">- </span>Generally create repositories + tokens in browser on GitHub</span>
+<span id="cb5-442"><a href="#cb5-442"></a><span class="ss">- </span>Use command line to configure a repository</span>
+<span id="cb5-443"><a href="#cb5-443"></a><span class="ss">- </span>Authenticate via access token from browser</span>
+<span id="cb5-444"><a href="#cb5-444"></a><span class="ss">- </span>Then use <span class="in">`git add`</span>, <span class="in">`git commit`</span>, <span class="in">`git push`</span> to save work</span>
+<span id="cb5-445"><a href="#cb5-445"></a><span class="ss">- </span>Use <span class="in">`git pull`</span> to grab saved work</span>
+<span id="cb5-446"><a href="#cb5-446"></a><span class="ss">- </span>Use a <span class="in">`.gitignore`</span> file so only code (**NOT** executables) live on GitHub</span>
+<span id="cb5-447"><a href="#cb5-447"></a></span>
+<span id="cb5-448"><a href="#cb5-448"></a><span class="fu"># Course Sketch</span></span>
+<span id="cb5-449"><a href="#cb5-449"></a></span>
+<span id="cb5-450"><a href="#cb5-450"></a><span class="fu">## Visually</span></span>
+<span id="cb5-451"><a href="#cb5-451"></a></span>
 <span id="cb5-452"><a href="#cb5-452"></a></span>
-<span id="cb5-453"><a href="#cb5-453"></a></span>
-<span id="cb5-456"><a href="#cb5-456"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-457"><a href="#cb5-457"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb5-458"><a href="#cb5-458"></a><span class="in">flowchart LR</span></span>
-<span id="cb5-459"><a href="#cb5-459"></a><span class="in">  B(Wordle)</span></span>
-<span id="cb5-460"><a href="#cb5-460"></a><span class="in">  B --&gt; C(SHA512)</span></span>
-<span id="cb5-461"><a href="#cb5-461"></a><span class="in">  C --&gt; D(Ed25519)</span></span>
-<span id="cb5-462"><a href="#cb5-462"></a><span class="in">  B --&gt; F(Graphs)</span></span>
-<span id="cb5-463"><a href="#cb5-463"></a><span class="in">  C --&gt; H(Merkle)</span></span>
-<span id="cb5-464"><a href="#cb5-464"></a><span class="in">  F --&gt; H</span></span>
-<span id="cb5-465"><a href="#cb5-465"></a><span class="in">  F --&gt; G(LCS)</span></span>
-<span id="cb5-466"><a href="#cb5-466"></a><span class="in">  H --&gt; I(VCS)</span></span>
-<span id="cb5-467"><a href="#cb5-467"></a><span class="in">  G --&gt; I</span></span>
-<span id="cb5-468"><a href="#cb5-468"></a><span class="in">  D --&gt; I</span></span>
-<span id="cb5-469"><a href="#cb5-469"></a><span class="in">```</span></span>
-<span id="cb5-470"><a href="#cb5-470"></a></span>
-<span id="cb5-471"><a href="#cb5-471"></a><span class="ss">- </span>LCS = Longest common subsequence, like <span class="in">`diff`</span></span>
-<span id="cb5-472"><a href="#cb5-472"></a><span class="ss">- </span>VCS = Version Control System, like <span class="in">`git`</span></span>
-<span id="cb5-473"><a href="#cb5-473"></a></span>
-<span id="cb5-474"><a href="#cb5-474"></a><span class="fu">## SHA</span></span>
-<span id="cb5-475"><a href="#cb5-475"></a></span>
-<span id="cb5-476"><a href="#cb5-476"></a><span class="ss">- </span>**SHA Basics:**</span>
-<span id="cb5-477"><a href="#cb5-477"></a><span class="ss">  - </span>Cryptographic hash function family.</span>
-<span id="cb5-478"><a href="#cb5-478"></a><span class="ss">  - </span>Input data into fixed-size hash values.</span>
-<span id="cb5-479"><a href="#cb5-479"></a><span class="ss">- </span>**Use Cases:**</span>
-<span id="cb5-480"><a href="#cb5-480"></a><span class="ss">  - </span>Data integrity.</span>
-<span id="cb5-481"><a href="#cb5-481"></a><span class="ss">- </span>**Learning Objectives:**</span>
-<span id="cb5-482"><a href="#cb5-482"></a><span class="ss">  - </span>Reason about bits and bytes.</span>
-<span id="cb5-483"><a href="#cb5-483"></a></span>
-<span id="cb5-484"><a href="#cb5-484"></a><span class="fu">## Ed25519</span></span>
-<span id="cb5-485"><a href="#cb5-485"></a></span>
-<span id="cb5-486"><a href="#cb5-486"></a><span class="ss">- </span>**Ed25519 Basics:**</span>
-<span id="cb5-487"><a href="#cb5-487"></a><span class="ss">    - </span>Public-key signature system.</span>
-<span id="cb5-488"><a href="#cb5-488"></a><span class="ss">    - </span>Based on elliptic curve cryptography (specifically, Edwards curves).</span>
-<span id="cb5-489"><a href="#cb5-489"></a><span class="ss">    - </span>Uses SHA-512 and Curve25519.</span>
-<span id="cb5-490"><a href="#cb5-490"></a><span class="ss">- </span>**Use Cases:**</span>
-<span id="cb5-491"><a href="#cb5-491"></a><span class="ss">    - </span>Confidentiality and authentication.</span>
-<span id="cb5-492"><a href="#cb5-492"></a><span class="ss">- </span>**Learning Objectives:**</span>
-<span id="cb5-493"><a href="#cb5-493"></a><span class="ss">    - </span>Reason about numerical computing.</span>
-<span id="cb5-494"><a href="#cb5-494"></a></span>
-<span id="cb5-495"><a href="#cb5-495"></a><span class="fu">## Graphs</span></span>
-<span id="cb5-496"><a href="#cb5-496"></a></span>
-<span id="cb5-497"><a href="#cb5-497"></a><span class="ss">- </span>Introduce graphs as a way to:</span>
-<span id="cb5-498"><a href="#cb5-498"></a><span class="ss">    - </span>Organize files</span>
-<span id="cb5-499"><a href="#cb5-499"></a><span class="ss">    - </span>Compare files</span>
-<span id="cb5-500"><a href="#cb5-500"></a><span class="ss">    - </span>Track changes.</span>
-<span id="cb5-501"><a href="#cb5-501"></a>   </span>
-<span id="cb5-502"><a href="#cb5-502"></a>  </span>
-<span id="cb5-503"><a href="#cb5-503"></a><span class="fu">## Longest Common Subseq. (LCS)</span></span>
-<span id="cb5-504"><a href="#cb5-504"></a></span>
-<span id="cb5-505"><a href="#cb5-505"></a><span class="ss">- </span>**LCS Basics:**</span>
-<span id="cb5-506"><a href="#cb5-506"></a><span class="ss">    - </span>Find longest sequence of characters in the same relative order in two or more sequences, but not necessarily contiguously.</span>
-<span id="cb5-507"><a href="#cb5-507"></a><span class="ss">    - </span>Often solved using dynamic programming.</span>
-<span id="cb5-508"><a href="#cb5-508"></a><span class="ss">- </span>**Use Cases:**</span>
-<span id="cb5-509"><a href="#cb5-509"></a><span class="ss">    - </span>File comparison (e.g., <span class="in">`diff`</span> utility).</span>
-<span id="cb5-510"><a href="#cb5-510"></a><span class="ss">- </span>**Learning Objectives:**</span>
-<span id="cb5-511"><a href="#cb5-511"></a><span class="ss">    - </span>Linear data structure.</span>
-<span id="cb5-512"><a href="#cb5-512"></a></span>
-<span id="cb5-513"><a href="#cb5-513"></a><span class="fu">##  Merkle Trees</span></span>
-<span id="cb5-514"><a href="#cb5-514"></a></span>
-<span id="cb5-515"><a href="#cb5-515"></a><span class="ss">- </span>**Merkle Trees:**</span>
-<span id="cb5-516"><a href="#cb5-516"></a><span class="ss">  - </span>Tree structure using SHA for data integrity.</span>
-<span id="cb5-517"><a href="#cb5-517"></a><span class="ss">  - </span>Hashes stored as nodes; pointers link them.</span>
-<span id="cb5-518"><a href="#cb5-518"></a><span class="ss">  - </span>Leaf nodes are RSA signatures!</span>
-<span id="cb5-519"><a href="#cb5-519"></a><span class="ss">- </span>Merkle Trees are **balanced**</span>
-<span id="cb5-520"><a href="#cb5-520"></a><span class="ss">  - </span>Hierarchical data structure embedded in linear data structure.</span>
-<span id="cb5-521"><a href="#cb5-521"></a>  </span>
-<span id="cb5-522"><a href="#cb5-522"></a><span class="fu">## File System</span></span>
-<span id="cb5-523"><a href="#cb5-523"></a></span>
-<span id="cb5-524"><a href="#cb5-524"></a><span class="ss">- </span>The file system a tree that cannot (easily) be embedded in a linear data structure.</span>
-<span id="cb5-525"><a href="#cb5-525"></a></span>
-<span id="cb5-526"><a href="#cb5-526"></a><span class="in">```{.bash}</span></span>
-<span id="cb5-527"><a href="#cb5-527"></a><span class="in">r</span></span>
-<span id="cb5-528"><a href="#cb5-528"></a><span class="in">├── DESCRIPTION</span></span>
-<span id="cb5-529"><a href="#cb5-529"></a><span class="in">├── Makefile</span></span>
-<span id="cb5-530"><a href="#cb5-530"></a><span class="in">├── NAMESPACE</span></span>
-<span id="cb5-531"><a href="#cb5-531"></a><span class="in">├── R</span></span>
-<span id="cb5-532"><a href="#cb5-532"></a><span class="in">│&nbsp;&nbsp; └── vcd2df.R</span></span>
-<span id="cb5-533"><a href="#cb5-533"></a><span class="in">├── man</span></span>
-<span id="cb5-534"><a href="#cb5-534"></a><span class="in">│&nbsp;&nbsp; └── vcd2df.Rd</span></span>
-<span id="cb5-535"><a href="#cb5-535"></a><span class="in">├── r</span></span>
-<span id="cb5-536"><a href="#cb5-536"></a><span class="in">├── vcd2df.Rcheck</span></span>
-<span id="cb5-537"><a href="#cb5-537"></a><span class="in">│&nbsp;&nbsp; ├── 00_pkg_src</span></span>
-<span id="cb5-538"><a href="#cb5-538"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df</span></span>
-<span id="cb5-539"><a href="#cb5-539"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── DESCRIPTION</span></span>
-<span id="cb5-540"><a href="#cb5-540"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── NAMESPACE</span></span>
-<span id="cb5-541"><a href="#cb5-541"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── R</span></span>
-<span id="cb5-542"><a href="#cb5-542"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.R</span></span>
-<span id="cb5-543"><a href="#cb5-543"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── build</span></span>
-<span id="cb5-544"><a href="#cb5-544"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vignette.rds</span></span>
-<span id="cb5-545"><a href="#cb5-545"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── inst</span></span>
-<span id="cb5-546"><a href="#cb5-546"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── doc</span></span>
-<span id="cb5-547"><a href="#cb5-547"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.R</span></span>
-<span id="cb5-548"><a href="#cb5-548"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.html</span></span>
-<span id="cb5-549"><a href="#cb5-549"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     └── index.qmd</span></span>
-<span id="cb5-550"><a href="#cb5-550"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── man</span></span>
-<span id="cb5-551"><a href="#cb5-551"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.Rd</span></span>
-<span id="cb5-552"><a href="#cb5-552"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── vignettes</span></span>
-<span id="cb5-553"><a href="#cb5-553"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── index.qmd</span></span>
-<span id="cb5-554"><a href="#cb5-554"></a><span class="in">│&nbsp;&nbsp; ├── 00check.log</span></span>
-<span id="cb5-555"><a href="#cb5-555"></a><span class="in">│&nbsp;&nbsp; ├── 00install.out</span></span>
-<span id="cb5-556"><a href="#cb5-556"></a><span class="in">│&nbsp;&nbsp; ├── Rdlatex.log</span></span>
-<span id="cb5-557"><a href="#cb5-557"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df</span></span>
-<span id="cb5-558"><a href="#cb5-558"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── DESCRIPTION</span></span>
-<span id="cb5-559"><a href="#cb5-559"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── INDEX</span></span>
-<span id="cb5-560"><a href="#cb5-560"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Meta</span></span>
-<span id="cb5-561"><a href="#cb5-561"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── Rd.rds</span></span>
-<span id="cb5-562"><a href="#cb5-562"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── features.rds</span></span>
-<span id="cb5-563"><a href="#cb5-563"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── hsearch.rds</span></span>
-<span id="cb5-564"><a href="#cb5-564"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── links.rds</span></span>
-<span id="cb5-565"><a href="#cb5-565"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── nsInfo.rds</span></span>
-<span id="cb5-566"><a href="#cb5-566"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── package.rds</span></span>
-<span id="cb5-567"><a href="#cb5-567"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vignette.rds</span></span>
-<span id="cb5-568"><a href="#cb5-568"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── NAMESPACE</span></span>
-<span id="cb5-569"><a href="#cb5-569"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── R</span></span>
-<span id="cb5-570"><a href="#cb5-570"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df</span></span>
-<span id="cb5-571"><a href="#cb5-571"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span></span>
-<span id="cb5-572"><a href="#cb5-572"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span></span>
-<span id="cb5-573"><a href="#cb5-573"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── doc</span></span>
-<span id="cb5-574"><a href="#cb5-574"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.R</span></span>
-<span id="cb5-575"><a href="#cb5-575"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.html</span></span>
-<span id="cb5-576"><a href="#cb5-576"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── index.qmd</span></span>
-<span id="cb5-577"><a href="#cb5-577"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── help</span></span>
-<span id="cb5-578"><a href="#cb5-578"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── AnIndex</span></span>
-<span id="cb5-579"><a href="#cb5-579"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── aliases.rds</span></span>
-<span id="cb5-580"><a href="#cb5-580"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── paths.rds</span></span>
-<span id="cb5-581"><a href="#cb5-581"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span></span>
-<span id="cb5-582"><a href="#cb5-582"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span></span>
-<span id="cb5-583"><a href="#cb5-583"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; └── html</span></span>
-<span id="cb5-584"><a href="#cb5-584"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── 00Index.html</span></span>
-<span id="cb5-585"><a href="#cb5-585"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── R.css</span></span>
-<span id="cb5-586"><a href="#cb5-586"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.R</span></span>
-<span id="cb5-587"><a href="#cb5-587"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.Rout</span></span>
-<span id="cb5-588"><a href="#cb5-588"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.pdf</span></span>
-<span id="cb5-589"><a href="#cb5-589"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-manual.log</span></span>
-<span id="cb5-590"><a href="#cb5-590"></a><span class="in">│&nbsp;&nbsp; └── vcd2df-manual.pdf</span></span>
-<span id="cb5-591"><a href="#cb5-591"></a><span class="in">├── vcd2df_1.0.1.tar.gz</span></span>
-<span id="cb5-592"><a href="#cb5-592"></a><span class="in">└── vignettes</span></span>
-<span id="cb5-593"><a href="#cb5-593"></a><span class="in">    └── index.qmd</span></span>
-<span id="cb5-594"><a href="#cb5-594"></a><span class="in">```</span></span>
-<span id="cb5-595"><a href="#cb5-595"></a></span>
-<span id="cb5-596"><a href="#cb5-596"></a><span class="fu"># Final</span></span>
-<span id="cb5-597"><a href="#cb5-597"></a></span>
-<span id="cb5-598"><a href="#cb5-598"></a><span class="ss">- </span>**Implement Minimal `git` in Rust**</span>
-<span id="cb5-599"><a href="#cb5-599"></a><span class="ss">  - </span>Must be *self-hosted* - able to track versions of itself.</span>
-<span id="cb5-600"><a href="#cb5-600"></a>  </span>
-<span id="cb5-601"><a href="#cb5-601"></a><span class="fu"># On `vim`</span></span>
-<span id="cb5-602"><a href="#cb5-602"></a></span>
-<span id="cb5-603"><a href="#cb5-603"></a><span class="fu">## Vim</span></span>
-<span id="cb5-604"><a href="#cb5-604"></a></span>
-<span id="cb5-605"><a href="#cb5-605"></a><span class="ss">- </span>You should use <span class="in">`vim`</span> or another console-based editor as a component of your learning in this class.</span>
-<span id="cb5-606"><a href="#cb5-606"></a><span class="ss">- </span>This will not be assessed (how can it be) but will *likely* be expected in a non-trivial subset of settings this course material will be useful.</span>
-<span id="cb5-607"><a href="#cb5-607"></a><span class="ss">- </span>I will live-code in either <span class="in">`vim`</span> or <span class="in">`helix`</span></span>
-<span id="cb5-608"><a href="#cb5-608"></a></span>
-<span id="cb5-609"><a href="#cb5-609"></a><span class="fu"># Fin</span></span>
+<span id="cb5-455"><a href="#cb5-455"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-456"><a href="#cb5-456"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb5-457"><a href="#cb5-457"></a><span class="in">flowchart LR</span></span>
+<span id="cb5-458"><a href="#cb5-458"></a><span class="in">  B(Wordle)</span></span>
+<span id="cb5-459"><a href="#cb5-459"></a><span class="in">  B --&gt; C(SHA512)</span></span>
+<span id="cb5-460"><a href="#cb5-460"></a><span class="in">  C --&gt; D(Ed25519)</span></span>
+<span id="cb5-461"><a href="#cb5-461"></a><span class="in">  B --&gt; F(Graphs)</span></span>
+<span id="cb5-462"><a href="#cb5-462"></a><span class="in">  C --&gt; H(Merkle)</span></span>
+<span id="cb5-463"><a href="#cb5-463"></a><span class="in">  F --&gt; H</span></span>
+<span id="cb5-464"><a href="#cb5-464"></a><span class="in">  F --&gt; G(LCS)</span></span>
+<span id="cb5-465"><a href="#cb5-465"></a><span class="in">  H --&gt; I(VCS)</span></span>
+<span id="cb5-466"><a href="#cb5-466"></a><span class="in">  G --&gt; I</span></span>
+<span id="cb5-467"><a href="#cb5-467"></a><span class="in">  D --&gt; I</span></span>
+<span id="cb5-468"><a href="#cb5-468"></a><span class="in">```</span></span>
+<span id="cb5-469"><a href="#cb5-469"></a></span>
+<span id="cb5-470"><a href="#cb5-470"></a><span class="ss">- </span>LCS = Longest common subsequence, like <span class="in">`diff`</span></span>
+<span id="cb5-471"><a href="#cb5-471"></a><span class="ss">- </span>VCS = Version Control System, like <span class="in">`git`</span></span>
+<span id="cb5-472"><a href="#cb5-472"></a></span>
+<span id="cb5-473"><a href="#cb5-473"></a><span class="fu">## SHA</span></span>
+<span id="cb5-474"><a href="#cb5-474"></a></span>
+<span id="cb5-475"><a href="#cb5-475"></a><span class="ss">- </span>**SHA Basics:**</span>
+<span id="cb5-476"><a href="#cb5-476"></a><span class="ss">  - </span>Cryptographic hash function family.</span>
+<span id="cb5-477"><a href="#cb5-477"></a><span class="ss">  - </span>Input data into fixed-size hash values.</span>
+<span id="cb5-478"><a href="#cb5-478"></a><span class="ss">- </span>**Use Cases:**</span>
+<span id="cb5-479"><a href="#cb5-479"></a><span class="ss">  - </span>Data integrity.</span>
+<span id="cb5-480"><a href="#cb5-480"></a><span class="ss">- </span>**Learning Objectives:**</span>
+<span id="cb5-481"><a href="#cb5-481"></a><span class="ss">  - </span>Reason about bits and bytes.</span>
+<span id="cb5-482"><a href="#cb5-482"></a></span>
+<span id="cb5-483"><a href="#cb5-483"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-484"><a href="#cb5-484"></a></span>
+<span id="cb5-485"><a href="#cb5-485"></a><span class="ss">- </span>**Ed25519 Basics:**</span>
+<span id="cb5-486"><a href="#cb5-486"></a><span class="ss">    - </span>Public-key signature system.</span>
+<span id="cb5-487"><a href="#cb5-487"></a><span class="ss">    - </span>Based on elliptic curve cryptography (specifically, Edwards curves).</span>
+<span id="cb5-488"><a href="#cb5-488"></a><span class="ss">    - </span>Uses SHA-512 and Curve25519.</span>
+<span id="cb5-489"><a href="#cb5-489"></a><span class="ss">- </span>**Use Cases:**</span>
+<span id="cb5-490"><a href="#cb5-490"></a><span class="ss">    - </span>Confidentiality and authentication.</span>
+<span id="cb5-491"><a href="#cb5-491"></a><span class="ss">- </span>**Learning Objectives:**</span>
+<span id="cb5-492"><a href="#cb5-492"></a><span class="ss">    - </span>Reason about numerical computing.</span>
+<span id="cb5-493"><a href="#cb5-493"></a></span>
+<span id="cb5-494"><a href="#cb5-494"></a><span class="fu">## Graphs</span></span>
+<span id="cb5-495"><a href="#cb5-495"></a></span>
+<span id="cb5-496"><a href="#cb5-496"></a><span class="ss">- </span>Introduce graphs as a way to:</span>
+<span id="cb5-497"><a href="#cb5-497"></a><span class="ss">    - </span>Organize files</span>
+<span id="cb5-498"><a href="#cb5-498"></a><span class="ss">    - </span>Compare files</span>
+<span id="cb5-499"><a href="#cb5-499"></a><span class="ss">    - </span>Track changes.</span>
+<span id="cb5-500"><a href="#cb5-500"></a>   </span>
+<span id="cb5-501"><a href="#cb5-501"></a>  </span>
+<span id="cb5-502"><a href="#cb5-502"></a><span class="fu">## Longest Common Subseq. (LCS)</span></span>
+<span id="cb5-503"><a href="#cb5-503"></a></span>
+<span id="cb5-504"><a href="#cb5-504"></a><span class="ss">- </span>**LCS Basics:**</span>
+<span id="cb5-505"><a href="#cb5-505"></a><span class="ss">    - </span>Find longest sequence of characters in the same relative order in two or more sequences, but not necessarily contiguously.</span>
+<span id="cb5-506"><a href="#cb5-506"></a><span class="ss">    - </span>Often solved using dynamic programming.</span>
+<span id="cb5-507"><a href="#cb5-507"></a><span class="ss">- </span>**Use Cases:**</span>
+<span id="cb5-508"><a href="#cb5-508"></a><span class="ss">    - </span>File comparison (e.g., <span class="in">`diff`</span> utility).</span>
+<span id="cb5-509"><a href="#cb5-509"></a><span class="ss">- </span>**Learning Objectives:**</span>
+<span id="cb5-510"><a href="#cb5-510"></a><span class="ss">    - </span>Linear data structure.</span>
+<span id="cb5-511"><a href="#cb5-511"></a></span>
+<span id="cb5-512"><a href="#cb5-512"></a><span class="fu">##  Merkle Trees</span></span>
+<span id="cb5-513"><a href="#cb5-513"></a></span>
+<span id="cb5-514"><a href="#cb5-514"></a><span class="ss">- </span>**Merkle Trees:**</span>
+<span id="cb5-515"><a href="#cb5-515"></a><span class="ss">  - </span>Tree structure using SHA for data integrity.</span>
+<span id="cb5-516"><a href="#cb5-516"></a><span class="ss">  - </span>Hashes stored as nodes; pointers link them.</span>
+<span id="cb5-517"><a href="#cb5-517"></a><span class="ss">  - </span>Leaf nodes are RSA signatures!</span>
+<span id="cb5-518"><a href="#cb5-518"></a><span class="ss">- </span>Merkle Trees are **balanced**</span>
+<span id="cb5-519"><a href="#cb5-519"></a><span class="ss">  - </span>Hierarchical data structure embedded in linear data structure.</span>
+<span id="cb5-520"><a href="#cb5-520"></a>  </span>
+<span id="cb5-521"><a href="#cb5-521"></a><span class="fu">## File System</span></span>
+<span id="cb5-522"><a href="#cb5-522"></a></span>
+<span id="cb5-523"><a href="#cb5-523"></a><span class="ss">- </span>The file system a tree that cannot (easily) be embedded in a linear data structure.</span>
+<span id="cb5-524"><a href="#cb5-524"></a></span>
+<span id="cb5-525"><a href="#cb5-525"></a><span class="in">```{.bash}</span></span>
+<span id="cb5-526"><a href="#cb5-526"></a><span class="in">r</span></span>
+<span id="cb5-527"><a href="#cb5-527"></a><span class="in">├── DESCRIPTION</span></span>
+<span id="cb5-528"><a href="#cb5-528"></a><span class="in">├── Makefile</span></span>
+<span id="cb5-529"><a href="#cb5-529"></a><span class="in">├── NAMESPACE</span></span>
+<span id="cb5-530"><a href="#cb5-530"></a><span class="in">├── R</span></span>
+<span id="cb5-531"><a href="#cb5-531"></a><span class="in">│&nbsp;&nbsp; └── vcd2df.R</span></span>
+<span id="cb5-532"><a href="#cb5-532"></a><span class="in">├── man</span></span>
+<span id="cb5-533"><a href="#cb5-533"></a><span class="in">│&nbsp;&nbsp; └── vcd2df.Rd</span></span>
+<span id="cb5-534"><a href="#cb5-534"></a><span class="in">├── r</span></span>
+<span id="cb5-535"><a href="#cb5-535"></a><span class="in">├── vcd2df.Rcheck</span></span>
+<span id="cb5-536"><a href="#cb5-536"></a><span class="in">│&nbsp;&nbsp; ├── 00_pkg_src</span></span>
+<span id="cb5-537"><a href="#cb5-537"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df</span></span>
+<span id="cb5-538"><a href="#cb5-538"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── DESCRIPTION</span></span>
+<span id="cb5-539"><a href="#cb5-539"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── NAMESPACE</span></span>
+<span id="cb5-540"><a href="#cb5-540"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── R</span></span>
+<span id="cb5-541"><a href="#cb5-541"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.R</span></span>
+<span id="cb5-542"><a href="#cb5-542"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── build</span></span>
+<span id="cb5-543"><a href="#cb5-543"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vignette.rds</span></span>
+<span id="cb5-544"><a href="#cb5-544"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── inst</span></span>
+<span id="cb5-545"><a href="#cb5-545"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── doc</span></span>
+<span id="cb5-546"><a href="#cb5-546"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.R</span></span>
+<span id="cb5-547"><a href="#cb5-547"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     ├── index.html</span></span>
+<span id="cb5-548"><a href="#cb5-548"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp;     └── index.qmd</span></span>
+<span id="cb5-549"><a href="#cb5-549"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── man</span></span>
+<span id="cb5-550"><a href="#cb5-550"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── vcd2df.Rd</span></span>
+<span id="cb5-551"><a href="#cb5-551"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── vignettes</span></span>
+<span id="cb5-552"><a href="#cb5-552"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── index.qmd</span></span>
+<span id="cb5-553"><a href="#cb5-553"></a><span class="in">│&nbsp;&nbsp; ├── 00check.log</span></span>
+<span id="cb5-554"><a href="#cb5-554"></a><span class="in">│&nbsp;&nbsp; ├── 00install.out</span></span>
+<span id="cb5-555"><a href="#cb5-555"></a><span class="in">│&nbsp;&nbsp; ├── Rdlatex.log</span></span>
+<span id="cb5-556"><a href="#cb5-556"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df</span></span>
+<span id="cb5-557"><a href="#cb5-557"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── DESCRIPTION</span></span>
+<span id="cb5-558"><a href="#cb5-558"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── INDEX</span></span>
+<span id="cb5-559"><a href="#cb5-559"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Meta</span></span>
+<span id="cb5-560"><a href="#cb5-560"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── Rd.rds</span></span>
+<span id="cb5-561"><a href="#cb5-561"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── features.rds</span></span>
+<span id="cb5-562"><a href="#cb5-562"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── hsearch.rds</span></span>
+<span id="cb5-563"><a href="#cb5-563"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── links.rds</span></span>
+<span id="cb5-564"><a href="#cb5-564"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── nsInfo.rds</span></span>
+<span id="cb5-565"><a href="#cb5-565"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── package.rds</span></span>
+<span id="cb5-566"><a href="#cb5-566"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vignette.rds</span></span>
+<span id="cb5-567"><a href="#cb5-567"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── NAMESPACE</span></span>
+<span id="cb5-568"><a href="#cb5-568"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── R</span></span>
+<span id="cb5-569"><a href="#cb5-569"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df</span></span>
+<span id="cb5-570"><a href="#cb5-570"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span></span>
+<span id="cb5-571"><a href="#cb5-571"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span></span>
+<span id="cb5-572"><a href="#cb5-572"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── doc</span></span>
+<span id="cb5-573"><a href="#cb5-573"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.R</span></span>
+<span id="cb5-574"><a href="#cb5-574"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── index.html</span></span>
+<span id="cb5-575"><a href="#cb5-575"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── index.qmd</span></span>
+<span id="cb5-576"><a href="#cb5-576"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── help</span></span>
+<span id="cb5-577"><a href="#cb5-577"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── AnIndex</span></span>
+<span id="cb5-578"><a href="#cb5-578"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── aliases.rds</span></span>
+<span id="cb5-579"><a href="#cb5-579"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── paths.rds</span></span>
+<span id="cb5-580"><a href="#cb5-580"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; ├── vcd2df.rdb</span></span>
+<span id="cb5-581"><a href="#cb5-581"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; │&nbsp;&nbsp; └── vcd2df.rdx</span></span>
+<span id="cb5-582"><a href="#cb5-582"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp; └── html</span></span>
+<span id="cb5-583"><a href="#cb5-583"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── 00Index.html</span></span>
+<span id="cb5-584"><a href="#cb5-584"></a><span class="in">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── R.css</span></span>
+<span id="cb5-585"><a href="#cb5-585"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.R</span></span>
+<span id="cb5-586"><a href="#cb5-586"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.Rout</span></span>
+<span id="cb5-587"><a href="#cb5-587"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-Ex.pdf</span></span>
+<span id="cb5-588"><a href="#cb5-588"></a><span class="in">│&nbsp;&nbsp; ├── vcd2df-manual.log</span></span>
+<span id="cb5-589"><a href="#cb5-589"></a><span class="in">│&nbsp;&nbsp; └── vcd2df-manual.pdf</span></span>
+<span id="cb5-590"><a href="#cb5-590"></a><span class="in">├── vcd2df_1.0.1.tar.gz</span></span>
+<span id="cb5-591"><a href="#cb5-591"></a><span class="in">└── vignettes</span></span>
+<span id="cb5-592"><a href="#cb5-592"></a><span class="in">    └── index.qmd</span></span>
+<span id="cb5-593"><a href="#cb5-593"></a><span class="in">```</span></span>
+<span id="cb5-594"><a href="#cb5-594"></a></span>
+<span id="cb5-595"><a href="#cb5-595"></a><span class="fu"># Final</span></span>
+<span id="cb5-596"><a href="#cb5-596"></a></span>
+<span id="cb5-597"><a href="#cb5-597"></a><span class="ss">- </span>**Implement Minimal `git` in Rust**</span>
+<span id="cb5-598"><a href="#cb5-598"></a><span class="ss">  - </span>Must be *self-hosted* - able to track versions of itself.</span>
+<span id="cb5-599"><a href="#cb5-599"></a>  </span>
+<span id="cb5-600"><a href="#cb5-600"></a><span class="fu"># On `vim`</span></span>
+<span id="cb5-601"><a href="#cb5-601"></a></span>
+<span id="cb5-602"><a href="#cb5-602"></a><span class="fu">## Vim</span></span>
+<span id="cb5-603"><a href="#cb5-603"></a></span>
+<span id="cb5-604"><a href="#cb5-604"></a><span class="ss">- </span>You should use <span class="in">`vim`</span> or another console-based editor as a component of your learning in this class.</span>
+<span id="cb5-605"><a href="#cb5-605"></a><span class="ss">- </span>This will not be assessed (how can it be) but will *likely* be expected in a non-trivial subset of settings this course material will be useful.</span>
+<span id="cb5-606"><a href="#cb5-606"></a><span class="ss">- </span>I will live-code in either <span class="in">`vim`</span> or <span class="in">`helix`</span></span>
+<span id="cb5-607"><a href="#cb5-607"></a></span>
+<span id="cb5-608"><a href="#cb5-608"></a><span class="fu"># Fin</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
