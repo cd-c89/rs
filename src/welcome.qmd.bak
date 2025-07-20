@@ -1,0 +1,518 @@
+---
+title: Welcome
+---
+
+## Announcements
+
+- **Welcome** to Systems in Rust
+  - What is in point of fact a systems cryptography course.
+  - But it's in Rust so you have to take it.
+- **Action Items**:
+  - Access the [course webpage](https://cd-c89.github.io/rs/)
+  - Join the Discord!
+    - You should have gotten an email...
+  - Set up Linux/Rust/Git.
+
+## Homework
+
+- The first homework, "Hello", is ready after this class.
+  - It is comically trivial.
+  - Mostly makes sure you have everything set up.
+- Due Friday, 1 Sept. at 1440 ET.
+
+## Today
+
+- Logistics
+- On Systems
+- On Rust
+- On Git
+- Course Sketch
+
+# Logistics
+
+## It me
+
+- **Name** 
+  - (Prof. )?Calvin
+- **Credentials**
+  - B.A. Mathematics
+  - B.S., M.S., Ph.D. Computer Science
+- **Pronouns** 
+  - they/them 
+
+## The Great Work
+
+- Thesis Title
+  - Mining Secure Behavior of Hardware Designs 
+- Plain English
+  - Just as there are bugs in code that makes software, modern hardware is also written in code and therefore may contain bugs. I find these bugs. 
+
+## Course Format
+
+- Lecture Monday
+- Lab Wednesday
+- Homework due Friday
+- In-class midterm week of 10/06
+- Final project due whenever the final is scheduled.
+
+## Ungrading++
+
+- Your voices have been heard:
+
+> I think failing my systems class was the best thing that happened to me.
+
+> This course demanded strong self-motivation due to its lax grading standards, which I did not bring to the table. Thus, I didn't learn as much as I might've if grading mattered more.
+
+## Proposal
+
+- I will offer two option
+    - Ungrading
+    - Specification Grading
+- Vote as a class (anonymously)
+- I update syllabus before add/drop ends.
+
+## 1. Ungrading
+
+- I provide autograders for all assignments except final.
+    - Or a reference solution with a rubric, if automated testing is too weird.
+    - I will have a final reference solution but will at most share snippets individually.
+- You do whatever you want.
+- Enrolled students get an A.
+
+## 2. Specification Grading
+
+- All the rage. I was never fan but tell me what you think.
+- Basically, I will assign some stuff but you don't have to do all of it perfectly.
+    - No partial credit, everything is yes/no grading.
+- I took distributions over final, midterm, and Lab/HW
+
+## It pays to get A's
+
+|Grade|Requirements|
+|:----------:|------|
+|A|Final meets spec|
+|A|90% ave HW/Lab/Midterm, Final compiles|
+|A-|90% ave HW/Lab, Midterm/Final compile|
+|A-|Midterm meets spec, Final compiles|
+
+## But B's are the Knees
+
+|Grade|Requirements|
+|:----------:|------|
+|B+|90% ave HW/Lab, Midterm compiles|
+|B| 80% ave HW/Lab, Midterm compiles|
+|B-|80% ave HW/Lab|
+
+## These may (???) earn degrees
+
+|Grade|Requirements|
+|:----------:|------|
+|C|80% ave Lab|
+|D|60% ave Lab|
+|F|Anything else|
+
+## Lab Grading
+
+- A (=100%)
+    - Meets spec by end of class
+- B (=90%)
+    - Compiles at end of class
+        - Can be turned into an executable.
+- F (=0%)
+    - Anything else
+    
+## HW Grading
+
+- A (=100%)
+    - On time
+    - Passes autograder.
+- B (=90%)
+    - On time
+    - Compiles
+        - Can be turned into an executable.
+- F (=0%)
+    - Anything else
+    
+## Final
+
+- Create, document, and publish a self-hosting version control system.
+- Entire codebase in Rust.
+- Minimum specifications:
+    - Support nested directory structures.
+    - Support text-based files (.rs, .py, .txt)
+    - Allow reverting to named changes (commits).
+    - Completed by you and at most a partner.
+    
+## Late Work Policy
+
+- Late work is not accepted.
+    - Turning in anything at all for on 90% of assignments yields B.
+    - Miss 100% of assignments and midterm but do the final for an A.
+
+## AI Policy
+
+- I would be shocked if it is helpful to you.
+- If you think it is helpful, that is probably not a good sign.
+- You can use it (I wouldn't)
+
+## Collaboration Policy
+
+- Non-final:
+    - Any size group via enthusiastic consent.
+    - Turn in your own code/copy.
+- Final:
+    - Partners via enthusiastic consent.
+    - Turn in your own code/copy.
+
+## Vote
+
+- If there's not a Forms link here I should add one quickly.
+
+# On Systems
+
+## The Hard Part
+
+- After ~10 years of systems research I've convinced myself [only two things](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/) really matter:
+
+  - Pointers, and
+  - Recursion 
+
+- Recursion isn't too bad... 
+
+```py
+>>> exp = lambda b, n : b if n == 1 else b*exp(b,n-1)
+>>> exp(2,8)
+256
+```
+
+## Pointers
+
+- Pointers are a beast, but without them nothing makes sense! 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```py
+>>> x = 1
+>>> def addx():
+...     x += 1
+...
+>>> addx()
+UnboundLocalError:
+<blah blah blah error messages>
+```
+::: 
+
+::: {.column width="50%"}
+
+```py
+>>> x = [1]
+>>> def addx():
+...     x[0] += 1
+...
+>>> addx()
+>>> x
+[2]
+```
+:::
+
+::::
+
+## Insight
+
+- **Definition:**
+  - Pointers: Variables that store memory addresses.
+  - Recursion: Functions calling themselves to solve sub-problems.
+- **Importance:**
+  - Core to efficient algorithms and memory management in low-level programming.
+
+## Python and Pointers
+
+- **Why not .py (.js, .java, .cs, .cpp, etc)?**
+  - These languages _abstract_ memory.
+  - This abstraction makes computation **unclear**
+  - This lack of clarity:
+    - Adversely impacts education
+    - Complicates low-level design
+    - Leads to low performance
+  - Good languages (except Java) but not for us
+
+# On Rust
+
+## Rust and Pointers
+
+- Rust:
+    - Obscures pointers, but...
+    - *Does not* obscure memory.
+- This is good!
+    - Memory matters, but pointers are historical accident.
+- You should probably use Rust in every application where correctness or performance matters.
+
+## Rust and Recursion
+
+- Separately, Rust is built on one of the most exciting ongoing computer science research efforts:
+- **LLVM** (stands for LLVM)
+- Basically, a way of turning human-readable code into machine-executable code.
+    - Very good at turning recursion into iteration and/or vice versa.
+- So Rust experiences less costs on recursion than many other languages.
+
+# On Git
+
+## Git
+
+- If you don't know `git`, you should soon.
+- Git corresponds, like the others, to a command: `git`
+  - It is common now to use other techniques, but the command remains extremely **stable**
+- Quoth GitHub, the first and greatest of the collaboration tools:
+
+> If you want a lot of control and flexibility, you can use the command line.[https://docs.github.com/en/get-started/using-github/connecting-to-github]
+
+
+## Git Example
+
+- So basically, you have things called repositories or "repos"
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(My ️‍🔥 code repo)
+```
+
+## Git Example
+
+- Then you realize you wrote an infinite loop so you update it
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(My ️‍🔥 code repo v0 ) --> B(My ️‍🔥 code repo v1)
+```
+
+## Git Example
+
+- Then you come to class and realize your code is on your gaming rig in your apartment.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(<s>My ️‍🔥 code repo v0</s>) --> B(<s>My ️‍🔥 code repo v1</s>)
+```
+
+## Git Example
+
+- So you save your code on GitHub
+  - GH = GitHub, GR = Gaming Rig
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GH.‍🔥 v0)
+```
+
+## Git Example
+
+- But you realize you didn't sanitize your inputs so you update again.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+```
+
+## Git Example
+
+- Then you have class again and grab the GitHub version onto your LT = Laptop
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+```
+
+## Git Example
+
+- You notice it has the bug so you fix it again on your laptop in almost the same way
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+```
+
+## Git Example
+
+- And save that back to GitHub then head back home to play Nethack on your 12000USD Gaming PC
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+```
+
+## Git Example
+
+- You realize you also added some ASCII art and try to send that to GitHub
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H(GH.‍🔥 v2)
+  C --> H
+```
+
+## Git Example
+
+- Two arrows into one thing is a merge conflict and out-of-scope for now.
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H{💥}
+  C --> H
+```
+
+## Git Example
+
+- Basically versions of code can live in more than one place.
+  - Ah, versions, our old friend...
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(GR.️‍🔥 v0) --> B(GR.️‍🔥 v1)
+  B --> C(GR.️‍🔥 v2)
+  B --> D(GH.‍🔥 v0)
+  D --> E(LT.‍🔥 v0)
+  E --> F(LT.‍🔥 v1)
+  F --> G(GH.‍🔥 v1)
+  G --> H{💥}
+  C --> H
+```
+
+# In Brief
+
+- Generally create repositories + tokens in browser on GitHub
+- Use command line to configure a repository.
+- Authenticate via access token from browser
+- Then use 'git add', 'git commit', 'git push' to save work
+- Use 'git pull' to grab saved work
+- Use a ".gitignore" file so only code (**NOT** executables) live on GitHub
+
+# Course Sketch
+
+## Visually
+
+
+```{dot}
+%%| theme: Darkly
+flowchart LR
+  B(Wordle)
+  B --> C(SHA512)
+  C --> D(Ed25519)
+  B --> F(Graphs)
+  C --> H(Merkle)
+  F --> H
+  F --> G(LCS)
+  H --> I(VCS)
+  G --> I
+  D --> I
+```
+
+- LCS = Longest common subsequence, like `diff`
+- VCS = Version Control System, like `git`
+
+## SHA
+
+- **SHA Basics:**
+  - Cryptographic hash function family.
+  - Input data into fixed-size hash values.
+- **Use Cases:**
+  - Data integrity.
+- **Learning Objectives:**
+  - Reason about bits and bytes.
+
+## Ed25519
+
+- **Ed25519 Basics:**
+    - Public-key signature system.
+    - Based on elliptic curve cryptography (specifically, Edwards curves).
+    - Uses SHA-512 and Curve25519.
+- **Use Cases:**
+    - Confidentiality and authentication.
+- **Learning Objectives:**
+    - Reason about numerical computing.
+
+## Graphs
+
+- Introduce graphs as a way to:
+    - Organize files
+    - Compare files
+    - Track changes.
+   
+  
+## Longest Common Subsequence (LCS)
+
+- **LCS Basics:**
+    - A classic problem in computer science.
+    - Finds the longest sequence of characters that appears in the same relative order in two or more sequences, but not necessarily contiguously.
+    - Often solved using dynamic programming.
+- **Use Cases:**
+    - File comparison (e.g., `diff` utility).
+- **Learning Objectives:**
+    - Understand and apply dynamic programming techniques.
+    - Linear data structure.
+
+##  Merkle Trees
+
+- **Merkle Trees:**
+  - Tree structure using SHA for data integrity.
+  - Hashes stored as nodes; pointers link them.
+  - Leaf nodes are RSA signatures!
+- Merkle Trees are **balanced**
+  - Hierarchical data structure embedded in linear data structure.
+  
+## File System
+
+- The file system a tree that cannot (easily) be embedded in a linear data structure.
+
+# Final
+
+- **Implement Minimal `git` in Rust**
+  - Must be *self-hosted* - able to track versions of itself.
+  
+# On `vim`
+
+## Vim
+
+- You should use `vim` or another console-based editor as a component of your learning in this class.
+- This will not be assessed (how can it be) but will *likely* be expected in a non-trivial subset of settings this course material will be useful.
+- I will live-code in either `vim` or `helix`
+
+# Fin
