@@ -31,7 +31,7 @@ format: html
 
 |Week|Date (M)|Lecture (M)|Lab (W)|HW (F)|
 |:--:|:---|:----|:-------|:-------|
-|0x0|08/25|Welcome|Rustup|Hi world|
+|0x0|08/25|[Welcome](00_welcome.qmd)|[Rustup](01_rustup.md)|Hi world|
 |0x1|09/01|*Off*|Cargo|Hi cargo|
 |0x2|09/08|Options|Guess|Wordle|
 |0x3|09/15|Bits|Hamming|Sigmas|

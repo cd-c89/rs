@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Systems in Rust",
-    "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nOff\nCargo\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
-  },
-  {
     "objectID": "00_welcome.html",
     "href": "00_welcome.html",
     "title": "Welcome",
@@ -799,76 +792,6 @@
     "text": "Vim\n\nYou should use vim or another console-based editor as a component of your learning in this class.\nThis will not be assessed (how can it be) but will likely be expected in a non-trivial subset of settings this course material will be useful.\nI will live-code in either vim or helix"
   },
   {
-    "objectID": "01_rustup.rjs.html#announcements",
-    "href": "01_rustup.rjs.html#announcements",
-    "title": "Rustup",
-    "section": "Announcements",
-    "text": "Announcements\n\nLab Day\n\nSet up environment"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#homework",
-    "href": "01_rustup.rjs.html#homework",
-    "title": "Rustup",
-    "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
-  },
-  {
-    "objectID": "01_rustup.rjs.html#today",
-    "href": "01_rustup.rjs.html#today",
-    "title": "Rustup",
-    "section": "Today",
-    "text": "Today\n\nSet up your operating system, if it is not UNIX-based.\nInstall Rust.\nInstall Git\nBonus!\n\nInstall Vim, Neovim, or Helix."
-  },
-  {
-    "objectID": "01_rustup.rjs.html#windows",
-    "href": "01_rustup.rjs.html#windows",
-    "title": "Rustup",
-    "section": "Windows",
-    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#macos",
-    "href": "01_rustup.rjs.html#macos",
-    "title": "Rustup",
-    "section": "MacOS",
-    "text": "MacOS\n\nMacOS should mostly work out-of-the-box.\nYou need one thing: XCode"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#rustup",
-    "href": "01_rustup.rjs.html#rustup",
-    "title": "Rustup",
-    "section": "Rustup",
-    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#verify",
-    "href": "01_rustup.rjs.html#verify",
-    "title": "Rustup",
-    "section": "Verify",
-    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#git-installation",
-    "href": "01_rustup.rjs.html#git-installation",
-    "title": "Rustup",
-    "section": "Git Installation",
-    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#verify-1",
-    "href": "01_rustup.rjs.html#verify-1",
-    "title": "Rustup",
-    "section": "Verify",
-    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1"
-  },
-  {
-    "objectID": "01_rustup.rjs.html#account",
-    "href": "01_rustup.rjs.html#account",
-    "title": "Rustup",
-    "section": "Account",
-    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More"
-  },
-  {
     "objectID": "01_rustup.html",
     "href": "01_rustup.html",
     "title": "Rustup",
@@ -913,17 +836,7 @@
     "href": "01_rustup.html#windows",
     "title": "Rustup",
     "section": "Windows",
-    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)\n\n\n\n\nWSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter\nType wsl\n\n\n\n\n\n\nDocker or Podman\n\nBoth will require WSL 2, but install for you\nDocker has better Windows support, I believe Podman is seeing more use.\nFollow this guide.\nNotes:\n\nUse WSL 2 backend.\nYou are responsible for teaching yourself containers.\nSlides for last year.\n\n\n\n\n\nGit Bash\n\nI have set up guide for Git Bash for another course\nThis seemed like it could work. I won’t be checking.\n\n\n\n\nCygwin\n\nI have no idea how Cygwin works but it’s pretty cool.\nBasically no longer in use due to WSL 2 and Docker.\nFollow this guide",
-    "crumbs": [
-      "Rustup"
-    ]
-  },
-  {
-    "objectID": "01_rustup.html#macos",
-    "href": "01_rustup.html#macos",
-    "title": "Rustup",
-    "section": "MacOS",
-    "text": "MacOS\n\nMacOS should mostly work out-of-the-box.\nYou need one thing: XCode",
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)\n\n\n\n\nWSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter -&gt; wsl\n\n\n\n\n\n\nDocker or Podman\n\nBoth will require WSL 2, but install for you\nDocker has better Windows support, I believe Podman is seeing more use.\nFollow this guide.\nNotes:\n\nUse WSL 2 backend.\nYou are responsible for teaching yourself containers.\nSlides for last year.\n\n\n\n\n\nGit Bash\n\nI have set up guide for Git Bash for another course\nThis seemed like it could work. I won’t be checking.\n\n\n\n\nCygwin\n\nI have no idea how Cygwin works but it’s pretty cool.\nBasically no longer in use due to WSL 2 and Docker.\nFollow this guide",
     "crumbs": [
       "Rustup"
     ]
@@ -977,5 +890,755 @@
     "crumbs": [
       "Rustup"
     ]
+  },
+  {
+    "objectID": "01_rustup.html#repository",
+    "href": "01_rustup.html#repository",
+    "title": "Rustup",
+    "section": "Repository",
+    "text": "Repository\n\nCreate a repository for this class.\nRequirements\n\nName is 271rs\nUse this template\nMay be public or private to you and me (cd-public).\n\nRead more\n\nMust email me a link to your repository from your @willamette.edu email.\n\nhttps://github.com/cd-example/271rs",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#remote",
+    "href": "01_rustup.html#remote",
+    "title": "Rustup",
+    "section": "Remote",
+    "text": "Remote\n\nWe have now created a remote repository on GitHub.\n\nRemote as in “not on our computer we are using right now”\nAs in “on a web server somewhere”\n\nNo we will make a local repository on our own computer.\nThen connect them!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#security-concession",
+    "href": "01_rustup.html#security-concession",
+    "title": "Rustup",
+    "section": "Security Concession",
+    "text": "Security Concession\n\nWe will use SSH, the “Secure Shell Protocol”\nIt is supported by git/GitHub and all major operating systems.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#keygen",
+    "href": "01_rustup.html#keygen",
+    "title": "Rustup",
+    "section": "Keygen",
+    "text": "Keygen\n\nSSH is based around having “keys”\n\nUnder the hood, these are special numbers with special properties related to primes, basically.\n\nWe generate a special unique key we can use as a password or signature.\n\nssh-keygen",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#prompts",
+    "href": "01_rustup.html#prompts",
+    "title": "Rustup",
+    "section": "Prompts",
+    "text": "Prompts\n\nThis example uses (1) the default location and (2) no passphrase.\n\nThis is less secure but easier to manage.\nWork in a passphrase as soon as you can!\n\n\nGenerating public/private ed25519 key pair.\nEnter file in which to save the key (/home/calvin/.ssh/id_ed25519): \nEnter passphrase (empty for no passphrase): \nEnter same passphrase again: \nYour identification has been saved in /home/calvin/.ssh/id_ed25519\n$ cat ~/.ssh/id_ed25519.pub \nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490\n\nYou now have a key! Let’s find a lock.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#github-1",
+    "href": "01_rustup.html#github-1",
+    "title": "Rustup",
+    "section": "GitHub",
+    "text": "GitHub\n\nThe purpose of this exercise is to connect to GitHub!\nWe will mostly use git for that, but we can check if we have a connection easily:\n\nssh -T git@github.com\n\nRead more",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#example",
+    "href": "01_rustup.html#example",
+    "title": "Rustup",
+    "section": "Example",
+    "text": "Example\n\nThis is what I see:\n\nThe authenticity of host 'github.com (140.82.116.3)' can't be established.\nED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.\nThis key is not known by any other names.\nAre you sure you want to continue connecting (yes/no/[fingerprint])?\n\nBefore saying “yes” or “no” compare versus the “public SSH key fingerprints”\n\nCheck them here\n\nBy default, the modern keygen uses “Ed25519” so compare those keys, and click “yes” if they match!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#connecting",
+    "href": "01_rustup.html#connecting",
+    "title": "Rustup",
+    "section": "Connecting",
+    "text": "Connecting\n\nAfter confirming the key correctness, you will likely see this.\n\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nWarning: Permanently added 'github.com' (ED25519) to the list of known hosts.\ngit@github.com: Permission denied (publickey).",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#one-way",
+    "href": "01_rustup.html#one-way",
+    "title": "Rustup",
+    "section": "One Way",
+    "text": "One Way\n\nNow we have instructed our computer to trust GitHub.\nTo save our code to GitHub, we must also get GitHub to trust our computer.\nWe generated our key, now we must match it to our lock on GitHub!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#github-pt-1",
+    "href": "01_rustup.html#github-pt-1",
+    "title": "Rustup",
+    "section": "GitHub pt 1",
+    "text": "GitHub pt 1\n\nWe follow this guide\nReturn to GitHub and in the top right click your profile.\n\nFor me, a picture of myself.\n\nScroll down to “Settings” and click.\n\nLast in 2nd grouping, for me.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#github-pt-2",
+    "href": "01_rustup.html#github-pt-2",
+    "title": "Rustup",
+    "section": "GitHub pt 2",
+    "text": "GitHub pt 2\n\nWithin settings left-side menu click “SSH and GPG keys”\n\nMiddle of 2nd group (Access) for me.\n\nWithin the center block click New SSH key in the top right of the block.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#prompt",
+    "href": "01_rustup.html#prompt",
+    "title": "Rustup",
+    "section": "Prompt",
+    "text": "Prompt\n\nI get a page “Add new SSH Key”.\nI provide a title (like “For 271rs class” or “Laptop”)\nNow we’ll get our key from our system to use.\nRecall we previously generated a key to the default location, like /home/calvin/.ssh/id_ed25519\n\nIf you don’t remember, just type ssh-keygen and it’ll show you.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#copypaste",
+    "href": "01_rustup.html#copypaste",
+    "title": "Rustup",
+    "section": "Copy/Paste",
+    "text": "Copy/Paste\n\nTo get the key for GitHub, we can can\n\ncat that file in the command line\nCopy from the command line\nPaste into the GitHub “Key” field\nClick Add SSH key",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#ssh-test",
+    "href": "01_rustup.html#ssh-test",
+    "title": "Rustup",
+    "section": "SSH Test",
+    "text": "SSH Test\n\nAfter adding the key to the account, I confirm via SSH like so:\n\nssh -T git@github.com\n\nI see the following:\n\nHi cd-public! You've successfully authenticated, but GitHub does not provide shell access.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#clone-pt1",
+    "href": "01_rustup.html#clone-pt1",
+    "title": "Rustup",
+    "section": "Clone pt1",
+    "text": "Clone pt1\n\nNavigate to the repository webpage, like github.com/cd-example/271rs\nFind the &lt;&gt; Code button in the top right.\nClick it:\n\nSelect the top “local” tab (for or local repository)\nSelect the SSH option (for our SSH key)\nCopy the name, like\n\n\n\ngit@github.com:cd-example/271rs",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#clone-pt2",
+    "href": "01_rustup.html#clone-pt2",
+    "title": "Rustup",
+    "section": "Clone pt2",
+    "text": "Clone pt2\n\nWithin terminal, where you keep files for this class.\n\nProbably just do\n\ncd ~\ngit clone git@github.com:cd-example/271rs \nVerify by listing the contents of the 271rs directory via:\n\nls 271rs\n\nYou should see a README.md and a LICENSE",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#enter-the-repository",
+    "href": "01_rustup.html#enter-the-repository",
+    "title": "Rustup",
+    "section": "Enter the Repository",
+    "text": "Enter the Repository\n\nTo change the directory within which you are working in the commandline from your home to the repository for this class, do:\n\ncd 271rs\n\nVerify the change via\n\npwd\n\nThis will give the full address of your class folder, ending in 271rs",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#today-1",
+    "href": "01_rustup.html#today-1",
+    "title": "Rustup",
+    "section": "Today",
+    "text": "Today\n\nTo complete the lab today, add a 01/rustup.md file to your 271rs\nSend me a link to a 271rs repository I have permission to view.\n\nTo be clear:\n\nI must receive an email with a hyperlink to a GitHub repository.\nI must have view access to public repository or a repository on which I am added as a collaborator.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#names-matter",
+    "href": "01_rustup.html#names-matter",
+    "title": "Rustup",
+    "section": "Names Matter",
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#file-editor",
+    "href": "01_rustup.html#file-editor",
+    "title": "Rustup",
+    "section": "File Editor",
+    "text": "File Editor\n\nLet’s make a new file.\nI recommend using vim, neovim, or helix.\nProbably already have it on MacOS.\nOn WSL install via\n\nsudo apt install vim",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#file-editting",
+    "href": "01_rustup.html#file-editting",
+    "title": "Rustup",
+    "section": "File Editting",
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1 ```{.bash} vim 01/rustup.md",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#using-vim",
+    "href": "01_rustup.html#using-vim",
+    "title": "Rustup",
+    "section": "Using vim",
+    "text": "Using vim\n\nThere’s more to life that using vim but basically:\n\nPress i to enter “insert mode” (so you can type)\nWhen you are done typing, press ESC then type :x to save and exit.\nRead more\n\nJust type some notes you have from today.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#check-status",
+    "href": "01_rustup.html#check-status",
+    "title": "Rustup",
+    "section": "Check Status",
+    "text": "Check Status\n\nYou have now added a new file to your repository.\nI consult status often, yours will likely look like this:\n\nOn branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        01/rustup.md\n\nnothing added to commit but untracked files present (use \"git add\" to track)",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#add",
+    "href": "01_rustup.html#add",
+    "title": "Rustup",
+    "section": "Add",
+    "text": "Add\n\nThe first thing we not is that there are “Untracked files”\nWhile we made a hello.py and have it in our hello-world directory, it isn’t yet “tracked” by git!\nBy default, git only keeps track of what we tell it to!\nSo, we tell it to track our code!\n\ngit add 01/rustup.md",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#status",
+    "href": "01_rustup.html#status",
+    "title": "Rustup",
+    "section": "Status",
+    "text": "Status\n\nI check status again\n\nOn branch master\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached &lt;file&gt;...\" to unstage)\n        new file:   01_rustup.md",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#commit",
+    "href": "01_rustup.html#commit",
+    "title": "Rustup",
+    "section": "Commit",
+    "text": "Commit\n\nWith git now aware of hello.py, we need to commit or changes for git to save them.\n\nSimilar to saving files to the file system.\nThere are, of course, ways to automate this.\n\nThis probably won’t work at first (next slide!) but try:\n\ngit commit -a -m \"first commit\"",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#a--m",
+    "href": "01_rustup.html#a--m",
+    "title": "Rustup",
+    "section": "“-a -m”",
+    "text": "“-a -m”\n\nCommits require a commit message (like a version name or number) so specify with -m\nUsually I provide -a to commit “all” files.\nI usually make some effort to make my life easier with specific commit messages, perhaps listing:\n\nWhat I’m trying to do\nWhy?",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#config",
+    "href": "01_rustup.html#config",
+    "title": "Rustup",
+    "section": "Config",
+    "text": "Config\n\nIf you haven’t used git on your system before, you’ll have to tell git who you are.\n\nIn git there are no anonymous changes - you have to sign every change you make.\n\nYou’ll be prompted to provide something like this:\n\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#my-name",
+    "href": "01_rustup.html#my-name",
+    "title": "Rustup",
+    "section": "My name",
+    "text": "My name\n\nI often include which computer I’m using in my name and also don’t use a real email address.\n\nMy GitHub account is already attached to an email address, so I use a throwaway for commits.\n\n\ngit config --global user.email \"prof_calvin@c89&gt;rs.edu\"\ngit config --global user.name \"Calvin for Class\"",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#looping-back",
+    "href": "01_rustup.html#looping-back",
+    "title": "Rustup",
+    "section": "Looping Back",
+    "text": "Looping Back\n\nOnce you have provided your identity, you can successfuly complete a commit.\n\ngit commit -a -m \"first commit\"\n\nThis will:\n\nMark current code as a version, named by your commit message.\n\nThis won’t:\n\nDo anything to GitHub.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#push",
+    "href": "01_rustup.html#push",
+    "title": "Rustup",
+    "section": "Push",
+    "text": "Push\n\nA commit saves changing on your computer.\nTo save on GitHub, push changes to the cloud\n\ngit push\n\nAfter a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#diagnostics",
+    "href": "01_rustup.html#diagnostics",
+    "title": "Rustup",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nFor example, you might see the following:\n\nEnumerating objects: 27, done.\nCounting objects: 100% (27/27), done.\nDelta compression using up to 22 threads\nCompressing objects: 100% (15/15), done.\nWriting objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.\nTotal 16 (delta 11), reused 0 (delta 0), pack-reused 0\nremote: Resolving deltas: 100% (11/11), completed with 10 local objects.\nTo github.com:cd-example/271rs.git\n   adaa3a7..ba3c794  main -&gt; main",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#verify-2",
+    "href": "01_rustup.html#verify-2",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nEnsure you have a 01/rustup.md\nEmail me.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#easier-after",
+    "href": "01_rustup.html#easier-after",
+    "title": "Rustup",
+    "section": "Easier After",
+    "text": "Easier After\n\nA lot of what we did, we only have to do once:\n\ngit config\nssh-keygen\nset origin\n\nMany are special cases:\n\nOnly have to make new repositories for… new repositories (likely projects)\nOnly have to git add for new files.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#quick-example",
+    "href": "01_rustup.html#quick-example",
+    "title": "Rustup",
+    "section": "Quick Example",
+    "text": "Quick Example\n\nLet’s add 02/hi_world.rs\nWe’ll create a new file at the command line.\n\nvim 02/hi_world.rs\n\nAdd any text\n\n\n\nhi_world.rs\n\nWait I don't know rust yet.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#add-commit-push",
+    "href": "01_rustup.html#add-commit-push",
+    "title": "Rustup",
+    "section": "Add, Commit, Push",
+    "text": "Add, Commit, Push\n\nTo get the code onto Github, add to the repo:\n\ngit add hi_world.rs \n\nCommit changes to a version:\n\ngit commit -a -m \"You say hello, I say goodbye\"\n\nPush to GitHub\n\ngit push\n\nAnd that’s that!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#altogether",
+    "href": "01_rustup.html#altogether",
+    "title": "Rustup",
+    "section": "Altogether",
+    "text": "Altogether\n\nFor a single copy/paste\n\ngit add bye.py\ngit commit -a -m \"You say hello, I say goodbye\"\ngit push\n\nIf it works, you’ll see the change on GitHub!",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#again",
+    "href": "01_rustup.html#again",
+    "title": "Rustup",
+    "section": "Again",
+    "text": "Again\n\nPerhaps we wish to be more correct with a well-formed Rust comment.\n\n\n\nbye.py\n\n// TODO: Homework 0 \n\n\nWe’ll learn Rust latter.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#no-add",
+    "href": "01_rustup.html#no-add",
+    "title": "Rustup",
+    "section": "No Add",
+    "text": "No Add\n\nDon’t need an add this time!\n\ngit commit -a -m \"Rust comment\"\ngit push",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.html#pulling",
+    "href": "01_rustup.html#pulling",
+    "title": "Rustup",
+    "section": "Pulling",
+    "text": "Pulling\n\nTo get remote changes reflected locally, simply use\n\ngit pull\n\nThis will be how assignment feedback is distributed.\nJust git pull every time you start working, basically.\nAlso good when you are working on multiple devices.",
+    "crumbs": [
+      "Rustup"
+    ]
+  },
+  {
+    "objectID": "01_rustup.rjs.html#announcements",
+    "href": "01_rustup.rjs.html#announcements",
+    "title": "Rustup",
+    "section": "Announcements",
+    "text": "Announcements\n\nLab Day\n\nSet up environment"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#homework",
+    "href": "01_rustup.rjs.html#homework",
+    "title": "Rustup",
+    "section": "Homework",
+    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#today",
+    "href": "01_rustup.rjs.html#today",
+    "title": "Rustup",
+    "section": "Today",
+    "text": "Today\n\nSet up your operating system, if it is not UNIX-based.\nInstall Rust.\nInstall Git\nBonus!\n\nInstall Vim, Neovim, or Helix."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#windows",
+    "href": "01_rustup.rjs.html#windows",
+    "title": "Rustup",
+    "section": "Windows",
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#rustup",
+    "href": "01_rustup.rjs.html#rustup",
+    "title": "Rustup",
+    "section": "Rustup",
+    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#verify",
+    "href": "01_rustup.rjs.html#verify",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#git-installation",
+    "href": "01_rustup.rjs.html#git-installation",
+    "title": "Rustup",
+    "section": "Git Installation",
+    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#verify-1",
+    "href": "01_rustup.rjs.html#verify-1",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#account",
+    "href": "01_rustup.rjs.html#account",
+    "title": "Rustup",
+    "section": "Account",
+    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#repository",
+    "href": "01_rustup.rjs.html#repository",
+    "title": "Rustup",
+    "section": "Repository",
+    "text": "Repository\n\nCreate a repository for this class.\nRequirements\n\nName is 271rs\nUse this template\nMay be public or private to you and me (cd-public).\n\nRead more\n\nMust email me a link to your repository from your @willamette.edu email.\n\nhttps://github.com/cd-example/271rs"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#remote",
+    "href": "01_rustup.rjs.html#remote",
+    "title": "Rustup",
+    "section": "Remote",
+    "text": "Remote\n\nWe have now created a remote repository on GitHub.\n\nRemote as in “not on our computer we are using right now”\nAs in “on a web server somewhere”\n\nNo we will make a local repository on our own computer.\nThen connect them!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#security-concession",
+    "href": "01_rustup.rjs.html#security-concession",
+    "title": "Rustup",
+    "section": "Security Concession",
+    "text": "Security Concession\n\nWe will use SSH, the “Secure Shell Protocol”\nIt is supported by git/GitHub and all major operating systems."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#keygen",
+    "href": "01_rustup.rjs.html#keygen",
+    "title": "Rustup",
+    "section": "Keygen",
+    "text": "Keygen\n\nSSH is based around having “keys”\n\nUnder the hood, these are special numbers with special properties related to primes, basically.\n\nWe generate a special unique key we can use as a password or signature.\n\nssh-keygen"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#prompts",
+    "href": "01_rustup.rjs.html#prompts",
+    "title": "Rustup",
+    "section": "Prompts",
+    "text": "Prompts\n\nThis example uses (1) the default location and (2) no passphrase.\n\nThis is less secure but easier to manage.\nWork in a passphrase as soon as you can!\n\n\nGenerating public/private ed25519 key pair.\nEnter file in which to save the key (/home/calvin/.ssh/id_ed25519): \nEnter passphrase (empty for no passphrase): \nEnter same passphrase again: \nYour identification has been saved in /home/calvin/.ssh/id_ed25519\n$ cat ~/.ssh/id_ed25519.pub \nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490\n\nYou now have a key! Let’s find a lock."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#github-1",
+    "href": "01_rustup.rjs.html#github-1",
+    "title": "Rustup",
+    "section": "GitHub",
+    "text": "GitHub\n\nThe purpose of this exercise is to connect to GitHub!\nWe will mostly use git for that, but we can check if we have a connection easily:\n\nssh -T git@github.com\n\nRead more"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#example",
+    "href": "01_rustup.rjs.html#example",
+    "title": "Rustup",
+    "section": "Example",
+    "text": "Example\n\nThis is what I see:\n\nThe authenticity of host 'github.com (140.82.116.3)' can't be established.\nED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.\nThis key is not known by any other names.\nAre you sure you want to continue connecting (yes/no/[fingerprint])?\n\nBefore saying “yes” or “no” compare versus the “public SSH key fingerprints”\n\nCheck them here\n\nBy default, the modern keygen uses “Ed25519” so compare those keys, and click “yes” if they match!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#connecting",
+    "href": "01_rustup.rjs.html#connecting",
+    "title": "Rustup",
+    "section": "Connecting",
+    "text": "Connecting\n\nAfter confirming the key correctness, you will likely see this.\n\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nWarning: Permanently added 'github.com' (ED25519) to the list of known hosts.\ngit@github.com: Permission denied (publickey)."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#one-way",
+    "href": "01_rustup.rjs.html#one-way",
+    "title": "Rustup",
+    "section": "One Way",
+    "text": "One Way\n\nNow we have instructed our computer to trust GitHub.\nTo save our code to GitHub, we must also get GitHub to trust our computer.\nWe generated our key, now we must match it to our lock on GitHub!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#github-pt-1",
+    "href": "01_rustup.rjs.html#github-pt-1",
+    "title": "Rustup",
+    "section": "GitHub pt 1",
+    "text": "GitHub pt 1\n\nWe follow this guide\nReturn to GitHub and in the top right click your profile.\n\nFor me, a picture of myself.\n\nScroll down to “Settings” and click.\n\nLast in 2nd grouping, for me."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#github-pt-2",
+    "href": "01_rustup.rjs.html#github-pt-2",
+    "title": "Rustup",
+    "section": "GitHub pt 2",
+    "text": "GitHub pt 2\n\nWithin settings left-side menu click “SSH and GPG keys”\n\nMiddle of 2nd group (Access) for me.\n\nWithin the center block click New SSH key in the top right of the block."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#prompt",
+    "href": "01_rustup.rjs.html#prompt",
+    "title": "Rustup",
+    "section": "Prompt",
+    "text": "Prompt\n\nI get a page “Add new SSH Key”.\nI provide a title (like “For 271rs class” or “Laptop”)\nNow we’ll get our key from our system to use.\nRecall we previously generated a key to the default location, like /home/calvin/.ssh/id_ed25519\n\nIf you don’t remember, just type ssh-keygen and it’ll show you."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#copypaste",
+    "href": "01_rustup.rjs.html#copypaste",
+    "title": "Rustup",
+    "section": "Copy/Paste",
+    "text": "Copy/Paste\n\nTo get the key for GitHub, we can can\n\ncat that file in the command line\nCopy from the command line\nPaste into the GitHub “Key” field\nClick Add SSH key"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#ssh-test",
+    "href": "01_rustup.rjs.html#ssh-test",
+    "title": "Rustup",
+    "section": "SSH Test",
+    "text": "SSH Test\n\nAfter adding the key to the account, I confirm via SSH like so:\n\nssh -T git@github.com\n\nI see the following:\n\nHi cd-public! You've successfully authenticated, but GitHub does not provide shell access."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#clone-pt1",
+    "href": "01_rustup.rjs.html#clone-pt1",
+    "title": "Rustup",
+    "section": "Clone pt1",
+    "text": "Clone pt1\n\nNavigate to the repository webpage, like github.com/cd-example/271rs\nFind the &lt;&gt; Code button in the top right.\nClick it:\n\nSelect the top “local” tab (for or local repository)\nSelect the SSH option (for our SSH key)\nCopy the name, like\n\n\n\ngit@github.com:cd-example/271rs"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#clone-pt2",
+    "href": "01_rustup.rjs.html#clone-pt2",
+    "title": "Rustup",
+    "section": "Clone pt2",
+    "text": "Clone pt2\n\nWithin terminal, where you keep files for this class.\n\nProbably just do\n\ncd ~\ngit clone git@github.com:cd-example/271rs \nVerify by listing the contents of the 271rs directory via:\n\nls 271rs\n\nYou should see a README.md and a LICENSE"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#enter-the-repository",
+    "href": "01_rustup.rjs.html#enter-the-repository",
+    "title": "Rustup",
+    "section": "Enter the Repository",
+    "text": "Enter the Repository\n\nTo change the directory within which you are working in the commandline from your home to the repository for this class, do:\n\ncd 271rs\n\nVerify the change via\n\npwd\n\nThis will give the full address of your class folder, ending in 271rs"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#today-1",
+    "href": "01_rustup.rjs.html#today-1",
+    "title": "Rustup",
+    "section": "Today",
+    "text": "Today\n\nTo complete the lab today, add a 01/rustup.md file to your 271rs\nSend me a link to a 271rs repository I have permission to view.\n\nTo be clear:\n\nI must receive an email with a hyperlink to a GitHub repository.\nI must have view access to public repository or a repository on which I am added as a collaborator."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#names-matter",
+    "href": "01_rustup.rjs.html#names-matter",
+    "title": "Rustup",
+    "section": "Names Matter",
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#file-editor",
+    "href": "01_rustup.rjs.html#file-editor",
+    "title": "Rustup",
+    "section": "File Editor",
+    "text": "File Editor\n\nLet’s make a new file.\nI recommend using vim, neovim, or helix.\nProbably already have it on MacOS.\nOn WSL install via\n\nsudo apt install vim"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#file-editting",
+    "href": "01_rustup.rjs.html#file-editting",
+    "title": "Rustup",
+    "section": "File Editting",
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1 ```{.bash} vim 01/rustup.md"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#using-vim",
+    "href": "01_rustup.rjs.html#using-vim",
+    "title": "Rustup",
+    "section": "Using vim",
+    "text": "Using vim\n\nThere’s more to life that using vim but basically:\n\nPress i to enter “insert mode” (so you can type)\nWhen you are done typing, press ESC then type :x to save and exit.\nRead more\n\nJust type some notes you have from today."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#check-status",
+    "href": "01_rustup.rjs.html#check-status",
+    "title": "Rustup",
+    "section": "Check Status",
+    "text": "Check Status\n\nYou have now added a new file to your repository.\nI consult status often, yours will likely look like this:\n\nOn branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        01/rustup.md\n\nnothing added to commit but untracked files present (use \"git add\" to track)"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#add",
+    "href": "01_rustup.rjs.html#add",
+    "title": "Rustup",
+    "section": "Add",
+    "text": "Add\n\nThe first thing we not is that there are “Untracked files”\nWhile we made a hello.py and have it in our hello-world directory, it isn’t yet “tracked” by git!\nBy default, git only keeps track of what we tell it to!\nSo, we tell it to track our code!\n\ngit add 01/rustup.md"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#status",
+    "href": "01_rustup.rjs.html#status",
+    "title": "Rustup",
+    "section": "Status",
+    "text": "Status\n\nI check status again\n\nOn branch master\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached &lt;file&gt;...\" to unstage)\n        new file:   01_rustup.md"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#commit",
+    "href": "01_rustup.rjs.html#commit",
+    "title": "Rustup",
+    "section": "Commit",
+    "text": "Commit\n\nWith git now aware of hello.py, we need to commit or changes for git to save them.\n\nSimilar to saving files to the file system.\nThere are, of course, ways to automate this.\n\nThis probably won’t work at first (next slide!) but try:\n\ngit commit -a -m \"first commit\""
+  },
+  {
+    "objectID": "01_rustup.rjs.html#a--m",
+    "href": "01_rustup.rjs.html#a--m",
+    "title": "Rustup",
+    "section": "“-a -m”",
+    "text": "“-a -m”\n\nCommits require a commit message (like a version name or number) so specify with -m\nUsually I provide -a to commit “all” files.\nI usually make some effort to make my life easier with specific commit messages, perhaps listing:\n\nWhat I’m trying to do\nWhy?"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#config",
+    "href": "01_rustup.rjs.html#config",
+    "title": "Rustup",
+    "section": "Config",
+    "text": "Config\n\nIf you haven’t used git on your system before, you’ll have to tell git who you are.\n\nIn git there are no anonymous changes - you have to sign every change you make.\n\nYou’ll be prompted to provide something like this:\n\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\""
+  },
+  {
+    "objectID": "01_rustup.rjs.html#my-name",
+    "href": "01_rustup.rjs.html#my-name",
+    "title": "Rustup",
+    "section": "My name",
+    "text": "My name\n\nI often include which computer I’m using in my name and also don’t use a real email address.\n\nMy GitHub account is already attached to an email address, so I use a throwaway for commits.\n\n\ngit config --global user.email \"prof_calvin@c89&gt;rs.edu\"\ngit config --global user.name \"Calvin for Class\""
+  },
+  {
+    "objectID": "01_rustup.rjs.html#looping-back",
+    "href": "01_rustup.rjs.html#looping-back",
+    "title": "Rustup",
+    "section": "Looping Back",
+    "text": "Looping Back\n\nOnce you have provided your identity, you can successfuly complete a commit.\n\ngit commit -a -m \"first commit\"\n\nThis will:\n\nMark current code as a version, named by your commit message.\n\nThis won’t:\n\nDo anything to GitHub."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#push",
+    "href": "01_rustup.rjs.html#push",
+    "title": "Rustup",
+    "section": "Push",
+    "text": "Push\n\nA commit saves changing on your computer.\nTo save on GitHub, push changes to the cloud\n\ngit push\n\nAfter a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#diagnostics",
+    "href": "01_rustup.rjs.html#diagnostics",
+    "title": "Rustup",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nFor example, you might see the following:\n\nEnumerating objects: 27, done.\nCounting objects: 100% (27/27), done.\nDelta compression using up to 22 threads\nCompressing objects: 100% (15/15), done.\nWriting objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.\nTotal 16 (delta 11), reused 0 (delta 0), pack-reused 0\nremote: Resolving deltas: 100% (11/11), completed with 10 local objects.\nTo github.com:cd-example/271rs.git\n   adaa3a7..ba3c794  main -&gt; main"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#verify-2",
+    "href": "01_rustup.rjs.html#verify-2",
+    "title": "Rustup",
+    "section": "Verify",
+    "text": "Verify\n\nEnsure you have a 01/rustup.md\nEmail me."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#easier-after",
+    "href": "01_rustup.rjs.html#easier-after",
+    "title": "Rustup",
+    "section": "Easier After",
+    "text": "Easier After\n\nA lot of what we did, we only have to do once:\n\ngit config\nssh-keygen\nset origin\n\nMany are special cases:\n\nOnly have to make new repositories for… new repositories (likely projects)\nOnly have to git add for new files."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#quick-example",
+    "href": "01_rustup.rjs.html#quick-example",
+    "title": "Rustup",
+    "section": "Quick Example",
+    "text": "Quick Example\n\nLet’s add 02/hi_world.rs\nWe’ll create a new file at the command line.\n\nvim 02/hi_world.rs\n\nAdd any text\n\n\n\nhi_world.rs\n\nWait I don't know rust yet."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#add-commit-push",
+    "href": "01_rustup.rjs.html#add-commit-push",
+    "title": "Rustup",
+    "section": "Add, Commit, Push",
+    "text": "Add, Commit, Push\n\nTo get the code onto Github, add to the repo:\n\ngit add hi_world.rs \n\nCommit changes to a version:\n\ngit commit -a -m \"You say hello, I say goodbye\"\n\nPush to GitHub\n\ngit push\n\nAnd that’s that!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#altogether",
+    "href": "01_rustup.rjs.html#altogether",
+    "title": "Rustup",
+    "section": "Altogether",
+    "text": "Altogether\n\nFor a single copy/paste\n\ngit add bye.py\ngit commit -a -m \"You say hello, I say goodbye\"\ngit push\n\nIf it works, you’ll see the change on GitHub!"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#again",
+    "href": "01_rustup.rjs.html#again",
+    "title": "Rustup",
+    "section": "Again",
+    "text": "Again\n\nPerhaps we wish to be more correct with a well-formed Rust comment.\n\n\n\nbye.py\n\n// TODO: Homework 0 \n\n\nWe’ll learn Rust latter."
+  },
+  {
+    "objectID": "01_rustup.rjs.html#no-add",
+    "href": "01_rustup.rjs.html#no-add",
+    "title": "Rustup",
+    "section": "No Add",
+    "text": "No Add\n\nDon’t need an add this time!\n\ngit commit -a -m \"Rust comment\"\ngit push"
+  },
+  {
+    "objectID": "01_rustup.rjs.html#pulling",
+    "href": "01_rustup.rjs.html#pulling",
+    "title": "Rustup",
+    "section": "Pulling",
+    "text": "Pulling\n\nTo get remote changes reflected locally, simply use\n\ngit pull\n\nThis will be how assignment feedback is distributed.\nJust git pull every time you start working, basically.\nAlso good when you are working on multiple devices."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Systems in Rust",
+    "section": "",
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nOff\nCargo\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
   }
 ]
