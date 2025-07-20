@@ -612,3 +612,5 @@ git pull
 - This will be how assignment feedback is distributed.
 - Just `git pull` every time you start working, basically.
 - Also good when you are working on multiple devices.
+
+# Fin
