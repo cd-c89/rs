@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nOff\nCargo\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD |0x0|08/25|Welcome|Rustup|Hi world| ======= |0x0|08/25|Welcome|Rustup|Hi world| &gt;&gt;&gt;&gt;&gt;&gt;&gt; 88d5569f117a55a2960939684283dc3f8d56383e |0x1|09/01|Off|Cargo|Hi cargo| |0x2|09/08|Options|Guess|Wordle| |0x3|09/15|Bits|Hamming|Sigmas| |0x4|09/22|SHA2|Endian|Chunk| |0x5|09/29|IEEE754|Constants|SHA512| |0x6|10/06|Review|Midterm|Off| |0x7|10/13|BigInt|BigAdd|u512| |0x8|10/20|ECDSA|Python|ECDSA| |0x9|10/27|Stacks|List|Tree| |0xA|11/03|Graphs|BFS|Djikstra| |0xB|11/10|Merkle||| |0xC|11/17|VCS|| |0xD|11/24|Spectre|Off| |0xE|11/24|Meltdown|Hypers|VCS.rs|\nThink I need string edit distance or patches somewhere.\nHamming teases it at least."
   },
   {
     "objectID": "02_hiworld.html",
@@ -1152,14 +1152,14 @@
     "href": "01_rustup.rjs.html#names-matter",
     "title": "Rustup",
     "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant."
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant. &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD"
   },
   {
     "objectID": "01_rustup.rjs.html#useful-commands",
     "href": "01_rustup.rjs.html#useful-commands",
     "title": "Rustup",
     "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here"
+    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here\n\n\n\n\n\n\n\n88d5569f117a55a2960939684283dc3f8d56383e"
   },
   {
     "objectID": "01_rustup.rjs.html#file-editor",
@@ -1173,7 +1173,7 @@
     "href": "01_rustup.rjs.html#file-editting",
     "title": "Rustup",
     "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md"
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 88d5569f117a55a2960939684283dc3f8d56383e"
   },
   {
     "objectID": "01_rustup.rjs.html#using-vim",
@@ -1593,7 +1593,7 @@
     "href": "01_rustup.html#names-matter",
     "title": "Rustup",
     "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant.",
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant. &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD",
     "crumbs": [
       "Rustup"
     ]
@@ -1603,7 +1603,7 @@
     "href": "01_rustup.html#useful-commands",
     "title": "Rustup",
     "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here",
+    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here\n\n\n\n\n\n\n\n88d5569f117a55a2960939684283dc3f8d56383e",
     "crumbs": [
       "Rustup"
     ]
@@ -1623,7 +1623,7 @@
     "href": "01_rustup.html#file-editting",
     "title": "Rustup",
     "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md",
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 88d5569f117a55a2960939684283dc3f8d56383e",
     "crumbs": [
       "Rustup"
     ]
@@ -1861,305 +1861,109 @@
     "text": "Compilation\n\nCompilation is the process that takes text-based code to whatever we saw on the last slide.\nCan be quite simple - we made hi_world, a program, already.\n\nNotably it didn’t do a lot.\n\nrustc takes a .rs file and makes an executable\n\na program, sort of\n\nExecutables run as command with ./ prefix\n\nThis differs from python3 which runs a script without creating a corresponding program."
   },
   {
-    "objectID": "12_build.rjs.html#rustup",
-    "href": "12_build.rjs.html#rustup",
+    "objectID": "12_build.rjs.html#py-vs-.rs",
+    "href": "12_build.rjs.html#py-vs-.rs",
     "title": "Build",
-    "section": "Rustup",
-    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more"
+    "section": ".py vs .rs",
+    "text": ".py vs .rs\n\n\n\n\n\nflowchart LR\n  A(Python) --&gt; B[fname.py file]\n  B --&gt; C[python fname.py]\n  C --&gt; D{hello world}\n  E(Rust) --&gt; F[fname.rs  file]\n  F --&gt; G[rustc fname.rs]\n  G --&gt; H[./fname]\n  H --&gt; I{hello world}\n\n\n\n\n\n\n\nYou only have to compile once to have the executable forever.\nMost programs are executables, not scripts."
   },
   {
-    "objectID": "12_build.rjs.html#verify",
-    "href": "12_build.rjs.html#verify",
+    "objectID": "12_build.rjs.html#rustc",
+    "href": "12_build.rjs.html#rustc",
     "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)"
+    "section": "Rustc",
+    "text": "Rustc\n\nrustc is rarely, if ever, used directly\n\nOver the years (since like, 1960) code has increased in complexity.\n\nMany files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)\nMany libraries (think NumPy, pandas, scikit)\nComplex file systems (01/rustup.md)\n\n\nThe solution was automation."
   },
   {
-    "objectID": "12_build.rjs.html#git-installation",
-    "href": "12_build.rjs.html#git-installation",
+    "objectID": "12_build.rjs.html#build-systems-1",
+    "href": "12_build.rjs.html#build-systems-1",
     "title": "Build",
-    "section": "Git Installation",
-    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install"
+    "section": "Build Systems",
+    "text": "Build Systems\n\nWe don’t have a real equivalence to compilation for Python.\n\nThere is Numba\n\nWe do have a build system equivalent.\n\nI use flit, which is easy.\nI think there’s others… Setuptools? Hatchling?"
   },
   {
-    "objectID": "12_build.rjs.html#verify-1",
-    "href": "12_build.rjs.html#verify-1",
+    "objectID": "12_build.rjs.html#flit",
+    "href": "12_build.rjs.html#flit",
     "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1"
+    "section": "Flit",
+    "text": "Flit\n\nFlit solves a novel problem for Python programers.\n\nNot: Let’s make some code that I can run.\nInstead: Let’s make code that can be used in code other people run."
   },
   {
-    "objectID": "12_build.rjs.html#account",
-    "href": "12_build.rjs.html#account",
+    "objectID": "12_build.rjs.html#packaging",
+    "href": "12_build.rjs.html#packaging",
     "title": "Build",
-    "section": "Account",
-    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More"
+    "section": "Packaging",
+    "text": "Packaging\n\nNumPy, pandas, and things like CS 151 PGL can be “built” into packages with Flit and friends.\n\nBasically, instead of running e.g. python3 mycode.py\nRun flit init to make a new folder, edit some code, then run flit publish to add it to pip\n\nTakeaway - package management and build systems work real well together."
   },
   {
-    "objectID": "12_build.rjs.html#repository",
-    "href": "12_build.rjs.html#repository",
+    "objectID": "12_build.rjs.html#wheels",
+    "href": "12_build.rjs.html#wheels",
     "title": "Build",
-    "section": "Repository",
-    "text": "Repository\n\nCreate a repository for this class.\nRequirements\n\nName is 271rs\nUse this template\nMay be public or private to you and me (cd-public).\n\nRead more\n\nMust email me a link to your repository from your @willamette.edu email.\n\nhttps://github.com/cd-example/271rs"
+    "section": "Wheels",
+    "text": "Wheels\n\nThe thing that flit and friends create and distribute is not a .py file.\nRather, they are “wheels” which are not human readable.\nA lot like compiled code\nTakeaway - a good way to think of Rust is that we’re writing packages for ourselves."
   },
   {
-    "objectID": "12_build.rjs.html#remote",
-    "href": "12_build.rjs.html#remote",
+    "objectID": "12_build.rjs.html#cargo",
+    "href": "12_build.rjs.html#cargo",
     "title": "Build",
-    "section": "Remote",
-    "text": "Remote\n\nWe have now created a remote repository on GitHub.\n\nRemote as in “not on our computer we are using right now”\nAs in “on a web server somewhere”\n\nNo we will make a local repository on our own computer.\nThen connect them!"
+    "section": "Cargo",
+    "text": "Cargo\n\nWith Python, we use python3 (or pip, but perhaps as python3 -m pip).\nrustc is not really the equivalent to that:\nRather, we use cargo, the Rust build and package manager.\ncargo will handle any usage of rustc that we may need.\n\nWe can easily then distribute code across multiple files."
   },
   {
-    "objectID": "12_build.rjs.html#security-concession",
-    "href": "12_build.rjs.html#security-concession",
+    "objectID": "12_build.rjs.html#buildpackage",
+    "href": "12_build.rjs.html#buildpackage",
     "title": "Build",
-    "section": "Security Concession",
-    "text": "Security Concession\n\nWe will use SSH, the “Secure Shell Protocol”\nIt is supported by git/GitHub and all major operating systems."
+    "section": "Build+Package",
+    "text": "Build+Package\n\nCargo is Rust’s build system (like flit) and package manager (like pip).\nWe will use Cargo instead of rustc for the rest of the term.\n\nMy sense is that this is the industry standard.\n\nWe’ll step through an example, then you’ll do a (very simple) exercise."
   },
   {
-    "objectID": "12_build.rjs.html#keygen",
-    "href": "12_build.rjs.html#keygen",
+    "objectID": "12_build.rjs.html#new",
+    "href": "12_build.rjs.html#new",
     "title": "Build",
-    "section": "Keygen",
-    "text": "Keygen\n\nSSH is based around having “keys”\n\nUnder the hood, these are special numbers with special properties related to primes, basically.\n\nWe generate a special unique key we can use as a password or signature.\n\nssh-keygen"
+    "section": "New",
+    "text": "New\n\nThe first thing to do with Cargo, as a rule, is great a new package.\n\nThis is kinda like creating a new .py file.\nIt is a bit more like creating a Python project from a template repository."
   },
   {
-    "objectID": "12_build.rjs.html#prompts",
-    "href": "12_build.rjs.html#prompts",
+    "objectID": "12_build.rjs.html#do-it",
+    "href": "12_build.rjs.html#do-it",
     "title": "Build",
-    "section": "Prompts",
-    "text": "Prompts\n\nThis example uses (1) the default location and (2) no passphrase.\n\nThis is less secure but easier to manage.\nWork in a passphrase as soon as you can!\n\n\nGenerating public/private ed25519 key pair.\nEnter file in which to save the key (/home/calvin/.ssh/id_ed25519): \nEnter passphrase (empty for no passphrase): \nEnter same passphrase again: \nYour identification has been saved in /home/calvin/.ssh/id_ed25519\n$ cat ~/.ssh/id_ed25519.pub \nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490\n\nYou now have a key! Let’s find a lock."
+    "section": "Do it",
+    "text": "Do it\n\nTo do so:\n\ncargo new throwaway_example\n\ncargo is, well, Cargo\nnew creates a new package.\nthrowaway_example is the name of the package1.\n\nWell, kinda. We’ll get to that."
   },
   {
-    "objectID": "12_build.rjs.html#github-1",
-    "href": "12_build.rjs.html#github-1",
+    "objectID": "12_build.rjs.html#examine",
+    "href": "12_build.rjs.html#examine",
     "title": "Build",
-    "section": "GitHub",
-    "text": "GitHub\n\nThe purpose of this exercise is to connect to GitHub!\nWe will mostly use git for that, but we can check if we have a connection easily:\n\nssh -T git@github.com\n\nRead more"
+    "section": "Examine",
+    "text": "Examine\n\nThe most natural thing is to see what has changed.\n\nls\n\nFor me, I see a new directory: throwaway_example\nI change into the directory to examine it.\n\ncd throwaway_example\nls\n\nNot much there:\n\nCargo.toml  src"
   },
   {
-    "objectID": "12_build.rjs.html#example",
-    "href": "12_build.rjs.html#example",
+    "objectID": "12_build.rjs.html#aside-tree",
+    "href": "12_build.rjs.html#aside-tree",
     "title": "Build",
-    "section": "Example",
-    "text": "Example\n\nThis is what I see:\n\nThe authenticity of host 'github.com (140.82.116.3)' can't be established.\nED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.\nThis key is not known by any other names.\nAre you sure you want to continue connecting (yes/no/[fingerprint])?\n\nBefore saying “yes” or “no” compare versus the “public SSH key fingerprints”\n\nCheck them here\n\nBy default, the modern keygen uses “Ed25519” so compare those keys, and click “yes” if they match!"
+    "section": "Aside: Tree",
+    "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files"
   },
   {
-    "objectID": "12_build.rjs.html#connecting",
-    "href": "12_build.rjs.html#connecting",
+    "objectID": "12_build.rjs.html#main.rs",
+    "href": "12_build.rjs.html#main.rs",
     "title": "Build",
-    "section": "Connecting",
-    "text": "Connecting\n\nAfter confirming the key correctness, you will likely see this.\n\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nWarning: Permanently added 'github.com' (ED25519) to the list of known hosts.\ngit@github.com: Permission denied (publickey)."
+    "section": "main.rs",
+    "text": "main.rs\n\nCargo creates projects with a default main file.\n\n\n\nmain.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\nThe name “main” is basically mainful to Cargo - it says which, if multiple, .rs files to read first when trying to execute the code in a package.\n\nMake sure you understand that sentence."
   },
   {
-    "objectID": "12_build.rjs.html#one-way",
-    "href": "12_build.rjs.html#one-way",
+    "objectID": "12_build.rjs.html#run",
+    "href": "12_build.rjs.html#run",
     "title": "Build",
-    "section": "One Way",
-    "text": "One Way\n\nNow we have instructed our computer to trust GitHub.\nTo save our code to GitHub, we must also get GitHub to trust our computer.\nWe generated our key, now we must match it to our lock on GitHub!"
+    "section": "Run",
+    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder."
   },
   {
-    "objectID": "12_build.rjs.html#github-pt-1",
-    "href": "12_build.rjs.html#github-pt-1",
+    "objectID": "12_build.rjs.html#try-it",
+    "href": "12_build.rjs.html#try-it",
     "title": "Build",
-    "section": "GitHub pt 1",
-    "text": "GitHub pt 1\n\nWe follow this guide\nReturn to GitHub and in the top right click your profile.\n\nFor me, a picture of myself.\n\nScroll down to “Settings” and click.\n\nLast in 2nd grouping, for me."
-  },
-  {
-    "objectID": "12_build.rjs.html#github-pt-2",
-    "href": "12_build.rjs.html#github-pt-2",
-    "title": "Build",
-    "section": "GitHub pt 2",
-    "text": "GitHub pt 2\n\nWithin settings left-side menu click “SSH and GPG keys”\n\nMiddle of 2nd group (Access) for me.\n\nWithin the center block click New SSH key in the top right of the block."
-  },
-  {
-    "objectID": "12_build.rjs.html#prompt",
-    "href": "12_build.rjs.html#prompt",
-    "title": "Build",
-    "section": "Prompt",
-    "text": "Prompt\n\nI get a page “Add new SSH Key”.\nI provide a title (like “For 271rs class” or “Laptop”)\nNow we’ll get our key from our system to use.\nRecall we previously generated a key to the default location, like /home/calvin/.ssh/id_ed25519\n\nIf you don’t remember, just type ssh-keygen and it’ll show you."
-  },
-  {
-    "objectID": "12_build.rjs.html#copypaste",
-    "href": "12_build.rjs.html#copypaste",
-    "title": "Build",
-    "section": "Copy/Paste",
-    "text": "Copy/Paste\n\nTo get the key for GitHub, we can can\n\ncat that file in the command line\nCopy from the command line\nPaste into the GitHub “Key” field\nClick Add SSH key"
-  },
-  {
-    "objectID": "12_build.rjs.html#ssh-test",
-    "href": "12_build.rjs.html#ssh-test",
-    "title": "Build",
-    "section": "SSH Test",
-    "text": "SSH Test\n\nAfter adding the key to the account, I confirm via SSH like so:\n\nssh -T git@github.com\n\nI see the following:\n\nHi cd-public! You've successfully authenticated, but GitHub does not provide shell access."
-  },
-  {
-    "objectID": "12_build.rjs.html#clone-pt1",
-    "href": "12_build.rjs.html#clone-pt1",
-    "title": "Build",
-    "section": "Clone pt1",
-    "text": "Clone pt1\n\nNavigate to the repository webpage, like github.com/cd-example/271rs\nFind the &lt;&gt; Code button in the top right.\nClick it:\n\nSelect the top “local” tab (for or local repository)\nSelect the SSH option (for our SSH key)\nCopy the name, like\n\n\n\ngit@github.com:cd-example/271rs"
-  },
-  {
-    "objectID": "12_build.rjs.html#clone-pt2",
-    "href": "12_build.rjs.html#clone-pt2",
-    "title": "Build",
-    "section": "Clone pt2",
-    "text": "Clone pt2\n\nWithin terminal, where you keep files for this class.\n\nProbably just do\n\ncd ~\ngit clone git@github.com:cd-example/271rs \nVerify by listing the contents of the 271rs directory via:\n\nls 271rs\n\nYou should see a README.md and a LICENSE"
-  },
-  {
-    "objectID": "12_build.rjs.html#enter-the-repository",
-    "href": "12_build.rjs.html#enter-the-repository",
-    "title": "Build",
-    "section": "Enter the Repository",
-    "text": "Enter the Repository\n\nTo change the directory within which you are working in the commandline from your home to the repository for this class, do:\n\ncd 271rs\n\nVerify the change via\n\npwd\n\nThis will give the full address of your class folder, ending in 271rs"
-  },
-  {
-    "objectID": "12_build.rjs.html#today-1",
-    "href": "12_build.rjs.html#today-1",
-    "title": "Build",
-    "section": "Today",
-    "text": "Today\n\nTo complete the lab today, add a 01/rustup.md file to your 271rs\nSend me a link to a 271rs repository I have permission to view.\n\nTo be clear:\n\nI must receive an email with a hyperlink to a GitHub repository.\nI must have view access to public repository or a repository on which I am added as a collaborator."
-  },
-  {
-    "objectID": "12_build.rjs.html#names-matter",
-    "href": "12_build.rjs.html#names-matter",
-    "title": "Build",
-    "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant."
-  },
-  {
-    "objectID": "12_build.rjs.html#useful-commands",
-    "href": "12_build.rjs.html#useful-commands",
-    "title": "Build",
-    "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here"
-  },
-  {
-    "objectID": "12_build.rjs.html#file-editor",
-    "href": "12_build.rjs.html#file-editor",
-    "title": "Build",
-    "section": "File Editor",
-    "text": "File Editor\n\nLet’s make a new file.\nI recommend using vim, neovim, or helix.\nProbably already have it on MacOS.\nOn WSL install via\n\nsudo apt install vim"
-  },
-  {
-    "objectID": "12_build.rjs.html#file-editting",
-    "href": "12_build.rjs.html#file-editting",
-    "title": "Build",
-    "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md"
-  },
-  {
-    "objectID": "12_build.rjs.html#using-vim",
-    "href": "12_build.rjs.html#using-vim",
-    "title": "Build",
-    "section": "Using vim",
-    "text": "Using vim\n\nThere’s more to life that using vim but basically:\n\nPress i to enter “insert mode” (so you can type)\nWhen you are done typing, press ESC then type :x to save and exit.\nRead more\n\nJust type some notes you have from today."
-  },
-  {
-    "objectID": "12_build.rjs.html#check-status",
-    "href": "12_build.rjs.html#check-status",
-    "title": "Build",
-    "section": "Check Status",
-    "text": "Check Status\n\nYou have now added a new file to your repository.\nI consult status often, yours will likely look like this:\n\nOn branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        01/rustup.md\n\nnothing added to commit but untracked files present (use \"git add\" to track)"
-  },
-  {
-    "objectID": "12_build.rjs.html#add",
-    "href": "12_build.rjs.html#add",
-    "title": "Build",
-    "section": "Add",
-    "text": "Add\n\nThe first thing we not is that there are “Untracked files”\nWhile we made a hello.py and have it in our hello-world directory, it isn’t yet “tracked” by git!\nBy default, git only keeps track of what we tell it to!\nSo, we tell it to track our code!\n\ngit add 01/rustup.md"
-  },
-  {
-    "objectID": "12_build.rjs.html#status",
-    "href": "12_build.rjs.html#status",
-    "title": "Build",
-    "section": "Status",
-    "text": "Status\n\nI check status again\n\nOn branch master\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached &lt;file&gt;...\" to unstage)\n        new file:   01_rustup.md"
-  },
-  {
-    "objectID": "12_build.rjs.html#commit",
-    "href": "12_build.rjs.html#commit",
-    "title": "Build",
-    "section": "Commit",
-    "text": "Commit\n\nWith git now aware of hello.py, we need to commit or changes for git to save them.\n\nSimilar to saving files to the file system.\nThere are, of course, ways to automate this.\n\nThis probably won’t work at first (next slide!) but try:\n\ngit commit -a -m \"first commit\""
-  },
-  {
-    "objectID": "12_build.rjs.html#a--m",
-    "href": "12_build.rjs.html#a--m",
-    "title": "Build",
-    "section": "“-a -m”",
-    "text": "“-a -m”\n\nCommits require a commit message (like a version name or number) so specify with -m\nUsually I provide -a to commit “all” files.\nI usually make some effort to make my life easier with specific commit messages, perhaps listing:\n\nWhat I’m trying to do\nWhy?"
-  },
-  {
-    "objectID": "12_build.rjs.html#config",
-    "href": "12_build.rjs.html#config",
-    "title": "Build",
-    "section": "Config",
-    "text": "Config\n\nIf you haven’t used git on your system before, you’ll have to tell git who you are.\n\nIn git there are no anonymous changes - you have to sign every change you make.\n\nYou’ll be prompted to provide something like this:\n\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\""
-  },
-  {
-    "objectID": "12_build.rjs.html#my-name",
-    "href": "12_build.rjs.html#my-name",
-    "title": "Build",
-    "section": "My name",
-    "text": "My name\n\nI often include which computer I’m using in my name and also don’t use a real email address.\n\nMy GitHub account is already attached to an email address, so I use a throwaway for commits.\n\n\ngit config --global user.email \"prof_calvin@c89&gt;rs.edu\"\ngit config --global user.name \"Calvin for Class\""
-  },
-  {
-    "objectID": "12_build.rjs.html#looping-back",
-    "href": "12_build.rjs.html#looping-back",
-    "title": "Build",
-    "section": "Looping Back",
-    "text": "Looping Back\n\nOnce you have provided your identity, you can successfuly complete a commit.\n\ngit commit -a -m \"first commit\"\n\nThis will:\n\nMark current code as a version, named by your commit message.\n\nThis won’t:\n\nDo anything to GitHub."
-  },
-  {
-    "objectID": "12_build.rjs.html#push",
-    "href": "12_build.rjs.html#push",
-    "title": "Build",
-    "section": "Push",
-    "text": "Push\n\nA commit saves changing on your computer.\nTo save on GitHub, push changes to the cloud\n\ngit push\n\nAfter a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!"
-  },
-  {
-    "objectID": "12_build.rjs.html#diagnostics",
-    "href": "12_build.rjs.html#diagnostics",
-    "title": "Build",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\nFor example, you might see the following:\n\nEnumerating objects: 27, done.\nCounting objects: 100% (27/27), done.\nDelta compression using up to 22 threads\nCompressing objects: 100% (15/15), done.\nWriting objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.\nTotal 16 (delta 11), reused 0 (delta 0), pack-reused 0\nremote: Resolving deltas: 100% (11/11), completed with 10 local objects.\nTo github.com:cd-example/271rs.git\n   adaa3a7..ba3c794  main -&gt; main"
-  },
-  {
-    "objectID": "12_build.rjs.html#verify-2",
-    "href": "12_build.rjs.html#verify-2",
-    "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nEnsure you have a 01/rustup.md\nEmail me."
-  },
-  {
-    "objectID": "12_build.rjs.html#easier-after",
-    "href": "12_build.rjs.html#easier-after",
-    "title": "Build",
-    "section": "Easier After",
-    "text": "Easier After\n\nA lot of what we did, we only have to do once:\n\ngit config\nssh-keygen\nset origin\n\nMany are special cases:\n\nOnly have to make new repositories for… new repositories (likely projects)\nOnly have to git add for new files."
-  },
-  {
-    "objectID": "12_build.rjs.html#quick-example",
-    "href": "12_build.rjs.html#quick-example",
-    "title": "Build",
-    "section": "Quick Example",
-    "text": "Quick Example\n\nLet’s add 02/hi_world.rs\nWe’ll create a new file at the command line.\n\nvim 02/hi_world.rs\n\nAdd any text\n\n\n\nhi_world.rs\n\nWait I don't know rust yet."
-  },
-  {
-    "objectID": "12_build.rjs.html#add-commit-push",
-    "href": "12_build.rjs.html#add-commit-push",
-    "title": "Build",
-    "section": "Add, Commit, Push",
-    "text": "Add, Commit, Push\n\nTo get the code onto Github, add to the repo:\n\ngit add hi_world.rs \n\nCommit changes to a version:\n\ngit commit -a -m \"You say hello, I say goodbye\"\n\nPush to GitHub\n\ngit push\n\nAnd that’s that!"
-  },
-  {
-    "objectID": "12_build.rjs.html#altogether",
-    "href": "12_build.rjs.html#altogether",
-    "title": "Build",
-    "section": "Altogether",
-    "text": "Altogether\n\nFor a single copy/paste\n\ngit add bye.py\ngit commit -a -m \"You say hello, I say goodbye\"\ngit push\n\nIf it works, you’ll see the change on GitHub!"
+    "section": "Try it",
+    "text": "Try it\n\nDo this:\n\ncargo run\n\nSee this:\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s\n     Running `target/debug/throwaway_example`\nHello, world!"
   },
   {
     "objectID": "12_build.rjs.html#again",
@@ -2169,18 +1973,39 @@
     "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here)\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s"
   },
   {
-    "objectID": "12_build.rjs.html#no-add",
-    "href": "12_build.rjs.html#no-add",
+    "objectID": "12_build.rjs.html#its-fast",
+    "href": "12_build.rjs.html#its-fast",
     "title": "Build",
-    "section": "No Add",
-    "text": "No Add\n\nDon’t need an add this time!\n\ngit commit -a -m \"Rust comment\"\ngit push"
+    "section": "It’s fast",
+    "text": "It’s fast\n\n0.56s -&gt; 0.00s\nThis is why we use languages which compile.\n\nPython took around .04s, for me.\n\ntime python3 -c \"print('Hello, world')\"\nThe results are:\n\nHello, world\n\nreal    0m0.039s\nuser    0m0.007s\nsys     0m0.008s\n\nGuess how long it takes to compile python, by the way."
   },
   {
-    "objectID": "12_build.rjs.html#pulling",
-    "href": "12_build.rjs.html#pulling",
+    "objectID": "12_build.rjs.html#other-files",
+    "href": "12_build.rjs.html#other-files",
     "title": "Build",
-    "section": "Pulling",
-    "text": "Pulling\n\nTo get remote changes reflected locally, simply use\n\ngit pull\n\nThis will be how assignment feedback is distributed.\nJust git pull every time you start working, basically.\nAlso good when you are working on multiple devices."
+    "section": "Other files",
+    "text": "Other files\n\nGo ahead and add another .rs file and see what happens.\n\nAdd it to the src directory!\n\nI’ll use this one - I change filename and text, but\n\n\n\nsecondary.rs\n\nfn secondary() {\n    println!(\"Goodbye, space!\");\n}"
+  },
+  {
+    "objectID": "12_build.rjs.html#run-it-again",
+    "href": "12_build.rjs.html#run-it-again",
+    "title": "Build",
+    "section": "Run it again…",
+    "text": "Run it again…\n\nNothing changes.\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\nThis is the same as adding another .py file then not using import or including its code in any other way."
+  },
+  {
+    "objectID": "12_build.rjs.html#swap-the-names.",
+    "href": "12_build.rjs.html#swap-the-names.",
+    "title": "Build",
+    "section": "Swap the names.",
+    "text": "Swap the names.\n\nI use mv (move) to change:\n\nmain.rs to old_main.rs\nsecondary.rs to main.rs\n\nThings change!\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\nerror[E0601]: `main` function not found in crate `throwaway_example`\n --&gt; src/main.rs:3:2\n  |\n3 | }\n  |  ^ consider adding a `main` function to `src/main.rs`\n\nFor more information about this error, try `rustc --explain E0601`.\nerror: could not compile `throwaway_example` (bin \"throwaway_example\") due to 1 previous error"
+  },
+  {
+    "objectID": "12_build.rjs.html#requirements",
+    "href": "12_build.rjs.html#requirements",
+    "title": "Build",
+    "section": "Requirements",
+    "text": "Requirements\n\nYou need a main.rs with a function named main.\nnvim src/main.rs -&gt; Change “secondary” to “main” -&gt; “cargo run”\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s\n     Running `target/debug/throwaway_example`\nGoodbye, space!"
   },
   {
     "objectID": "12_build.html",
@@ -2253,466 +2078,6 @@
     ]
   },
   {
-    "objectID": "12_build.html#rustup",
-    "href": "12_build.html#rustup",
-    "title": "Build",
-    "section": "Rustup",
-    "text": "Rustup\n\nOn your UNIX-based OS:\n\nLinux\nMacOS\nWSL 2\nFreeBSD\n\nOpen the command line and run the following:\n\ncurl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n\nRead more",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#verify",
-    "href": "12_build.html#verify",
-    "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nTo ensure you have a Rust installation, run:\n\nrustc --version\n\nAt time of slide creation, I saw this version:\n\nrustc 1.87.0 (17067e9ac 2025-05-09)",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#git-installation",
-    "href": "12_build.html#git-installation",
-    "title": "Build",
-    "section": "Git Installation",
-    "text": "Git Installation\n\nEnsure you have a Git installation:\n\nWindows:\n\nLaunch WSL\n\nwsl ~\n\nInstall git within WSL\n\nsudo apt install git\nMacOS:\n\nLaunch the terminal and then:\n\nxcode-select --install",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#verify-1",
-    "href": "12_build.html#verify-1",
-    "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nVerify install via:\n\ngit --version\n\nI had:\n\ngit version 2.34.1",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#account",
-    "href": "12_build.html#account",
-    "title": "Build",
-    "section": "Account",
-    "text": "Account\n\nEnsure you have an account on GitHub.\nRead More",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#repository",
-    "href": "12_build.html#repository",
-    "title": "Build",
-    "section": "Repository",
-    "text": "Repository\n\nCreate a repository for this class.\nRequirements\n\nName is 271rs\nUse this template\nMay be public or private to you and me (cd-public).\n\nRead more\n\nMust email me a link to your repository from your @willamette.edu email.\n\nhttps://github.com/cd-example/271rs",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#remote",
-    "href": "12_build.html#remote",
-    "title": "Build",
-    "section": "Remote",
-    "text": "Remote\n\nWe have now created a remote repository on GitHub.\n\nRemote as in “not on our computer we are using right now”\nAs in “on a web server somewhere”\n\nNo we will make a local repository on our own computer.\nThen connect them!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#security-concession",
-    "href": "12_build.html#security-concession",
-    "title": "Build",
-    "section": "Security Concession",
-    "text": "Security Concession\n\nWe will use SSH, the “Secure Shell Protocol”\nIt is supported by git/GitHub and all major operating systems.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#keygen",
-    "href": "12_build.html#keygen",
-    "title": "Build",
-    "section": "Keygen",
-    "text": "Keygen\n\nSSH is based around having “keys”\n\nUnder the hood, these are special numbers with special properties related to primes, basically.\n\nWe generate a special unique key we can use as a password or signature.\n\nssh-keygen",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#prompts",
-    "href": "12_build.html#prompts",
-    "title": "Build",
-    "section": "Prompts",
-    "text": "Prompts\n\nThis example uses (1) the default location and (2) no passphrase.\n\nThis is less secure but easier to manage.\nWork in a passphrase as soon as you can!\n\n\nGenerating public/private ed25519 key pair.\nEnter file in which to save the key (/home/calvin/.ssh/id_ed25519): \nEnter passphrase (empty for no passphrase): \nEnter same passphrase again: \nYour identification has been saved in /home/calvin/.ssh/id_ed25519\n$ cat ~/.ssh/id_ed25519.pub \nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490\n\nYou now have a key! Let’s find a lock.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#github-1",
-    "href": "12_build.html#github-1",
-    "title": "Build",
-    "section": "GitHub",
-    "text": "GitHub\n\nThe purpose of this exercise is to connect to GitHub!\nWe will mostly use git for that, but we can check if we have a connection easily:\n\nssh -T git@github.com\n\nRead more",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#example",
-    "href": "12_build.html#example",
-    "title": "Build",
-    "section": "Example",
-    "text": "Example\n\nThis is what I see:\n\nThe authenticity of host 'github.com (140.82.116.3)' can't be established.\nED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.\nThis key is not known by any other names.\nAre you sure you want to continue connecting (yes/no/[fingerprint])?\n\nBefore saying “yes” or “no” compare versus the “public SSH key fingerprints”\n\nCheck them here\n\nBy default, the modern keygen uses “Ed25519” so compare those keys, and click “yes” if they match!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#connecting",
-    "href": "12_build.html#connecting",
-    "title": "Build",
-    "section": "Connecting",
-    "text": "Connecting\n\nAfter confirming the key correctness, you will likely see this.\n\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nWarning: Permanently added 'github.com' (ED25519) to the list of known hosts.\ngit@github.com: Permission denied (publickey).",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#one-way",
-    "href": "12_build.html#one-way",
-    "title": "Build",
-    "section": "One Way",
-    "text": "One Way\n\nNow we have instructed our computer to trust GitHub.\nTo save our code to GitHub, we must also get GitHub to trust our computer.\nWe generated our key, now we must match it to our lock on GitHub!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#github-pt-1",
-    "href": "12_build.html#github-pt-1",
-    "title": "Build",
-    "section": "GitHub pt 1",
-    "text": "GitHub pt 1\n\nWe follow this guide\nReturn to GitHub and in the top right click your profile.\n\nFor me, a picture of myself.\n\nScroll down to “Settings” and click.\n\nLast in 2nd grouping, for me.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#github-pt-2",
-    "href": "12_build.html#github-pt-2",
-    "title": "Build",
-    "section": "GitHub pt 2",
-    "text": "GitHub pt 2\n\nWithin settings left-side menu click “SSH and GPG keys”\n\nMiddle of 2nd group (Access) for me.\n\nWithin the center block click New SSH key in the top right of the block.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#prompt",
-    "href": "12_build.html#prompt",
-    "title": "Build",
-    "section": "Prompt",
-    "text": "Prompt\n\nI get a page “Add new SSH Key”.\nI provide a title (like “For 271rs class” or “Laptop”)\nNow we’ll get our key from our system to use.\nRecall we previously generated a key to the default location, like /home/calvin/.ssh/id_ed25519\n\nIf you don’t remember, just type ssh-keygen and it’ll show you.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#copypaste",
-    "href": "12_build.html#copypaste",
-    "title": "Build",
-    "section": "Copy/Paste",
-    "text": "Copy/Paste\n\nTo get the key for GitHub, we can can\n\ncat that file in the command line\nCopy from the command line\nPaste into the GitHub “Key” field\nClick Add SSH key",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#ssh-test",
-    "href": "12_build.html#ssh-test",
-    "title": "Build",
-    "section": "SSH Test",
-    "text": "SSH Test\n\nAfter adding the key to the account, I confirm via SSH like so:\n\nssh -T git@github.com\n\nI see the following:\n\nHi cd-public! You've successfully authenticated, but GitHub does not provide shell access.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#clone-pt1",
-    "href": "12_build.html#clone-pt1",
-    "title": "Build",
-    "section": "Clone pt1",
-    "text": "Clone pt1\n\nNavigate to the repository webpage, like github.com/cd-example/271rs\nFind the &lt;&gt; Code button in the top right.\nClick it:\n\nSelect the top “local” tab (for or local repository)\nSelect the SSH option (for our SSH key)\nCopy the name, like\n\n\n\ngit@github.com:cd-example/271rs",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#clone-pt2",
-    "href": "12_build.html#clone-pt2",
-    "title": "Build",
-    "section": "Clone pt2",
-    "text": "Clone pt2\n\nWithin terminal, where you keep files for this class.\n\nProbably just do\n\ncd ~\ngit clone git@github.com:cd-example/271rs \nVerify by listing the contents of the 271rs directory via:\n\nls 271rs\n\nYou should see a README.md and a LICENSE",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#enter-the-repository",
-    "href": "12_build.html#enter-the-repository",
-    "title": "Build",
-    "section": "Enter the Repository",
-    "text": "Enter the Repository\n\nTo change the directory within which you are working in the commandline from your home to the repository for this class, do:\n\ncd 271rs\n\nVerify the change via\n\npwd\n\nThis will give the full address of your class folder, ending in 271rs",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#today-1",
-    "href": "12_build.html#today-1",
-    "title": "Build",
-    "section": "Today",
-    "text": "Today\n\nTo complete the lab today, add a 01/rustup.md file to your 271rs\nSend me a link to a 271rs repository I have permission to view.\n\nTo be clear:\n\nI must receive an email with a hyperlink to a GitHub repository.\nI must have view access to public repository or a repository on which I am added as a collaborator.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#names-matter",
-    "href": "12_build.html#names-matter",
-    "title": "Build",
-    "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#useful-commands",
-    "href": "12_build.html#useful-commands",
-    "title": "Build",
-    "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#file-editor",
-    "href": "12_build.html#file-editor",
-    "title": "Build",
-    "section": "File Editor",
-    "text": "File Editor\n\nLet’s make a new file.\nI recommend using vim, neovim, or helix.\nProbably already have it on MacOS.\nOn WSL install via\n\nsudo apt install vim",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#file-editting",
-    "href": "12_build.html#file-editting",
-    "title": "Build",
-    "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#using-vim",
-    "href": "12_build.html#using-vim",
-    "title": "Build",
-    "section": "Using vim",
-    "text": "Using vim\n\nThere’s more to life that using vim but basically:\n\nPress i to enter “insert mode” (so you can type)\nWhen you are done typing, press ESC then type :x to save and exit.\nRead more\n\nJust type some notes you have from today.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#check-status",
-    "href": "12_build.html#check-status",
-    "title": "Build",
-    "section": "Check Status",
-    "text": "Check Status\n\nYou have now added a new file to your repository.\nI consult status often, yours will likely look like this:\n\nOn branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        01/rustup.md\n\nnothing added to commit but untracked files present (use \"git add\" to track)",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#add",
-    "href": "12_build.html#add",
-    "title": "Build",
-    "section": "Add",
-    "text": "Add\n\nThe first thing we not is that there are “Untracked files”\nWhile we made a hello.py and have it in our hello-world directory, it isn’t yet “tracked” by git!\nBy default, git only keeps track of what we tell it to!\nSo, we tell it to track our code!\n\ngit add 01/rustup.md",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#status",
-    "href": "12_build.html#status",
-    "title": "Build",
-    "section": "Status",
-    "text": "Status\n\nI check status again\n\nOn branch master\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached &lt;file&gt;...\" to unstage)\n        new file:   01_rustup.md",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#commit",
-    "href": "12_build.html#commit",
-    "title": "Build",
-    "section": "Commit",
-    "text": "Commit\n\nWith git now aware of hello.py, we need to commit or changes for git to save them.\n\nSimilar to saving files to the file system.\nThere are, of course, ways to automate this.\n\nThis probably won’t work at first (next slide!) but try:\n\ngit commit -a -m \"first commit\"",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#a--m",
-    "href": "12_build.html#a--m",
-    "title": "Build",
-    "section": "“-a -m”",
-    "text": "“-a -m”\n\nCommits require a commit message (like a version name or number) so specify with -m\nUsually I provide -a to commit “all” files.\nI usually make some effort to make my life easier with specific commit messages, perhaps listing:\n\nWhat I’m trying to do\nWhy?",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#config",
-    "href": "12_build.html#config",
-    "title": "Build",
-    "section": "Config",
-    "text": "Config\n\nIf you haven’t used git on your system before, you’ll have to tell git who you are.\n\nIn git there are no anonymous changes - you have to sign every change you make.\n\nYou’ll be prompted to provide something like this:\n\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#my-name",
-    "href": "12_build.html#my-name",
-    "title": "Build",
-    "section": "My name",
-    "text": "My name\n\nI often include which computer I’m using in my name and also don’t use a real email address.\n\nMy GitHub account is already attached to an email address, so I use a throwaway for commits.\n\n\ngit config --global user.email \"prof_calvin@c89&gt;rs.edu\"\ngit config --global user.name \"Calvin for Class\"",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#looping-back",
-    "href": "12_build.html#looping-back",
-    "title": "Build",
-    "section": "Looping Back",
-    "text": "Looping Back\n\nOnce you have provided your identity, you can successfuly complete a commit.\n\ngit commit -a -m \"first commit\"\n\nThis will:\n\nMark current code as a version, named by your commit message.\n\nThis won’t:\n\nDo anything to GitHub.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#push",
-    "href": "12_build.html#push",
-    "title": "Build",
-    "section": "Push",
-    "text": "Push\n\nA commit saves changing on your computer.\nTo save on GitHub, push changes to the cloud\n\ngit push\n\nAfter a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#diagnostics",
-    "href": "12_build.html#diagnostics",
-    "title": "Build",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\nFor example, you might see the following:\n\nEnumerating objects: 27, done.\nCounting objects: 100% (27/27), done.\nDelta compression using up to 22 threads\nCompressing objects: 100% (15/15), done.\nWriting objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.\nTotal 16 (delta 11), reused 0 (delta 0), pack-reused 0\nremote: Resolving deltas: 100% (11/11), completed with 10 local objects.\nTo github.com:cd-example/271rs.git\n   adaa3a7..ba3c794  main -&gt; main",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#verify-2",
-    "href": "12_build.html#verify-2",
-    "title": "Build",
-    "section": "Verify",
-    "text": "Verify\n\nEnsure you have a 01/rustup.md\nEmail me.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#easier-after",
-    "href": "12_build.html#easier-after",
-    "title": "Build",
-    "section": "Easier After",
-    "text": "Easier After\n\nA lot of what we did, we only have to do once:\n\ngit config\nssh-keygen\nset origin\n\nMany are special cases:\n\nOnly have to make new repositories for… new repositories (likely projects)\nOnly have to git add for new files.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#quick-example",
-    "href": "12_build.html#quick-example",
-    "title": "Build",
-    "section": "Quick Example",
-    "text": "Quick Example\n\nLet’s add 02/hi_world.rs\nWe’ll create a new file at the command line.\n\nvim 02/hi_world.rs\n\nAdd any text\n\n\n\nhi_world.rs\n\nWait I don't know rust yet.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#add-commit-push",
-    "href": "12_build.html#add-commit-push",
-    "title": "Build",
-    "section": "Add, Commit, Push",
-    "text": "Add, Commit, Push\n\nTo get the code onto Github, add to the repo:\n\ngit add hi_world.rs \n\nCommit changes to a version:\n\ngit commit -a -m \"You say hello, I say goodbye\"\n\nPush to GitHub\n\ngit push\n\nAnd that’s that!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#altogether",
-    "href": "12_build.html#altogether",
-    "title": "Build",
-    "section": "Altogether",
-    "text": "Altogether\n\nFor a single copy/paste\n\ngit add bye.py\ngit commit -a -m \"You say hello, I say goodbye\"\ngit push\n\nIf it works, you’ll see the change on GitHub!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#again",
-    "href": "12_build.html#again",
-    "title": "Build",
-    "section": "Again!",
-    "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here)\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#no-add",
-    "href": "12_build.html#no-add",
-    "title": "Build",
-    "section": "No Add",
-    "text": "No Add\n\nDon’t need an add this time!\n\ngit commit -a -m \"Rust comment\"\ngit push",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#pulling",
-    "href": "12_build.html#pulling",
-    "title": "Build",
-    "section": "Pulling",
-    "text": "Pulling\n\nTo get remote changes reflected locally, simply use\n\ngit pull\n\nThis will be how assignment feedback is distributed.\nJust git pull every time you start working, basically.\nAlso good when you are working on multiple devices.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
     "objectID": "12_build.html#py-vs-.rs",
     "href": "12_build.html#py-vs-.rs",
     "title": "Build",
@@ -2743,27 +2108,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#py-vs-.rs",
-    "href": "12_build.rjs.html#py-vs-.rs",
-    "title": "Build",
-    "section": ".py vs .rs",
-    "text": ".py vs .rs\n\n\n\n\n\nflowchart LR\n  A(Python) --&gt; B[fname.py file]\n  B --&gt; C[python fname.py]\n  C --&gt; D{hello world}\n  E(Rust) --&gt; F[fname.rs  file]\n  F --&gt; G[rustc fname.rs]\n  G --&gt; H[./fname]\n  H --&gt; I{hello world}\n\n\n\n\n\n\n\nYou only have to compile once to have the executable forever.\nMost programs are executables, not scripts."
-  },
-  {
-    "objectID": "12_build.rjs.html#rustc",
-    "href": "12_build.rjs.html#rustc",
-    "title": "Build",
-    "section": "Rustc",
-    "text": "Rustc\n\nrustc is rarely, if ever, used directly\n\nOver the years (since like, 1960) code has increased in complexity.\n\nMany files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)\nMany libraries (think NumPy, pandas, scikit)\nComplex file systems (01/rustup.md)\n\n\nThe solution was automation."
-  },
-  {
-    "objectID": "12_build.rjs.html#build-systems-1",
-    "href": "12_build.rjs.html#build-systems-1",
-    "title": "Build",
-    "section": "Build Systems",
-    "text": "Build Systems\n\nWe don’t have a real equivalence to compilation for Python.\n\nThere is Numba\n\nWe do have a build system equivalent.\n\nI use flit, which is easy.\nI think there’s others… Setuptools? Hatchling?"
-  },
-  {
     "objectID": "12_build.html#flit",
     "href": "12_build.html#flit",
     "title": "Build",
@@ -2774,13 +2118,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#flit",
-    "href": "12_build.rjs.html#flit",
-    "title": "Build",
-    "section": "Flit",
-    "text": "Flit\n\nFlit solves a novel problem for Python programers.\n\nNot: Let’s make some code that I can run.\nInstead: Let’s make code that can be used in code other people run."
-  },
-  {
     "objectID": "12_build.html#packaging",
     "href": "12_build.html#packaging",
     "title": "Build",
@@ -2789,13 +2126,6 @@
     "crumbs": [
       "Build"
     ]
-  },
-  {
-    "objectID": "12_build.rjs.html#packaging",
-    "href": "12_build.rjs.html#packaging",
-    "title": "Build",
-    "section": "Packaging",
-    "text": "Packaging\n\nNumPy, pandas, and things like CS 151 PGL can be “built” into packages with Flit and friends.\n\nBasically, instead of running e.g. python3 mycode.py\nRun flit init to make a new folder, edit some code, then run flit publish to add it to pip\n\nTakeaway - package management and build systems work real well together."
   },
   {
     "objectID": "12_build.html#wheels",
@@ -2816,20 +2146,6 @@
     "crumbs": [
       "Build"
     ]
-  },
-  {
-    "objectID": "12_build.rjs.html#wheels",
-    "href": "12_build.rjs.html#wheels",
-    "title": "Build",
-    "section": "Wheels",
-    "text": "Wheels\n\nThe thing that flit and friends create and distribute is not a .py file.\nRather, they are “wheels” which are not human readable.\nA lot like compiled code\nTakeaway - a good way to think of Rust is that we’re writing packages for ourselves."
-  },
-  {
-    "objectID": "12_build.rjs.html#cargo",
-    "href": "12_build.rjs.html#cargo",
-    "title": "Build",
-    "section": "Cargo",
-    "text": "Cargo\n\nWith Python, we use python3 (or pip, but perhaps as python3 -m pip).\nrustc is not really the equivalent to that:\nRather, we use cargo, the Rust build and package manager.\ncargo will handle any usage of rustc that we may need.\n\nWe can easily then distribute code across multiple files."
   },
   {
     "objectID": "12_build.html#buildpackage",
@@ -2862,27 +2178,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#buildpackage",
-    "href": "12_build.rjs.html#buildpackage",
-    "title": "Build",
-    "section": "Build+Package",
-    "text": "Build+Package\n\nCargo is Rust’s build system (like flit) and package manager (like pip).\nWe will use Cargo instead of rustc for the rest of the term.\n\nMy sense is that this is the industry standard.\n\nWe’ll step through an example, then you’ll do a (very simple) exercise."
-  },
-  {
-    "objectID": "12_build.rjs.html#new",
-    "href": "12_build.rjs.html#new",
-    "title": "Build",
-    "section": "New",
-    "text": "New\n\nThe first thing to do with Cargo, as a rule, is great a new package.\n\nThis is kinda like creating a new .py file.\nIt is a bit more like creating a Python project from a template repository."
-  },
-  {
-    "objectID": "12_build.rjs.html#do-it",
-    "href": "12_build.rjs.html#do-it",
-    "title": "Build",
-    "section": "Do it",
-    "text": "Do it\n\nTo do so:\n\ncargo new throwaway_example\n\ncargo is, well, Cargo\nnew creates a new package.\nthrowaway_example is the name of the package1.\n\nWell, kinda. We’ll get to that."
-  },
-  {
     "objectID": "12_build.html#examine",
     "href": "12_build.html#examine",
     "title": "Build",
@@ -2893,35 +2188,11 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#examine",
-    "href": "12_build.rjs.html#examine",
-    "title": "Build",
-    "section": "Examine",
-    "text": "Examine\n\nThe most natural thing is to see what has changed.\n\nls\n\nFor me, I see a new directory: throwaway_example\nI change into the directory to examine it.\n\ncd throwaway_example\nls\n\nNot much there:\n\nCargo.toml  src"
-  },
-  {
     "objectID": "12_build.html#aside-tree",
     "href": "12_build.html#aside-tree",
     "title": "Build",
     "section": "Aside: Tree",
     "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.rjs.html#aside-tree",
-    "href": "12_build.rjs.html#aside-tree",
-    "title": "Build",
-    "section": "Aside: Tree",
-    "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files"
-  },
-  {
-    "objectID": "12_build.html#footnotes",
-    "href": "12_build.html#footnotes",
-    "title": "Build",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nWell, kinda. We’ll get to that.↩︎",
     "crumbs": [
       "Build"
     ]
@@ -2937,13 +2208,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#main.rs",
-    "href": "12_build.rjs.html#main.rs",
-    "title": "Build",
-    "section": "main.rs",
-    "text": "main.rs\n\nCargo creates projects with a default main file.\n\n\n\nmain.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\nThe name “main” is basically mainful to Cargo - it says which, if multiple, .rs files to read first when trying to execute the code in a package.\n\nMake sure you understand that sentence."
-  },
-  {
     "objectID": "12_build.html#run",
     "href": "12_build.html#run",
     "title": "Build",
@@ -2952,13 +2216,6 @@
     "crumbs": [
       "Build"
     ]
-  },
-  {
-    "objectID": "12_build.rjs.html#run",
-    "href": "12_build.rjs.html#run",
-    "title": "Build",
-    "section": "Run",
-    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder."
   },
   {
     "objectID": "12_build.html#try-it",
@@ -2971,11 +2228,14 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#try-it",
-    "href": "12_build.rjs.html#try-it",
+    "objectID": "12_build.html#again",
+    "href": "12_build.html#again",
     "title": "Build",
-    "section": "Try it",
-    "text": "Try it\n\nDo this:\n\ncargo run\n\nSee this:\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s\n     Running `target/debug/throwaway_example`\nHello, world!"
+    "section": "Again!",
+    "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here)\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s",
+    "crumbs": [
+      "Build"
+    ]
   },
   {
     "objectID": "12_build.html#its-fast",
@@ -2988,13 +2248,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#its-fast",
-    "href": "12_build.rjs.html#its-fast",
-    "title": "Build",
-    "section": "It’s fast",
-    "text": "It’s fast\n\n0.56s -&gt; 0.00s\nThis is why we use languages which compile.\n\nPython took around .04s, for me.\n\ntime python3 -c \"print('Hello, world')\"\nThe results are:\n\nHello, world\n\nreal    0m0.039s\nuser    0m0.007s\nsys     0m0.008s\n\nGuess how long it takes to compile python, by the way."
-  },
-  {
     "objectID": "12_build.html#other-files",
     "href": "12_build.html#other-files",
     "title": "Build",
@@ -3003,213 +2256,6 @@
     "crumbs": [
       "Build"
     ]
-  },
-  {
-    "objectID": "12_build.html#programs-1",
-    "href": "12_build.html#programs-1",
-    "title": "Build",
-    "section": "Programs",
-    "text": "Programs\n\nWe can create programs but we also use existing programs.\nAs an example, consider the Firefox web-browser\n\nIf you use Chrome, keep that to yourself, that’s embarassing.\n\nThis is what “Firefox.exe” looks like on a Window device.\n\n\n\nFirefox.exe\n\nA{Ÿ@€ÿ\u0019w.\u000f·þ9Ï\u000fCñ~¿‰ó€Ë @€ÿ\u001a\u000f¶û\u000fCþD8ßu\u000fé¬%  Aƒù/\u000f„î%  L‹R\bHƒÂ\bHƒÀ\bM…Ò\u000f…wÿÿÿM…À\u000f„Ã\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-\u000f…“\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…À\u000f„|\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùc\u000f…P\u0002  D\u000f·B\u0002fE…À\u000f„A\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùo\u000f…\u0015\u0002  D\u000f·B\u0004fE…À\u000f„\u0006\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…Ú\u0001  D\u000f·B\u0006fE…À\u000f„Ë\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…Ÿ\u0001  D\u000f·B\bfE…À\u000f„\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùe\u000f…d\u0001  D\u000f·B\nfE…À\u000f„U\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…)\u0001  D\u000f·B\ffE…À\u000f„\u001a\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…î   D\u000f·B\u000efE…À\u000f„ß   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùp\u000f…³   D\u000f·B\u0010fE…À\u000f„¤   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùru|D\u000f·B\u0012fE…ÀtqE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùouID\u000f·B\u0014fE…Àt&gt;E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùcu\u0016fƒz\u0016 \u000f„*\u001c  ë   ƒú/\u000f„i#  L‹ HƒÀ\bM…À\u000f…GýÿÿHŒ$ð\u0001  è)˜  f\u000fïÀL„$ \u0007  fA\u000f@ fA\u000f@\u0010fA\u000f H„$à\u0002  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   è\u001bE\u0005 …À\u000fˆ\u001e#  L‹„$H\u0007  ¹ \u0010  1Òÿ\u0015\u001eû\u0005 H‰ÃH…À\u000f„;#  L´$@\u0007  AÇFà    AÆFø LŒ$à\u0002  AÇ\u0001   \u0002  H‰Ùº\u0001   M‰ðÿ\u0015õú\u0005 L‰ÿ…À\u000f„4#  €¼$8\u0007   \u000f…_#  D‹„$ \u0007  L¼$0\u0001  L‰ùL‰òè\u0019™  A€\u0018 \u000f…X#  L´$ \u0003  AÇFà\u0001   AÆFø 1ÉL‰òA¸ \u0002  ÿ\u00150ù\u0005 =  \u0002  t\b…À\u000f…\u0002!  ÿ\u0015\u000bù\u0005 \u000f·èÍ  \u0007€…À\u000fNèA¼)   @¶\u0001L=t˜\u0005 H‰ØHÿÀHƒø\u0002r    H‰Ùÿ\u0015°÷\u0005 @„ö\u000f…*\"  A€÷\u0001³\u00011íH\n\u0005¤\u0005 ÿ\u0015’ü\u0005 H…ÀL‹d$`\u000f…6#  L‹\u0007M…À\u000f„w\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-t\u001aƒú/\u000f„»!  L‹ HƒÀ\bM…ÀuâéJ\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…ÀtÓE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùlu«D\u000f·B\u0002fE…Àt E\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øa\u000f…jÿÿÿD\u000f·B\u0004fE…À\u000f„[ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øu\u000f…%ÿÿÿD\u000f·B\u0006fE…À\u000f„\u0016ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øn\u000f…àþÿÿD\u000f·B\bfE…À\u000f„ÑþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øc\u000f…›þÿÿD\u000f·B\nfE…À\u000f„ŒþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øh\u000f…VþÿÿD\u000f·B\ffE…À\u000f„GþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øe\u000f…\u0011þÿÿD\u000f·B\u000efE…À\u000f„\u0002þÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€ør\u000f…Ìýÿÿfƒz\u0010 \u000f…ÁýÿÿH‹\bH‰HøHƒÀ\bH…ÉuðAÿÍ°\u0001L‹d$`ë\u00021À„Û\u000f„Æ   A\bÇE1ÉAöÇ\u0001tyL‹\u0007M…ÀtqID$\u0010¹ÿ   A\u000f·\u0010ƒú-uIIP\u0002MP\u0004fAƒx\u0002-I\u000fDÒD\u000f·\u0002fE…Àt6E\u000f·ÐA9ÊD\u000fCÁEP¿E‰ÃA€Ë A€ú\u001aE\u000f¶ÓE\u000fCÐA€úfu\u000eéj   ƒú/\u000f„\u0010$  L‹ HƒÀ\bM…Àu™Aö×E\u000f¶ÇAƒà\u0001HŒ$ð\u0001  Hœ$ \u0007  H‰Úè\u000f˜  @Šs\u0010@„ö\u000f…à#  ƒ¼$ \u0007   I‰ÿu\u00041íë/H\n} \u0005 ÿ\u0015$ù\u0005 H…À\u000f…à%  H\n\n\nI would not regard that as readable to humans (depends on the human)",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#compilation-1",
-    "href": "12_build.html#compilation-1",
-    "title": "Build",
-    "section": "Compilation",
-    "text": "Compilation\n\nCompilation is the process that takes text-based code to whatever we saw on the last slide.\nCan be quite simple - we made hi_world, a program, already.\n\nNotably it didn’t do a lot.\n\nrustc takes a .rs file and makes an executable\n\na program, sort of\n\nExecutables run as command with ./ prefix\n\nThis differs from python3 which runs a script without creating a corresponding program.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#py-vs-.rs-1",
-    "href": "12_build.html#py-vs-.rs-1",
-    "title": "Build",
-    "section": ".py vs .rs",
-    "text": ".py vs .rs\nquarto-executable-code-5450563D\n%%| theme: Darkly\nflowchart LR\n  A(Python) --&gt; B[fname.py file]\n  B --&gt; C[python fname.py]\n  C --&gt; D{hello world}\n  E(Rust) --&gt; F[fname.rs  file]\n  F --&gt; G[rustc fname.rs]\n  G --&gt; H[./fname]\n  H --&gt; I{hello world}\n\nYou only have to compile once to have the executable forever.\nMost programs are executables, not scripts.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#rustc-1",
-    "href": "12_build.html#rustc-1",
-    "title": "Build",
-    "section": "Rustc",
-    "text": "Rustc\n\nrustc is rarely, if ever, used directly\n\nOver the years (since like, 1960) code has increased in complexity.\n\nMany files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)\nMany libraries (think NumPy, pandas, scikit)\nComplex file systems (01/rustup.md)\n\n\nThe solution was automation.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#build-systems-2",
-    "href": "12_build.html#build-systems-2",
-    "title": "Build",
-    "section": "Build Systems",
-    "text": "Build Systems\n\nWe don’t have a real equivalence to compilation for Python.\n\nThere is Numba\n\nWe do have a build system equivalent.\n\nI use flit, which is easy.\nI think there’s others… Setuptools? Hatchling?",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#flit-1",
-    "href": "12_build.html#flit-1",
-    "title": "Build",
-    "section": "Flit",
-    "text": "Flit\n\nFlit solves a novel problem for Python programers.\n\nNot: Let’s make some code that I can run.\nInstead: Let’s make code that can be used in code other people run.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#packaging-1",
-    "href": "12_build.html#packaging-1",
-    "title": "Build",
-    "section": "Packaging",
-    "text": "Packaging\n\nNumPy, pandas, and things like CS 151 PGL can be “built” into packages with Flit and friends.\n\nBasically, instead of running e.g. python3 mycode.py\nRun flit init to make a new folder, edit some code, then run flit publish to add it to pip\n\nTakeaway - package management and build systems work real well together.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#wheels-1",
-    "href": "12_build.html#wheels-1",
-    "title": "Build",
-    "section": "Wheels",
-    "text": "Wheels\n\nThe thing that flit and friends create and distribute is not a .py file.\nRather, they are “wheels” which are not human readable.\nA lot like compiled code\nTakeaway - a good way to think of Rust is that we’re writing packages for ourselves.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#cargo-1",
-    "href": "12_build.html#cargo-1",
-    "title": "Build",
-    "section": "Cargo",
-    "text": "Cargo\n\nWith Python, we use python3 (or pip, but perhaps as python3 -m pip).\nrustc is not really the equivalent to that:\nRather, we use cargo, the Rust build and package manager.\ncargo will handle any usage of rustc that we may need.\n\nWe can easily then distribute code across multiple files.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#buildpackage-1",
-    "href": "12_build.html#buildpackage-1",
-    "title": "Build",
-    "section": "Build+Package",
-    "text": "Build+Package\n\nCargo is Rust’s build system (like flit) and package manager (like pip).\nWe will use Cargo instead of rustc for the rest of the term.\n\nMy sense is that this is the industry standard.\n\nWe’ll step through an example, then you’ll do a (very simple) exercise.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#new-1",
-    "href": "12_build.html#new-1",
-    "title": "Build",
-    "section": "New",
-    "text": "New\n\nThe first thing to do with Cargo, as a rule, is great a new package.\n\nThis is kinda like creating a new .py file.\nIt is a bit more like creating a Python project from a template repository.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#do-it-1",
-    "href": "12_build.html#do-it-1",
-    "title": "Build",
-    "section": "Do it",
-    "text": "Do it\n\nTo do so:\n\ncargo new throwaway_example\n\ncargo is, well, Cargo\nnew creates a new package.\nthrowaway_example is the name of the package2.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#examine-1",
-    "href": "12_build.html#examine-1",
-    "title": "Build",
-    "section": "Examine",
-    "text": "Examine\n\nThe most natural thing is to see what has changed.\n\nls\n\nFor me, I see a new directory: throwaway_example\nI change into the directory to examine it.\n\ncd throwaway_example\nls\n\nNot much there:\n\nCargo.toml  src",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#aside-tree-1",
-    "href": "12_build.html#aside-tree-1",
-    "title": "Build",
-    "section": "Aside: Tree",
-    "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#main.rs-1",
-    "href": "12_build.html#main.rs-1",
-    "title": "Build",
-    "section": "main.rs",
-    "text": "main.rs\n\nCargo creates projects with a default main file.\n\n\n\nmain.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\nThe name “main” is basically mainful to Cargo - it says which, if multiple, .rs files to read first when trying to execute the code in a package.\n\nMake sure you understand that sentence.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#run-1",
-    "href": "12_build.html#run-1",
-    "title": "Build",
-    "section": "Run",
-    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#try-it-1",
-    "href": "12_build.html#try-it-1",
-    "title": "Build",
-    "section": "Try it",
-    "text": "Try it\n\nDo this:\n\ncargo run\n\nSee this:\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s\n     Running `target/debug/throwaway_example`\nHello, world!",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#again-1",
-    "href": "12_build.html#again-1",
-    "title": "Build",
-    "section": "Again!",
-    "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here) quarto-executable-code-5450563D\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#its-fast-1",
-    "href": "12_build.html#its-fast-1",
-    "title": "Build",
-    "section": "It’s fast",
-    "text": "It’s fast\n\n0.56s -&gt; 0.00s\nThis is why we use languages which compile.\n\nPython took around .04s, for me.\n\ntime python3 -c \"print('Hello, world')\"\nThe results are:\n\nHello, world\n\nreal    0m0.039s\nuser    0m0.007s\nsys     0m0.008s\n\nGuess how long it takes to compile python, by the way.",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.html#other-files-1",
-    "href": "12_build.html#other-files-1",
-    "title": "Build",
-    "section": "Other files",
-    "text": "Other files\n\nGo ahead and add another .rs file and see what happens.\nI’ll use this one.\n\n\n\nsecondary.rs\n\nfn main() {\n    println!(\"Goodbye, space!\");\n}\n\n# Fin\n\n:::",
-    "crumbs": [
-      "Build"
-    ]
-  },
-  {
-    "objectID": "12_build.rjs.html#other-files",
-    "href": "12_build.rjs.html#other-files",
-    "title": "Build",
-    "section": "Other files",
-    "text": "Other files\n\nGo ahead and add another .rs file and see what happens.\n\nAdd it to the src directory!\n\nI’ll use this one - I change filename and text, but\n\n\n\nsecondary.rs\n\nfn secondary() {\n    println!(\"Goodbye, space!\");\n}"
   },
   {
     "objectID": "12_build.html#run-it-again",
@@ -3232,20 +2278,6 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#run-it-again",
-    "href": "12_build.rjs.html#run-it-again",
-    "title": "Build",
-    "section": "Run it again…",
-    "text": "Run it again…\n\nNothing changes.\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\nThis is the same as adding another .py file then not using import or including its code in any other way."
-  },
-  {
-    "objectID": "12_build.rjs.html#swap-the-names.",
-    "href": "12_build.rjs.html#swap-the-names.",
-    "title": "Build",
-    "section": "Swap the names.",
-    "text": "Swap the names.\n\nI use mv (move) to change:\n\nmain.rs to old_main.rs\nsecondary.rs to main.rs\n\nThings change!\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\nerror[E0601]: `main` function not found in crate `throwaway_example`\n --&gt; src/main.rs:3:2\n  |\n3 | }\n  |  ^ consider adding a `main` function to `src/main.rs`\n\nFor more information about this error, try `rustc --explain E0601`.\nerror: could not compile `throwaway_example` (bin \"throwaway_example\") due to 1 previous error"
-  },
-  {
     "objectID": "12_build.html#requirements",
     "href": "12_build.html#requirements",
     "title": "Build",
@@ -3256,10 +2288,13 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#requirements",
-    "href": "12_build.rjs.html#requirements",
+    "objectID": "12_build.html#footnotes",
+    "href": "12_build.html#footnotes",
     "title": "Build",
-    "section": "Requirements",
-    "text": "Requirements\n\nYou need a main.rs with a function named main.\nnvim src/main.rs -&gt; Change “secondary” to “main” -&gt; “cargo run”\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s\n     Running `target/debug/throwaway_example`\nGoodbye, space!"
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nWell, kinda. We’ll get to that.↩︎",
+    "crumbs": [
+      "Build"
+    ]
   }
 ]
