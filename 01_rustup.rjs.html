@@ -464,8 +464,7 @@ Prof.&nbsp;Calvin
 <li>I recommend using Ubuntu distribution. You will be asked.</li>
 <li>I prefer <a href="https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-US&amp;gl=US">Windows Terminal</a>.
 <ul>
-<li>Windows key -&gt; “Terminal” -&gt; Enter</li>
-<li>Type <code>wsl</code></li>
+<li>Windows key -&gt; “Terminal” -&gt; Enter -&gt; <code>wsl</code></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -502,12 +501,8 @@ Prof.&nbsp;Calvin
 <li>Follow <a href="https://www.cygwin.com/install.html">this guide</a></li>
 </ul>
 </section>
-<section id="macos" class="slide level2">
-<h2>MacOS</h2>
-<ul>
-<li>MacOS should mostly work out-of-the-box.</li>
-<li>You need one thing: XCode</li>
-</ul>
+<section class="slide level2">
+
 </section></section>
 <section>
 <section id="rust" class="title-slide slide level1 center">
@@ -591,9 +586,570 @@ Prof.&nbsp;Calvin
 <li>Ensure you have an account on GitHub.</li>
 <li><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">Read More</a></li>
 </ul>
-
-
+</section>
+<section id="repository" class="slide level2">
+<h2>Repository</h2>
+<ul>
+<li>Create a repository for this class.</li>
+<li>Requirements
+<ul>
+<li>Name is <code>271rs</code></li>
+<li>Use <a href="https://github.com/new?template_name=271rs&amp;template_owner=cd-c89">this template</a></li>
+<li>May be public or private to you and me (<a href="https://github.com/cd-public/">cd-public</a>).
+<ul>
+<li><a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository">Read more</a></li>
+</ul></li>
+<li>Must email me a link to your repository from your <span class="citation" data-cites="willamette.edu">@willamette.edu</span> email.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource email number-lines code-with-copy"><code class="sourceCode email"><span id="cb9-1"><a></a>https://github.com/cd-example/271rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="remote" class="slide level2">
+<h2>Remote</h2>
+<ul>
+<li>We have now created a <em>remote</em> repository on GitHub.
+<ul>
+<li>Remote as in “not on our computer we are using right now”</li>
+<li>As in “on a web server somewhere”</li>
+</ul></li>
+<li>No we will make a <em>local</em> repository on our own computer.</li>
+<li>Then connect them!</li>
+</ul>
 </section></section>
+<section>
+<section id="ssh" class="title-slide slide level1 center">
+<h1>ssh</h1>
+<ul>
+<li>We know how to deal with a very important topic:</li>
+<li><em>Security</em></li>
+<li>When moving executable code between websites and our system, we have to be careful that it is:
+<ul>
+<li>Not tampered with</li>
+<li>Made by who said made it</li>
+</ul></li>
+</ul>
+</section>
+<section id="security-concession" class="slide level2">
+<h2>Security Concession</h2>
+<ul>
+<li>We will use SSH, the “Secure Shell Protocol”</li>
+<li>It is supported by <code>git</code>/GitHub and all major operating systems.</li>
+</ul>
+</section>
+<section id="keygen" class="slide level2">
+<h2>Keygen</h2>
+<ul>
+<li>SSH is based around having “keys”
+<ul>
+<li>Under the hood, these are special numbers with special properties related to primes, basically.</li>
+</ul></li>
+<li>We generate a special unique key we can use as a password or signature.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="prompts" class="slide level2">
+<h2>Prompts</h2>
+<ul>
+<li>This example uses (1) the default location and (2) no passphrase.
+<ul>
+<li>This is less secure but easier to manage.</li>
+<li>Work in a passphrase as soon as you can!</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Generating</span> public/private ed25519 key pair.</span>
+<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> file in which to save the key <span class="er">(</span><span class="ex">/home/calvin/.ssh/id_ed25519</span><span class="kw">)</span><span class="bu">:</span> </span>
+<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> passphrase <span class="er">(</span><span class="ex">empty</span> for no passphrase<span class="kw">)</span><span class="bu">:</span> </span>
+<span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> same passphrase again: </span>
+<span id="cb11-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> identification has been saved in /home/calvin/.ssh/id_ed25519</span>
+<span id="cb11-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat ~/.ssh/id_ed25519.pub </span>
+<span id="cb11-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-ed25519</span> AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You now have a key! Let’s find a lock.</li>
+</ul>
+</section>
+<section id="github-1" class="slide level2">
+<h2>GitHub</h2>
+<ul>
+<li>The purpose of this exercise is to connect to GitHub!</li>
+<li>We will mostly use <code>git</code> for that, but we can check if we have a connection easily:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection">Read more</a></li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>This is what I see:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> authenticity of host <span class="st">'github.com (140.82.116.3)'</span> can<span class="st">'t be established.</span></span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="st">ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.</span></span>
+<span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a><span class="st">This key is not known by any other names.</span></span>
+<span id="cb13-4"><a aria-hidden="true" tabindex="-1"></a><span class="st">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Before saying “yes” or “no” compare versus the “public SSH key fingerprints”
+<ul>
+<li>Check them <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">here</a></li>
+</ul></li>
+<li>By default, the modern keygen uses “Ed25519” so compare those keys, and click “yes” if they match!</li>
+</ul>
+</section>
+<section id="connecting" class="slide level2">
+<h2>Connecting</h2>
+<ul>
+<li>After confirming the key correctness, you will likely see this.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Are</span> you sure you want to continue connecting <span class="er">(</span><span class="ex">yes/no/[fingerprint]</span><span class="kw">)</span><span class="ex">?</span> yes</span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Warning:</span> Permanently added <span class="st">'github.com'</span> <span class="er">(</span><span class="ex">ED25519</span><span class="kw">)</span> <span class="ex">to</span> the list of known hosts.</span>
+<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">git@github.com:</span> Permission denied <span class="er">(</span><span class="ex">publickey</span><span class="kw">)</span><span class="bu">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="one-way" class="slide level2">
+<h2>One Way</h2>
+<ul>
+<li>Now we have instructed <em>our</em> computer to trust GitHub.</li>
+<li>To save our code to GitHub, we must also get GitHub to trust <em>our</em> computer.</li>
+<li>We generated our key, now we must match it to our lock on GitHub!</li>
+</ul>
+</section>
+<section id="github-pt-1" class="slide level2">
+<h2>GitHub pt 1</h2>
+<ul>
+<li>We follow <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">this guide</a></li>
+<li>Return to GitHub and in the top right click your profile.
+<ul>
+<li>For me, a picture of myself.</li>
+</ul></li>
+<li>Scroll down to “Settings” and click.
+<ul>
+<li>Last in 2nd grouping, for me.</li>
+</ul></li>
+</ul>
+</section>
+<section id="github-pt-2" class="slide level2">
+<h2>GitHub pt 2</h2>
+<ul>
+<li>Within settings left-side menu click “SSH and GPG keys”
+<ul>
+<li>Middle of 2nd group (Access) for me.</li>
+</ul></li>
+<li>Within the center block click <span style="background-color:#238636;color:white">New SSH key</span> in the top right of the block.</li>
+</ul>
+</section>
+<section id="prompt" class="slide level2">
+<h2>Prompt</h2>
+<ul>
+<li>I get a page “Add new SSH Key”.</li>
+<li>I provide a title (like “For 271rs class” or “Laptop”)</li>
+<li>Now we’ll get our key from our system to use.</li>
+<li>Recall we previously generated a key to the default location, like <code>/home/calvin/.ssh/id_ed25519</code>
+<ul>
+<li>If you don’t remember, just type <code>ssh-keygen</code> and it’ll show you.</li>
+</ul></li>
+</ul>
+</section>
+<section id="copypaste" class="slide level2">
+<h2>Copy/Paste</h2>
+<ul>
+<li>To get the key for GitHub, we can can
+<ul>
+<li><code>cat</code> that file in the command line</li>
+<li>Copy from the command line</li>
+<li>Paste into the GitHub “Key” field</li>
+<li>Click <span style="background-color:#238636;color:white">Add SSH key</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="ssh-test" class="slide level2">
+<h2>SSH Test</h2>
+<ul>
+<li>After adding the key to the account, I confirm via SSH like so:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I see the following:</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Hi</span> cd-public! You<span class="st">'ve successfully authenticated, but GitHub does not provide shell access.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="clone" class="title-slide slide level1 center">
+<h1>Clone</h1>
+<ul>
+<li>With <code>ssh</code> configured on your local device and on the remote service, you can clone your <code>271rs</code>.
+<ul>
+<li>This will be a another copy of the same repository you use.</li>
+<li>It based off of (templated off of) a repository I made under my account.</li>
+<li>Template <span class="math inline">\(\neq\)</span> clone.</li>
+</ul></li>
+</ul>
+</section>
+<section id="clone-pt1" class="slide level2">
+<h2>Clone pt1</h2>
+<ul>
+<li>Navigate to the repository webpage, like <code>github.com/cd-example/271rs</code></li>
+<li>Find the <span style="background-color:#238636;color:white">&lt;&gt; Code</span> button in the top right.</li>
+<li>Click it:
+<ul>
+<li>Select the top “local” tab (for or local repository)</li>
+<li>Select the SSH option (for our SSH key)</li>
+<li>Copy the name, like</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>git@github.com:cd-example/271rs</p>
+</blockquote>
+</section>
+<section id="clone-pt2" class="slide level2">
+<h2>Clone pt2</h2>
+<ul>
+<li>Within terminal, where you keep files for this class.
+<ul>
+<li>Probably just do</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a></a><span class="bu">cd</span> ~</span>
+<span id="cb17-2"><a></a><span class="fu">git</span> clone git@github.com:cd-example/271rs </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>Verify by listing the contents of the <code>271rs</code> directory via:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="fu">ls</span> 271rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You should see a <code>README.md</code> and a <code>LICENSE</code></li>
+</ul>
+</section>
+<section id="enter-the-repository" class="slide level2">
+<h2>Enter the Repository</h2>
+<ul>
+<li>To change the directory within which you are working in the commandline from your home to the repository for this class, do:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a></a><span class="bu">cd</span> 271rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Verify the change via</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This will give the full address of your class folder, ending in <code>271rs</code></li>
+</ul>
+</section></section>
+<section>
+<section id="exercise" class="title-slide slide level1 center">
+<h1>Exercise</h1>
+
+</section>
+<section id="today-1" class="slide level2">
+<h2>Today</h2>
+<ul>
+<li>To complete the lab today, add a <code>01/rustup.md</code> file to your <code>271rs</code></li>
+<li>Send me a link to a <code>271rs</code> repository I have permission to view.
+<ul>
+<li>To be clear:
+<ul>
+<li>I must receive an email with a hyperlink to a GitHub repository.</li>
+<li>I must have view access to public repository or a repository on which I am added as a collaborator.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="names-matter" class="slide level2">
+<h2>Names Matter</h2>
+<ul>
+<li>Your submission will be tested be a script.
+<ul>
+<li>The file must be named <code>rustup.md</code></li>
+<li>It must be in a folder named <code>01</code></li>
+<li>The repository must be named <code>271rs</code></li>
+<li>No other arrangement constitutes a lab submission.</li>
+<li>The contents of <code>rustup.md</code> are not relevant.</li>
+</ul></li>
+</ul>
+</section>
+<section id="useful-commands" class="slide level2">
+<h2>Useful commands</h2>
+<ul>
+<li>You may use <code>ls</code> to list files/folders.</li>
+<li>You make use <code>mkdir 01</code> to creat the <code>01</code> folder.</li>
+<li>You may use <code>vim 01/rustup.md</code> to edit the <code>rustup.md</code> file in the <code>01</code> folder.
+<ul>
+<li>The <code>01</code> folder must exist to do this.</li>
+</ul></li>
+<li>Learn more <a href="https://cd-public.github.io/scicom/03_shell.html#files">here</a></li>
+</ul>
+</section>
+<section id="file-editor" class="slide level2">
+<h2>File Editor</h2>
+<ul>
+<li>Let’s make a new file.</li>
+<li>I recommend using <code>vim</code>, <code>neovim</code>, or <code>helix</code>.</li>
+<li><em>Probably</em> already have it on MacOS.</li>
+<li>On WSL install via</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install vim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="file-editting" class="slide level2">
+<h2>File Editting</h2>
+<ul>
+<li>To create said file, type <code>vim</code> then the name of the file.</li>
+<li>If you just cloned <code>271rs</code>, there will be a <code>271rs</code> folder into which you should create a <code>01</code> folder.
+<ul>
+<li>Stands for week 0, day 1</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a></a><span class="ex">vim</span> 01/rustup.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="using-vim" class="slide level2">
+<h2>Using <code>vim</code></h2>
+<ul>
+<li>There’s more to life that using <code>vim</code> but basically:
+<ul>
+<li>Press <code>i</code> to enter “insert mode” (so you can type)</li>
+<li>When you are done typing, press ESC then type <code>:x</code> to save and exit.</li>
+<li><a href="https://cd-public.github.io/scicom/02_neovim.html">Read more</a></li>
+</ul></li>
+<li>Just type some notes you have from today.</li>
+</ul>
+</section>
+<section id="check-status" class="slide level2">
+<h2>Check Status</h2>
+<ul>
+<li>You have now added a new file to your repository.</li>
+<li>I consult status often, yours will likely look like this:</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch master</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> commits yet</span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb23-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb23-7"><a aria-hidden="true" tabindex="-1"></a>        <span class="ex">01/rustup.md</span></span>
+<span id="cb23-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">nothing</span> added to commit but untracked files present <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="add" class="slide level2">
+<h2>Add</h2>
+<ul>
+<li>The first thing we not is that there are “Untracked files”</li>
+<li>While we made a <code>hello.py</code> and have it in our <code>hello-world</code> directory, it isn’t yet “tracked” by <code>git</code>!</li>
+<li>By default, <code>git</code> only keeps track of what we tell it to!</li>
+<li>So, we tell it to track our code!</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add 01/rustup.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="status" class="slide level2">
+<h2>Status</h2>
+<ul>
+<li>I check status again</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch master</span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> commits yet</span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a>        <span class="ex">new</span> file:   01_rustup.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="commit" class="slide level2">
+<h2>Commit</h2>
+<ul>
+<li>With <code>git</code> now aware of <code>hello.py</code>, we need to commit or changes for <code>git</code> to save them.
+<ul>
+<li>Similar to saving files to the file system.</li>
+<li>There are, of course, ways to automate this.</li>
+</ul></li>
+<li>This probably won’t work at first (next slide!) but try:</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"first commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="a--m" class="slide level2">
+<h2>“-a -m”</h2>
+<ul>
+<li>Commits require a commit message (like a version name or number) so specify with <code>-m</code></li>
+<li>Usually I provide <code>-a</code> to commit “all” files.</li>
+<li>I usually make some effort to make my life easier with specific commit messages, perhaps listing:
+<ul>
+<li>What I’m trying to do</li>
+<li>Why?</li>
+</ul></li>
+</ul>
+</section>
+<section id="config" class="slide level2">
+<h2>Config</h2>
+<ul>
+<li>If you haven’t used <code>git</code> on your system before, you’ll have to tell <code>git</code> who you are.
+<ul>
+<li>In <code>git</code> there are no <em>anonymous</em> changes - you have to sign every change you make.</li>
+</ul></li>
+<li>You’ll be prompted to provide something like this:</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span>
+<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="my-name" class="slide level2">
+<h2>My name</h2>
+<ul>
+<li>I often include which computer I’m using in my name and also don’t use a real email address.
+<ul>
+<li>My GitHub account is already attached to an email address, so I use a throwaway for commits.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"prof_calvin@c89&gt;rs.edu"</span></span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Calvin for Class"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="looping-back" class="slide level2">
+<h2>Looping Back</h2>
+<ul>
+<li>Once you have provided your identity, you can successfuly complete a commit.</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"first commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This will:
+<ul>
+<li>Mark current code as a version, named by your commit message.</li>
+</ul></li>
+<li>This won’t:
+<ul>
+<li>Do <em>anything</em> to GitHub.</li>
+</ul></li>
+</ul>
+</section>
+<section id="push" class="slide level2">
+<h2>Push</h2>
+<ul>
+<li>A commit saves changing on your computer.</li>
+<li>To save on GitHub, push changes to the cloud</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>After a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!</li>
+</ul>
+</section>
+<section id="diagnostics" class="slide level2">
+<h2>Diagnostics</h2>
+<ul>
+<li>For example, you might see the following:</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Enumerating</span> objects: 27, done.</span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Counting</span> objects: 100% <span class="er">(</span><span class="ex">27/27</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Delta</span> compression using up to 22 threads</span>
+<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Compressing</span> objects: 100% <span class="er">(</span><span class="ex">15/15</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Writing</span> objects: 100% <span class="er">(</span><span class="ex">16/16</span><span class="kw">)</span><span class="ex">,</span> 98.54 KiB <span class="kw">|</span> <span class="ex">2.46</span> MiB/s, done.</span>
+<span id="cb31-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Total</span> 16 <span class="er">(</span><span class="ex">delta</span> 11<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
+<span id="cb31-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Resolving deltas: 100% <span class="er">(</span><span class="ex">11/11</span><span class="kw">)</span><span class="ex">,</span> completed with 10 local objects.</span>
+<span id="cb31-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">To</span> github.com:cd-example/271rs.git</span>
+<span id="cb31-9"><a aria-hidden="true" tabindex="-1"></a>   <span class="ex">adaa3a7..ba3c794</span>  main <span class="at">-</span><span class="op">&gt;</span> main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verify-2" class="slide level2">
+<h2>Verify</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Ensure you have a <code>01/rustup.md</code></label></li>
+<li><label><input type="checkbox">Email me.</label></li>
+</ul>
+</section></section>
+<section>
+<section id="everyday-use" class="title-slide slide level1 center">
+<h1>Everyday Use</h1>
+
+</section>
+<section id="easier-after" class="slide level2">
+<h2>Easier After</h2>
+<ul>
+<li>A lot of what we did, we only have to do once:
+<ul>
+<li><code>git config</code></li>
+<li><code>ssh-keygen</code></li>
+<li><code>set origin</code></li>
+</ul></li>
+<li>Many are special cases:
+<ul>
+<li>Only have to make new repositories for… new repositories (likely projects)</li>
+<li>Only have to <code>git add</code> for new files.</li>
+</ul></li>
+</ul>
+</section>
+<section id="quick-example" class="slide level2">
+<h2>Quick Example</h2>
+<ul>
+<li>Let’s add <code>02/hi_world.rs</code></li>
+<li>We’ll create a new file at the command line.</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> 02/hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Add any text</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hi_world.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb33" data-filename="hi_world.rs"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>Wait I don<span class="st">'t know rust yet.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="add-commit-push" class="slide level2">
+<h2>Add, Commit, Push</h2>
+<ul>
+<li>To get the code onto Github, add to the repo:</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add hi_world.rs </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Commit changes to a version:</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"You say hello, I say goodbye"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Push to GitHub</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>And that’s that!</li>
+</ul>
+</section>
+<section id="altogether" class="slide level2">
+<h2>Altogether</h2>
+<ul>
+<li>For a single copy/paste</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add bye.py</span>
+<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"You say hello, I say goodbye"</span></span>
+<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>If it works, you’ll see the change on GitHub!</li>
+</ul>
+</section>
+<section id="again" class="slide level2">
+<h2>Again</h2>
+<ul>
+<li>Perhaps we wish to be more correct with a well-formed Rust comment.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bye.py</strong></pre>
+</div>
+<div class="sourceCode" id="cb38" data-filename="bye.py"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="op">//</span> TODO: Homework <span class="dv">0</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>We’ll learn Rust latter.</li>
+</ul>
+</section>
+<section id="no-add" class="slide level2">
+<h2>No Add</h2>
+<ul>
+<li>Don’t need an add this time!</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"Rust comment"</span></span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pulling" class="slide level2">
+<h2>Pulling</h2>
+<ul>
+<li>To get remote changes reflected locally, simply use</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This will be how assignment feedback is distributed.</li>
+<li>Just <code>git pull</code> every time you start working, basically.</li>
+<li>Also good when you are working on multiple devices.</li>
+</ul>
+</section></section>
+<section id="fin" class="title-slide slide level1 center">
+<h1>Fin</h1>
+
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
