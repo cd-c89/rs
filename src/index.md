@@ -31,12 +31,8 @@ format: html
 
 |Week|Date (M)|Lecture (M)|Lab (W)|HW (F)|
 |:--:|:---|:----|:-------|:-------|
-<<<<<<< HEAD
 |0x0|08/25|[Welcome](00_welcome.qmd)|[Rustup](01_rustup.md)|[Hi world](02_hiworld.md)|
-=======
-|0x0|08/25|[Welcome](00_welcome.qmd)|[Rustup](01_rustup.md)|Hi world|
->>>>>>> 88d5569f117a55a2960939684283dc3f8d56383e
-|0x1|09/01|*Off*|Cargo|Hi cargo|
+|0x1|09/01|*Off*|[Build](12_build.qmd)|Hi cargo|
 |0x2|09/08|Options|Guess|Wordle|
 |0x3|09/15|Bits|Hamming|Sigmas|
 |0x4|09/22|SHA2|Endian|Chunk|
@@ -50,7 +46,8 @@ format: html
 |0xC|11/17|VCS||
 |0xD|11/24|Spectre|*Off*|
 |0xE|11/24|Meltdown|Hypers|VCS.rs|
-
+<!--
 Think I need string edit distance or patches somewhere. 
 
 Hamming teases it at least.
+-->
