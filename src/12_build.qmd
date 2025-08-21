@@ -1,0 +1,304 @@
+---
+title: Build
+---
+
+## Announcements
+
+- The second homework, "Hi cargo", is ready after this class.
+  - It is comically trivial.
+  - Mostly makes sure you have everything set up.
+- Due Friday, 12 Sept. at 1440 ET.
+
+## Today
+
+- Hybrid Day
+- Build system/package manager
+    - Theory behind Cargo
+    - Trap in Cargo
+    - Use Cargo
+
+# Build Systems
+
+## Interpretation
+
+- We once again address *interpretation* vs. *compilation*
+    - I think of this as *programming* vs. *scripting*
+    - We can think in terms of languages - *Rust/C* vs. *Python/JavaScript*
+
+## Scripts
+
+- I regard a script a:
+    - Text file
+    - Which describes actions for a computer
+    - Readable to humans
+    - And readable to a *program* (like `python`) which can direct the computer to act
+```{.python filename="what_up_earth.py"}
+print("what up earth")
+```
+- We note that this is much closer to being a text file that it is to being a program.
+
+## Programs
+
+- We can create programs but we also use existing programs.
+- As an example, consider the Firefox web-browser
+    - If you use Chrome, keep that to yourself, that's embarassing. 
+- This is what "Firefox.exe" looks like on a Window device.
+```{.lisp filename="Firefox.exe"}
+A{Ÿ@€ÿw.·þ9ÏCñ~¿‰ó€Ë @€ÿ¶ûCþD8ßué¬%  Aƒù/„î%  L‹RHƒÂHƒÀM…Ò…wÿÿÿM…À„Ã  ID$¹ÿ   A·ƒú-…“  IPMHfAƒx-IDÑD·fE…À„|  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùc…P  D·BfE…À„A  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùo…  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…Ú  D·BfE…À„Ë  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…Ÿ  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùe…d  D·B
+fE…À„U  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…)  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…î   D·BfE…À„ß   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùp…³   D·BfE…À„¤   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùru|D·BfE…ÀtqE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùouID·BfE…Àt>E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùcufƒz „*  ë	ƒú/„i#  L‹ HƒÀM…À…GýÿÿHŒ$ð  è)˜  fïÀL„$   fA@ fA@fA H„$à  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   èE …Àˆ#  L‹„$H  ¹   1Òÿû H‰ÃH…À„;#  L´$@  AÇFà    AÆFø LŒ$à  AÇ	  H‰Ùº   M‰ðÿõú L‰ÿ…À„4#  €¼$8   …_#  D‹„$   L¼$0  L‰ùL‰òè™  A€ …X#  L´$   AÇFà   AÆFø 1ÉL‰òA¸	  ÿ0ù =	  t…À…!  ÿù ·èÍ  €…ÀNèA¼)   @¶L=t˜ H‰ØHÿÀHƒør	H‰Ùÿ°÷ @„ö…*"  A€÷³1íH
+¤ ÿ’ü H…ÀL‹d$`…6#  L‹M…À„w  ID$¹ÿ   A·ƒú-tƒú/„»!  L‹ HƒÀM…ÀuâéJ  IPMHfAƒx-IDÑD·fE…ÀtÓE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùlu«D·BfE…Àt E·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øa…jÿÿÿD·BfE…À„[ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øu…%ÿÿÿD·BfE…À„ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øn…àþÿÿD·BfE…À„ÑþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øc…›þÿÿD·B
+fE…À„ŒþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øh…VþÿÿD·BfE…À„GþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øe…þÿÿD·BfE…À„þÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€ør…Ìýÿÿfƒz …ÁýÿÿH‹H‰HøHƒÀH…ÉuðAÿÍ°L‹d$`ë1À„Û„Æ   AÇE1ÉAöÇtyL‹M…ÀtqID$¹ÿ   A·ƒú-uIIPMPfAƒx-IDÒD·fE…Àt6E·ÐA9ÊDCÁEP¿E‰ÃA€Ë A€úE¶ÓECÐA€úfuéj   ƒú/„$  L‹ HƒÀM…Àu™Aö×E¶ÇAƒàHŒ$ð  Hœ$   H‰Úè˜  @Šs@„ö…à#  ƒ¼$    I‰ÿu1íë/H
+}  ÿ$ù H…À…à%  H
+```
+- I would not regard that as readable to humans (depends on the human)
+
+## Compilation
+
+- Compilation is the process that takes text-based code to whatever we saw on the last slide.
+- Can be quite simple - we made `hi_world`, a program, already.
+    - Notably it didn't do a lot.
+- `rustc` takes a `.rs` file and makes an executable 
+  - a program, sort of
+- Executables run as command with `./` prefix
+  - This differs from `python3` which runs a script **without** creating a corresponding program.
+
+## .py vs .rs
+
+```{mermaid}
+%%| theme: Darkly
+flowchart LR
+  A(Python) --> B[fname.py file]
+  B --> C[python fname.py]
+  C --> D{hello world}
+  E(Rust) --> F[fname.rs  file]
+  F --> G[rustc fname.rs]
+  G --> H[./fname]
+  H --> I{hello world}
+```
+
+- _You only have to compile once to have the executable forever._
+- _Most programs are executables, not scripts._
+
+## Rustc
+
+- `rustc` is rarely, if ever, used *directly*
+  - Over the years (since like, 1960) code has increased in complexity.
+    - Many files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)
+    - Many libraries (think NumPy, **pandas**, scikit)
+    - Complex file systems (01/rustup.md)
+- The solution was automation.
+
+## Build Systems
+
+- We don't have a real equivalence to compilation for Python.
+    - There is [Numba](https://cd-public.github.io/scicom/0C_numba.html)
+- We do have a build system equivalent.
+    - I use flit, which is easy.
+    - I think there's others... Setuptools? Hatchling?
+    
+## Flit
+
+- Flit solves a novel problem for Python programers.
+    - **Not**: Let's make some code that I can run.
+    - **Instead**: Let's make code that can be used in code other people run.
+    
+## Packaging
+    
+- NumPy, **pandas**, and things like CS 151 PGL can be "built" into packages with Flit and friends.
+    - Basically, instead of running e.g. `python3 mycode.py`
+    - Run `flit init` to make a new folder, edit some code, then run `flit publish` to add it to `pip`
+- Takeaway - package management and build systems work *real* well together.
+
+## Wheels
+
+- The thing that `flit` and friends create and distribute is not a `.py` file.
+- Rather, they are "wheels" which are not human readable.
+- *A lot like compiled code*
+- Takeaway - a good way to think of Rust is that we're writing packages for ourselves.
+
+## Cargo
+
+- With Python, we use `python3` (or `pip`, but perhaps as `python3 -m pip`).
+- `rustc` is not really the equivalent to that:
+- Rather, we use `cargo`, the Rust build and package manager.
+- `cargo` will handle any usage of `rustc` that we may need.
+    - We can easily then distribute code across multiple files.
+    
+# Cargo New
+
+## Build+Package
+
+- Cargo is Rust’s *build system* (like `flit`) and *package manager* (like `pip`).
+- We will use Cargo instead of `rustc` for the rest of the term.
+    - My sense is that this is the industry standard.
+- We'll step through an example, then you'll do a (very simple) exercise.
+
+## New
+
+- The first thing to do with Cargo, as a rule, is great a new package.
+    - This is *kinda* like creating a new `.py` file.
+    - It is a bit more like creating a Python project from a template repository.
+    
+## Do it
+    
+- To do so:
+
+```{.bash}
+cargo new throwaway_example
+```
+
+- `cargo` is, well, Cargo
+- `new` creates a new package.
+- `throwaway_example` is the name of the package[^1].
+
+[^1]: Well, kinda. We'll get to that.
+
+## Examine
+
+- The most natural thing is to see what has changed.
+```{.bash}
+ls
+```
+- For me, I see a new directory: `throwaway_example`
+- I change into the directory to examine it.
+```{.bash}
+cd throwaway_example
+ls
+```
+- Not much there:
+```{.bash}
+Cargo.toml  src
+```
+
+## Aside: Tree
+
+- Can also see directory structure.
+- Install `tree` with your preferred installer (perhaps `apt` or `brew`)
+```{.bash}
+sudo apt install tree
+```
+- Then use `tree` instead of `ls`
+```{.bash}
+.
+├── Cargo.toml
+└── src
+    └── main.rs
+
+1 directory, 2 files
+```
+
+## main.rs
+
+- Cargo creates projects with a default main file.
+```{.rs filename="main.rs"}
+fn main() {
+    println!("Hello, world!");
+}
+```
+- The name "main" is basically mainful to Cargo - it says which, if multiple, `.rs` files to read first when trying to execute the code in a package.
+    - Make sure you understand that sentence.
+ 
+# Cargo Run
+ 
+## Run
+
+- `cargo run` is probably our closest equivalent to `python3 throwaway_example.py` or the "Run" button in VS Code.
+- Of note, you can simply do "new" then "run".
+    - "New" creates a new folder.
+    - "Run" must be done from *within* that folder.
+
+## Try it
+
+- Do this:
+```{.bash}
+cargo run
+```
+- See this:
+```{.bash}
+   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
+     Running `target/debug/throwaway_example`
+Hello, world!
+```
+
+## Again!
+
+- If you run again, the process will:
+    - Skip the compile step.
+    - Be *way* faster (&infin;x reported here)
+```{bash}
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/throwaway_example`
+Hello, world!
+```
+- 0.56s -> 0.00s
+
+## It's fast
+
+- 0.56s -> 0.00s
+- This is why we use languages which compile.
+    - Python took around .04s, for me.
+```{.bash}
+time python3 -c "print('Hello, world')"
+```
+- The results are:
+```{.bash}
+Hello, world
+
+real    0m0.039s
+user    0m0.007s
+sys     0m0.008s
+```
+- Guess how long it takes to compile `python`, by the way.
+
+## Other files
+
+- Go ahead and add another `.rs` file and see what happens.
+    - Add it to the `src` directory!
+- I'll use this one - I change filename and text, but 
+```{.rs filename="secondary.rs"}
+fn secondary() {
+    println!("Goodbye, space!");
+}
+```
+
+## Run it again...
+
+- Nothing changes.
+```{.bash}
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/throwaway_example`
+Hello, world!
+```
+- This is the same as adding another `.py` file then not using `import` or including its code in any other way.
+
+## Swap the names.
+
+- I use `mv` (move) to change:
+    - `main.rs` to `old_main.rs`
+    - `secondary.rs` to `main.rs`
+- Things change!
+```{.bash}
+   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)
+error[E0601]: `main` function not found in crate `throwaway_example`
+ --> src/main.rs:3:2
+  |
+3 | }
+  |  ^ consider adding a `main` function to `src/main.rs`
+
+For more information about this error, try `rustc --explain E0601`.
+error: could not compile `throwaway_example` (bin "throwaway_example") due to 1 previous error
+```
+
+## Requirements
+
+- You need a `main.rs` with a function named `main`.
+- `nvim src/main.rs` -> Change "secondary" to "main" -> "cargo run"
+```{.bash}
+   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s
+     Running `target/debug/throwaway_example`
+Goodbye, space!
+```
+
+# Fin

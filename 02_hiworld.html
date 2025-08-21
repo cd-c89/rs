@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="">
+
+<title>Hi world – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12_build.html" rel="next">
+<link href="./01_rustup.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_hiworld.html">Hi world</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#sketch" id="toc-sketch" class="nav-link" data-scroll-target="#sketch">Sketch</a></li>
+  <li><a href="#pre-flight-checks" id="toc-pre-flight-checks" class="nav-link" data-scroll-target="#pre-flight-checks">Pre-flight Checks</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
+  </ul></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a>
+  <ul class="collapse">
+  <li><a href="#new-folder" id="toc-new-folder" class="nav-link" data-scroll-target="#new-folder">New Folder</a></li>
+  <li><a href="#new-file" id="toc-new-file" class="nav-link" data-scroll-target="#new-file">New File</a></li>
+  <li><a href="#new-program" id="toc-new-program" class="nav-link" data-scroll-target="#new-program">New Program</a></li>
+  </ul></li>
+  <li><a href="#hi-world" id="toc-hi-world" class="nav-link" data-scroll-target="#hi-world">Hi world</a>
+  <ul class="collapse">
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#writing-and-running-a-rust-program" id="toc-writing-and-running-a-rust-program" class="nav-link" data-scroll-target="#writing-and-running-a-rust-program">Writing and Running a Rust Program</a>
+  <ul class="collapse">
+  <li><a href="#rs" id="toc-rs" class="nav-link" data-scroll-target="#rs">.rs</a></li>
+  <li><a href="#rustc" id="toc-rustc" class="nav-link" data-scroll-target="#rustc">rustc</a></li>
+  <li><a href="#verify" id="toc-verify" class="nav-link" data-scroll-target="#verify">Verify</a></li>
+  <li><a href="#run" id="toc-run" class="nav-link" data-scroll-target="#run">Run</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#anatomy-of-a-rust-program" id="toc-anatomy-of-a-rust-program" class="nav-link" data-scroll-target="#anatomy-of-a-rust-program">Anatomy of a Rust Program</a>
+  <ul class="collapse">
+  <li><a href="#the-first-piece" id="toc-the-first-piece" class="nav-link" data-scroll-target="#the-first-piece">The first piece</a></li>
+  <li><a href="#white-space-and" id="toc-white-space-and" class="nav-link" data-scroll-target="#white-space-and">White space and <code>{}</code></a></li>
+  <li><a href="#rustfmt" id="toc-rustfmt" class="nav-link" data-scroll-target="#rustfmt">rustfmt</a></li>
+  <li><a href="#function-body" id="toc-function-body" class="nav-link" data-scroll-target="#function-body">Function Body</a></li>
+  <li><a href="#printing" id="toc-printing" class="nav-link" data-scroll-target="#printing">Printing</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings">Strings</a></li>
+  <li><a href="#semicolons" id="toc-semicolons" class="nav-link" data-scroll-target="#semicolons">Semicolons</a></li>
+  </ul></li>
+  <li><a href="#fin" id="toc-fin" class="nav-link" data-scroll-target="#fin">Fin</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Hi world</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Due 5 Sep 1440 ET</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<section id="sketch" class="level2">
+<h2 class="anchored" data-anchor-id="sketch">Sketch</h2>
+<ul>
+<li>By convention, the first program in a new language is “Hello, world!”</li>
+<li>Rust follows this convention in the Rust Book.
+<ul>
+<li>We basically do <a href="https://doc.rust-lang.org/book/ch01-02-hello-world.html">Chapter 1.2</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="pre-flight-checks" class="level2">
+<h2 class="anchored" data-anchor-id="pre-flight-checks">Pre-flight Checks</h2>
+<ul>
+<li>You should have
+<ul>
+<li><code>git</code> installed and working.</li>
+<li>A repository named <code>271rs</code>, both a local repository on your device and a remote repository on GitHub.</li>
+<li>An editor, which really should be text-based, in-console text editor, but I can’t actually ban you from using VS Code.</li>
+<li><code>rustc</code> installed and working.</li>
+</ul></li>
+<li>If you miss any of this, back to <a href="./01_rustup.html">lab</a>.</li>
+</ul>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<ul>
+<li>To complete this assignment, you must:
+<ul>
+<li>Create a <code>02/hiworld.rs</code> file in your <code>271rs</code> repository.</li>
+<li>Ensure this file:
+<ul>
+<li>Is present in the remote repository on GitHub, to which I have access after the lab, and…</li>
+<li>That the file can be compiled, as specified below, and…</li>
+<li>The executable produced by compilation prints “Hi world”.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="review" class="level1">
+<h1>Review</h1>
+<section id="new-folder" class="level2">
+<h2 class="anchored" data-anchor-id="new-folder">New Folder</h2>
+<ul>
+<li>You will need to make an <code>02</code> folder in <code>271rs</code> to save your work.</li>
+<li>Ensure your shell/terminal/console/command line is in the <code>271rs</code> repository.
+<ul>
+<li>Review the <a href="./01_rustup.html">lab</a>.</li>
+<li>Review the <a href="https://cd-public.github.io/scicom/03_shell.html">shell</a>.</li>
+</ul></li>
+<li>Use:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> 02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="new-file" class="level2">
+<h2 class="anchored" data-anchor-id="new-file">New File</h2>
+<ul>
+<li>You will need to edit a <code>hi_world.rs</code> file in the <code>02</code> folder.</li>
+<li>Use something like:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">vim</span> 02/hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Or perhaps:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">cd</span> 02</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">vim</span> hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We recall that to save and exit vim we press the ESC key then type <code>:x</code> then press ENTER.
+<ul>
+<li>Read more <a href="https://cd-public.github.io/scicom/02_neovim.html#modes">here</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="new-program" class="level2">
+<h2 class="anchored" data-anchor-id="new-program">New Program</h2>
+<ul>
+<li>You should have <code>rustc</code> installed.</li>
+<li>If I were you, I’d leave open a terminal window with <code>vim</code> and create another to use <code>rustc</code></li>
+<li>For example, when you first create and save an empty file as <code>hiworld.rs</code>, you can use <code>rustc</code>:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">rustc</span> hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You’ll see the following:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="va">error</span><span class="op">[</span>E0601<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function not found in crate <span class="kw">`</span><span class="ex">hi_world</span><span class="kw">`</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">|</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="ex">=</span> note: consider adding a <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function to <span class="kw">`</span><span class="ex">hi_world.rs</span><span class="kw">`</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="ex">error:</span> aborting due to 1 previous error</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">For</span> more information about this error, try <span class="kw">`</span><span class="ex">rustc</span> <span class="at">--explain</span> E0601<span class="kw">`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This is good enough for now.</li>
+</ul>
+</section>
+</section>
+<section id="hi-world" class="level1">
+<h1>Hi world</h1>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<ul>
+<li>The following content is lifted directly from the Rust Book</li>
+</ul>
+</section>
+<section id="writing-and-running-a-rust-program" class="level2">
+<h2 class="anchored" data-anchor-id="writing-and-running-a-rust-program">Writing and Running a Rust Program</h2>
+<section id="rs" class="level3">
+<h3 class="anchored" data-anchor-id="rs">.rs</h3>
+<ul>
+<li>Rust files always end with the <code>.rs</code> extension.</li>
+<li>If you’re using more than one word in your filename, the convention is to use an underscore to separate them. For example, use <code>hi_world.rs</code> rather than <code>hi_world.rs</code>.</li>
+<li>In <code>hi_world.rs</code> enter the following:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hi_world.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="hi_world.rs"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="rustc" class="level3">
+<h3 class="anchored" data-anchor-id="rustc">rustc</h3>
+<ul>
+<li>Save (ESC + <code>:w</code> in vim) the file and go back to your terminal window.</li>
+<li>Enter the following commands to compile the file:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">rustc</span> hi_world.c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rust is a compiled language, unlike Python, bash, or R. To create programs in Rust, we first “compile” the source code in an executable. We do not “run” <code>.rs</code> files, as we do with <code>.py</code> files using the <code>python3</code> command.</p>
+</div>
+</div>
+</section>
+<section id="verify" class="level3">
+<h3 class="anchored" data-anchor-id="verify">Verify</h3>
+<ul>
+<li>Verify that compilation was successful by using <code>ls</code> to list the files in your folder.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You should see the following.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">hi_world</span>  hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>hi_world</code> is a program, and <code>hi_world.rs</code> is source code.</li>
+</ul>
+</section>
+<section id="run" class="level3">
+<h3 class="anchored" data-anchor-id="run">Run</h3>
+<ul>
+<li>To use a Rust program, we do not have to call <code>rustc</code> like we do with Python <code>.py</code> scripts!</li>
+<li>We use <code>./</code> notation to have the shell interpret <code>hi_world</code> as a program to be run
+<ul>
+<li><code>.</code> means use the current folder (should be <code>02</code>)</li>
+<li><code>/</code> means find the file by name in the current folder.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">./hi_world</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>You should see:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">Hello,</span> world!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you created your <code>hi_world.rs</code> file using e.g.&nbsp;<code>vim 02/hi_world.rs</code>, then the file will be in a different folder. You may need to run <code>rustc 02/hi_world.rs</code> or <code>./02/hi_world</code>. Review <a href="https://cd-public.github.io/scicom/03_shell.html#the-file-system">the file system</a> if you get stuck.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="anatomy-of-a-rust-program" class="level1">
+<h1>Anatomy of a Rust Program</h1>
+<section id="the-first-piece" class="level2">
+<h2 class="anchored" data-anchor-id="the-first-piece">The first piece</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>These lines define a function named <code>main</code>.</li>
+<li>The <code>main</code> function is special:
+<ul>
+<li>It is always the first code that runs in every executable Rust program.</li>
+</ul></li>
+<li>The first line declares a function named <code>main</code> that has no parameters and returns nothing.</li>
+<li>If there were parameters, they would go inside the parentheses <code>()</code>.</li>
+</ul>
+</section>
+<section id="white-space-and" class="level2">
+<h2 class="anchored" data-anchor-id="white-space-and">White space and <code>{}</code></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The function body is wrapped in <code>{}</code>.</li>
+<li>Rust requires curly brackets around all function bodies. It’s good style to place the opening curly bracket on the same line as the function declaration, adding one space in between.</li>
+</ul>
+</section>
+<section id="rustfmt" class="level2">
+<h2 class="anchored" data-anchor-id="rustfmt">rustfmt</h2>
+<blockquote class="blockquote">
+<p>Note: If you want to stick to a standard style across Rust projects, you can use an automatic formatter tool called <code>rustfmt</code> to format your code in a particular style. The Rust team has included this tool with the standard Rust distribution, as <code>rustc</code> is, so it should already be installed on your computer!</p>
+</blockquote>
+</section>
+<section id="function-body" class="level2">
+<h2 class="anchored" data-anchor-id="function-body">Function Body</h2>
+<ul>
+<li>The body of the <code>main</code> function holds the following code:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This line does all the work in this little program: it prints text to the screen.</li>
+<li>There are three important details to notice here.</li>
+</ul>
+</section>
+<section id="printing" class="level2">
+<h2 class="anchored" data-anchor-id="printing">Printing</h2>
+<ul>
+<li>First, <code>println!</code> calls a Rust macro.</li>
+<li>If it had called a function instead, it would be entered as <code>println</code> (without the <code>!</code>).</li>
+<li>Rust macros are a way to writecode that generates code to extend Rust syntax, a latter topic.</li>
+<li>It is common for printing to be uncommonly complex when learning new programming languages; Rust follows this trend.</li>
+<li>For now, you just need to know that using a <code>!</code> means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.</li>
+</ul>
+</section>
+<section id="strings" class="level2">
+<h2 class="anchored" data-anchor-id="strings">Strings</h2>
+<ul>
+<li>Second, you see the <code>"Hello, world!"</code> string.</li>
+<li>We pass this string as an argument to <code>println!</code>.</li>
+<li>Then string is printed to the screen.</li>
+</ul>
+</section>
+<section id="semicolons" class="level2">
+<h2 class="anchored" data-anchor-id="semicolons">Semicolons</h2>
+<ul>
+<li>Third, we end the line with a semicolon (<code>;</code>), which indicates that this expression is over and the next one is ready to begin.
+<ul>
+<li>An expression is the atomic unit of code.
+<ul>
+<li><p>This is an expression:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>x <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>This is not, it is divisible into valid code (two expressions)</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>THis is not, it is not independently valid code.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="op">=</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+</ul></li>
+<li>Most lines of Rust code end with a semicolon.
+<ul>
+<li><p>This is legal in Python:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="bu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="fin" class="level1">
+<h1>Fin</h1>
+<ul>
+<li>You are done <em>coding</em> once your <code>hi_world.rs</code> file:
+<ul>
+<li>Compiles, and</li>
+<li>When run, prints “Hello, world!” or some other string that is school appropriate
+<ul>
+<li>The complete text of <em>Infinite Jest</em> is the boundary between appropriate and inappropriate.</li>
+<li>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.
+<ul>
+<li>🖾��￼fo9i?⛔󠀰🩷🫴✍</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>You are done with the <em>homework</em> once said <code>.rs</code> file is:
+<ul>
+<li>Visible, to me,</li>
+<li>On the GitHub <code>271rs</code> repository you shared for the lab</li>
+</ul></li>
+<li>If you need to review how to get files onto GitHub, review <a href="./01_rustup.html">the lab</a></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01_rustup.html" class="pagination-link" aria-label="Rustup">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Rustup</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./12_build.html" class="pagination-link" aria-label="Build">
+        <span class="nav-page-text">Build</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">---</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="an">title:</span><span class="co"> "Hi world"</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="an">subtitle:</span><span class="co"> "Due 5 Sep 1440 ET"</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="co">---</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="fu"># Setup</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">## Sketch</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="ss">- </span>By convention, the first program in a new language is "Hello, world!"</span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="ss">- </span>Rust follows this convention in the Rust Book.</span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="ss">    - </span>We basically do <span class="co">[</span><span class="ot">Chapter 1.2</span><span class="co">](https://doc.rust-lang.org/book/ch01-02-hello-world.html)</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="fu">## Pre-flight Checks</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a></span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="ss">- </span>You should have</span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="ss">    - </span><span class="in">`git`</span> installed and working.</span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="ss">    - </span>A repository named <span class="in">`271rs`</span>, both a local repository on your device and a remote repository on GitHub.</span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="ss">    - </span>An editor, which really should be text-based, in-console text editor, but I can't actually ban you from using VS Code.</span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="ss">    - </span><span class="in">`rustc`</span> installed and working.</span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="ss">- </span>If you miss any of this, back to <span class="co">[</span><span class="ot">lab</span><span class="co">](01_rustup.md)</span>.</span>
+<span id="cb19-24"><a href="#cb19-24"></a></span>
+<span id="cb19-25"><a href="#cb19-25"></a><span class="fu">## Requirements</span></span>
+<span id="cb19-26"><a href="#cb19-26"></a></span>
+<span id="cb19-27"><a href="#cb19-27"></a><span class="ss">- </span>To complete this assignment, you must:</span>
+<span id="cb19-28"><a href="#cb19-28"></a><span class="ss">    - </span>Create a <span class="in">`02/hiworld.rs`</span> file in your <span class="in">`271rs`</span> repository.</span>
+<span id="cb19-29"><a href="#cb19-29"></a><span class="ss">    - </span>Ensure this file:</span>
+<span id="cb19-30"><a href="#cb19-30"></a><span class="ss">        - </span>Is present in the remote repository on GitHub, to which I have access after the lab, and...</span>
+<span id="cb19-31"><a href="#cb19-31"></a><span class="ss">        - </span>That the file can be compiled, as specified below, and...</span>
+<span id="cb19-32"><a href="#cb19-32"></a><span class="ss">        - </span>The executable produced by compilation prints "Hi world".</span>
+<span id="cb19-33"><a href="#cb19-33"></a>        </span>
+<span id="cb19-34"><a href="#cb19-34"></a><span class="fu"># Review</span></span>
+<span id="cb19-35"><a href="#cb19-35"></a></span>
+<span id="cb19-36"><a href="#cb19-36"></a><span class="fu">## New Folder</span></span>
+<span id="cb19-37"><a href="#cb19-37"></a></span>
+<span id="cb19-38"><a href="#cb19-38"></a><span class="ss">- </span>You will need to make an <span class="in">`02`</span> folder in <span class="in">`271rs`</span> to save your work.</span>
+<span id="cb19-39"><a href="#cb19-39"></a><span class="ss">- </span>Ensure your shell/terminal/console/command line is in the <span class="in">`271rs`</span> repository.</span>
+<span id="cb19-40"><a href="#cb19-40"></a><span class="ss">    - </span>Review the <span class="co">[</span><span class="ot">lab</span><span class="co">](01_rustup.md)</span>.</span>
+<span id="cb19-41"><a href="#cb19-41"></a><span class="ss">    - </span>Review the <span class="co">[</span><span class="ot">shell</span><span class="co">](https://cd-public.github.io/scicom/03_shell.html)</span>.</span>
+<span id="cb19-42"><a href="#cb19-42"></a><span class="ss">- </span>Use:</span>
+<span id="cb19-43"><a href="#cb19-43"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-44"><a href="#cb19-44"></a><span class="in">mkdir 02</span></span>
+<span id="cb19-45"><a href="#cb19-45"></a><span class="in">```</span></span>
+<span id="cb19-46"><a href="#cb19-46"></a></span>
+<span id="cb19-47"><a href="#cb19-47"></a><span class="fu">## New File</span></span>
+<span id="cb19-48"><a href="#cb19-48"></a></span>
+<span id="cb19-49"><a href="#cb19-49"></a><span class="ss">- </span>You will need to edit a <span class="in">`hi_world.rs`</span> file in the <span class="in">`02`</span> folder.</span>
+<span id="cb19-50"><a href="#cb19-50"></a><span class="ss">- </span>Use something like:</span>
+<span id="cb19-51"><a href="#cb19-51"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-52"><a href="#cb19-52"></a><span class="in">vim 02/hi_world.rs</span></span>
+<span id="cb19-53"><a href="#cb19-53"></a><span class="in">```</span></span>
+<span id="cb19-54"><a href="#cb19-54"></a><span class="ss">- </span>Or perhaps:</span>
+<span id="cb19-55"><a href="#cb19-55"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-56"><a href="#cb19-56"></a><span class="in">cd 02</span></span>
+<span id="cb19-57"><a href="#cb19-57"></a><span class="in">vim hi_world.rs</span></span>
+<span id="cb19-58"><a href="#cb19-58"></a><span class="in">```</span></span>
+<span id="cb19-59"><a href="#cb19-59"></a><span class="ss">- </span>We recall that to save and exit vim we press the ESC key then type <span class="in">`:x`</span> then press ENTER.</span>
+<span id="cb19-60"><a href="#cb19-60"></a><span class="ss">    - </span>Read more <span class="co">[</span><span class="ot">here</span><span class="co">](https://cd-public.github.io/scicom/02_neovim.html#modes)</span></span>
+<span id="cb19-61"><a href="#cb19-61"></a></span>
+<span id="cb19-62"><a href="#cb19-62"></a><span class="fu">## New Program</span></span>
+<span id="cb19-63"><a href="#cb19-63"></a></span>
+<span id="cb19-64"><a href="#cb19-64"></a><span class="ss">- </span>You should have <span class="in">`rustc`</span> installed.</span>
+<span id="cb19-65"><a href="#cb19-65"></a><span class="ss">- </span>If I were you, I'd leave open a terminal window with <span class="in">`vim`</span> and create another to use <span class="in">`rustc`</span></span>
+<span id="cb19-66"><a href="#cb19-66"></a><span class="ss">- </span>For example, when you first create and save an empty file as <span class="in">`hiworld.rs`</span>, you can use <span class="in">`rustc`</span>:</span>
+<span id="cb19-67"><a href="#cb19-67"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-68"><a href="#cb19-68"></a><span class="in">rustc hi_world.rs</span></span>
+<span id="cb19-69"><a href="#cb19-69"></a><span class="in">```</span></span>
+<span id="cb19-70"><a href="#cb19-70"></a><span class="ss">- </span>You'll see the following:</span>
+<span id="cb19-71"><a href="#cb19-71"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-72"><a href="#cb19-72"></a><span class="in">error[E0601]: `main` function not found in crate `hi_world`</span></span>
+<span id="cb19-73"><a href="#cb19-73"></a><span class="in">  |</span></span>
+<span id="cb19-74"><a href="#cb19-74"></a><span class="in">  = note: consider adding a `main` function to `hi_world.rs`</span></span>
+<span id="cb19-75"><a href="#cb19-75"></a></span>
+<span id="cb19-76"><a href="#cb19-76"></a><span class="in">error: aborting due to 1 previous error</span></span>
+<span id="cb19-77"><a href="#cb19-77"></a></span>
+<span id="cb19-78"><a href="#cb19-78"></a><span class="in">For more information about this error, try `rustc --explain E0601`.</span></span>
+<span id="cb19-79"><a href="#cb19-79"></a><span class="in">```</span></span>
+<span id="cb19-80"><a href="#cb19-80"></a><span class="ss">- </span>This is good enough for now.</span>
+<span id="cb19-81"><a href="#cb19-81"></a></span>
+<span id="cb19-82"><a href="#cb19-82"></a><span class="fu"># Hi world</span></span>
+<span id="cb19-83"><a href="#cb19-83"></a></span>
+<span id="cb19-84"><a href="#cb19-84"></a><span class="fu">## Citation</span></span>
+<span id="cb19-85"><a href="#cb19-85"></a></span>
+<span id="cb19-86"><a href="#cb19-86"></a><span class="ss">- </span>The following content is lifted directly from the Rust Book</span>
+<span id="cb19-87"><a href="#cb19-87"></a></span>
+<span id="cb19-88"><a href="#cb19-88"></a><span class="fu">## Writing and Running a Rust Program</span></span>
+<span id="cb19-89"><a href="#cb19-89"></a></span>
+<span id="cb19-90"><a href="#cb19-90"></a><span class="fu">### .rs</span></span>
+<span id="cb19-91"><a href="#cb19-91"></a></span>
+<span id="cb19-92"><a href="#cb19-92"></a><span class="ss">- </span>Rust files always end with the <span class="in">`.rs`</span> extension.</span>
+<span id="cb19-93"><a href="#cb19-93"></a><span class="ss">- </span>If you’re using more than one word in your filename, the</span>
+<span id="cb19-94"><a href="#cb19-94"></a>convention is to use an underscore to separate them. For example, use</span>
+<span id="cb19-95"><a href="#cb19-95"></a><span class="in">`hi_world.rs`</span> rather than <span class="in">`hi_world.rs`</span>.</span>
+<span id="cb19-96"><a href="#cb19-96"></a><span class="ss">- </span>In <span class="in">`hi_world.rs`</span> enter the following:</span>
+<span id="cb19-97"><a href="#cb19-97"></a></span>
+<span id="cb19-98"><a href="#cb19-98"></a><span class="in">```{.rust filename="hi_world.rs"}</span></span>
+<span id="cb19-99"><a href="#cb19-99"></a><span class="in">fn main() {</span></span>
+<span id="cb19-100"><a href="#cb19-100"></a><span class="in">    println!("Hello, world!");</span></span>
+<span id="cb19-101"><a href="#cb19-101"></a><span class="in">}</span></span>
+<span id="cb19-102"><a href="#cb19-102"></a><span class="in">```</span></span>
+<span id="cb19-103"><a href="#cb19-103"></a></span>
+<span id="cb19-104"><a href="#cb19-104"></a><span class="fu">### rustc</span></span>
+<span id="cb19-105"><a href="#cb19-105"></a></span>
+<span id="cb19-106"><a href="#cb19-106"></a><span class="ss">- </span>Save (ESC + <span class="in">`:w`</span> in vim) the file and go back to your terminal window.</span>
+<span id="cb19-107"><a href="#cb19-107"></a><span class="ss">- </span>Enter the following commands to compile the file:</span>
+<span id="cb19-108"><a href="#cb19-108"></a></span>
+<span id="cb19-109"><a href="#cb19-109"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-110"><a href="#cb19-110"></a><span class="in">rustc hi_world.c</span></span>
+<span id="cb19-111"><a href="#cb19-111"></a><span class="in">```</span></span>
+<span id="cb19-112"><a href="#cb19-112"></a></span>
+<span id="cb19-113"><a href="#cb19-113"></a>::: {.callout-note}</span>
+<span id="cb19-114"><a href="#cb19-114"></a>Rust is a compiled language, unlike Python, bash, or R. To create programs in Rust, we first "compile" the source code in an executable. We do not "run" <span class="in">`.rs`</span> files, as we do with <span class="in">`.py`</span> files using the <span class="in">`python3`</span> command.</span>
+<span id="cb19-115"><a href="#cb19-115"></a>:::</span>
+<span id="cb19-116"><a href="#cb19-116"></a></span>
+<span id="cb19-117"><a href="#cb19-117"></a><span class="fu">### Verify</span></span>
+<span id="cb19-118"><a href="#cb19-118"></a></span>
+<span id="cb19-119"><a href="#cb19-119"></a><span class="ss">- </span>Verify that compilation was successful by using <span class="in">`ls`</span> to list the files in your folder.</span>
+<span id="cb19-120"><a href="#cb19-120"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-121"><a href="#cb19-121"></a><span class="in">ls</span></span>
+<span id="cb19-122"><a href="#cb19-122"></a><span class="in">```</span></span>
+<span id="cb19-123"><a href="#cb19-123"></a><span class="ss">- </span>You should see the following.</span>
+<span id="cb19-124"><a href="#cb19-124"></a></span>
+<span id="cb19-125"><a href="#cb19-125"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-126"><a href="#cb19-126"></a><span class="in">hi_world  hi_world.rs</span></span>
+<span id="cb19-127"><a href="#cb19-127"></a><span class="in">```</span></span>
+<span id="cb19-128"><a href="#cb19-128"></a></span>
+<span id="cb19-129"><a href="#cb19-129"></a><span class="ss">- </span><span class="in">`hi_world`</span> is a program, and <span class="in">`hi_world.rs`</span> is source code.</span>
+<span id="cb19-130"><a href="#cb19-130"></a></span>
+<span id="cb19-131"><a href="#cb19-131"></a><span class="fu">### Run</span></span>
+<span id="cb19-132"><a href="#cb19-132"></a></span>
+<span id="cb19-133"><a href="#cb19-133"></a><span class="ss">- </span>To use a Rust program, we do not have to call <span class="in">`rustc`</span> like we do with Python <span class="in">`.py`</span> scripts!</span>
+<span id="cb19-134"><a href="#cb19-134"></a><span class="ss">- </span>We use <span class="in">`./`</span> notation to have the shell interpret <span class="in">`hi_world`</span> as a program to be run</span>
+<span id="cb19-135"><a href="#cb19-135"></a><span class="ss">    - </span><span class="in">`.`</span> means use the current folder (should be <span class="in">`02`</span>)</span>
+<span id="cb19-136"><a href="#cb19-136"></a><span class="ss">    - </span><span class="in">`/`</span> means find the file by name in the current folder.</span>
+<span id="cb19-137"><a href="#cb19-137"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-138"><a href="#cb19-138"></a><span class="in">./hi_world</span></span>
+<span id="cb19-139"><a href="#cb19-139"></a><span class="in">```</span></span>
+<span id="cb19-140"><a href="#cb19-140"></a><span class="ss">- </span>You should see:</span>
+<span id="cb19-141"><a href="#cb19-141"></a><span class="in">```{.bash}</span></span>
+<span id="cb19-142"><a href="#cb19-142"></a><span class="in">Hello, world!</span></span>
+<span id="cb19-143"><a href="#cb19-143"></a><span class="in">```</span></span>
+<span id="cb19-144"><a href="#cb19-144"></a></span>
+<span id="cb19-145"><a href="#cb19-145"></a>::: {.callout-note}</span>
+<span id="cb19-146"><a href="#cb19-146"></a>If you created your <span class="in">`hi_world.rs`</span> file using e.g. <span class="in">`vim 02/hi_world.rs`</span>, then the file will be in a different folder. You may need to run <span class="in">`rustc 02/hi_world.rs`</span> or <span class="in">`./02/hi_world`</span>. Review <span class="co">[</span><span class="ot">the file system</span><span class="co">](https://cd-public.github.io/scicom/03_shell.html#the-file-system)</span> if you get stuck.</span>
+<span id="cb19-147"><a href="#cb19-147"></a>:::</span>
+<span id="cb19-148"><a href="#cb19-148"></a></span>
+<span id="cb19-149"><a href="#cb19-149"></a><span class="fu"># Anatomy of a Rust Program</span></span>
+<span id="cb19-150"><a href="#cb19-150"></a></span>
+<span id="cb19-151"><a href="#cb19-151"></a><span class="fu">## The first piece</span></span>
+<span id="cb19-152"><a href="#cb19-152"></a></span>
+<span id="cb19-153"><a href="#cb19-153"></a><span class="in">```rust</span></span>
+<span id="cb19-154"><a href="#cb19-154"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb19-155"><a href="#cb19-155"></a></span>
+<span id="cb19-156"><a href="#cb19-156"></a><span class="op">}</span></span>
+<span id="cb19-157"><a href="#cb19-157"></a><span class="in">```</span></span>
+<span id="cb19-158"><a href="#cb19-158"></a></span>
+<span id="cb19-159"><a href="#cb19-159"></a><span class="ss">- </span>These lines define a function named <span class="in">`main`</span>. </span>
+<span id="cb19-160"><a href="#cb19-160"></a><span class="ss">- </span>The <span class="in">`main`</span> function is special:</span>
+<span id="cb19-161"><a href="#cb19-161"></a><span class="ss">    - </span>It is always the first code that runs in every executable Rust program. </span>
+<span id="cb19-162"><a href="#cb19-162"></a><span class="ss">- </span>The first line declares a function named <span class="in">`main`</span> that has no parameters and returns</span>
+<span id="cb19-163"><a href="#cb19-163"></a>nothing.</span>
+<span id="cb19-164"><a href="#cb19-164"></a><span class="ss">- </span>If there were parameters, they would go inside the parentheses <span class="in">`()`</span>.</span>
+<span id="cb19-165"><a href="#cb19-165"></a></span>
+<span id="cb19-166"><a href="#cb19-166"></a><span class="fu">## White space and `{}`</span></span>
+<span id="cb19-167"><a href="#cb19-167"></a></span>
+<span id="cb19-168"><a href="#cb19-168"></a><span class="in">```rust</span></span>
+<span id="cb19-169"><a href="#cb19-169"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb19-170"><a href="#cb19-170"></a></span>
+<span id="cb19-171"><a href="#cb19-171"></a><span class="op">}</span></span>
+<span id="cb19-172"><a href="#cb19-172"></a><span class="in">```</span></span>
+<span id="cb19-173"><a href="#cb19-173"></a></span>
+<span id="cb19-174"><a href="#cb19-174"></a><span class="ss">- </span>The function body is wrapped in <span class="in">`{}`</span>. </span>
+<span id="cb19-175"><a href="#cb19-175"></a><span class="ss">- </span>Rust requires curly brackets around all</span>
+<span id="cb19-176"><a href="#cb19-176"></a>function bodies. It’s good style to place the opening curly bracket on the same</span>
+<span id="cb19-177"><a href="#cb19-177"></a>line as the function declaration, adding one space in between.</span>
+<span id="cb19-178"><a href="#cb19-178"></a></span>
+<span id="cb19-179"><a href="#cb19-179"></a><span class="fu">## rustfmt</span></span>
+<span id="cb19-180"><a href="#cb19-180"></a></span>
+<span id="cb19-181"><a href="#cb19-181"></a><span class="at">&gt; Note: If you want to stick to a standard style across Rust projects, you can</span></span>
+<span id="cb19-182"><a href="#cb19-182"></a><span class="at">&gt; use an automatic formatter tool called </span><span class="in">`rustfmt`</span><span class="at"> to format your code in a</span></span>
+<span id="cb19-183"><a href="#cb19-183"></a><span class="at">&gt; particular style. The Rust team has included this tool</span></span>
+<span id="cb19-184"><a href="#cb19-184"></a><span class="at">&gt; with the standard Rust distribution, as </span><span class="in">`rustc`</span><span class="at"> is, so it should already be</span></span>
+<span id="cb19-185"><a href="#cb19-185"></a><span class="at">&gt; installed on your computer!</span></span>
+<span id="cb19-186"><a href="#cb19-186"></a></span>
+<span id="cb19-187"><a href="#cb19-187"></a><span class="fu">## Function Body</span></span>
+<span id="cb19-188"><a href="#cb19-188"></a></span>
+<span id="cb19-189"><a href="#cb19-189"></a><span class="ss">- </span>The body of the <span class="in">`main`</span> function holds the following code:</span>
+<span id="cb19-190"><a href="#cb19-190"></a></span>
+<span id="cb19-191"><a href="#cb19-191"></a><span class="in">```rust</span></span>
+<span id="cb19-192"><a href="#cb19-192"></a><span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span>
+<span id="cb19-193"><a href="#cb19-193"></a><span class="in">```</span></span>
+<span id="cb19-194"><a href="#cb19-194"></a></span>
+<span id="cb19-195"><a href="#cb19-195"></a><span class="ss">- </span>This line does all the work in this little program: it prints text to the</span>
+<span id="cb19-196"><a href="#cb19-196"></a>screen. </span>
+<span id="cb19-197"><a href="#cb19-197"></a><span class="ss">- </span>There are three important details to notice here.</span>
+<span id="cb19-198"><a href="#cb19-198"></a></span>
+<span id="cb19-199"><a href="#cb19-199"></a><span class="fu">## Printing</span></span>
+<span id="cb19-200"><a href="#cb19-200"></a></span>
+<span id="cb19-201"><a href="#cb19-201"></a><span class="ss">- </span>First, <span class="in">`println!`</span> calls a Rust macro. </span>
+<span id="cb19-202"><a href="#cb19-202"></a><span class="ss">- </span>If it had called a function instead, it</span>
+<span id="cb19-203"><a href="#cb19-203"></a>would be entered as <span class="in">`println`</span> (without the <span class="in">`!`</span>). </span>
+<span id="cb19-204"><a href="#cb19-204"></a><span class="ss">- </span>Rust macros are a way to writecode that generates code to extend Rust syntax, a latter topic. </span>
+<span id="cb19-205"><a href="#cb19-205"></a><span class="ss">- </span>It is common for printing to be uncommonly complex when learning new programming languages; Rust follows this trend. </span>
+<span id="cb19-206"><a href="#cb19-206"></a><span class="ss">- </span>For now, you just need to know that using a <span class="in">`!`</span> means that you’re calling a macro instead of a normal</span>
+<span id="cb19-207"><a href="#cb19-207"></a>function and that macros don’t always follow the same rules as functions.</span>
+<span id="cb19-208"><a href="#cb19-208"></a></span>
+<span id="cb19-209"><a href="#cb19-209"></a><span class="fu">## Strings</span></span>
+<span id="cb19-210"><a href="#cb19-210"></a></span>
+<span id="cb19-211"><a href="#cb19-211"></a><span class="ss">- </span>Second, you see the <span class="in">`"Hello, world!"`</span> string. </span>
+<span id="cb19-212"><a href="#cb19-212"></a><span class="ss">- </span>We pass this string as an argument to <span class="in">`println!`</span>.</span>
+<span id="cb19-213"><a href="#cb19-213"></a><span class="ss">- </span>Then string is printed to the screen.</span>
+<span id="cb19-214"><a href="#cb19-214"></a></span>
+<span id="cb19-215"><a href="#cb19-215"></a><span class="fu">## Semicolons</span></span>
+<span id="cb19-216"><a href="#cb19-216"></a></span>
+<span id="cb19-217"><a href="#cb19-217"></a><span class="ss">- </span>Third, we end the line with a semicolon (<span class="in">`;`</span>), which indicates that this</span>
+<span id="cb19-218"><a href="#cb19-218"></a>expression is over and the next one is ready to begin. </span>
+<span id="cb19-219"><a href="#cb19-219"></a><span class="ss">    - </span>An expression is the atomic unit of code.</span>
+<span id="cb19-220"><a href="#cb19-220"></a><span class="ss">        - </span>This is an expression:</span>
+<span id="cb19-221"><a href="#cb19-221"></a>        </span>
+<span id="cb19-222"><a href="#cb19-222"></a>            <span class="in">```{.py}</span></span>
+<span id="cb19-223"><a href="#cb19-223"></a><span class="in">            x = 1</span></span>
+<span id="cb19-224"><a href="#cb19-224"></a><span class="in">            ```</span></span>
+<span id="cb19-225"><a href="#cb19-225"></a><span class="ss">        - </span>This is not, it is divisible into valid code (two expressions)</span>
+<span id="cb19-226"><a href="#cb19-226"></a>        </span>
+<span id="cb19-227"><a href="#cb19-227"></a>            <span class="in">```{.py}</span></span>
+<span id="cb19-228"><a href="#cb19-228"></a><span class="in">            x = 1</span></span>
+<span id="cb19-229"><a href="#cb19-229"></a><span class="in">            print(x)</span></span>
+<span id="cb19-230"><a href="#cb19-230"></a><span class="in">            ```</span></span>
+<span id="cb19-231"><a href="#cb19-231"></a><span class="ss">        - </span>THis is not, it is not independently valid code.</span>
+<span id="cb19-232"><a href="#cb19-232"></a>        </span>
+<span id="cb19-233"><a href="#cb19-233"></a>            <span class="in">```{.py}</span></span>
+<span id="cb19-234"><a href="#cb19-234"></a><span class="in">            x = </span></span>
+<span id="cb19-235"><a href="#cb19-235"></a><span class="in">            ```</span></span>
+<span id="cb19-236"><a href="#cb19-236"></a><span class="ss">- </span>Most lines of Rust code end with a semicolon.</span>
+<span id="cb19-237"><a href="#cb19-237"></a><span class="ss">    - </span>This is legal in Python:</span>
+<span id="cb19-238"><a href="#cb19-238"></a>    </span>
+<span id="cb19-239"><a href="#cb19-239"></a>        <span class="in">```{.py}</span></span>
+<span id="cb19-240"><a href="#cb19-240"></a><span class="in">        x = 1;</span></span>
+<span id="cb19-241"><a href="#cb19-241"></a><span class="in">        print(x);</span></span>
+<span id="cb19-242"><a href="#cb19-242"></a><span class="in">        ```</span></span>
+<span id="cb19-243"><a href="#cb19-243"></a>        </span>
+<span id="cb19-244"><a href="#cb19-244"></a><span class="fu"># Fin</span></span>
+<span id="cb19-245"><a href="#cb19-245"></a></span>
+<span id="cb19-246"><a href="#cb19-246"></a><span class="ss">- </span>You are done *coding* once your <span class="in">`hi_world.rs`</span> file:</span>
+<span id="cb19-247"><a href="#cb19-247"></a><span class="ss">    - </span>Compiles, and</span>
+<span id="cb19-248"><a href="#cb19-248"></a><span class="ss">    - </span>When run, prints "Hello, world!" or some other string that is school appropriate</span>
+<span id="cb19-249"><a href="#cb19-249"></a><span class="ss">        - </span>The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.</span>
+<span id="cb19-250"><a href="#cb19-250"></a><span class="ss">        - </span>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.</span>
+<span id="cb19-251"><a href="#cb19-251"></a><span class="ss">            - </span>🖾��￼fo9i?⛔󠀰🩷🫴✍</span>
+<span id="cb19-252"><a href="#cb19-252"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
+<span id="cb19-253"><a href="#cb19-253"></a><span class="ss">    - </span>Visible, to me, </span>
+<span id="cb19-254"><a href="#cb19-254"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
+<span id="cb19-255"><a href="#cb19-255"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
