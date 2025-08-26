@@ -46,8 +46,13 @@ format: html
 |0xC|11/17|VCS||
 |0xD|11/24|Spectre|*Off*|
 |0xE|11/24|Meltdown|Hypers|VCS.rs|
+
 <!--
 Think I need string edit distance or patches somewhere. 
 
 Hamming teases it at least.
 -->
+
+# Lecture Recordings
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D&amp;list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
