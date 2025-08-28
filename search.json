@@ -1152,14 +1152,14 @@
     "href": "01_rustup.rjs.html#names-matter",
     "title": "Rustup",
     "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant. &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD"
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant."
   },
   {
     "objectID": "01_rustup.rjs.html#useful-commands",
     "href": "01_rustup.rjs.html#useful-commands",
     "title": "Rustup",
     "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here\n\n\n\n\n\n\n\n88d5569f117a55a2960939684283dc3f8d56383e"
+    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here"
   },
   {
     "objectID": "01_rustup.rjs.html#file-editor",
@@ -1173,7 +1173,7 @@
     "href": "01_rustup.rjs.html#file-editting",
     "title": "Rustup",
     "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 88d5569f117a55a2960939684283dc3f8d56383e"
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md"
   },
   {
     "objectID": "01_rustup.rjs.html#using-vim",
@@ -1593,7 +1593,7 @@
     "href": "01_rustup.html#names-matter",
     "title": "Rustup",
     "section": "Names Matter",
-    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant. &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD",
+    "text": "Names Matter\n\nYour submission will be tested be a script.\n\nThe file must be named rustup.md\nIt must be in a folder named 01\nThe repository must be named 271rs\nNo other arrangement constitutes a lab submission.\nThe contents of rustup.md are not relevant.",
     "crumbs": [
       "Rustup"
     ]
@@ -1603,7 +1603,7 @@
     "href": "01_rustup.html#useful-commands",
     "title": "Rustup",
     "section": "Useful commands",
-    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here\n\n\n\n\n\n\n\n88d5569f117a55a2960939684283dc3f8d56383e",
+    "text": "Useful commands\n\nYou may use ls to list files/folders.\nYou make use mkdir 01 to creat the 01 folder.\nYou may use vim 01/rustup.md to edit the rustup.md file in the 01 folder.\n\nThe 01 folder must exist to do this.\n\nLearn more here",
     "crumbs": [
       "Rustup"
     ]
@@ -1623,7 +1623,7 @@
     "href": "01_rustup.html#file-editting",
     "title": "Rustup",
     "section": "File Editting",
-    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 88d5569f117a55a2960939684283dc3f8d56383e",
+    "text": "File Editting\n\nTo create said file, type vim then the name of the file.\nIf you just cloned 271rs, there will be a 271rs folder into which you should create a 01 folder.\n\nStands for week 0, day 1\n\nvim 01/rustup.md",
     "crumbs": [
       "Rustup"
     ]
@@ -1819,482 +1819,618 @@
     ]
   },
   {
-    "objectID": "12_build.rjs.html#announcements",
-    "href": "12_build.rjs.html#announcements",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#announcements",
+    "href": "11_packages.rjs.html#announcements",
+    "title": "Packages",
     "section": "Announcements",
     "text": "Announcements\n\nThe second homework, “Hi cargo”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 12 Sept. at 1440 ET."
   },
   {
-    "objectID": "12_build.rjs.html#today",
-    "href": "12_build.rjs.html#today",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#today",
+    "href": "11_packages.rjs.html#today",
+    "title": "Packages",
     "section": "Today",
     "text": "Today\n\nHybrid Day\nBuild system/package manager\n\nTheory behind Cargo\nTrap in Cargo\nUse Cargo"
   },
   {
-    "objectID": "12_build.rjs.html#interpretation",
-    "href": "12_build.rjs.html#interpretation",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#interpretation",
+    "href": "11_packages.rjs.html#interpretation",
+    "title": "Packages",
     "section": "Interpretation",
     "text": "Interpretation\n\nWe once again address interpretation vs. compilation\n\nI think of this as programming vs. scripting\nWe can think in terms of languages - Rust/C vs. Python/JavaScript"
   },
   {
-    "objectID": "12_build.rjs.html#scripts",
-    "href": "12_build.rjs.html#scripts",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#scripts",
+    "href": "11_packages.rjs.html#scripts",
+    "title": "Packages",
     "section": "Scripts",
     "text": "Scripts\n\nI regard a script a:\n\nText file\nWhich describes actions for a computer\nReadable to humans\nAnd readable to a program (like python) which can direct the computer to act\n\n\n\nwhat_up_earth.py\n\nprint(\"what up earth\")\n\nWe note that this is much closer to being a text file that it is to being a program."
   },
   {
-    "objectID": "12_build.rjs.html#programs",
-    "href": "12_build.rjs.html#programs",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#programs",
+    "href": "11_packages.rjs.html#programs",
+    "title": "Packages",
     "section": "Programs",
     "text": "Programs\n\nWe can create programs but we also use existing programs.\nAs an example, consider the Firefox web-browser\n\nIf you use Chrome, keep that to yourself, that’s embarassing.\n\nThis is what “Firefox.exe” looks like on a Window device.\n\n\n\nFirefox.exe\n\nA{Ÿ@€ÿ\u0019w.\u000f·þ9Ï\u000fCñ~¿‰ó€Ë @€ÿ\u001a\u000f¶û\u000fCþD8ßu\u000fé¬%  Aƒù/\u000f„î%  L‹R\bHƒÂ\bHƒÀ\bM…Ò\u000f…wÿÿÿM…À\u000f„Ã\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-\u000f…“\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…À\u000f„|\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùc\u000f…P\u0002  D\u000f·B\u0002fE…À\u000f„A\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùo\u000f…\u0015\u0002  D\u000f·B\u0004fE…À\u000f„\u0006\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…Ú\u0001  D\u000f·B\u0006fE…À\u000f„Ë\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…Ÿ\u0001  D\u000f·B\bfE…À\u000f„\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùe\u000f…d\u0001  D\u000f·B\nfE…À\u000f„U\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…)\u0001  D\u000f·B\ffE…À\u000f„\u001a\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…î   D\u000f·B\u000efE…À\u000f„ß   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùp\u000f…³   D\u000f·B\u0010fE…À\u000f„¤   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùru|D\u000f·B\u0012fE…ÀtqE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùouID\u000f·B\u0014fE…Àt&gt;E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùcu\u0016fƒz\u0016 \u000f„*\u001c  ë   ƒú/\u000f„i#  L‹ HƒÀ\bM…À\u000f…GýÿÿHŒ$ð\u0001  è)˜  f\u000fïÀL„$ \u0007  fA\u000f@ fA\u000f@\u0010fA\u000f H„$à\u0002  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   è\u001bE\u0005 …À\u000fˆ\u001e#  L‹„$H\u0007  ¹ \u0010  1Òÿ\u0015\u001eû\u0005 H‰ÃH…À\u000f„;#  L´$@\u0007  AÇFà    AÆFø LŒ$à\u0002  AÇ\u0001   \u0002  H‰Ùº\u0001   M‰ðÿ\u0015õú\u0005 L‰ÿ…À\u000f„4#  €¼$8\u0007   \u000f…_#  D‹„$ \u0007  L¼$0\u0001  L‰ùL‰òè\u0019™  A€\u0018 \u000f…X#  L´$ \u0003  AÇFà\u0001   AÆFø 1ÉL‰òA¸ \u0002  ÿ\u00150ù\u0005 =  \u0002  t\b…À\u000f…\u0002!  ÿ\u0015\u000bù\u0005 \u000f·èÍ  \u0007€…À\u000fNèA¼)   @¶\u0001L=t˜\u0005 H‰ØHÿÀHƒø\u0002r    H‰Ùÿ\u0015°÷\u0005 @„ö\u000f…*\"  A€÷\u0001³\u00011íH\n\u0005¤\u0005 ÿ\u0015’ü\u0005 H…ÀL‹d$`\u000f…6#  L‹\u0007M…À\u000f„w\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-t\u001aƒú/\u000f„»!  L‹ HƒÀ\bM…ÀuâéJ\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…ÀtÓE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùlu«D\u000f·B\u0002fE…Àt E\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øa\u000f…jÿÿÿD\u000f·B\u0004fE…À\u000f„[ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øu\u000f…%ÿÿÿD\u000f·B\u0006fE…À\u000f„\u0016ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øn\u000f…àþÿÿD\u000f·B\bfE…À\u000f„ÑþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øc\u000f…›þÿÿD\u000f·B\nfE…À\u000f„ŒþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øh\u000f…VþÿÿD\u000f·B\ffE…À\u000f„GþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øe\u000f…\u0011þÿÿD\u000f·B\u000efE…À\u000f„\u0002þÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€ør\u000f…Ìýÿÿfƒz\u0010 \u000f…ÁýÿÿH‹\bH‰HøHƒÀ\bH…ÉuðAÿÍ°\u0001L‹d$`ë\u00021À„Û\u000f„Æ   A\bÇE1ÉAöÇ\u0001tyL‹\u0007M…ÀtqID$\u0010¹ÿ   A\u000f·\u0010ƒú-uIIP\u0002MP\u0004fAƒx\u0002-I\u000fDÒD\u000f·\u0002fE…Àt6E\u000f·ÐA9ÊD\u000fCÁEP¿E‰ÃA€Ë A€ú\u001aE\u000f¶ÓE\u000fCÐA€úfu\u000eéj   ƒú/\u000f„\u0010$  L‹ HƒÀ\bM…Àu™Aö×E\u000f¶ÇAƒà\u0001HŒ$ð\u0001  Hœ$ \u0007  H‰Úè\u000f˜  @Šs\u0010@„ö\u000f…à#  ƒ¼$ \u0007   I‰ÿu\u00041íë/H\n} \u0005 ÿ\u0015$ù\u0005 H…À\u000f…à%  H\n\n\nI would not regard that as readable to humans (depends on the human)"
   },
   {
-    "objectID": "12_build.rjs.html#compilation",
-    "href": "12_build.rjs.html#compilation",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#compilation",
+    "href": "11_packages.rjs.html#compilation",
+    "title": "Packages",
     "section": "Compilation",
     "text": "Compilation\n\nCompilation is the process that takes text-based code to whatever we saw on the last slide.\nCan be quite simple - we made hi_world, a program, already.\n\nNotably it didn’t do a lot.\n\nrustc takes a .rs file and makes an executable\n\na program, sort of\n\nExecutables run as command with ./ prefix\n\nThis differs from python3 which runs a script without creating a corresponding program."
   },
   {
-    "objectID": "12_build.rjs.html#py-vs-.rs",
-    "href": "12_build.rjs.html#py-vs-.rs",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#py-vs-.rs",
+    "href": "11_packages.rjs.html#py-vs-.rs",
+    "title": "Packages",
     "section": ".py vs .rs",
     "text": ".py vs .rs\n\n\n\n\n\nflowchart LR\n  A(Python) --&gt; B[fname.py file]\n  B --&gt; C[python fname.py]\n  C --&gt; D{hello world}\n  E(Rust) --&gt; F[fname.rs  file]\n  F --&gt; G[rustc fname.rs]\n  G --&gt; H[./fname]\n  H --&gt; I{hello world}\n\n\n\n\n\n\n\nYou only have to compile once to have the executable forever.\nMost programs are executables, not scripts."
   },
   {
-    "objectID": "12_build.rjs.html#rustc",
-    "href": "12_build.rjs.html#rustc",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#rustc",
+    "href": "11_packages.rjs.html#rustc",
+    "title": "Packages",
     "section": "Rustc",
     "text": "Rustc\n\nrustc is rarely, if ever, used directly\n\nOver the years (since like, 1960) code has increased in complexity.\n\nMany files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)\nMany libraries (think NumPy, pandas, scikit)\nComplex file systems (01/rustup.md)\n\n\nThe solution was automation."
   },
   {
-    "objectID": "12_build.rjs.html#build-systems-1",
-    "href": "12_build.rjs.html#build-systems-1",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#build-systems-1",
+    "href": "11_packages.rjs.html#build-systems-1",
+    "title": "Packages",
     "section": "Build Systems",
     "text": "Build Systems\n\nWe don’t have a real equivalence to compilation for Python.\n\nThere is Numba\n\nWe do have a build system equivalent.\n\nI use flit, which is easy.\nI think there’s others… Setuptools? Hatchling?"
   },
   {
-    "objectID": "12_build.rjs.html#flit",
-    "href": "12_build.rjs.html#flit",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#flit",
+    "href": "11_packages.rjs.html#flit",
+    "title": "Packages",
     "section": "Flit",
     "text": "Flit\n\nFlit solves a novel problem for Python programers.\n\nNot: Let’s make some code that I can run.\nInstead: Let’s make code that can be used in code other people run."
   },
   {
-    "objectID": "12_build.rjs.html#packaging",
-    "href": "12_build.rjs.html#packaging",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#packaging",
+    "href": "11_packages.rjs.html#packaging",
+    "title": "Packages",
     "section": "Packaging",
     "text": "Packaging\n\nNumPy, pandas, and things like CS 151 PGL can be “built” into packages with Flit and friends.\n\nBasically, instead of running e.g. python3 mycode.py\nRun flit init to make a new folder, edit some code, then run flit publish to add it to pip\n\nTakeaway - package management and build systems work real well together."
   },
   {
-    "objectID": "12_build.rjs.html#wheels",
-    "href": "12_build.rjs.html#wheels",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#wheels",
+    "href": "11_packages.rjs.html#wheels",
+    "title": "Packages",
     "section": "Wheels",
     "text": "Wheels\n\nThe thing that flit and friends create and distribute is not a .py file.\nRather, they are “wheels” which are not human readable.\nA lot like compiled code\nTakeaway - a good way to think of Rust is that we’re writing packages for ourselves."
   },
   {
-    "objectID": "12_build.rjs.html#cargo",
-    "href": "12_build.rjs.html#cargo",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#cargo",
+    "href": "11_packages.rjs.html#cargo",
+    "title": "Packages",
     "section": "Cargo",
     "text": "Cargo\n\nWith Python, we use python3 (or pip, but perhaps as python3 -m pip).\nrustc is not really the equivalent to that:\nRather, we use cargo, the Rust build and package manager.\ncargo will handle any usage of rustc that we may need.\n\nWe can easily then distribute code across multiple files."
   },
   {
-    "objectID": "12_build.rjs.html#buildpackage",
-    "href": "12_build.rjs.html#buildpackage",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#buildpackage",
+    "href": "11_packages.rjs.html#buildpackage",
+    "title": "Packages",
     "section": "Build+Package",
     "text": "Build+Package\n\nCargo is Rust’s build system (like flit) and package manager (like pip).\nWe will use Cargo instead of rustc for the rest of the term.\n\nMy sense is that this is the industry standard.\n\nWe’ll step through an example, then you’ll do a (very simple) exercise."
   },
   {
-    "objectID": "12_build.rjs.html#new",
-    "href": "12_build.rjs.html#new",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#new",
+    "href": "11_packages.rjs.html#new",
+    "title": "Packages",
     "section": "New",
     "text": "New\n\nThe first thing to do with Cargo, as a rule, is great a new package.\n\nThis is kinda like creating a new .py file.\nIt is a bit more like creating a Python project from a template repository."
   },
   {
-    "objectID": "12_build.rjs.html#do-it",
-    "href": "12_build.rjs.html#do-it",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#do-it",
+    "href": "11_packages.rjs.html#do-it",
+    "title": "Packages",
     "section": "Do it",
     "text": "Do it\n\nTo do so:\n\ncargo new throwaway_example\n\ncargo is, well, Cargo\nnew creates a new package.\nthrowaway_example is the name of the package1.\n\nWell, kinda. We’ll get to that."
   },
   {
-    "objectID": "12_build.rjs.html#examine",
-    "href": "12_build.rjs.html#examine",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#examine",
+    "href": "11_packages.rjs.html#examine",
+    "title": "Packages",
     "section": "Examine",
     "text": "Examine\n\nThe most natural thing is to see what has changed.\n\nls\n\nFor me, I see a new directory: throwaway_example\nI change into the directory to examine it.\n\ncd throwaway_example\nls\n\nNot much there:\n\nCargo.toml  src"
   },
   {
-    "objectID": "12_build.rjs.html#aside-tree",
-    "href": "12_build.rjs.html#aside-tree",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#aside-tree",
+    "href": "11_packages.rjs.html#aside-tree",
+    "title": "Packages",
     "section": "Aside: Tree",
     "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files"
   },
   {
-    "objectID": "12_build.rjs.html#main.rs",
-    "href": "12_build.rjs.html#main.rs",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#main.rs",
+    "href": "11_packages.rjs.html#main.rs",
+    "title": "Packages",
     "section": "main.rs",
     "text": "main.rs\n\nCargo creates projects with a default main file.\n\n\n\nmain.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\nThe name “main” is basically mainful to Cargo - it says which, if multiple, .rs files to read first when trying to execute the code in a package.\n\nMake sure you understand that sentence."
   },
   {
-    "objectID": "12_build.rjs.html#run",
-    "href": "12_build.rjs.html#run",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#run",
+    "href": "11_packages.rjs.html#run",
+    "title": "Packages",
     "section": "Run",
-    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder."
+    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can not simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder."
   },
   {
-    "objectID": "12_build.rjs.html#try-it",
-    "href": "12_build.rjs.html#try-it",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#try-it",
+    "href": "11_packages.rjs.html#try-it",
+    "title": "Packages",
     "section": "Try it",
     "text": "Try it\n\nDo this:\n\ncargo run\n\nSee this:\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s\n     Running `target/debug/throwaway_example`\nHello, world!"
   },
   {
-    "objectID": "12_build.rjs.html#again",
-    "href": "12_build.rjs.html#again",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#again",
+    "href": "11_packages.rjs.html#again",
+    "title": "Packages",
     "section": "Again!",
     "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here)\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s"
   },
   {
-    "objectID": "12_build.rjs.html#its-fast",
-    "href": "12_build.rjs.html#its-fast",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#its-fast",
+    "href": "11_packages.rjs.html#its-fast",
+    "title": "Packages",
     "section": "It’s fast",
     "text": "It’s fast\n\n0.56s -&gt; 0.00s\nThis is why we use languages which compile.\n\nPython took around .04s, for me.\n\ntime python3 -c \"print('Hello, world')\"\nThe results are:\n\nHello, world\n\nreal    0m0.039s\nuser    0m0.007s\nsys     0m0.008s\n\nGuess how long it takes to compile python, by the way."
   },
   {
-    "objectID": "12_build.rjs.html#other-files",
-    "href": "12_build.rjs.html#other-files",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#other-files",
+    "href": "11_packages.rjs.html#other-files",
+    "title": "Packages",
     "section": "Other files",
     "text": "Other files\n\nGo ahead and add another .rs file and see what happens.\n\nAdd it to the src directory!\n\nI’ll use this one - I change filename and text, but\n\n\n\nsecondary.rs\n\nfn secondary() {\n    println!(\"Goodbye, space!\");\n}"
   },
   {
-    "objectID": "12_build.rjs.html#run-it-again",
-    "href": "12_build.rjs.html#run-it-again",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#run-it-again",
+    "href": "11_packages.rjs.html#run-it-again",
+    "title": "Packages",
     "section": "Run it again…",
     "text": "Run it again…\n\nNothing changes.\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\nThis is the same as adding another .py file then not using import or including its code in any other way."
   },
   {
-    "objectID": "12_build.rjs.html#swap-the-names.",
-    "href": "12_build.rjs.html#swap-the-names.",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#swap-the-names.",
+    "href": "11_packages.rjs.html#swap-the-names.",
+    "title": "Packages",
     "section": "Swap the names.",
     "text": "Swap the names.\n\nI use mv (move) to change:\n\nmain.rs to old_main.rs\nsecondary.rs to main.rs\n\nThings change!\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\nerror[E0601]: `main` function not found in crate `throwaway_example`\n --&gt; src/main.rs:3:2\n  |\n3 | }\n  |  ^ consider adding a `main` function to `src/main.rs`\n\nFor more information about this error, try `rustc --explain E0601`.\nerror: could not compile `throwaway_example` (bin \"throwaway_example\") due to 1 previous error"
   },
   {
-    "objectID": "12_build.rjs.html#requirements",
-    "href": "12_build.rjs.html#requirements",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#requirements",
+    "href": "11_packages.rjs.html#requirements",
+    "title": "Packages",
     "section": "Requirements",
     "text": "Requirements\n\nYou need a main.rs with a function named main.\nnvim src/main.rs -&gt; Change “secondary” to “main” -&gt; “cargo run”\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s\n     Running `target/debug/throwaway_example`\nGoodbye, space!"
   },
   {
-    "objectID": "12_build.html",
-    "href": "12_build.html",
-    "title": "Build",
+    "objectID": "11_packages.rjs.html#carry-on-only",
+    "href": "11_packages.rjs.html#carry-on-only",
+    "title": "Packages",
+    "section": "Carry-on only",
+    "text": "Carry-on only\n\nI try to live me life without baggage.\n\n(I don’t like cargo)\n\nWhy? Well…\n\nI can’t name things the way I want\nI can’t add cargo created directories to repositories.\n\nWell, I can, but it I have to use options."
+  },
+  {
+    "objectID": "11_packages.rjs.html#option-1-names",
+    "href": "11_packages.rjs.html#option-1-names",
+    "title": "Packages",
+    "section": "Option 1: Names",
+    "text": "Option 1: Names\n\nIt is uncommon to name a package numerically.\nIt is however, I think, useful in a course.\nIt is also, I think, useful to write packages for a course.\nSo we do so."
+  },
+  {
+    "objectID": "11_packages.rjs.html#name-scheme",
+    "href": "11_packages.rjs.html#name-scheme",
+    "title": "Packages",
+    "section": "Name Scheme",
+    "text": "Name Scheme\n\nI have used the following scheme this term:\n\nEach class day is denoted as a two digit value.\nThe first digit represents the zero-indexed week.\nThe second digit represents the zero-index position in [\"Lecture\", \"Lab\", \"Homework\"]"
+  },
+  {
+    "objectID": "11_packages.rjs.html#today-1",
+    "href": "11_packages.rjs.html#today-1",
+    "title": "Packages",
+    "section": "Today",
+    "text": "Today\n\nToday is one week from the first day of class, last week.\nToday is one day from the first day of the week, Monday.\nSo I denote today 11"
+  },
+  {
+    "objectID": "11_packages.rjs.html#use-cargo",
+    "href": "11_packages.rjs.html#use-cargo",
+    "title": "Packages",
+    "section": "Use Cargo",
+    "text": "Use Cargo\n\nLet’s use cargo to make a package called 11.\n\ncargo new 11\n\nWhat happens?"
+  },
+  {
+    "objectID": "11_packages.rjs.html#problem",
+    "href": "11_packages.rjs.html#problem",
+    "title": "Packages",
+    "section": "Problem",
+    "text": "Problem\n\u0016\u0016    Creating binary (application) `11` package\nerror: invalid character `1` in package name: `11`, the name cannot start with a digit\nIf you need a package name to not match the directory name, consider using --name flag.\nIf you need a binary with the name \"11\", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:\n\n    [[bin]]\n    name = \"11\"\n    path = \"src/main.rs\""
+  },
+  {
+    "objectID": "11_packages.rjs.html#solution",
+    "href": "11_packages.rjs.html#solution",
+    "title": "Packages",
+    "section": "Solution",
+    "text": "Solution\n\nWe can make a folder named 11\nBut not a package named 11.\nWe use the --name flag.\n\nI use the name of these slides, rather than the number, as the package name.\n\ncargo new 11 --name packages\nThis should be allowed."
+  },
+  {
+    "objectID": "11_packages.rjs.html#exercise-1",
+    "href": "11_packages.rjs.html#exercise-1",
+    "title": "Packages",
+    "section": "Exercise",
+    "text": "Exercise\n\nFor the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named 12, with [ ] A valid Cargo name (not 12), that is [ ] In your course repository and therefore [ ] Has no cargo managed repository."
+  },
+  {
+    "objectID": "11_packages.html",
+    "href": "11_packages.html",
+    "title": "Packages",
     "section": "",
     "text": "The second homework, “Hi cargo”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 12 Sept. at 1440 ET.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#announcements",
-    "href": "12_build.html#announcements",
-    "title": "Build",
+    "objectID": "11_packages.html#announcements",
+    "href": "11_packages.html#announcements",
+    "title": "Packages",
     "section": "",
     "text": "The second homework, “Hi cargo”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 12 Sept. at 1440 ET.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#today",
-    "href": "12_build.html#today",
-    "title": "Build",
+    "objectID": "11_packages.html#today",
+    "href": "11_packages.html#today",
+    "title": "Packages",
     "section": "Today",
     "text": "Today\n\nHybrid Day\nBuild system/package manager\n\nTheory behind Cargo\nTrap in Cargo\nUse Cargo",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#interpretation",
-    "href": "12_build.html#interpretation",
-    "title": "Build",
+    "objectID": "11_packages.html#interpretation",
+    "href": "11_packages.html#interpretation",
+    "title": "Packages",
     "section": "Interpretation",
     "text": "Interpretation\n\nWe once again address interpretation vs. compilation\n\nI think of this as programming vs. scripting\nWe can think in terms of languages - Rust/C vs. Python/JavaScript",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#scripts",
-    "href": "12_build.html#scripts",
-    "title": "Build",
+    "objectID": "11_packages.html#scripts",
+    "href": "11_packages.html#scripts",
+    "title": "Packages",
     "section": "Scripts",
     "text": "Scripts\n\nI regard a script a:\n\nText file\nWhich describes actions for a computer\nReadable to humans\nAnd readable to a program (like python) which can direct the computer to act\n\n\n\nwhat_up_earth.py\n\nprint(\"what up earth\")\n\nWe note that this is much closer to being a text file that it is to being a program.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#programs",
-    "href": "12_build.html#programs",
-    "title": "Build",
+    "objectID": "11_packages.html#programs",
+    "href": "11_packages.html#programs",
+    "title": "Packages",
     "section": "Programs",
     "text": "Programs\n\nWe can create programs but we also use existing programs.\nAs an example, consider the Firefox web-browser\n\nIf you use Chrome, keep that to yourself, that’s embarassing.\n\nThis is what “Firefox.exe” looks like on a Window device.\n\n\n\nFirefox.exe\n\nA{Ÿ@€ÿ\u0019w.\u000f·þ9Ï\u000fCñ~¿‰ó€Ë @€ÿ\u001a\u000f¶û\u000fCþD8ßu\u000fé¬%  Aƒù/\u000f„î%  L‹R\bHƒÂ\bHƒÀ\bM…Ò\u000f…wÿÿÿM…À\u000f„Ã\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-\u000f…“\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…À\u000f„|\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùc\u000f…P\u0002  D\u000f·B\u0002fE…À\u000f„A\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùo\u000f…\u0015\u0002  D\u000f·B\u0004fE…À\u000f„\u0006\u0002  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…Ú\u0001  D\u000f·B\u0006fE…À\u000f„Ë\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…Ÿ\u0001  D\u000f·B\bfE…À\u000f„\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùe\u000f…d\u0001  D\u000f·B\nfE…À\u000f„U\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùn\u000f…)\u0001  D\u000f·B\ffE…À\u000f„\u001a\u0001  E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùt\u000f…î   D\u000f·B\u000efE…À\u000f„ß   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùp\u000f…³   D\u000f·B\u0010fE…À\u000f„¤   E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùru|D\u000f·B\u0012fE…ÀtqE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùouID\u000f·B\u0014fE…Àt&gt;E\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùcu\u0016fƒz\u0016 \u000f„*\u001c  ë   ƒú/\u000f„i#  L‹ HƒÀ\bM…À\u000f…GýÿÿHŒ$ð\u0001  è)˜  f\u000fïÀL„$ \u0007  fA\u000f@ fA\u000f@\u0010fA\u000f H„$à\u0002  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   è\u001bE\u0005 …À\u000fˆ\u001e#  L‹„$H\u0007  ¹ \u0010  1Òÿ\u0015\u001eû\u0005 H‰ÃH…À\u000f„;#  L´$@\u0007  AÇFà    AÆFø LŒ$à\u0002  AÇ\u0001   \u0002  H‰Ùº\u0001   M‰ðÿ\u0015õú\u0005 L‰ÿ…À\u000f„4#  €¼$8\u0007   \u000f…_#  D‹„$ \u0007  L¼$0\u0001  L‰ùL‰òè\u0019™  A€\u0018 \u000f…X#  L´$ \u0003  AÇFà\u0001   AÆFø 1ÉL‰òA¸ \u0002  ÿ\u00150ù\u0005 =  \u0002  t\b…À\u000f…\u0002!  ÿ\u0015\u000bù\u0005 \u000f·èÍ  \u0007€…À\u000fNèA¼)   @¶\u0001L=t˜\u0005 H‰ØHÿÀHƒø\u0002r    H‰Ùÿ\u0015°÷\u0005 @„ö\u000f…*\"  A€÷\u0001³\u00011íH\n\u0005¤\u0005 ÿ\u0015’ü\u0005 H…ÀL‹d$`\u000f…6#  L‹\u0007M…À\u000f„w\u0002  ID$\u0010¹ÿ   A\u000f·\u0010ƒú-t\u001aƒú/\u000f„»!  L‹ HƒÀ\bM…ÀuâéJ\u0002  IP\u0002MH\u0004fAƒx\u0002-I\u000fDÑD\u000f·\u0002fE…ÀtÓE\u000f·ÈA9ÉD\u000fCÁEH¿E‰ÂA€Ê A€ù\u001aE\u000f¶ÊE\u000fCÈA€ùlu«D\u000f·B\u0002fE…Àt E\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øa\u000f…jÿÿÿD\u000f·B\u0004fE…À\u000f„[ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øu\u000f…%ÿÿÿD\u000f·B\u0006fE…À\u000f„\u0016ÿÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øn\u000f…àþÿÿD\u000f·B\bfE…À\u000f„ÑþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øc\u000f…›þÿÿD\u000f·B\nfE…À\u000f„ŒþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øh\u000f…VþÿÿD\u000f·B\ffE…À\u000f„GþÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€øe\u000f…\u0011þÿÿD\u000f·B\u000efE…À\u000f„\u0002þÿÿE\u000f·ÈAºÿ   Aùÿ   E\u000fBÐEB¿E‰ÑA€É A€ø\u001aE\u000f¶ÁE\u000fCÂA€ør\u000f…Ìýÿÿfƒz\u0010 \u000f…ÁýÿÿH‹\bH‰HøHƒÀ\bH…ÉuðAÿÍ°\u0001L‹d$`ë\u00021À„Û\u000f„Æ   A\bÇE1ÉAöÇ\u0001tyL‹\u0007M…ÀtqID$\u0010¹ÿ   A\u000f·\u0010ƒú-uIIP\u0002MP\u0004fAƒx\u0002-I\u000fDÒD\u000f·\u0002fE…Àt6E\u000f·ÐA9ÊD\u000fCÁEP¿E‰ÃA€Ë A€ú\u001aE\u000f¶ÓE\u000fCÐA€úfu\u000eéj   ƒú/\u000f„\u0010$  L‹ HƒÀ\bM…Àu™Aö×E\u000f¶ÇAƒà\u0001HŒ$ð\u0001  Hœ$ \u0007  H‰Úè\u000f˜  @Šs\u0010@„ö\u000f…à#  ƒ¼$ \u0007   I‰ÿu\u00041íë/H\n} \u0005 ÿ\u0015$ù\u0005 H…À\u000f…à%  H\n\n\nI would not regard that as readable to humans (depends on the human)",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#compilation",
-    "href": "12_build.html#compilation",
-    "title": "Build",
+    "objectID": "11_packages.html#compilation",
+    "href": "11_packages.html#compilation",
+    "title": "Packages",
     "section": "Compilation",
     "text": "Compilation\n\nCompilation is the process that takes text-based code to whatever we saw on the last slide.\nCan be quite simple - we made hi_world, a program, already.\n\nNotably it didn’t do a lot.\n\nrustc takes a .rs file and makes an executable\n\na program, sort of\n\nExecutables run as command with ./ prefix\n\nThis differs from python3 which runs a script without creating a corresponding program.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#py-vs-.rs",
-    "href": "12_build.html#py-vs-.rs",
-    "title": "Build",
+    "objectID": "11_packages.html#py-vs-.rs",
+    "href": "11_packages.html#py-vs-.rs",
+    "title": "Packages",
     "section": ".py vs .rs",
     "text": ".py vs .rs\n\n\n\n\n\nflowchart LR\n  A(Python) --&gt; B[fname.py file]\n  B --&gt; C[python fname.py]\n  C --&gt; D{hello world}\n  E(Rust) --&gt; F[fname.rs  file]\n  F --&gt; G[rustc fname.rs]\n  G --&gt; H[./fname]\n  H --&gt; I{hello world}\n\n\n\n\n\n\n\nYou only have to compile once to have the executable forever.\nMost programs are executables, not scripts.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#rustc",
-    "href": "12_build.html#rustc",
-    "title": "Build",
+    "objectID": "11_packages.html#rustc",
+    "href": "11_packages.html#rustc",
+    "title": "Packages",
     "section": "Rustc",
     "text": "Rustc\n\nrustc is rarely, if ever, used directly\n\nOver the years (since like, 1960) code has increased in complexity.\n\nMany files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)\nMany libraries (think NumPy, pandas, scikit)\nComplex file systems (01/rustup.md)\n\n\nThe solution was automation.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#build-systems-1",
-    "href": "12_build.html#build-systems-1",
-    "title": "Build",
+    "objectID": "11_packages.html#build-systems-1",
+    "href": "11_packages.html#build-systems-1",
+    "title": "Packages",
     "section": "Build Systems",
     "text": "Build Systems\n\nWe don’t have a real equivalence to compilation for Python.\n\nThere is Numba\n\nWe do have a build system equivalent.\n\nI use flit, which is easy.\nI think there’s others… Setuptools? Hatchling?",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#flit",
-    "href": "12_build.html#flit",
-    "title": "Build",
+    "objectID": "11_packages.html#flit",
+    "href": "11_packages.html#flit",
+    "title": "Packages",
     "section": "Flit",
     "text": "Flit\n\nFlit solves a novel problem for Python programers.\n\nNot: Let’s make some code that I can run.\nInstead: Let’s make code that can be used in code other people run.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#packaging",
-    "href": "12_build.html#packaging",
-    "title": "Build",
+    "objectID": "11_packages.html#packaging",
+    "href": "11_packages.html#packaging",
+    "title": "Packages",
     "section": "Packaging",
     "text": "Packaging\n\nNumPy, pandas, and things like CS 151 PGL can be “built” into packages with Flit and friends.\n\nBasically, instead of running e.g. python3 mycode.py\nRun flit init to make a new folder, edit some code, then run flit publish to add it to pip\n\nTakeaway - package management and build systems work real well together.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#wheels",
-    "href": "12_build.html#wheels",
-    "title": "Build",
+    "objectID": "11_packages.html#wheels",
+    "href": "11_packages.html#wheels",
+    "title": "Packages",
     "section": "Wheels",
     "text": "Wheels\n\nThe thing that flit and friends create and distribute is not a .py file.\nRather, they are “wheels” which are not human readable.\nA lot like compiled code\nTakeaway - a good way to think of Rust is that we’re writing packages for ourselves.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#cargo",
-    "href": "12_build.html#cargo",
-    "title": "Build",
+    "objectID": "11_packages.html#cargo",
+    "href": "11_packages.html#cargo",
+    "title": "Packages",
     "section": "Cargo",
     "text": "Cargo\n\nWith Python, we use python3 (or pip, but perhaps as python3 -m pip).\nrustc is not really the equivalent to that:\nRather, we use cargo, the Rust build and package manager.\ncargo will handle any usage of rustc that we may need.\n\nWe can easily then distribute code across multiple files.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#buildpackage",
-    "href": "12_build.html#buildpackage",
-    "title": "Build",
+    "objectID": "11_packages.html#buildpackage",
+    "href": "11_packages.html#buildpackage",
+    "title": "Packages",
     "section": "Build+Package",
     "text": "Build+Package\n\nCargo is Rust’s build system (like flit) and package manager (like pip).\nWe will use Cargo instead of rustc for the rest of the term.\n\nMy sense is that this is the industry standard.\n\nWe’ll step through an example, then you’ll do a (very simple) exercise.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#new",
-    "href": "12_build.html#new",
-    "title": "Build",
+    "objectID": "11_packages.html#new",
+    "href": "11_packages.html#new",
+    "title": "Packages",
     "section": "New",
     "text": "New\n\nThe first thing to do with Cargo, as a rule, is great a new package.\n\nThis is kinda like creating a new .py file.\nIt is a bit more like creating a Python project from a template repository.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#do-it",
-    "href": "12_build.html#do-it",
-    "title": "Build",
+    "objectID": "11_packages.html#do-it",
+    "href": "11_packages.html#do-it",
+    "title": "Packages",
     "section": "Do it",
     "text": "Do it\n\nTo do so:\n\ncargo new throwaway_example\n\ncargo is, well, Cargo\nnew creates a new package.\nthrowaway_example is the name of the package1.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#examine",
-    "href": "12_build.html#examine",
-    "title": "Build",
+    "objectID": "11_packages.html#examine",
+    "href": "11_packages.html#examine",
+    "title": "Packages",
     "section": "Examine",
     "text": "Examine\n\nThe most natural thing is to see what has changed.\n\nls\n\nFor me, I see a new directory: throwaway_example\nI change into the directory to examine it.\n\ncd throwaway_example\nls\n\nNot much there:\n\nCargo.toml  src",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#aside-tree",
-    "href": "12_build.html#aside-tree",
-    "title": "Build",
+    "objectID": "11_packages.html#aside-tree",
+    "href": "11_packages.html#aside-tree",
+    "title": "Packages",
     "section": "Aside: Tree",
     "text": "Aside: Tree\n\nCan also see directory structure.\nInstall tree with your preferred installer (perhaps apt or brew)\n\nsudo apt install tree\n\nThen use tree instead of ls\n\n.\n├── Cargo.toml\n└── src\n    └── main.rs\n\n1 directory, 2 files",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#main.rs",
-    "href": "12_build.html#main.rs",
-    "title": "Build",
+    "objectID": "11_packages.html#main.rs",
+    "href": "11_packages.html#main.rs",
+    "title": "Packages",
     "section": "main.rs",
     "text": "main.rs\n\nCargo creates projects with a default main file.\n\n\n\nmain.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\nThe name “main” is basically mainful to Cargo - it says which, if multiple, .rs files to read first when trying to execute the code in a package.\n\nMake sure you understand that sentence.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#run",
-    "href": "12_build.html#run",
-    "title": "Build",
+    "objectID": "11_packages.html#run",
+    "href": "11_packages.html#run",
+    "title": "Packages",
     "section": "Run",
-    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder.",
+    "text": "Run\n\ncargo run is probably our closest equivalent to python3 throwaway_example.py or the “Run” button in VS Code.\nOf note, you can not simply do “new” then “run”.\n\n“New” creates a new folder.\n“Run” must be done from within that folder.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#try-it",
-    "href": "12_build.html#try-it",
-    "title": "Build",
+    "objectID": "11_packages.html#try-it",
+    "href": "11_packages.html#try-it",
+    "title": "Packages",
     "section": "Try it",
     "text": "Try it\n\nDo this:\n\ncargo run\n\nSee this:\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s\n     Running `target/debug/throwaway_example`\nHello, world!",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#again",
-    "href": "12_build.html#again",
-    "title": "Build",
+    "objectID": "11_packages.html#again",
+    "href": "11_packages.html#again",
+    "title": "Packages",
     "section": "Again!",
     "text": "Again!\n\nIf you run again, the process will:\n\nSkip the compile step.\nBe way faster (∞x reported here)\n\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\n0.56s -&gt; 0.00s",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#its-fast",
-    "href": "12_build.html#its-fast",
-    "title": "Build",
+    "objectID": "11_packages.html#its-fast",
+    "href": "11_packages.html#its-fast",
+    "title": "Packages",
     "section": "It’s fast",
     "text": "It’s fast\n\n0.56s -&gt; 0.00s\nThis is why we use languages which compile.\n\nPython took around .04s, for me.\n\ntime python3 -c \"print('Hello, world')\"\nThe results are:\n\nHello, world\n\nreal    0m0.039s\nuser    0m0.007s\nsys     0m0.008s\n\nGuess how long it takes to compile python, by the way.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#other-files",
-    "href": "12_build.html#other-files",
-    "title": "Build",
+    "objectID": "11_packages.html#other-files",
+    "href": "11_packages.html#other-files",
+    "title": "Packages",
     "section": "Other files",
     "text": "Other files\n\nGo ahead and add another .rs file and see what happens.\n\nAdd it to the src directory!\n\nI’ll use this one - I change filename and text, but\n\n\n\nsecondary.rs\n\nfn secondary() {\n    println!(\"Goodbye, space!\");\n}",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#run-it-again",
-    "href": "12_build.html#run-it-again",
-    "title": "Build",
+    "objectID": "11_packages.html#run-it-again",
+    "href": "11_packages.html#run-it-again",
+    "title": "Packages",
     "section": "Run it again…",
     "text": "Run it again…\n\nNothing changes.\n\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/throwaway_example`\nHello, world!\n\nThis is the same as adding another .py file then not using import or including its code in any other way.",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#swap-the-names.",
-    "href": "12_build.html#swap-the-names.",
-    "title": "Build",
+    "objectID": "11_packages.html#swap-the-names.",
+    "href": "11_packages.html#swap-the-names.",
+    "title": "Packages",
     "section": "Swap the names.",
     "text": "Swap the names.\n\nI use mv (move) to change:\n\nmain.rs to old_main.rs\nsecondary.rs to main.rs\n\nThings change!\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\nerror[E0601]: `main` function not found in crate `throwaway_example`\n --&gt; src/main.rs:3:2\n  |\n3 | }\n  |  ^ consider adding a `main` function to `src/main.rs`\n\nFor more information about this error, try `rustc --explain E0601`.\nerror: could not compile `throwaway_example` (bin \"throwaway_example\") due to 1 previous error",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#requirements",
-    "href": "12_build.html#requirements",
-    "title": "Build",
+    "objectID": "11_packages.html#requirements",
+    "href": "11_packages.html#requirements",
+    "title": "Packages",
     "section": "Requirements",
     "text": "Requirements\n\nYou need a main.rs with a function named main.\nnvim src/main.rs -&gt; Change “secondary” to “main” -&gt; “cargo run”\n\n   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s\n     Running `target/debug/throwaway_example`\nGoodbye, space!",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   },
   {
-    "objectID": "12_build.html#footnotes",
-    "href": "12_build.html#footnotes",
-    "title": "Build",
+    "objectID": "11_packages.html#carry-on-only",
+    "href": "11_packages.html#carry-on-only",
+    "title": "Packages",
+    "section": "Carry-on only",
+    "text": "Carry-on only\n\nI try to live me life without baggage.\n\n(I don’t like cargo)\n\nWhy? Well…\n\nI can’t name things the way I want\nI can’t add cargo created directories to repositories.\n\nWell, I can, but it I have to use options.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#option-1-names",
+    "href": "11_packages.html#option-1-names",
+    "title": "Packages",
+    "section": "Option 1: Names",
+    "text": "Option 1: Names\n\nIt is uncommon to name a package numerically.\nIt is however, I think, useful in a course.\nIt is also, I think, useful to write packages for a course.\nSo we do so.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#name-scheme",
+    "href": "11_packages.html#name-scheme",
+    "title": "Packages",
+    "section": "Name Scheme",
+    "text": "Name Scheme\n\nI have used the following scheme this term:\n\nEach class day is denoted as a two digit value.\nThe first digit represents the zero-indexed week.\nThe second digit represents the zero-index position in [\"Lecture\", \"Lab\", \"Homework\"]",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#today-1",
+    "href": "11_packages.html#today-1",
+    "title": "Packages",
+    "section": "Today",
+    "text": "Today\n\nToday is one week from the first day of class, last week.\nToday is one day from the first day of the week, Monday.\nSo I denote today 11",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#use-cargo",
+    "href": "11_packages.html#use-cargo",
+    "title": "Packages",
+    "section": "Use Cargo",
+    "text": "Use Cargo\n\nLet’s use cargo to make a package called 11.\n\ncargo new 11\n\nWhat happens?",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#problem",
+    "href": "11_packages.html#problem",
+    "title": "Packages",
+    "section": "Problem",
+    "text": "Problem\n\u0016\u0016    Creating binary (application) `11` package\nerror: invalid character `1` in package name: `11`, the name cannot start with a digit\nIf you need a package name to not match the directory name, consider using --name flag.\nIf you need a binary with the name \"11\", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:\n\n    [[bin]]\n    name = \"11\"\n    path = \"src/main.rs\"",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#solution",
+    "href": "11_packages.html#solution",
+    "title": "Packages",
+    "section": "Solution",
+    "text": "Solution\n\nWe can make a folder named 11\nBut not a package named 11.\nWe use the --name flag.\n\nI use the name of these slides, rather than the number, as the package name.\n\ncargo new 11 --name packages\nThis should be allowed.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#exercise-1",
+    "href": "11_packages.html#exercise-1",
+    "title": "Packages",
+    "section": "Exercise",
+    "text": "Exercise\n\nFor the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named 12, with [ ] A valid Cargo name (not 12), that is [ ] In your course repository and therefore [ ] Has no cargo managed repository.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#footnotes",
+    "href": "11_packages.html#footnotes",
+    "title": "Packages",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nWell, kinda. We’ll get to that.↩︎",
     "crumbs": [
-      "Build"
+      "Packages"
     ]
   }
 ]

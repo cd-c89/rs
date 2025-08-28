@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.30">
 
   <meta name="author" content="Prof.&nbsp;Calvin">
-  <title>Systems in Rust – Build</title>
+  <title>Systems in Rust – Packages</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -94,7 +94,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-0f071606cd187ea9c4f27a73aca9ddf7.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-83ff8eaca933b935d6975c751fe501e4.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -393,7 +393,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Build</h1>
+  <h1 class="title">Packages</h1>
   <p class="subtitle">Systems in Rust</p>
 
 <div class="quarto-title-authors">
@@ -702,7 +702,7 @@ Prof.&nbsp;Calvin
 <h2>Run</h2>
 <ul>
 <li><code>cargo run</code> is probably our closest equivalent to <code>python3 throwaway_example.py</code> or the “Run” button in VS Code.</li>
-<li>Of note, you can simply do “new” then “run”.
+<li>Of note, you can <strong>not</strong> simply do “new” then “run”.
 <ul>
 <li>“New” creates a new folder.</li>
 <li>“Run” must be done from <em>within</em> that folder.</li>
@@ -819,6 +819,99 @@ Prof.&nbsp;Calvin
 <span id="cb18-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.33s</span></span>
 <span id="cb18-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/throwaway_example</span><span class="kw">`</span></span>
 <span id="cb18-4"><a></a><span class="ex">Goodbye,</span> space!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="options" class="title-slide slide level1 center">
+<h1>Options</h1>
+
+</section>
+<section id="carry-on-only" class="slide level2">
+<h2>Carry-on only</h2>
+<ul>
+<li>I try to live me life without baggage.
+<ul>
+<li>(I don’t like <code>cargo</code>)</li>
+</ul></li>
+<li>Why? Well…
+<ul>
+<li>I can’t name things the way I want</li>
+<li>I can’t add <code>cargo</code> created directories to repositories.</li>
+</ul></li>
+<li>Well, I can, but it I have to use options.</li>
+</ul>
+</section>
+<section id="option-1-names" class="slide level2">
+<h2>Option 1: Names</h2>
+<ul>
+<li>It is uncommon to name a package numerically.</li>
+<li>It is however, I think, useful in a course.</li>
+<li>It is also, I think, useful to write packages for a course.</li>
+<li>So we do so.</li>
+</ul>
+</section>
+<section id="name-scheme" class="slide level2">
+<h2>Name Scheme</h2>
+<ul>
+<li>I have used the following scheme this term:
+<ul>
+<li>Each class day is denoted as a two digit value.</li>
+<li>The first digit represents the zero-indexed week.</li>
+<li>The second digit represents the zero-index position in <code>["Lecture", "Lab", "Homework"]</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="today-1" class="slide level2">
+<h2>Today</h2>
+<ul>
+<li>Today is one week from the first day of class, last week.</li>
+<li>Today is one day from the first day of the week, Monday.</li>
+<li>So I denote today <code>11</code></li>
+</ul>
+</section>
+<section id="use-cargo" class="slide level2">
+<h2>Use Cargo</h2>
+<ul>
+<li>Let’s use <code>cargo</code> to make a package called <code>11</code>.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a></a><span class="ex">cargo</span> new 11</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What happens?</li>
+</ul>
+</section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="ex"></span>    Creating binary <span class="er">(</span><span class="ex">application</span><span class="kw">)</span> <span class="kw">`</span><span class="ex">11</span><span class="kw">`</span> package</span>
+<span id="cb20-2"><a></a><span class="ex">error:</span> invalid character <span class="kw">`</span><span class="ex">1</span><span class="kw">`</span> in package name: <span class="kw">`</span><span class="ex">11</span><span class="kw">`</span>, the name cannot start with a digit</span>
+<span id="cb20-3"><a></a><span class="ex">If</span> you need a package name to not match the directory name, consider using <span class="at">--name</span> flag.</span>
+<span id="cb20-4"><a></a><span class="ex">If</span> you need a binary with the name <span class="st">"11"</span>, use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to <span class="kw">`</span><span class="ex">src/bin/11.rs</span><span class="kw">`</span> or change the name in Cargo.toml with:</span>
+<span id="cb20-5"><a></a></span>
+<span id="cb20-6"><a></a>    <span class="ex">[[bin]]</span></span>
+<span id="cb20-7"><a></a>    <span class="ex">name</span> = <span class="st">"11"</span></span>
+<span id="cb20-8"><a></a>    <span class="ex">path</span> = <span class="st">"src/main.rs"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<ul>
+<li>We can make a folder named <code>11</code></li>
+<li>But not a package named <code>11</code>.</li>
+<li>We use the <code>--name</code> flag.
+<ul>
+<li>I use the name of these slides, rather than the number, as the package name.</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a></a><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>This should be allowed.</li>
+</ul>
+</section></section>
+<section>
+<section id="exercise" class="title-slide slide level1 center">
+<h1>Exercise</h1>
+
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<ul>
+<li>For the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named <code>12</code>, with [ ] A valid Cargo name (not <code>12</code>), that is [ ] In your <em>course</em> repository and therefore [ ] Has no <code>cargo</code> managed repository.</li>
+</ul>
 </section></section>
 <section id="fin" class="title-slide slide level1 center">
 <h1>Fin</h1>

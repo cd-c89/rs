@@ -1,12 +1,7 @@
 ---
-title: Build
+title: Packages
 ---
 
-<style>
-    * {
-        font-family: "Monaco", monospace;
-    }
-</style>
 
 ## Announcements
 
@@ -319,6 +314,57 @@ Goodbye, space!
 - Well, I can, but it I have to use options.
 
 ## Option 1: Names
+
+- It is uncommon to name a package numerically.
+- It is however, I think, useful in a course.
+- It is also, I think, useful to write packages for a course.
+- So we do so.
+
+## Name Scheme
+
+- I have used the following scheme this term:
+    - Each class day is denoted as a two digit value.
+    - The first digit represents the zero-indexed week.
+    - The second digit represents the zero-index position in `["Lecture", "Lab", "Homework"]`
+
+
+## Today
+
+- Today is one week from the first day of class, last week.
+- Today is one day from the first day of the week, Monday.
+- So I denote today `11`
+
+## Use Cargo
+
+- Let's use `cargo` to make a package called `11`.
+```{.bash}
+cargo new 11
+```
+- What happens?
+
+## Problem
+
+```{.bash}
+    Creating binary (application) `11` package
+error: invalid character `1` in package name: `11`, the name cannot start with a digit
+If you need a package name to not match the directory name, consider using --name flag.
+If you need a binary with the name "11", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:
+
+    [[bin]]
+    name = "11"
+    path = "src/main.rs"
+```
+
+## Solution
+
+- We can make a folder named `11`
+- But not a package named `11`.
+- We use the `--name` flag.
+    - I use the name of these slides, rather than the number, as the package name.
+```{.bash}
+cargo new 11 --name packages
+```
+- This should be allowed.
 
 # Exercise
 
