@@ -32,7 +32,7 @@ format: html
 |Week|Date (M)|Lecture (M)|Lab (W)|HW (F)|
 |:--:|:---|:----|:-------|:-------|
 |0x0|08/25|[Welcome](00_welcome.qmd)|[Rustup](01_rustup.md)|[Hi world](02_hiworld.md)|
-|0x1|09/01|*Off*|[Build](12_build.qmd)|Hi cargo|
+|0x1|09/01|*Off*|[Packages](11_packages.qmd)|Hi cargo|
 |0x2|09/08|Options|Guess|Wordle|
 |0x3|09/15|Bits|Hamming|Sigmas|
 |0x4|09/22|SHA2|Endian|Chunk|
