@@ -92,7 +92,7 @@ For more information about this error, try `rustc --explain E0601`.
 - Rust files always end with the `.rs` extension.
 - If you’re using more than one word in your filename, the
 convention is to use an underscore to separate them. For example, use
-`hi_world.rs` rather than `HiWorld.rs`.
+`hi_world.rs` rather than `hiworld.rs`.
 - In `hi_world.rs` enter the following:
 
 ```{.rust filename="hi_world.rs"}

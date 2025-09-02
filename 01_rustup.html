@@ -194,6 +194,18 @@ window.Quarto = {
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22 Wordle</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -211,7 +223,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a>
   <ul class="collapse">
-  <li><a href="#wsl-2" id="toc-wsl-2" class="nav-link" data-scroll-target="#wsl-2">WSL 2</a></li>
   <li><a href="#docker-or-podman" id="toc-docker-or-podman" class="nav-link" data-scroll-target="#docker-or-podman">Docker or Podman</a></li>
   <li><a href="#git-bash" id="toc-git-bash" class="nav-link" data-scroll-target="#git-bash">Git Bash</a></li>
   <li><a href="#cygwin" id="toc-cygwin" class="nav-link" data-scroll-target="#cygwin">Cygwin</a></li>
@@ -334,7 +345,7 @@ window.Quarto = {
 <li>It is comically trivial.</li>
 <li>Mostly makes sure you have everything set up.</li>
 </ul></li>
-<li>Due Friday, 1 Sept.&nbsp;at 1440 ET.</li>
+<li>Due Friday, 5 Sept.&nbsp;at 1440 ET.</li>
 </ul>
 </section>
 <section id="today" class="level2">
@@ -360,13 +371,8 @@ window.Quarto = {
 <li>Use Windows Subsystem for Linux (Recommended)</li>
 <li>Use Docker or Podman</li>
 <li>Use Git Bash or Mingw in some other way (Discouraged)</li>
-<li>Use Cygwin (Discouraged)</li>
+<li>Use Cygwin (Discouraged) ### WSL 2</li>
 </ul></li>
-</ul>
-<hr>
-<section id="wsl-2" class="level3">
-<h3 class="anchored" data-anchor-id="wsl-2">WSL 2</h3>
-<ul>
 <li>Windows Subsystem for Linux</li>
 <li>Follow <a href="https://learn.microsoft.com/en-us/windows/wsl/install">this guide</a></li>
 <li>Notes:
@@ -380,7 +386,6 @@ window.Quarto = {
 </ul></li>
 </ul>
 <hr>
-</section>
 <section id="docker-or-podman" class="level3">
 <h3 class="anchored" data-anchor-id="docker-or-podman">Docker or Podman</h3>
 <ul>
@@ -1564,7 +1569,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb41-12"><a href="#cb41-12"></a><span class="ss">- </span>The first homework, "Hi world", is ready after this class.</span>
 <span id="cb41-13"><a href="#cb41-13"></a><span class="ss">  - </span>It is comically trivial.</span>
 <span id="cb41-14"><a href="#cb41-14"></a><span class="ss">  - </span>Mostly makes sure you have everything set up.</span>
-<span id="cb41-15"><a href="#cb41-15"></a><span class="ss">- </span>Due Friday, 1 Sept. at 1440 ET.</span>
+<span id="cb41-15"><a href="#cb41-15"></a><span class="ss">- </span>Due Friday, 5 Sept. at 1440 ET.</span>
 <span id="cb41-16"><a href="#cb41-16"></a></span>
 <span id="cb41-17"><a href="#cb41-17"></a><span class="fu">## Today</span></span>
 <span id="cb41-18"><a href="#cb41-18"></a></span>
@@ -1584,599 +1589,596 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb41-32"><a href="#cb41-32"></a><span class="ss">    - </span>Use Docker or Podman </span>
 <span id="cb41-33"><a href="#cb41-33"></a><span class="ss">    - </span>Use Git Bash or Mingw in some other way (Discouraged)</span>
 <span id="cb41-34"><a href="#cb41-34"></a><span class="ss">    - </span>Use Cygwin (Discouraged)</span>
-<span id="cb41-35"><a href="#cb41-35"></a></span>
-<span id="cb41-36"><a href="#cb41-36"></a>---</span>
-<span id="cb41-37"><a href="#cb41-37"></a></span>
-<span id="cb41-38"><a href="#cb41-38"></a><span class="fu">### WSL 2</span></span>
-<span id="cb41-39"><a href="#cb41-39"></a></span>
-<span id="cb41-40"><a href="#cb41-40"></a><span class="ss">- </span>Windows Subsystem for Linux</span>
-<span id="cb41-41"><a href="#cb41-41"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://learn.microsoft.com/en-us/windows/wsl/install)</span></span>
-<span id="cb41-42"><a href="#cb41-42"></a><span class="ss">- </span>Notes:</span>
-<span id="cb41-43"><a href="#cb41-43"></a><span class="ss">    - </span>Use WSL 2. It is the default.</span>
-<span id="cb41-44"><a href="#cb41-44"></a><span class="ss">    - </span>I recommend using Ubuntu distribution. You will be asked.</span>
-<span id="cb41-45"><a href="#cb41-45"></a><span class="ss">    - </span>I prefer <span class="co">[</span><span class="ot">Windows Terminal</span><span class="co">](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-US&amp;gl=US)</span>.</span>
-<span id="cb41-46"><a href="#cb41-46"></a><span class="ss">        - </span>Windows key -&gt; "Terminal" -&gt; Enter -&gt; <span class="in">`wsl`</span></span>
-<span id="cb41-47"><a href="#cb41-47"></a></span>
-<span id="cb41-48"><a href="#cb41-48"></a>---</span>
-<span id="cb41-49"><a href="#cb41-49"></a></span>
-<span id="cb41-50"><a href="#cb41-50"></a><span class="fu">### Docker or Podman</span></span>
-<span id="cb41-51"><a href="#cb41-51"></a></span>
-<span id="cb41-52"><a href="#cb41-52"></a><span class="ss">- </span>Both will require WSL 2, but install for you</span>
-<span id="cb41-53"><a href="#cb41-53"></a><span class="ss">- </span>Docker has better Windows support, I believe Podman is seeing more use.</span>
-<span id="cb41-54"><a href="#cb41-54"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://docs.docker.com/desktop/setup/install/windows-install/)</span>.</span>
-<span id="cb41-55"><a href="#cb41-55"></a><span class="ss">- </span>Notes:</span>
-<span id="cb41-56"><a href="#cb41-56"></a><span class="ss">    - </span>Use WSL 2 backend.</span>
-<span id="cb41-57"><a href="#cb41-57"></a><span class="ss">    - </span>You are responsible for teaching yourself containers.</span>
-<span id="cb41-58"><a href="#cb41-58"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Slides for last year.</span><span class="co">](https://cd-public.github.io/courses/old/c89s25/qmd/podman.html#/what-is-podman)</span></span>
-<span id="cb41-59"><a href="#cb41-59"></a></span>
-<span id="cb41-60"><a href="#cb41-60"></a>---</span>
-<span id="cb41-61"><a href="#cb41-61"></a></span>
-<span id="cb41-62"><a href="#cb41-62"></a><span class="fu">### Git Bash</span></span>
+<span id="cb41-35"><a href="#cb41-35"></a><span class="fu">### WSL 2</span></span>
+<span id="cb41-36"><a href="#cb41-36"></a></span>
+<span id="cb41-37"><a href="#cb41-37"></a><span class="ss">- </span>Windows Subsystem for Linux</span>
+<span id="cb41-38"><a href="#cb41-38"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://learn.microsoft.com/en-us/windows/wsl/install)</span></span>
+<span id="cb41-39"><a href="#cb41-39"></a><span class="ss">- </span>Notes:</span>
+<span id="cb41-40"><a href="#cb41-40"></a><span class="ss">    - </span>Use WSL 2. It is the default.</span>
+<span id="cb41-41"><a href="#cb41-41"></a><span class="ss">    - </span>I recommend using Ubuntu distribution. You will be asked.</span>
+<span id="cb41-42"><a href="#cb41-42"></a><span class="ss">    - </span>I prefer <span class="co">[</span><span class="ot">Windows Terminal</span><span class="co">](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-US&amp;gl=US)</span>.</span>
+<span id="cb41-43"><a href="#cb41-43"></a><span class="ss">        - </span>Windows key -&gt; "Terminal" -&gt; Enter -&gt; <span class="in">`wsl`</span></span>
+<span id="cb41-44"><a href="#cb41-44"></a></span>
+<span id="cb41-45"><a href="#cb41-45"></a>---</span>
+<span id="cb41-46"><a href="#cb41-46"></a></span>
+<span id="cb41-47"><a href="#cb41-47"></a><span class="fu">### Docker or Podman</span></span>
+<span id="cb41-48"><a href="#cb41-48"></a></span>
+<span id="cb41-49"><a href="#cb41-49"></a><span class="ss">- </span>Both will require WSL 2, but install for you</span>
+<span id="cb41-50"><a href="#cb41-50"></a><span class="ss">- </span>Docker has better Windows support, I believe Podman is seeing more use.</span>
+<span id="cb41-51"><a href="#cb41-51"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://docs.docker.com/desktop/setup/install/windows-install/)</span>.</span>
+<span id="cb41-52"><a href="#cb41-52"></a><span class="ss">- </span>Notes:</span>
+<span id="cb41-53"><a href="#cb41-53"></a><span class="ss">    - </span>Use WSL 2 backend.</span>
+<span id="cb41-54"><a href="#cb41-54"></a><span class="ss">    - </span>You are responsible for teaching yourself containers.</span>
+<span id="cb41-55"><a href="#cb41-55"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Slides for last year.</span><span class="co">](https://cd-public.github.io/courses/old/c89s25/qmd/podman.html#/what-is-podman)</span></span>
+<span id="cb41-56"><a href="#cb41-56"></a></span>
+<span id="cb41-57"><a href="#cb41-57"></a>---</span>
+<span id="cb41-58"><a href="#cb41-58"></a></span>
+<span id="cb41-59"><a href="#cb41-59"></a><span class="fu">### Git Bash</span></span>
+<span id="cb41-60"><a href="#cb41-60"></a></span>
+<span id="cb41-61"><a href="#cb41-61"></a><span class="ss">- </span>I have set up guide for Git Bash for <span class="co">[</span><span class="ot">another course</span><span class="co">](https://cd-public.github.io/scicom/qmd/A1_gitbash.html)</span></span>
+<span id="cb41-62"><a href="#cb41-62"></a><span class="ss">- </span>This seemed like it could work. I won't be checking.</span>
 <span id="cb41-63"><a href="#cb41-63"></a></span>
-<span id="cb41-64"><a href="#cb41-64"></a><span class="ss">- </span>I have set up guide for Git Bash for <span class="co">[</span><span class="ot">another course</span><span class="co">](https://cd-public.github.io/scicom/qmd/A1_gitbash.html)</span></span>
-<span id="cb41-65"><a href="#cb41-65"></a><span class="ss">- </span>This seemed like it could work. I won't be checking.</span>
-<span id="cb41-66"><a href="#cb41-66"></a></span>
-<span id="cb41-67"><a href="#cb41-67"></a>---</span>
-<span id="cb41-68"><a href="#cb41-68"></a></span>
-<span id="cb41-69"><a href="#cb41-69"></a><span class="fu">### Cygwin</span></span>
-<span id="cb41-70"><a href="#cb41-70"></a></span>
-<span id="cb41-71"><a href="#cb41-71"></a><span class="ss">- </span>I have no idea how Cygwin works but it's pretty cool.</span>
-<span id="cb41-72"><a href="#cb41-72"></a><span class="ss">- </span>Basically no longer in use due to WSL 2 and Docker.</span>
-<span id="cb41-73"><a href="#cb41-73"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://www.cygwin.com/install.html)</span></span>
-<span id="cb41-74"><a href="#cb41-74"></a></span>
-<span id="cb41-75"><a href="#cb41-75"></a>---</span>
-<span id="cb41-76"><a href="#cb41-76"></a></span>
-<span id="cb41-77"><a href="#cb41-77"></a><span class="fu"># Rust</span></span>
-<span id="cb41-78"><a href="#cb41-78"></a></span>
-<span id="cb41-79"><a href="#cb41-79"></a><span class="fu">## Rustup</span></span>
-<span id="cb41-80"><a href="#cb41-80"></a></span>
-<span id="cb41-81"><a href="#cb41-81"></a><span class="ss">- </span>On your UNIX-based OS:</span>
-<span id="cb41-82"><a href="#cb41-82"></a><span class="ss">    - </span>Linux</span>
-<span id="cb41-83"><a href="#cb41-83"></a><span class="ss">    - </span>MacOS</span>
-<span id="cb41-84"><a href="#cb41-84"></a><span class="ss">    - </span>WSL 2</span>
-<span id="cb41-85"><a href="#cb41-85"></a><span class="ss">    - </span>FreeBSD</span>
-<span id="cb41-86"><a href="#cb41-86"></a><span class="ss">- </span>Open the command line and run the following:</span>
-<span id="cb41-87"><a href="#cb41-87"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-88"><a href="#cb41-88"></a><span class="in">curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh</span></span>
-<span id="cb41-89"><a href="#cb41-89"></a><span class="in">```</span></span>
-<span id="cb41-90"><a href="#cb41-90"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://doc.rust-lang.org/book/ch01-01-installation.html)</span></span>
-<span id="cb41-91"><a href="#cb41-91"></a></span>
-<span id="cb41-92"><a href="#cb41-92"></a><span class="fu">## Verify</span></span>
-<span id="cb41-93"><a href="#cb41-93"></a></span>
-<span id="cb41-94"><a href="#cb41-94"></a><span class="ss">- </span>To ensure you have a Rust installation, run:</span>
-<span id="cb41-95"><a href="#cb41-95"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-96"><a href="#cb41-96"></a><span class="in">rustc --version</span></span>
-<span id="cb41-97"><a href="#cb41-97"></a><span class="in">```</span></span>
-<span id="cb41-98"><a href="#cb41-98"></a><span class="ss">- </span>At time of slide creation, I saw this version:</span>
-<span id="cb41-99"><a href="#cb41-99"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-100"><a href="#cb41-100"></a><span class="in">rustc 1.87.0 (17067e9ac 2025-05-09)</span></span>
-<span id="cb41-101"><a href="#cb41-101"></a><span class="in">```</span></span>
-<span id="cb41-102"><a href="#cb41-102"></a></span>
-<span id="cb41-103"><a href="#cb41-103"></a><span class="fu"># Git</span></span>
-<span id="cb41-104"><a href="#cb41-104"></a></span>
-<span id="cb41-105"><a href="#cb41-105"></a><span class="fu">## Git Installation</span></span>
-<span id="cb41-106"><a href="#cb41-106"></a></span>
-<span id="cb41-107"><a href="#cb41-107"></a><span class="ss">- </span>Ensure you have a Git installation:</span>
-<span id="cb41-108"><a href="#cb41-108"></a><span class="ss">    - </span>Windows:</span>
-<span id="cb41-109"><a href="#cb41-109"></a><span class="ss">        - </span>Launch WSL</span>
-<span id="cb41-110"><a href="#cb41-110"></a><span class="in">```{.powershell}</span></span>
-<span id="cb41-111"><a href="#cb41-111"></a><span class="in">wsl ~</span></span>
-<span id="cb41-112"><a href="#cb41-112"></a><span class="in">```</span></span>
-<span id="cb41-113"><a href="#cb41-113"></a><span class="ss">        - </span>Install <span class="in">`git`</span> within WSL</span>
-<span id="cb41-114"><a href="#cb41-114"></a>        <span class="in">```{.bash}</span></span>
-<span id="cb41-115"><a href="#cb41-115"></a><span class="in">sudo apt install git</span></span>
-<span id="cb41-116"><a href="#cb41-116"></a><span class="in">```</span></span>
-<span id="cb41-117"><a href="#cb41-117"></a><span class="ss">    - </span>MacOS:</span>
-<span id="cb41-118"><a href="#cb41-118"></a><span class="ss">        - </span><span class="co">[</span><span class="ot">Launch the terminal</span><span class="co">](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac)</span> and then: </span>
-<span id="cb41-119"><a href="#cb41-119"></a><span class="in">```{.zsh}</span></span>
-<span id="cb41-120"><a href="#cb41-120"></a><span class="in">xcode-select --install</span></span>
-<span id="cb41-121"><a href="#cb41-121"></a><span class="in">```</span></span>
-<span id="cb41-122"><a href="#cb41-122"></a></span>
-<span id="cb41-123"><a href="#cb41-123"></a><span class="fu">## Verify</span></span>
-<span id="cb41-124"><a href="#cb41-124"></a></span>
-<span id="cb41-125"><a href="#cb41-125"></a><span class="ss">- </span>Verify install via:</span>
-<span id="cb41-126"><a href="#cb41-126"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-127"><a href="#cb41-127"></a><span class="in">git --version</span></span>
-<span id="cb41-128"><a href="#cb41-128"></a><span class="in">```</span></span>
-<span id="cb41-129"><a href="#cb41-129"></a><span class="ss">- </span>I had:</span>
-<span id="cb41-130"><a href="#cb41-130"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-131"><a href="#cb41-131"></a><span class="in">git version 2.34.1</span></span>
-<span id="cb41-132"><a href="#cb41-132"></a><span class="in">```</span></span>
-<span id="cb41-133"><a href="#cb41-133"></a></span>
-<span id="cb41-134"><a href="#cb41-134"></a><span class="fu"># GitHub</span></span>
-<span id="cb41-135"><a href="#cb41-135"></a></span>
-<span id="cb41-136"><a href="#cb41-136"></a><span class="fu">## Account</span></span>
+<span id="cb41-64"><a href="#cb41-64"></a>---</span>
+<span id="cb41-65"><a href="#cb41-65"></a></span>
+<span id="cb41-66"><a href="#cb41-66"></a><span class="fu">### Cygwin</span></span>
+<span id="cb41-67"><a href="#cb41-67"></a></span>
+<span id="cb41-68"><a href="#cb41-68"></a><span class="ss">- </span>I have no idea how Cygwin works but it's pretty cool.</span>
+<span id="cb41-69"><a href="#cb41-69"></a><span class="ss">- </span>Basically no longer in use due to WSL 2 and Docker.</span>
+<span id="cb41-70"><a href="#cb41-70"></a><span class="ss">- </span>Follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://www.cygwin.com/install.html)</span></span>
+<span id="cb41-71"><a href="#cb41-71"></a></span>
+<span id="cb41-72"><a href="#cb41-72"></a>---</span>
+<span id="cb41-73"><a href="#cb41-73"></a></span>
+<span id="cb41-74"><a href="#cb41-74"></a><span class="fu"># Rust</span></span>
+<span id="cb41-75"><a href="#cb41-75"></a></span>
+<span id="cb41-76"><a href="#cb41-76"></a><span class="fu">## Rustup</span></span>
+<span id="cb41-77"><a href="#cb41-77"></a></span>
+<span id="cb41-78"><a href="#cb41-78"></a><span class="ss">- </span>On your UNIX-based OS:</span>
+<span id="cb41-79"><a href="#cb41-79"></a><span class="ss">    - </span>Linux</span>
+<span id="cb41-80"><a href="#cb41-80"></a><span class="ss">    - </span>MacOS</span>
+<span id="cb41-81"><a href="#cb41-81"></a><span class="ss">    - </span>WSL 2</span>
+<span id="cb41-82"><a href="#cb41-82"></a><span class="ss">    - </span>FreeBSD</span>
+<span id="cb41-83"><a href="#cb41-83"></a><span class="ss">- </span>Open the command line and run the following:</span>
+<span id="cb41-84"><a href="#cb41-84"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-85"><a href="#cb41-85"></a><span class="in">curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh</span></span>
+<span id="cb41-86"><a href="#cb41-86"></a><span class="in">```</span></span>
+<span id="cb41-87"><a href="#cb41-87"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://doc.rust-lang.org/book/ch01-01-installation.html)</span></span>
+<span id="cb41-88"><a href="#cb41-88"></a></span>
+<span id="cb41-89"><a href="#cb41-89"></a><span class="fu">## Verify</span></span>
+<span id="cb41-90"><a href="#cb41-90"></a></span>
+<span id="cb41-91"><a href="#cb41-91"></a><span class="ss">- </span>To ensure you have a Rust installation, run:</span>
+<span id="cb41-92"><a href="#cb41-92"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-93"><a href="#cb41-93"></a><span class="in">rustc --version</span></span>
+<span id="cb41-94"><a href="#cb41-94"></a><span class="in">```</span></span>
+<span id="cb41-95"><a href="#cb41-95"></a><span class="ss">- </span>At time of slide creation, I saw this version:</span>
+<span id="cb41-96"><a href="#cb41-96"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-97"><a href="#cb41-97"></a><span class="in">rustc 1.87.0 (17067e9ac 2025-05-09)</span></span>
+<span id="cb41-98"><a href="#cb41-98"></a><span class="in">```</span></span>
+<span id="cb41-99"><a href="#cb41-99"></a></span>
+<span id="cb41-100"><a href="#cb41-100"></a><span class="fu"># Git</span></span>
+<span id="cb41-101"><a href="#cb41-101"></a></span>
+<span id="cb41-102"><a href="#cb41-102"></a><span class="fu">## Git Installation</span></span>
+<span id="cb41-103"><a href="#cb41-103"></a></span>
+<span id="cb41-104"><a href="#cb41-104"></a><span class="ss">- </span>Ensure you have a Git installation:</span>
+<span id="cb41-105"><a href="#cb41-105"></a><span class="ss">    - </span>Windows:</span>
+<span id="cb41-106"><a href="#cb41-106"></a><span class="ss">        - </span>Launch WSL</span>
+<span id="cb41-107"><a href="#cb41-107"></a><span class="in">```{.powershell}</span></span>
+<span id="cb41-108"><a href="#cb41-108"></a><span class="in">wsl ~</span></span>
+<span id="cb41-109"><a href="#cb41-109"></a><span class="in">```</span></span>
+<span id="cb41-110"><a href="#cb41-110"></a><span class="ss">        - </span>Install <span class="in">`git`</span> within WSL</span>
+<span id="cb41-111"><a href="#cb41-111"></a>        <span class="in">```{.bash}</span></span>
+<span id="cb41-112"><a href="#cb41-112"></a><span class="in">sudo apt install git</span></span>
+<span id="cb41-113"><a href="#cb41-113"></a><span class="in">```</span></span>
+<span id="cb41-114"><a href="#cb41-114"></a><span class="ss">    - </span>MacOS:</span>
+<span id="cb41-115"><a href="#cb41-115"></a><span class="ss">        - </span><span class="co">[</span><span class="ot">Launch the terminal</span><span class="co">](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac)</span> and then: </span>
+<span id="cb41-116"><a href="#cb41-116"></a><span class="in">```{.zsh}</span></span>
+<span id="cb41-117"><a href="#cb41-117"></a><span class="in">xcode-select --install</span></span>
+<span id="cb41-118"><a href="#cb41-118"></a><span class="in">```</span></span>
+<span id="cb41-119"><a href="#cb41-119"></a></span>
+<span id="cb41-120"><a href="#cb41-120"></a><span class="fu">## Verify</span></span>
+<span id="cb41-121"><a href="#cb41-121"></a></span>
+<span id="cb41-122"><a href="#cb41-122"></a><span class="ss">- </span>Verify install via:</span>
+<span id="cb41-123"><a href="#cb41-123"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-124"><a href="#cb41-124"></a><span class="in">git --version</span></span>
+<span id="cb41-125"><a href="#cb41-125"></a><span class="in">```</span></span>
+<span id="cb41-126"><a href="#cb41-126"></a><span class="ss">- </span>I had:</span>
+<span id="cb41-127"><a href="#cb41-127"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-128"><a href="#cb41-128"></a><span class="in">git version 2.34.1</span></span>
+<span id="cb41-129"><a href="#cb41-129"></a><span class="in">```</span></span>
+<span id="cb41-130"><a href="#cb41-130"></a></span>
+<span id="cb41-131"><a href="#cb41-131"></a><span class="fu"># GitHub</span></span>
+<span id="cb41-132"><a href="#cb41-132"></a></span>
+<span id="cb41-133"><a href="#cb41-133"></a><span class="fu">## Account</span></span>
+<span id="cb41-134"><a href="#cb41-134"></a></span>
+<span id="cb41-135"><a href="#cb41-135"></a><span class="ss">- </span>Ensure you have an account on GitHub.</span>
+<span id="cb41-136"><a href="#cb41-136"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read More</span><span class="co">](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)</span></span>
 <span id="cb41-137"><a href="#cb41-137"></a></span>
-<span id="cb41-138"><a href="#cb41-138"></a><span class="ss">- </span>Ensure you have an account on GitHub.</span>
-<span id="cb41-139"><a href="#cb41-139"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read More</span><span class="co">](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)</span></span>
-<span id="cb41-140"><a href="#cb41-140"></a></span>
-<span id="cb41-141"><a href="#cb41-141"></a><span class="fu">## Repository</span></span>
-<span id="cb41-142"><a href="#cb41-142"></a></span>
-<span id="cb41-143"><a href="#cb41-143"></a><span class="ss">- </span>Create a repository for this class.</span>
-<span id="cb41-144"><a href="#cb41-144"></a><span class="ss">- </span>Requirements</span>
-<span id="cb41-145"><a href="#cb41-145"></a><span class="ss">    - </span>Name is <span class="in">`271rs`</span></span>
-<span id="cb41-146"><a href="#cb41-146"></a><span class="ss">    - </span>Use <span class="co">[</span><span class="ot">this template</span><span class="co">](https://github.com/new?template_name=271rs&amp;template_owner=cd-c89)</span></span>
-<span id="cb41-147"><a href="#cb41-147"></a><span class="ss">    - </span>May be public or private to you and me (<span class="co">[</span><span class="ot">cd-public</span><span class="co">](https://github.com/cd-public/)</span>).</span>
-<span id="cb41-148"><a href="#cb41-148"></a><span class="ss">        - </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository)</span></span>
-<span id="cb41-149"><a href="#cb41-149"></a><span class="ss">    - </span>Must email me a link to your repository from your @willamette.edu email.</span>
-<span id="cb41-150"><a href="#cb41-150"></a><span class="in">```{.email}</span></span>
-<span id="cb41-151"><a href="#cb41-151"></a><span class="in">https://github.com/cd-example/271rs</span></span>
-<span id="cb41-152"><a href="#cb41-152"></a><span class="in">```</span></span>
-<span id="cb41-153"><a href="#cb41-153"></a></span>
-<span id="cb41-154"><a href="#cb41-154"></a><span class="fu">## Remote</span></span>
-<span id="cb41-155"><a href="#cb41-155"></a></span>
-<span id="cb41-156"><a href="#cb41-156"></a><span class="ss">- </span>We have now created a *remote* repository on GitHub.</span>
-<span id="cb41-157"><a href="#cb41-157"></a><span class="ss">    - </span>Remote as in "not on our computer we are using right now"</span>
-<span id="cb41-158"><a href="#cb41-158"></a><span class="ss">    - </span>As in "on a web server somewhere"</span>
-<span id="cb41-159"><a href="#cb41-159"></a><span class="ss">- </span>No we will make a *local* repository on our own computer.</span>
-<span id="cb41-160"><a href="#cb41-160"></a><span class="ss">- </span>Then connect them!</span>
+<span id="cb41-138"><a href="#cb41-138"></a><span class="fu">## Repository</span></span>
+<span id="cb41-139"><a href="#cb41-139"></a></span>
+<span id="cb41-140"><a href="#cb41-140"></a><span class="ss">- </span>Create a repository for this class.</span>
+<span id="cb41-141"><a href="#cb41-141"></a><span class="ss">- </span>Requirements</span>
+<span id="cb41-142"><a href="#cb41-142"></a><span class="ss">    - </span>Name is <span class="in">`271rs`</span></span>
+<span id="cb41-143"><a href="#cb41-143"></a><span class="ss">    - </span>Use <span class="co">[</span><span class="ot">this template</span><span class="co">](https://github.com/new?template_name=271rs&amp;template_owner=cd-c89)</span></span>
+<span id="cb41-144"><a href="#cb41-144"></a><span class="ss">    - </span>May be public or private to you and me (<span class="co">[</span><span class="ot">cd-public</span><span class="co">](https://github.com/cd-public/)</span>).</span>
+<span id="cb41-145"><a href="#cb41-145"></a><span class="ss">        - </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository)</span></span>
+<span id="cb41-146"><a href="#cb41-146"></a><span class="ss">    - </span>Must email me a link to your repository from your @willamette.edu email.</span>
+<span id="cb41-147"><a href="#cb41-147"></a><span class="in">```{.email}</span></span>
+<span id="cb41-148"><a href="#cb41-148"></a><span class="in">https://github.com/cd-example/271rs</span></span>
+<span id="cb41-149"><a href="#cb41-149"></a><span class="in">```</span></span>
+<span id="cb41-150"><a href="#cb41-150"></a></span>
+<span id="cb41-151"><a href="#cb41-151"></a><span class="fu">## Remote</span></span>
+<span id="cb41-152"><a href="#cb41-152"></a></span>
+<span id="cb41-153"><a href="#cb41-153"></a><span class="ss">- </span>We have now created a *remote* repository on GitHub.</span>
+<span id="cb41-154"><a href="#cb41-154"></a><span class="ss">    - </span>Remote as in "not on our computer we are using right now"</span>
+<span id="cb41-155"><a href="#cb41-155"></a><span class="ss">    - </span>As in "on a web server somewhere"</span>
+<span id="cb41-156"><a href="#cb41-156"></a><span class="ss">- </span>No we will make a *local* repository on our own computer.</span>
+<span id="cb41-157"><a href="#cb41-157"></a><span class="ss">- </span>Then connect them!</span>
+<span id="cb41-158"><a href="#cb41-158"></a></span>
+<span id="cb41-159"><a href="#cb41-159"></a></span>
+<span id="cb41-160"><a href="#cb41-160"></a><span class="fu"># ssh </span></span>
 <span id="cb41-161"><a href="#cb41-161"></a></span>
-<span id="cb41-162"><a href="#cb41-162"></a></span>
-<span id="cb41-163"><a href="#cb41-163"></a><span class="fu"># ssh </span></span>
-<span id="cb41-164"><a href="#cb41-164"></a></span>
-<span id="cb41-165"><a href="#cb41-165"></a><span class="ss">- </span>We know how to deal with a very important topic:</span>
-<span id="cb41-166"><a href="#cb41-166"></a><span class="ss">- </span>*Security*</span>
-<span id="cb41-167"><a href="#cb41-167"></a><span class="ss">- </span>When moving executable code between websites and our system, we have to be careful that it is:</span>
-<span id="cb41-168"><a href="#cb41-168"></a><span class="ss">    - </span>Not tampered with</span>
-<span id="cb41-169"><a href="#cb41-169"></a><span class="ss">    - </span>Made by who said made it</span>
-<span id="cb41-170"><a href="#cb41-170"></a></span>
-<span id="cb41-171"><a href="#cb41-171"></a>---</span>
-<span id="cb41-172"><a href="#cb41-172"></a></span>
-<span id="cb41-173"><a href="#cb41-173"></a><span class="fu">## Security Concession</span></span>
+<span id="cb41-162"><a href="#cb41-162"></a><span class="ss">- </span>We know how to deal with a very important topic:</span>
+<span id="cb41-163"><a href="#cb41-163"></a><span class="ss">- </span>*Security*</span>
+<span id="cb41-164"><a href="#cb41-164"></a><span class="ss">- </span>When moving executable code between websites and our system, we have to be careful that it is:</span>
+<span id="cb41-165"><a href="#cb41-165"></a><span class="ss">    - </span>Not tampered with</span>
+<span id="cb41-166"><a href="#cb41-166"></a><span class="ss">    - </span>Made by who said made it</span>
+<span id="cb41-167"><a href="#cb41-167"></a></span>
+<span id="cb41-168"><a href="#cb41-168"></a>---</span>
+<span id="cb41-169"><a href="#cb41-169"></a></span>
+<span id="cb41-170"><a href="#cb41-170"></a><span class="fu">## Security Concession</span></span>
+<span id="cb41-171"><a href="#cb41-171"></a></span>
+<span id="cb41-172"><a href="#cb41-172"></a><span class="ss">- </span>We will use SSH, the "Secure Shell Protocol"</span>
+<span id="cb41-173"><a href="#cb41-173"></a><span class="ss">- </span>It is supported by <span class="in">`git`</span>/GitHub and all major operating systems.</span>
 <span id="cb41-174"><a href="#cb41-174"></a></span>
-<span id="cb41-175"><a href="#cb41-175"></a><span class="ss">- </span>We will use SSH, the "Secure Shell Protocol"</span>
-<span id="cb41-176"><a href="#cb41-176"></a><span class="ss">- </span>It is supported by <span class="in">`git`</span>/GitHub and all major operating systems.</span>
-<span id="cb41-177"><a href="#cb41-177"></a></span>
-<span id="cb41-178"><a href="#cb41-178"></a>---</span>
-<span id="cb41-179"><a href="#cb41-179"></a></span>
-<span id="cb41-180"><a href="#cb41-180"></a><span class="fu">## Keygen</span></span>
-<span id="cb41-181"><a href="#cb41-181"></a></span>
-<span id="cb41-182"><a href="#cb41-182"></a><span class="ss">- </span>SSH is based around having "keys"</span>
-<span id="cb41-183"><a href="#cb41-183"></a><span class="ss">    - </span>Under the hood, these are special numbers with special properties related to primes, basically.</span>
-<span id="cb41-184"><a href="#cb41-184"></a><span class="ss">- </span>We generate a special unique key we can use as a password or signature.</span>
-<span id="cb41-185"><a href="#cb41-185"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-186"><a href="#cb41-186"></a><span class="in">ssh-keygen</span></span>
-<span id="cb41-187"><a href="#cb41-187"></a><span class="in">```</span></span>
-<span id="cb41-188"><a href="#cb41-188"></a></span>
-<span id="cb41-189"><a href="#cb41-189"></a>---</span>
-<span id="cb41-190"><a href="#cb41-190"></a></span>
-<span id="cb41-191"><a href="#cb41-191"></a><span class="fu">## Prompts</span></span>
-<span id="cb41-192"><a href="#cb41-192"></a></span>
-<span id="cb41-193"><a href="#cb41-193"></a><span class="ss">- </span>This example uses (1) the default location and (2) no passphrase.</span>
-<span id="cb41-194"><a href="#cb41-194"></a><span class="ss">    - </span>This is less secure but easier to manage.</span>
-<span id="cb41-195"><a href="#cb41-195"></a><span class="ss">    - </span>Work in a passphrase as soon as you can!</span>
-<span id="cb41-196"><a href="#cb41-196"></a></span>
-<span id="cb41-197"><a href="#cb41-197"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-198"><a href="#cb41-198"></a><span class="in">Generating public/private ed25519 key pair.</span></span>
-<span id="cb41-199"><a href="#cb41-199"></a><span class="in">Enter file in which to save the key (/home/calvin/.ssh/id_ed25519): </span></span>
-<span id="cb41-200"><a href="#cb41-200"></a><span class="in">Enter passphrase (empty for no passphrase): </span></span>
-<span id="cb41-201"><a href="#cb41-201"></a><span class="in">Enter same passphrase again: </span></span>
-<span id="cb41-202"><a href="#cb41-202"></a><span class="in">Your identification has been saved in /home/calvin/.ssh/id_ed25519</span></span>
-<span id="cb41-203"><a href="#cb41-203"></a><span class="in">$ cat ~/.ssh/id_ed25519.pub </span></span>
-<span id="cb41-204"><a href="#cb41-204"></a><span class="in">ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490</span></span>
-<span id="cb41-205"><a href="#cb41-205"></a><span class="in">```</span></span>
-<span id="cb41-206"><a href="#cb41-206"></a></span>
-<span id="cb41-207"><a href="#cb41-207"></a><span class="ss">- </span>You now have a key! Let's find a lock.</span>
-<span id="cb41-208"><a href="#cb41-208"></a></span>
-<span id="cb41-209"><a href="#cb41-209"></a>---</span>
-<span id="cb41-210"><a href="#cb41-210"></a></span>
-<span id="cb41-211"><a href="#cb41-211"></a><span class="fu">## GitHub</span></span>
+<span id="cb41-175"><a href="#cb41-175"></a>---</span>
+<span id="cb41-176"><a href="#cb41-176"></a></span>
+<span id="cb41-177"><a href="#cb41-177"></a><span class="fu">## Keygen</span></span>
+<span id="cb41-178"><a href="#cb41-178"></a></span>
+<span id="cb41-179"><a href="#cb41-179"></a><span class="ss">- </span>SSH is based around having "keys"</span>
+<span id="cb41-180"><a href="#cb41-180"></a><span class="ss">    - </span>Under the hood, these are special numbers with special properties related to primes, basically.</span>
+<span id="cb41-181"><a href="#cb41-181"></a><span class="ss">- </span>We generate a special unique key we can use as a password or signature.</span>
+<span id="cb41-182"><a href="#cb41-182"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-183"><a href="#cb41-183"></a><span class="in">ssh-keygen</span></span>
+<span id="cb41-184"><a href="#cb41-184"></a><span class="in">```</span></span>
+<span id="cb41-185"><a href="#cb41-185"></a></span>
+<span id="cb41-186"><a href="#cb41-186"></a>---</span>
+<span id="cb41-187"><a href="#cb41-187"></a></span>
+<span id="cb41-188"><a href="#cb41-188"></a><span class="fu">## Prompts</span></span>
+<span id="cb41-189"><a href="#cb41-189"></a></span>
+<span id="cb41-190"><a href="#cb41-190"></a><span class="ss">- </span>This example uses (1) the default location and (2) no passphrase.</span>
+<span id="cb41-191"><a href="#cb41-191"></a><span class="ss">    - </span>This is less secure but easier to manage.</span>
+<span id="cb41-192"><a href="#cb41-192"></a><span class="ss">    - </span>Work in a passphrase as soon as you can!</span>
+<span id="cb41-193"><a href="#cb41-193"></a></span>
+<span id="cb41-194"><a href="#cb41-194"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-195"><a href="#cb41-195"></a><span class="in">Generating public/private ed25519 key pair.</span></span>
+<span id="cb41-196"><a href="#cb41-196"></a><span class="in">Enter file in which to save the key (/home/calvin/.ssh/id_ed25519): </span></span>
+<span id="cb41-197"><a href="#cb41-197"></a><span class="in">Enter passphrase (empty for no passphrase): </span></span>
+<span id="cb41-198"><a href="#cb41-198"></a><span class="in">Enter same passphrase again: </span></span>
+<span id="cb41-199"><a href="#cb41-199"></a><span class="in">Your identification has been saved in /home/calvin/.ssh/id_ed25519</span></span>
+<span id="cb41-200"><a href="#cb41-200"></a><span class="in">$ cat ~/.ssh/id_ed25519.pub </span></span>
+<span id="cb41-201"><a href="#cb41-201"></a><span class="in">ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE5cnx/tgBp8v/LnuHz28evmnRPrnlz3cvYaAAM4G0ik calvin@calvin-Precision-3490</span></span>
+<span id="cb41-202"><a href="#cb41-202"></a><span class="in">```</span></span>
+<span id="cb41-203"><a href="#cb41-203"></a></span>
+<span id="cb41-204"><a href="#cb41-204"></a><span class="ss">- </span>You now have a key! Let's find a lock.</span>
+<span id="cb41-205"><a href="#cb41-205"></a></span>
+<span id="cb41-206"><a href="#cb41-206"></a>---</span>
+<span id="cb41-207"><a href="#cb41-207"></a></span>
+<span id="cb41-208"><a href="#cb41-208"></a><span class="fu">## GitHub</span></span>
+<span id="cb41-209"><a href="#cb41-209"></a></span>
+<span id="cb41-210"><a href="#cb41-210"></a><span class="ss">- </span>The purpose of this exercise is to connect to GitHub!</span>
+<span id="cb41-211"><a href="#cb41-211"></a><span class="ss">- </span>We will mostly use <span class="in">`git`</span> for that, but we can check if we have a connection easily:</span>
 <span id="cb41-212"><a href="#cb41-212"></a></span>
-<span id="cb41-213"><a href="#cb41-213"></a><span class="ss">- </span>The purpose of this exercise is to connect to GitHub!</span>
-<span id="cb41-214"><a href="#cb41-214"></a><span class="ss">- </span>We will mostly use <span class="in">`git`</span> for that, but we can check if we have a connection easily:</span>
-<span id="cb41-215"><a href="#cb41-215"></a></span>
-<span id="cb41-216"><a href="#cb41-216"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-217"><a href="#cb41-217"></a><span class="in">ssh -T git@github.com</span></span>
-<span id="cb41-218"><a href="#cb41-218"></a><span class="in">```</span></span>
-<span id="cb41-219"><a href="#cb41-219"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)</span></span>
-<span id="cb41-220"><a href="#cb41-220"></a></span>
-<span id="cb41-221"><a href="#cb41-221"></a>---</span>
-<span id="cb41-222"><a href="#cb41-222"></a></span>
-<span id="cb41-223"><a href="#cb41-223"></a><span class="fu">## Example</span></span>
-<span id="cb41-224"><a href="#cb41-224"></a></span>
-<span id="cb41-225"><a href="#cb41-225"></a><span class="ss">- </span>This is what I see:</span>
-<span id="cb41-226"><a href="#cb41-226"></a></span>
-<span id="cb41-227"><a href="#cb41-227"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-228"><a href="#cb41-228"></a><span class="in">The authenticity of host 'github.com (140.82.116.3)' can't be established.</span></span>
-<span id="cb41-229"><a href="#cb41-229"></a><span class="in">ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.</span></span>
-<span id="cb41-230"><a href="#cb41-230"></a><span class="in">This key is not known by any other names.</span></span>
-<span id="cb41-231"><a href="#cb41-231"></a><span class="in">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></span>
-<span id="cb41-232"><a href="#cb41-232"></a><span class="in">```</span></span>
-<span id="cb41-233"><a href="#cb41-233"></a></span>
-<span id="cb41-234"><a href="#cb41-234"></a><span class="ss">- </span>Before saying "yes" or "no" compare versus the "public SSH key fingerprints"</span>
-<span id="cb41-235"><a href="#cb41-235"></a><span class="ss">    - </span>Check them <span class="co">[</span><span class="ot">here</span><span class="co">](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)</span></span>
-<span id="cb41-236"><a href="#cb41-236"></a><span class="ss">- </span>By default, the modern keygen uses "Ed25519" so compare those keys, and click "yes" if they match!</span>
-<span id="cb41-237"><a href="#cb41-237"></a></span>
-<span id="cb41-238"><a href="#cb41-238"></a>---</span>
-<span id="cb41-239"><a href="#cb41-239"></a></span>
-<span id="cb41-240"><a href="#cb41-240"></a><span class="fu">## Connecting</span></span>
-<span id="cb41-241"><a href="#cb41-241"></a></span>
-<span id="cb41-242"><a href="#cb41-242"></a><span class="ss">- </span>After confirming the key correctness, you will likely see this.</span>
-<span id="cb41-243"><a href="#cb41-243"></a></span>
-<span id="cb41-244"><a href="#cb41-244"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-245"><a href="#cb41-245"></a><span class="in">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span>
-<span id="cb41-246"><a href="#cb41-246"></a><span class="in">Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.</span></span>
-<span id="cb41-247"><a href="#cb41-247"></a><span class="in">git@github.com: Permission denied (publickey).</span></span>
-<span id="cb41-248"><a href="#cb41-248"></a><span class="in">```</span></span>
-<span id="cb41-249"><a href="#cb41-249"></a></span>
-<span id="cb41-250"><a href="#cb41-250"></a>---</span>
-<span id="cb41-251"><a href="#cb41-251"></a></span>
-<span id="cb41-252"><a href="#cb41-252"></a><span class="fu">## One Way</span></span>
-<span id="cb41-253"><a href="#cb41-253"></a></span>
-<span id="cb41-254"><a href="#cb41-254"></a><span class="ss">- </span>Now we have instructed *our* computer to trust GitHub.</span>
-<span id="cb41-255"><a href="#cb41-255"></a><span class="ss">- </span>To save our code to GitHub, we must also get GitHub to trust *our* computer.</span>
-<span id="cb41-256"><a href="#cb41-256"></a><span class="ss">- </span>We generated our key, now we must match it to our lock on GitHub!</span>
-<span id="cb41-257"><a href="#cb41-257"></a></span>
-<span id="cb41-258"><a href="#cb41-258"></a>---</span>
-<span id="cb41-259"><a href="#cb41-259"></a></span>
-<span id="cb41-260"><a href="#cb41-260"></a><span class="fu">## GitHub pt 1</span></span>
-<span id="cb41-261"><a href="#cb41-261"></a></span>
-<span id="cb41-262"><a href="#cb41-262"></a><span class="ss">- </span>We follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)</span></span>
-<span id="cb41-263"><a href="#cb41-263"></a><span class="ss">- </span>Return to GitHub and in the top right click your profile.</span>
-<span id="cb41-264"><a href="#cb41-264"></a><span class="ss">    - </span>For me, a picture of myself.</span>
-<span id="cb41-265"><a href="#cb41-265"></a><span class="ss">- </span>Scroll down to "Settings" and click.</span>
-<span id="cb41-266"><a href="#cb41-266"></a><span class="ss">    - </span>Last in 2nd grouping, for me.</span>
-<span id="cb41-267"><a href="#cb41-267"></a></span>
-<span id="cb41-268"><a href="#cb41-268"></a>---</span>
-<span id="cb41-269"><a href="#cb41-269"></a></span>
-<span id="cb41-270"><a href="#cb41-270"></a><span class="fu">## GitHub pt 2</span></span>
-<span id="cb41-271"><a href="#cb41-271"></a></span>
-<span id="cb41-272"><a href="#cb41-272"></a><span class="ss">- </span>Within settings left-side menu click "SSH and GPG keys"</span>
-<span id="cb41-273"><a href="#cb41-273"></a><span class="ss">    - </span>Middle of 2nd group (Access) for me.</span>
-<span id="cb41-274"><a href="#cb41-274"></a><span class="ss">- </span>Within the center block click &lt;span style="background-color:#238636;color:white"&gt;New SSH key&lt;/span&gt; in the top right of the block. </span>
-<span id="cb41-275"><a href="#cb41-275"></a></span>
-<span id="cb41-276"><a href="#cb41-276"></a>---</span>
-<span id="cb41-277"><a href="#cb41-277"></a></span>
-<span id="cb41-278"><a href="#cb41-278"></a><span class="fu">## Prompt</span></span>
-<span id="cb41-279"><a href="#cb41-279"></a></span>
-<span id="cb41-280"><a href="#cb41-280"></a><span class="ss">- </span>I get a page "Add new SSH Key".</span>
-<span id="cb41-281"><a href="#cb41-281"></a><span class="ss">- </span>I provide a title (like "For 271rs class" or "Laptop")</span>
-<span id="cb41-282"><a href="#cb41-282"></a><span class="ss">- </span>Now we'll get our key from our system to use.</span>
-<span id="cb41-283"><a href="#cb41-283"></a><span class="ss">- </span>Recall we previously generated a key to the default location, like </span>
-<span id="cb41-284"><a href="#cb41-284"></a><span class="in">`/home/calvin/.ssh/id_ed25519`</span></span>
-<span id="cb41-285"><a href="#cb41-285"></a><span class="ss">    - </span>If you don't remember, just type <span class="in">`ssh-keygen`</span> and it'll show you.</span>
-<span id="cb41-286"><a href="#cb41-286"></a></span>
-<span id="cb41-287"><a href="#cb41-287"></a>---</span>
-<span id="cb41-288"><a href="#cb41-288"></a></span>
-<span id="cb41-289"><a href="#cb41-289"></a><span class="fu">## Copy/Paste</span></span>
-<span id="cb41-290"><a href="#cb41-290"></a></span>
-<span id="cb41-291"><a href="#cb41-291"></a><span class="ss">- </span>To get the key for GitHub, we can can </span>
-<span id="cb41-292"><a href="#cb41-292"></a><span class="ss">  - </span><span class="in">`cat`</span> that file in the command line</span>
-<span id="cb41-293"><a href="#cb41-293"></a><span class="ss">  - </span>Copy from the command line</span>
-<span id="cb41-294"><a href="#cb41-294"></a><span class="ss">  - </span>Paste into the GitHub "Key" field</span>
-<span id="cb41-295"><a href="#cb41-295"></a><span class="ss">  - </span>Click &lt;span style="background-color:#238636;color:white"&gt;Add SSH key&lt;/span&gt; </span>
-<span id="cb41-296"><a href="#cb41-296"></a></span>
-<span id="cb41-297"><a href="#cb41-297"></a>---</span>
-<span id="cb41-298"><a href="#cb41-298"></a></span>
-<span id="cb41-299"><a href="#cb41-299"></a><span class="fu">## SSH Test</span></span>
-<span id="cb41-300"><a href="#cb41-300"></a></span>
-<span id="cb41-301"><a href="#cb41-301"></a><span class="ss">- </span>After adding the key to the account, I confirm via SSH like so:</span>
-<span id="cb41-302"><a href="#cb41-302"></a></span>
-<span id="cb41-303"><a href="#cb41-303"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-304"><a href="#cb41-304"></a><span class="in">ssh -T git@github.com</span></span>
-<span id="cb41-305"><a href="#cb41-305"></a><span class="in">```</span></span>
-<span id="cb41-306"><a href="#cb41-306"></a></span>
-<span id="cb41-307"><a href="#cb41-307"></a><span class="ss">- </span>I see the following:</span>
-<span id="cb41-308"><a href="#cb41-308"></a></span>
-<span id="cb41-309"><a href="#cb41-309"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-310"><a href="#cb41-310"></a><span class="in">Hi cd-public! You've successfully authenticated, but GitHub does not provide shell access.</span></span>
-<span id="cb41-311"><a href="#cb41-311"></a><span class="in">```</span></span>
-<span id="cb41-312"><a href="#cb41-312"></a></span>
-<span id="cb41-313"><a href="#cb41-313"></a><span class="fu"># Clone</span></span>
-<span id="cb41-314"><a href="#cb41-314"></a></span>
-<span id="cb41-315"><a href="#cb41-315"></a><span class="ss">- </span>With <span class="in">`ssh`</span> configured on your local device and on the remote service, you can clone your <span class="in">`271rs`</span>.</span>
-<span id="cb41-316"><a href="#cb41-316"></a><span class="ss">    - </span>This will be a another copy of the same repository you use.</span>
-<span id="cb41-317"><a href="#cb41-317"></a><span class="ss">    - </span>It based off of (templated off of) a repository I made under my account.</span>
-<span id="cb41-318"><a href="#cb41-318"></a><span class="ss">    - </span>Template $\neq$ clone.</span>
-<span id="cb41-319"><a href="#cb41-319"></a></span>
-<span id="cb41-320"><a href="#cb41-320"></a>---</span>
-<span id="cb41-321"><a href="#cb41-321"></a></span>
-<span id="cb41-322"><a href="#cb41-322"></a><span class="fu">## Clone pt1</span></span>
-<span id="cb41-323"><a href="#cb41-323"></a></span>
-<span id="cb41-324"><a href="#cb41-324"></a><span class="ss">- </span>Navigate to the repository webpage, like <span class="in">`github.com/cd-example/271rs`</span></span>
-<span id="cb41-325"><a href="#cb41-325"></a><span class="ss">- </span>Find the &lt;span style="background-color:#238636;color:white"&gt;<span class="sc">\&lt;\&gt;</span> Code&lt;/span&gt; button in the top right.</span>
-<span id="cb41-326"><a href="#cb41-326"></a><span class="ss">- </span>Click it:</span>
-<span id="cb41-327"><a href="#cb41-327"></a><span class="ss">    - </span>Select the top "local" tab (for or local repository)</span>
-<span id="cb41-328"><a href="#cb41-328"></a><span class="ss">    - </span>Select the SSH option (for our SSH key)</span>
-<span id="cb41-329"><a href="#cb41-329"></a><span class="ss">    - </span>Copy the name, like </span>
-<span id="cb41-330"><a href="#cb41-330"></a></span>
-<span id="cb41-331"><a href="#cb41-331"></a><span class="at">&gt; git@github.com:cd-example/271rs</span></span>
-<span id="cb41-332"><a href="#cb41-332"></a></span>
-<span id="cb41-333"><a href="#cb41-333"></a>---</span>
-<span id="cb41-334"><a href="#cb41-334"></a></span>
-<span id="cb41-335"><a href="#cb41-335"></a><span class="fu">## Clone pt2</span></span>
-<span id="cb41-336"><a href="#cb41-336"></a></span>
-<span id="cb41-337"><a href="#cb41-337"></a><span class="ss">- </span>Within terminal, where you keep files for this class.</span>
-<span id="cb41-338"><a href="#cb41-338"></a><span class="ss">    - </span>Probably just do</span>
-<span id="cb41-339"><a href="#cb41-339"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-340"><a href="#cb41-340"></a><span class="in">cd ~</span></span>
-<span id="cb41-341"><a href="#cb41-341"></a><span class="in">git clone git@github.com:cd-example/271rs </span></span>
-<span id="cb41-342"><a href="#cb41-342"></a><span class="in">```</span></span>
-<span id="cb41-343"><a href="#cb41-343"></a><span class="ss">- </span>Verify by listing the contents of the <span class="in">`271rs`</span> directory via:</span>
-<span id="cb41-344"><a href="#cb41-344"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-345"><a href="#cb41-345"></a><span class="in">ls 271rs</span></span>
-<span id="cb41-346"><a href="#cb41-346"></a><span class="in">```</span></span>
-<span id="cb41-347"><a href="#cb41-347"></a><span class="ss">- </span>You should see a <span class="in">`README.md`</span> and a <span class="in">`LICENSE`</span></span>
-<span id="cb41-348"><a href="#cb41-348"></a></span>
-<span id="cb41-349"><a href="#cb41-349"></a><span class="fu">## Enter the Repository</span></span>
-<span id="cb41-350"><a href="#cb41-350"></a></span>
-<span id="cb41-351"><a href="#cb41-351"></a><span class="ss">- </span>To change the directory within which you are working in the commandline from your home to the repository for this class, do:</span>
-<span id="cb41-352"><a href="#cb41-352"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-353"><a href="#cb41-353"></a><span class="in">cd 271rs</span></span>
-<span id="cb41-354"><a href="#cb41-354"></a><span class="in">```</span></span>
-<span id="cb41-355"><a href="#cb41-355"></a><span class="ss">- </span>Verify the change via</span>
-<span id="cb41-356"><a href="#cb41-356"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-357"><a href="#cb41-357"></a><span class="in">pwd</span></span>
-<span id="cb41-358"><a href="#cb41-358"></a><span class="in">```</span></span>
-<span id="cb41-359"><a href="#cb41-359"></a><span class="ss">- </span>This will give the full address of your class folder, ending in <span class="in">`271rs`</span></span>
-<span id="cb41-360"><a href="#cb41-360"></a></span>
-<span id="cb41-361"><a href="#cb41-361"></a><span class="fu"># Exercise</span></span>
-<span id="cb41-362"><a href="#cb41-362"></a></span>
-<span id="cb41-363"><a href="#cb41-363"></a><span class="fu">## Today</span></span>
-<span id="cb41-364"><a href="#cb41-364"></a></span>
-<span id="cb41-365"><a href="#cb41-365"></a><span class="ss">- </span>To complete the lab today, add a <span class="in">`01/rustup.md`</span> file to your <span class="in">`271rs`</span></span>
-<span id="cb41-366"><a href="#cb41-366"></a><span class="ss">- </span>Send me a link to a <span class="in">`271rs`</span> repository I have permission to view.</span>
-<span id="cb41-367"><a href="#cb41-367"></a><span class="ss">    - </span>To be clear:</span>
-<span id="cb41-368"><a href="#cb41-368"></a><span class="ss">        - </span>I must receive an email with a hyperlink to a GitHub repository.</span>
-<span id="cb41-369"><a href="#cb41-369"></a><span class="ss">        - </span>I must have view access to public repository or a repository on which I am added as a collaborator.</span>
-<span id="cb41-370"><a href="#cb41-370"></a></span>
-<span id="cb41-371"><a href="#cb41-371"></a><span class="fu">## Names Matter</span></span>
-<span id="cb41-372"><a href="#cb41-372"></a></span>
-<span id="cb41-373"><a href="#cb41-373"></a><span class="ss">- </span>Your submission will be tested be a script.</span>
-<span id="cb41-374"><a href="#cb41-374"></a><span class="ss">    - </span>The file must be named <span class="in">`rustup.md`</span></span>
-<span id="cb41-375"><a href="#cb41-375"></a><span class="ss">    - </span>It must be in a folder named <span class="in">`01`</span></span>
-<span id="cb41-376"><a href="#cb41-376"></a><span class="ss">    - </span>The repository must be named <span class="in">`271rs`</span></span>
-<span id="cb41-377"><a href="#cb41-377"></a><span class="ss">    - </span>No other arrangement constitutes a lab submission.</span>
-<span id="cb41-378"><a href="#cb41-378"></a><span class="ss">    - </span>The contents of <span class="in">`rustup.md`</span> are not relevant.</span>
+<span id="cb41-213"><a href="#cb41-213"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-214"><a href="#cb41-214"></a><span class="in">ssh -T git@github.com</span></span>
+<span id="cb41-215"><a href="#cb41-215"></a><span class="in">```</span></span>
+<span id="cb41-216"><a href="#cb41-216"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)</span></span>
+<span id="cb41-217"><a href="#cb41-217"></a></span>
+<span id="cb41-218"><a href="#cb41-218"></a>---</span>
+<span id="cb41-219"><a href="#cb41-219"></a></span>
+<span id="cb41-220"><a href="#cb41-220"></a><span class="fu">## Example</span></span>
+<span id="cb41-221"><a href="#cb41-221"></a></span>
+<span id="cb41-222"><a href="#cb41-222"></a><span class="ss">- </span>This is what I see:</span>
+<span id="cb41-223"><a href="#cb41-223"></a></span>
+<span id="cb41-224"><a href="#cb41-224"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-225"><a href="#cb41-225"></a><span class="in">The authenticity of host 'github.com (140.82.116.3)' can't be established.</span></span>
+<span id="cb41-226"><a href="#cb41-226"></a><span class="in">ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.</span></span>
+<span id="cb41-227"><a href="#cb41-227"></a><span class="in">This key is not known by any other names.</span></span>
+<span id="cb41-228"><a href="#cb41-228"></a><span class="in">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></span>
+<span id="cb41-229"><a href="#cb41-229"></a><span class="in">```</span></span>
+<span id="cb41-230"><a href="#cb41-230"></a></span>
+<span id="cb41-231"><a href="#cb41-231"></a><span class="ss">- </span>Before saying "yes" or "no" compare versus the "public SSH key fingerprints"</span>
+<span id="cb41-232"><a href="#cb41-232"></a><span class="ss">    - </span>Check them <span class="co">[</span><span class="ot">here</span><span class="co">](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)</span></span>
+<span id="cb41-233"><a href="#cb41-233"></a><span class="ss">- </span>By default, the modern keygen uses "Ed25519" so compare those keys, and click "yes" if they match!</span>
+<span id="cb41-234"><a href="#cb41-234"></a></span>
+<span id="cb41-235"><a href="#cb41-235"></a>---</span>
+<span id="cb41-236"><a href="#cb41-236"></a></span>
+<span id="cb41-237"><a href="#cb41-237"></a><span class="fu">## Connecting</span></span>
+<span id="cb41-238"><a href="#cb41-238"></a></span>
+<span id="cb41-239"><a href="#cb41-239"></a><span class="ss">- </span>After confirming the key correctness, you will likely see this.</span>
+<span id="cb41-240"><a href="#cb41-240"></a></span>
+<span id="cb41-241"><a href="#cb41-241"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-242"><a href="#cb41-242"></a><span class="in">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span>
+<span id="cb41-243"><a href="#cb41-243"></a><span class="in">Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.</span></span>
+<span id="cb41-244"><a href="#cb41-244"></a><span class="in">git@github.com: Permission denied (publickey).</span></span>
+<span id="cb41-245"><a href="#cb41-245"></a><span class="in">```</span></span>
+<span id="cb41-246"><a href="#cb41-246"></a></span>
+<span id="cb41-247"><a href="#cb41-247"></a>---</span>
+<span id="cb41-248"><a href="#cb41-248"></a></span>
+<span id="cb41-249"><a href="#cb41-249"></a><span class="fu">## One Way</span></span>
+<span id="cb41-250"><a href="#cb41-250"></a></span>
+<span id="cb41-251"><a href="#cb41-251"></a><span class="ss">- </span>Now we have instructed *our* computer to trust GitHub.</span>
+<span id="cb41-252"><a href="#cb41-252"></a><span class="ss">- </span>To save our code to GitHub, we must also get GitHub to trust *our* computer.</span>
+<span id="cb41-253"><a href="#cb41-253"></a><span class="ss">- </span>We generated our key, now we must match it to our lock on GitHub!</span>
+<span id="cb41-254"><a href="#cb41-254"></a></span>
+<span id="cb41-255"><a href="#cb41-255"></a>---</span>
+<span id="cb41-256"><a href="#cb41-256"></a></span>
+<span id="cb41-257"><a href="#cb41-257"></a><span class="fu">## GitHub pt 1</span></span>
+<span id="cb41-258"><a href="#cb41-258"></a></span>
+<span id="cb41-259"><a href="#cb41-259"></a><span class="ss">- </span>We follow <span class="co">[</span><span class="ot">this guide</span><span class="co">](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)</span></span>
+<span id="cb41-260"><a href="#cb41-260"></a><span class="ss">- </span>Return to GitHub and in the top right click your profile.</span>
+<span id="cb41-261"><a href="#cb41-261"></a><span class="ss">    - </span>For me, a picture of myself.</span>
+<span id="cb41-262"><a href="#cb41-262"></a><span class="ss">- </span>Scroll down to "Settings" and click.</span>
+<span id="cb41-263"><a href="#cb41-263"></a><span class="ss">    - </span>Last in 2nd grouping, for me.</span>
+<span id="cb41-264"><a href="#cb41-264"></a></span>
+<span id="cb41-265"><a href="#cb41-265"></a>---</span>
+<span id="cb41-266"><a href="#cb41-266"></a></span>
+<span id="cb41-267"><a href="#cb41-267"></a><span class="fu">## GitHub pt 2</span></span>
+<span id="cb41-268"><a href="#cb41-268"></a></span>
+<span id="cb41-269"><a href="#cb41-269"></a><span class="ss">- </span>Within settings left-side menu click "SSH and GPG keys"</span>
+<span id="cb41-270"><a href="#cb41-270"></a><span class="ss">    - </span>Middle of 2nd group (Access) for me.</span>
+<span id="cb41-271"><a href="#cb41-271"></a><span class="ss">- </span>Within the center block click &lt;span style="background-color:#238636;color:white"&gt;New SSH key&lt;/span&gt; in the top right of the block. </span>
+<span id="cb41-272"><a href="#cb41-272"></a></span>
+<span id="cb41-273"><a href="#cb41-273"></a>---</span>
+<span id="cb41-274"><a href="#cb41-274"></a></span>
+<span id="cb41-275"><a href="#cb41-275"></a><span class="fu">## Prompt</span></span>
+<span id="cb41-276"><a href="#cb41-276"></a></span>
+<span id="cb41-277"><a href="#cb41-277"></a><span class="ss">- </span>I get a page "Add new SSH Key".</span>
+<span id="cb41-278"><a href="#cb41-278"></a><span class="ss">- </span>I provide a title (like "For 271rs class" or "Laptop")</span>
+<span id="cb41-279"><a href="#cb41-279"></a><span class="ss">- </span>Now we'll get our key from our system to use.</span>
+<span id="cb41-280"><a href="#cb41-280"></a><span class="ss">- </span>Recall we previously generated a key to the default location, like </span>
+<span id="cb41-281"><a href="#cb41-281"></a><span class="in">`/home/calvin/.ssh/id_ed25519`</span></span>
+<span id="cb41-282"><a href="#cb41-282"></a><span class="ss">    - </span>If you don't remember, just type <span class="in">`ssh-keygen`</span> and it'll show you.</span>
+<span id="cb41-283"><a href="#cb41-283"></a></span>
+<span id="cb41-284"><a href="#cb41-284"></a>---</span>
+<span id="cb41-285"><a href="#cb41-285"></a></span>
+<span id="cb41-286"><a href="#cb41-286"></a><span class="fu">## Copy/Paste</span></span>
+<span id="cb41-287"><a href="#cb41-287"></a></span>
+<span id="cb41-288"><a href="#cb41-288"></a><span class="ss">- </span>To get the key for GitHub, we can can </span>
+<span id="cb41-289"><a href="#cb41-289"></a><span class="ss">  - </span><span class="in">`cat`</span> that file in the command line</span>
+<span id="cb41-290"><a href="#cb41-290"></a><span class="ss">  - </span>Copy from the command line</span>
+<span id="cb41-291"><a href="#cb41-291"></a><span class="ss">  - </span>Paste into the GitHub "Key" field</span>
+<span id="cb41-292"><a href="#cb41-292"></a><span class="ss">  - </span>Click &lt;span style="background-color:#238636;color:white"&gt;Add SSH key&lt;/span&gt; </span>
+<span id="cb41-293"><a href="#cb41-293"></a></span>
+<span id="cb41-294"><a href="#cb41-294"></a>---</span>
+<span id="cb41-295"><a href="#cb41-295"></a></span>
+<span id="cb41-296"><a href="#cb41-296"></a><span class="fu">## SSH Test</span></span>
+<span id="cb41-297"><a href="#cb41-297"></a></span>
+<span id="cb41-298"><a href="#cb41-298"></a><span class="ss">- </span>After adding the key to the account, I confirm via SSH like so:</span>
+<span id="cb41-299"><a href="#cb41-299"></a></span>
+<span id="cb41-300"><a href="#cb41-300"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-301"><a href="#cb41-301"></a><span class="in">ssh -T git@github.com</span></span>
+<span id="cb41-302"><a href="#cb41-302"></a><span class="in">```</span></span>
+<span id="cb41-303"><a href="#cb41-303"></a></span>
+<span id="cb41-304"><a href="#cb41-304"></a><span class="ss">- </span>I see the following:</span>
+<span id="cb41-305"><a href="#cb41-305"></a></span>
+<span id="cb41-306"><a href="#cb41-306"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-307"><a href="#cb41-307"></a><span class="in">Hi cd-public! You've successfully authenticated, but GitHub does not provide shell access.</span></span>
+<span id="cb41-308"><a href="#cb41-308"></a><span class="in">```</span></span>
+<span id="cb41-309"><a href="#cb41-309"></a></span>
+<span id="cb41-310"><a href="#cb41-310"></a><span class="fu"># Clone</span></span>
+<span id="cb41-311"><a href="#cb41-311"></a></span>
+<span id="cb41-312"><a href="#cb41-312"></a><span class="ss">- </span>With <span class="in">`ssh`</span> configured on your local device and on the remote service, you can clone your <span class="in">`271rs`</span>.</span>
+<span id="cb41-313"><a href="#cb41-313"></a><span class="ss">    - </span>This will be a another copy of the same repository you use.</span>
+<span id="cb41-314"><a href="#cb41-314"></a><span class="ss">    - </span>It based off of (templated off of) a repository I made under my account.</span>
+<span id="cb41-315"><a href="#cb41-315"></a><span class="ss">    - </span>Template $\neq$ clone.</span>
+<span id="cb41-316"><a href="#cb41-316"></a></span>
+<span id="cb41-317"><a href="#cb41-317"></a>---</span>
+<span id="cb41-318"><a href="#cb41-318"></a></span>
+<span id="cb41-319"><a href="#cb41-319"></a><span class="fu">## Clone pt1</span></span>
+<span id="cb41-320"><a href="#cb41-320"></a></span>
+<span id="cb41-321"><a href="#cb41-321"></a><span class="ss">- </span>Navigate to the repository webpage, like <span class="in">`github.com/cd-example/271rs`</span></span>
+<span id="cb41-322"><a href="#cb41-322"></a><span class="ss">- </span>Find the &lt;span style="background-color:#238636;color:white"&gt;<span class="sc">\&lt;\&gt;</span> Code&lt;/span&gt; button in the top right.</span>
+<span id="cb41-323"><a href="#cb41-323"></a><span class="ss">- </span>Click it:</span>
+<span id="cb41-324"><a href="#cb41-324"></a><span class="ss">    - </span>Select the top "local" tab (for or local repository)</span>
+<span id="cb41-325"><a href="#cb41-325"></a><span class="ss">    - </span>Select the SSH option (for our SSH key)</span>
+<span id="cb41-326"><a href="#cb41-326"></a><span class="ss">    - </span>Copy the name, like </span>
+<span id="cb41-327"><a href="#cb41-327"></a></span>
+<span id="cb41-328"><a href="#cb41-328"></a><span class="at">&gt; git@github.com:cd-example/271rs</span></span>
+<span id="cb41-329"><a href="#cb41-329"></a></span>
+<span id="cb41-330"><a href="#cb41-330"></a>---</span>
+<span id="cb41-331"><a href="#cb41-331"></a></span>
+<span id="cb41-332"><a href="#cb41-332"></a><span class="fu">## Clone pt2</span></span>
+<span id="cb41-333"><a href="#cb41-333"></a></span>
+<span id="cb41-334"><a href="#cb41-334"></a><span class="ss">- </span>Within terminal, where you keep files for this class.</span>
+<span id="cb41-335"><a href="#cb41-335"></a><span class="ss">    - </span>Probably just do</span>
+<span id="cb41-336"><a href="#cb41-336"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-337"><a href="#cb41-337"></a><span class="in">cd ~</span></span>
+<span id="cb41-338"><a href="#cb41-338"></a><span class="in">git clone git@github.com:cd-example/271rs </span></span>
+<span id="cb41-339"><a href="#cb41-339"></a><span class="in">```</span></span>
+<span id="cb41-340"><a href="#cb41-340"></a><span class="ss">- </span>Verify by listing the contents of the <span class="in">`271rs`</span> directory via:</span>
+<span id="cb41-341"><a href="#cb41-341"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-342"><a href="#cb41-342"></a><span class="in">ls 271rs</span></span>
+<span id="cb41-343"><a href="#cb41-343"></a><span class="in">```</span></span>
+<span id="cb41-344"><a href="#cb41-344"></a><span class="ss">- </span>You should see a <span class="in">`README.md`</span> and a <span class="in">`LICENSE`</span></span>
+<span id="cb41-345"><a href="#cb41-345"></a></span>
+<span id="cb41-346"><a href="#cb41-346"></a><span class="fu">## Enter the Repository</span></span>
+<span id="cb41-347"><a href="#cb41-347"></a></span>
+<span id="cb41-348"><a href="#cb41-348"></a><span class="ss">- </span>To change the directory within which you are working in the commandline from your home to the repository for this class, do:</span>
+<span id="cb41-349"><a href="#cb41-349"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-350"><a href="#cb41-350"></a><span class="in">cd 271rs</span></span>
+<span id="cb41-351"><a href="#cb41-351"></a><span class="in">```</span></span>
+<span id="cb41-352"><a href="#cb41-352"></a><span class="ss">- </span>Verify the change via</span>
+<span id="cb41-353"><a href="#cb41-353"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-354"><a href="#cb41-354"></a><span class="in">pwd</span></span>
+<span id="cb41-355"><a href="#cb41-355"></a><span class="in">```</span></span>
+<span id="cb41-356"><a href="#cb41-356"></a><span class="ss">- </span>This will give the full address of your class folder, ending in <span class="in">`271rs`</span></span>
+<span id="cb41-357"><a href="#cb41-357"></a></span>
+<span id="cb41-358"><a href="#cb41-358"></a><span class="fu"># Exercise</span></span>
+<span id="cb41-359"><a href="#cb41-359"></a></span>
+<span id="cb41-360"><a href="#cb41-360"></a><span class="fu">## Today</span></span>
+<span id="cb41-361"><a href="#cb41-361"></a></span>
+<span id="cb41-362"><a href="#cb41-362"></a><span class="ss">- </span>To complete the lab today, add a <span class="in">`01/rustup.md`</span> file to your <span class="in">`271rs`</span></span>
+<span id="cb41-363"><a href="#cb41-363"></a><span class="ss">- </span>Send me a link to a <span class="in">`271rs`</span> repository I have permission to view.</span>
+<span id="cb41-364"><a href="#cb41-364"></a><span class="ss">    - </span>To be clear:</span>
+<span id="cb41-365"><a href="#cb41-365"></a><span class="ss">        - </span>I must receive an email with a hyperlink to a GitHub repository.</span>
+<span id="cb41-366"><a href="#cb41-366"></a><span class="ss">        - </span>I must have view access to public repository or a repository on which I am added as a collaborator.</span>
+<span id="cb41-367"><a href="#cb41-367"></a></span>
+<span id="cb41-368"><a href="#cb41-368"></a><span class="fu">## Names Matter</span></span>
+<span id="cb41-369"><a href="#cb41-369"></a></span>
+<span id="cb41-370"><a href="#cb41-370"></a><span class="ss">- </span>Your submission will be tested be a script.</span>
+<span id="cb41-371"><a href="#cb41-371"></a><span class="ss">    - </span>The file must be named <span class="in">`rustup.md`</span></span>
+<span id="cb41-372"><a href="#cb41-372"></a><span class="ss">    - </span>It must be in a folder named <span class="in">`01`</span></span>
+<span id="cb41-373"><a href="#cb41-373"></a><span class="ss">    - </span>The repository must be named <span class="in">`271rs`</span></span>
+<span id="cb41-374"><a href="#cb41-374"></a><span class="ss">    - </span>No other arrangement constitutes a lab submission.</span>
+<span id="cb41-375"><a href="#cb41-375"></a><span class="ss">    - </span>The contents of <span class="in">`rustup.md`</span> are not relevant.</span>
+<span id="cb41-376"><a href="#cb41-376"></a></span>
+<span id="cb41-377"><a href="#cb41-377"></a>    </span>
+<span id="cb41-378"><a href="#cb41-378"></a><span class="fu">## Useful commands</span></span>
 <span id="cb41-379"><a href="#cb41-379"></a></span>
-<span id="cb41-380"><a href="#cb41-380"></a>    </span>
-<span id="cb41-381"><a href="#cb41-381"></a><span class="fu">## Useful commands</span></span>
-<span id="cb41-382"><a href="#cb41-382"></a></span>
-<span id="cb41-383"><a href="#cb41-383"></a><span class="ss">- </span>You may use <span class="in">`ls`</span> to list files/folders.</span>
-<span id="cb41-384"><a href="#cb41-384"></a><span class="ss">- </span>You make use <span class="in">`mkdir 01`</span> to creat the <span class="in">`01`</span> folder.</span>
-<span id="cb41-385"><a href="#cb41-385"></a><span class="ss">- </span>You may use <span class="in">`vim 01/rustup.md`</span> to edit the <span class="in">`rustup.md`</span> file in the <span class="in">`01`</span> folder.</span>
-<span id="cb41-386"><a href="#cb41-386"></a><span class="ss">    - </span>The <span class="in">`01`</span> folder must exist to do this.</span>
-<span id="cb41-387"><a href="#cb41-387"></a><span class="ss">- </span>Learn more <span class="co">[</span><span class="ot">here</span><span class="co">](https://cd-public.github.io/scicom/03_shell.html#files)</span></span>
+<span id="cb41-380"><a href="#cb41-380"></a><span class="ss">- </span>You may use <span class="in">`ls`</span> to list files/folders.</span>
+<span id="cb41-381"><a href="#cb41-381"></a><span class="ss">- </span>You make use <span class="in">`mkdir 01`</span> to creat the <span class="in">`01`</span> folder.</span>
+<span id="cb41-382"><a href="#cb41-382"></a><span class="ss">- </span>You may use <span class="in">`vim 01/rustup.md`</span> to edit the <span class="in">`rustup.md`</span> file in the <span class="in">`01`</span> folder.</span>
+<span id="cb41-383"><a href="#cb41-383"></a><span class="ss">    - </span>The <span class="in">`01`</span> folder must exist to do this.</span>
+<span id="cb41-384"><a href="#cb41-384"></a><span class="ss">- </span>Learn more <span class="co">[</span><span class="ot">here</span><span class="co">](https://cd-public.github.io/scicom/03_shell.html#files)</span></span>
+<span id="cb41-385"><a href="#cb41-385"></a></span>
+<span id="cb41-386"><a href="#cb41-386"></a></span>
+<span id="cb41-387"><a href="#cb41-387"></a><span class="fu">## File Editor</span></span>
 <span id="cb41-388"><a href="#cb41-388"></a></span>
-<span id="cb41-389"><a href="#cb41-389"></a></span>
-<span id="cb41-390"><a href="#cb41-390"></a><span class="fu">## File Editor</span></span>
-<span id="cb41-391"><a href="#cb41-391"></a></span>
-<span id="cb41-392"><a href="#cb41-392"></a><span class="ss">- </span>Let's make a new file.</span>
-<span id="cb41-393"><a href="#cb41-393"></a><span class="ss">- </span>I recommend using <span class="in">`vim`</span>, <span class="in">`neovim`</span>, or <span class="in">`helix`</span>.</span>
-<span id="cb41-394"><a href="#cb41-394"></a><span class="ss">- </span>*Probably* already have it on MacOS.</span>
-<span id="cb41-395"><a href="#cb41-395"></a><span class="ss">- </span>On WSL install via</span>
-<span id="cb41-396"><a href="#cb41-396"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-397"><a href="#cb41-397"></a><span class="in">sudo apt install vim</span></span>
-<span id="cb41-398"><a href="#cb41-398"></a><span class="in">```</span></span>
-<span id="cb41-399"><a href="#cb41-399"></a></span>
-<span id="cb41-400"><a href="#cb41-400"></a><span class="fu">## File Editting</span></span>
-<span id="cb41-401"><a href="#cb41-401"></a></span>
-<span id="cb41-402"><a href="#cb41-402"></a><span class="ss">- </span>To create said file, type <span class="in">`vim`</span> then the name of the file.</span>
-<span id="cb41-403"><a href="#cb41-403"></a><span class="ss">- </span>If you just cloned <span class="in">`271rs`</span>, there will be a <span class="in">`271rs`</span> folder into which you should create a <span class="in">`01`</span> folder.</span>
-<span id="cb41-404"><a href="#cb41-404"></a><span class="ss">    - </span>Stands for week 0, day 1</span>
-<span id="cb41-405"><a href="#cb41-405"></a><span class="in">```{.bash}</span></span>
-<span id="cb41-406"><a href="#cb41-406"></a><span class="in">vim 01/rustup.md</span></span>
-<span id="cb41-407"><a href="#cb41-407"></a><span class="in">```</span></span>
-<span id="cb41-408"><a href="#cb41-408"></a></span>
-<span id="cb41-409"><a href="#cb41-409"></a><span class="fu">## Using `vim`</span></span>
-<span id="cb41-410"><a href="#cb41-410"></a></span>
-<span id="cb41-411"><a href="#cb41-411"></a><span class="ss">- </span>There's more to life that using <span class="in">`vim`</span> but basically:</span>
-<span id="cb41-412"><a href="#cb41-412"></a><span class="ss">    - </span>Press <span class="in">`i`</span> to enter "insert mode" (so you can type)</span>
-<span id="cb41-413"><a href="#cb41-413"></a><span class="ss">    - </span>When you are done typing, press ESC then type <span class="in">`:x`</span> to save and exit.</span>
-<span id="cb41-414"><a href="#cb41-414"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://cd-public.github.io/scicom/02_neovim.html)</span></span>
-<span id="cb41-415"><a href="#cb41-415"></a><span class="ss">- </span>Just type some notes you have from today.</span>
-<span id="cb41-416"><a href="#cb41-416"></a></span>
-<span id="cb41-417"><a href="#cb41-417"></a><span class="fu">## Check Status</span></span>
-<span id="cb41-418"><a href="#cb41-418"></a></span>
-<span id="cb41-419"><a href="#cb41-419"></a><span class="ss">- </span>You have now added a new file to your repository.</span>
-<span id="cb41-420"><a href="#cb41-420"></a><span class="ss">- </span>I consult status often, yours will likely look like this:</span>
-<span id="cb41-421"><a href="#cb41-421"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-422"><a href="#cb41-422"></a><span class="in">On branch master</span></span>
-<span id="cb41-423"><a href="#cb41-423"></a></span>
-<span id="cb41-424"><a href="#cb41-424"></a><span class="in">No commits yet</span></span>
-<span id="cb41-425"><a href="#cb41-425"></a></span>
-<span id="cb41-426"><a href="#cb41-426"></a><span class="in">Untracked files:</span></span>
-<span id="cb41-427"><a href="#cb41-427"></a><span class="in">  (use "git add &lt;file&gt;..." to include in what will be committed)</span></span>
-<span id="cb41-428"><a href="#cb41-428"></a><span class="in">        01/rustup.md</span></span>
+<span id="cb41-389"><a href="#cb41-389"></a><span class="ss">- </span>Let's make a new file.</span>
+<span id="cb41-390"><a href="#cb41-390"></a><span class="ss">- </span>I recommend using <span class="in">`vim`</span>, <span class="in">`neovim`</span>, or <span class="in">`helix`</span>.</span>
+<span id="cb41-391"><a href="#cb41-391"></a><span class="ss">- </span>*Probably* already have it on MacOS.</span>
+<span id="cb41-392"><a href="#cb41-392"></a><span class="ss">- </span>On WSL install via</span>
+<span id="cb41-393"><a href="#cb41-393"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-394"><a href="#cb41-394"></a><span class="in">sudo apt install vim</span></span>
+<span id="cb41-395"><a href="#cb41-395"></a><span class="in">```</span></span>
+<span id="cb41-396"><a href="#cb41-396"></a></span>
+<span id="cb41-397"><a href="#cb41-397"></a><span class="fu">## File Editting</span></span>
+<span id="cb41-398"><a href="#cb41-398"></a></span>
+<span id="cb41-399"><a href="#cb41-399"></a><span class="ss">- </span>To create said file, type <span class="in">`vim`</span> then the name of the file.</span>
+<span id="cb41-400"><a href="#cb41-400"></a><span class="ss">- </span>If you just cloned <span class="in">`271rs`</span>, there will be a <span class="in">`271rs`</span> folder into which you should create a <span class="in">`01`</span> folder.</span>
+<span id="cb41-401"><a href="#cb41-401"></a><span class="ss">    - </span>Stands for week 0, day 1</span>
+<span id="cb41-402"><a href="#cb41-402"></a><span class="in">```{.bash}</span></span>
+<span id="cb41-403"><a href="#cb41-403"></a><span class="in">vim 01/rustup.md</span></span>
+<span id="cb41-404"><a href="#cb41-404"></a><span class="in">```</span></span>
+<span id="cb41-405"><a href="#cb41-405"></a></span>
+<span id="cb41-406"><a href="#cb41-406"></a><span class="fu">## Using `vim`</span></span>
+<span id="cb41-407"><a href="#cb41-407"></a></span>
+<span id="cb41-408"><a href="#cb41-408"></a><span class="ss">- </span>There's more to life that using <span class="in">`vim`</span> but basically:</span>
+<span id="cb41-409"><a href="#cb41-409"></a><span class="ss">    - </span>Press <span class="in">`i`</span> to enter "insert mode" (so you can type)</span>
+<span id="cb41-410"><a href="#cb41-410"></a><span class="ss">    - </span>When you are done typing, press ESC then type <span class="in">`:x`</span> to save and exit.</span>
+<span id="cb41-411"><a href="#cb41-411"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://cd-public.github.io/scicom/02_neovim.html)</span></span>
+<span id="cb41-412"><a href="#cb41-412"></a><span class="ss">- </span>Just type some notes you have from today.</span>
+<span id="cb41-413"><a href="#cb41-413"></a></span>
+<span id="cb41-414"><a href="#cb41-414"></a><span class="fu">## Check Status</span></span>
+<span id="cb41-415"><a href="#cb41-415"></a></span>
+<span id="cb41-416"><a href="#cb41-416"></a><span class="ss">- </span>You have now added a new file to your repository.</span>
+<span id="cb41-417"><a href="#cb41-417"></a><span class="ss">- </span>I consult status often, yours will likely look like this:</span>
+<span id="cb41-418"><a href="#cb41-418"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-419"><a href="#cb41-419"></a><span class="in">On branch master</span></span>
+<span id="cb41-420"><a href="#cb41-420"></a></span>
+<span id="cb41-421"><a href="#cb41-421"></a><span class="in">No commits yet</span></span>
+<span id="cb41-422"><a href="#cb41-422"></a></span>
+<span id="cb41-423"><a href="#cb41-423"></a><span class="in">Untracked files:</span></span>
+<span id="cb41-424"><a href="#cb41-424"></a><span class="in">  (use "git add &lt;file&gt;..." to include in what will be committed)</span></span>
+<span id="cb41-425"><a href="#cb41-425"></a><span class="in">        01/rustup.md</span></span>
+<span id="cb41-426"><a href="#cb41-426"></a></span>
+<span id="cb41-427"><a href="#cb41-427"></a><span class="in">nothing added to commit but untracked files present (use "git add" to track)</span></span>
+<span id="cb41-428"><a href="#cb41-428"></a><span class="in">```</span></span>
 <span id="cb41-429"><a href="#cb41-429"></a></span>
-<span id="cb41-430"><a href="#cb41-430"></a><span class="in">nothing added to commit but untracked files present (use "git add" to track)</span></span>
-<span id="cb41-431"><a href="#cb41-431"></a><span class="in">```</span></span>
-<span id="cb41-432"><a href="#cb41-432"></a></span>
-<span id="cb41-433"><a href="#cb41-433"></a><span class="fu">## Add</span></span>
-<span id="cb41-434"><a href="#cb41-434"></a></span>
-<span id="cb41-435"><a href="#cb41-435"></a><span class="ss">- </span>The first thing we not is that there are "Untracked files"</span>
-<span id="cb41-436"><a href="#cb41-436"></a><span class="ss">- </span>While we made a <span class="in">`hello.py`</span> and have it in our <span class="in">`hello-world`</span> directory, it isn't yet "tracked" by <span class="in">`git`</span>!</span>
-<span id="cb41-437"><a href="#cb41-437"></a><span class="ss">- </span>By default, <span class="in">`git`</span> only keeps track of what we tell it to!</span>
-<span id="cb41-438"><a href="#cb41-438"></a><span class="ss">- </span>So, we tell it to track our code!</span>
-<span id="cb41-439"><a href="#cb41-439"></a></span>
-<span id="cb41-440"><a href="#cb41-440"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-441"><a href="#cb41-441"></a><span class="in">git add 01/rustup.md</span></span>
-<span id="cb41-442"><a href="#cb41-442"></a><span class="in">```</span></span>
-<span id="cb41-443"><a href="#cb41-443"></a></span>
-<span id="cb41-444"><a href="#cb41-444"></a><span class="fu">## Status</span></span>
-<span id="cb41-445"><a href="#cb41-445"></a></span>
-<span id="cb41-446"><a href="#cb41-446"></a><span class="ss">- </span>I check status again  </span>
+<span id="cb41-430"><a href="#cb41-430"></a><span class="fu">## Add</span></span>
+<span id="cb41-431"><a href="#cb41-431"></a></span>
+<span id="cb41-432"><a href="#cb41-432"></a><span class="ss">- </span>The first thing we not is that there are "Untracked files"</span>
+<span id="cb41-433"><a href="#cb41-433"></a><span class="ss">- </span>While we made a <span class="in">`hello.py`</span> and have it in our <span class="in">`hello-world`</span> directory, it isn't yet "tracked" by <span class="in">`git`</span>!</span>
+<span id="cb41-434"><a href="#cb41-434"></a><span class="ss">- </span>By default, <span class="in">`git`</span> only keeps track of what we tell it to!</span>
+<span id="cb41-435"><a href="#cb41-435"></a><span class="ss">- </span>So, we tell it to track our code!</span>
+<span id="cb41-436"><a href="#cb41-436"></a></span>
+<span id="cb41-437"><a href="#cb41-437"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-438"><a href="#cb41-438"></a><span class="in">git add 01/rustup.md</span></span>
+<span id="cb41-439"><a href="#cb41-439"></a><span class="in">```</span></span>
+<span id="cb41-440"><a href="#cb41-440"></a></span>
+<span id="cb41-441"><a href="#cb41-441"></a><span class="fu">## Status</span></span>
+<span id="cb41-442"><a href="#cb41-442"></a></span>
+<span id="cb41-443"><a href="#cb41-443"></a><span class="ss">- </span>I check status again  </span>
+<span id="cb41-444"><a href="#cb41-444"></a></span>
+<span id="cb41-445"><a href="#cb41-445"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-446"><a href="#cb41-446"></a><span class="in">On branch master</span></span>
 <span id="cb41-447"><a href="#cb41-447"></a></span>
-<span id="cb41-448"><a href="#cb41-448"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-449"><a href="#cb41-449"></a><span class="in">On branch master</span></span>
-<span id="cb41-450"><a href="#cb41-450"></a></span>
-<span id="cb41-451"><a href="#cb41-451"></a><span class="in">No commits yet</span></span>
-<span id="cb41-452"><a href="#cb41-452"></a></span>
-<span id="cb41-453"><a href="#cb41-453"></a><span class="in">Changes to be committed:</span></span>
-<span id="cb41-454"><a href="#cb41-454"></a><span class="in">  (use "git rm --cached &lt;file&gt;..." to unstage)</span></span>
-<span id="cb41-455"><a href="#cb41-455"></a><span class="in">        new file:   01_rustup.md</span></span>
-<span id="cb41-456"><a href="#cb41-456"></a><span class="in">```</span></span>
-<span id="cb41-457"><a href="#cb41-457"></a></span>
-<span id="cb41-458"><a href="#cb41-458"></a><span class="fu">## Commit</span></span>
-<span id="cb41-459"><a href="#cb41-459"></a></span>
-<span id="cb41-460"><a href="#cb41-460"></a><span class="ss">- </span>With <span class="in">`git`</span> now aware of <span class="in">`hello.py`</span>, we need to commit or changes for <span class="in">`git`</span> to save them.</span>
-<span id="cb41-461"><a href="#cb41-461"></a><span class="ss">    - </span>Similar to saving files to the file system.</span>
-<span id="cb41-462"><a href="#cb41-462"></a><span class="ss">    - </span>There are, of course, ways to automate this.</span>
-<span id="cb41-463"><a href="#cb41-463"></a><span class="ss">- </span>This probably won't work at first (next slide!) but try:</span>
-<span id="cb41-464"><a href="#cb41-464"></a></span>
-<span id="cb41-465"><a href="#cb41-465"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-466"><a href="#cb41-466"></a><span class="in">git commit -a -m "first commit"</span></span>
-<span id="cb41-467"><a href="#cb41-467"></a><span class="in">```</span></span>
-<span id="cb41-468"><a href="#cb41-468"></a></span>
-<span id="cb41-469"><a href="#cb41-469"></a><span class="fu">## "-a -m"</span></span>
-<span id="cb41-470"><a href="#cb41-470"></a></span>
-<span id="cb41-471"><a href="#cb41-471"></a><span class="ss">- </span>Commits require a commit message (like a version name or number) so specify with <span class="in">`-m`</span></span>
-<span id="cb41-472"><a href="#cb41-472"></a><span class="ss">- </span>Usually I provide <span class="in">`-a`</span> to commit "all" files.</span>
-<span id="cb41-473"><a href="#cb41-473"></a><span class="ss">- </span>I usually make some effort to make my life easier with specific commit messages, perhaps listing:</span>
-<span id="cb41-474"><a href="#cb41-474"></a><span class="ss">    - </span>What I'm trying to do</span>
-<span id="cb41-475"><a href="#cb41-475"></a><span class="ss">    - </span>Why?</span>
-<span id="cb41-476"><a href="#cb41-476"></a></span>
-<span id="cb41-477"><a href="#cb41-477"></a><span class="fu">## Config</span></span>
-<span id="cb41-478"><a href="#cb41-478"></a></span>
-<span id="cb41-479"><a href="#cb41-479"></a><span class="ss">- </span>If you haven't used <span class="in">`git`</span> on your system before, you'll have to tell <span class="in">`git`</span> who you are.</span>
-<span id="cb41-480"><a href="#cb41-480"></a><span class="ss">    - </span>In <span class="in">`git`</span> there are no *anonymous* changes - you have to sign every change you make.</span>
-<span id="cb41-481"><a href="#cb41-481"></a><span class="ss">- </span>You'll be prompted to provide something like this:</span>
-<span id="cb41-482"><a href="#cb41-482"></a>  </span>
-<span id="cb41-483"><a href="#cb41-483"></a></span>
-<span id="cb41-484"><a href="#cb41-484"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-485"><a href="#cb41-485"></a><span class="in">git config --global user.email "you@example.com"</span></span>
-<span id="cb41-486"><a href="#cb41-486"></a><span class="in">git config --global user.name "Your Name"</span></span>
-<span id="cb41-487"><a href="#cb41-487"></a><span class="in">```</span></span>
-<span id="cb41-488"><a href="#cb41-488"></a></span>
-<span id="cb41-489"><a href="#cb41-489"></a><span class="fu">## My name</span></span>
+<span id="cb41-448"><a href="#cb41-448"></a><span class="in">No commits yet</span></span>
+<span id="cb41-449"><a href="#cb41-449"></a></span>
+<span id="cb41-450"><a href="#cb41-450"></a><span class="in">Changes to be committed:</span></span>
+<span id="cb41-451"><a href="#cb41-451"></a><span class="in">  (use "git rm --cached &lt;file&gt;..." to unstage)</span></span>
+<span id="cb41-452"><a href="#cb41-452"></a><span class="in">        new file:   01_rustup.md</span></span>
+<span id="cb41-453"><a href="#cb41-453"></a><span class="in">```</span></span>
+<span id="cb41-454"><a href="#cb41-454"></a></span>
+<span id="cb41-455"><a href="#cb41-455"></a><span class="fu">## Commit</span></span>
+<span id="cb41-456"><a href="#cb41-456"></a></span>
+<span id="cb41-457"><a href="#cb41-457"></a><span class="ss">- </span>With <span class="in">`git`</span> now aware of <span class="in">`hello.py`</span>, we need to commit or changes for <span class="in">`git`</span> to save them.</span>
+<span id="cb41-458"><a href="#cb41-458"></a><span class="ss">    - </span>Similar to saving files to the file system.</span>
+<span id="cb41-459"><a href="#cb41-459"></a><span class="ss">    - </span>There are, of course, ways to automate this.</span>
+<span id="cb41-460"><a href="#cb41-460"></a><span class="ss">- </span>This probably won't work at first (next slide!) but try:</span>
+<span id="cb41-461"><a href="#cb41-461"></a></span>
+<span id="cb41-462"><a href="#cb41-462"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-463"><a href="#cb41-463"></a><span class="in">git commit -a -m "first commit"</span></span>
+<span id="cb41-464"><a href="#cb41-464"></a><span class="in">```</span></span>
+<span id="cb41-465"><a href="#cb41-465"></a></span>
+<span id="cb41-466"><a href="#cb41-466"></a><span class="fu">## "-a -m"</span></span>
+<span id="cb41-467"><a href="#cb41-467"></a></span>
+<span id="cb41-468"><a href="#cb41-468"></a><span class="ss">- </span>Commits require a commit message (like a version name or number) so specify with <span class="in">`-m`</span></span>
+<span id="cb41-469"><a href="#cb41-469"></a><span class="ss">- </span>Usually I provide <span class="in">`-a`</span> to commit "all" files.</span>
+<span id="cb41-470"><a href="#cb41-470"></a><span class="ss">- </span>I usually make some effort to make my life easier with specific commit messages, perhaps listing:</span>
+<span id="cb41-471"><a href="#cb41-471"></a><span class="ss">    - </span>What I'm trying to do</span>
+<span id="cb41-472"><a href="#cb41-472"></a><span class="ss">    - </span>Why?</span>
+<span id="cb41-473"><a href="#cb41-473"></a></span>
+<span id="cb41-474"><a href="#cb41-474"></a><span class="fu">## Config</span></span>
+<span id="cb41-475"><a href="#cb41-475"></a></span>
+<span id="cb41-476"><a href="#cb41-476"></a><span class="ss">- </span>If you haven't used <span class="in">`git`</span> on your system before, you'll have to tell <span class="in">`git`</span> who you are.</span>
+<span id="cb41-477"><a href="#cb41-477"></a><span class="ss">    - </span>In <span class="in">`git`</span> there are no *anonymous* changes - you have to sign every change you make.</span>
+<span id="cb41-478"><a href="#cb41-478"></a><span class="ss">- </span>You'll be prompted to provide something like this:</span>
+<span id="cb41-479"><a href="#cb41-479"></a>  </span>
+<span id="cb41-480"><a href="#cb41-480"></a></span>
+<span id="cb41-481"><a href="#cb41-481"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-482"><a href="#cb41-482"></a><span class="in">git config --global user.email "you@example.com"</span></span>
+<span id="cb41-483"><a href="#cb41-483"></a><span class="in">git config --global user.name "Your Name"</span></span>
+<span id="cb41-484"><a href="#cb41-484"></a><span class="in">```</span></span>
+<span id="cb41-485"><a href="#cb41-485"></a></span>
+<span id="cb41-486"><a href="#cb41-486"></a><span class="fu">## My name</span></span>
+<span id="cb41-487"><a href="#cb41-487"></a></span>
+<span id="cb41-488"><a href="#cb41-488"></a><span class="ss">- </span>I often include which computer I'm using in my name and also don't use a real email address.</span>
+<span id="cb41-489"><a href="#cb41-489"></a><span class="ss">    - </span>My GitHub account is already attached to an email address, so I use a throwaway for commits.</span>
 <span id="cb41-490"><a href="#cb41-490"></a></span>
-<span id="cb41-491"><a href="#cb41-491"></a><span class="ss">- </span>I often include which computer I'm using in my name and also don't use a real email address.</span>
-<span id="cb41-492"><a href="#cb41-492"></a><span class="ss">    - </span>My GitHub account is already attached to an email address, so I use a throwaway for commits.</span>
-<span id="cb41-493"><a href="#cb41-493"></a></span>
-<span id="cb41-494"><a href="#cb41-494"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-495"><a href="#cb41-495"></a><span class="in">git config --global user.email "prof_calvin@c89&gt;rs.edu"</span></span>
-<span id="cb41-496"><a href="#cb41-496"></a><span class="in">git config --global user.name "Calvin for Class"</span></span>
-<span id="cb41-497"><a href="#cb41-497"></a><span class="in">```</span></span>
-<span id="cb41-498"><a href="#cb41-498"></a></span>
-<span id="cb41-499"><a href="#cb41-499"></a><span class="fu">## Looping Back</span></span>
-<span id="cb41-500"><a href="#cb41-500"></a></span>
-<span id="cb41-501"><a href="#cb41-501"></a><span class="ss">- </span>Once you have provided your identity, you can successfuly complete a commit.</span>
-<span id="cb41-502"><a href="#cb41-502"></a></span>
-<span id="cb41-503"><a href="#cb41-503"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-504"><a href="#cb41-504"></a><span class="in">git commit -a -m "first commit"</span></span>
-<span id="cb41-505"><a href="#cb41-505"></a><span class="in">```</span></span>
-<span id="cb41-506"><a href="#cb41-506"></a><span class="ss">- </span>This will:</span>
-<span id="cb41-507"><a href="#cb41-507"></a><span class="ss">    - </span>Mark current code as a version, named by your commit message.</span>
-<span id="cb41-508"><a href="#cb41-508"></a><span class="ss">- </span>This won't:</span>
-<span id="cb41-509"><a href="#cb41-509"></a><span class="ss">    - </span>Do *anything* to GitHub.</span>
-<span id="cb41-510"><a href="#cb41-510"></a></span>
-<span id="cb41-511"><a href="#cb41-511"></a><span class="fu">## Push</span></span>
+<span id="cb41-491"><a href="#cb41-491"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-492"><a href="#cb41-492"></a><span class="in">git config --global user.email "prof_calvin@c89&gt;rs.edu"</span></span>
+<span id="cb41-493"><a href="#cb41-493"></a><span class="in">git config --global user.name "Calvin for Class"</span></span>
+<span id="cb41-494"><a href="#cb41-494"></a><span class="in">```</span></span>
+<span id="cb41-495"><a href="#cb41-495"></a></span>
+<span id="cb41-496"><a href="#cb41-496"></a><span class="fu">## Looping Back</span></span>
+<span id="cb41-497"><a href="#cb41-497"></a></span>
+<span id="cb41-498"><a href="#cb41-498"></a><span class="ss">- </span>Once you have provided your identity, you can successfuly complete a commit.</span>
+<span id="cb41-499"><a href="#cb41-499"></a></span>
+<span id="cb41-500"><a href="#cb41-500"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-501"><a href="#cb41-501"></a><span class="in">git commit -a -m "first commit"</span></span>
+<span id="cb41-502"><a href="#cb41-502"></a><span class="in">```</span></span>
+<span id="cb41-503"><a href="#cb41-503"></a><span class="ss">- </span>This will:</span>
+<span id="cb41-504"><a href="#cb41-504"></a><span class="ss">    - </span>Mark current code as a version, named by your commit message.</span>
+<span id="cb41-505"><a href="#cb41-505"></a><span class="ss">- </span>This won't:</span>
+<span id="cb41-506"><a href="#cb41-506"></a><span class="ss">    - </span>Do *anything* to GitHub.</span>
+<span id="cb41-507"><a href="#cb41-507"></a></span>
+<span id="cb41-508"><a href="#cb41-508"></a><span class="fu">## Push</span></span>
+<span id="cb41-509"><a href="#cb41-509"></a></span>
+<span id="cb41-510"><a href="#cb41-510"></a><span class="ss">- </span>A commit saves changing on your computer.</span>
+<span id="cb41-511"><a href="#cb41-511"></a><span class="ss">- </span>To save on GitHub, push changes to the cloud</span>
 <span id="cb41-512"><a href="#cb41-512"></a></span>
-<span id="cb41-513"><a href="#cb41-513"></a><span class="ss">- </span>A commit saves changing on your computer.</span>
-<span id="cb41-514"><a href="#cb41-514"></a><span class="ss">- </span>To save on GitHub, push changes to the cloud</span>
-<span id="cb41-515"><a href="#cb41-515"></a></span>
-<span id="cb41-516"><a href="#cb41-516"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-517"><a href="#cb41-517"></a><span class="in">git push</span></span>
-<span id="cb41-518"><a href="#cb41-518"></a><span class="in">```</span></span>
-<span id="cb41-519"><a href="#cb41-519"></a></span>
-<span id="cb41-520"><a href="#cb41-520"></a><span class="ss">- </span>After a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!</span>
-<span id="cb41-521"><a href="#cb41-521"></a></span>
-<span id="cb41-522"><a href="#cb41-522"></a><span class="fu">## Diagnostics</span></span>
-<span id="cb41-523"><a href="#cb41-523"></a></span>
-<span id="cb41-524"><a href="#cb41-524"></a><span class="ss">- </span>For example, you might see the following:</span>
-<span id="cb41-525"><a href="#cb41-525"></a></span>
-<span id="cb41-526"><a href="#cb41-526"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-527"><a href="#cb41-527"></a><span class="in">Enumerating objects: 27, done.</span></span>
-<span id="cb41-528"><a href="#cb41-528"></a><span class="in">Counting objects: 100% (27/27), done.</span></span>
-<span id="cb41-529"><a href="#cb41-529"></a><span class="in">Delta compression using up to 22 threads</span></span>
-<span id="cb41-530"><a href="#cb41-530"></a><span class="in">Compressing objects: 100% (15/15), done.</span></span>
-<span id="cb41-531"><a href="#cb41-531"></a><span class="in">Writing objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.</span></span>
-<span id="cb41-532"><a href="#cb41-532"></a><span class="in">Total 16 (delta 11), reused 0 (delta 0), pack-reused 0</span></span>
-<span id="cb41-533"><a href="#cb41-533"></a><span class="in">remote: Resolving deltas: 100% (11/11), completed with 10 local objects.</span></span>
-<span id="cb41-534"><a href="#cb41-534"></a><span class="in">To github.com:cd-example/271rs.git</span></span>
-<span id="cb41-535"><a href="#cb41-535"></a><span class="in">   adaa3a7..ba3c794  main -&gt; main</span></span>
-<span id="cb41-536"><a href="#cb41-536"></a><span class="in">```</span></span>
-<span id="cb41-537"><a href="#cb41-537"></a></span>
-<span id="cb41-538"><a href="#cb41-538"></a><span class="fu">## Verify</span></span>
+<span id="cb41-513"><a href="#cb41-513"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-514"><a href="#cb41-514"></a><span class="in">git push</span></span>
+<span id="cb41-515"><a href="#cb41-515"></a><span class="in">```</span></span>
+<span id="cb41-516"><a href="#cb41-516"></a></span>
+<span id="cb41-517"><a href="#cb41-517"></a><span class="ss">- </span>After a moment and some diagnostic text, you should be able to see your code on GitHub, possibly after refreshing the page!</span>
+<span id="cb41-518"><a href="#cb41-518"></a></span>
+<span id="cb41-519"><a href="#cb41-519"></a><span class="fu">## Diagnostics</span></span>
+<span id="cb41-520"><a href="#cb41-520"></a></span>
+<span id="cb41-521"><a href="#cb41-521"></a><span class="ss">- </span>For example, you might see the following:</span>
+<span id="cb41-522"><a href="#cb41-522"></a></span>
+<span id="cb41-523"><a href="#cb41-523"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-524"><a href="#cb41-524"></a><span class="in">Enumerating objects: 27, done.</span></span>
+<span id="cb41-525"><a href="#cb41-525"></a><span class="in">Counting objects: 100% (27/27), done.</span></span>
+<span id="cb41-526"><a href="#cb41-526"></a><span class="in">Delta compression using up to 22 threads</span></span>
+<span id="cb41-527"><a href="#cb41-527"></a><span class="in">Compressing objects: 100% (15/15), done.</span></span>
+<span id="cb41-528"><a href="#cb41-528"></a><span class="in">Writing objects: 100% (16/16), 98.54 KiB | 2.46 MiB/s, done.</span></span>
+<span id="cb41-529"><a href="#cb41-529"></a><span class="in">Total 16 (delta 11), reused 0 (delta 0), pack-reused 0</span></span>
+<span id="cb41-530"><a href="#cb41-530"></a><span class="in">remote: Resolving deltas: 100% (11/11), completed with 10 local objects.</span></span>
+<span id="cb41-531"><a href="#cb41-531"></a><span class="in">To github.com:cd-example/271rs.git</span></span>
+<span id="cb41-532"><a href="#cb41-532"></a><span class="in">   adaa3a7..ba3c794  main -&gt; main</span></span>
+<span id="cb41-533"><a href="#cb41-533"></a><span class="in">```</span></span>
+<span id="cb41-534"><a href="#cb41-534"></a></span>
+<span id="cb41-535"><a href="#cb41-535"></a><span class="fu">## Verify</span></span>
+<span id="cb41-536"><a href="#cb41-536"></a></span>
+<span id="cb41-537"><a href="#cb41-537"></a><span class="ss">- </span><span class="va">[ ]</span> Ensure you have a <span class="in">`01/rustup.md`</span></span>
+<span id="cb41-538"><a href="#cb41-538"></a><span class="ss">- </span><span class="va">[ ]</span> Email me.</span>
 <span id="cb41-539"><a href="#cb41-539"></a></span>
-<span id="cb41-540"><a href="#cb41-540"></a><span class="ss">- </span><span class="va">[ ]</span> Ensure you have a <span class="in">`01/rustup.md`</span></span>
-<span id="cb41-541"><a href="#cb41-541"></a><span class="ss">- </span><span class="va">[ ]</span> Email me.</span>
+<span id="cb41-540"><a href="#cb41-540"></a></span>
+<span id="cb41-541"><a href="#cb41-541"></a><span class="fu"># Everyday Use</span></span>
 <span id="cb41-542"><a href="#cb41-542"></a></span>
-<span id="cb41-543"><a href="#cb41-543"></a></span>
-<span id="cb41-544"><a href="#cb41-544"></a><span class="fu"># Everyday Use</span></span>
-<span id="cb41-545"><a href="#cb41-545"></a></span>
-<span id="cb41-546"><a href="#cb41-546"></a><span class="fu">## Easier After</span></span>
-<span id="cb41-547"><a href="#cb41-547"></a></span>
-<span id="cb41-548"><a href="#cb41-548"></a><span class="ss">- </span>A lot of what we did, we only have to do once:</span>
-<span id="cb41-549"><a href="#cb41-549"></a><span class="ss">    - </span><span class="in">`git config`</span></span>
-<span id="cb41-550"><a href="#cb41-550"></a><span class="ss">    - </span><span class="in">`ssh-keygen`</span></span>
-<span id="cb41-551"><a href="#cb41-551"></a><span class="ss">    - </span><span class="in">`set origin`</span></span>
-<span id="cb41-552"><a href="#cb41-552"></a><span class="ss">- </span>Many are special cases:</span>
-<span id="cb41-553"><a href="#cb41-553"></a><span class="ss">    - </span>Only have to make new repositories for... new repositories (likely projects)</span>
-<span id="cb41-554"><a href="#cb41-554"></a><span class="ss">    - </span>Only have to <span class="in">`git add`</span> for new files.</span>
-<span id="cb41-555"><a href="#cb41-555"></a></span>
-<span id="cb41-556"><a href="#cb41-556"></a><span class="fu">## Quick Example</span></span>
-<span id="cb41-557"><a href="#cb41-557"></a></span>
-<span id="cb41-558"><a href="#cb41-558"></a><span class="ss">- </span>Let's add <span class="in">`02/hi_world.rs`</span></span>
-<span id="cb41-559"><a href="#cb41-559"></a><span class="ss">- </span>We'll create a new file at the command line.</span>
-<span id="cb41-560"><a href="#cb41-560"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-561"><a href="#cb41-561"></a><span class="in">vim 02/hi_world.rs</span></span>
-<span id="cb41-562"><a href="#cb41-562"></a><span class="in">```</span></span>
-<span id="cb41-563"><a href="#cb41-563"></a><span class="ss">- </span>Add any text</span>
-<span id="cb41-564"><a href="#cb41-564"></a><span class="in">```{.python filename="hi_world.rs"}</span></span>
-<span id="cb41-565"><a href="#cb41-565"></a><span class="in">Wait I don't know rust yet.</span></span>
-<span id="cb41-566"><a href="#cb41-566"></a><span class="in">```</span></span>
-<span id="cb41-567"><a href="#cb41-567"></a></span>
-<span id="cb41-568"><a href="#cb41-568"></a><span class="fu">## Add, Commit, Push</span></span>
-<span id="cb41-569"><a href="#cb41-569"></a></span>
-<span id="cb41-570"><a href="#cb41-570"></a><span class="ss">- </span>To get the code onto Github, add to the repo:</span>
-<span id="cb41-571"><a href="#cb41-571"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-572"><a href="#cb41-572"></a><span class="in">git add hi_world.rs </span></span>
-<span id="cb41-573"><a href="#cb41-573"></a><span class="in">```</span></span>
-<span id="cb41-574"><a href="#cb41-574"></a><span class="ss">- </span>Commit changes to a version:</span>
-<span id="cb41-575"><a href="#cb41-575"></a></span>
-<span id="cb41-576"><a href="#cb41-576"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-577"><a href="#cb41-577"></a><span class="in">git commit -a -m "You say hello, I say goodbye"</span></span>
-<span id="cb41-578"><a href="#cb41-578"></a><span class="in">```</span></span>
-<span id="cb41-579"><a href="#cb41-579"></a></span>
-<span id="cb41-580"><a href="#cb41-580"></a><span class="ss">- </span>Push to GitHub</span>
-<span id="cb41-581"><a href="#cb41-581"></a></span>
-<span id="cb41-582"><a href="#cb41-582"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-583"><a href="#cb41-583"></a><span class="in">git push</span></span>
-<span id="cb41-584"><a href="#cb41-584"></a><span class="in">```</span></span>
-<span id="cb41-585"><a href="#cb41-585"></a></span>
-<span id="cb41-586"><a href="#cb41-586"></a><span class="ss">- </span>And that's that!</span>
-<span id="cb41-587"><a href="#cb41-587"></a></span>
-<span id="cb41-588"><a href="#cb41-588"></a><span class="fu">## Altogether</span></span>
-<span id="cb41-589"><a href="#cb41-589"></a></span>
-<span id="cb41-590"><a href="#cb41-590"></a><span class="ss">- </span>For a single copy/paste</span>
-<span id="cb41-591"><a href="#cb41-591"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-592"><a href="#cb41-592"></a><span class="in">git add bye.py</span></span>
-<span id="cb41-593"><a href="#cb41-593"></a><span class="in">git commit -a -m "You say hello, I say goodbye"</span></span>
-<span id="cb41-594"><a href="#cb41-594"></a><span class="in">git push</span></span>
-<span id="cb41-595"><a href="#cb41-595"></a><span class="in">```</span></span>
+<span id="cb41-543"><a href="#cb41-543"></a><span class="fu">## Easier After</span></span>
+<span id="cb41-544"><a href="#cb41-544"></a></span>
+<span id="cb41-545"><a href="#cb41-545"></a><span class="ss">- </span>A lot of what we did, we only have to do once:</span>
+<span id="cb41-546"><a href="#cb41-546"></a><span class="ss">    - </span><span class="in">`git config`</span></span>
+<span id="cb41-547"><a href="#cb41-547"></a><span class="ss">    - </span><span class="in">`ssh-keygen`</span></span>
+<span id="cb41-548"><a href="#cb41-548"></a><span class="ss">    - </span><span class="in">`set origin`</span></span>
+<span id="cb41-549"><a href="#cb41-549"></a><span class="ss">- </span>Many are special cases:</span>
+<span id="cb41-550"><a href="#cb41-550"></a><span class="ss">    - </span>Only have to make new repositories for... new repositories (likely projects)</span>
+<span id="cb41-551"><a href="#cb41-551"></a><span class="ss">    - </span>Only have to <span class="in">`git add`</span> for new files.</span>
+<span id="cb41-552"><a href="#cb41-552"></a></span>
+<span id="cb41-553"><a href="#cb41-553"></a><span class="fu">## Quick Example</span></span>
+<span id="cb41-554"><a href="#cb41-554"></a></span>
+<span id="cb41-555"><a href="#cb41-555"></a><span class="ss">- </span>Let's add <span class="in">`02/hi_world.rs`</span></span>
+<span id="cb41-556"><a href="#cb41-556"></a><span class="ss">- </span>We'll create a new file at the command line.</span>
+<span id="cb41-557"><a href="#cb41-557"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-558"><a href="#cb41-558"></a><span class="in">vim 02/hi_world.rs</span></span>
+<span id="cb41-559"><a href="#cb41-559"></a><span class="in">```</span></span>
+<span id="cb41-560"><a href="#cb41-560"></a><span class="ss">- </span>Add any text</span>
+<span id="cb41-561"><a href="#cb41-561"></a><span class="in">```{.python filename="hi_world.rs"}</span></span>
+<span id="cb41-562"><a href="#cb41-562"></a><span class="in">Wait I don't know rust yet.</span></span>
+<span id="cb41-563"><a href="#cb41-563"></a><span class="in">```</span></span>
+<span id="cb41-564"><a href="#cb41-564"></a></span>
+<span id="cb41-565"><a href="#cb41-565"></a><span class="fu">## Add, Commit, Push</span></span>
+<span id="cb41-566"><a href="#cb41-566"></a></span>
+<span id="cb41-567"><a href="#cb41-567"></a><span class="ss">- </span>To get the code onto Github, add to the repo:</span>
+<span id="cb41-568"><a href="#cb41-568"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-569"><a href="#cb41-569"></a><span class="in">git add hi_world.rs </span></span>
+<span id="cb41-570"><a href="#cb41-570"></a><span class="in">```</span></span>
+<span id="cb41-571"><a href="#cb41-571"></a><span class="ss">- </span>Commit changes to a version:</span>
+<span id="cb41-572"><a href="#cb41-572"></a></span>
+<span id="cb41-573"><a href="#cb41-573"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-574"><a href="#cb41-574"></a><span class="in">git commit -a -m "You say hello, I say goodbye"</span></span>
+<span id="cb41-575"><a href="#cb41-575"></a><span class="in">```</span></span>
+<span id="cb41-576"><a href="#cb41-576"></a></span>
+<span id="cb41-577"><a href="#cb41-577"></a><span class="ss">- </span>Push to GitHub</span>
+<span id="cb41-578"><a href="#cb41-578"></a></span>
+<span id="cb41-579"><a href="#cb41-579"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-580"><a href="#cb41-580"></a><span class="in">git push</span></span>
+<span id="cb41-581"><a href="#cb41-581"></a><span class="in">```</span></span>
+<span id="cb41-582"><a href="#cb41-582"></a></span>
+<span id="cb41-583"><a href="#cb41-583"></a><span class="ss">- </span>And that's that!</span>
+<span id="cb41-584"><a href="#cb41-584"></a></span>
+<span id="cb41-585"><a href="#cb41-585"></a><span class="fu">## Altogether</span></span>
+<span id="cb41-586"><a href="#cb41-586"></a></span>
+<span id="cb41-587"><a href="#cb41-587"></a><span class="ss">- </span>For a single copy/paste</span>
+<span id="cb41-588"><a href="#cb41-588"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-589"><a href="#cb41-589"></a><span class="in">git add bye.py</span></span>
+<span id="cb41-590"><a href="#cb41-590"></a><span class="in">git commit -a -m "You say hello, I say goodbye"</span></span>
+<span id="cb41-591"><a href="#cb41-591"></a><span class="in">git push</span></span>
+<span id="cb41-592"><a href="#cb41-592"></a><span class="in">```</span></span>
+<span id="cb41-593"><a href="#cb41-593"></a></span>
+<span id="cb41-594"><a href="#cb41-594"></a><span class="ss">- </span>If it works, you'll see the change on GitHub!</span>
+<span id="cb41-595"><a href="#cb41-595"></a></span>
 <span id="cb41-596"><a href="#cb41-596"></a></span>
-<span id="cb41-597"><a href="#cb41-597"></a><span class="ss">- </span>If it works, you'll see the change on GitHub!</span>
+<span id="cb41-597"><a href="#cb41-597"></a><span class="fu">## Again</span></span>
 <span id="cb41-598"><a href="#cb41-598"></a></span>
-<span id="cb41-599"><a href="#cb41-599"></a></span>
-<span id="cb41-600"><a href="#cb41-600"></a><span class="fu">## Again</span></span>
-<span id="cb41-601"><a href="#cb41-601"></a></span>
-<span id="cb41-602"><a href="#cb41-602"></a><span class="ss">- </span>Perhaps we wish to be more correct with a well-formed Rust comment.</span>
-<span id="cb41-603"><a href="#cb41-603"></a><span class="in">```{.python filename="bye.py"}</span></span>
-<span id="cb41-604"><a href="#cb41-604"></a><span class="in">// TODO: Homework 0 </span></span>
-<span id="cb41-605"><a href="#cb41-605"></a><span class="in">```</span></span>
-<span id="cb41-606"><a href="#cb41-606"></a><span class="ss">- </span>We'll learn Rust latter.</span>
-<span id="cb41-607"><a href="#cb41-607"></a></span>
-<span id="cb41-608"><a href="#cb41-608"></a><span class="fu">## No Add</span></span>
-<span id="cb41-609"><a href="#cb41-609"></a></span>
-<span id="cb41-610"><a href="#cb41-610"></a><span class="ss">- </span>Don't need an add this time!</span>
-<span id="cb41-611"><a href="#cb41-611"></a></span>
-<span id="cb41-612"><a href="#cb41-612"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-613"><a href="#cb41-613"></a><span class="in">git commit -a -m "Rust comment"</span></span>
-<span id="cb41-614"><a href="#cb41-614"></a><span class="in">git push</span></span>
-<span id="cb41-615"><a href="#cb41-615"></a><span class="in">```</span></span>
-<span id="cb41-616"><a href="#cb41-616"></a></span>
-<span id="cb41-617"><a href="#cb41-617"></a><span class="fu">## Pulling</span></span>
-<span id="cb41-618"><a href="#cb41-618"></a></span>
-<span id="cb41-619"><a href="#cb41-619"></a><span class="ss">- </span>To get remote changes reflected locally, simply use</span>
-<span id="cb41-620"><a href="#cb41-620"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
-<span id="cb41-621"><a href="#cb41-621"></a><span class="in">git pull</span></span>
-<span id="cb41-622"><a href="#cb41-622"></a><span class="in">```</span></span>
-<span id="cb41-623"><a href="#cb41-623"></a><span class="ss">- </span>This will be how assignment feedback is distributed.</span>
-<span id="cb41-624"><a href="#cb41-624"></a><span class="ss">- </span>Just <span class="in">`git pull`</span> every time you start working, basically.</span>
-<span id="cb41-625"><a href="#cb41-625"></a><span class="ss">- </span>Also good when you are working on multiple devices.</span>
-<span id="cb41-626"><a href="#cb41-626"></a></span>
-<span id="cb41-627"><a href="#cb41-627"></a><span class="fu"># Fin</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb41-599"><a href="#cb41-599"></a><span class="ss">- </span>Perhaps we wish to be more correct with a well-formed Rust comment.</span>
+<span id="cb41-600"><a href="#cb41-600"></a><span class="in">```{.python filename="bye.py"}</span></span>
+<span id="cb41-601"><a href="#cb41-601"></a><span class="in">// TODO: Homework 0 </span></span>
+<span id="cb41-602"><a href="#cb41-602"></a><span class="in">```</span></span>
+<span id="cb41-603"><a href="#cb41-603"></a><span class="ss">- </span>We'll learn Rust latter.</span>
+<span id="cb41-604"><a href="#cb41-604"></a></span>
+<span id="cb41-605"><a href="#cb41-605"></a><span class="fu">## No Add</span></span>
+<span id="cb41-606"><a href="#cb41-606"></a></span>
+<span id="cb41-607"><a href="#cb41-607"></a><span class="ss">- </span>Don't need an add this time!</span>
+<span id="cb41-608"><a href="#cb41-608"></a></span>
+<span id="cb41-609"><a href="#cb41-609"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-610"><a href="#cb41-610"></a><span class="in">git commit -a -m "Rust comment"</span></span>
+<span id="cb41-611"><a href="#cb41-611"></a><span class="in">git push</span></span>
+<span id="cb41-612"><a href="#cb41-612"></a><span class="in">```</span></span>
+<span id="cb41-613"><a href="#cb41-613"></a></span>
+<span id="cb41-614"><a href="#cb41-614"></a><span class="fu">## Pulling</span></span>
+<span id="cb41-615"><a href="#cb41-615"></a></span>
+<span id="cb41-616"><a href="#cb41-616"></a><span class="ss">- </span>To get remote changes reflected locally, simply use</span>
+<span id="cb41-617"><a href="#cb41-617"></a><span class="in">```{.bash code-line-numbers="false"}</span></span>
+<span id="cb41-618"><a href="#cb41-618"></a><span class="in">git pull</span></span>
+<span id="cb41-619"><a href="#cb41-619"></a><span class="in">```</span></span>
+<span id="cb41-620"><a href="#cb41-620"></a><span class="ss">- </span>This will be how assignment feedback is distributed.</span>
+<span id="cb41-621"><a href="#cb41-621"></a><span class="ss">- </span>Just <span class="in">`git pull`</span> every time you start working, basically.</span>
+<span id="cb41-622"><a href="#cb41-622"></a><span class="ss">- </span>Also good when you are working on multiple devices.</span>
+<span id="cb41-623"><a href="#cb41-623"></a></span>
+<span id="cb41-624"><a href="#cb41-624"></a><span class="fu"># Fin</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

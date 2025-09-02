@@ -366,17 +366,127 @@ cargo new 11 --name packages
 ```
 - This should be allowed.
 
+## Option 2: VCS
+
+- It may be the case that you created a `11` folder outside of your `271rs` directory.
+    - I do this often, then plan to move it in latter.
+- This can pose a problem.
+
+## Situation
+
+- `git clone` a `271rs` repository, e.g.:
+```{.bash}
+git clone git@github.com:cd-c89/271rs.git
+- `cargo new 11 --name packages` before `cd 271rs`
+- It would look like this:
+
+```{.bash filename="tree"}
+.
+├── 11
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+└── 271rs
+    ├── LICENSE
+    └── README.md
+
+3 directories, 4 files
+```
+
+## Move
+
+- I'd like to use the `mv` command to put `11` in `271` rs.
+    - Notation is "mv" then "source" then "destination"
+```{.bash}
+mv 11 271rs
+```
+- I have this:
+```{.bash filename="tree"}
+.
+└── 271rs
+    ├── 11
+    │   ├── Cargo.toml
+    │   └── src
+    │       └── main.rs
+    ├── LICENSE
+    └── README.md
+
+3 directories, 4 files
+```
+
+## Status
+
+- Then I `cd` into `271rs` to add/commit/push
+
+```{.bash filename="git status"}
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        11/
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+## Add
+
+- Add doesn't work:
+
+
+```{.bash filename="git add 11"}
+error: '11/' does not have a commit checked out
+fatal: adding files failed
+```
+
+- By default, `cargo` initializes new projects as a git repository.
+- Putting a git repository inside another git repository is non-trivial.
+
+## Confirm
+
+- You can tell by looking for the hidden `.git` folder in `11`.
+```{.bash}
+cd 11
+ls -al
+```
+- You'll see something called `.git`.
+- You can delete it, but this is inelegant.
+
+## Solution
+
+- Use `cargo new` with the option to have no "version control system" used.
+
+```{.bash}
+cargo new 11 --name packages --vcs none
+```
+
+- You can confirm there is no hidden `.git` folder.
+- This can be moved into `271rs` or created within `271rs`
+
+
 # Exercise
 
 ## Exercise
 
-- For the lab today, you must create a:
-    [ ] New Cargo project, in
-    [ ] A folder named `12`, with
-    [ ] A valid Cargo name (not `12`), that is
-    [ ] In your *course* repository and therefore
-    [ ] Has no `cargo` managed repository.
-    
+- New Cargo project, in
+- A folder named `11`, with
+- A valid Cargo name (not `11`), that is
+- In your *course* repository and therefore
+- Has no `cargo` managed repository, and
+- Present on your remote GitHub repository
+- The conents of the project are immaterial.
 
+## Disambiguity
+
+- I have seen students take extreme liberties with naming folders and assignments.
+- I believe no ambiguity exists within the instructions.
+- It is trivial to check the following:
+```{.bash}
+ls 271
+```
+- Unless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.
+```{.bash}
+01  02  11  LICENSE  README.md
+```
 
 # Fin

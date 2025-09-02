@@ -901,6 +901,122 @@ Prof.&nbsp;Calvin
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a></a><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li>This should be allowed.</li>
 </ul>
+</section>
+<section id="option-2-vcs" class="slide level2">
+<h2>Option 2: VCS</h2>
+<ul>
+<li>It may be the case that you created a <code>11</code> folder outside of your <code>271rs</code> directory.
+<ul>
+<li>I do this often, then plan to move it in latter.</li>
+</ul></li>
+<li>This can pose a problem.</li>
+</ul>
+</section>
+<section id="situation" class="slide level2">
+<h2>Situation</h2>
+<ul>
+<li><code>git clone</code> a <code>271rs</code> repository, e.g.:</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a></a><span class="fu">git</span> clone git@github.com:cd-c89/271rs.git</span>
+<span id="cb22-2"><a></a><span class="ex">-</span> <span class="kw">`</span><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages<span class="kw">`</span> before <span class="kw">`</span><span class="bu">cd</span> 271rs<span class="kw">`</span></span>
+<span id="cb22-3"><a></a><span class="ex">-</span> It would look like this:</span>
+<span id="cb22-4"><a></a></span>
+<span id="cb22-5"><a></a><span class="kw">```</span><span class="ex">{.bash</span> filename=<span class="st">"tree"</span>}</span>
+<span id="cb22-6"><a></a><span class="bu">.</span></span>
+<span id="cb22-7"><a></a><span class="ex">├──</span> 11</span>
+<span id="cb22-8"><a></a><span class="ex">│&nbsp;&nbsp;</span> ├── Cargo.toml</span>
+<span id="cb22-9"><a></a><span class="ex">│&nbsp;&nbsp;</span> └── src</span>
+<span id="cb22-10"><a></a><span class="ex">│&nbsp;&nbsp;</span>     └── main.rs</span>
+<span id="cb22-11"><a></a><span class="ex">└──</span> 271rs</span>
+<span id="cb22-12"><a></a>    <span class="ex">├──</span> LICENSE</span>
+<span id="cb22-13"><a></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb22-14"><a></a></span>
+<span id="cb22-15"><a></a><span class="ex">3</span> directories, 4 files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="move" class="slide level2">
+<h2>Move</h2>
+<ul>
+<li>I’d like to use the <code>mv</code> command to put <code>11</code> in <code>271</code> rs.
+<ul>
+<li>Notation is “mv” then “source” then “destination”</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a></a><span class="fu">mv</span> 11 271rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>I have this:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tree</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="tree"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a></a><span class="bu">.</span></span>
+<span id="cb24-2"><a></a><span class="ex">└──</span> 271rs</span>
+<span id="cb24-3"><a></a>    <span class="ex">├──</span> 11</span>
+<span id="cb24-4"><a></a>    <span class="ex">│&nbsp;&nbsp;</span> ├── Cargo.toml</span>
+<span id="cb24-5"><a></a>    <span class="ex">│&nbsp;&nbsp;</span> └── src</span>
+<span id="cb24-6"><a></a>    <span class="ex">│&nbsp;&nbsp;</span>     └── main.rs</span>
+<span id="cb24-7"><a></a>    <span class="ex">├──</span> LICENSE</span>
+<span id="cb24-8"><a></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb24-9"><a></a></span>
+<span id="cb24-10"><a></a><span class="ex">3</span> directories, 4 files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="status" class="slide level2">
+<h2>Status</h2>
+<ul>
+<li>Then I <code>cd</code> into <code>271rs</code> to add/commit/push</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>git status</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="git status"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a></a><span class="ex">On</span> branch main</span>
+<span id="cb25-2"><a></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span>
+<span id="cb25-3"><a></a></span>
+<span id="cb25-4"><a></a><span class="ex">Untracked</span> files:</span>
+<span id="cb25-5"><a></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb25-6"><a></a>        <span class="ex">11/</span></span>
+<span id="cb25-7"><a></a></span>
+<span id="cb25-8"><a></a><span class="ex">nothing</span> added to commit but untracked files present <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="add" class="slide level2">
+<h2>Add</h2>
+<ul>
+<li>Add doesn’t work:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>git add 11</strong></pre>
+</div>
+<div class="sourceCode" id="cb26" data-filename="git add 11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a></a><span class="ex">error:</span> <span class="st">'11/'</span> does not have a commit checked out</span>
+<span id="cb26-2"><a></a><span class="ex">fatal:</span> adding files failed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>By default, <code>cargo</code> initializes new projects as a git repository.</li>
+<li>Putting a git repository inside another git repository is non-trivial.</li>
+</ul>
+</section>
+<section id="confirm" class="slide level2">
+<h2>Confirm</h2>
+<ul>
+<li>You can tell by looking for the hidden <code>.git</code> folder in <code>11</code>.</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a></a><span class="bu">cd</span> 11</span>
+<span id="cb27-2"><a></a><span class="fu">ls</span> <span class="at">-al</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You’ll see something called <code>.git</code>.</li>
+<li>You can delete it, but this is inelegant.</li>
+</ul>
+</section>
+<section id="solution-1" class="slide level2">
+<h2>Solution</h2>
+<ul>
+<li>Use <code>cargo new</code> with the option to have no “version control system” used.</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a></a><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can confirm there is no hidden <code>.git</code> folder.</li>
+<li>This can be moved into <code>271rs</code> or created within <code>271rs</code></li>
+</ul>
 </section></section>
 <section>
 <section id="exercise" class="title-slide slide level1 center">
@@ -910,8 +1026,27 @@ Prof.&nbsp;Calvin
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
 <ul>
-<li>For the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named <code>12</code>, with [ ] A valid Cargo name (not <code>12</code>), that is [ ] In your <em>course</em> repository and therefore [ ] Has no <code>cargo</code> managed repository.</li>
+<li>New Cargo project, in</li>
+<li>A folder named <code>11</code>, with</li>
+<li>A valid Cargo name (not <code>11</code>), that is</li>
+<li>In your <em>course</em> repository and therefore</li>
+<li>Has no <code>cargo</code> managed repository, and</li>
+<li>Present on your remote GitHub repository</li>
+<li>The conents of the project are immaterial.</li>
 </ul>
+</section>
+<section id="disambiguity" class="slide level2">
+<h2>Disambiguity</h2>
+<ul>
+<li>I have seen students take extreme liberties with naming folders and assignments.</li>
+<li>I believe no ambiguity exists within the instructions.</li>
+<li>It is trivial to check the following:</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a></a><span class="fu">ls</span> 271</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Unless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a></a><span class="ex">01</span>  02  11  LICENSE  README.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="fin" class="title-slide slide level1 center">
 <h1>Fin</h1>

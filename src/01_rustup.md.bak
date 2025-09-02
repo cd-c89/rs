@@ -376,7 +376,7 @@ pwd
     - The repository must be named `271rs`
     - No other arrangement constitutes a lab submission.
     - The contents of `rustup.md` are not relevant.
-<<<<<<< HEAD
+
     
 ## Useful commands
 
@@ -385,8 +385,7 @@ pwd
 - You may use `vim 01/rustup.md` to edit the `rustup.md` file in the `01` folder.
     - The `01` folder must exist to do this.
 - Learn more [here](https://cd-public.github.io/scicom/03_shell.html#files)
-=======
->>>>>>> 88d5569f117a55a2960939684283dc3f8d56383e
+
 
 ## File Editor
 
@@ -405,10 +404,7 @@ sudo apt install vim
     - Stands for week 0, day 1
 ```{.bash}
 vim 01/rustup.md
-<<<<<<< HEAD
 ```
-=======
->>>>>>> 88d5569f117a55a2960939684283dc3f8d56383e
 
 ## Using `vim`
 

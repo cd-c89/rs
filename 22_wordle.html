@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="">
+<meta name="author" content="Prof.&nbsp;Calvin">
 
-<title>Systems in Rust</title>
+<title>wordle – Systems in Rust</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./12_hicargo.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,9 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Systems in Rust
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./22_wordle.html">22 Wordle</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">22 Wordle</span></a>
   </div>
 </li>
@@ -183,33 +182,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#cs-271-systems-in-rust" id="toc-cs-271-systems-in-rust" class="nav-link active" data-scroll-target="#cs-271-systems-in-rust">CS 271 “Systems in Rust”</a>
-  <ul class="collapse">
-  <li><a href="#mw-1310-1440" id="toc-mw-1310-1440" class="nav-link" data-scroll-target="#mw-1310-1440">MW 1310-1440</a></li>
-  <li><a href="#prof.-calvin" id="toc-prof.-calvin" class="nav-link" data-scroll-target="#prof.-calvin">Prof.&nbsp;Calvin</a></li>
-  <li><a href="#syllabus-tbd" id="toc-syllabus-tbd" class="nav-link" data-scroll-target="#syllabus-tbd">Syllabus TBD</a></li>
-  </ul></li>
-  <li><a href="#calendar" id="toc-calendar" class="nav-link" data-scroll-target="#calendar">Calendar</a></li>
-  <li><a href="#lecture-recordings" id="toc-lecture-recordings" class="nav-link" data-scroll-target="#lecture-recordings">Lecture Recordings</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="22_wordle.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Systems in Rust</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
     
   
     
@@ -220,177 +212,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="cs-271-systems-in-rust" class="level1">
-<h1>CS 271 “Systems in Rust”</h1>
-<ul>
-<li>Called:
-<ul>
-<li>CS 271: Systems Programming</li>
-<li>CS 271: Sys Programming, Computer Arch</li>
-</ul></li>
-<li>The first semester class in a:
-<ul>
-<li>Compiled language, with</li>
-<li>No garbage collector.</li>
-</ul></li>
-<li>Term these “systems” languages.
-<ul>
-<li>Suitable to write an operating system.</li>
-</ul></li>
-<li>Taught this year in Rust.
-<ul>
-<li>So to me, “Systems in Rust”</li>
-</ul></li>
-</ul>
-<section id="mw-1310-1440" class="level3">
-<h3 class="anchored" data-anchor-id="mw-1310-1440">MW 1310-1440</h3>
-</section>
-<section id="prof.-calvin" class="level3">
-<h3 class="anchored" data-anchor-id="prof.-calvin"><a href="mailto:ckdeutschbein@willamette.edu">Prof.&nbsp;Calvin</a></h3>
-</section>
-<section id="syllabus-tbd" class="level3">
-<h3 class="anchored" data-anchor-id="syllabus-tbd">Syllabus TBD</h3>
-<ul>
-<li>Ungrade++</li>
-<li>Lec/Lab/HW</li>
-</ul>
-</section>
-</section>
-<section id="calendar" class="level1">
-<h1>Calendar</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Week</th>
-<th style="text-align: left;">Date (M)</th>
-<th style="text-align: left;">Lecture (M)</th>
-<th style="text-align: left;">Lab (W)</th>
-<th style="text-align: left;">HW (F)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0x0</td>
-<td style="text-align: left;">08/25</td>
-<td style="text-align: left;"><a href="./00_welcome.html">Welcome</a></td>
-<td style="text-align: left;"><a href="./01_rustup.html">Rustup</a></td>
-<td style="text-align: left;"><a href="./02_hiworld.html">Hi world</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x1</td>
-<td style="text-align: left;">09/01</td>
-<td style="text-align: left;"><code>None</code></td>
-<td style="text-align: left;"><a href="./11_packages.html">Packages</a></td>
-<td style="text-align: left;"><a href="./12_hicargo.html">Hi cargo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x2</td>
-<td style="text-align: left;">09/08</td>
-<td style="text-align: left;">Options</td>
-<td style="text-align: left;">Guess</td>
-<td style="text-align: left;">Wordle</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x3</td>
-<td style="text-align: left;">09/15</td>
-<td style="text-align: left;">Bits</td>
-<td style="text-align: left;">Hamming</td>
-<td style="text-align: left;">Sigmas</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x4</td>
-<td style="text-align: left;">09/22</td>
-<td style="text-align: left;">SHA2</td>
-<td style="text-align: left;">Endian</td>
-<td style="text-align: left;">Chunk</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x5</td>
-<td style="text-align: left;">09/29</td>
-<td style="text-align: left;">IEEE754</td>
-<td style="text-align: left;">Constants</td>
-<td style="text-align: left;">SHA512</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x6</td>
-<td style="text-align: left;">10/06</td>
-<td style="text-align: left;">Review</td>
-<td style="text-align: left;">Midterm</td>
-<td style="text-align: left;"><code>None</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x7</td>
-<td style="text-align: left;">10/13</td>
-<td style="text-align: left;">BigInt</td>
-<td style="text-align: left;">BigAdd</td>
-<td style="text-align: left;">u512</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x8</td>
-<td style="text-align: left;">10/20</td>
-<td style="text-align: left;">ECDSA</td>
-<td style="text-align: left;">Python</td>
-<td style="text-align: left;">ECDSA</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x9</td>
-<td style="text-align: left;">10/27</td>
-<td style="text-align: left;">Stacks</td>
-<td style="text-align: left;">List</td>
-<td style="text-align: left;">Tree</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xA</td>
-<td style="text-align: left;">11/03</td>
-<td style="text-align: left;">Graphs</td>
-<td style="text-align: left;">BFS</td>
-<td style="text-align: left;">Djikstra</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0xB</td>
-<td style="text-align: left;">11/10</td>
-<td style="text-align: left;">Merkle</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xC</td>
-<td style="text-align: left;">11/17</td>
-<td style="text-align: left;">VCS</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0xD</td>
-<td style="text-align: left;">11/24</td>
-<td style="text-align: left;">Spectre</td>
-<td style="text-align: left;"><code>None</code></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xE</td>
-<td style="text-align: left;">11/24</td>
-<td style="text-align: left;">Meltdown</td>
-<td style="text-align: left;">Hypers</td>
-<td style="text-align: left;">VCS.rs</td>
-</tr>
-</tbody>
-</table>
 <!--
-Think I need string edit distance or patches somewhere. 
 
-Hamming teases it at least.
+saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/
+
+println!("\u{001b}[44mHello, world!\u{001b}[0m")
+
 -->
-</section>
-<section id="lecture-recordings" class="level1">
-<h1>Lecture Recordings</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D&amp;list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
-</iframe>
 
 
 <!-- -->
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -863,65 +695,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> Systems in Rust</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="an">subtitle:</span><span class="co"> ""</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">---</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu"># CS 271 "Systems in Rust"</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="ss">- </span>Called:</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="ss">    - </span>CS 271: Systems Programming</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="ss">    - </span>CS 271: Sys Programming, Computer Arch</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="ss">- </span>The first semester class in a:</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="ss">    - </span>Compiled language, with</span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="ss">    - </span>No garbage collector.</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="ss">- </span>Term these "systems" languages.</span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="ss">    - </span>Suitable to write an operating system.</span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="ss">- </span>Taught this year in Rust.</span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="ss">    - </span>So to me, "Systems in Rust"</span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">### MW 1310-1440</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="fu">### Syllabus TBD</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="ss">- </span>Ungrade++</span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="ss">- </span>Lec/Lab/HW</span>
-<span id="cb1-29"><a href="#cb1-29"></a></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="fu"># Calendar</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32"></a>|Week|Date (M)|Lecture (M)|Lab (W)|HW (F)|</span>
-<span id="cb1-33"><a href="#cb1-33"></a>|:--:|:---|:----|:-------|:-------|</span>
-<span id="cb1-34"><a href="#cb1-34"></a>|0x0|08/25|<span class="co">[</span><span class="ot">Welcome</span><span class="co">](00_welcome.qmd)</span>|<span class="co">[</span><span class="ot">Rustup</span><span class="co">](01_rustup.md)</span>|<span class="co">[</span><span class="ot">Hi world</span><span class="co">](02_hiworld.md)</span>|</span>
-<span id="cb1-35"><a href="#cb1-35"></a>|0x1|09/01|<span class="in">`None`</span>|<span class="co">[</span><span class="ot">Packages</span><span class="co">](11_packages.qmd)</span>|<span class="co">[</span><span class="ot">Hi cargo</span><span class="co">](12_hicargo.md)</span>|</span>
-<span id="cb1-36"><a href="#cb1-36"></a>|0x2|09/08|Options|Guess|Wordle|</span>
-<span id="cb1-37"><a href="#cb1-37"></a>|0x3|09/15|Bits|Hamming|Sigmas|</span>
-<span id="cb1-38"><a href="#cb1-38"></a>|0x4|09/22|SHA2|Endian|Chunk|</span>
-<span id="cb1-39"><a href="#cb1-39"></a>|0x5|09/29|IEEE754|Constants|SHA512|</span>
-<span id="cb1-40"><a href="#cb1-40"></a>|0x6|10/06|Review|Midterm|<span class="in">`None`</span>|</span>
-<span id="cb1-41"><a href="#cb1-41"></a>|0x7|10/13|BigInt|BigAdd|u512|</span>
-<span id="cb1-42"><a href="#cb1-42"></a>|0x8|10/20|ECDSA|Python|ECDSA|</span>
-<span id="cb1-43"><a href="#cb1-43"></a>|0x9|10/27|Stacks|List|Tree|</span>
-<span id="cb1-44"><a href="#cb1-44"></a>|0xA|11/03|Graphs|BFS|Djikstra|</span>
-<span id="cb1-45"><a href="#cb1-45"></a>|0xB|11/10|Merkle|||</span>
-<span id="cb1-46"><a href="#cb1-46"></a>|0xC|11/17|VCS||</span>
-<span id="cb1-47"><a href="#cb1-47"></a>|0xD|11/24|Spectre|<span class="in">`None`</span>|</span>
-<span id="cb1-48"><a href="#cb1-48"></a>|0xE|11/24|Meltdown|Hypers|VCS.rs|</span>
-<span id="cb1-49"><a href="#cb1-49"></a></span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="co">&lt;!--</span></span>
-<span id="cb1-51"><a href="#cb1-51"></a><span class="co">Think I need string edit distance or patches somewhere. </span></span>
-<span id="cb1-52"><a href="#cb1-52"></a></span>
-<span id="cb1-53"><a href="#cb1-53"></a><span class="co">Hamming teases it at least.</span></span>
-<span id="cb1-54"><a href="#cb1-54"></a><span class="co">--&gt;</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a></span>
-<span id="cb1-56"><a href="#cb1-56"></a><span class="fu"># Lecture Recordings</span></span>
-<span id="cb1-57"><a href="#cb1-57"></a></span>
-<span id="cb1-58"><a href="#cb1-58"></a>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D<span class="dv">&amp;amp;</span>list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12_hicargo.html" class="pagination-link" aria-label="Hi cargo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hi cargo</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">println!("\u{001b}[44mHello, world!\u{001b}[0m")</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">--&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

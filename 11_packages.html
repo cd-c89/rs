@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./12_hicargo.html" rel="next">
 <link href="./02_hiworld.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -167,6 +168,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22 Wordle</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -222,10 +235,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#use-cargo" id="toc-use-cargo" class="nav-link" data-scroll-target="#use-cargo">Use Cargo</a></li>
   <li><a href="#problem" id="toc-problem" class="nav-link" data-scroll-target="#problem">Problem</a></li>
   <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  <li><a href="#option-2-vcs" id="toc-option-2-vcs" class="nav-link" data-scroll-target="#option-2-vcs">Option 2: VCS</a></li>
+  <li><a href="#situation" id="toc-situation" class="nav-link" data-scroll-target="#situation">Situation</a></li>
+  <li><a href="#move" id="toc-move" class="nav-link" data-scroll-target="#move">Move</a></li>
+  <li><a href="#status" id="toc-status" class="nav-link" data-scroll-target="#status">Status</a></li>
+  <li><a href="#add" id="toc-add" class="nav-link" data-scroll-target="#add">Add</a></li>
+  <li><a href="#confirm" id="toc-confirm" class="nav-link" data-scroll-target="#confirm">Confirm</a></li>
+  <li><a href="#solution-1" id="toc-solution-1" class="nav-link" data-scroll-target="#solution-1">Solution</a></li>
   </ul></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
   <ul class="collapse">
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
+  <li><a href="#disambiguity" id="toc-disambiguity" class="nav-link" data-scroll-target="#disambiguity">Disambiguity</a></li>
   </ul></li>
   <li><a href="#fin" id="toc-fin" class="nav-link" data-scroll-target="#fin">Fin</a></li>
   </ul>
@@ -748,14 +769,149 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>This should be allowed.</li>
 </ul>
 </section>
+<section id="option-2-vcs" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-vcs">Option 2: VCS</h2>
+<ul>
+<li>It may be the case that you created a <code>11</code> folder outside of your <code>271rs</code> directory.
+<ul>
+<li>I do this often, then plan to move it in latter.</li>
+</ul></li>
+<li>This can pose a problem.</li>
+</ul>
+</section>
+<section id="situation" class="level2">
+<h2 class="anchored" data-anchor-id="situation">Situation</h2>
+<ul>
+<li><code>git clone</code> a <code>271rs</code> repository, e.g.:</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">git</span> clone git@github.com:cd-c89/271rs.git</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">-</span> <span class="kw">`</span><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages<span class="kw">`</span> before <span class="kw">`</span><span class="bu">cd</span> 271rs<span class="kw">`</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="ex">-</span> It would look like this:</span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="kw">```</span><span class="ex">{.bash</span> filename=<span class="st">"tree"</span>}</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="bu">.</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="ex">├──</span> 11</span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Cargo.toml</span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="ex">│&nbsp;&nbsp;</span> └── src</span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="ex">│&nbsp;&nbsp;</span>     └── main.rs</span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="ex">└──</span> 271rs</span>
+<span id="cb22-12"><a href="#cb22-12"></a>    <span class="ex">├──</span> LICENSE</span>
+<span id="cb22-13"><a href="#cb22-13"></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb22-14"><a href="#cb22-14"></a></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="ex">3</span> directories, 4 files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="move" class="level2">
+<h2 class="anchored" data-anchor-id="move">Move</h2>
+<ul>
+<li>I’d like to use the <code>mv</code> command to put <code>11</code> in <code>271</code> rs.
+<ul>
+<li>Notation is “mv” then “source” then “destination”</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">mv</span> 11 271rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>I have this:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tree</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="tree"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="bu">.</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="ex">└──</span> 271rs</span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="ex">├──</span> 11</span>
+<span id="cb24-4"><a href="#cb24-4"></a>    <span class="ex">│&nbsp;&nbsp;</span> ├── Cargo.toml</span>
+<span id="cb24-5"><a href="#cb24-5"></a>    <span class="ex">│&nbsp;&nbsp;</span> └── src</span>
+<span id="cb24-6"><a href="#cb24-6"></a>    <span class="ex">│&nbsp;&nbsp;</span>     └── main.rs</span>
+<span id="cb24-7"><a href="#cb24-7"></a>    <span class="ex">├──</span> LICENSE</span>
+<span id="cb24-8"><a href="#cb24-8"></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb24-9"><a href="#cb24-9"></a></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="ex">3</span> directories, 4 files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="status" class="level2">
+<h2 class="anchored" data-anchor-id="status">Status</h2>
+<ul>
+<li>Then I <code>cd</code> into <code>271rs</code> to add/commit/push</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>git status</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="git status"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="ex">11/</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="ex">nothing</span> added to commit but untracked files present <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="add" class="level2">
+<h2 class="anchored" data-anchor-id="add">Add</h2>
+<ul>
+<li>Add doesn’t work:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>git add 11</strong></pre>
+</div>
+<div class="sourceCode" id="cb26" data-filename="git add 11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="ex">error:</span> <span class="st">'11/'</span> does not have a commit checked out</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="ex">fatal:</span> adding files failed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>By default, <code>cargo</code> initializes new projects as a git repository.</li>
+<li>Putting a git repository inside another git repository is non-trivial.</li>
+</ul>
+</section>
+<section id="confirm" class="level2">
+<h2 class="anchored" data-anchor-id="confirm">Confirm</h2>
+<ul>
+<li>You can tell by looking for the hidden <code>.git</code> folder in <code>11</code>.</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">cd</span> 11</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">ls</span> <span class="at">-al</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You’ll see something called <code>.git</code>.</li>
+<li>You can delete it, but this is inelegant.</li>
+</ul>
+</section>
+<section id="solution-1" class="level2">
+<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<ul>
+<li>Use <code>cargo new</code> with the option to have no “version control system” used.</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="ex">cargo</span> new 11 <span class="at">--name</span> packages <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can confirm there is no hidden <code>.git</code> folder.</li>
+<li>This can be moved into <code>271rs</code> or created within <code>271rs</code></li>
+</ul>
+</section>
 </section>
 <section id="exercise" class="level1">
 <h1>Exercise</h1>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise</h2>
 <ul>
-<li>For the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named <code>12</code>, with [ ] A valid Cargo name (not <code>12</code>), that is [ ] In your <em>course</em> repository and therefore [ ] Has no <code>cargo</code> managed repository.</li>
+<li>New Cargo project, in</li>
+<li>A folder named <code>11</code>, with</li>
+<li>A valid Cargo name (not <code>11</code>), that is</li>
+<li>In your <em>course</em> repository and therefore</li>
+<li>Has no <code>cargo</code> managed repository, and</li>
+<li>Present on your remote GitHub repository</li>
+<li>The conents of the project are immaterial.</li>
 </ul>
+</section>
+<section id="disambiguity" class="level2">
+<h2 class="anchored" data-anchor-id="disambiguity">Disambiguity</h2>
+<ul>
+<li>I have seen students take extreme liberties with naming folders and assignments.</li>
+<li>I believe no ambiguity exists within the instructions.</li>
+<li>It is trivial to check the following:</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ls</span> 271</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Unless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="ex">01</span>  02  11  LICENSE  README.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="fin" class="level1">
@@ -1251,390 +1407,503 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./12_hicargo.html" class="pagination-link" aria-label="Hi cargo">
+        <span class="nav-page-text">Hi cargo</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">---</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="an">title:</span><span class="co"> Packages</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="co">---</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a></span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">## Announcements</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="ss">- </span>The second homework, "Hi cargo", is ready after this class.</span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="ss">  - </span>It is comically trivial.</span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="ss">  - </span>Mostly makes sure you have everything set up.</span>
-<span id="cb22-11"><a href="#cb22-11"></a><span class="ss">- </span>Due Friday, 12 Sept. at 1440 ET.</span>
-<span id="cb22-12"><a href="#cb22-12"></a></span>
-<span id="cb22-13"><a href="#cb22-13"></a><span class="fu">## Today</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a></span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="ss">- </span>Hybrid Day</span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="ss">- </span>Build system/package manager</span>
-<span id="cb22-17"><a href="#cb22-17"></a><span class="ss">    - </span>Theory behind Cargo</span>
-<span id="cb22-18"><a href="#cb22-18"></a><span class="ss">    - </span>Trap in Cargo</span>
-<span id="cb22-19"><a href="#cb22-19"></a><span class="ss">    - </span>Use Cargo</span>
-<span id="cb22-20"><a href="#cb22-20"></a></span>
-<span id="cb22-21"><a href="#cb22-21"></a><span class="fu"># Build Systems</span></span>
-<span id="cb22-22"><a href="#cb22-22"></a></span>
-<span id="cb22-23"><a href="#cb22-23"></a><span class="fu">## Interpretation</span></span>
-<span id="cb22-24"><a href="#cb22-24"></a></span>
-<span id="cb22-25"><a href="#cb22-25"></a><span class="ss">- </span>We once again address *interpretation* vs. *compilation*</span>
-<span id="cb22-26"><a href="#cb22-26"></a><span class="ss">    - </span>I think of this as *programming* vs. *scripting*</span>
-<span id="cb22-27"><a href="#cb22-27"></a><span class="ss">    - </span>We can think in terms of languages - *Rust/C* vs. *Python/JavaScript*</span>
-<span id="cb22-28"><a href="#cb22-28"></a></span>
-<span id="cb22-29"><a href="#cb22-29"></a><span class="fu">## Scripts</span></span>
-<span id="cb22-30"><a href="#cb22-30"></a></span>
-<span id="cb22-31"><a href="#cb22-31"></a><span class="ss">- </span>I regard a script a:</span>
-<span id="cb22-32"><a href="#cb22-32"></a><span class="ss">    - </span>Text file</span>
-<span id="cb22-33"><a href="#cb22-33"></a><span class="ss">    - </span>Which describes actions for a computer</span>
-<span id="cb22-34"><a href="#cb22-34"></a><span class="ss">    - </span>Readable to humans</span>
-<span id="cb22-35"><a href="#cb22-35"></a><span class="ss">    - </span>And readable to a *program* (like <span class="in">`python`</span>) which can direct the computer to act</span>
-<span id="cb22-36"><a href="#cb22-36"></a><span class="in">```{.python filename="what_up_earth.py"}</span></span>
-<span id="cb22-37"><a href="#cb22-37"></a><span class="in">print("what up earth")</span></span>
-<span id="cb22-38"><a href="#cb22-38"></a><span class="in">```</span></span>
-<span id="cb22-39"><a href="#cb22-39"></a><span class="ss">- </span>We note that this is much closer to being a text file that it is to being a program.</span>
-<span id="cb22-40"><a href="#cb22-40"></a></span>
-<span id="cb22-41"><a href="#cb22-41"></a><span class="fu">## Programs</span></span>
-<span id="cb22-42"><a href="#cb22-42"></a></span>
-<span id="cb22-43"><a href="#cb22-43"></a><span class="ss">- </span>We can create programs but we also use existing programs.</span>
-<span id="cb22-44"><a href="#cb22-44"></a><span class="ss">- </span>As an example, consider the Firefox web-browser</span>
-<span id="cb22-45"><a href="#cb22-45"></a><span class="ss">    - </span>If you use Chrome, keep that to yourself, that's embarassing. </span>
-<span id="cb22-46"><a href="#cb22-46"></a><span class="ss">- </span>This is what "Firefox.exe" looks like on a Window device.</span>
-<span id="cb22-47"><a href="#cb22-47"></a><span class="in">```{.lisp filename="Firefox.exe"}</span></span>
-<span id="cb22-48"><a href="#cb22-48"></a><span class="in">A{Ÿ@€ÿw.·þ9ÏCñ~¿‰ó€Ë @€ÿ¶ûCþD8ßué¬%  Aƒù/„î%  L‹RHƒÂHƒÀM…Ò…wÿÿÿM…À„Ã  ID$¹ÿ   A·ƒú-…“  IPMHfAƒx-IDÑD·fE…À„|  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùc…P  D·BfE…À„A  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùo…  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…Ú  D·BfE…À„Ë  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…Ÿ  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùe…d  D·B</span></span>
-<span id="cb22-49"><a href="#cb22-49"></a><span class="in">fE…À„U  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…)  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…î   D·BfE…À„ß   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùp…³   D·BfE…À„¤   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùru|D·BfE…ÀtqE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùouID·BfE…Àt&gt;E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùcufƒz „*  ë   ƒú/„i#  L‹ HƒÀM…À…GýÿÿHŒ$ð  è)˜  fïÀL„$   fA@ fA@fA H„$à  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   èE …Àˆ#  L‹„$H  ¹   1Òÿû H‰ÃH…À„;#  L´$@  AÇFà    AÆFø LŒ$à  AÇ     H‰Ùº   M‰ðÿõú L‰ÿ…À„4#  €¼$8   …_#  D‹„$   L¼$0  L‰ùL‰òè™  A€ …X#  L´$   AÇFà   AÆFø 1ÉL‰òA¸   ÿ0ù =    t…À…!  ÿù ·èÍ  €…ÀNèA¼)   @¶L=t˜ H‰ØHÿÀHƒør    H‰Ùÿ°÷ @„ö…*"  A€÷³1íH</span></span>
-<span id="cb22-50"><a href="#cb22-50"></a><span class="in">¤ ÿ’ü H…ÀL‹d$`…6#  L‹M…À„w  ID$¹ÿ   A·ƒú-tƒú/„»!  L‹ HƒÀM…ÀuâéJ  IPMHfAƒx-IDÑD·fE…ÀtÓE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùlu«D·BfE…Àt&nbsp;E·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øa…jÿÿÿD·BfE…À„[ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øu…%ÿÿÿD·BfE…À„ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øn…àþÿÿD·BfE…À„ÑþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øc…›þÿÿD·B</span></span>
-<span id="cb22-51"><a href="#cb22-51"></a><span class="in">fE…À„ŒþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øh…VþÿÿD·BfE…À„GþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øe…þÿÿD·BfE…À„þÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€ør…Ìýÿÿfƒz …ÁýÿÿH‹H‰HøHƒÀH…ÉuðAÿÍ°L‹d$`ë1À„Û„Æ   AÇE1ÉAöÇtyL‹M…ÀtqID$¹ÿ   A·ƒú-uIIPMPfAƒx-IDÒD·fE…Àt6E·ÐA9ÊDCÁEP¿E‰ÃA€Ë A€úE¶ÓECÐA€úfuéj   ƒú/„$  L‹ HƒÀM…Àu™Aö×E¶ÇAƒàHŒ$ð  Hœ$   H‰Úè˜  @Šs@„ö…à#  ƒ¼$    I‰ÿu1íë/H</span></span>
-<span id="cb22-52"><a href="#cb22-52"></a><span class="in">}&nbsp; ÿ$ù H…À…à%  H</span></span>
-<span id="cb22-53"><a href="#cb22-53"></a><span class="in">```</span></span>
-<span id="cb22-54"><a href="#cb22-54"></a><span class="ss">- </span>I would not regard that as readable to humans (depends on the human)</span>
-<span id="cb22-55"><a href="#cb22-55"></a></span>
-<span id="cb22-56"><a href="#cb22-56"></a><span class="fu">## Compilation</span></span>
-<span id="cb22-57"><a href="#cb22-57"></a></span>
-<span id="cb22-58"><a href="#cb22-58"></a><span class="ss">- </span>Compilation is the process that takes text-based code to whatever we saw on the last slide.</span>
-<span id="cb22-59"><a href="#cb22-59"></a><span class="ss">- </span>Can be quite simple - we made <span class="in">`hi_world`</span>, a program, already.</span>
-<span id="cb22-60"><a href="#cb22-60"></a><span class="ss">    - </span>Notably it didn't do a lot.</span>
-<span id="cb22-61"><a href="#cb22-61"></a><span class="ss">- </span><span class="in">`rustc`</span> takes a <span class="in">`.rs`</span> file and makes an executable </span>
-<span id="cb22-62"><a href="#cb22-62"></a><span class="ss">  - </span>a program, sort of</span>
-<span id="cb22-63"><a href="#cb22-63"></a><span class="ss">- </span>Executables run as command with <span class="in">`./`</span> prefix</span>
-<span id="cb22-64"><a href="#cb22-64"></a><span class="ss">  - </span>This differs from <span class="in">`python3`</span> which runs a script **without** creating a corresponding program.</span>
-<span id="cb22-65"><a href="#cb22-65"></a></span>
-<span id="cb22-66"><a href="#cb22-66"></a><span class="fu">## .py vs .rs</span></span>
-<span id="cb22-67"><a href="#cb22-67"></a></span>
-<span id="cb22-70"><a href="#cb22-70"></a><span class="in">```{mermaid}</span></span>
-<span id="cb22-71"><a href="#cb22-71"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb22-72"><a href="#cb22-72"></a><span class="in">flowchart LR</span></span>
-<span id="cb22-73"><a href="#cb22-73"></a><span class="in">  A(Python) --&gt; B[fname.py file]</span></span>
-<span id="cb22-74"><a href="#cb22-74"></a><span class="in">  B --&gt; C[python fname.py]</span></span>
-<span id="cb22-75"><a href="#cb22-75"></a><span class="in">  C --&gt; D{hello world}</span></span>
-<span id="cb22-76"><a href="#cb22-76"></a><span class="in">  E(Rust) --&gt; F[fname.rs  file]</span></span>
-<span id="cb22-77"><a href="#cb22-77"></a><span class="in">  F --&gt; G[rustc fname.rs]</span></span>
-<span id="cb22-78"><a href="#cb22-78"></a><span class="in">  G --&gt; H[./fname]</span></span>
-<span id="cb22-79"><a href="#cb22-79"></a><span class="in">  H --&gt; I{hello world}</span></span>
-<span id="cb22-80"><a href="#cb22-80"></a><span class="in">```</span></span>
-<span id="cb22-81"><a href="#cb22-81"></a></span>
-<span id="cb22-82"><a href="#cb22-82"></a><span class="ss">- </span>_You only have to compile once to have the executable forever._</span>
-<span id="cb22-83"><a href="#cb22-83"></a><span class="ss">- </span>_Most programs are executables, not scripts._</span>
-<span id="cb22-84"><a href="#cb22-84"></a></span>
-<span id="cb22-85"><a href="#cb22-85"></a><span class="fu">## Rustc</span></span>
-<span id="cb22-86"><a href="#cb22-86"></a></span>
-<span id="cb22-87"><a href="#cb22-87"></a><span class="ss">- </span><span class="in">`rustc`</span> is rarely, if ever, used *directly*</span>
-<span id="cb22-88"><a href="#cb22-88"></a><span class="ss">  - </span>Over the years (since like, 1960) code has increased in complexity.</span>
-<span id="cb22-89"><a href="#cb22-89"></a><span class="ss">    - </span>Many files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)</span>
-<span id="cb22-90"><a href="#cb22-90"></a><span class="ss">    - </span>Many libraries (think NumPy, **pandas**, scikit)</span>
-<span id="cb22-91"><a href="#cb22-91"></a><span class="ss">    - </span>Complex file systems (01/rustup.md)</span>
-<span id="cb22-92"><a href="#cb22-92"></a><span class="ss">- </span>The solution was automation.</span>
-<span id="cb22-93"><a href="#cb22-93"></a></span>
-<span id="cb22-94"><a href="#cb22-94"></a><span class="fu">## Build Systems</span></span>
-<span id="cb22-95"><a href="#cb22-95"></a></span>
-<span id="cb22-96"><a href="#cb22-96"></a><span class="ss">- </span>We don't have a real equivalence to compilation for Python.</span>
-<span id="cb22-97"><a href="#cb22-97"></a><span class="ss">    - </span>There is <span class="co">[</span><span class="ot">Numba</span><span class="co">](https://cd-public.github.io/scicom/0C_numba.html)</span></span>
-<span id="cb22-98"><a href="#cb22-98"></a><span class="ss">- </span>We do have a build system equivalent.</span>
-<span id="cb22-99"><a href="#cb22-99"></a><span class="ss">    - </span>I use flit, which is easy.</span>
-<span id="cb22-100"><a href="#cb22-100"></a><span class="ss">    - </span>I think there's others... Setuptools? Hatchling?</span>
-<span id="cb22-101"><a href="#cb22-101"></a>    </span>
-<span id="cb22-102"><a href="#cb22-102"></a><span class="fu">## Flit</span></span>
-<span id="cb22-103"><a href="#cb22-103"></a></span>
-<span id="cb22-104"><a href="#cb22-104"></a><span class="ss">- </span>Flit solves a novel problem for Python programers.</span>
-<span id="cb22-105"><a href="#cb22-105"></a><span class="ss">    - </span>**Not**: Let's make some code that I can run.</span>
-<span id="cb22-106"><a href="#cb22-106"></a><span class="ss">    - </span>**Instead**: Let's make code that can be used in code other people run.</span>
-<span id="cb22-107"><a href="#cb22-107"></a>    </span>
-<span id="cb22-108"><a href="#cb22-108"></a><span class="fu">## Packaging</span></span>
-<span id="cb22-109"><a href="#cb22-109"></a>    </span>
-<span id="cb22-110"><a href="#cb22-110"></a><span class="ss">- </span>NumPy, **pandas**, and things like CS 151 PGL can be "built" into packages with Flit and friends.</span>
-<span id="cb22-111"><a href="#cb22-111"></a><span class="ss">    - </span>Basically, instead of running e.g. <span class="in">`python3 mycode.py`</span></span>
-<span id="cb22-112"><a href="#cb22-112"></a><span class="ss">    - </span>Run <span class="in">`flit init`</span> to make a new folder, edit some code, then run <span class="in">`flit publish`</span> to add it to <span class="in">`pip`</span></span>
-<span id="cb22-113"><a href="#cb22-113"></a><span class="ss">- </span>Takeaway - package management and build systems work *real* well together.</span>
-<span id="cb22-114"><a href="#cb22-114"></a></span>
-<span id="cb22-115"><a href="#cb22-115"></a><span class="fu">## Wheels</span></span>
-<span id="cb22-116"><a href="#cb22-116"></a></span>
-<span id="cb22-117"><a href="#cb22-117"></a><span class="ss">- </span>The thing that <span class="in">`flit`</span> and friends create and distribute is not a <span class="in">`.py`</span> file.</span>
-<span id="cb22-118"><a href="#cb22-118"></a><span class="ss">- </span>Rather, they are "wheels" which are not human readable.</span>
-<span id="cb22-119"><a href="#cb22-119"></a><span class="ss">- </span>*A lot like compiled code*</span>
-<span id="cb22-120"><a href="#cb22-120"></a><span class="ss">- </span>Takeaway - a good way to think of Rust is that we're writing packages for ourselves.</span>
-<span id="cb22-121"><a href="#cb22-121"></a></span>
-<span id="cb22-122"><a href="#cb22-122"></a><span class="fu">## Cargo</span></span>
-<span id="cb22-123"><a href="#cb22-123"></a></span>
-<span id="cb22-124"><a href="#cb22-124"></a><span class="ss">- </span>With Python, we use <span class="in">`python3`</span> (or <span class="in">`pip`</span>, but perhaps as <span class="in">`python3 -m pip`</span>).</span>
-<span id="cb22-125"><a href="#cb22-125"></a><span class="ss">- </span><span class="in">`rustc`</span> is not really the equivalent to that:</span>
-<span id="cb22-126"><a href="#cb22-126"></a><span class="ss">- </span>Rather, we use <span class="in">`cargo`</span>, the Rust build and package manager.</span>
-<span id="cb22-127"><a href="#cb22-127"></a><span class="ss">- </span><span class="in">`cargo`</span> will handle any usage of <span class="in">`rustc`</span> that we may need.</span>
-<span id="cb22-128"><a href="#cb22-128"></a><span class="ss">    - </span>We can easily then distribute code across multiple files.</span>
-<span id="cb22-129"><a href="#cb22-129"></a>    </span>
-<span id="cb22-130"><a href="#cb22-130"></a><span class="fu"># Cargo New</span></span>
-<span id="cb22-131"><a href="#cb22-131"></a></span>
-<span id="cb22-132"><a href="#cb22-132"></a><span class="fu">## Build+Package</span></span>
-<span id="cb22-133"><a href="#cb22-133"></a></span>
-<span id="cb22-134"><a href="#cb22-134"></a><span class="ss">- </span>Cargo is Rust’s *build system* (like `flit`) and *package manager* (like <span class="in">`pip`</span>).</span>
-<span id="cb22-135"><a href="#cb22-135"></a><span class="ss">- </span>We will use Cargo instead of <span class="in">`rustc`</span> for the rest of the term.</span>
-<span id="cb22-136"><a href="#cb22-136"></a><span class="ss">    - </span>My sense is that this is the industry standard.</span>
-<span id="cb22-137"><a href="#cb22-137"></a><span class="ss">- </span>We'll step through an example, then you'll do a (very simple) exercise.</span>
-<span id="cb22-138"><a href="#cb22-138"></a></span>
-<span id="cb22-139"><a href="#cb22-139"></a><span class="fu">## New</span></span>
-<span id="cb22-140"><a href="#cb22-140"></a></span>
-<span id="cb22-141"><a href="#cb22-141"></a><span class="ss">- </span>The first thing to do with Cargo, as a rule, is great a new package.</span>
-<span id="cb22-142"><a href="#cb22-142"></a><span class="ss">    - </span>This is *kinda* like creating a new <span class="in">`.py`</span> file.</span>
-<span id="cb22-143"><a href="#cb22-143"></a><span class="ss">    - </span>It is a bit more like creating a Python project from a template repository.</span>
-<span id="cb22-144"><a href="#cb22-144"></a>    </span>
-<span id="cb22-145"><a href="#cb22-145"></a><span class="fu">## Do it</span></span>
-<span id="cb22-146"><a href="#cb22-146"></a>    </span>
-<span id="cb22-147"><a href="#cb22-147"></a><span class="ss">- </span>To do so:</span>
-<span id="cb22-148"><a href="#cb22-148"></a></span>
-<span id="cb22-149"><a href="#cb22-149"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-150"><a href="#cb22-150"></a><span class="in">cargo new throwaway_example</span></span>
-<span id="cb22-151"><a href="#cb22-151"></a><span class="in">```</span></span>
-<span id="cb22-152"><a href="#cb22-152"></a></span>
-<span id="cb22-153"><a href="#cb22-153"></a><span class="ss">- </span><span class="in">`cargo`</span> is, well, Cargo</span>
-<span id="cb22-154"><a href="#cb22-154"></a><span class="ss">- </span><span class="in">`new`</span> creates a new package.</span>
-<span id="cb22-155"><a href="#cb22-155"></a><span class="ss">- </span><span class="in">`throwaway_example`</span> is the name of the package<span class="ot">[^1]</span>.</span>
-<span id="cb22-156"><a href="#cb22-156"></a></span>
-<span id="cb22-157"><a href="#cb22-157"></a><span class="ot">[^1]: </span>Well, kinda. We'll get to that.</span>
-<span id="cb22-158"><a href="#cb22-158"></a></span>
-<span id="cb22-159"><a href="#cb22-159"></a><span class="fu">## Examine</span></span>
-<span id="cb22-160"><a href="#cb22-160"></a></span>
-<span id="cb22-161"><a href="#cb22-161"></a><span class="ss">- </span>The most natural thing is to see what has changed.</span>
-<span id="cb22-162"><a href="#cb22-162"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-163"><a href="#cb22-163"></a><span class="in">ls</span></span>
-<span id="cb22-164"><a href="#cb22-164"></a><span class="in">```</span></span>
-<span id="cb22-165"><a href="#cb22-165"></a><span class="ss">- </span>For me, I see a new directory: <span class="in">`throwaway_example`</span></span>
-<span id="cb22-166"><a href="#cb22-166"></a><span class="ss">- </span>I change into the directory to examine it.</span>
-<span id="cb22-167"><a href="#cb22-167"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-168"><a href="#cb22-168"></a><span class="in">cd throwaway_example</span></span>
-<span id="cb22-169"><a href="#cb22-169"></a><span class="in">ls</span></span>
-<span id="cb22-170"><a href="#cb22-170"></a><span class="in">```</span></span>
-<span id="cb22-171"><a href="#cb22-171"></a><span class="ss">- </span>Not much there:</span>
-<span id="cb22-172"><a href="#cb22-172"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-173"><a href="#cb22-173"></a><span class="in">Cargo.toml  src</span></span>
-<span id="cb22-174"><a href="#cb22-174"></a><span class="in">```</span></span>
-<span id="cb22-175"><a href="#cb22-175"></a></span>
-<span id="cb22-176"><a href="#cb22-176"></a><span class="fu">## Aside: Tree</span></span>
-<span id="cb22-177"><a href="#cb22-177"></a></span>
-<span id="cb22-178"><a href="#cb22-178"></a><span class="ss">- </span>Can also see directory structure.</span>
-<span id="cb22-179"><a href="#cb22-179"></a><span class="ss">- </span>Install <span class="in">`tree`</span> with your preferred installer (perhaps <span class="in">`apt`</span> or <span class="in">`brew`</span>)</span>
-<span id="cb22-180"><a href="#cb22-180"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-181"><a href="#cb22-181"></a><span class="in">sudo apt install tree</span></span>
-<span id="cb22-182"><a href="#cb22-182"></a><span class="in">```</span></span>
-<span id="cb22-183"><a href="#cb22-183"></a><span class="ss">- </span>Then use <span class="in">`tree`</span> instead of <span class="in">`ls`</span></span>
-<span id="cb22-184"><a href="#cb22-184"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-185"><a href="#cb22-185"></a><span class="in">.</span></span>
-<span id="cb22-186"><a href="#cb22-186"></a><span class="in">├── Cargo.toml</span></span>
-<span id="cb22-187"><a href="#cb22-187"></a><span class="in">└── src</span></span>
-<span id="cb22-188"><a href="#cb22-188"></a><span class="in">    └── main.rs</span></span>
-<span id="cb22-189"><a href="#cb22-189"></a></span>
-<span id="cb22-190"><a href="#cb22-190"></a><span class="in">1 directory, 2 files</span></span>
-<span id="cb22-191"><a href="#cb22-191"></a><span class="in">```</span></span>
-<span id="cb22-192"><a href="#cb22-192"></a></span>
-<span id="cb22-193"><a href="#cb22-193"></a><span class="fu">## main.rs</span></span>
-<span id="cb22-194"><a href="#cb22-194"></a></span>
-<span id="cb22-195"><a href="#cb22-195"></a><span class="ss">- </span>Cargo creates projects with a default main file.</span>
-<span id="cb22-196"><a href="#cb22-196"></a><span class="in">```{.rs filename="main.rs"}</span></span>
-<span id="cb22-197"><a href="#cb22-197"></a><span class="in">fn main() {</span></span>
-<span id="cb22-198"><a href="#cb22-198"></a><span class="in">    println!("Hello, world!");</span></span>
-<span id="cb22-199"><a href="#cb22-199"></a><span class="in">}</span></span>
-<span id="cb22-200"><a href="#cb22-200"></a><span class="in">```</span></span>
-<span id="cb22-201"><a href="#cb22-201"></a><span class="ss">- </span>The name "main" is basically mainful to Cargo - it says which, if multiple, <span class="in">`.rs`</span> files to read first when trying to execute the code in a package.</span>
-<span id="cb22-202"><a href="#cb22-202"></a><span class="ss">    - </span>Make sure you understand that sentence.</span>
-<span id="cb22-203"><a href="#cb22-203"></a> </span>
-<span id="cb22-204"><a href="#cb22-204"></a><span class="fu"># Cargo Run</span></span>
-<span id="cb22-205"><a href="#cb22-205"></a> </span>
-<span id="cb22-206"><a href="#cb22-206"></a><span class="fu">## Run</span></span>
-<span id="cb22-207"><a href="#cb22-207"></a></span>
-<span id="cb22-208"><a href="#cb22-208"></a><span class="ss">- </span><span class="in">`cargo run`</span> is probably our closest equivalent to <span class="in">`python3 throwaway_example.py`</span> or the "Run" button in VS Code.</span>
-<span id="cb22-209"><a href="#cb22-209"></a><span class="ss">- </span>Of note, you can **not** simply do "new" then "run".</span>
-<span id="cb22-210"><a href="#cb22-210"></a><span class="ss">    - </span>"New" creates a new folder.</span>
-<span id="cb22-211"><a href="#cb22-211"></a><span class="ss">    - </span>"Run" must be done from *within* that folder.</span>
-<span id="cb22-212"><a href="#cb22-212"></a></span>
-<span id="cb22-213"><a href="#cb22-213"></a><span class="fu">## Try it</span></span>
-<span id="cb22-214"><a href="#cb22-214"></a></span>
-<span id="cb22-215"><a href="#cb22-215"></a><span class="ss">- </span>Do this:</span>
-<span id="cb22-216"><a href="#cb22-216"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-217"><a href="#cb22-217"></a><span class="in">cargo run</span></span>
-<span id="cb22-218"><a href="#cb22-218"></a><span class="in">```</span></span>
-<span id="cb22-219"><a href="#cb22-219"></a><span class="ss">- </span>See this:</span>
-<span id="cb22-220"><a href="#cb22-220"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-221"><a href="#cb22-221"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb22-222"><a href="#cb22-222"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s</span></span>
-<span id="cb22-223"><a href="#cb22-223"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb22-224"><a href="#cb22-224"></a><span class="in">Hello, world!</span></span>
-<span id="cb22-225"><a href="#cb22-225"></a><span class="in">```</span></span>
-<span id="cb22-226"><a href="#cb22-226"></a></span>
-<span id="cb22-227"><a href="#cb22-227"></a><span class="fu">## Again!</span></span>
-<span id="cb22-228"><a href="#cb22-228"></a></span>
-<span id="cb22-229"><a href="#cb22-229"></a><span class="ss">- </span>If you run again, the process will:</span>
-<span id="cb22-230"><a href="#cb22-230"></a><span class="ss">    - </span>Skip the compile step.</span>
-<span id="cb22-231"><a href="#cb22-231"></a><span class="ss">    - </span>Be *way* faster (<span class="dv">&amp;infin;</span>x reported here)</span>
-<span id="cb22-234"><a href="#cb22-234"></a><span class="in">```{bash}</span></span>
-<span id="cb22-235"><a href="#cb22-235"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
-<span id="cb22-236"><a href="#cb22-236"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/throwaway_example</span><span class="kw">`</span></span>
-<span id="cb22-237"><a href="#cb22-237"></a><span class="ex">Hello,</span> world!</span>
-<span id="cb22-238"><a href="#cb22-238"></a><span class="in">```</span></span>
-<span id="cb22-239"><a href="#cb22-239"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
-<span id="cb22-240"><a href="#cb22-240"></a></span>
-<span id="cb22-241"><a href="#cb22-241"></a><span class="fu">## It's fast</span></span>
-<span id="cb22-242"><a href="#cb22-242"></a></span>
-<span id="cb22-243"><a href="#cb22-243"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
-<span id="cb22-244"><a href="#cb22-244"></a><span class="ss">- </span>This is why we use languages which compile.</span>
-<span id="cb22-245"><a href="#cb22-245"></a><span class="ss">    - </span>Python took around .04s, for me.</span>
-<span id="cb22-246"><a href="#cb22-246"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-247"><a href="#cb22-247"></a><span class="in">time python3 -c "print('Hello, world')"</span></span>
-<span id="cb22-248"><a href="#cb22-248"></a><span class="in">```</span></span>
-<span id="cb22-249"><a href="#cb22-249"></a><span class="ss">- </span>The results are:</span>
-<span id="cb22-250"><a href="#cb22-250"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-251"><a href="#cb22-251"></a><span class="in">Hello, world</span></span>
-<span id="cb22-252"><a href="#cb22-252"></a></span>
-<span id="cb22-253"><a href="#cb22-253"></a><span class="in">real    0m0.039s</span></span>
-<span id="cb22-254"><a href="#cb22-254"></a><span class="in">user    0m0.007s</span></span>
-<span id="cb22-255"><a href="#cb22-255"></a><span class="in">sys     0m0.008s</span></span>
-<span id="cb22-256"><a href="#cb22-256"></a><span class="in">```</span></span>
-<span id="cb22-257"><a href="#cb22-257"></a><span class="ss">- </span>Guess how long it takes to compile <span class="in">`python`</span>, by the way.</span>
-<span id="cb22-258"><a href="#cb22-258"></a></span>
-<span id="cb22-259"><a href="#cb22-259"></a><span class="fu">## Other files</span></span>
-<span id="cb22-260"><a href="#cb22-260"></a></span>
-<span id="cb22-261"><a href="#cb22-261"></a><span class="ss">- </span>Go ahead and add another <span class="in">`.rs`</span> file and see what happens.</span>
-<span id="cb22-262"><a href="#cb22-262"></a><span class="ss">    - </span>Add it to the <span class="in">`src`</span> directory!</span>
-<span id="cb22-263"><a href="#cb22-263"></a><span class="ss">- </span>I'll use this one - I change filename and text, but </span>
-<span id="cb22-264"><a href="#cb22-264"></a><span class="in">```{.rs filename="secondary.rs"}</span></span>
-<span id="cb22-265"><a href="#cb22-265"></a><span class="in">fn secondary() {</span></span>
-<span id="cb22-266"><a href="#cb22-266"></a><span class="in">    println!("Goodbye, space!");</span></span>
-<span id="cb22-267"><a href="#cb22-267"></a><span class="in">}</span></span>
-<span id="cb22-268"><a href="#cb22-268"></a><span class="in">```</span></span>
-<span id="cb22-269"><a href="#cb22-269"></a></span>
-<span id="cb22-270"><a href="#cb22-270"></a><span class="fu">## Run it again...</span></span>
-<span id="cb22-271"><a href="#cb22-271"></a></span>
-<span id="cb22-272"><a href="#cb22-272"></a><span class="ss">- </span>Nothing changes.</span>
-<span id="cb22-273"><a href="#cb22-273"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-274"><a href="#cb22-274"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
-<span id="cb22-275"><a href="#cb22-275"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb22-276"><a href="#cb22-276"></a><span class="in">Hello, world!</span></span>
-<span id="cb22-277"><a href="#cb22-277"></a><span class="in">```</span></span>
-<span id="cb22-278"><a href="#cb22-278"></a><span class="ss">- </span>This is the same as adding another <span class="in">`.py`</span> file then not using <span class="in">`import`</span> or including its code in any other way.</span>
-<span id="cb22-279"><a href="#cb22-279"></a></span>
-<span id="cb22-280"><a href="#cb22-280"></a><span class="fu">## Swap the names.</span></span>
-<span id="cb22-281"><a href="#cb22-281"></a></span>
-<span id="cb22-282"><a href="#cb22-282"></a><span class="ss">- </span>I use <span class="in">`mv`</span> (move) to change:</span>
-<span id="cb22-283"><a href="#cb22-283"></a><span class="ss">    - </span><span class="in">`main.rs`</span> to <span class="in">`old_main.rs`</span></span>
-<span id="cb22-284"><a href="#cb22-284"></a><span class="ss">    - </span><span class="in">`secondary.rs`</span> to <span class="in">`main.rs`</span></span>
-<span id="cb22-285"><a href="#cb22-285"></a><span class="ss">- </span>Things change!</span>
-<span id="cb22-286"><a href="#cb22-286"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-287"><a href="#cb22-287"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb22-288"><a href="#cb22-288"></a><span class="in">error[E0601]: `main` function not found in crate `throwaway_example`</span></span>
-<span id="cb22-289"><a href="#cb22-289"></a><span class="in"> --&gt; src/main.rs:3:2</span></span>
-<span id="cb22-290"><a href="#cb22-290"></a><span class="in">  |</span></span>
-<span id="cb22-291"><a href="#cb22-291"></a><span class="in">3 | }</span></span>
-<span id="cb22-292"><a href="#cb22-292"></a><span class="in">  |  ^ consider adding a `main` function to `src/main.rs`</span></span>
-<span id="cb22-293"><a href="#cb22-293"></a></span>
-<span id="cb22-294"><a href="#cb22-294"></a><span class="in">For more information about this error, try `rustc --explain E0601`.</span></span>
-<span id="cb22-295"><a href="#cb22-295"></a><span class="in">error: could not compile `throwaway_example` (bin "throwaway_example") due to 1 previous error</span></span>
-<span id="cb22-296"><a href="#cb22-296"></a><span class="in">```</span></span>
-<span id="cb22-297"><a href="#cb22-297"></a></span>
-<span id="cb22-298"><a href="#cb22-298"></a><span class="fu">## Requirements</span></span>
-<span id="cb22-299"><a href="#cb22-299"></a></span>
-<span id="cb22-300"><a href="#cb22-300"></a><span class="ss">- </span>You need a <span class="in">`main.rs`</span> with a function named <span class="in">`main`</span>.</span>
-<span id="cb22-301"><a href="#cb22-301"></a><span class="ss">- </span><span class="in">`nvim src/main.rs`</span> -&gt; Change "secondary" to "main" -&gt; "cargo run"</span>
-<span id="cb22-302"><a href="#cb22-302"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-303"><a href="#cb22-303"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb22-304"><a href="#cb22-304"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s</span></span>
-<span id="cb22-305"><a href="#cb22-305"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb22-306"><a href="#cb22-306"></a><span class="in">Goodbye, space!</span></span>
-<span id="cb22-307"><a href="#cb22-307"></a><span class="in">```</span></span>
-<span id="cb22-308"><a href="#cb22-308"></a></span>
-<span id="cb22-309"><a href="#cb22-309"></a><span class="fu"># Options</span></span>
-<span id="cb22-310"><a href="#cb22-310"></a></span>
-<span id="cb22-311"><a href="#cb22-311"></a><span class="fu">## Carry-on only</span></span>
-<span id="cb22-312"><a href="#cb22-312"></a></span>
-<span id="cb22-313"><a href="#cb22-313"></a><span class="ss">- </span>I try to live me life without baggage.</span>
-<span id="cb22-314"><a href="#cb22-314"></a><span class="ss">    - </span>(I don't like <span class="in">`cargo`</span>)</span>
-<span id="cb22-315"><a href="#cb22-315"></a><span class="ss">- </span>Why? Well...</span>
-<span id="cb22-316"><a href="#cb22-316"></a><span class="ss">    - </span>I can't name things the way I want</span>
-<span id="cb22-317"><a href="#cb22-317"></a><span class="ss">    - </span>I can't add <span class="in">`cargo`</span> created directories to repositories.</span>
-<span id="cb22-318"><a href="#cb22-318"></a><span class="ss">- </span>Well, I can, but it I have to use options.</span>
-<span id="cb22-319"><a href="#cb22-319"></a></span>
-<span id="cb22-320"><a href="#cb22-320"></a><span class="fu">## Option 1: Names</span></span>
-<span id="cb22-321"><a href="#cb22-321"></a></span>
-<span id="cb22-322"><a href="#cb22-322"></a><span class="ss">- </span>It is uncommon to name a package numerically.</span>
-<span id="cb22-323"><a href="#cb22-323"></a><span class="ss">- </span>It is however, I think, useful in a course.</span>
-<span id="cb22-324"><a href="#cb22-324"></a><span class="ss">- </span>It is also, I think, useful to write packages for a course.</span>
-<span id="cb22-325"><a href="#cb22-325"></a><span class="ss">- </span>So we do so.</span>
-<span id="cb22-326"><a href="#cb22-326"></a></span>
-<span id="cb22-327"><a href="#cb22-327"></a><span class="fu">## Name Scheme</span></span>
-<span id="cb22-328"><a href="#cb22-328"></a></span>
-<span id="cb22-329"><a href="#cb22-329"></a><span class="ss">- </span>I have used the following scheme this term:</span>
-<span id="cb22-330"><a href="#cb22-330"></a><span class="ss">    - </span>Each class day is denoted as a two digit value.</span>
-<span id="cb22-331"><a href="#cb22-331"></a><span class="ss">    - </span>The first digit represents the zero-indexed week.</span>
-<span id="cb22-332"><a href="#cb22-332"></a><span class="ss">    - </span>The second digit represents the zero-index position in <span class="in">`["Lecture", "Lab", "Homework"]`</span></span>
-<span id="cb22-333"><a href="#cb22-333"></a></span>
-<span id="cb22-334"><a href="#cb22-334"></a></span>
-<span id="cb22-335"><a href="#cb22-335"></a><span class="fu">## Today</span></span>
-<span id="cb22-336"><a href="#cb22-336"></a></span>
-<span id="cb22-337"><a href="#cb22-337"></a><span class="ss">- </span>Today is one week from the first day of class, last week.</span>
-<span id="cb22-338"><a href="#cb22-338"></a><span class="ss">- </span>Today is one day from the first day of the week, Monday.</span>
-<span id="cb22-339"><a href="#cb22-339"></a><span class="ss">- </span>So I denote today <span class="in">`11`</span></span>
-<span id="cb22-340"><a href="#cb22-340"></a></span>
-<span id="cb22-341"><a href="#cb22-341"></a><span class="fu">## Use Cargo</span></span>
-<span id="cb22-342"><a href="#cb22-342"></a></span>
-<span id="cb22-343"><a href="#cb22-343"></a><span class="ss">- </span>Let's use <span class="in">`cargo`</span> to make a package called <span class="in">`11`</span>.</span>
-<span id="cb22-344"><a href="#cb22-344"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-345"><a href="#cb22-345"></a><span class="in">cargo new 11</span></span>
-<span id="cb22-346"><a href="#cb22-346"></a><span class="in">```</span></span>
-<span id="cb22-347"><a href="#cb22-347"></a><span class="ss">- </span>What happens?</span>
-<span id="cb22-348"><a href="#cb22-348"></a></span>
-<span id="cb22-349"><a href="#cb22-349"></a><span class="fu">## Problem</span></span>
-<span id="cb22-350"><a href="#cb22-350"></a></span>
-<span id="cb22-351"><a href="#cb22-351"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-352"><a href="#cb22-352"></a><span class="in">    Creating binary (application) `11` package</span></span>
-<span id="cb22-353"><a href="#cb22-353"></a><span class="in">error: invalid character `1` in package name: `11`, the name cannot start with a digit</span></span>
-<span id="cb22-354"><a href="#cb22-354"></a><span class="in">If you need a package name to not match the directory name, consider using --name flag.</span></span>
-<span id="cb22-355"><a href="#cb22-355"></a><span class="in">If you need a binary with the name "11", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:</span></span>
-<span id="cb22-356"><a href="#cb22-356"></a></span>
-<span id="cb22-357"><a href="#cb22-357"></a><span class="in">    [[bin]]</span></span>
-<span id="cb22-358"><a href="#cb22-358"></a><span class="in">    name = "11"</span></span>
-<span id="cb22-359"><a href="#cb22-359"></a><span class="in">    path = "src/main.rs"</span></span>
-<span id="cb22-360"><a href="#cb22-360"></a><span class="in">```</span></span>
-<span id="cb22-361"><a href="#cb22-361"></a></span>
-<span id="cb22-362"><a href="#cb22-362"></a><span class="fu">## Solution</span></span>
-<span id="cb22-363"><a href="#cb22-363"></a></span>
-<span id="cb22-364"><a href="#cb22-364"></a><span class="ss">- </span>We can make a folder named <span class="in">`11`</span></span>
-<span id="cb22-365"><a href="#cb22-365"></a><span class="ss">- </span>But not a package named <span class="in">`11`</span>.</span>
-<span id="cb22-366"><a href="#cb22-366"></a><span class="ss">- </span>We use the <span class="in">`--name`</span> flag.</span>
-<span id="cb22-367"><a href="#cb22-367"></a><span class="ss">    - </span>I use the name of these slides, rather than the number, as the package name.</span>
-<span id="cb22-368"><a href="#cb22-368"></a><span class="in">```{.bash}</span></span>
-<span id="cb22-369"><a href="#cb22-369"></a><span class="in">cargo new 11 --name packages</span></span>
-<span id="cb22-370"><a href="#cb22-370"></a><span class="in">```</span></span>
-<span id="cb22-371"><a href="#cb22-371"></a><span class="ss">- </span>This should be allowed.</span>
-<span id="cb22-372"><a href="#cb22-372"></a></span>
-<span id="cb22-373"><a href="#cb22-373"></a><span class="fu"># Exercise</span></span>
-<span id="cb22-374"><a href="#cb22-374"></a></span>
-<span id="cb22-375"><a href="#cb22-375"></a><span class="fu">## Exercise</span></span>
-<span id="cb22-376"><a href="#cb22-376"></a></span>
-<span id="cb22-377"><a href="#cb22-377"></a><span class="ss">- </span>For the lab today, you must create a:</span>
-<span id="cb22-378"><a href="#cb22-378"></a>    <span class="co">[ ]</span> New Cargo project, in</span>
-<span id="cb22-379"><a href="#cb22-379"></a>    <span class="co">[ ]</span> A folder named <span class="in">`12`</span>, with</span>
-<span id="cb22-380"><a href="#cb22-380"></a>    <span class="co">[ ]</span> A valid Cargo name (not <span class="in">`12`</span>), that is</span>
-<span id="cb22-381"><a href="#cb22-381"></a>    <span class="co">[ ]</span> In your *course* repository and therefore</span>
-<span id="cb22-382"><a href="#cb22-382"></a>    <span class="co">[ ]</span> Has no <span class="in">`cargo`</span> managed repository.</span>
-<span id="cb22-383"><a href="#cb22-383"></a>    </span>
-<span id="cb22-384"><a href="#cb22-384"></a></span>
-<span id="cb22-385"><a href="#cb22-385"></a></span>
-<span id="cb22-386"><a href="#cb22-386"></a><span class="fu"># Fin</span></span>
+<div class="sourceCode" id="cb31" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">---</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="an">title:</span><span class="co"> Packages</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="co">---</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a></span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="ss">- </span>The second homework, "Hi cargo", is ready after this class.</span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="ss">  - </span>It is comically trivial.</span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="ss">  - </span>Mostly makes sure you have everything set up.</span>
+<span id="cb31-11"><a href="#cb31-11"></a><span class="ss">- </span>Due Friday, 12 Sept. at 1440 ET.</span>
+<span id="cb31-12"><a href="#cb31-12"></a></span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="fu">## Today</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a></span>
+<span id="cb31-15"><a href="#cb31-15"></a><span class="ss">- </span>Hybrid Day</span>
+<span id="cb31-16"><a href="#cb31-16"></a><span class="ss">- </span>Build system/package manager</span>
+<span id="cb31-17"><a href="#cb31-17"></a><span class="ss">    - </span>Theory behind Cargo</span>
+<span id="cb31-18"><a href="#cb31-18"></a><span class="ss">    - </span>Trap in Cargo</span>
+<span id="cb31-19"><a href="#cb31-19"></a><span class="ss">    - </span>Use Cargo</span>
+<span id="cb31-20"><a href="#cb31-20"></a></span>
+<span id="cb31-21"><a href="#cb31-21"></a><span class="fu"># Build Systems</span></span>
+<span id="cb31-22"><a href="#cb31-22"></a></span>
+<span id="cb31-23"><a href="#cb31-23"></a><span class="fu">## Interpretation</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a></span>
+<span id="cb31-25"><a href="#cb31-25"></a><span class="ss">- </span>We once again address *interpretation* vs. *compilation*</span>
+<span id="cb31-26"><a href="#cb31-26"></a><span class="ss">    - </span>I think of this as *programming* vs. *scripting*</span>
+<span id="cb31-27"><a href="#cb31-27"></a><span class="ss">    - </span>We can think in terms of languages - *Rust/C* vs. *Python/JavaScript*</span>
+<span id="cb31-28"><a href="#cb31-28"></a></span>
+<span id="cb31-29"><a href="#cb31-29"></a><span class="fu">## Scripts</span></span>
+<span id="cb31-30"><a href="#cb31-30"></a></span>
+<span id="cb31-31"><a href="#cb31-31"></a><span class="ss">- </span>I regard a script a:</span>
+<span id="cb31-32"><a href="#cb31-32"></a><span class="ss">    - </span>Text file</span>
+<span id="cb31-33"><a href="#cb31-33"></a><span class="ss">    - </span>Which describes actions for a computer</span>
+<span id="cb31-34"><a href="#cb31-34"></a><span class="ss">    - </span>Readable to humans</span>
+<span id="cb31-35"><a href="#cb31-35"></a><span class="ss">    - </span>And readable to a *program* (like <span class="in">`python`</span>) which can direct the computer to act</span>
+<span id="cb31-36"><a href="#cb31-36"></a><span class="in">```{.python filename="what_up_earth.py"}</span></span>
+<span id="cb31-37"><a href="#cb31-37"></a><span class="in">print("what up earth")</span></span>
+<span id="cb31-38"><a href="#cb31-38"></a><span class="in">```</span></span>
+<span id="cb31-39"><a href="#cb31-39"></a><span class="ss">- </span>We note that this is much closer to being a text file that it is to being a program.</span>
+<span id="cb31-40"><a href="#cb31-40"></a></span>
+<span id="cb31-41"><a href="#cb31-41"></a><span class="fu">## Programs</span></span>
+<span id="cb31-42"><a href="#cb31-42"></a></span>
+<span id="cb31-43"><a href="#cb31-43"></a><span class="ss">- </span>We can create programs but we also use existing programs.</span>
+<span id="cb31-44"><a href="#cb31-44"></a><span class="ss">- </span>As an example, consider the Firefox web-browser</span>
+<span id="cb31-45"><a href="#cb31-45"></a><span class="ss">    - </span>If you use Chrome, keep that to yourself, that's embarassing. </span>
+<span id="cb31-46"><a href="#cb31-46"></a><span class="ss">- </span>This is what "Firefox.exe" looks like on a Window device.</span>
+<span id="cb31-47"><a href="#cb31-47"></a><span class="in">```{.lisp filename="Firefox.exe"}</span></span>
+<span id="cb31-48"><a href="#cb31-48"></a><span class="in">A{Ÿ@€ÿw.·þ9ÏCñ~¿‰ó€Ë @€ÿ¶ûCþD8ßué¬%  Aƒù/„î%  L‹RHƒÂHƒÀM…Ò…wÿÿÿM…À„Ã  ID$¹ÿ   A·ƒú-…“  IPMHfAƒx-IDÑD·fE…À„|  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùc…P  D·BfE…À„A  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùo…  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…Ú  D·BfE…À„Ë  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…Ÿ  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùe…d  D·B</span></span>
+<span id="cb31-49"><a href="#cb31-49"></a><span class="in">fE…À„U  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùn…)  D·BfE…À„  E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùt…î   D·BfE…À„ß   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùp…³   D·BfE…À„¤   E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùru|D·BfE…ÀtqE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùouID·BfE…Àt&gt;E·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùcufƒz „*  ë   ƒú/„i#  L‹ HƒÀM…À…GýÿÿHŒ$ð  è)˜  fïÀL„$   fA@ fA@fA H„$à  H‰D$ HÇÁÿÿÿÿ1ÒA¹0   èE …Àˆ#  L‹„$H  ¹   1Òÿû H‰ÃH…À„;#  L´$@  AÇFà    AÆFø LŒ$à  AÇ     H‰Ùº   M‰ðÿõú L‰ÿ…À„4#  €¼$8   …_#  D‹„$   L¼$0  L‰ùL‰òè™  A€ …X#  L´$   AÇFà   AÆFø 1ÉL‰òA¸   ÿ0ù =    t…À…!  ÿù ·èÍ  €…ÀNèA¼)   @¶L=t˜ H‰ØHÿÀHƒør    H‰Ùÿ°÷ @„ö…*"  A€÷³1íH</span></span>
+<span id="cb31-50"><a href="#cb31-50"></a><span class="in">¤ ÿ’ü H…ÀL‹d$`…6#  L‹M…À„w  ID$¹ÿ   A·ƒú-tƒú/„»!  L‹ HƒÀM…ÀuâéJ  IPMHfAƒx-IDÑD·fE…ÀtÓE·ÈA9ÉDCÁEH¿E‰ÂA€Ê A€ùE¶ÊECÈA€ùlu«D·BfE…Àt&nbsp;E·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øa…jÿÿÿD·BfE…À„[ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øu…%ÿÿÿD·BfE…À„ÿÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øn…àþÿÿD·BfE…À„ÑþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øc…›þÿÿD·B</span></span>
+<span id="cb31-51"><a href="#cb31-51"></a><span class="in">fE…À„ŒþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øh…VþÿÿD·BfE…À„GþÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€øe…þÿÿD·BfE…À„þÿÿE·ÈAºÿ   Aùÿ   EBÐEB¿E‰ÑA€É A€øE¶ÁECÂA€ør…Ìýÿÿfƒz …ÁýÿÿH‹H‰HøHƒÀH…ÉuðAÿÍ°L‹d$`ë1À„Û„Æ   AÇE1ÉAöÇtyL‹M…ÀtqID$¹ÿ   A·ƒú-uIIPMPfAƒx-IDÒD·fE…Àt6E·ÐA9ÊDCÁEP¿E‰ÃA€Ë A€úE¶ÓECÐA€úfuéj   ƒú/„$  L‹ HƒÀM…Àu™Aö×E¶ÇAƒàHŒ$ð  Hœ$   H‰Úè˜  @Šs@„ö…à#  ƒ¼$    I‰ÿu1íë/H</span></span>
+<span id="cb31-52"><a href="#cb31-52"></a><span class="in">}&nbsp; ÿ$ù H…À…à%  H</span></span>
+<span id="cb31-53"><a href="#cb31-53"></a><span class="in">```</span></span>
+<span id="cb31-54"><a href="#cb31-54"></a><span class="ss">- </span>I would not regard that as readable to humans (depends on the human)</span>
+<span id="cb31-55"><a href="#cb31-55"></a></span>
+<span id="cb31-56"><a href="#cb31-56"></a><span class="fu">## Compilation</span></span>
+<span id="cb31-57"><a href="#cb31-57"></a></span>
+<span id="cb31-58"><a href="#cb31-58"></a><span class="ss">- </span>Compilation is the process that takes text-based code to whatever we saw on the last slide.</span>
+<span id="cb31-59"><a href="#cb31-59"></a><span class="ss">- </span>Can be quite simple - we made <span class="in">`hi_world`</span>, a program, already.</span>
+<span id="cb31-60"><a href="#cb31-60"></a><span class="ss">    - </span>Notably it didn't do a lot.</span>
+<span id="cb31-61"><a href="#cb31-61"></a><span class="ss">- </span><span class="in">`rustc`</span> takes a <span class="in">`.rs`</span> file and makes an executable </span>
+<span id="cb31-62"><a href="#cb31-62"></a><span class="ss">  - </span>a program, sort of</span>
+<span id="cb31-63"><a href="#cb31-63"></a><span class="ss">- </span>Executables run as command with <span class="in">`./`</span> prefix</span>
+<span id="cb31-64"><a href="#cb31-64"></a><span class="ss">  - </span>This differs from <span class="in">`python3`</span> which runs a script **without** creating a corresponding program.</span>
+<span id="cb31-65"><a href="#cb31-65"></a></span>
+<span id="cb31-66"><a href="#cb31-66"></a><span class="fu">## .py vs .rs</span></span>
+<span id="cb31-67"><a href="#cb31-67"></a></span>
+<span id="cb31-70"><a href="#cb31-70"></a><span class="in">```{mermaid}</span></span>
+<span id="cb31-71"><a href="#cb31-71"></a><span class="in">%%| theme: Darkly</span></span>
+<span id="cb31-72"><a href="#cb31-72"></a><span class="in">flowchart LR</span></span>
+<span id="cb31-73"><a href="#cb31-73"></a><span class="in">  A(Python) --&gt; B[fname.py file]</span></span>
+<span id="cb31-74"><a href="#cb31-74"></a><span class="in">  B --&gt; C[python fname.py]</span></span>
+<span id="cb31-75"><a href="#cb31-75"></a><span class="in">  C --&gt; D{hello world}</span></span>
+<span id="cb31-76"><a href="#cb31-76"></a><span class="in">  E(Rust) --&gt; F[fname.rs  file]</span></span>
+<span id="cb31-77"><a href="#cb31-77"></a><span class="in">  F --&gt; G[rustc fname.rs]</span></span>
+<span id="cb31-78"><a href="#cb31-78"></a><span class="in">  G --&gt; H[./fname]</span></span>
+<span id="cb31-79"><a href="#cb31-79"></a><span class="in">  H --&gt; I{hello world}</span></span>
+<span id="cb31-80"><a href="#cb31-80"></a><span class="in">```</span></span>
+<span id="cb31-81"><a href="#cb31-81"></a></span>
+<span id="cb31-82"><a href="#cb31-82"></a><span class="ss">- </span>_You only have to compile once to have the executable forever._</span>
+<span id="cb31-83"><a href="#cb31-83"></a><span class="ss">- </span>_Most programs are executables, not scripts._</span>
+<span id="cb31-84"><a href="#cb31-84"></a></span>
+<span id="cb31-85"><a href="#cb31-85"></a><span class="fu">## Rustc</span></span>
+<span id="cb31-86"><a href="#cb31-86"></a></span>
+<span id="cb31-87"><a href="#cb31-87"></a><span class="ss">- </span><span class="in">`rustc`</span> is rarely, if ever, used *directly*</span>
+<span id="cb31-88"><a href="#cb31-88"></a><span class="ss">  - </span>Over the years (since like, 1960) code has increased in complexity.</span>
+<span id="cb31-89"><a href="#cb31-89"></a><span class="ss">    - </span>Many files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)</span>
+<span id="cb31-90"><a href="#cb31-90"></a><span class="ss">    - </span>Many libraries (think NumPy, **pandas**, scikit)</span>
+<span id="cb31-91"><a href="#cb31-91"></a><span class="ss">    - </span>Complex file systems (01/rustup.md)</span>
+<span id="cb31-92"><a href="#cb31-92"></a><span class="ss">- </span>The solution was automation.</span>
+<span id="cb31-93"><a href="#cb31-93"></a></span>
+<span id="cb31-94"><a href="#cb31-94"></a><span class="fu">## Build Systems</span></span>
+<span id="cb31-95"><a href="#cb31-95"></a></span>
+<span id="cb31-96"><a href="#cb31-96"></a><span class="ss">- </span>We don't have a real equivalence to compilation for Python.</span>
+<span id="cb31-97"><a href="#cb31-97"></a><span class="ss">    - </span>There is <span class="co">[</span><span class="ot">Numba</span><span class="co">](https://cd-public.github.io/scicom/0C_numba.html)</span></span>
+<span id="cb31-98"><a href="#cb31-98"></a><span class="ss">- </span>We do have a build system equivalent.</span>
+<span id="cb31-99"><a href="#cb31-99"></a><span class="ss">    - </span>I use flit, which is easy.</span>
+<span id="cb31-100"><a href="#cb31-100"></a><span class="ss">    - </span>I think there's others... Setuptools? Hatchling?</span>
+<span id="cb31-101"><a href="#cb31-101"></a>    </span>
+<span id="cb31-102"><a href="#cb31-102"></a><span class="fu">## Flit</span></span>
+<span id="cb31-103"><a href="#cb31-103"></a></span>
+<span id="cb31-104"><a href="#cb31-104"></a><span class="ss">- </span>Flit solves a novel problem for Python programers.</span>
+<span id="cb31-105"><a href="#cb31-105"></a><span class="ss">    - </span>**Not**: Let's make some code that I can run.</span>
+<span id="cb31-106"><a href="#cb31-106"></a><span class="ss">    - </span>**Instead**: Let's make code that can be used in code other people run.</span>
+<span id="cb31-107"><a href="#cb31-107"></a>    </span>
+<span id="cb31-108"><a href="#cb31-108"></a><span class="fu">## Packaging</span></span>
+<span id="cb31-109"><a href="#cb31-109"></a>    </span>
+<span id="cb31-110"><a href="#cb31-110"></a><span class="ss">- </span>NumPy, **pandas**, and things like CS 151 PGL can be "built" into packages with Flit and friends.</span>
+<span id="cb31-111"><a href="#cb31-111"></a><span class="ss">    - </span>Basically, instead of running e.g. <span class="in">`python3 mycode.py`</span></span>
+<span id="cb31-112"><a href="#cb31-112"></a><span class="ss">    - </span>Run <span class="in">`flit init`</span> to make a new folder, edit some code, then run <span class="in">`flit publish`</span> to add it to <span class="in">`pip`</span></span>
+<span id="cb31-113"><a href="#cb31-113"></a><span class="ss">- </span>Takeaway - package management and build systems work *real* well together.</span>
+<span id="cb31-114"><a href="#cb31-114"></a></span>
+<span id="cb31-115"><a href="#cb31-115"></a><span class="fu">## Wheels</span></span>
+<span id="cb31-116"><a href="#cb31-116"></a></span>
+<span id="cb31-117"><a href="#cb31-117"></a><span class="ss">- </span>The thing that <span class="in">`flit`</span> and friends create and distribute is not a <span class="in">`.py`</span> file.</span>
+<span id="cb31-118"><a href="#cb31-118"></a><span class="ss">- </span>Rather, they are "wheels" which are not human readable.</span>
+<span id="cb31-119"><a href="#cb31-119"></a><span class="ss">- </span>*A lot like compiled code*</span>
+<span id="cb31-120"><a href="#cb31-120"></a><span class="ss">- </span>Takeaway - a good way to think of Rust is that we're writing packages for ourselves.</span>
+<span id="cb31-121"><a href="#cb31-121"></a></span>
+<span id="cb31-122"><a href="#cb31-122"></a><span class="fu">## Cargo</span></span>
+<span id="cb31-123"><a href="#cb31-123"></a></span>
+<span id="cb31-124"><a href="#cb31-124"></a><span class="ss">- </span>With Python, we use <span class="in">`python3`</span> (or <span class="in">`pip`</span>, but perhaps as <span class="in">`python3 -m pip`</span>).</span>
+<span id="cb31-125"><a href="#cb31-125"></a><span class="ss">- </span><span class="in">`rustc`</span> is not really the equivalent to that:</span>
+<span id="cb31-126"><a href="#cb31-126"></a><span class="ss">- </span>Rather, we use <span class="in">`cargo`</span>, the Rust build and package manager.</span>
+<span id="cb31-127"><a href="#cb31-127"></a><span class="ss">- </span><span class="in">`cargo`</span> will handle any usage of <span class="in">`rustc`</span> that we may need.</span>
+<span id="cb31-128"><a href="#cb31-128"></a><span class="ss">    - </span>We can easily then distribute code across multiple files.</span>
+<span id="cb31-129"><a href="#cb31-129"></a>    </span>
+<span id="cb31-130"><a href="#cb31-130"></a><span class="fu"># Cargo New</span></span>
+<span id="cb31-131"><a href="#cb31-131"></a></span>
+<span id="cb31-132"><a href="#cb31-132"></a><span class="fu">## Build+Package</span></span>
+<span id="cb31-133"><a href="#cb31-133"></a></span>
+<span id="cb31-134"><a href="#cb31-134"></a><span class="ss">- </span>Cargo is Rust’s *build system* (like `flit`) and *package manager* (like <span class="in">`pip`</span>).</span>
+<span id="cb31-135"><a href="#cb31-135"></a><span class="ss">- </span>We will use Cargo instead of <span class="in">`rustc`</span> for the rest of the term.</span>
+<span id="cb31-136"><a href="#cb31-136"></a><span class="ss">    - </span>My sense is that this is the industry standard.</span>
+<span id="cb31-137"><a href="#cb31-137"></a><span class="ss">- </span>We'll step through an example, then you'll do a (very simple) exercise.</span>
+<span id="cb31-138"><a href="#cb31-138"></a></span>
+<span id="cb31-139"><a href="#cb31-139"></a><span class="fu">## New</span></span>
+<span id="cb31-140"><a href="#cb31-140"></a></span>
+<span id="cb31-141"><a href="#cb31-141"></a><span class="ss">- </span>The first thing to do with Cargo, as a rule, is great a new package.</span>
+<span id="cb31-142"><a href="#cb31-142"></a><span class="ss">    - </span>This is *kinda* like creating a new <span class="in">`.py`</span> file.</span>
+<span id="cb31-143"><a href="#cb31-143"></a><span class="ss">    - </span>It is a bit more like creating a Python project from a template repository.</span>
+<span id="cb31-144"><a href="#cb31-144"></a>    </span>
+<span id="cb31-145"><a href="#cb31-145"></a><span class="fu">## Do it</span></span>
+<span id="cb31-146"><a href="#cb31-146"></a>    </span>
+<span id="cb31-147"><a href="#cb31-147"></a><span class="ss">- </span>To do so:</span>
+<span id="cb31-148"><a href="#cb31-148"></a></span>
+<span id="cb31-149"><a href="#cb31-149"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-150"><a href="#cb31-150"></a><span class="in">cargo new throwaway_example</span></span>
+<span id="cb31-151"><a href="#cb31-151"></a><span class="in">```</span></span>
+<span id="cb31-152"><a href="#cb31-152"></a></span>
+<span id="cb31-153"><a href="#cb31-153"></a><span class="ss">- </span><span class="in">`cargo`</span> is, well, Cargo</span>
+<span id="cb31-154"><a href="#cb31-154"></a><span class="ss">- </span><span class="in">`new`</span> creates a new package.</span>
+<span id="cb31-155"><a href="#cb31-155"></a><span class="ss">- </span><span class="in">`throwaway_example`</span> is the name of the package<span class="ot">[^1]</span>.</span>
+<span id="cb31-156"><a href="#cb31-156"></a></span>
+<span id="cb31-157"><a href="#cb31-157"></a><span class="ot">[^1]: </span>Well, kinda. We'll get to that.</span>
+<span id="cb31-158"><a href="#cb31-158"></a></span>
+<span id="cb31-159"><a href="#cb31-159"></a><span class="fu">## Examine</span></span>
+<span id="cb31-160"><a href="#cb31-160"></a></span>
+<span id="cb31-161"><a href="#cb31-161"></a><span class="ss">- </span>The most natural thing is to see what has changed.</span>
+<span id="cb31-162"><a href="#cb31-162"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-163"><a href="#cb31-163"></a><span class="in">ls</span></span>
+<span id="cb31-164"><a href="#cb31-164"></a><span class="in">```</span></span>
+<span id="cb31-165"><a href="#cb31-165"></a><span class="ss">- </span>For me, I see a new directory: <span class="in">`throwaway_example`</span></span>
+<span id="cb31-166"><a href="#cb31-166"></a><span class="ss">- </span>I change into the directory to examine it.</span>
+<span id="cb31-167"><a href="#cb31-167"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-168"><a href="#cb31-168"></a><span class="in">cd throwaway_example</span></span>
+<span id="cb31-169"><a href="#cb31-169"></a><span class="in">ls</span></span>
+<span id="cb31-170"><a href="#cb31-170"></a><span class="in">```</span></span>
+<span id="cb31-171"><a href="#cb31-171"></a><span class="ss">- </span>Not much there:</span>
+<span id="cb31-172"><a href="#cb31-172"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-173"><a href="#cb31-173"></a><span class="in">Cargo.toml  src</span></span>
+<span id="cb31-174"><a href="#cb31-174"></a><span class="in">```</span></span>
+<span id="cb31-175"><a href="#cb31-175"></a></span>
+<span id="cb31-176"><a href="#cb31-176"></a><span class="fu">## Aside: Tree</span></span>
+<span id="cb31-177"><a href="#cb31-177"></a></span>
+<span id="cb31-178"><a href="#cb31-178"></a><span class="ss">- </span>Can also see directory structure.</span>
+<span id="cb31-179"><a href="#cb31-179"></a><span class="ss">- </span>Install <span class="in">`tree`</span> with your preferred installer (perhaps <span class="in">`apt`</span> or <span class="in">`brew`</span>)</span>
+<span id="cb31-180"><a href="#cb31-180"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-181"><a href="#cb31-181"></a><span class="in">sudo apt install tree</span></span>
+<span id="cb31-182"><a href="#cb31-182"></a><span class="in">```</span></span>
+<span id="cb31-183"><a href="#cb31-183"></a><span class="ss">- </span>Then use <span class="in">`tree`</span> instead of <span class="in">`ls`</span></span>
+<span id="cb31-184"><a href="#cb31-184"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-185"><a href="#cb31-185"></a><span class="in">.</span></span>
+<span id="cb31-186"><a href="#cb31-186"></a><span class="in">├── Cargo.toml</span></span>
+<span id="cb31-187"><a href="#cb31-187"></a><span class="in">└── src</span></span>
+<span id="cb31-188"><a href="#cb31-188"></a><span class="in">    └── main.rs</span></span>
+<span id="cb31-189"><a href="#cb31-189"></a></span>
+<span id="cb31-190"><a href="#cb31-190"></a><span class="in">1 directory, 2 files</span></span>
+<span id="cb31-191"><a href="#cb31-191"></a><span class="in">```</span></span>
+<span id="cb31-192"><a href="#cb31-192"></a></span>
+<span id="cb31-193"><a href="#cb31-193"></a><span class="fu">## main.rs</span></span>
+<span id="cb31-194"><a href="#cb31-194"></a></span>
+<span id="cb31-195"><a href="#cb31-195"></a><span class="ss">- </span>Cargo creates projects with a default main file.</span>
+<span id="cb31-196"><a href="#cb31-196"></a><span class="in">```{.rs filename="main.rs"}</span></span>
+<span id="cb31-197"><a href="#cb31-197"></a><span class="in">fn main() {</span></span>
+<span id="cb31-198"><a href="#cb31-198"></a><span class="in">    println!("Hello, world!");</span></span>
+<span id="cb31-199"><a href="#cb31-199"></a><span class="in">}</span></span>
+<span id="cb31-200"><a href="#cb31-200"></a><span class="in">```</span></span>
+<span id="cb31-201"><a href="#cb31-201"></a><span class="ss">- </span>The name "main" is basically mainful to Cargo - it says which, if multiple, <span class="in">`.rs`</span> files to read first when trying to execute the code in a package.</span>
+<span id="cb31-202"><a href="#cb31-202"></a><span class="ss">    - </span>Make sure you understand that sentence.</span>
+<span id="cb31-203"><a href="#cb31-203"></a> </span>
+<span id="cb31-204"><a href="#cb31-204"></a><span class="fu"># Cargo Run</span></span>
+<span id="cb31-205"><a href="#cb31-205"></a> </span>
+<span id="cb31-206"><a href="#cb31-206"></a><span class="fu">## Run</span></span>
+<span id="cb31-207"><a href="#cb31-207"></a></span>
+<span id="cb31-208"><a href="#cb31-208"></a><span class="ss">- </span><span class="in">`cargo run`</span> is probably our closest equivalent to <span class="in">`python3 throwaway_example.py`</span> or the "Run" button in VS Code.</span>
+<span id="cb31-209"><a href="#cb31-209"></a><span class="ss">- </span>Of note, you can **not** simply do "new" then "run".</span>
+<span id="cb31-210"><a href="#cb31-210"></a><span class="ss">    - </span>"New" creates a new folder.</span>
+<span id="cb31-211"><a href="#cb31-211"></a><span class="ss">    - </span>"Run" must be done from *within* that folder.</span>
+<span id="cb31-212"><a href="#cb31-212"></a></span>
+<span id="cb31-213"><a href="#cb31-213"></a><span class="fu">## Try it</span></span>
+<span id="cb31-214"><a href="#cb31-214"></a></span>
+<span id="cb31-215"><a href="#cb31-215"></a><span class="ss">- </span>Do this:</span>
+<span id="cb31-216"><a href="#cb31-216"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-217"><a href="#cb31-217"></a><span class="in">cargo run</span></span>
+<span id="cb31-218"><a href="#cb31-218"></a><span class="in">```</span></span>
+<span id="cb31-219"><a href="#cb31-219"></a><span class="ss">- </span>See this:</span>
+<span id="cb31-220"><a href="#cb31-220"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-221"><a href="#cb31-221"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-222"><a href="#cb31-222"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s</span></span>
+<span id="cb31-223"><a href="#cb31-223"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
+<span id="cb31-224"><a href="#cb31-224"></a><span class="in">Hello, world!</span></span>
+<span id="cb31-225"><a href="#cb31-225"></a><span class="in">```</span></span>
+<span id="cb31-226"><a href="#cb31-226"></a></span>
+<span id="cb31-227"><a href="#cb31-227"></a><span class="fu">## Again!</span></span>
+<span id="cb31-228"><a href="#cb31-228"></a></span>
+<span id="cb31-229"><a href="#cb31-229"></a><span class="ss">- </span>If you run again, the process will:</span>
+<span id="cb31-230"><a href="#cb31-230"></a><span class="ss">    - </span>Skip the compile step.</span>
+<span id="cb31-231"><a href="#cb31-231"></a><span class="ss">    - </span>Be *way* faster (<span class="dv">&amp;infin;</span>x reported here)</span>
+<span id="cb31-234"><a href="#cb31-234"></a><span class="in">```{bash}</span></span>
+<span id="cb31-235"><a href="#cb31-235"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb31-236"><a href="#cb31-236"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/throwaway_example</span><span class="kw">`</span></span>
+<span id="cb31-237"><a href="#cb31-237"></a><span class="ex">Hello,</span> world!</span>
+<span id="cb31-238"><a href="#cb31-238"></a><span class="in">```</span></span>
+<span id="cb31-239"><a href="#cb31-239"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
+<span id="cb31-240"><a href="#cb31-240"></a></span>
+<span id="cb31-241"><a href="#cb31-241"></a><span class="fu">## It's fast</span></span>
+<span id="cb31-242"><a href="#cb31-242"></a></span>
+<span id="cb31-243"><a href="#cb31-243"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
+<span id="cb31-244"><a href="#cb31-244"></a><span class="ss">- </span>This is why we use languages which compile.</span>
+<span id="cb31-245"><a href="#cb31-245"></a><span class="ss">    - </span>Python took around .04s, for me.</span>
+<span id="cb31-246"><a href="#cb31-246"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-247"><a href="#cb31-247"></a><span class="in">time python3 -c "print('Hello, world')"</span></span>
+<span id="cb31-248"><a href="#cb31-248"></a><span class="in">```</span></span>
+<span id="cb31-249"><a href="#cb31-249"></a><span class="ss">- </span>The results are:</span>
+<span id="cb31-250"><a href="#cb31-250"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-251"><a href="#cb31-251"></a><span class="in">Hello, world</span></span>
+<span id="cb31-252"><a href="#cb31-252"></a></span>
+<span id="cb31-253"><a href="#cb31-253"></a><span class="in">real    0m0.039s</span></span>
+<span id="cb31-254"><a href="#cb31-254"></a><span class="in">user    0m0.007s</span></span>
+<span id="cb31-255"><a href="#cb31-255"></a><span class="in">sys     0m0.008s</span></span>
+<span id="cb31-256"><a href="#cb31-256"></a><span class="in">```</span></span>
+<span id="cb31-257"><a href="#cb31-257"></a><span class="ss">- </span>Guess how long it takes to compile <span class="in">`python`</span>, by the way.</span>
+<span id="cb31-258"><a href="#cb31-258"></a></span>
+<span id="cb31-259"><a href="#cb31-259"></a><span class="fu">## Other files</span></span>
+<span id="cb31-260"><a href="#cb31-260"></a></span>
+<span id="cb31-261"><a href="#cb31-261"></a><span class="ss">- </span>Go ahead and add another <span class="in">`.rs`</span> file and see what happens.</span>
+<span id="cb31-262"><a href="#cb31-262"></a><span class="ss">    - </span>Add it to the <span class="in">`src`</span> directory!</span>
+<span id="cb31-263"><a href="#cb31-263"></a><span class="ss">- </span>I'll use this one - I change filename and text, but </span>
+<span id="cb31-264"><a href="#cb31-264"></a><span class="in">```{.rs filename="secondary.rs"}</span></span>
+<span id="cb31-265"><a href="#cb31-265"></a><span class="in">fn secondary() {</span></span>
+<span id="cb31-266"><a href="#cb31-266"></a><span class="in">    println!("Goodbye, space!");</span></span>
+<span id="cb31-267"><a href="#cb31-267"></a><span class="in">}</span></span>
+<span id="cb31-268"><a href="#cb31-268"></a><span class="in">```</span></span>
+<span id="cb31-269"><a href="#cb31-269"></a></span>
+<span id="cb31-270"><a href="#cb31-270"></a><span class="fu">## Run it again...</span></span>
+<span id="cb31-271"><a href="#cb31-271"></a></span>
+<span id="cb31-272"><a href="#cb31-272"></a><span class="ss">- </span>Nothing changes.</span>
+<span id="cb31-273"><a href="#cb31-273"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-274"><a href="#cb31-274"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb31-275"><a href="#cb31-275"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
+<span id="cb31-276"><a href="#cb31-276"></a><span class="in">Hello, world!</span></span>
+<span id="cb31-277"><a href="#cb31-277"></a><span class="in">```</span></span>
+<span id="cb31-278"><a href="#cb31-278"></a><span class="ss">- </span>This is the same as adding another <span class="in">`.py`</span> file then not using <span class="in">`import`</span> or including its code in any other way.</span>
+<span id="cb31-279"><a href="#cb31-279"></a></span>
+<span id="cb31-280"><a href="#cb31-280"></a><span class="fu">## Swap the names.</span></span>
+<span id="cb31-281"><a href="#cb31-281"></a></span>
+<span id="cb31-282"><a href="#cb31-282"></a><span class="ss">- </span>I use <span class="in">`mv`</span> (move) to change:</span>
+<span id="cb31-283"><a href="#cb31-283"></a><span class="ss">    - </span><span class="in">`main.rs`</span> to <span class="in">`old_main.rs`</span></span>
+<span id="cb31-284"><a href="#cb31-284"></a><span class="ss">    - </span><span class="in">`secondary.rs`</span> to <span class="in">`main.rs`</span></span>
+<span id="cb31-285"><a href="#cb31-285"></a><span class="ss">- </span>Things change!</span>
+<span id="cb31-286"><a href="#cb31-286"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-287"><a href="#cb31-287"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-288"><a href="#cb31-288"></a><span class="in">error[E0601]: `main` function not found in crate `throwaway_example`</span></span>
+<span id="cb31-289"><a href="#cb31-289"></a><span class="in"> --&gt; src/main.rs:3:2</span></span>
+<span id="cb31-290"><a href="#cb31-290"></a><span class="in">  |</span></span>
+<span id="cb31-291"><a href="#cb31-291"></a><span class="in">3 | }</span></span>
+<span id="cb31-292"><a href="#cb31-292"></a><span class="in">  |  ^ consider adding a `main` function to `src/main.rs`</span></span>
+<span id="cb31-293"><a href="#cb31-293"></a></span>
+<span id="cb31-294"><a href="#cb31-294"></a><span class="in">For more information about this error, try `rustc --explain E0601`.</span></span>
+<span id="cb31-295"><a href="#cb31-295"></a><span class="in">error: could not compile `throwaway_example` (bin "throwaway_example") due to 1 previous error</span></span>
+<span id="cb31-296"><a href="#cb31-296"></a><span class="in">```</span></span>
+<span id="cb31-297"><a href="#cb31-297"></a></span>
+<span id="cb31-298"><a href="#cb31-298"></a><span class="fu">## Requirements</span></span>
+<span id="cb31-299"><a href="#cb31-299"></a></span>
+<span id="cb31-300"><a href="#cb31-300"></a><span class="ss">- </span>You need a <span class="in">`main.rs`</span> with a function named <span class="in">`main`</span>.</span>
+<span id="cb31-301"><a href="#cb31-301"></a><span class="ss">- </span><span class="in">`nvim src/main.rs`</span> -&gt; Change "secondary" to "main" -&gt; "cargo run"</span>
+<span id="cb31-302"><a href="#cb31-302"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-303"><a href="#cb31-303"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-304"><a href="#cb31-304"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s</span></span>
+<span id="cb31-305"><a href="#cb31-305"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
+<span id="cb31-306"><a href="#cb31-306"></a><span class="in">Goodbye, space!</span></span>
+<span id="cb31-307"><a href="#cb31-307"></a><span class="in">```</span></span>
+<span id="cb31-308"><a href="#cb31-308"></a></span>
+<span id="cb31-309"><a href="#cb31-309"></a><span class="fu"># Options</span></span>
+<span id="cb31-310"><a href="#cb31-310"></a></span>
+<span id="cb31-311"><a href="#cb31-311"></a><span class="fu">## Carry-on only</span></span>
+<span id="cb31-312"><a href="#cb31-312"></a></span>
+<span id="cb31-313"><a href="#cb31-313"></a><span class="ss">- </span>I try to live me life without baggage.</span>
+<span id="cb31-314"><a href="#cb31-314"></a><span class="ss">    - </span>(I don't like <span class="in">`cargo`</span>)</span>
+<span id="cb31-315"><a href="#cb31-315"></a><span class="ss">- </span>Why? Well...</span>
+<span id="cb31-316"><a href="#cb31-316"></a><span class="ss">    - </span>I can't name things the way I want</span>
+<span id="cb31-317"><a href="#cb31-317"></a><span class="ss">    - </span>I can't add <span class="in">`cargo`</span> created directories to repositories.</span>
+<span id="cb31-318"><a href="#cb31-318"></a><span class="ss">- </span>Well, I can, but it I have to use options.</span>
+<span id="cb31-319"><a href="#cb31-319"></a></span>
+<span id="cb31-320"><a href="#cb31-320"></a><span class="fu">## Option 1: Names</span></span>
+<span id="cb31-321"><a href="#cb31-321"></a></span>
+<span id="cb31-322"><a href="#cb31-322"></a><span class="ss">- </span>It is uncommon to name a package numerically.</span>
+<span id="cb31-323"><a href="#cb31-323"></a><span class="ss">- </span>It is however, I think, useful in a course.</span>
+<span id="cb31-324"><a href="#cb31-324"></a><span class="ss">- </span>It is also, I think, useful to write packages for a course.</span>
+<span id="cb31-325"><a href="#cb31-325"></a><span class="ss">- </span>So we do so.</span>
+<span id="cb31-326"><a href="#cb31-326"></a></span>
+<span id="cb31-327"><a href="#cb31-327"></a><span class="fu">## Name Scheme</span></span>
+<span id="cb31-328"><a href="#cb31-328"></a></span>
+<span id="cb31-329"><a href="#cb31-329"></a><span class="ss">- </span>I have used the following scheme this term:</span>
+<span id="cb31-330"><a href="#cb31-330"></a><span class="ss">    - </span>Each class day is denoted as a two digit value.</span>
+<span id="cb31-331"><a href="#cb31-331"></a><span class="ss">    - </span>The first digit represents the zero-indexed week.</span>
+<span id="cb31-332"><a href="#cb31-332"></a><span class="ss">    - </span>The second digit represents the zero-index position in <span class="in">`["Lecture", "Lab", "Homework"]`</span></span>
+<span id="cb31-333"><a href="#cb31-333"></a></span>
+<span id="cb31-334"><a href="#cb31-334"></a></span>
+<span id="cb31-335"><a href="#cb31-335"></a><span class="fu">## Today</span></span>
+<span id="cb31-336"><a href="#cb31-336"></a></span>
+<span id="cb31-337"><a href="#cb31-337"></a><span class="ss">- </span>Today is one week from the first day of class, last week.</span>
+<span id="cb31-338"><a href="#cb31-338"></a><span class="ss">- </span>Today is one day from the first day of the week, Monday.</span>
+<span id="cb31-339"><a href="#cb31-339"></a><span class="ss">- </span>So I denote today <span class="in">`11`</span></span>
+<span id="cb31-340"><a href="#cb31-340"></a></span>
+<span id="cb31-341"><a href="#cb31-341"></a><span class="fu">## Use Cargo</span></span>
+<span id="cb31-342"><a href="#cb31-342"></a></span>
+<span id="cb31-343"><a href="#cb31-343"></a><span class="ss">- </span>Let's use <span class="in">`cargo`</span> to make a package called <span class="in">`11`</span>.</span>
+<span id="cb31-344"><a href="#cb31-344"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-345"><a href="#cb31-345"></a><span class="in">cargo new 11</span></span>
+<span id="cb31-346"><a href="#cb31-346"></a><span class="in">```</span></span>
+<span id="cb31-347"><a href="#cb31-347"></a><span class="ss">- </span>What happens?</span>
+<span id="cb31-348"><a href="#cb31-348"></a></span>
+<span id="cb31-349"><a href="#cb31-349"></a><span class="fu">## Problem</span></span>
+<span id="cb31-350"><a href="#cb31-350"></a></span>
+<span id="cb31-351"><a href="#cb31-351"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-352"><a href="#cb31-352"></a><span class="in">    Creating binary (application) `11` package</span></span>
+<span id="cb31-353"><a href="#cb31-353"></a><span class="in">error: invalid character `1` in package name: `11`, the name cannot start with a digit</span></span>
+<span id="cb31-354"><a href="#cb31-354"></a><span class="in">If you need a package name to not match the directory name, consider using --name flag.</span></span>
+<span id="cb31-355"><a href="#cb31-355"></a><span class="in">If you need a binary with the name "11", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:</span></span>
+<span id="cb31-356"><a href="#cb31-356"></a></span>
+<span id="cb31-357"><a href="#cb31-357"></a><span class="in">    [[bin]]</span></span>
+<span id="cb31-358"><a href="#cb31-358"></a><span class="in">    name = "11"</span></span>
+<span id="cb31-359"><a href="#cb31-359"></a><span class="in">    path = "src/main.rs"</span></span>
+<span id="cb31-360"><a href="#cb31-360"></a><span class="in">```</span></span>
+<span id="cb31-361"><a href="#cb31-361"></a></span>
+<span id="cb31-362"><a href="#cb31-362"></a><span class="fu">## Solution</span></span>
+<span id="cb31-363"><a href="#cb31-363"></a></span>
+<span id="cb31-364"><a href="#cb31-364"></a><span class="ss">- </span>We can make a folder named <span class="in">`11`</span></span>
+<span id="cb31-365"><a href="#cb31-365"></a><span class="ss">- </span>But not a package named <span class="in">`11`</span>.</span>
+<span id="cb31-366"><a href="#cb31-366"></a><span class="ss">- </span>We use the <span class="in">`--name`</span> flag.</span>
+<span id="cb31-367"><a href="#cb31-367"></a><span class="ss">    - </span>I use the name of these slides, rather than the number, as the package name.</span>
+<span id="cb31-368"><a href="#cb31-368"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-369"><a href="#cb31-369"></a><span class="in">cargo new 11 --name packages</span></span>
+<span id="cb31-370"><a href="#cb31-370"></a><span class="in">```</span></span>
+<span id="cb31-371"><a href="#cb31-371"></a><span class="ss">- </span>This should be allowed.</span>
+<span id="cb31-372"><a href="#cb31-372"></a></span>
+<span id="cb31-373"><a href="#cb31-373"></a><span class="fu">## Option 2: VCS</span></span>
+<span id="cb31-374"><a href="#cb31-374"></a></span>
+<span id="cb31-375"><a href="#cb31-375"></a><span class="ss">- </span>It may be the case that you created a <span class="in">`11`</span> folder outside of your <span class="in">`271rs`</span> directory.</span>
+<span id="cb31-376"><a href="#cb31-376"></a><span class="ss">    - </span>I do this often, then plan to move it in latter.</span>
+<span id="cb31-377"><a href="#cb31-377"></a><span class="ss">- </span>This can pose a problem.</span>
+<span id="cb31-378"><a href="#cb31-378"></a></span>
+<span id="cb31-379"><a href="#cb31-379"></a><span class="fu">## Situation</span></span>
+<span id="cb31-380"><a href="#cb31-380"></a></span>
+<span id="cb31-381"><a href="#cb31-381"></a><span class="ss">- </span><span class="in">`git clone`</span> a <span class="in">`271rs`</span> repository, e.g.:</span>
+<span id="cb31-382"><a href="#cb31-382"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-383"><a href="#cb31-383"></a><span class="in">git clone git@github.com:cd-c89/271rs.git</span></span>
+<span id="cb31-384"><a href="#cb31-384"></a><span class="in">- `cargo new 11 --name packages` before `cd 271rs`</span></span>
+<span id="cb31-385"><a href="#cb31-385"></a><span class="in">- It would look like this:</span></span>
+<span id="cb31-386"><a href="#cb31-386"></a></span>
+<span id="cb31-387"><a href="#cb31-387"></a><span class="in">```{.bash filename="tree"}</span></span>
+<span id="cb31-388"><a href="#cb31-388"></a><span class="in">.</span></span>
+<span id="cb31-389"><a href="#cb31-389"></a><span class="in">├── 11</span></span>
+<span id="cb31-390"><a href="#cb31-390"></a><span class="in">│&nbsp;&nbsp; ├── Cargo.toml</span></span>
+<span id="cb31-391"><a href="#cb31-391"></a><span class="in">│&nbsp;&nbsp; └── src</span></span>
+<span id="cb31-392"><a href="#cb31-392"></a><span class="in">│&nbsp;&nbsp;     └── main.rs</span></span>
+<span id="cb31-393"><a href="#cb31-393"></a><span class="in">└── 271rs</span></span>
+<span id="cb31-394"><a href="#cb31-394"></a><span class="in">    ├── LICENSE</span></span>
+<span id="cb31-395"><a href="#cb31-395"></a><span class="in">    └── README.md</span></span>
+<span id="cb31-396"><a href="#cb31-396"></a></span>
+<span id="cb31-397"><a href="#cb31-397"></a><span class="in">3 directories, 4 files</span></span>
+<span id="cb31-398"><a href="#cb31-398"></a><span class="in">```</span></span>
+<span id="cb31-399"><a href="#cb31-399"></a></span>
+<span id="cb31-400"><a href="#cb31-400"></a><span class="fu">## Move</span></span>
+<span id="cb31-401"><a href="#cb31-401"></a></span>
+<span id="cb31-402"><a href="#cb31-402"></a><span class="ss">- </span>I'd like to use the <span class="in">`mv`</span> command to put <span class="in">`11`</span> in <span class="in">`271`</span> rs.</span>
+<span id="cb31-403"><a href="#cb31-403"></a><span class="ss">    - </span>Notation is "mv" then "source" then "destination"</span>
+<span id="cb31-404"><a href="#cb31-404"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-405"><a href="#cb31-405"></a><span class="in">mv 11 271rs</span></span>
+<span id="cb31-406"><a href="#cb31-406"></a><span class="in">```</span></span>
+<span id="cb31-407"><a href="#cb31-407"></a><span class="ss">- </span>I have this:</span>
+<span id="cb31-408"><a href="#cb31-408"></a><span class="in">```{.bash filename="tree"}</span></span>
+<span id="cb31-409"><a href="#cb31-409"></a><span class="in">.</span></span>
+<span id="cb31-410"><a href="#cb31-410"></a><span class="in">└── 271rs</span></span>
+<span id="cb31-411"><a href="#cb31-411"></a><span class="in">    ├── 11</span></span>
+<span id="cb31-412"><a href="#cb31-412"></a><span class="in">    │&nbsp;&nbsp; ├── Cargo.toml</span></span>
+<span id="cb31-413"><a href="#cb31-413"></a><span class="in">    │&nbsp;&nbsp; └── src</span></span>
+<span id="cb31-414"><a href="#cb31-414"></a><span class="in">    │&nbsp;&nbsp;     └── main.rs</span></span>
+<span id="cb31-415"><a href="#cb31-415"></a><span class="in">    ├── LICENSE</span></span>
+<span id="cb31-416"><a href="#cb31-416"></a><span class="in">    └── README.md</span></span>
+<span id="cb31-417"><a href="#cb31-417"></a></span>
+<span id="cb31-418"><a href="#cb31-418"></a><span class="in">3 directories, 4 files</span></span>
+<span id="cb31-419"><a href="#cb31-419"></a><span class="in">```</span></span>
+<span id="cb31-420"><a href="#cb31-420"></a></span>
+<span id="cb31-421"><a href="#cb31-421"></a><span class="fu">## Status</span></span>
+<span id="cb31-422"><a href="#cb31-422"></a></span>
+<span id="cb31-423"><a href="#cb31-423"></a><span class="ss">- </span>Then I <span class="in">`cd`</span> into <span class="in">`271rs`</span> to add/commit/push</span>
+<span id="cb31-424"><a href="#cb31-424"></a></span>
+<span id="cb31-425"><a href="#cb31-425"></a><span class="in">```{.bash filename="git status"}</span></span>
+<span id="cb31-426"><a href="#cb31-426"></a><span class="in">On branch main</span></span>
+<span id="cb31-427"><a href="#cb31-427"></a><span class="in">Your branch is up to date with 'origin/main'.</span></span>
+<span id="cb31-428"><a href="#cb31-428"></a></span>
+<span id="cb31-429"><a href="#cb31-429"></a><span class="in">Untracked files:</span></span>
+<span id="cb31-430"><a href="#cb31-430"></a><span class="in">  (use "git add &lt;file&gt;..." to include in what will be committed)</span></span>
+<span id="cb31-431"><a href="#cb31-431"></a><span class="in">        11/</span></span>
+<span id="cb31-432"><a href="#cb31-432"></a></span>
+<span id="cb31-433"><a href="#cb31-433"></a><span class="in">nothing added to commit but untracked files present (use "git add" to track)</span></span>
+<span id="cb31-434"><a href="#cb31-434"></a><span class="in">```</span></span>
+<span id="cb31-435"><a href="#cb31-435"></a></span>
+<span id="cb31-436"><a href="#cb31-436"></a><span class="fu">## Add</span></span>
+<span id="cb31-437"><a href="#cb31-437"></a></span>
+<span id="cb31-438"><a href="#cb31-438"></a><span class="ss">- </span>Add doesn't work:</span>
+<span id="cb31-439"><a href="#cb31-439"></a></span>
+<span id="cb31-440"><a href="#cb31-440"></a></span>
+<span id="cb31-441"><a href="#cb31-441"></a><span class="in">```{.bash filename="git add 11"}</span></span>
+<span id="cb31-442"><a href="#cb31-442"></a><span class="in">error: '11/' does not have a commit checked out</span></span>
+<span id="cb31-443"><a href="#cb31-443"></a><span class="in">fatal: adding files failed</span></span>
+<span id="cb31-444"><a href="#cb31-444"></a><span class="in">```</span></span>
+<span id="cb31-445"><a href="#cb31-445"></a></span>
+<span id="cb31-446"><a href="#cb31-446"></a><span class="ss">- </span>By default, <span class="in">`cargo`</span> initializes new projects as a git repository.</span>
+<span id="cb31-447"><a href="#cb31-447"></a><span class="ss">- </span>Putting a git repository inside another git repository is non-trivial.</span>
+<span id="cb31-448"><a href="#cb31-448"></a></span>
+<span id="cb31-449"><a href="#cb31-449"></a><span class="fu">## Confirm</span></span>
+<span id="cb31-450"><a href="#cb31-450"></a></span>
+<span id="cb31-451"><a href="#cb31-451"></a><span class="ss">- </span>You can tell by looking for the hidden <span class="in">`.git`</span> folder in <span class="in">`11`</span>.</span>
+<span id="cb31-452"><a href="#cb31-452"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-453"><a href="#cb31-453"></a><span class="in">cd 11</span></span>
+<span id="cb31-454"><a href="#cb31-454"></a><span class="in">ls -al</span></span>
+<span id="cb31-455"><a href="#cb31-455"></a><span class="in">```</span></span>
+<span id="cb31-456"><a href="#cb31-456"></a><span class="ss">- </span>You'll see something called <span class="in">`.git`</span>.</span>
+<span id="cb31-457"><a href="#cb31-457"></a><span class="ss">- </span>You can delete it, but this is inelegant.</span>
+<span id="cb31-458"><a href="#cb31-458"></a></span>
+<span id="cb31-459"><a href="#cb31-459"></a><span class="fu">## Solution</span></span>
+<span id="cb31-460"><a href="#cb31-460"></a></span>
+<span id="cb31-461"><a href="#cb31-461"></a><span class="ss">- </span>Use <span class="in">`cargo new`</span> with the option to have no "version control system" used.</span>
+<span id="cb31-462"><a href="#cb31-462"></a></span>
+<span id="cb31-463"><a href="#cb31-463"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-464"><a href="#cb31-464"></a><span class="in">cargo new 11 --name packages --vcs none</span></span>
+<span id="cb31-465"><a href="#cb31-465"></a><span class="in">```</span></span>
+<span id="cb31-466"><a href="#cb31-466"></a></span>
+<span id="cb31-467"><a href="#cb31-467"></a><span class="ss">- </span>You can confirm there is no hidden <span class="in">`.git`</span> folder.</span>
+<span id="cb31-468"><a href="#cb31-468"></a><span class="ss">- </span>This can be moved into <span class="in">`271rs`</span> or created within <span class="in">`271rs`</span></span>
+<span id="cb31-469"><a href="#cb31-469"></a></span>
+<span id="cb31-470"><a href="#cb31-470"></a></span>
+<span id="cb31-471"><a href="#cb31-471"></a><span class="fu"># Exercise</span></span>
+<span id="cb31-472"><a href="#cb31-472"></a></span>
+<span id="cb31-473"><a href="#cb31-473"></a><span class="fu">## Exercise</span></span>
+<span id="cb31-474"><a href="#cb31-474"></a></span>
+<span id="cb31-475"><a href="#cb31-475"></a><span class="ss">- </span>New Cargo project, in</span>
+<span id="cb31-476"><a href="#cb31-476"></a><span class="ss">- </span>A folder named <span class="in">`11`</span>, with</span>
+<span id="cb31-477"><a href="#cb31-477"></a><span class="ss">- </span>A valid Cargo name (not <span class="in">`11`</span>), that is</span>
+<span id="cb31-478"><a href="#cb31-478"></a><span class="ss">- </span>In your *course* repository and therefore</span>
+<span id="cb31-479"><a href="#cb31-479"></a><span class="ss">- </span>Has no <span class="in">`cargo`</span> managed repository, and</span>
+<span id="cb31-480"><a href="#cb31-480"></a><span class="ss">- </span>Present on your remote GitHub repository</span>
+<span id="cb31-481"><a href="#cb31-481"></a><span class="ss">- </span>The conents of the project are immaterial.</span>
+<span id="cb31-482"><a href="#cb31-482"></a></span>
+<span id="cb31-483"><a href="#cb31-483"></a><span class="fu">## Disambiguity</span></span>
+<span id="cb31-484"><a href="#cb31-484"></a></span>
+<span id="cb31-485"><a href="#cb31-485"></a><span class="ss">- </span>I have seen students take extreme liberties with naming folders and assignments.</span>
+<span id="cb31-486"><a href="#cb31-486"></a><span class="ss">- </span>I believe no ambiguity exists within the instructions.</span>
+<span id="cb31-487"><a href="#cb31-487"></a><span class="ss">- </span>It is trivial to check the following:</span>
+<span id="cb31-488"><a href="#cb31-488"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-489"><a href="#cb31-489"></a><span class="in">ls 271</span></span>
+<span id="cb31-490"><a href="#cb31-490"></a><span class="in">```</span></span>
+<span id="cb31-491"><a href="#cb31-491"></a><span class="ss">- </span>Unless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.</span>
+<span id="cb31-492"><a href="#cb31-492"></a><span class="in">```{.bash}</span></span>
+<span id="cb31-493"><a href="#cb31-493"></a><span class="in">01  02  11  LICENSE  README.md</span></span>
+<span id="cb31-494"><a href="#cb31-494"></a><span class="in">```</span></span>
+<span id="cb31-495"><a href="#cb31-495"></a></span>
+<span id="cb31-496"><a href="#cb31-496"></a><span class="fu"># Fin</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

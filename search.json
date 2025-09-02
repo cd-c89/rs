@@ -4,7 +4,157 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nOff\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nOff\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nOff\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus TBD\n\nUngrade++\nLec/Lab/HW\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nNone\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+  },
+  {
+    "objectID": "12_hicargo.html",
+    "href": "12_hicargo.html",
+    "title": "Hi cargo",
+    "section": "",
+    "text": "There’s a hot new trend that all the cool kids are talking about in town.\nData Science.\nRust is, of course, one of the best data science langauges.\n\n\n\n\n\nYou should have\n\ngit installed and working.\nA repository named 271rs, both a local repository on your device and a remote repository on GitHub.\nAn editor, which really should be text-based, in-console text editor, but I can’t actually ban you from using VS Code.\ncargo installed and working.\n\nIf you miss any of this, back to lab.\n\n\n\n\n\nTo complete this assignment, you must:\n\nCreate a 12 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage other Cargo packages, namely “polars” and “chrono”\n\n\n\n\n\n\nTo complete this assignment, your code must produce precisely the following DataFrame:\n\n┌────────────────┬────────────┬────────┬────────┐\n│ name           ┆ birthdate  ┆ weight ┆ height │\n│ ---            ┆ ---        ┆ ---    ┆ ---    │\n│ str            ┆ date       ┆ f64    ┆ f64    │\n╞════════════════╪════════════╪════════╪════════╡\n│ Alice Archer   ┆ 1997-01-10 ┆ 57.9   ┆ 1.56   │\n│ Ben Brown      ┆ 1985-02-15 ┆ 72.5   ┆ 1.77   │\n│ Chloe Cooper   ┆ 1983-03-22 ┆ 53.6   ┆ 1.65   │\n│ Daniel Donovan ┆ 1981-04-30 ┆ 83.1   ┆ 1.75   │\n└────────────────┴────────────┴────────┴────────┘",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#sketch",
+    "href": "12_hicargo.html#sketch",
+    "title": "Hi cargo",
+    "section": "",
+    "text": "There’s a hot new trend that all the cool kids are talking about in town.\nData Science.\nRust is, of course, one of the best data science langauges.",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#pre-flight-checks",
+    "href": "12_hicargo.html#pre-flight-checks",
+    "title": "Hi cargo",
+    "section": "",
+    "text": "You should have\n\ngit installed and working.\nA repository named 271rs, both a local repository on your device and a remote repository on GitHub.\nAn editor, which really should be text-based, in-console text editor, but I can’t actually ban you from using VS Code.\ncargo installed and working.\n\nIf you miss any of this, back to lab.",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#requirements",
+    "href": "12_hicargo.html#requirements",
+    "title": "Hi cargo",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 12 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage other Cargo packages, namely “polars” and “chrono”",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#requirements-1",
+    "href": "12_hicargo.html#requirements-1",
+    "title": "Hi cargo",
+    "section": "",
+    "text": "To complete this assignment, your code must produce precisely the following DataFrame:\n\n┌────────────────┬────────────┬────────┬────────┐\n│ name           ┆ birthdate  ┆ weight ┆ height │\n│ ---            ┆ ---        ┆ ---    ┆ ---    │\n│ str            ┆ date       ┆ f64    ┆ f64    │\n╞════════════════╪════════════╪════════╪════════╡\n│ Alice Archer   ┆ 1997-01-10 ┆ 57.9   ┆ 1.56   │\n│ Ben Brown      ┆ 1985-02-15 ┆ 72.5   ┆ 1.77   │\n│ Chloe Cooper   ┆ 1983-03-22 ┆ 53.6   ┆ 1.65   │\n│ Daniel Donovan ┆ 1981-04-30 ┆ 83.1   ┆ 1.75   │\n└────────────────┴────────────┴────────┴────────┘",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#new-folder",
+    "href": "12_hicargo.html#new-folder",
+    "title": "Hi cargo",
+    "section": "New Folder",
+    "text": "New Folder\n\nYou will need to make an 12 folder in 271rs to save your work.\nEnsure your shell/terminal/console/command line is in the 271rs repository.\n\nReview the lecture/lab.\n\nCreate the package.\n\ncargo new 11 --name packages --vcs none\n\nEnter the 11 directory.\n\ncd 11\n\nPrepare to modify the src/main.rs file.\n\nhelix src/main.rs # or vi, vim, nvim, emacs, etc",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#citation",
+    "href": "12_hicargo.html#citation",
+    "title": "Hi cargo",
+    "section": "Citation",
+    "text": "Citation\n\nThe following content is lifted directly from the Polars documentation.",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#example",
+    "href": "12_hicargo.html#example",
+    "title": "Hi cargo",
+    "section": "Example",
+    "text": "Example\n\nMost things here should look vaguely familiar to you…\n\nuse chrono::prelude::*;\nuse polars::prelude::*;\n\nlet mut df: DataFrame = df!(\n    \"name\" =&gt; [\"Alice Archer\", \"Ben Brown\", \"Chloe Cooper\", \"Daniel Donovan\"],\n    \"birthdate\" =&gt; [\n        NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),\n        NaiveDate::from_ymd_opt(1985, 2, 15).unwrap(),\n        NaiveDate::from_ymd_opt(1983, 3, 22).unwrap(),\n        NaiveDate::from_ymd_opt(1981, 4, 30).unwrap(),\n    ],\n    \"weight\" =&gt; [57.9, 72.5, 53.6, 83.1],  // (kg)\n    \"height\" =&gt; [1.56, 1.77, 1.65, 1.75],  // (m)\n)\n.unwrap();\nprintln!(\"{df}\");",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#useimport",
+    "href": "12_hicargo.html#useimport",
+    "title": "Hi cargo",
+    "section": "Use/Import",
+    "text": "Use/Import\n\nThese are like Python import\n\nuse chrono::prelude::*;\nuse polars::prelude::*;\n\nTo use Polars in Python, we would do the following:\n\nimport polars as pl\nimport datetime as dt",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#single-equals-assignment",
+    "href": "12_hicargo.html#single-equals-assignment",
+    "title": "Hi cargo",
+    "section": "Single Equals Assignment",
+    "text": "Single Equals Assignment\n\nThese are variable declarations.\n\nIn Rust, the first time a variable is declared:\n\nThe let keyword is used (different from Python, similar to JavaScript)\nThe type of the variable is given (different from Python, similar to C)\nThe mutability (think tuple vs. list) is specified (similar to JavaScript)\n\nlet mut df: DataFrame = df!( // More to come.\n\nTo create a df variable in Python, we would do the following:\n\ndf = pl.DataFrame( # More to come.",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#key-value-pairs",
+    "href": "12_hicargo.html#key-value-pairs",
+    "title": "Hi cargo",
+    "section": "Key-Value pairs",
+    "text": "Key-Value pairs\n\nThis is pattern matching.\n\nSimilar enough to to C switch\nSimilar enough to Python dict\nBased on Haskell/Standard ML pattern matching, Read more\n\n\"name\" =&gt; [\"Alice Archer\", \"Ben Brown\", \"Chloe Cooper\", \"Daniel Donovan\"],\nIn Python, we match a string with a collection of strings using a dictionary for key-value storage.\n\nWe note in Python this operation must occur within a dictionary, not as a free-standing expression like x = 1 if True else 0\n\n{\n  \"name\": [\"Alice Archer\", \"Ben Brown\", \"Chloe Cooper\", \"Daniel Donovan\"],",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#access-and-errors",
+    "href": "12_hicargo.html#access-and-errors",
+    "title": "Hi cargo",
+    "section": "Access and Errors",
+    "text": "Access and Errors\n\nTo use things in a Rust package, rather than dot notation . we use “path related synatx” ::\n\nNaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),\n\nIn Python, we typical use a module name which is incidentally a file name, which we import as some alias and then look up an internal value using .\n\ndt.date(1997, 1, 10),",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#options",
+    "href": "12_hicargo.html#options",
+    "title": "Hi cargo",
+    "section": "Options",
+    "text": "Options\n\nMore on this next week.\nRust manages errors, such as there not being a 57th of Thirteentober, using options\n\nSame as a Haskell option. Read more\nEverything in Python is kinda an object because it could technical be None\n\n&gt;&gt;&gt; f = lambda x: x if x &gt; 0 else None\n&gt;&gt;&gt; f(10)\n10\n&gt;&gt;&gt; f(-10)\n&gt;&gt;&gt;",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#optional-options",
+    "href": "12_hicargo.html#optional-options",
+    "title": "Hi cargo",
+    "section": "Optional Options",
+    "text": "Optional Options\n\nYou can use from_ymd with or without the option error handling, but using options is good form and to be encouraged.\nOptions must be unwrapped, which throws a graceful error if there is nothing inside of them.\nThe following are equivalent specifically in the case of well-formed dates:\nThe first gracefully may throw an error.\n\nNaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),\n\nIf this fails, the program crashes:\n\nNaiveDate::from_ymd(1997, 1, 10),",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#rustfmt",
+    "href": "12_hicargo.html#rustfmt",
+    "title": "Hi cargo",
+    "section": "rustfmt",
+    "text": "rustfmt\n\nNote: If you want to stick to a standard style across Rust projects, you can use an automatic formatter tool called rustfmt to format your code in a particular style. The Rust team has included this tool with the standard Rust distribution, as rustc is, so it should already be installed on your computer!",
+    "crumbs": [
+      "Hi cargo"
+    ]
   },
   {
     "objectID": "02_hiworld.html",
@@ -91,7 +241,7 @@
     "href": "02_hiworld.html#writing-and-running-a-rust-program",
     "title": "Hi world",
     "section": "Writing and Running a Rust Program",
-    "text": "Writing and Running a Rust Program\n\n.rs\n\nRust files always end with the .rs extension.\nIf you’re using more than one word in your filename, the convention is to use an underscore to separate them. For example, use hi_world.rs rather than hi_world.rs.\nIn hi_world.rs enter the following:\n\n\n\nhi_world.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\n\nrustc\n\nSave (ESC + :w in vim) the file and go back to your terminal window.\nEnter the following commands to compile the file:\n\nrustc hi_world.c\n\n\n\n\n\n\nNote\n\n\n\nRust is a compiled language, unlike Python, bash, or R. To create programs in Rust, we first “compile” the source code in an executable. We do not “run” .rs files, as we do with .py files using the python3 command.\n\n\n\n\nVerify\n\nVerify that compilation was successful by using ls to list the files in your folder.\n\nls\n\nYou should see the following.\n\nhi_world  hi_world.rs\n\nhi_world is a program, and hi_world.rs is source code.\n\n\n\nRun\n\nTo use a Rust program, we do not have to call rustc like we do with Python .py scripts!\nWe use ./ notation to have the shell interpret hi_world as a program to be run\n\n. means use the current folder (should be 02)\n/ means find the file by name in the current folder.\n\n./hi_world\nYou should see:\n\nHello, world!\n\n\n\n\n\n\nNote\n\n\n\nIf you created your hi_world.rs file using e.g. vim 02/hi_world.rs, then the file will be in a different folder. You may need to run rustc 02/hi_world.rs or ./02/hi_world. Review the file system if you get stuck.",
+    "text": "Writing and Running a Rust Program\n\n.rs\n\nRust files always end with the .rs extension.\nIf you’re using more than one word in your filename, the convention is to use an underscore to separate them. For example, use hi_world.rs rather than HiWorld.rs.\nIn hi_world.rs enter the following:\n\n\n\nhi_world.rs\n\nfn main() {\n    println!(\"Hello, world!\");\n}\n\n\n\nrustc\n\nSave (ESC + :w in vim) the file and go back to your terminal window.\nEnter the following commands to compile the file:\n\nrustc hi_world.c\n\n\n\n\n\n\nNote\n\n\n\nRust is a compiled language, unlike Python, bash, or R. To create programs in Rust, we first “compile” the source code in an executable. We do not “run” .rs files, as we do with .py files using the python3 command.\n\n\n\n\nVerify\n\nVerify that compilation was successful by using ls to list the files in your folder.\n\nls\n\nYou should see the following.\n\nhi_world  hi_world.rs\n\nhi_world is a program, and hi_world.rs is source code.\n\n\n\nRun\n\nTo use a Rust program, we do not have to call rustc like we do with Python .py scripts!\nWe use ./ notation to have the shell interpret hi_world as a program to be run\n\n. means use the current folder (should be 02)\n/ means find the file by name in the current folder.\n\n./hi_world\nYou should see:\n\nHello, world!\n\n\n\n\n\n\nNote\n\n\n\nIf you created your hi_world.rs file using e.g. vim 02/hi_world.rs, then the file will be in a different folder. You may need to run rustc 02/hi_world.rs or ./02/hi_world. Review the file system if you get stuck.",
     "crumbs": [
       "Hi world"
     ]
@@ -970,7 +1120,7 @@
     "href": "01_rustup.rjs.html#homework",
     "title": "Rustup",
     "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET."
+    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 5 Sept. at 1440 ET."
   },
   {
     "objectID": "01_rustup.rjs.html#today",
@@ -984,7 +1134,7 @@
     "href": "01_rustup.rjs.html#windows",
     "title": "Rustup",
     "section": "Windows",
-    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)"
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged) ### WSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter -&gt; wsl"
   },
   {
     "objectID": "01_rustup.rjs.html#rustup",
@@ -1333,7 +1483,7 @@
     "href": "01_rustup.html#homework",
     "title": "Rustup",
     "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 1 Sept. at 1440 ET.",
+    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 5 Sept. at 1440 ET.",
     "crumbs": [
       "Rustup"
     ]
@@ -1353,7 +1503,7 @@
     "href": "01_rustup.html#windows",
     "title": "Rustup",
     "section": "Windows",
-    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged)\n\n\n\n\nWSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter -&gt; wsl\n\n\n\n\n\n\nDocker or Podman\n\nBoth will require WSL 2, but install for you\nDocker has better Windows support, I believe Podman is seeing more use.\nFollow this guide.\nNotes:\n\nUse WSL 2 backend.\nYou are responsible for teaching yourself containers.\nSlides for last year.\n\n\n\n\n\nGit Bash\n\nI have set up guide for Git Bash for another course\nThis seemed like it could work. I won’t be checking.\n\n\n\n\nCygwin\n\nI have no idea how Cygwin works but it’s pretty cool.\nBasically no longer in use due to WSL 2 and Docker.\nFollow this guide",
+    "text": "Windows\n\nWindows usage is not supported in the course.\nIf you are using Windows, you must:\n\nUse Windows Subsystem for Linux (Recommended)\nUse Docker or Podman\nUse Git Bash or Mingw in some other way (Discouraged)\nUse Cygwin (Discouraged) ### WSL 2\n\nWindows Subsystem for Linux\nFollow this guide\nNotes:\n\nUse WSL 2. It is the default.\nI recommend using Ubuntu distribution. You will be asked.\nI prefer Windows Terminal.\n\nWindows key -&gt; “Terminal” -&gt; Enter -&gt; wsl\n\n\n\n\n\nDocker or Podman\n\nBoth will require WSL 2, but install for you\nDocker has better Windows support, I believe Podman is seeing more use.\nFollow this guide.\nNotes:\n\nUse WSL 2 backend.\nYou are responsible for teaching yourself containers.\nSlides for last year.\n\n\n\n\n\nGit Bash\n\nI have set up guide for Git Bash for another course\nThis seemed like it could work. I won’t be checking.\n\n\n\n\nCygwin\n\nI have no idea how Cygwin works but it’s pretty cool.\nBasically no longer in use due to WSL 2 and Docker.\nFollow this guide",
     "crumbs": [
       "Rustup"
     ]
@@ -2057,11 +2207,67 @@
     "text": "Solution\n\nWe can make a folder named 11\nBut not a package named 11.\nWe use the --name flag.\n\nI use the name of these slides, rather than the number, as the package name.\n\ncargo new 11 --name packages\nThis should be allowed."
   },
   {
+    "objectID": "11_packages.rjs.html#option-2-vcs",
+    "href": "11_packages.rjs.html#option-2-vcs",
+    "title": "Packages",
+    "section": "Option 2: VCS",
+    "text": "Option 2: VCS\n\nIt may be the case that you created a 11 folder outside of your 271rs directory.\n\nI do this often, then plan to move it in latter.\n\nThis can pose a problem."
+  },
+  {
+    "objectID": "11_packages.rjs.html#situation",
+    "href": "11_packages.rjs.html#situation",
+    "title": "Packages",
+    "section": "Situation",
+    "text": "Situation\n\ngit clone a 271rs repository, e.g.:\n\ngit clone git@github.com:cd-c89/271rs.git\n- `cargo new 11 --name packages` before `cd 271rs`\n- It would look like this:\n\n```{.bash filename=\"tree\"}\n.\n├── 11\n│   ├── Cargo.toml\n│   └── src\n│       └── main.rs\n└── 271rs\n    ├── LICENSE\n    └── README.md\n\n3 directories, 4 files"
+  },
+  {
+    "objectID": "11_packages.rjs.html#move",
+    "href": "11_packages.rjs.html#move",
+    "title": "Packages",
+    "section": "Move",
+    "text": "Move\n\nI’d like to use the mv command to put 11 in 271 rs.\n\nNotation is “mv” then “source” then “destination”\n\nmv 11 271rs\nI have this:\n\n\n\ntree\n\n.\n└── 271rs\n    ├── 11\n    │   ├── Cargo.toml\n    │   └── src\n    │       └── main.rs\n    ├── LICENSE\n    └── README.md\n\n3 directories, 4 files"
+  },
+  {
+    "objectID": "11_packages.rjs.html#status",
+    "href": "11_packages.rjs.html#status",
+    "title": "Packages",
+    "section": "Status",
+    "text": "Status\n\nThen I cd into 271rs to add/commit/push\n\n\n\ngit status\n\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        11/\n\nnothing added to commit but untracked files present (use \"git add\" to track)"
+  },
+  {
+    "objectID": "11_packages.rjs.html#add",
+    "href": "11_packages.rjs.html#add",
+    "title": "Packages",
+    "section": "Add",
+    "text": "Add\n\nAdd doesn’t work:\n\n\n\ngit add 11\n\nerror: '11/' does not have a commit checked out\nfatal: adding files failed\n\n\nBy default, cargo initializes new projects as a git repository.\nPutting a git repository inside another git repository is non-trivial."
+  },
+  {
+    "objectID": "11_packages.rjs.html#confirm",
+    "href": "11_packages.rjs.html#confirm",
+    "title": "Packages",
+    "section": "Confirm",
+    "text": "Confirm\n\nYou can tell by looking for the hidden .git folder in 11.\n\ncd 11\nls -al\n\nYou’ll see something called .git.\nYou can delete it, but this is inelegant."
+  },
+  {
+    "objectID": "11_packages.rjs.html#solution-1",
+    "href": "11_packages.rjs.html#solution-1",
+    "title": "Packages",
+    "section": "Solution",
+    "text": "Solution\n\nUse cargo new with the option to have no “version control system” used.\n\ncargo new 11 --name packages --vcs none\n\nYou can confirm there is no hidden .git folder.\nThis can be moved into 271rs or created within 271rs"
+  },
+  {
     "objectID": "11_packages.rjs.html#exercise-1",
     "href": "11_packages.rjs.html#exercise-1",
     "title": "Packages",
     "section": "Exercise",
-    "text": "Exercise\n\nFor the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named 12, with [ ] A valid Cargo name (not 12), that is [ ] In your course repository and therefore [ ] Has no cargo managed repository."
+    "text": "Exercise\n\nNew Cargo project, in\nA folder named 11, with\nA valid Cargo name (not 11), that is\nIn your course repository and therefore\nHas no cargo managed repository, and\nPresent on your remote GitHub repository\nThe conents of the project are immaterial."
+  },
+  {
+    "objectID": "11_packages.rjs.html#disambiguity",
+    "href": "11_packages.rjs.html#disambiguity",
+    "title": "Packages",
+    "section": "Disambiguity",
+    "text": "Disambiguity\n\nI have seen students take extreme liberties with naming folders and assignments.\nI believe no ambiguity exists within the instructions.\nIt is trivial to check the following:\n\nls 271\n\nUnless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.\n\n01  02  11  LICENSE  README.md"
   },
   {
     "objectID": "11_packages.html",
@@ -2414,11 +2620,91 @@
     ]
   },
   {
+    "objectID": "11_packages.html#option-2-vcs",
+    "href": "11_packages.html#option-2-vcs",
+    "title": "Packages",
+    "section": "Option 2: VCS",
+    "text": "Option 2: VCS\n\nIt may be the case that you created a 11 folder outside of your 271rs directory.\n\nI do this often, then plan to move it in latter.\n\nThis can pose a problem.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#situation",
+    "href": "11_packages.html#situation",
+    "title": "Packages",
+    "section": "Situation",
+    "text": "Situation\n\ngit clone a 271rs repository, e.g.:\n\ngit clone git@github.com:cd-c89/271rs.git\n- `cargo new 11 --name packages` before `cd 271rs`\n- It would look like this:\n\n```{.bash filename=\"tree\"}\n.\n├── 11\n│   ├── Cargo.toml\n│   └── src\n│       └── main.rs\n└── 271rs\n    ├── LICENSE\n    └── README.md\n\n3 directories, 4 files",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#move",
+    "href": "11_packages.html#move",
+    "title": "Packages",
+    "section": "Move",
+    "text": "Move\n\nI’d like to use the mv command to put 11 in 271 rs.\n\nNotation is “mv” then “source” then “destination”\n\nmv 11 271rs\nI have this:\n\n\n\ntree\n\n.\n└── 271rs\n    ├── 11\n    │   ├── Cargo.toml\n    │   └── src\n    │       └── main.rs\n    ├── LICENSE\n    └── README.md\n\n3 directories, 4 files",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#status",
+    "href": "11_packages.html#status",
+    "title": "Packages",
+    "section": "Status",
+    "text": "Status\n\nThen I cd into 271rs to add/commit/push\n\n\n\ngit status\n\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        11/\n\nnothing added to commit but untracked files present (use \"git add\" to track)",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#add",
+    "href": "11_packages.html#add",
+    "title": "Packages",
+    "section": "Add",
+    "text": "Add\n\nAdd doesn’t work:\n\n\n\ngit add 11\n\nerror: '11/' does not have a commit checked out\nfatal: adding files failed\n\n\nBy default, cargo initializes new projects as a git repository.\nPutting a git repository inside another git repository is non-trivial.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#confirm",
+    "href": "11_packages.html#confirm",
+    "title": "Packages",
+    "section": "Confirm",
+    "text": "Confirm\n\nYou can tell by looking for the hidden .git folder in 11.\n\ncd 11\nls -al\n\nYou’ll see something called .git.\nYou can delete it, but this is inelegant.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#solution-1",
+    "href": "11_packages.html#solution-1",
+    "title": "Packages",
+    "section": "Solution",
+    "text": "Solution\n\nUse cargo new with the option to have no “version control system” used.\n\ncargo new 11 --name packages --vcs none\n\nYou can confirm there is no hidden .git folder.\nThis can be moved into 271rs or created within 271rs",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
     "objectID": "11_packages.html#exercise-1",
     "href": "11_packages.html#exercise-1",
     "title": "Packages",
     "section": "Exercise",
-    "text": "Exercise\n\nFor the lab today, you must create a: [ ] New Cargo project, in [ ] A folder named 12, with [ ] A valid Cargo name (not 12), that is [ ] In your course repository and therefore [ ] Has no cargo managed repository.",
+    "text": "Exercise\n\nNew Cargo project, in\nA folder named 11, with\nA valid Cargo name (not 11), that is\nIn your course repository and therefore\nHas no cargo managed repository, and\nPresent on your remote GitHub repository\nThe conents of the project are immaterial.",
+    "crumbs": [
+      "Packages"
+    ]
+  },
+  {
+    "objectID": "11_packages.html#disambiguity",
+    "href": "11_packages.html#disambiguity",
+    "title": "Packages",
+    "section": "Disambiguity",
+    "text": "Disambiguity\n\nI have seen students take extreme liberties with naming folders and assignments.\nI believe no ambiguity exists within the instructions.\nIt is trivial to check the following:\n\nls 271\n\nUnless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.\n\n01  02  11  LICENSE  README.md",
     "crumbs": [
       "Packages"
     ]

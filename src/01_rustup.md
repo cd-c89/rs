@@ -12,7 +12,7 @@ title: Rustup
 - The first homework, "Hi world", is ready after this class.
   - It is comically trivial.
   - Mostly makes sure you have everything set up.
-- Due Friday, 1 Sept. at 1440 ET.
+- Due Friday, 5 Sept. at 1440 ET.
 
 ## Today
 
@@ -32,9 +32,6 @@ title: Rustup
     - Use Docker or Podman 
     - Use Git Bash or Mingw in some other way (Discouraged)
     - Use Cygwin (Discouraged)
-
----
-
 ### WSL 2
 
 - Windows Subsystem for Linux

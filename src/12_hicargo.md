@@ -1,0 +1,217 @@
+---
+title: "Hi cargo"
+author: ""
+subtitle: "Due 7 Sep 1440 ET"
+format: html
+---
+
+
+# Setup
+
+## Sketch
+
+- There's a hot new trend that all the cool kids are talking about in town.
+- Data Science.
+- Rust is, of course, one of the best data science langauges.
+
+## Pre-flight Checks
+
+- You should have
+    - `git` installed and working.
+    - A repository named `271rs`, both a local repository on your device and a remote repository on GitHub.
+    - An editor, which really should be text-based, in-console text editor, but I can't actually ban you from using VS Code.
+    - `cargo` installed and working.
+- If you miss any of this, back to [lab](01_rustup.md).
+
+## Requirements
+
+- To complete this assignment, you must:
+    - Create a `12` directory in your `271rs` repository.
+    - This folder must be a Cargo package.
+    - It must leverage *other* Cargo packages, namely "polars" and "chrono"
+    
+## Requirements
+
+- To complete this assignment, your code must produce precisely the following DataFrame:
+```{.bash}
+┌────────────────┬────────────┬────────┬────────┐
+│ name           ┆ birthdate  ┆ weight ┆ height │
+│ ---            ┆ ---        ┆ ---    ┆ ---    │
+│ str            ┆ date       ┆ f64    ┆ f64    │
+╞════════════════╪════════════╪════════╪════════╡
+│ Alice Archer   ┆ 1997-01-10 ┆ 57.9   ┆ 1.56   │
+│ Ben Brown      ┆ 1985-02-15 ┆ 72.5   ┆ 1.77   │
+│ Chloe Cooper   ┆ 1983-03-22 ┆ 53.6   ┆ 1.65   │
+│ Daniel Donovan ┆ 1981-04-30 ┆ 83.1   ┆ 1.75   │
+└────────────────┴────────────┴────────┴────────┘
+```
+        
+# Review
+
+## New Folder
+
+- You will need to make an `12` folder in `271rs` to save your work.
+- Ensure your shell/terminal/console/command line is in the `271rs` repository.
+    - Review the [lecture/lab](11_packages.md).
+- Create the package.
+```{.bash}
+cargo new 11 --name packages --vcs none
+```
+- Enter the `11` directory.
+```{.bash}
+cd 11
+```
+- Prepare to modify the `src/main.rs` file.
+```{.bash}
+helix src/main.rs # or vi, vim, nvim, emacs, etc
+```
+
+
+# Hi cargo
+
+## Citation
+
+- The following content is lifted directly from the [Polars documentation](https://docs.pola.rs/user-guide/getting-started/).
+
+## Example
+
+- Most things here should look vaguely familiar to you...
+
+```{.rs}
+use chrono::prelude::*;
+use polars::prelude::*;
+
+let mut df: DataFrame = df!(
+    "name" => ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],
+    "birthdate" => [
+        NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
+        NaiveDate::from_ymd_opt(1985, 2, 15).unwrap(),
+        NaiveDate::from_ymd_opt(1983, 3, 22).unwrap(),
+        NaiveDate::from_ymd_opt(1981, 4, 30).unwrap(),
+    ],
+    "weight" => [57.9, 72.5, 53.6, 83.1],  // (kg)
+    "height" => [1.56, 1.77, 1.65, 1.75],  // (m)
+)
+.unwrap();
+println!("{df}");
+```
+
+## Use/Import
+
+- These are like Python `import`
+
+```{.rs}
+use chrono::prelude::*;
+use polars::prelude::*;
+```
+
+- To use Polars in Python, we would do the following:
+
+```{.py}
+import polars as pl
+import datetime as dt
+```
+
+## Single Equals Assignment
+
+- These are variable declarations.
+    - In Rust, the first time a variable is declared:
+        - The `let` keyword is used (different from Python, similar to JavaScript)
+        - The type of the variable is given (different from Python, similar to C)
+        - The mutability (think tuple vs. list) is specified (similar to JavaScript)
+```{.rs}
+let mut df: DataFrame = df!( // More to come.
+```
+- To create a `df` variable in Python, we would do the following:
+```{.py}
+df = pl.DataFrame( # More to come.
+```
+
+## Key-Value pairs
+
+- This is pattern matching.
+    - Similar enough to to C `switch`
+    - Similar enough to Python `dict`
+    - Based on Haskell/Standard ML pattern matching, [Read more](https://www.haskell.org/tutorial/patterns.html)
+```{.rs}
+"name" => ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],
+```
+- In Python, we match a string with a collection of strings using a dictionary for key-value storage.
+    - We note in Python this operation must occur within a dictionary, not as a free-standing expression like `x = 1 if True else 0`
+```{.py}
+{
+    "name": ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],
+```
+
+## Access and Errors
+
+- To use things in a Rust package, rather than dot notation `.` we use "path related synatx" `::`
+```{.rs}
+NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
+```
+- In Python, we typical use a module name which is incidentally a file name, which we import as some alias and then look up an internal value using `.`
+```{.py}
+dt.date(1997, 1, 10),
+```
+
+## Options
+
+- More on this next week.
+- Rust manages errors, such as there not being a 57th of Thirteentober, using [options](https://doc.rust-lang.org/rust-by-example/std/option.html)
+    - Same as a Haskell option. [Read more](https://hackage.haskell.org/package/type-combinators-0.2.4.3/docs/Data-Type-Option.html)
+    - *Everything* in Python is *kinda* an object because it could technical be `None`
+```{.py}
+>>> f = lambda x: x if x > 0 else None
+>>> f(10)
+10
+>>> f(-10)
+>>>
+```
+
+## Optional Options
+
+- You can use `from_ymd` with or without the option error handling, but using options is good form and to be encouraged.
+- Options must be unwrapped, which throws a graceful error if there is nothing inside of them.
+- The following are equivalent specifically in the case of well-formed dates:
+- The first gracefully may throw an error.
+```{.rs}
+NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
+```
+- If this fails, the program crashes:
+```{.rs}
+NaiveDate::from_ymd(1997, 1, 10),
+```
+
+<!--
+
+C+p polars demo
+move imports
+rustfmt
+cargo add
+cargo run
+
+branch???
+
+-->
+
+## rustfmt
+
+> Note: If you want to stick to a standard style across Rust projects, you can
+> use an automatic formatter tool called `rustfmt` to format your code in a
+> particular style. The Rust team has included this tool
+> with the standard Rust distribution, as `rustc` is, so it should already be
+> installed on your computer!
+
+       
+# Fin
+
+- You are done *coding* once your `hi_world.rs` file:
+    - Compiles, and
+    - When run, prints "Hello, world!" or some other string that is school appropriate
+        - The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.
+        - Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.
+            - 🖾��￼fo9i?⛔󠀰🩷🫴✍
+- You are done with the *homework* once said `.rs` file is:
+    - Visible, to me, 
+    - On the GitHub `271rs` repository you shared for the lab
+- If you need to review how to get files onto GitHub, review [the lab](01_rustup.md)
