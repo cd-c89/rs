@@ -52,7 +52,7 @@ format: html
 
 - You will need to make an `12` folder in `271rs` to save your work.
 - Ensure your shell/terminal/console/command line is in the `271rs` repository.
-    - Review the [lecture/lab](11_packages.md).
+    - Review the [lecture/lab](11_packages.qmd).
 - Create the package.
 ```{.bash}
 cargo new 11 --name packages --vcs none
@@ -66,6 +66,14 @@ cd 11
 helix src/main.rs # or vi, vim, nvim, emacs, etc
 ```
 
+## Comments
+
+- Comments are important to good code!
+- Rust comments are double-slash prefixed.
+```{.rs}
+println!{"This is code"}
+// This is a comment!
+```
 
 # Hi cargo
 
@@ -182,7 +190,44 @@ NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
 NaiveDate::from_ymd(1997, 1, 10),
 ```
 
+## Unwrap
 
+- Versus Python, where `pl.DataFrame` will return a dataframe, `df!` in Rust will return an option.
+    - It may not be able to coerce something into a dataframe.
+- We have to unwrap that option. This is the last line before print
+    - I've removed the contents so you can see it here:
+```{.rs}
+let mut df: DataFrame = df!(
+)
+.unwrap();  // This line!
+println!("{df}");
+```
+
+# Package Management
+
+## Try it!
+
+- The provided code, above, is debugged Polars code that will run successfully!
+- However, that doesn't mean that it *does* run successfully.
+```{.bash}
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `polars`
+ --> src/main.rs:3:9
+  |
+3 |     use polars::prelude::*;
+  |         ^^^^^^ use of unresolved module or unlinked crate `polars`
+  |
+  = help: if you wanted to use a crate named `polars`, use `cargo add polars` to add it to your `Cargo.toml`
+```
+
+## Cargo add
+
+- To use packages within your own code, you need to `cargo add` them.
+- The example code uses two packages: `polars` and `chrono`
+- This is mostly similar to `pip install` for Python, but is specific to one Cargo project.
+    - This reflects the growing consensus in package management.
+- Try using `cargo add` to get the code to work!
+    - Think about what directory you should be in when using `cargo add`
+    - Think about how you would look up help if you get stuck!
 
 <!--
 
@@ -196,7 +241,7 @@ branch???
 
 -->
 
-## rustfmt
+## Cargo fmt
 
 > Note: If you want to stick to a standard style across Rust projects, you can
 > use an automatic formatter tool called `rustfmt` to format your code in a
@@ -204,16 +249,18 @@ branch???
 > with the standard Rust distribution, as `rustc` is, so it should already be
 > installed on your computer!
 
+- In a Cargo project, you can simply use `cargo fmt`
+- Play around the with the code, then format it, and see what changes!
+
        
 # Fin
 
-- You are done *coding* once your `hi_world.rs` file:
-    - Compiles, and
-    - When run, prints "Hello, world!" or some other string that is school appropriate
-        - The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.
-        - Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.
-            - 🖾��￼fo9i?⛔󠀰🩷🫴✍
+- You are done *coding* once your Cargo project:
+    - Compiles via `cargo run`, and
+    - When run, prints the required DataFrame.
 - You are done with the *homework* once said `.rs` file is:
     - Visible, to me, 
     - On the GitHub `271rs` repository you shared for the lab
+    - In a folder named `12`
+    - As a Cargo project.
 - If you need to review how to get files onto GitHub, review [the lab](01_rustup.md)

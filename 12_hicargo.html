@@ -209,6 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a>
   <ul class="collapse">
   <li><a href="#new-folder" id="toc-new-folder" class="nav-link" data-scroll-target="#new-folder">New Folder</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
   </ul></li>
   <li><a href="#hi-cargo" id="toc-hi-cargo" class="nav-link" data-scroll-target="#hi-cargo">Hi cargo</a>
   <ul class="collapse">
@@ -220,7 +221,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#access-and-errors" id="toc-access-and-errors" class="nav-link" data-scroll-target="#access-and-errors">Access and Errors</a></li>
   <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a></li>
   <li><a href="#optional-options" id="toc-optional-options" class="nav-link" data-scroll-target="#optional-options">Optional Options</a></li>
-  <li><a href="#rustfmt" id="toc-rustfmt" class="nav-link" data-scroll-target="#rustfmt">rustfmt</a></li>
+  <li><a href="#unwrap" id="toc-unwrap" class="nav-link" data-scroll-target="#unwrap">Unwrap</a></li>
+  </ul></li>
+  <li><a href="#package-management" id="toc-package-management" class="nav-link" data-scroll-target="#package-management">Package Management</a>
+  <ul class="collapse">
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it">Try it!</a></li>
+  <li><a href="#cargo-add" id="toc-cargo-add" class="nav-link" data-scroll-target="#cargo-add">Cargo add</a></li>
+  <li><a href="#cargo-fmt" id="toc-cargo-fmt" class="nav-link" data-scroll-target="#cargo-fmt">Cargo fmt</a></li>
   </ul></li>
   <li><a href="#fin" id="toc-fin" class="nav-link" data-scroll-target="#fin">Fin</a></li>
   </ul>
@@ -308,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You will need to make an <code>12</code> folder in <code>271rs</code> to save your work.</li>
 <li>Ensure your shell/terminal/console/command line is in the <code>271rs</code> repository.
 <ul>
-<li>Review the <a href="11_packages.md">lecture/lab</a>.</li>
+<li>Review the <a href="./11_packages.html">lecture/lab</a>.</li>
 </ul></li>
 <li>Create the package.</li>
 </ul>
@@ -321,6 +328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Prepare to modify the <code>src/main.rs</code> file.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">helix</span> src/main.rs <span class="co"># or vi, vim, nvim, emacs, etc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comments" class="level2">
+<h2 class="anchored" data-anchor-id="comments">Comments</h2>
+<ul>
+<li>Comments are important to good code!</li>
+<li>Rust comments are double-slash prefixed.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">println!</span><span class="op">{</span><span class="st">"This is code"</span><span class="op">}</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">// This is a comment!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="hi-cargo" class="level1">
@@ -336,35 +352,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Most things here should look vaguely familiar to you…</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">use</span> <span class="pp">chrono::prelude::</span><span class="op">*;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">use</span> <span class="pp">polars::prelude::</span><span class="op">*;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">let</span> <span class="kw">mut</span> df<span class="op">:</span> DataFrame <span class="op">=</span> <span class="pp">df!</span>(</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="st">"name"</span> <span class="op">=&gt;</span> [<span class="st">"Alice Archer"</span><span class="op">,</span> <span class="st">"Ben Brown"</span><span class="op">,</span> <span class="st">"Chloe Cooper"</span><span class="op">,</span> <span class="st">"Daniel Donovan"</span>]<span class="op">,</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="st">"birthdate"</span> <span class="op">=&gt;</span> [</span>
-<span id="cb5-7"><a href="#cb5-7"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1985</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1983</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">22</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1981</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">30</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>    ]<span class="op">,</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>    <span class="st">"weight"</span> <span class="op">=&gt;</span> [<span class="dv">57.9</span><span class="op">,</span> <span class="dv">72.5</span><span class="op">,</span> <span class="dv">53.6</span><span class="op">,</span> <span class="dv">83.1</span>]<span class="op">,</span>  <span class="co">// (kg)</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>    <span class="st">"height"</span> <span class="op">=&gt;</span> [<span class="dv">1.56</span><span class="op">,</span> <span class="dv">1.77</span><span class="op">,</span> <span class="dv">1.65</span><span class="op">,</span> <span class="dv">1.75</span>]<span class="op">,</span>  <span class="co">// (m)</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>)</span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="pp">println!</span>(<span class="st">"{df}"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">use</span> <span class="pp">chrono::prelude::</span><span class="op">*;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">use</span> <span class="pp">polars::prelude::</span><span class="op">*;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">let</span> <span class="kw">mut</span> df<span class="op">:</span> DataFrame <span class="op">=</span> <span class="pp">df!</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="st">"name"</span> <span class="op">=&gt;</span> [<span class="st">"Alice Archer"</span><span class="op">,</span> <span class="st">"Ben Brown"</span><span class="op">,</span> <span class="st">"Chloe Cooper"</span><span class="op">,</span> <span class="st">"Daniel Donovan"</span>]<span class="op">,</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="st">"birthdate"</span> <span class="op">=&gt;</span> [</span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1985</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1983</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">22</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>        <span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1981</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">30</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    ]<span class="op">,</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="st">"weight"</span> <span class="op">=&gt;</span> [<span class="dv">57.9</span><span class="op">,</span> <span class="dv">72.5</span><span class="op">,</span> <span class="dv">53.6</span><span class="op">,</span> <span class="dv">83.1</span>]<span class="op">,</span>  <span class="co">// (kg)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="st">"height"</span> <span class="op">=&gt;</span> [<span class="dv">1.56</span><span class="op">,</span> <span class="dv">1.77</span><span class="op">,</span> <span class="dv">1.65</span><span class="op">,</span> <span class="dv">1.75</span>]<span class="op">,</span>  <span class="co">// (m)</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="pp">println!</span>(<span class="st">"{df}"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="useimport" class="level2">
 <h2 class="anchored" data-anchor-id="useimport">Use/Import</h2>
 <ul>
 <li>These are like Python <code>import</code></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">use</span> <span class="pp">chrono::prelude::</span><span class="op">*;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">use</span> <span class="pp">polars::prelude::</span><span class="op">*;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">use</span> <span class="pp">chrono::prelude::</span><span class="op">*;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">use</span> <span class="pp">polars::prelude::</span><span class="op">*;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>To use Polars in Python, we would do the following:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="single-equals-assignment" class="level2">
 <h2 class="anchored" data-anchor-id="single-equals-assignment">Single Equals Assignment</h2>
@@ -377,11 +393,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The type of the variable is given (different from Python, similar to C)</li>
 <li>The mutability (think tuple vs.&nbsp;list) is specified (similar to JavaScript)</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">let</span> <span class="kw">mut</span> df<span class="op">:</span> DataFrame <span class="op">=</span> <span class="pp">df!</span>( <span class="co">// More to come.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">let</span> <span class="kw">mut</span> df<span class="op">:</span> DataFrame <span class="op">=</span> <span class="pp">df!</span>( <span class="co">// More to come.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
 <li>To create a <code>df</code> variable in Python, we would do the following:</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df <span class="op">=</span> pl.DataFrame( <span class="co"># More to come.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>df <span class="op">=</span> pl.DataFrame( <span class="co"># More to come.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="key-value-pairs" class="level2">
 <h2 class="anchored" data-anchor-id="key-value-pairs">Key-Value pairs</h2>
@@ -392,13 +408,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Similar enough to Python <code>dict</code></li>
 <li>Based on Haskell/Standard ML pattern matching, <a href="https://www.haskell.org/tutorial/patterns.html">Read more</a></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="st">"name"</span> <span class="op">=&gt;</span> [<span class="st">"Alice Archer"</span><span class="op">,</span> <span class="st">"Ben Brown"</span><span class="op">,</span> <span class="st">"Chloe Cooper"</span><span class="op">,</span> <span class="st">"Daniel Donovan"</span>]<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="st">"name"</span> <span class="op">=&gt;</span> [<span class="st">"Alice Archer"</span><span class="op">,</span> <span class="st">"Ben Brown"</span><span class="op">,</span> <span class="st">"Chloe Cooper"</span><span class="op">,</span> <span class="st">"Daniel Donovan"</span>]<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li>In Python, we match a string with a collection of strings using a dictionary for key-value storage.
 <ul>
 <li>We note in Python this operation must occur within a dictionary, not as a free-standing expression like <code>x = 1 if True else 0</code></li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>{</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="st">"name"</span>: [<span class="st">"Alice Archer"</span>, <span class="st">"Ben Brown"</span>, <span class="st">"Chloe Cooper"</span>, <span class="st">"Daniel Donovan"</span>],</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>{</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="st">"name"</span>: [<span class="st">"Alice Archer"</span>, <span class="st">"Ben Brown"</span>, <span class="st">"Chloe Cooper"</span>, <span class="st">"Daniel Donovan"</span>],</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="access-and-errors" class="level2">
@@ -406,11 +422,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>To use things in a Rust package, rather than dot notation <code>.</code> we use “path related synatx” <code>::</code></li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a><span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>In Python, we typical use a module name which is incidentally a file name, which we import as some alias and then look up an internal value using <code>.</code></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>dt.date(<span class="dv">1997</span>, <span class="dv">1</span>, <span class="dv">10</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>dt.date(<span class="dv">1997</span>, <span class="dv">1</span>, <span class="dv">10</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="options" class="level2">
 <h2 class="anchored" data-anchor-id="options">Options</h2>
@@ -421,11 +437,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Same as a Haskell option. <a href="https://hackage.haskell.org/package/type-combinators-0.2.4.3/docs/Data-Type-Option.html">Read more</a></li>
 <li><em>Everything</em> in Python is <em>kinda</em> an object because it could technical be <code>None</code></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="op">&gt;&gt;&gt;</span> f(<span class="dv">10</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="dv">10</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="op">&gt;&gt;&gt;</span> f(<span class="op">-</span><span class="dv">10</span>)</span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="op">&gt;&gt;&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="op">&gt;&gt;&gt;</span> f(<span class="dv">10</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="dv">10</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="op">&gt;&gt;&gt;</span> f(<span class="op">-</span><span class="dv">10</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="op">&gt;&gt;&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="optional-options" class="level2">
@@ -436,11 +452,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The following are equivalent specifically in the case of well-formed dates:</li>
 <li>The first gracefully may throw an error.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="pp">NaiveDate::</span>from_ymd_opt(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span>unwrap()<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>If this fails, the program crashes:</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="pp">NaiveDate::</span>from_ymd(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1"></a><span class="pp">NaiveDate::</span>from_ymd(<span class="dv">1997</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="unwrap" class="level2">
+<h2 class="anchored" data-anchor-id="unwrap">Unwrap</h2>
+<ul>
+<li>Versus Python, where <code>pl.DataFrame</code> will return a dataframe, <code>df!</code> in Rust will return an option.
+<ul>
+<li>It may not be able to coerce something into a dataframe.</li>
+</ul></li>
+<li>We have to unwrap that option. This is the last line before print
+<ul>
+<li>I’ve removed the contents so you can see it here:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">let</span> <span class="kw">mut</span> df<span class="op">:</span> DataFrame <span class="op">=</span> <span class="pp">df!</span>(</span>
+<span id="cb18-2"><a href="#cb18-2"></a>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="op">.</span>unwrap()<span class="op">;</span>  <span class="co">// This line!</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="pp">println!</span>(<span class="st">"{df}"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+</section>
+<section id="package-management" class="level1">
+<h1>Package Management</h1>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it!</h2>
+<ul>
+<li>The provided code, above, is debugged Polars code that will run successfully!</li>
+<li>However, that doesn’t mean that it <em>does</em> run successfully.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="va">error</span><span class="op">[</span>E0433<span class="op">]</span><span class="ex">:</span> failed to resolve: use of unresolved module or unlinked crate <span class="kw">`</span><span class="ex">polars</span><span class="kw">`</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:3:9</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="kw">|</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="ex">3</span> <span class="kw">|</span>     <span class="ex">use</span> polars::prelude::<span class="pp">*</span><span class="kw">;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="kw">|</span>         <span class="ex">^^^^^^</span> use of unresolved module or unlinked crate <span class="kw">`</span><span class="ex">polars</span><span class="kw">`</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="kw">|</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="ex">=</span> help: if you wanted to use a crate named <span class="kw">`</span><span class="ex">polars</span><span class="kw">`</span>, use <span class="kw">`</span><span class="ex">cargo</span> add polars<span class="kw">`</span> to add it to your <span class="kw">`</span><span class="ex">Cargo.toml</span><span class="kw">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cargo-add" class="level2">
+<h2 class="anchored" data-anchor-id="cargo-add">Cargo add</h2>
+<ul>
+<li>To use packages within your own code, you need to <code>cargo add</code> them.</li>
+<li>The example code uses two packages: <code>polars</code> and <code>chrono</code></li>
+<li>This is mostly similar to <code>pip install</code> for Python, but is specific to one Cargo project.
+<ul>
+<li>This reflects the growing consensus in package management.</li>
+</ul></li>
+<li>Try using <code>cargo add</code> to get the code to work!
+<ul>
+<li>Think about what directory you should be in when using <code>cargo add</code></li>
+<li>Think about how you would look up help if you get stuck!</li>
+</ul></li>
+</ul>
 <!--
 
 C+p polars demo
@@ -453,32 +519,31 @@ branch???
 
 -->
 </section>
-<section id="rustfmt" class="level2">
-<h2 class="anchored" data-anchor-id="rustfmt">rustfmt</h2>
+<section id="cargo-fmt" class="level2">
+<h2 class="anchored" data-anchor-id="cargo-fmt">Cargo fmt</h2>
 <blockquote class="blockquote">
 <p>Note: If you want to stick to a standard style across Rust projects, you can use an automatic formatter tool called <code>rustfmt</code> to format your code in a particular style. The Rust team has included this tool with the standard Rust distribution, as <code>rustc</code> is, so it should already be installed on your computer!</p>
 </blockquote>
+<ul>
+<li>In a Cargo project, you can simply use <code>cargo fmt</code></li>
+<li>Play around the with the code, then format it, and see what changes!</li>
+</ul>
 </section>
 </section>
 <section id="fin" class="level1">
 <h1>Fin</h1>
 <ul>
-<li>You are done <em>coding</em> once your <code>hi_world.rs</code> file:
+<li>You are done <em>coding</em> once your Cargo project:
 <ul>
-<li>Compiles, and</li>
-<li>When run, prints “Hello, world!” or some other string that is school appropriate
-<ul>
-<li>The complete text of <em>Infinite Jest</em> is the boundary between appropriate and inappropriate.</li>
-<li>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.
-<ul>
-<li>🖾��￼fo9i?⛔󠀰🩷🫴✍</li>
-</ul></li>
-</ul></li>
+<li>Compiles via <code>cargo run</code>, and</li>
+<li>When run, prints the required DataFrame.</li>
 </ul></li>
 <li>You are done with the <em>homework</em> once said <code>.rs</code> file is:
 <ul>
 <li>Visible, to me,</li>
 <li>On the GitHub <code>271rs</code> repository you shared for the lab</li>
+<li>In a folder named <code>12</code></li>
+<li>As a Cargo project.</li>
 </ul></li>
 <li>If you need to review how to get files onto GitHub, review <a href="./01_rustup.html">the lab</a></li>
 </ul>
@@ -972,225 +1037,272 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">---</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="an">title:</span><span class="co"> "Hi cargo"</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 12 Sep 1440 ET"</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">---</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a></span>
-<span id="cb17-8"><a href="#cb17-8"></a></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="fu"># Setup</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="fu">## Sketch</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="ss">- </span>There's a hot new trend that all the cool kids are talking about in town.</span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="ss">- </span>Data Science.</span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="ss">- </span>Rust is, of course, one of the best data science langauges.</span>
-<span id="cb17-16"><a href="#cb17-16"></a></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="fu">## Pre-flight Checks</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="ss">- </span>You should have</span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="ss">    - </span><span class="in">`git`</span> installed and working.</span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="ss">    - </span>A repository named <span class="in">`271rs`</span>, both a local repository on your device and a remote repository on GitHub.</span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="ss">    - </span>An editor, which really should be text-based, in-console text editor, but I can't actually ban you from using VS Code.</span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="ss">    - </span><span class="in">`cargo`</span> installed and working.</span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="ss">- </span>If you miss any of this, back to <span class="co">[</span><span class="ot">lab</span><span class="co">](01_rustup.md)</span>.</span>
-<span id="cb17-25"><a href="#cb17-25"></a></span>
-<span id="cb17-26"><a href="#cb17-26"></a><span class="fu">## Requirements</span></span>
-<span id="cb17-27"><a href="#cb17-27"></a></span>
-<span id="cb17-28"><a href="#cb17-28"></a><span class="ss">- </span>To complete this assignment, you must:</span>
-<span id="cb17-29"><a href="#cb17-29"></a><span class="ss">    - </span>Create a <span class="in">`12`</span> directory in your <span class="in">`271rs`</span> repository.</span>
-<span id="cb17-30"><a href="#cb17-30"></a><span class="ss">    - </span>This folder must be a Cargo package.</span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="ss">    - </span>It must leverage *other* Cargo packages, namely "polars" and "chrono"</span>
-<span id="cb17-32"><a href="#cb17-32"></a>    </span>
-<span id="cb17-33"><a href="#cb17-33"></a><span class="fu">## Requirements</span></span>
-<span id="cb17-34"><a href="#cb17-34"></a></span>
-<span id="cb17-35"><a href="#cb17-35"></a><span class="ss">- </span>To complete this assignment, your code must produce precisely the following DataFrame:</span>
-<span id="cb17-36"><a href="#cb17-36"></a><span class="in">```{.bash}</span></span>
-<span id="cb17-37"><a href="#cb17-37"></a><span class="in">┌────────────────┬────────────┬────────┬────────┐</span></span>
-<span id="cb17-38"><a href="#cb17-38"></a><span class="in">│ name           ┆ birthdate  ┆ weight ┆ height │</span></span>
-<span id="cb17-39"><a href="#cb17-39"></a><span class="in">│ ---            ┆ ---        ┆ ---    ┆ ---    │</span></span>
-<span id="cb17-40"><a href="#cb17-40"></a><span class="in">│ str            ┆ date       ┆ f64    ┆ f64    │</span></span>
-<span id="cb17-41"><a href="#cb17-41"></a><span class="in">╞════════════════╪════════════╪════════╪════════╡</span></span>
-<span id="cb17-42"><a href="#cb17-42"></a><span class="in">│ Alice Archer   ┆ 1997-01-10 ┆ 57.9   ┆ 1.56   │</span></span>
-<span id="cb17-43"><a href="#cb17-43"></a><span class="in">│ Ben Brown      ┆ 1985-02-15 ┆ 72.5   ┆ 1.77   │</span></span>
-<span id="cb17-44"><a href="#cb17-44"></a><span class="in">│ Chloe Cooper   ┆ 1983-03-22 ┆ 53.6   ┆ 1.65   │</span></span>
-<span id="cb17-45"><a href="#cb17-45"></a><span class="in">│ Daniel Donovan ┆ 1981-04-30 ┆ 83.1   ┆ 1.75   │</span></span>
-<span id="cb17-46"><a href="#cb17-46"></a><span class="in">└────────────────┴────────────┴────────┴────────┘</span></span>
-<span id="cb17-47"><a href="#cb17-47"></a><span class="in">```</span></span>
-<span id="cb17-48"><a href="#cb17-48"></a>        </span>
-<span id="cb17-49"><a href="#cb17-49"></a><span class="fu"># Review</span></span>
-<span id="cb17-50"><a href="#cb17-50"></a></span>
-<span id="cb17-51"><a href="#cb17-51"></a><span class="fu">## New Folder</span></span>
-<span id="cb17-52"><a href="#cb17-52"></a></span>
-<span id="cb17-53"><a href="#cb17-53"></a><span class="ss">- </span>You will need to make an <span class="in">`12`</span> folder in <span class="in">`271rs`</span> to save your work.</span>
-<span id="cb17-54"><a href="#cb17-54"></a><span class="ss">- </span>Ensure your shell/terminal/console/command line is in the <span class="in">`271rs`</span> repository.</span>
-<span id="cb17-55"><a href="#cb17-55"></a><span class="ss">    - </span>Review the <span class="co">[</span><span class="ot">lecture/lab</span><span class="co">](11_packages.md)</span>.</span>
-<span id="cb17-56"><a href="#cb17-56"></a><span class="ss">- </span>Create the package.</span>
-<span id="cb17-57"><a href="#cb17-57"></a><span class="in">```{.bash}</span></span>
-<span id="cb17-58"><a href="#cb17-58"></a><span class="in">cargo new 11 --name packages --vcs none</span></span>
-<span id="cb17-59"><a href="#cb17-59"></a><span class="in">```</span></span>
-<span id="cb17-60"><a href="#cb17-60"></a><span class="ss">- </span>Enter the <span class="in">`11`</span> directory.</span>
-<span id="cb17-61"><a href="#cb17-61"></a><span class="in">```{.bash}</span></span>
-<span id="cb17-62"><a href="#cb17-62"></a><span class="in">cd 11</span></span>
-<span id="cb17-63"><a href="#cb17-63"></a><span class="in">```</span></span>
-<span id="cb17-64"><a href="#cb17-64"></a><span class="ss">- </span>Prepare to modify the <span class="in">`src/main.rs`</span> file.</span>
-<span id="cb17-65"><a href="#cb17-65"></a><span class="in">```{.bash}</span></span>
-<span id="cb17-66"><a href="#cb17-66"></a><span class="in">helix src/main.rs # or vi, vim, nvim, emacs, etc</span></span>
-<span id="cb17-67"><a href="#cb17-67"></a><span class="in">```</span></span>
-<span id="cb17-68"><a href="#cb17-68"></a></span>
-<span id="cb17-69"><a href="#cb17-69"></a></span>
-<span id="cb17-70"><a href="#cb17-70"></a><span class="fu"># Hi cargo</span></span>
-<span id="cb17-71"><a href="#cb17-71"></a></span>
-<span id="cb17-72"><a href="#cb17-72"></a><span class="fu">## Citation</span></span>
-<span id="cb17-73"><a href="#cb17-73"></a></span>
-<span id="cb17-74"><a href="#cb17-74"></a><span class="ss">- </span>The following content is lifted directly from the <span class="co">[</span><span class="ot">Polars documentation</span><span class="co">](https://docs.pola.rs/user-guide/getting-started/)</span>.</span>
-<span id="cb17-75"><a href="#cb17-75"></a></span>
-<span id="cb17-76"><a href="#cb17-76"></a><span class="fu">## Example</span></span>
-<span id="cb17-77"><a href="#cb17-77"></a></span>
-<span id="cb17-78"><a href="#cb17-78"></a><span class="ss">- </span>Most things here should look vaguely familiar to you...</span>
-<span id="cb17-79"><a href="#cb17-79"></a></span>
-<span id="cb17-80"><a href="#cb17-80"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-81"><a href="#cb17-81"></a><span class="in">use chrono::prelude::*;</span></span>
-<span id="cb17-82"><a href="#cb17-82"></a><span class="in">use polars::prelude::*;</span></span>
-<span id="cb17-83"><a href="#cb17-83"></a></span>
-<span id="cb17-84"><a href="#cb17-84"></a><span class="in">let mut df: DataFrame = df!(</span></span>
-<span id="cb17-85"><a href="#cb17-85"></a><span class="in">    "name" =&gt; ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
-<span id="cb17-86"><a href="#cb17-86"></a><span class="in">    "birthdate" =&gt; [</span></span>
-<span id="cb17-87"><a href="#cb17-87"></a><span class="in">        NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
-<span id="cb17-88"><a href="#cb17-88"></a><span class="in">        NaiveDate::from_ymd_opt(1985, 2, 15).unwrap(),</span></span>
-<span id="cb17-89"><a href="#cb17-89"></a><span class="in">        NaiveDate::from_ymd_opt(1983, 3, 22).unwrap(),</span></span>
-<span id="cb17-90"><a href="#cb17-90"></a><span class="in">        NaiveDate::from_ymd_opt(1981, 4, 30).unwrap(),</span></span>
-<span id="cb17-91"><a href="#cb17-91"></a><span class="in">    ],</span></span>
-<span id="cb17-92"><a href="#cb17-92"></a><span class="in">    "weight" =&gt; [57.9, 72.5, 53.6, 83.1],  // (kg)</span></span>
-<span id="cb17-93"><a href="#cb17-93"></a><span class="in">    "height" =&gt; [1.56, 1.77, 1.65, 1.75],  // (m)</span></span>
-<span id="cb17-94"><a href="#cb17-94"></a><span class="in">)</span></span>
-<span id="cb17-95"><a href="#cb17-95"></a><span class="in">.unwrap();</span></span>
-<span id="cb17-96"><a href="#cb17-96"></a><span class="in">println!("{df}");</span></span>
-<span id="cb17-97"><a href="#cb17-97"></a><span class="in">```</span></span>
-<span id="cb17-98"><a href="#cb17-98"></a></span>
-<span id="cb17-99"><a href="#cb17-99"></a><span class="fu">## Use/Import</span></span>
-<span id="cb17-100"><a href="#cb17-100"></a></span>
-<span id="cb17-101"><a href="#cb17-101"></a><span class="ss">- </span>These are like Python <span class="in">`import`</span></span>
-<span id="cb17-102"><a href="#cb17-102"></a></span>
-<span id="cb17-103"><a href="#cb17-103"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-104"><a href="#cb17-104"></a><span class="in">use chrono::prelude::*;</span></span>
-<span id="cb17-105"><a href="#cb17-105"></a><span class="in">use polars::prelude::*;</span></span>
-<span id="cb17-106"><a href="#cb17-106"></a><span class="in">```</span></span>
-<span id="cb17-107"><a href="#cb17-107"></a></span>
-<span id="cb17-108"><a href="#cb17-108"></a><span class="ss">- </span>To use Polars in Python, we would do the following:</span>
-<span id="cb17-109"><a href="#cb17-109"></a></span>
-<span id="cb17-110"><a href="#cb17-110"></a><span class="in">```{.py}</span></span>
-<span id="cb17-111"><a href="#cb17-111"></a><span class="in">import polars as pl</span></span>
-<span id="cb17-112"><a href="#cb17-112"></a><span class="in">import datetime as dt</span></span>
-<span id="cb17-113"><a href="#cb17-113"></a><span class="in">```</span></span>
-<span id="cb17-114"><a href="#cb17-114"></a></span>
-<span id="cb17-115"><a href="#cb17-115"></a><span class="fu">## Single Equals Assignment</span></span>
-<span id="cb17-116"><a href="#cb17-116"></a></span>
-<span id="cb17-117"><a href="#cb17-117"></a><span class="ss">- </span>These are variable declarations.</span>
-<span id="cb17-118"><a href="#cb17-118"></a><span class="ss">    - </span>In Rust, the first time a variable is declared:</span>
-<span id="cb17-119"><a href="#cb17-119"></a><span class="ss">        - </span>The <span class="in">`let`</span> keyword is used (different from Python, similar to JavaScript)</span>
-<span id="cb17-120"><a href="#cb17-120"></a><span class="ss">        - </span>The type of the variable is given (different from Python, similar to C)</span>
-<span id="cb17-121"><a href="#cb17-121"></a><span class="ss">        - </span>The mutability (think tuple vs. list) is specified (similar to JavaScript)</span>
-<span id="cb17-122"><a href="#cb17-122"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-123"><a href="#cb17-123"></a><span class="in">let mut df: DataFrame = df!( // More to come.</span></span>
-<span id="cb17-124"><a href="#cb17-124"></a><span class="in">```</span></span>
-<span id="cb17-125"><a href="#cb17-125"></a><span class="ss">- </span>To create a <span class="in">`df`</span> variable in Python, we would do the following:</span>
-<span id="cb17-126"><a href="#cb17-126"></a><span class="in">```{.py}</span></span>
-<span id="cb17-127"><a href="#cb17-127"></a><span class="in">df = pl.DataFrame( # More to come.</span></span>
-<span id="cb17-128"><a href="#cb17-128"></a><span class="in">```</span></span>
-<span id="cb17-129"><a href="#cb17-129"></a></span>
-<span id="cb17-130"><a href="#cb17-130"></a><span class="fu">## Key-Value pairs</span></span>
-<span id="cb17-131"><a href="#cb17-131"></a></span>
-<span id="cb17-132"><a href="#cb17-132"></a><span class="ss">- </span>This is pattern matching.</span>
-<span id="cb17-133"><a href="#cb17-133"></a><span class="ss">    - </span>Similar enough to to C <span class="in">`switch`</span></span>
-<span id="cb17-134"><a href="#cb17-134"></a><span class="ss">    - </span>Similar enough to Python <span class="in">`dict`</span></span>
-<span id="cb17-135"><a href="#cb17-135"></a><span class="ss">    - </span>Based on Haskell/Standard ML pattern matching, <span class="co">[</span><span class="ot">Read more</span><span class="co">](https://www.haskell.org/tutorial/patterns.html)</span></span>
-<span id="cb17-136"><a href="#cb17-136"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-137"><a href="#cb17-137"></a><span class="in">"name" =&gt; ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
-<span id="cb17-138"><a href="#cb17-138"></a><span class="in">```</span></span>
-<span id="cb17-139"><a href="#cb17-139"></a><span class="ss">- </span>In Python, we match a string with a collection of strings using a dictionary for key-value storage.</span>
-<span id="cb17-140"><a href="#cb17-140"></a><span class="ss">    - </span>We note in Python this operation must occur within a dictionary, not as a free-standing expression like <span class="in">`x = 1 if True else 0`</span></span>
-<span id="cb17-141"><a href="#cb17-141"></a><span class="in">```{.py}</span></span>
-<span id="cb17-142"><a href="#cb17-142"></a><span class="in">{</span></span>
-<span id="cb17-143"><a href="#cb17-143"></a><span class="in">    "name": ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
-<span id="cb17-144"><a href="#cb17-144"></a><span class="in">```</span></span>
-<span id="cb17-145"><a href="#cb17-145"></a></span>
-<span id="cb17-146"><a href="#cb17-146"></a><span class="fu">## Access and Errors</span></span>
-<span id="cb17-147"><a href="#cb17-147"></a></span>
-<span id="cb17-148"><a href="#cb17-148"></a><span class="ss">- </span>To use things in a Rust package, rather than dot notation <span class="in">`.`</span> we use "path related synatx" <span class="in">`::`</span></span>
-<span id="cb17-149"><a href="#cb17-149"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-150"><a href="#cb17-150"></a><span class="in">NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
-<span id="cb17-151"><a href="#cb17-151"></a><span class="in">```</span></span>
-<span id="cb17-152"><a href="#cb17-152"></a><span class="ss">- </span>In Python, we typical use a module name which is incidentally a file name, which we import as some alias and then look up an internal value using <span class="in">`.`</span></span>
-<span id="cb17-153"><a href="#cb17-153"></a><span class="in">```{.py}</span></span>
-<span id="cb17-154"><a href="#cb17-154"></a><span class="in">dt.date(1997, 1, 10),</span></span>
-<span id="cb17-155"><a href="#cb17-155"></a><span class="in">```</span></span>
-<span id="cb17-156"><a href="#cb17-156"></a></span>
-<span id="cb17-157"><a href="#cb17-157"></a><span class="fu">## Options</span></span>
-<span id="cb17-158"><a href="#cb17-158"></a></span>
-<span id="cb17-159"><a href="#cb17-159"></a><span class="ss">- </span>More on this next week.</span>
-<span id="cb17-160"><a href="#cb17-160"></a><span class="ss">- </span>Rust manages errors, such as there not being a 57th of Thirteentober, using <span class="co">[</span><span class="ot">options</span><span class="co">](https://doc.rust-lang.org/rust-by-example/std/option.html)</span></span>
-<span id="cb17-161"><a href="#cb17-161"></a><span class="ss">    - </span>Same as a Haskell option. <span class="co">[</span><span class="ot">Read more</span><span class="co">](https://hackage.haskell.org/package/type-combinators-0.2.4.3/docs/Data-Type-Option.html)</span></span>
-<span id="cb17-162"><a href="#cb17-162"></a><span class="ss">    - </span>*Everything* in Python is *kinda* an object because it could technical be <span class="in">`None`</span></span>
-<span id="cb17-163"><a href="#cb17-163"></a><span class="in">```{.py}</span></span>
-<span id="cb17-164"><a href="#cb17-164"></a><span class="in">&gt;&gt;&gt; f = lambda x: x if x &gt; 0 else None</span></span>
-<span id="cb17-165"><a href="#cb17-165"></a><span class="in">&gt;&gt;&gt; f(10)</span></span>
-<span id="cb17-166"><a href="#cb17-166"></a><span class="in">10</span></span>
-<span id="cb17-167"><a href="#cb17-167"></a><span class="in">&gt;&gt;&gt; f(-10)</span></span>
-<span id="cb17-168"><a href="#cb17-168"></a><span class="in">&gt;&gt;&gt;</span></span>
-<span id="cb17-169"><a href="#cb17-169"></a><span class="in">```</span></span>
-<span id="cb17-170"><a href="#cb17-170"></a></span>
-<span id="cb17-171"><a href="#cb17-171"></a><span class="fu">## Optional Options</span></span>
-<span id="cb17-172"><a href="#cb17-172"></a></span>
-<span id="cb17-173"><a href="#cb17-173"></a><span class="ss">- </span>You can use <span class="in">`from_ymd`</span> with or without the option error handling, but using options is good form and to be encouraged.</span>
-<span id="cb17-174"><a href="#cb17-174"></a><span class="ss">- </span>Options must be unwrapped, which throws a graceful error if there is nothing inside of them.</span>
-<span id="cb17-175"><a href="#cb17-175"></a><span class="ss">- </span>The following are equivalent specifically in the case of well-formed dates:</span>
-<span id="cb17-176"><a href="#cb17-176"></a><span class="ss">- </span>The first gracefully may throw an error.</span>
-<span id="cb17-177"><a href="#cb17-177"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-178"><a href="#cb17-178"></a><span class="in">NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
-<span id="cb17-179"><a href="#cb17-179"></a><span class="in">```</span></span>
-<span id="cb17-180"><a href="#cb17-180"></a><span class="ss">- </span>If this fails, the program crashes:</span>
-<span id="cb17-181"><a href="#cb17-181"></a><span class="in">```{.rs}</span></span>
-<span id="cb17-182"><a href="#cb17-182"></a><span class="in">NaiveDate::from_ymd(1997, 1, 10),</span></span>
-<span id="cb17-183"><a href="#cb17-183"></a><span class="in">```</span></span>
-<span id="cb17-184"><a href="#cb17-184"></a></span>
-<span id="cb17-185"><a href="#cb17-185"></a></span>
-<span id="cb17-186"><a href="#cb17-186"></a></span>
-<span id="cb17-187"><a href="#cb17-187"></a><span class="co">&lt;!--</span></span>
-<span id="cb17-188"><a href="#cb17-188"></a></span>
-<span id="cb17-189"><a href="#cb17-189"></a><span class="co">C+p polars demo</span></span>
-<span id="cb17-190"><a href="#cb17-190"></a><span class="co">move imports</span></span>
-<span id="cb17-191"><a href="#cb17-191"></a><span class="co">rustfmt</span></span>
-<span id="cb17-192"><a href="#cb17-192"></a><span class="co">cargo add</span></span>
-<span id="cb17-193"><a href="#cb17-193"></a><span class="co">cargo run</span></span>
-<span id="cb17-194"><a href="#cb17-194"></a></span>
-<span id="cb17-195"><a href="#cb17-195"></a><span class="co">branch???</span></span>
-<span id="cb17-196"><a href="#cb17-196"></a></span>
-<span id="cb17-197"><a href="#cb17-197"></a><span class="co">--&gt;</span></span>
-<span id="cb17-198"><a href="#cb17-198"></a></span>
-<span id="cb17-199"><a href="#cb17-199"></a><span class="fu">## rustfmt</span></span>
-<span id="cb17-200"><a href="#cb17-200"></a></span>
-<span id="cb17-201"><a href="#cb17-201"></a><span class="at">&gt; Note: If you want to stick to a standard style across Rust projects, you can</span></span>
-<span id="cb17-202"><a href="#cb17-202"></a><span class="at">&gt; use an automatic formatter tool called </span><span class="in">`rustfmt`</span><span class="at"> to format your code in a</span></span>
-<span id="cb17-203"><a href="#cb17-203"></a><span class="at">&gt; particular style. The Rust team has included this tool</span></span>
-<span id="cb17-204"><a href="#cb17-204"></a><span class="at">&gt; with the standard Rust distribution, as </span><span class="in">`rustc`</span><span class="at"> is, so it should already be</span></span>
-<span id="cb17-205"><a href="#cb17-205"></a><span class="at">&gt; installed on your computer!</span></span>
-<span id="cb17-206"><a href="#cb17-206"></a></span>
-<span id="cb17-207"><a href="#cb17-207"></a>       </span>
-<span id="cb17-208"><a href="#cb17-208"></a><span class="fu"># Fin</span></span>
-<span id="cb17-209"><a href="#cb17-209"></a></span>
-<span id="cb17-210"><a href="#cb17-210"></a><span class="ss">- </span>You are done *coding* once your <span class="in">`hi_world.rs`</span> file:</span>
-<span id="cb17-211"><a href="#cb17-211"></a><span class="ss">    - </span>Compiles, and</span>
-<span id="cb17-212"><a href="#cb17-212"></a><span class="ss">    - </span>When run, prints "Hello, world!" or some other string that is school appropriate</span>
-<span id="cb17-213"><a href="#cb17-213"></a><span class="ss">        - </span>The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.</span>
-<span id="cb17-214"><a href="#cb17-214"></a><span class="ss">        - </span>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.</span>
-<span id="cb17-215"><a href="#cb17-215"></a><span class="ss">            - </span>🖾��￼fo9i?⛔󠀰🩷🫴✍</span>
-<span id="cb17-216"><a href="#cb17-216"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
-<span id="cb17-217"><a href="#cb17-217"></a><span class="ss">    - </span>Visible, to me, </span>
-<span id="cb17-218"><a href="#cb17-218"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
-<span id="cb17-219"><a href="#cb17-219"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="an">title:</span><span class="co"> "Hi cargo"</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 12 Sep 1440 ET"</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">---</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="fu"># Setup</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="fu">## Sketch</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="ss">- </span>There's a hot new trend that all the cool kids are talking about in town.</span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="ss">- </span>Data Science.</span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="ss">- </span>Rust is, of course, one of the best data science langauges.</span>
+<span id="cb20-16"><a href="#cb20-16"></a></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="fu">## Pre-flight Checks</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="ss">- </span>You should have</span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="ss">    - </span><span class="in">`git`</span> installed and working.</span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="ss">    - </span>A repository named <span class="in">`271rs`</span>, both a local repository on your device and a remote repository on GitHub.</span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="ss">    - </span>An editor, which really should be text-based, in-console text editor, but I can't actually ban you from using VS Code.</span>
+<span id="cb20-23"><a href="#cb20-23"></a><span class="ss">    - </span><span class="in">`cargo`</span> installed and working.</span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="ss">- </span>If you miss any of this, back to <span class="co">[</span><span class="ot">lab</span><span class="co">](01_rustup.md)</span>.</span>
+<span id="cb20-25"><a href="#cb20-25"></a></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="fu">## Requirements</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a></span>
+<span id="cb20-28"><a href="#cb20-28"></a><span class="ss">- </span>To complete this assignment, you must:</span>
+<span id="cb20-29"><a href="#cb20-29"></a><span class="ss">    - </span>Create a <span class="in">`12`</span> directory in your <span class="in">`271rs`</span> repository.</span>
+<span id="cb20-30"><a href="#cb20-30"></a><span class="ss">    - </span>This folder must be a Cargo package.</span>
+<span id="cb20-31"><a href="#cb20-31"></a><span class="ss">    - </span>It must leverage *other* Cargo packages, namely "polars" and "chrono"</span>
+<span id="cb20-32"><a href="#cb20-32"></a>    </span>
+<span id="cb20-33"><a href="#cb20-33"></a><span class="fu">## Requirements</span></span>
+<span id="cb20-34"><a href="#cb20-34"></a></span>
+<span id="cb20-35"><a href="#cb20-35"></a><span class="ss">- </span>To complete this assignment, your code must produce precisely the following DataFrame:</span>
+<span id="cb20-36"><a href="#cb20-36"></a><span class="in">```{.bash}</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a><span class="in">┌────────────────┬────────────┬────────┬────────┐</span></span>
+<span id="cb20-38"><a href="#cb20-38"></a><span class="in">│ name           ┆ birthdate  ┆ weight ┆ height │</span></span>
+<span id="cb20-39"><a href="#cb20-39"></a><span class="in">│ ---            ┆ ---        ┆ ---    ┆ ---    │</span></span>
+<span id="cb20-40"><a href="#cb20-40"></a><span class="in">│ str            ┆ date       ┆ f64    ┆ f64    │</span></span>
+<span id="cb20-41"><a href="#cb20-41"></a><span class="in">╞════════════════╪════════════╪════════╪════════╡</span></span>
+<span id="cb20-42"><a href="#cb20-42"></a><span class="in">│ Alice Archer   ┆ 1997-01-10 ┆ 57.9   ┆ 1.56   │</span></span>
+<span id="cb20-43"><a href="#cb20-43"></a><span class="in">│ Ben Brown      ┆ 1985-02-15 ┆ 72.5   ┆ 1.77   │</span></span>
+<span id="cb20-44"><a href="#cb20-44"></a><span class="in">│ Chloe Cooper   ┆ 1983-03-22 ┆ 53.6   ┆ 1.65   │</span></span>
+<span id="cb20-45"><a href="#cb20-45"></a><span class="in">│ Daniel Donovan ┆ 1981-04-30 ┆ 83.1   ┆ 1.75   │</span></span>
+<span id="cb20-46"><a href="#cb20-46"></a><span class="in">└────────────────┴────────────┴────────┴────────┘</span></span>
+<span id="cb20-47"><a href="#cb20-47"></a><span class="in">```</span></span>
+<span id="cb20-48"><a href="#cb20-48"></a>        </span>
+<span id="cb20-49"><a href="#cb20-49"></a><span class="fu"># Review</span></span>
+<span id="cb20-50"><a href="#cb20-50"></a></span>
+<span id="cb20-51"><a href="#cb20-51"></a><span class="fu">## New Folder</span></span>
+<span id="cb20-52"><a href="#cb20-52"></a></span>
+<span id="cb20-53"><a href="#cb20-53"></a><span class="ss">- </span>You will need to make an <span class="in">`12`</span> folder in <span class="in">`271rs`</span> to save your work.</span>
+<span id="cb20-54"><a href="#cb20-54"></a><span class="ss">- </span>Ensure your shell/terminal/console/command line is in the <span class="in">`271rs`</span> repository.</span>
+<span id="cb20-55"><a href="#cb20-55"></a><span class="ss">    - </span>Review the <span class="co">[</span><span class="ot">lecture/lab</span><span class="co">](11_packages.qmd)</span>.</span>
+<span id="cb20-56"><a href="#cb20-56"></a><span class="ss">- </span>Create the package.</span>
+<span id="cb20-57"><a href="#cb20-57"></a><span class="in">```{.bash}</span></span>
+<span id="cb20-58"><a href="#cb20-58"></a><span class="in">cargo new 11 --name packages --vcs none</span></span>
+<span id="cb20-59"><a href="#cb20-59"></a><span class="in">```</span></span>
+<span id="cb20-60"><a href="#cb20-60"></a><span class="ss">- </span>Enter the <span class="in">`11`</span> directory.</span>
+<span id="cb20-61"><a href="#cb20-61"></a><span class="in">```{.bash}</span></span>
+<span id="cb20-62"><a href="#cb20-62"></a><span class="in">cd 11</span></span>
+<span id="cb20-63"><a href="#cb20-63"></a><span class="in">```</span></span>
+<span id="cb20-64"><a href="#cb20-64"></a><span class="ss">- </span>Prepare to modify the <span class="in">`src/main.rs`</span> file.</span>
+<span id="cb20-65"><a href="#cb20-65"></a><span class="in">```{.bash}</span></span>
+<span id="cb20-66"><a href="#cb20-66"></a><span class="in">helix src/main.rs # or vi, vim, nvim, emacs, etc</span></span>
+<span id="cb20-67"><a href="#cb20-67"></a><span class="in">```</span></span>
+<span id="cb20-68"><a href="#cb20-68"></a></span>
+<span id="cb20-69"><a href="#cb20-69"></a><span class="fu">## Comments</span></span>
+<span id="cb20-70"><a href="#cb20-70"></a></span>
+<span id="cb20-71"><a href="#cb20-71"></a><span class="ss">- </span>Comments are important to good code!</span>
+<span id="cb20-72"><a href="#cb20-72"></a><span class="ss">- </span>Rust comments are double-slash prefixed.</span>
+<span id="cb20-73"><a href="#cb20-73"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-74"><a href="#cb20-74"></a><span class="in">println!{"This is code"}</span></span>
+<span id="cb20-75"><a href="#cb20-75"></a><span class="in">// This is a comment!</span></span>
+<span id="cb20-76"><a href="#cb20-76"></a><span class="in">```</span></span>
+<span id="cb20-77"><a href="#cb20-77"></a></span>
+<span id="cb20-78"><a href="#cb20-78"></a><span class="fu"># Hi cargo</span></span>
+<span id="cb20-79"><a href="#cb20-79"></a></span>
+<span id="cb20-80"><a href="#cb20-80"></a><span class="fu">## Citation</span></span>
+<span id="cb20-81"><a href="#cb20-81"></a></span>
+<span id="cb20-82"><a href="#cb20-82"></a><span class="ss">- </span>The following content is lifted directly from the <span class="co">[</span><span class="ot">Polars documentation</span><span class="co">](https://docs.pola.rs/user-guide/getting-started/)</span>.</span>
+<span id="cb20-83"><a href="#cb20-83"></a></span>
+<span id="cb20-84"><a href="#cb20-84"></a><span class="fu">## Example</span></span>
+<span id="cb20-85"><a href="#cb20-85"></a></span>
+<span id="cb20-86"><a href="#cb20-86"></a><span class="ss">- </span>Most things here should look vaguely familiar to you...</span>
+<span id="cb20-87"><a href="#cb20-87"></a></span>
+<span id="cb20-88"><a href="#cb20-88"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-89"><a href="#cb20-89"></a><span class="in">use chrono::prelude::*;</span></span>
+<span id="cb20-90"><a href="#cb20-90"></a><span class="in">use polars::prelude::*;</span></span>
+<span id="cb20-91"><a href="#cb20-91"></a></span>
+<span id="cb20-92"><a href="#cb20-92"></a><span class="in">let mut df: DataFrame = df!(</span></span>
+<span id="cb20-93"><a href="#cb20-93"></a><span class="in">    "name" =&gt; ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
+<span id="cb20-94"><a href="#cb20-94"></a><span class="in">    "birthdate" =&gt; [</span></span>
+<span id="cb20-95"><a href="#cb20-95"></a><span class="in">        NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
+<span id="cb20-96"><a href="#cb20-96"></a><span class="in">        NaiveDate::from_ymd_opt(1985, 2, 15).unwrap(),</span></span>
+<span id="cb20-97"><a href="#cb20-97"></a><span class="in">        NaiveDate::from_ymd_opt(1983, 3, 22).unwrap(),</span></span>
+<span id="cb20-98"><a href="#cb20-98"></a><span class="in">        NaiveDate::from_ymd_opt(1981, 4, 30).unwrap(),</span></span>
+<span id="cb20-99"><a href="#cb20-99"></a><span class="in">    ],</span></span>
+<span id="cb20-100"><a href="#cb20-100"></a><span class="in">    "weight" =&gt; [57.9, 72.5, 53.6, 83.1],  // (kg)</span></span>
+<span id="cb20-101"><a href="#cb20-101"></a><span class="in">    "height" =&gt; [1.56, 1.77, 1.65, 1.75],  // (m)</span></span>
+<span id="cb20-102"><a href="#cb20-102"></a><span class="in">)</span></span>
+<span id="cb20-103"><a href="#cb20-103"></a><span class="in">.unwrap();</span></span>
+<span id="cb20-104"><a href="#cb20-104"></a><span class="in">println!("{df}");</span></span>
+<span id="cb20-105"><a href="#cb20-105"></a><span class="in">```</span></span>
+<span id="cb20-106"><a href="#cb20-106"></a></span>
+<span id="cb20-107"><a href="#cb20-107"></a><span class="fu">## Use/Import</span></span>
+<span id="cb20-108"><a href="#cb20-108"></a></span>
+<span id="cb20-109"><a href="#cb20-109"></a><span class="ss">- </span>These are like Python <span class="in">`import`</span></span>
+<span id="cb20-110"><a href="#cb20-110"></a></span>
+<span id="cb20-111"><a href="#cb20-111"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-112"><a href="#cb20-112"></a><span class="in">use chrono::prelude::*;</span></span>
+<span id="cb20-113"><a href="#cb20-113"></a><span class="in">use polars::prelude::*;</span></span>
+<span id="cb20-114"><a href="#cb20-114"></a><span class="in">```</span></span>
+<span id="cb20-115"><a href="#cb20-115"></a></span>
+<span id="cb20-116"><a href="#cb20-116"></a><span class="ss">- </span>To use Polars in Python, we would do the following:</span>
+<span id="cb20-117"><a href="#cb20-117"></a></span>
+<span id="cb20-118"><a href="#cb20-118"></a><span class="in">```{.py}</span></span>
+<span id="cb20-119"><a href="#cb20-119"></a><span class="in">import polars as pl</span></span>
+<span id="cb20-120"><a href="#cb20-120"></a><span class="in">import datetime as dt</span></span>
+<span id="cb20-121"><a href="#cb20-121"></a><span class="in">```</span></span>
+<span id="cb20-122"><a href="#cb20-122"></a></span>
+<span id="cb20-123"><a href="#cb20-123"></a><span class="fu">## Single Equals Assignment</span></span>
+<span id="cb20-124"><a href="#cb20-124"></a></span>
+<span id="cb20-125"><a href="#cb20-125"></a><span class="ss">- </span>These are variable declarations.</span>
+<span id="cb20-126"><a href="#cb20-126"></a><span class="ss">    - </span>In Rust, the first time a variable is declared:</span>
+<span id="cb20-127"><a href="#cb20-127"></a><span class="ss">        - </span>The <span class="in">`let`</span> keyword is used (different from Python, similar to JavaScript)</span>
+<span id="cb20-128"><a href="#cb20-128"></a><span class="ss">        - </span>The type of the variable is given (different from Python, similar to C)</span>
+<span id="cb20-129"><a href="#cb20-129"></a><span class="ss">        - </span>The mutability (think tuple vs. list) is specified (similar to JavaScript)</span>
+<span id="cb20-130"><a href="#cb20-130"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-131"><a href="#cb20-131"></a><span class="in">let mut df: DataFrame = df!( // More to come.</span></span>
+<span id="cb20-132"><a href="#cb20-132"></a><span class="in">```</span></span>
+<span id="cb20-133"><a href="#cb20-133"></a><span class="ss">- </span>To create a <span class="in">`df`</span> variable in Python, we would do the following:</span>
+<span id="cb20-134"><a href="#cb20-134"></a><span class="in">```{.py}</span></span>
+<span id="cb20-135"><a href="#cb20-135"></a><span class="in">df = pl.DataFrame( # More to come.</span></span>
+<span id="cb20-136"><a href="#cb20-136"></a><span class="in">```</span></span>
+<span id="cb20-137"><a href="#cb20-137"></a></span>
+<span id="cb20-138"><a href="#cb20-138"></a><span class="fu">## Key-Value pairs</span></span>
+<span id="cb20-139"><a href="#cb20-139"></a></span>
+<span id="cb20-140"><a href="#cb20-140"></a><span class="ss">- </span>This is pattern matching.</span>
+<span id="cb20-141"><a href="#cb20-141"></a><span class="ss">    - </span>Similar enough to to C <span class="in">`switch`</span></span>
+<span id="cb20-142"><a href="#cb20-142"></a><span class="ss">    - </span>Similar enough to Python <span class="in">`dict`</span></span>
+<span id="cb20-143"><a href="#cb20-143"></a><span class="ss">    - </span>Based on Haskell/Standard ML pattern matching, <span class="co">[</span><span class="ot">Read more</span><span class="co">](https://www.haskell.org/tutorial/patterns.html)</span></span>
+<span id="cb20-144"><a href="#cb20-144"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-145"><a href="#cb20-145"></a><span class="in">"name" =&gt; ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
+<span id="cb20-146"><a href="#cb20-146"></a><span class="in">```</span></span>
+<span id="cb20-147"><a href="#cb20-147"></a><span class="ss">- </span>In Python, we match a string with a collection of strings using a dictionary for key-value storage.</span>
+<span id="cb20-148"><a href="#cb20-148"></a><span class="ss">    - </span>We note in Python this operation must occur within a dictionary, not as a free-standing expression like <span class="in">`x = 1 if True else 0`</span></span>
+<span id="cb20-149"><a href="#cb20-149"></a><span class="in">```{.py}</span></span>
+<span id="cb20-150"><a href="#cb20-150"></a><span class="in">{</span></span>
+<span id="cb20-151"><a href="#cb20-151"></a><span class="in">    "name": ["Alice Archer", "Ben Brown", "Chloe Cooper", "Daniel Donovan"],</span></span>
+<span id="cb20-152"><a href="#cb20-152"></a><span class="in">```</span></span>
+<span id="cb20-153"><a href="#cb20-153"></a></span>
+<span id="cb20-154"><a href="#cb20-154"></a><span class="fu">## Access and Errors</span></span>
+<span id="cb20-155"><a href="#cb20-155"></a></span>
+<span id="cb20-156"><a href="#cb20-156"></a><span class="ss">- </span>To use things in a Rust package, rather than dot notation <span class="in">`.`</span> we use "path related synatx" <span class="in">`::`</span></span>
+<span id="cb20-157"><a href="#cb20-157"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-158"><a href="#cb20-158"></a><span class="in">NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
+<span id="cb20-159"><a href="#cb20-159"></a><span class="in">```</span></span>
+<span id="cb20-160"><a href="#cb20-160"></a><span class="ss">- </span>In Python, we typical use a module name which is incidentally a file name, which we import as some alias and then look up an internal value using <span class="in">`.`</span></span>
+<span id="cb20-161"><a href="#cb20-161"></a><span class="in">```{.py}</span></span>
+<span id="cb20-162"><a href="#cb20-162"></a><span class="in">dt.date(1997, 1, 10),</span></span>
+<span id="cb20-163"><a href="#cb20-163"></a><span class="in">```</span></span>
+<span id="cb20-164"><a href="#cb20-164"></a></span>
+<span id="cb20-165"><a href="#cb20-165"></a><span class="fu">## Options</span></span>
+<span id="cb20-166"><a href="#cb20-166"></a></span>
+<span id="cb20-167"><a href="#cb20-167"></a><span class="ss">- </span>More on this next week.</span>
+<span id="cb20-168"><a href="#cb20-168"></a><span class="ss">- </span>Rust manages errors, such as there not being a 57th of Thirteentober, using <span class="co">[</span><span class="ot">options</span><span class="co">](https://doc.rust-lang.org/rust-by-example/std/option.html)</span></span>
+<span id="cb20-169"><a href="#cb20-169"></a><span class="ss">    - </span>Same as a Haskell option. <span class="co">[</span><span class="ot">Read more</span><span class="co">](https://hackage.haskell.org/package/type-combinators-0.2.4.3/docs/Data-Type-Option.html)</span></span>
+<span id="cb20-170"><a href="#cb20-170"></a><span class="ss">    - </span>*Everything* in Python is *kinda* an object because it could technical be <span class="in">`None`</span></span>
+<span id="cb20-171"><a href="#cb20-171"></a><span class="in">```{.py}</span></span>
+<span id="cb20-172"><a href="#cb20-172"></a><span class="in">&gt;&gt;&gt; f = lambda x: x if x &gt; 0 else None</span></span>
+<span id="cb20-173"><a href="#cb20-173"></a><span class="in">&gt;&gt;&gt; f(10)</span></span>
+<span id="cb20-174"><a href="#cb20-174"></a><span class="in">10</span></span>
+<span id="cb20-175"><a href="#cb20-175"></a><span class="in">&gt;&gt;&gt; f(-10)</span></span>
+<span id="cb20-176"><a href="#cb20-176"></a><span class="in">&gt;&gt;&gt;</span></span>
+<span id="cb20-177"><a href="#cb20-177"></a><span class="in">```</span></span>
+<span id="cb20-178"><a href="#cb20-178"></a></span>
+<span id="cb20-179"><a href="#cb20-179"></a><span class="fu">## Optional Options</span></span>
+<span id="cb20-180"><a href="#cb20-180"></a></span>
+<span id="cb20-181"><a href="#cb20-181"></a><span class="ss">- </span>You can use <span class="in">`from_ymd`</span> with or without the option error handling, but using options is good form and to be encouraged.</span>
+<span id="cb20-182"><a href="#cb20-182"></a><span class="ss">- </span>Options must be unwrapped, which throws a graceful error if there is nothing inside of them.</span>
+<span id="cb20-183"><a href="#cb20-183"></a><span class="ss">- </span>The following are equivalent specifically in the case of well-formed dates:</span>
+<span id="cb20-184"><a href="#cb20-184"></a><span class="ss">- </span>The first gracefully may throw an error.</span>
+<span id="cb20-185"><a href="#cb20-185"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-186"><a href="#cb20-186"></a><span class="in">NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),</span></span>
+<span id="cb20-187"><a href="#cb20-187"></a><span class="in">```</span></span>
+<span id="cb20-188"><a href="#cb20-188"></a><span class="ss">- </span>If this fails, the program crashes:</span>
+<span id="cb20-189"><a href="#cb20-189"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-190"><a href="#cb20-190"></a><span class="in">NaiveDate::from_ymd(1997, 1, 10),</span></span>
+<span id="cb20-191"><a href="#cb20-191"></a><span class="in">```</span></span>
+<span id="cb20-192"><a href="#cb20-192"></a></span>
+<span id="cb20-193"><a href="#cb20-193"></a><span class="fu">## Unwrap</span></span>
+<span id="cb20-194"><a href="#cb20-194"></a></span>
+<span id="cb20-195"><a href="#cb20-195"></a><span class="ss">- </span>Versus Python, where <span class="in">`pl.DataFrame`</span> will return a dataframe, <span class="in">`df!`</span> in Rust will return an option.</span>
+<span id="cb20-196"><a href="#cb20-196"></a><span class="ss">    - </span>It may not be able to coerce something into a dataframe.</span>
+<span id="cb20-197"><a href="#cb20-197"></a><span class="ss">- </span>We have to unwrap that option. This is the last line before print</span>
+<span id="cb20-198"><a href="#cb20-198"></a><span class="ss">    - </span>I've removed the contents so you can see it here:</span>
+<span id="cb20-199"><a href="#cb20-199"></a><span class="in">```{.rs}</span></span>
+<span id="cb20-200"><a href="#cb20-200"></a><span class="in">let mut df: DataFrame = df!(</span></span>
+<span id="cb20-201"><a href="#cb20-201"></a><span class="in">)</span></span>
+<span id="cb20-202"><a href="#cb20-202"></a><span class="in">.unwrap();  // This line!</span></span>
+<span id="cb20-203"><a href="#cb20-203"></a><span class="in">println!("{df}");</span></span>
+<span id="cb20-204"><a href="#cb20-204"></a><span class="in">```</span></span>
+<span id="cb20-205"><a href="#cb20-205"></a></span>
+<span id="cb20-206"><a href="#cb20-206"></a><span class="fu"># Package Management</span></span>
+<span id="cb20-207"><a href="#cb20-207"></a></span>
+<span id="cb20-208"><a href="#cb20-208"></a><span class="fu">## Try it!</span></span>
+<span id="cb20-209"><a href="#cb20-209"></a></span>
+<span id="cb20-210"><a href="#cb20-210"></a><span class="ss">- </span>The provided code, above, is debugged Polars code that will run successfully!</span>
+<span id="cb20-211"><a href="#cb20-211"></a><span class="ss">- </span>However, that doesn't mean that it *does* run successfully.</span>
+<span id="cb20-212"><a href="#cb20-212"></a><span class="in">```{.bash}</span></span>
+<span id="cb20-213"><a href="#cb20-213"></a><span class="in">error[E0433]: failed to resolve: use of unresolved module or unlinked crate `polars`</span></span>
+<span id="cb20-214"><a href="#cb20-214"></a><span class="in"> --&gt; src/main.rs:3:9</span></span>
+<span id="cb20-215"><a href="#cb20-215"></a><span class="in">  |</span></span>
+<span id="cb20-216"><a href="#cb20-216"></a><span class="in">3 |     use polars::prelude::*;</span></span>
+<span id="cb20-217"><a href="#cb20-217"></a><span class="in">  |         ^^^^^^ use of unresolved module or unlinked crate `polars`</span></span>
+<span id="cb20-218"><a href="#cb20-218"></a><span class="in">  |</span></span>
+<span id="cb20-219"><a href="#cb20-219"></a><span class="in">  = help: if you wanted to use a crate named `polars`, use `cargo add polars` to add it to your `Cargo.toml`</span></span>
+<span id="cb20-220"><a href="#cb20-220"></a><span class="in">```</span></span>
+<span id="cb20-221"><a href="#cb20-221"></a></span>
+<span id="cb20-222"><a href="#cb20-222"></a><span class="fu">## Cargo add</span></span>
+<span id="cb20-223"><a href="#cb20-223"></a></span>
+<span id="cb20-224"><a href="#cb20-224"></a><span class="ss">- </span>To use packages within your own code, you need to <span class="in">`cargo add`</span> them.</span>
+<span id="cb20-225"><a href="#cb20-225"></a><span class="ss">- </span>The example code uses two packages: <span class="in">`polars`</span> and <span class="in">`chrono`</span></span>
+<span id="cb20-226"><a href="#cb20-226"></a><span class="ss">- </span>This is mostly similar to <span class="in">`pip install`</span> for Python, but is specific to one Cargo project.</span>
+<span id="cb20-227"><a href="#cb20-227"></a><span class="ss">    - </span>This reflects the growing consensus in package management.</span>
+<span id="cb20-228"><a href="#cb20-228"></a><span class="ss">- </span>Try using <span class="in">`cargo add`</span> to get the code to work!</span>
+<span id="cb20-229"><a href="#cb20-229"></a><span class="ss">    - </span>Think about what directory you should be in when using <span class="in">`cargo add`</span></span>
+<span id="cb20-230"><a href="#cb20-230"></a><span class="ss">    - </span>Think about how you would look up help if you get stuck!</span>
+<span id="cb20-231"><a href="#cb20-231"></a></span>
+<span id="cb20-232"><a href="#cb20-232"></a><span class="co">&lt;!--</span></span>
+<span id="cb20-233"><a href="#cb20-233"></a></span>
+<span id="cb20-234"><a href="#cb20-234"></a><span class="co">C+p polars demo</span></span>
+<span id="cb20-235"><a href="#cb20-235"></a><span class="co">move imports</span></span>
+<span id="cb20-236"><a href="#cb20-236"></a><span class="co">rustfmt</span></span>
+<span id="cb20-237"><a href="#cb20-237"></a><span class="co">cargo add</span></span>
+<span id="cb20-238"><a href="#cb20-238"></a><span class="co">cargo run</span></span>
+<span id="cb20-239"><a href="#cb20-239"></a></span>
+<span id="cb20-240"><a href="#cb20-240"></a><span class="co">branch???</span></span>
+<span id="cb20-241"><a href="#cb20-241"></a></span>
+<span id="cb20-242"><a href="#cb20-242"></a><span class="co">--&gt;</span></span>
+<span id="cb20-243"><a href="#cb20-243"></a></span>
+<span id="cb20-244"><a href="#cb20-244"></a><span class="fu">## Cargo fmt</span></span>
+<span id="cb20-245"><a href="#cb20-245"></a></span>
+<span id="cb20-246"><a href="#cb20-246"></a><span class="at">&gt; Note: If you want to stick to a standard style across Rust projects, you can</span></span>
+<span id="cb20-247"><a href="#cb20-247"></a><span class="at">&gt; use an automatic formatter tool called </span><span class="in">`rustfmt`</span><span class="at"> to format your code in a</span></span>
+<span id="cb20-248"><a href="#cb20-248"></a><span class="at">&gt; particular style. The Rust team has included this tool</span></span>
+<span id="cb20-249"><a href="#cb20-249"></a><span class="at">&gt; with the standard Rust distribution, as </span><span class="in">`rustc`</span><span class="at"> is, so it should already be</span></span>
+<span id="cb20-250"><a href="#cb20-250"></a><span class="at">&gt; installed on your computer!</span></span>
+<span id="cb20-251"><a href="#cb20-251"></a></span>
+<span id="cb20-252"><a href="#cb20-252"></a><span class="ss">- </span>In a Cargo project, you can simply use <span class="in">`cargo fmt`</span></span>
+<span id="cb20-253"><a href="#cb20-253"></a><span class="ss">- </span>Play around the with the code, then format it, and see what changes!</span>
+<span id="cb20-254"><a href="#cb20-254"></a></span>
+<span id="cb20-255"><a href="#cb20-255"></a><span class="in">       </span></span>
+<span id="cb20-256"><a href="#cb20-256"></a><span class="fu"># Fin</span></span>
+<span id="cb20-257"><a href="#cb20-257"></a></span>
+<span id="cb20-258"><a href="#cb20-258"></a><span class="ss">- </span>You are done *coding* once your Cargo project:</span>
+<span id="cb20-259"><a href="#cb20-259"></a><span class="ss">    - </span>Compiles via <span class="in">`cargo run`</span>, and</span>
+<span id="cb20-260"><a href="#cb20-260"></a><span class="ss">    - </span>When run, prints the required DataFrame.</span>
+<span id="cb20-261"><a href="#cb20-261"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
+<span id="cb20-262"><a href="#cb20-262"></a><span class="ss">    - </span>Visible, to me, </span>
+<span id="cb20-263"><a href="#cb20-263"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
+<span id="cb20-264"><a href="#cb20-264"></a><span class="ss">    - </span>In a folder named <span class="in">`12`</span></span>
+<span id="cb20-265"><a href="#cb20-265"></a><span class="ss">    - </span>As a Cargo project.</span>
+<span id="cb20-266"><a href="#cb20-266"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

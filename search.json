@@ -67,6 +67,16 @@
     ]
   },
   {
+    "objectID": "12_hicargo.html#comments",
+    "href": "12_hicargo.html#comments",
+    "title": "Hi cargo",
+    "section": "Comments",
+    "text": "Comments\n\nComments are important to good code!\nRust comments are double-slash prefixed.\n\nprintln!{\"This is code\"}\n// This is a comment!",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
     "objectID": "12_hicargo.html#citation",
     "href": "12_hicargo.html#citation",
     "title": "Hi cargo",
@@ -147,11 +157,41 @@
     ]
   },
   {
-    "objectID": "12_hicargo.html#rustfmt",
-    "href": "12_hicargo.html#rustfmt",
+    "objectID": "12_hicargo.html#unwrap",
+    "href": "12_hicargo.html#unwrap",
     "title": "Hi cargo",
-    "section": "rustfmt",
-    "text": "rustfmt\n\nNote: If you want to stick to a standard style across Rust projects, you can use an automatic formatter tool called rustfmt to format your code in a particular style. The Rust team has included this tool with the standard Rust distribution, as rustc is, so it should already be installed on your computer!",
+    "section": "Unwrap",
+    "text": "Unwrap\n\nVersus Python, where pl.DataFrame will return a dataframe, df! in Rust will return an option.\n\nIt may not be able to coerce something into a dataframe.\n\nWe have to unwrap that option. This is the last line before print\n\nI’ve removed the contents so you can see it here:\n\nlet mut df: DataFrame = df!(\n)\n.unwrap();  // This line!\nprintln!(\"{df}\");",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#try-it",
+    "href": "12_hicargo.html#try-it",
+    "title": "Hi cargo",
+    "section": "Try it!",
+    "text": "Try it!\n\nThe provided code, above, is debugged Polars code that will run successfully!\nHowever, that doesn’t mean that it does run successfully.\n\nerror[E0433]: failed to resolve: use of unresolved module or unlinked crate `polars`\n --&gt; src/main.rs:3:9\n  |\n3 |     use polars::prelude::*;\n  |         ^^^^^^ use of unresolved module or unlinked crate `polars`\n  |\n  = help: if you wanted to use a crate named `polars`, use `cargo add polars` to add it to your `Cargo.toml`",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#cargo-add",
+    "href": "12_hicargo.html#cargo-add",
+    "title": "Hi cargo",
+    "section": "Cargo add",
+    "text": "Cargo add\n\nTo use packages within your own code, you need to cargo add them.\nThe example code uses two packages: polars and chrono\nThis is mostly similar to pip install for Python, but is specific to one Cargo project.\n\nThis reflects the growing consensus in package management.\n\nTry using cargo add to get the code to work!\n\nThink about what directory you should be in when using cargo add\nThink about how you would look up help if you get stuck!",
+    "crumbs": [
+      "Hi cargo"
+    ]
+  },
+  {
+    "objectID": "12_hicargo.html#cargo-fmt",
+    "href": "12_hicargo.html#cargo-fmt",
+    "title": "Hi cargo",
+    "section": "Cargo fmt",
+    "text": "Cargo fmt\n\nNote: If you want to stick to a standard style across Rust projects, you can use an automatic formatter tool called rustfmt to format your code in a particular style. The Rust team has included this tool with the standard Rust distribution, as rustc is, so it should already be installed on your computer!\n\n\nIn a Cargo project, you can simply use cargo fmt\nPlay around the with the code, then format it, and see what changes!",
     "crumbs": [
       "Hi cargo"
     ]
