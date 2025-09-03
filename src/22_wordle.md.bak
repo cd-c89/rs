@@ -1,3 +1,14 @@
+---
+title: "Wordle"
+author: ""
+subtitle: "Due 14 Sep 1440 ET"
+format: html
+---
+
+<!--
+
 saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/
 
 println!("\u{001b}[44mHello, world!\u{001b}[0m")
+
+-->

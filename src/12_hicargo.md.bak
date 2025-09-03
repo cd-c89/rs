@@ -173,7 +173,7 @@ dt.date(1997, 1, 10),
 - You can use `from_ymd` with or without the option error handling, but using options is good form and to be encouraged.
 - Options must be unwrapped, which throws a graceful error if there is nothing inside of them.
 - The following are equivalent specifically in the case of well-formed dates:
-- The first exits graceful on error.
+- The first gracefully may throw an error.
 ```{.rs}
 NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
 ```

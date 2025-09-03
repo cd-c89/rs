@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./22_wordle.html" rel="next">
+<link href="./20_options.html" rel="next">
 <link href="./11_packages.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -173,8 +173,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">22 Wordle</span></a>
+ <span class="menu-text">Wordle</span></a>
   </div>
 </li>
     </ul>
@@ -220,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Hi cargo</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Due 7 Sep 1440 ET</p>
+<p class="subtitle lead">Due Friday, 12 Sep 1440 ET</p>
 </div>
 
 
@@ -955,15 +967,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./22_wordle.html" class="pagination-link" aria-label="22 Wordle">
-        <span class="nav-page-text">22 Wordle</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./20_options.html" class="pagination-link" aria-label="Options">
+        <span class="nav-page-text">Options</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">---</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="an">title:</span><span class="co"> "Hi cargo"</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="an">subtitle:</span><span class="co"> "Due 7 Sep 1440 ET"</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 12 Sep 1440 ET"</span></span>
 <span id="cb17-5"><a href="#cb17-5"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb17-6"><a href="#cb17-6"></a><span class="co">---</span></span>
 <span id="cb17-7"><a href="#cb17-7"></a></span>
@@ -1144,39 +1156,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-182"><a href="#cb17-182"></a><span class="in">NaiveDate::from_ymd(1997, 1, 10),</span></span>
 <span id="cb17-183"><a href="#cb17-183"></a><span class="in">```</span></span>
 <span id="cb17-184"><a href="#cb17-184"></a></span>
-<span id="cb17-185"><a href="#cb17-185"></a><span class="co">&lt;!--</span></span>
+<span id="cb17-185"><a href="#cb17-185"></a></span>
 <span id="cb17-186"><a href="#cb17-186"></a></span>
-<span id="cb17-187"><a href="#cb17-187"></a><span class="co">C+p polars demo</span></span>
-<span id="cb17-188"><a href="#cb17-188"></a><span class="co">move imports</span></span>
-<span id="cb17-189"><a href="#cb17-189"></a><span class="co">rustfmt</span></span>
-<span id="cb17-190"><a href="#cb17-190"></a><span class="co">cargo add</span></span>
-<span id="cb17-191"><a href="#cb17-191"></a><span class="co">cargo run</span></span>
-<span id="cb17-192"><a href="#cb17-192"></a></span>
-<span id="cb17-193"><a href="#cb17-193"></a><span class="co">branch???</span></span>
+<span id="cb17-187"><a href="#cb17-187"></a><span class="co">&lt;!--</span></span>
+<span id="cb17-188"><a href="#cb17-188"></a></span>
+<span id="cb17-189"><a href="#cb17-189"></a><span class="co">C+p polars demo</span></span>
+<span id="cb17-190"><a href="#cb17-190"></a><span class="co">move imports</span></span>
+<span id="cb17-191"><a href="#cb17-191"></a><span class="co">rustfmt</span></span>
+<span id="cb17-192"><a href="#cb17-192"></a><span class="co">cargo add</span></span>
+<span id="cb17-193"><a href="#cb17-193"></a><span class="co">cargo run</span></span>
 <span id="cb17-194"><a href="#cb17-194"></a></span>
-<span id="cb17-195"><a href="#cb17-195"></a><span class="co">--&gt;</span></span>
+<span id="cb17-195"><a href="#cb17-195"></a><span class="co">branch???</span></span>
 <span id="cb17-196"><a href="#cb17-196"></a></span>
-<span id="cb17-197"><a href="#cb17-197"></a><span class="fu">## rustfmt</span></span>
+<span id="cb17-197"><a href="#cb17-197"></a><span class="co">--&gt;</span></span>
 <span id="cb17-198"><a href="#cb17-198"></a></span>
-<span id="cb17-199"><a href="#cb17-199"></a><span class="at">&gt; Note: If you want to stick to a standard style across Rust projects, you can</span></span>
-<span id="cb17-200"><a href="#cb17-200"></a><span class="at">&gt; use an automatic formatter tool called </span><span class="in">`rustfmt`</span><span class="at"> to format your code in a</span></span>
-<span id="cb17-201"><a href="#cb17-201"></a><span class="at">&gt; particular style. The Rust team has included this tool</span></span>
-<span id="cb17-202"><a href="#cb17-202"></a><span class="at">&gt; with the standard Rust distribution, as </span><span class="in">`rustc`</span><span class="at"> is, so it should already be</span></span>
-<span id="cb17-203"><a href="#cb17-203"></a><span class="at">&gt; installed on your computer!</span></span>
-<span id="cb17-204"><a href="#cb17-204"></a></span>
-<span id="cb17-205"><a href="#cb17-205"></a>       </span>
-<span id="cb17-206"><a href="#cb17-206"></a><span class="fu"># Fin</span></span>
-<span id="cb17-207"><a href="#cb17-207"></a></span>
-<span id="cb17-208"><a href="#cb17-208"></a><span class="ss">- </span>You are done *coding* once your <span class="in">`hi_world.rs`</span> file:</span>
-<span id="cb17-209"><a href="#cb17-209"></a><span class="ss">    - </span>Compiles, and</span>
-<span id="cb17-210"><a href="#cb17-210"></a><span class="ss">    - </span>When run, prints "Hello, world!" or some other string that is school appropriate</span>
-<span id="cb17-211"><a href="#cb17-211"></a><span class="ss">        - </span>The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.</span>
-<span id="cb17-212"><a href="#cb17-212"></a><span class="ss">        - </span>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.</span>
-<span id="cb17-213"><a href="#cb17-213"></a><span class="ss">            - </span>🖾��￼fo9i?⛔󠀰🩷🫴✍</span>
-<span id="cb17-214"><a href="#cb17-214"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
-<span id="cb17-215"><a href="#cb17-215"></a><span class="ss">    - </span>Visible, to me, </span>
-<span id="cb17-216"><a href="#cb17-216"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
-<span id="cb17-217"><a href="#cb17-217"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb17-199"><a href="#cb17-199"></a><span class="fu">## rustfmt</span></span>
+<span id="cb17-200"><a href="#cb17-200"></a></span>
+<span id="cb17-201"><a href="#cb17-201"></a><span class="at">&gt; Note: If you want to stick to a standard style across Rust projects, you can</span></span>
+<span id="cb17-202"><a href="#cb17-202"></a><span class="at">&gt; use an automatic formatter tool called </span><span class="in">`rustfmt`</span><span class="at"> to format your code in a</span></span>
+<span id="cb17-203"><a href="#cb17-203"></a><span class="at">&gt; particular style. The Rust team has included this tool</span></span>
+<span id="cb17-204"><a href="#cb17-204"></a><span class="at">&gt; with the standard Rust distribution, as </span><span class="in">`rustc`</span><span class="at"> is, so it should already be</span></span>
+<span id="cb17-205"><a href="#cb17-205"></a><span class="at">&gt; installed on your computer!</span></span>
+<span id="cb17-206"><a href="#cb17-206"></a></span>
+<span id="cb17-207"><a href="#cb17-207"></a>       </span>
+<span id="cb17-208"><a href="#cb17-208"></a><span class="fu"># Fin</span></span>
+<span id="cb17-209"><a href="#cb17-209"></a></span>
+<span id="cb17-210"><a href="#cb17-210"></a><span class="ss">- </span>You are done *coding* once your <span class="in">`hi_world.rs`</span> file:</span>
+<span id="cb17-211"><a href="#cb17-211"></a><span class="ss">    - </span>Compiles, and</span>
+<span id="cb17-212"><a href="#cb17-212"></a><span class="ss">    - </span>When run, prints "Hello, world!" or some other string that is school appropriate</span>
+<span id="cb17-213"><a href="#cb17-213"></a><span class="ss">        - </span>The complete text of *Infinite Jest* is the boundary between appropriate and inappropriate.</span>
+<span id="cb17-214"><a href="#cb17-214"></a><span class="ss">        - </span>Emojis that are supported on some but not all of MacOS, Linux, and Windows form the boundary between some string and not a string.</span>
+<span id="cb17-215"><a href="#cb17-215"></a><span class="ss">            - </span>🖾��￼fo9i?⛔󠀰🩷🫴✍</span>
+<span id="cb17-216"><a href="#cb17-216"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
+<span id="cb17-217"><a href="#cb17-217"></a><span class="ss">    - </span>Visible, to me, </span>
+<span id="cb17-218"><a href="#cb17-218"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
+<span id="cb17-219"><a href="#cb17-219"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

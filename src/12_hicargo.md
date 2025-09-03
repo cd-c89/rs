@@ -1,7 +1,7 @@
 ---
 title: "Hi cargo"
 author: ""
-subtitle: "Due 7 Sep 1440 ET"
+subtitle: "Due Friday, 12 Sep 1440 ET"
 format: html
 ---
 
@@ -181,6 +181,8 @@ NaiveDate::from_ymd_opt(1997, 1, 10).unwrap(),
 ```{.rs}
 NaiveDate::from_ymd(1997, 1, 10),
 ```
+
+
 
 <!--
 
