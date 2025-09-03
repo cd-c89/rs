@@ -252,7 +252,6 @@ branch???
 - In a Cargo project, you can simply use `cargo fmt`
 - Play around the with the code, then format it, and see what changes!
 
-       
 # Fin
 
 - You are done *coding* once your Cargo project:
