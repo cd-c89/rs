@@ -107,7 +107,7 @@ fn main() {
 - Enter the following commands to compile the file:
 
 ```{.bash}
-rustc hi_world.c
+rustc hi_world.rs
 ```
 
 ::: {.callout-note}
