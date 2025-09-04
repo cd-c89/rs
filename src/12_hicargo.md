@@ -55,11 +55,11 @@ format: html
     - Review the [lecture/lab](11_packages.qmd).
 - Create the package.
 ```{.bash}
-cargo new 11 --name packages --vcs none
+cargo new 12 --name packages --vcs none
 ```
-- Enter the `11` directory.
+- Enter the `12` directory.
 ```{.bash}
-cd 11
+cd 12
 ```
 - Prepare to modify the `src/main.rs` file.
 ```{.bash}

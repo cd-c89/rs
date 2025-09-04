@@ -61,7 +61,7 @@
     "href": "12_hicargo.html#new-folder",
     "title": "Hi cargo",
     "section": "New Folder",
-    "text": "New Folder\n\nYou will need to make an 12 folder in 271rs to save your work.\nEnsure your shell/terminal/console/command line is in the 271rs repository.\n\nReview the lecture/lab.\n\nCreate the package.\n\ncargo new 11 --name packages --vcs none\n\nEnter the 11 directory.\n\ncd 11\n\nPrepare to modify the src/main.rs file.\n\nhelix src/main.rs # or vi, vim, nvim, emacs, etc",
+    "text": "New Folder\n\nYou will need to make an 12 folder in 271rs to save your work.\nEnsure your shell/terminal/console/command line is in the 271rs repository.\n\nReview the lecture/lab.\n\nCreate the package.\n\ncargo new 12 --name packages --vcs none\n\nEnter the 12 directory.\n\ncd 12\n\nPrepare to modify the src/main.rs file.\n\nhelix src/main.rs # or vi, vim, nvim, emacs, etc",
     "crumbs": [
       "Hi cargo"
     ]
