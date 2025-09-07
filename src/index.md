@@ -22,10 +22,10 @@ format: html
 
 ### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)
 
-### Syllabus TBD
+### Syllabus
 
-- Ungrade++
-- Lec/Lab/HW
+- Ungrade selected by a comfortable super majority.
+- [Syllabus link](syllabus/syllabus.pdf)
 
 # Calendar
 
