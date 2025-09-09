@@ -494,7 +494,8 @@ let mut guess = String::new();
 - You may benefit from using `for` loops of fixed index.
 - Rust has a syntactical rather than functional range.
 - It follows the same start/stop rules as Python.
-```{.rs filename="src.main.rs")
+
+```{.rs filename="src/main.rs"}
 fn main() {
     for i in 1..5 {
         println!("{:?}", i);

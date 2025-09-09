@@ -933,8 +933,18 @@ Help Yourself
 <ul>
 <li>You may benefit from using <code>for</code> loops of fixed index.</li>
 <li>Rust has a syntactical rather than functional range.</li>
-<li>It follows the same start/stop rules as Python. <code>{.rs filename="src.main.rs") fn main() {     for i in 1..5 {         println!("{:?}", i);     } }</code></li>
+<li>It follows the same start/stop rules as Python.</li>
 </ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb28" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span><span class="op">..</span><span class="dv">5</span> <span class="op">{</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>        <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> i)<span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>    <span class="op">}</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="vectors" class="level2">
 <h2 class="anchored" data-anchor-id="vectors">Vectors</h2>
@@ -1445,524 +1455,525 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">---</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="co">---</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a></span>
-<span id="cb28-6"><a href="#cb28-6"></a><span class="fu">## Announcements</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a></span>
-<span id="cb28-8"><a href="#cb28-8"></a><span class="ss">- </span>Lab Day</span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="ss">    - </span>Prepare for Wordle</span>
-<span id="cb28-10"><a href="#cb28-10"></a></span>
-<span id="cb28-11"><a href="#cb28-11"></a><span class="fu">## Homework</span></span>
-<span id="cb28-12"><a href="#cb28-12"></a></span>
-<span id="cb28-13"><a href="#cb28-13"></a><span class="ss">- </span>Wordle is ready after this class.</span>
-<span id="cb28-14"><a href="#cb28-14"></a><span class="ss">  - </span>It is exactly hard enough to use all programming basics.</span>
-<span id="cb28-15"><a href="#cb28-15"></a><span class="ss">  - </span>Windows development is no longer supported.</span>
-<span id="cb28-16"><a href="#cb28-16"></a><span class="ss">- </span>Due Friday, 19 Sept. at 1440 ET.</span>
-<span id="cb28-17"><a href="#cb28-17"></a></span>
-<span id="cb28-18"><a href="#cb28-18"></a><span class="fu">## Citation</span></span>
-<span id="cb28-19"><a href="#cb28-19"></a></span>
-<span id="cb28-20"><a href="#cb28-20"></a><span class="ss">- </span>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <span class="co">[</span><span class="ot">Guessing Game</span><span class="co">](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)</span></span>
-<span id="cb28-21"><a href="#cb28-21"></a><span class="ss">- </span>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <span class="co">[</span><span class="ot">same name</span><span class="co">](http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/)</span>.</span>
-<span id="cb28-22"><a href="#cb28-22"></a></span>
-<span id="cb28-23"><a href="#cb28-23"></a><span class="fu">## Today</span></span>
-<span id="cb28-24"><a href="#cb28-24"></a></span>
-<span id="cb28-25"><a href="#cb28-25"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`const`</span></span>
-<span id="cb28-26"><a href="#cb28-26"></a><span class="ss">- </span><span class="va">[ ]</span> Character iteration</span>
-<span id="cb28-27"><a href="#cb28-27"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`/dev/urandom`</span></span>
-<span id="cb28-28"><a href="#cb28-28"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
-<span id="cb28-29"><a href="#cb28-29"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
-<span id="cb28-30"><a href="#cb28-30"></a></span>
-<span id="cb28-31"><a href="#cb28-31"></a></span>
-<span id="cb28-32"><a href="#cb28-32"></a><span class="fu"># consts</span></span>
-<span id="cb28-33"><a href="#cb28-33"></a></span>
-<span id="cb28-34"><a href="#cb28-34"></a><span class="fu">## Compile time</span></span>
-<span id="cb28-35"><a href="#cb28-35"></a></span>
-<span id="cb28-36"><a href="#cb28-36"></a><span class="ss">- </span>In Wordle, you'll likely have two kinds of values that won't change.</span>
-<span id="cb28-37"><a href="#cb28-37"></a><span class="ss">    - </span>The "ANSI Escape Codes" which allow you to print to the terminal in color, which are set when you install your operating system.</span>
-<span id="cb28-38"><a href="#cb28-38"></a><span class="ss">        - </span>For these we may use a Rust <span class="in">`const`</span></span>
-<span id="cb28-39"><a href="#cb28-39"></a><span class="ss">    - </span>The "answer" which will be set as soon as the program begins running, and never be altered thereafter.</span>
-<span id="cb28-40"><a href="#cb28-40"></a><span class="ss">        - </span>For these, we use a <span class="in">`let`</span>.</span>
-<span id="cb28-41"><a href="#cb28-41"></a><span class="ss">- </span>I refer to the first as "compile time constants" and declare them outside of any function.</span>
-<span id="cb28-42"><a href="#cb28-42"></a></span>
-<span id="cb28-43"><a href="#cb28-43"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-44"><a href="#cb28-44"></a><span class="in">const RED : &amp;str = "\u{001b}[31m";</span></span>
-<span id="cb28-45"><a href="#cb28-45"></a><span class="in">const WHT : &amp;str = "\u{001b}[0m";</span></span>
-<span id="cb28-46"><a href="#cb28-46"></a></span>
-<span id="cb28-47"><a href="#cb28-47"></a><span class="in">fn main() {</span></span>
-<span id="cb28-48"><a href="#cb28-48"></a><span class="in">    println!("White text. {RED}Red text. {WHT}White text.");</span></span>
-<span id="cb28-49"><a href="#cb28-49"></a><span class="in">}</span></span>
-<span id="cb28-50"><a href="#cb28-50"></a><span class="in">```</span></span>
-<span id="cb28-51"><a href="#cb28-51"></a></span>
-<span id="cb28-52"><a href="#cb28-52"></a>*This section transparently added in response to a question in class. I do not use `const` in my own code rather than `let`, though perhaps I should.*</span>
-<span id="cb28-53"><a href="#cb28-53"></a></span>
-<span id="cb28-54"><a href="#cb28-54"></a><span class="fu">## Create constants</span></span>
-<span id="cb28-55"><a href="#cb28-55"></a></span>
-<span id="cb28-56"><a href="#cb28-56"></a><span class="ss">- </span>Create your own constants for yellow and green.</span>
-<span id="cb28-57"><a href="#cb28-57"></a><span class="ss">    - </span>You may want to write a loop to try different colors, or consult documentation.</span>
-<span id="cb28-58"><a href="#cb28-58"></a><span class="ss">- </span>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</span>
-<span id="cb28-59"><a href="#cb28-59"></a><span class="in">```{.rs}</span></span>
-<span id="cb28-60"><a href="#cb28-60"></a><span class="in">fn letter(a:char, c:i32)</span></span>
-<span id="cb28-61"><a href="#cb28-61"></a><span class="in">```</span></span>
-<span id="cb28-62"><a href="#cb28-62"></a></span>
-<span id="cb28-63"><a href="#cb28-63"></a><span class="fu"># Character iteration</span></span>
-<span id="cb28-64"><a href="#cb28-64"></a></span>
-<span id="cb28-65"><a href="#cb28-65"></a><span class="fu">## Strings lack indices</span></span>
-<span id="cb28-66"><a href="#cb28-66"></a></span>
-<span id="cb28-67"><a href="#cb28-67"></a><span class="ss">- </span>In Python, we have some packing and unpacking to do to edit strings by character index.</span>
-<span id="cb28-68"><a href="#cb28-68"></a><span class="in">```{.py}</span></span>
-<span id="cb28-69"><a href="#cb28-69"></a><span class="in">&gt;&gt;&gt; s = list("hello, world")</span></span>
-<span id="cb28-70"><a href="#cb28-70"></a><span class="in">&gt;&gt;&gt; s[10] = 'd'</span></span>
-<span id="cb28-71"><a href="#cb28-71"></a><span class="in">&gt;&gt;&gt; s[11] = 'l'</span></span>
-<span id="cb28-72"><a href="#cb28-72"></a><span class="in">&gt;&gt;&gt; "".join(s)</span></span>
-<span id="cb28-73"><a href="#cb28-73"></a><span class="in">'hello, wordl'</span></span>
-<span id="cb28-74"><a href="#cb28-74"></a><span class="in">```</span></span>
-<span id="cb28-75"><a href="#cb28-75"></a></span>
-<span id="cb28-76"><a href="#cb28-76"></a><span class="fu">## Rust uses `.chars()`</span></span>
-<span id="cb28-77"><a href="#cb28-77"></a></span>
-<span id="cb28-78"><a href="#cb28-78"></a><span class="ss">- </span>In the case of Wordle, all solutions are formulated as 5 characters, so we can assume the underlying character-ness of strings.</span>
-<span id="cb28-79"><a href="#cb28-79"></a><span class="ss">    - </span>This is not permitted *generally* in Rust, but in our case we may.</span>
-<span id="cb28-80"><a href="#cb28-80"></a><span class="ss">- </span>To unpack Rust strings into characters, you may use <span class="in">`.chars()`</span></span>
-<span id="cb28-81"><a href="#cb28-81"></a></span>
-<span id="cb28-82"><a href="#cb28-82"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-83"><a href="#cb28-83"></a><span class="in">fn main() {</span></span>
-<span id="cb28-84"><a href="#cb28-84"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb28-85"><a href="#cb28-85"></a><span class="in">    println!("{:?}", s.chars());</span></span>
-<span id="cb28-86"><a href="#cb28-86"></a><span class="in">}</span></span>
-<span id="cb28-87"><a href="#cb28-87"></a><span class="in">```</span></span>
-<span id="cb28-88"><a href="#cb28-88"></a></span>
-<span id="cb28-89"><a href="#cb28-89"></a><span class="ss">- </span>What do you see?</span>
-<span id="cb28-90"><a href="#cb28-90"></a><span class="ss">    - </span>Can you access the <span class="in">`i`</span>th element?</span>
-<span id="cb28-91"><a href="#cb28-91"></a><span class="ss">    - </span>Can you loop over object?</span>
-<span id="cb28-92"><a href="#cb28-92"></a>    </span>
-<span id="cb28-93"><a href="#cb28-93"></a><span class="fu">## Iterators</span></span>
-<span id="cb28-94"><a href="#cb28-94"></a></span>
-<span id="cb28-95"><a href="#cb28-95"></a><span class="ss">- </span>What <span class="in">`.chars()`</span> returns is called an iterator, it is much like a Python generator.</span>
-<span id="cb28-96"><a href="#cb28-96"></a><span class="in">```{.py}</span></span>
-<span id="cb28-97"><a href="#cb28-97"></a><span class="in">&gt;&gt;&gt; gen = (i ** i for i in range(100))</span></span>
-<span id="cb28-98"><a href="#cb28-98"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb28-99"><a href="#cb28-99"></a><span class="in">1</span></span>
-<span id="cb28-100"><a href="#cb28-100"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb28-101"><a href="#cb28-101"></a><span class="in">1</span></span>
-<span id="cb28-102"><a href="#cb28-102"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb28-103"><a href="#cb28-103"></a><span class="in">4</span></span>
-<span id="cb28-104"><a href="#cb28-104"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb28-105"><a href="#cb28-105"></a><span class="in">27</span></span>
-<span id="cb28-106"><a href="#cb28-106"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb28-107"><a href="#cb28-107"></a><span class="in">256</span></span>
-<span id="cb28-108"><a href="#cb28-108"></a><span class="in">```</span></span>
-<span id="cb28-109"><a href="#cb28-109"></a><span class="ss">- </span>Basically, it is a collection type of unknown size where next elements may be queried.</span>
-<span id="cb28-110"><a href="#cb28-110"></a></span>
-<span id="cb28-111"><a href="#cb28-111"></a><span class="fu">## Rust uses `.nth()`</span></span>
-<span id="cb28-112"><a href="#cb28-112"></a></span>
-<span id="cb28-113"><a href="#cb28-113"></a><span class="ss">- </span>You can see the <span class="in">`n`</span>th element of an iterator with <span class="in">`.nth()`</span>, more or less:</span>
-<span id="cb28-114"><a href="#cb28-114"></a></span>
-<span id="cb28-115"><a href="#cb28-115"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-116"><a href="#cb28-116"></a><span class="in">fn main() {</span></span>
-<span id="cb28-117"><a href="#cb28-117"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb28-118"><a href="#cb28-118"></a><span class="in">    println!("{:?}", s.chars().nth(10));</span></span>
-<span id="cb28-119"><a href="#cb28-119"></a><span class="in">}</span></span>
-<span id="cb28-120"><a href="#cb28-120"></a><span class="in">```</span></span>
-<span id="cb28-121"><a href="#cb28-121"></a><span class="ss">- </span>What do you see?</span>
-<span id="cb28-122"><a href="#cb28-122"></a><span class="ss">    - </span>What happens if you ask for the 256th letter?</span>
-<span id="cb28-123"><a href="#cb28-123"></a>    </span>
-<span id="cb28-124"><a href="#cb28-124"></a><span class="fu">## Options</span></span>
-<span id="cb28-125"><a href="#cb28-125"></a></span>
-<span id="cb28-126"><a href="#cb28-126"></a><span class="ss">- </span>Rust library functions almost always return an <span class="in">`Option`</span></span>
-<span id="cb28-127"><a href="#cb28-127"></a><span class="ss">    - </span>This is just good practice, it beats returning e.g. Python <span class="in">`None`</span> sometimes, or crashing.</span>
-<span id="cb28-128"><a href="#cb28-128"></a><span class="ss">- </span>An option is simple:</span>
-<span id="cb28-129"><a href="#cb28-129"></a><span class="in">```rs</span></span>
-<span id="cb28-130"><a href="#cb28-130"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb28-131"><a href="#cb28-131"></a>    <span class="cn">None</span><span class="op">,</span></span>
-<span id="cb28-132"><a href="#cb28-132"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
-<span id="cb28-133"><a href="#cb28-133"></a><span class="op">}</span></span>
-<span id="cb28-134"><a href="#cb28-134"></a><span class="in">```</span></span>
-<span id="cb28-135"><a href="#cb28-135"></a></span>
-<span id="cb28-136"><a href="#cb28-136"></a><span class="fu">## Options for options</span></span>
-<span id="cb28-137"><a href="#cb28-137"></a></span>
-<span id="cb28-138"><a href="#cb28-138"></a><span class="ss">- </span><span class="va">[ ]</span> Pattern match</span>
-<span id="cb28-139"><a href="#cb28-139"></a><span class="ss">- </span><span class="va">[ ]</span> Expect</span>
-<span id="cb28-140"><a href="#cb28-140"></a><span class="ss">- </span><span class="va">[ ]</span> Unwrap</span>
-<span id="cb28-141"><a href="#cb28-141"></a></span>
-<span id="cb28-142"><a href="#cb28-142"></a><span class="fu">## Pattern match</span></span>
-<span id="cb28-143"><a href="#cb28-143"></a></span>
-<span id="cb28-144"><a href="#cb28-144"></a><span class="ss">- </span>The language designers intend options to be handled as follows:</span>
-<span id="cb28-145"><a href="#cb28-145"></a></span>
-<span id="cb28-146"><a href="#cb28-146"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-147"><a href="#cb28-147"></a><span class="in">fn main() {</span></span>
-<span id="cb28-148"><a href="#cb28-148"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb28-149"><a href="#cb28-149"></a><span class="in">    match s.chars().nth(11) {</span></span>
-<span id="cb28-150"><a href="#cb28-150"></a><span class="in">        Some(c) =&gt; println!("The 11th character is {:?}", c),</span></span>
-<span id="cb28-151"><a href="#cb28-151"></a><span class="in">        None =&gt; println!("String `s` is fewer than 11 characters in length"),</span></span>
-<span id="cb28-152"><a href="#cb28-152"></a><span class="in">    }</span></span>
-<span id="cb28-153"><a href="#cb28-153"></a><span class="in">}</span></span>
-<span id="cb28-154"><a href="#cb28-154"></a><span class="in">```</span></span>
-<span id="cb28-155"><a href="#cb28-155"></a></span>
-<span id="cb28-156"><a href="#cb28-156"></a><span class="ss">- </span>I very rarely see code that looks like this, including in official Rust documentation.</span>
-<span id="cb28-157"><a href="#cb28-157"></a><span class="ss">- </span>For example, the Polars documentation does not manage <span class="in">`Option`</span> return types this way.</span>
-<span id="cb28-158"><a href="#cb28-158"></a><span class="ss">- </span>This is, however, the only way to ensure code does not crash on e.g. arbitrary length input.</span>
-<span id="cb28-159"><a href="#cb28-159"></a></span>
-<span id="cb28-160"><a href="#cb28-160"></a><span class="fu">## Expect</span></span>
-<span id="cb28-161"><a href="#cb28-161"></a></span>
-<span id="cb28-162"><a href="#cb28-162"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.expect()`</span>, a method of options that either:</span>
-<span id="cb28-163"><a href="#cb28-163"></a><span class="ss">    - </span>Sucessful unpacks the option into a usable type, or</span>
-<span id="cb28-164"><a href="#cb28-164"></a><span class="ss">    - </span>Causes a "panic" - a comparatively graceful program crash.</span>
-<span id="cb28-165"><a href="#cb28-165"></a><span class="ss">        - </span>This panic prints the message you furnished to expect.</span>
-<span id="cb28-166"><a href="#cb28-166"></a>        </span>
-<span id="cb28-167"><a href="#cb28-167"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-168"><a href="#cb28-168"></a><span class="in">fn main() {</span></span>
-<span id="cb28-169"><a href="#cb28-169"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb28-170"><a href="#cb28-170"></a><span class="in">    println!("{:?}", s.chars().nth(13).expect("The string literal is known to be of length 11"));</span></span>
-<span id="cb28-171"><a href="#cb28-171"></a><span class="in">}</span></span>
-<span id="cb28-172"><a href="#cb28-172"></a><span class="in">```</span></span>
-<span id="cb28-173"><a href="#cb28-173"></a></span>
-<span id="cb28-174"><a href="#cb28-174"></a><span class="ss">- </span>Try checking for existing and non-existant characters. What do you find?</span>
-<span id="cb28-175"><a href="#cb28-175"></a></span>
-<span id="cb28-176"><a href="#cb28-176"></a><span class="fu">## Rust uses `.unwrap()`</span></span>
-<span id="cb28-177"><a href="#cb28-177"></a></span>
-<span id="cb28-178"><a href="#cb28-178"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.unwrap()`</span>.</span>
-<span id="cb28-179"><a href="#cb28-179"></a><span class="ss">- </span>Unwrap does not require a message but is otherwise just like <span class="in">`.expect()`</span></span>
-<span id="cb28-180"><a href="#cb28-180"></a><span class="ss">- </span>Unwrap is used by e.g. the Polars documentation.</span>
-<span id="cb28-181"><a href="#cb28-181"></a></span>
-<span id="cb28-182"><a href="#cb28-182"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-183"><a href="#cb28-183"></a><span class="in">fn main() {</span></span>
-<span id="cb28-184"><a href="#cb28-184"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb28-185"><a href="#cb28-185"></a><span class="in">    println!("{:?}", s.chars().nth(13).unwrap());</span></span>
-<span id="cb28-186"><a href="#cb28-186"></a><span class="in">}</span></span>
-<span id="cb28-187"><a href="#cb28-187"></a><span class="in">```</span></span>
-<span id="cb28-188"><a href="#cb28-188"></a></span>
-<span id="cb28-189"><a href="#cb28-189"></a><span class="ss">- </span>Try <span class="in">`.unwrap()`</span> on both successful and failed <span class="in">`.nth()`</span> calls.</span>
-<span id="cb28-190"><a href="#cb28-190"></a></span>
-<span id="cb28-191"><a href="#cb28-191"></a><span class="fu">## Unwrap vs. Expect</span></span>
-<span id="cb28-192"><a href="#cb28-192"></a></span>
-<span id="cb28-193"><a href="#cb28-193"></a><span class="ss">- </span>I have never voluntarily used <span class="in">`.expect()`</span> instead of <span class="in">`.unwrap()`</span>, but...</span>
-<span id="cb28-194"><a href="#cb28-194"></a></span>
-<span id="cb28-195"><a href="#cb28-195"></a>::: {.callout-note appearance="simple"}</span>
-<span id="cb28-196"><a href="#cb28-196"></a></span>
-<span id="cb28-197"><a href="#cb28-197"></a><span class="fu">## Help Yourself</span></span>
-<span id="cb28-198"><a href="#cb28-198"></a></span>
-<span id="cb28-199"><a href="#cb28-199"></a></span>
-<span id="cb28-200"><a href="#cb28-200"></a>If your code uses <span class="in">`.unwrap()`</span> instead of <span class="in">`.expect()`</span> you should carefully consider converting any <span class="in">`.unwrap()`</span>s to <span class="in">`.expect()`</span>s before asking someone else, who is less familiar with the assumptions you made when writing your code, for help.</span>
-<span id="cb28-201"><a href="#cb28-201"></a></span>
-<span id="cb28-202"><a href="#cb28-202"></a>This applies to colleagues, QUAD TAs, and potential to the course instructor depending on how busy things are.</span>
-<span id="cb28-203"><a href="#cb28-203"></a></span>
-<span id="cb28-204"><a href="#cb28-204"></a>:::</span>
-<span id="cb28-205"><a href="#cb28-205"></a></span>
-<span id="cb28-206"><a href="#cb28-206"></a><span class="fu"># /dev/random</span></span>
-<span id="cb28-207"><a href="#cb28-207"></a></span>
-<span id="cb28-208"><a href="#cb28-208"></a><span class="fu">## Randomization</span></span>
-<span id="cb28-209"><a href="#cb28-209"></a></span>
-<span id="cb28-210"><a href="#cb28-210"></a><span class="ss">- </span>There are always many ways to generated results that are vaguely random.</span>
-<span id="cb28-211"><a href="#cb28-211"></a><span class="ss">- </span>As a security researcher, I am required to instruct you about <span class="in">`/dev/random`</span> rather than use the Rust Book recommendations.</span>
-<span id="cb28-212"><a href="#cb28-212"></a><span class="ss">- </span>Separately we:</span>
-<span id="cb28-213"><a href="#cb28-213"></a><span class="ss">    - </span>Learn to read from a file.</span>
-<span id="cb28-214"><a href="#cb28-214"></a><span class="ss">    - </span>Get to think about how random different things really are.</span>
-<span id="cb28-215"><a href="#cb28-215"></a></span>
-<span id="cb28-216"><a href="#cb28-216"></a><span class="fu">## Quoth Wikipedia</span></span>
-<span id="cb28-217"><a href="#cb28-217"></a></span>
-<span id="cb28-218"><a href="#cb28-218"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In Unix-like operating systems, /dev/random and /dev/urandom are special files that provide random numbers from a cryptographically secure pseudorandom number generator (CSPRNG). The CSPRNG is seeded with entropy (a value that provides randomness) from environmental noise, collected from device drivers and other sources. Users can obtain random numbers from the CSPRNG simply by reading the file.</span><span class="co">](https://en.wikipedia.org/wiki//dev/random)</span></span>
-<span id="cb28-219"><a href="#cb28-219"></a></span>
-<span id="cb28-220"><a href="#cb28-220"></a><span class="fu">## Peep it</span></span>
-<span id="cb28-221"><a href="#cb28-221"></a></span>
-<span id="cb28-222"><a href="#cb28-222"></a><span class="ss">- </span>Verify you are on a system implementing <span class="in">`/dev/random`</span> with the following, at command line:</span>
-<span id="cb28-223"><a href="#cb28-223"></a><span class="in">```{.bash}</span></span>
-<span id="cb28-224"><a href="#cb28-224"></a><span class="in">head -1 /dev/random</span></span>
-<span id="cb28-225"><a href="#cb28-225"></a><span class="in">```</span></span>
-<span id="cb28-226"><a href="#cb28-226"></a><span class="ss">- </span>For me, I see:</span>
-<span id="cb28-227"><a href="#cb28-227"></a><span class="in">```{.sh}</span></span>
-<span id="cb28-228"><a href="#cb28-228"></a><span class="in">$ head -1 /dev/random</span></span>
-<span id="cb28-229"><a href="#cb28-229"></a><span class="in">6��c�W�Y|S�t��|��=���U�&gt;�$��8�����E���*�&amp;;�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{ ��^"/%!7���vv@�w{p��q�y"� AD�/Ahb��fb��Ed�</span></span>
-<span id="cb28-230"><a href="#cb28-230"></a><span class="in">                                                                                                                      ­�k�:���F�&gt;����09h��Ʊl#�&gt;�J����:J����5|I�E���04�������NH��-�X����l�,k�&lt;�������=.4^qav�}Y��</span></span>
-<span id="cb28-231"><a href="#cb28-231"></a><span class="in">        ��(�)1���B���c)�&amp;*�#r��"H�(�:�e���֩A</span></span>
-<span id="cb28-232"><a href="#cb28-232"></a><span class="in">$</span></span>
-<span id="cb28-233"><a href="#cb28-233"></a><span class="in">```</span></span>
-<span id="cb28-234"><a href="#cb28-234"></a><span class="ss">- </span>You can test what <span class="in">`head`</span> does on a file with which you are familiar, or consult <span class="in">`man head`</span></span>
-<span id="cb28-235"><a href="#cb28-235"></a></span>
-<span id="cb28-236"><a href="#cb28-236"></a><span class="fu"># File I/O</span></span>
-<span id="cb28-237"><a href="#cb28-237"></a></span>
-<span id="cb28-238"><a href="#cb28-238"></a><span class="fu">## `open`</span></span>
-<span id="cb28-239"><a href="#cb28-239"></a></span>
-<span id="cb28-240"><a href="#cb28-240"></a><span class="ss">- </span>A la Python, Rust utilizes <span class="in">`open`</span> to read files.</span>
-<span id="cb28-241"><a href="#cb28-241"></a><span class="ss">- </span>Unlike Python, Rust has a great love for gobs of a text and <span class="in">`Option`</span>s.</span>
-<span id="cb28-242"><a href="#cb28-242"></a><span class="ss">- </span>The following opens <span class="in">`/dev/random`</span> to be read.</span>
-<span id="cb28-243"><a href="#cb28-243"></a><span class="ss">    - </span>Think about why we need to <span class="in">`.unwrap()`</span> when opening a file.</span>
-<span id="cb28-244"><a href="#cb28-244"></a><span class="ss">    - </span>What is the Python equivalent?</span>
-<span id="cb28-245"><a href="#cb28-245"></a><span class="in">```rs</span></span>
-<span id="cb28-246"><a href="#cb28-246"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-247"><a href="#cb28-247"></a><span class="in">```</span></span>
-<span id="cb28-248"><a href="#cb28-248"></a><span class="ss">- </span>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <span class="in">`File`</span> object.</span>
-<span id="cb28-249"><a href="#cb28-249"></a></span>
-<span id="cb28-250"><a href="#cb28-250"></a><span class="at">&gt; An object providing access to an open file on the filesystem.</span></span>
-<span id="cb28-251"><a href="#cb28-251"></a></span>
-<span id="cb28-252"><a href="#cb28-252"></a><span class="fu">## `use`</span></span>
-<span id="cb28-253"><a href="#cb28-253"></a></span>
-<span id="cb28-254"><a href="#cb28-254"></a><span class="ss">- </span>A lot of people who aren't me prefer to use <span class="in">`use`</span> to have shorter names.</span>
-<span id="cb28-255"><a href="#cb28-255"></a><span class="ss">- </span>I don't personally understand this, but I do use <span class="in">`from pgl import *`</span> in Python.</span>
-<span id="cb28-256"><a href="#cb28-256"></a><span class="ss">- </span>Here's an example from <span class="co">[</span><span class="ot">Rust documentation</span><span class="co">](https://doc.rust-lang.org/std/fs/struct.File.html)</span> of a <span class="in">`use`</span>:</span>
-<span id="cb28-257"><a href="#cb28-257"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-258"><a href="#cb28-258"></a><span class="in">use std::fs::File;</span></span>
-<span id="cb28-259"><a href="#cb28-259"></a></span>
-<span id="cb28-260"><a href="#cb28-260"></a><span class="in">fn main() {</span></span>
-<span id="cb28-261"><a href="#cb28-261"></a><span class="in">    let mut devrnd = File::open("/dev/random").unwrap();</span></span>
-<span id="cb28-262"><a href="#cb28-262"></a><span class="in">}</span></span>
-<span id="cb28-263"><a href="#cb28-263"></a><span class="in">```</span></span>
-<span id="cb28-264"><a href="#cb28-264"></a></span>
-<span id="cb28-265"><a href="#cb28-265"></a><span class="ss">- </span><span class="co">[</span><span class="ot">The Used - The Bird And The Worm (Video)</span><span class="co">](https://www.youtube.com/watch?v=12dBCgAo-RA)</span></span>
-<span id="cb28-266"><a href="#cb28-266"></a></span>
-<span id="cb28-267"><a href="#cb28-267"></a><span class="fu">## `read`</span></span>
-<span id="cb28-268"><a href="#cb28-268"></a></span>
-<span id="cb28-269"><a href="#cb28-269"></a><span class="ss">- </span>True to form, <span class="in">`read`</span> has a variety of complexities introduced by:</span>
-<span id="cb28-270"><a href="#cb28-270"></a><span class="ss">    - </span>Not assuming anything about the Rust <span class="in">`File`</span> object</span>
-<span id="cb28-271"><a href="#cb28-271"></a><span class="ss">    - </span>Not assuming anything about how to read or save data.</span>
-<span id="cb28-272"><a href="#cb28-272"></a><span class="ss">    - </span>Not assuming anything about the underlying file within the computer's file system.</span>
-<span id="cb28-273"><a href="#cb28-273"></a><span class="ss">- </span>I use it as follows:</span>
-<span id="cb28-274"><a href="#cb28-274"></a><span class="in">```rs</span></span>
-<span id="cb28-275"><a href="#cb28-275"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-276"><a href="#cb28-276"></a><span class="in">```</span></span>
-<span id="cb28-277"><a href="#cb28-277"></a><span class="ss">- </span>An astute reader will notice a few idiosyncracies.</span>
-<span id="cb28-278"><a href="#cb28-278"></a></span>
-<span id="cb28-279"><a href="#cb28-279"></a><span class="fu">## `&amp;mut`</span></span>
-<span id="cb28-280"><a href="#cb28-280"></a></span>
-<span id="cb28-281"><a href="#cb28-281"></a><span class="ss">- </span>When we:</span>
-<span id="cb28-282"><a href="#cb28-282"></a><span class="ss">    - </span>Have a variable in Rust</span>
-<span id="cb28-283"><a href="#cb28-283"></a><span class="ss">    - </span>For which the ownership model applies, such as a file of arbitrary size</span>
-<span id="cb28-284"><a href="#cb28-284"></a><span class="ss">    - </span>For which mutability is necessary, such as a <span class="in">`File`</span> object from which <span class="in">`n`</span> bytes have been read.</span>
-<span id="cb28-285"><a href="#cb28-285"></a><span class="ss">- </span>We can use this variable:</span>
-<span id="cb28-286"><a href="#cb28-286"></a><span class="ss">    - </span>Within some other function, while</span>
-<span id="cb28-287"><a href="#cb28-287"></a><span class="ss">    - </span>Retaining the ability to use it again in some future function.</span>
-<span id="cb28-288"><a href="#cb28-288"></a><span class="ss">- </span>We do so by passing a "mutable reference", generated by prefixing the variable name with <span class="in">`&amp;mut`</span> and a space.</span>
-<span id="cb28-289"><a href="#cb28-289"></a></span>
-<span id="cb28-290"><a href="#cb28-290"></a><span class="fu">## Buffers</span></span>
-<span id="cb28-291"><a href="#cb28-291"></a></span>
-<span id="cb28-292"><a href="#cb28-292"></a><span class="ss">- </span>It is common in lower level languages to read from a file into a "buffer", a temporary storage space within the executing program.</span>
-<span id="cb28-293"><a href="#cb28-293"></a><span class="ss">- </span>These are commonly implemented as multiple of bytes of some fixed size in that language's array type.</span>
-<span id="cb28-294"><a href="#cb28-294"></a><span class="ss">- </span>These bits are commonly initialized to zero.</span>
-<span id="cb28-295"><a href="#cb28-295"></a><span class="ss">- </span>I am aware of no graceful way to do this in Rust, so I'll tell you what I'm doing now and why.</span>
-<span id="cb28-296"><a href="#cb28-296"></a></span>
-<span id="cb28-297"><a href="#cb28-297"></a><span class="fu">## Arrays</span></span>
-<span id="cb28-298"><a href="#cb28-298"></a></span>
-<span id="cb28-299"><a href="#cb28-299"></a><span class="ss">- </span>Arrays in Rust are fixed size and typed, not unlike NumPy array.</span>
-<span id="cb28-300"><a href="#cb28-300"></a><span class="ss">- </span>They see little use versus the more common vector type, but I preferred arrays for Wordle.</span>
-<span id="cb28-301"><a href="#cb28-301"></a><span class="ss">    - </span>And in fact expect to prefer arrays this term.</span>
-<span id="cb28-302"><a href="#cb28-302"></a></span>
-<span id="cb28-303"><a href="#cb28-303"></a><span class="fu">## Quoth the [Docs](https://doc.rust-lang.org/std/primitive.array.html)</span></span>
-<span id="cb28-304"><a href="#cb28-304"></a></span>
-<span id="cb28-305"><a href="#cb28-305"></a><span class="ss">- </span>A fixed-size array, denoted <span class="in">`[T; N]`</span>, for the element type, <span class="in">`T`</span>, and the non-negative compile-time constant size, <span class="in">`N`</span>.</span>
-<span id="cb28-306"><a href="#cb28-306"></a><span class="ss">- </span>There are two syntactic forms for creating an array:</span>
-<span id="cb28-307"><a href="#cb28-307"></a></span>
-<span id="cb28-308"><a href="#cb28-308"></a><span class="ss">    - </span>A list with each element, i.e., <span class="in">`[x, y, z]`</span>.</span>
-<span id="cb28-309"><a href="#cb28-309"></a></span>
-<span id="cb28-310"><a href="#cb28-310"></a><span class="ss">    - </span>A repeat expression <span class="in">`[expr; N]`</span> where <span class="in">`N`</span> is how many times to repeat expr in the array. expr must either be:</span>
-<span id="cb28-311"><a href="#cb28-311"></a><span class="ss">        - </span>A value of a type implementing the Copy trait</span>
-<span id="cb28-312"><a href="#cb28-312"></a><span class="ss">        - </span>A const value</span>
-<span id="cb28-313"><a href="#cb28-313"></a><span class="ss">- </span>I never read this, I found <span class="co">[</span><span class="ot">this page</span><span class="co">](https://blog.orhun.dev/zero-deps-random-in-rust/)</span> through a search engine and ripped it.</span>
-<span id="cb28-314"><a href="#cb28-314"></a><span class="ss">    - </span>Search for <span class="in">`dev/urandom`</span> on that page.</span>
-<span id="cb28-315"><a href="#cb28-315"></a>    </span>
-<span id="cb28-316"><a href="#cb28-316"></a><span class="fu">## Create an array</span></span>
-<span id="cb28-317"><a href="#cb28-317"></a></span>
-<span id="cb28-318"><a href="#cb28-318"></a><span class="ss">- </span>The following is a mutable - so we can read file data *into* it - array of 8 bytes.</span>
-<span id="cb28-319"><a href="#cb28-319"></a><span class="in">```rs</span></span>
-<span id="cb28-320"><a href="#cb28-320"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span>
-<span id="cb28-321"><a href="#cb28-321"></a><span class="in">```</span></span>
-<span id="cb28-322"><a href="#cb28-322"></a><span class="ss">- </span>Breakdown.</span>
-<span id="cb28-323"><a href="#cb28-323"></a><span class="ss">    - </span>The <span class="in">`0`</span> in <span class="in">`0u8`</span> is the initialization value.</span>
-<span id="cb28-324"><a href="#cb28-324"></a><span class="ss">    - </span>The <span class="in">`u8`</span> is the type, unsigned 8 bit value.</span>
-<span id="cb28-325"><a href="#cb28-325"></a><span class="ss">    - </span>The post comma <span class="in">`8`</span> is the number of 8 bit values to store.</span>
-<span id="cb28-326"><a href="#cb28-326"></a><span class="ss">- </span>There's only one problem here.</span>
-<span id="cb28-327"><a href="#cb28-327"></a><span class="ss">    - </span>That second <span class="in">`8`</span> is a magic number, which to me represents poor style.</span>
-<span id="cb28-328"><a href="#cb28-328"></a><span class="ss">        - </span>Believe me, I wanted to just type 8, but we shouldn't.</span>
-<span id="cb28-329"><a href="#cb28-329"></a>        </span>
-<span id="cb28-330"><a href="#cb28-330"></a><span class="fu">## On Magic Numbers</span></span>
-<span id="cb28-331"><a href="#cb28-331"></a></span>
-<span id="cb28-332"><a href="#cb28-332"></a><span class="ss">- </span>To select a random word, eventually you will probably have:</span>
-<span id="cb28-333"><a href="#cb28-333"></a><span class="ss">    - </span>An array of 5 letter words.</span>
-<span id="cb28-334"><a href="#cb28-334"></a><span class="ss">    - </span>That array will have some length.</span>
-<span id="cb28-335"><a href="#cb28-335"></a><span class="ss">    - </span>That length will be whatever Rust uses to store the size of memory objects.</span>
-<span id="cb28-336"><a href="#cb28-336"></a><span class="ss">    - </span>Different computers have different ways of address memory...</span>
-<span id="cb28-337"><a href="#cb28-337"></a><span class="ss">    - </span>So we cannot make assumptions about the size of values which themselves store the size of memory.</span>
-<span id="cb28-338"><a href="#cb28-338"></a><span class="ss">        - </span>I wish I was kidding! I'm not!</span>
-<span id="cb28-339"><a href="#cb28-339"></a></span>
-<span id="cb28-340"><a href="#cb28-340"></a><span class="fu">## 32 vs 64 bit</span></span>
-<span id="cb28-341"><a href="#cb28-341"></a></span>
-<span id="cb28-342"><a href="#cb28-342"></a><span class="ss">- </span>For example, how many memory locations can be addressed by a 32 bit system?</span>
-<span id="cb28-343"><a href="#cb28-343"></a><span class="ss">- </span>How many on a 64 bit system?</span>
-<span id="cb28-344"><a href="#cb28-344"></a><span class="ss">- </span>Does your device potentially use 48 bit addresses?</span>
-<span id="cb28-345"><a href="#cb28-345"></a><span class="ss">- </span>How could you tell?</span>
-<span id="cb28-346"><a href="#cb28-346"></a><span class="ss">- </span>What if you run code on a 16 bit microcontroller?</span>
-<span id="cb28-347"><a href="#cb28-347"></a><span class="ss">- </span>Enter <span class="in">`usize`</span></span>
-<span id="cb28-348"><a href="#cb28-348"></a><span class="ss">    - </span>The unsigned value that is the right size to store a size.</span>
-<span id="cb28-349"><a href="#cb28-349"></a>    </span>
-<span id="cb28-350"><a href="#cb28-350"></a><span class="fu">## `usize`</span></span>
-<span id="cb28-351"><a href="#cb28-351"></a></span>
-<span id="cb28-352"><a href="#cb28-352"></a><span class="ss">- </span>We will use <span class="in">`usize`</span> by name twice:</span>
-<span id="cb28-353"><a href="#cb28-353"></a><span class="ss">    - </span>We need to read a random usize.</span>
-<span id="cb28-354"><a href="#cb28-354"></a><span class="ss">- </span>We can determine how many <span class="in">`u8`</span>s are required to make up a <span class="in">`usize`</span> by checking how many bits are in a <span class="in">`usize`</span>. and dividing by 8.</span>
-<span id="cb28-355"><a href="#cb28-355"></a><span class="in">```rs</span></span>
-<span id="cb28-356"><a href="#cb28-356"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span>
-<span id="cb28-357"><a href="#cb28-357"></a><span class="in">```</span></span>
-<span id="cb28-358"><a href="#cb28-358"></a><span class="ss">- </span>Only one problem - for some reason <span class="in">`usize`</span> stores *its* size as a <span class="in">`u32`</span>.</span>
-<span id="cb28-359"><a href="#cb28-359"></a><span class="ss">- </span>So to get enough bits to fill I <span class="in">`usize`</span>, I ended up doing... this?</span>
-<span id="cb28-360"><a href="#cb28-360"></a><span class="in">```rs</span></span>
-<span id="cb28-361"><a href="#cb28-361"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb28-362"><a href="#cb28-362"></a><span class="in">```</span></span>
-<span id="cb28-363"><a href="#cb28-363"></a></span>
-<span id="cb28-364"><a href="#cb28-364"></a><span class="al">![](https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif)</span></span>
-<span id="cb28-365"><a href="#cb28-365"></a></span>
-<span id="cb28-366"><a href="#cb28-366"></a>*Presumably I'm doing this wrong.*</span>
-<span id="cb28-367"><a href="#cb28-367"></a></span>
-<span id="cb28-368"><a href="#cb28-368"></a><span class="fu">## Check in</span></span>
-<span id="cb28-369"><a href="#cb28-369"></a></span>
-<span id="cb28-370"><a href="#cb28-370"></a><span class="ss">- </span>I have this so far:</span>
-<span id="cb28-371"><a href="#cb28-371"></a></span>
-<span id="cb28-372"><a href="#cb28-372"></a><span class="in">```rs</span></span>
-<span id="cb28-373"><a href="#cb28-373"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-374"><a href="#cb28-374"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb28-375"><a href="#cb28-375"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-376"><a href="#cb28-376"></a><span class="in">```</span></span>
-<span id="cb28-377"><a href="#cb28-377"></a></span>
-<span id="cb28-378"><a href="#cb28-378"></a><span class="fu">## Candidate Answers</span></span>
-<span id="cb28-379"><a href="#cb28-379"></a></span>
-<span id="cb28-380"><a href="#cb28-380"></a><span class="ss">- </span>You can imagine testing with a smaller word list, like the words of the <span class="co">[</span><span class="ot">Sator Square</span><span class="co">](https://en.wikipedia.org/wiki/Sator_Square)</span></span>
-<span id="cb28-381"><a href="#cb28-381"></a></span>
-<span id="cb28-382"><a href="#cb28-382"></a><span class="in">```rs</span></span>
-<span id="cb28-383"><a href="#cb28-383"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
-<span id="cb28-384"><a href="#cb28-384"></a><span class="in">```</span></span>
-<span id="cb28-385"><a href="#cb28-385"></a></span>
-<span id="cb28-386"><a href="#cb28-386"></a><span class="ss">- </span>Here <span class="in">`&amp;str`</span> is used to refer to string literals, that is, *not* the <span class="in">`String`</span> quasi-data structure of arbitrary size.</span>
-<span id="cb28-387"><a href="#cb28-387"></a><span class="ss">    - </span>This was the type that e.g. <span class="in">`"hello world"`</span> had the whole time under the hood.</span>
-<span id="cb28-388"><a href="#cb28-388"></a></span>
-<span id="cb28-389"><a href="#cb28-389"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb28-390"><a href="#cb28-390"></a><span class="in">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
-<span id="cb28-391"><a href="#cb28-391"></a></span>
-<span id="cb28-392"><a href="#cb28-392"></a><span class="in">fn main() {</span></span>
-<span id="cb28-393"><a href="#cb28-393"></a><span class="in">    let i : u8 = 2;</span></span>
-<span id="cb28-394"><a href="#cb28-394"></a><span class="in">    println!("{:?}", WORDS[i]);</span></span>
-<span id="cb28-395"><a href="#cb28-395"></a><span class="in">}</span></span>
-<span id="cb28-396"><a href="#cb28-396"></a><span class="in">```</span></span>
-<span id="cb28-397"><a href="#cb28-397"></a><span class="ss">- </span>This doesn't work.</span>
-<span id="cb28-398"><a href="#cb28-398"></a></span>
-<span id="cb28-399"><a href="#cb28-399"></a><span class="fu">## Indices</span></span>
-<span id="cb28-400"><a href="#cb28-400"></a></span>
-<span id="cb28-401"><a href="#cb28-401"></a><span class="ss">- </span>An array can be as large as memory.</span>
-<span id="cb28-402"><a href="#cb28-402"></a><span class="ss">- </span>So it's index can be as large as memory.</span>
-<span id="cb28-403"><a href="#cb28-403"></a><span class="ss">- </span>The thing as large memory is <span class="in">`usize`</span>.</span>
-<span id="cb28-404"><a href="#cb28-404"></a><span class="in">```bash</span></span>
-<span id="cb28-405"><a href="#cb28-405"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
-<span id="cb28-406"><a href="#cb28-406"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
-<span id="cb28-407"><a href="#cb28-407"></a><span class="st">  |</span></span>
-<span id="cb28-408"><a href="#cb28-408"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
-<span id="cb28-409"><a href="#cb28-409"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span>
-<span id="cb28-410"><a href="#cb28-410"></a><span class="st">```</span></span>
-<span id="cb28-411"><a href="#cb28-411"></a></span>
-<span id="cb28-412"><a href="#cb28-412"></a><span class="st">## Byte array to `usize`</span></span>
-<span id="cb28-413"><a href="#cb28-413"></a></span>
-<span id="cb28-414"><a href="#cb28-414"></a><span class="st">- Usize helpfully has "from bytes" methods.</span></span>
-<span id="cb28-415"><a href="#cb28-415"></a><span class="st">    - There are 3 such methods for different *endianness*es, a future topic.</span></span>
-<span id="cb28-416"><a href="#cb28-416"></a><span class="st">- I use little endianness because it doesn'</span><span class="ex">t</span> matter <span class="at">-</span> <span class="kw">`</span>le<span class="kw">`</span></span>
-<span id="cb28-417"><a href="#cb28-417"></a><span class="kw">```</span>rs</span>
-<span id="cb28-418"><a href="#cb28-418"></a><span class="bu">let</span> <span class="va">secret</span> <span class="op">=</span> <span class="va">usize</span><span class="op">::</span><span class="va">from_le_bytes</span><span class="er">(</span><span class="ex">buffer</span><span class="kw">);</span></span>
-<span id="cb28-419"><a href="#cb28-419"></a><span class="in">```</span></span>
-<span id="cb28-420"><a href="#cb28-420"></a><span class="ss">- </span>This can be used as an index, but it's probably too large.</span>
-<span id="cb28-421"><a href="#cb28-421"></a></span>
-<span id="cb28-422"><a href="#cb28-422"></a><span class="fu">## `.len()`</span></span>
-<span id="cb28-423"><a href="#cb28-423"></a></span>
-<span id="cb28-424"><a href="#cb28-424"></a><span class="ss">- </span>Rust furnishes the <span class="in">`.len()`</span> method of arrays to detect their type.</span>
-<span id="cb28-425"><a href="#cb28-425"></a><span class="in">```rs</span></span>
-<span id="cb28-426"><a href="#cb28-426"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span>
-<span id="cb28-427"><a href="#cb28-427"></a><span class="in">```</span></span>
-<span id="cb28-428"><a href="#cb28-428"></a></span>
-<span id="cb28-429"><a href="#cb28-429"></a><span class="fu">## Altogether</span></span>
-<span id="cb28-430"><a href="#cb28-430"></a></span>
-<span id="cb28-431"><a href="#cb28-431"></a><span class="ss">- </span>We use <span class="in">`String::from()`</span> to get a <span class="in">`String`</span> from a <span class="in">`&amp;str`</span>, as the array contains fixed length strings and I use the <span class="in">`String`</span> type for consistency with lecture recommendations.</span>
-<span id="cb28-432"><a href="#cb28-432"></a></span>
-<span id="cb28-433"><a href="#cb28-433"></a><span class="in">```rs</span></span>
-<span id="cb28-434"><a href="#cb28-434"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-435"><a href="#cb28-435"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb28-436"><a href="#cb28-436"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-437"><a href="#cb28-437"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
-<span id="cb28-438"><a href="#cb28-438"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span>
-<span id="cb28-439"><a href="#cb28-439"></a><span class="in">```</span></span>
-<span id="cb28-440"><a href="#cb28-440"></a></span>
-<span id="cb28-441"><a href="#cb28-441"></a></span>
-<span id="cb28-442"><a href="#cb28-442"></a><span class="fu">## Today</span></span>
-<span id="cb28-443"><a href="#cb28-443"></a></span>
-<span id="cb28-444"><a href="#cb28-444"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
-<span id="cb28-445"><a href="#cb28-445"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
-<span id="cb28-446"><a href="#cb28-446"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
-<span id="cb28-447"><a href="#cb28-447"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
-<span id="cb28-448"><a href="#cb28-448"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
-<span id="cb28-449"><a href="#cb28-449"></a></span>
-<span id="cb28-450"><a href="#cb28-450"></a></span>
-<span id="cb28-451"><a href="#cb28-451"></a><span class="fu"># stdin</span></span>
-<span id="cb28-452"><a href="#cb28-452"></a></span>
-<span id="cb28-453"><a href="#cb28-453"></a><span class="fu">## `input()`</span></span>
-<span id="cb28-454"><a href="#cb28-454"></a></span>
-<span id="cb28-455"><a href="#cb28-455"></a><span class="ss">- </span>Python furnishes the straight-forward <span class="in">`input()`</span> function.</span>
-<span id="cb28-456"><a href="#cb28-456"></a><span class="ss">- </span>We don't have that in rust, but we do have"</span>
-<span id="cb28-457"><a href="#cb28-457"></a><span class="ss">    - </span><span class="in">`stdin()`</span> - the "standard input" that represents text provided at terminal.</span>
-<span id="cb28-458"><a href="#cb28-458"></a><span class="ss">    - </span><span class="in">`.read_line()`</span> - like Python <span class="in">`.read_line()`</span> in that it reads to the next newline character, but a bit different in type.</span>
-<span id="cb28-459"><a href="#cb28-459"></a><span class="ss">- </span>Essentially, <span class="in">`stdin()`</span> is a function that returns a <span class="in">`File`</span> the refers to the terminal.</span>
-<span id="cb28-460"><a href="#cb28-460"></a></span>
-<span id="cb28-461"><a href="#cb28-461"></a><span class="in">```rs</span></span>
-<span id="cb28-462"><a href="#cb28-462"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb28-463"><a href="#cb28-463"></a><span class="in">```</span></span>
-<span id="cb28-464"><a href="#cb28-464"></a></span>
-<span id="cb28-465"><a href="#cb28-465"></a><span class="ss">- </span>What happens if you don't unwrap?</span>
-<span id="cb28-466"><a href="#cb28-466"></a><span class="ss">- </span>What type is <span class="in">`guess`</span>? Array? <span class="in">`&amp;str`</span>? <span class="in">`String`</span>?</span>
-<span id="cb28-467"><a href="#cb28-467"></a><span class="in">```rs</span></span>
-<span id="cb28-468"><a href="#cb28-468"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb28-469"><a href="#cb28-469"></a><span class="in">```</span></span>
-<span id="cb28-470"><a href="#cb28-470"></a></span>
-<span id="cb28-471"><a href="#cb28-471"></a><span class="fu">## `.trim()`</span></span>
-<span id="cb28-472"><a href="#cb28-472"></a></span>
-<span id="cb28-473"><a href="#cb28-473"></a><span class="ss">- </span>Reading lines will return slightly longer strings that end with a newline character.</span>
-<span id="cb28-474"><a href="#cb28-474"></a><span class="ss">- </span>This can be removed with <span class="in">`.trim()`</span>.</span>
-<span id="cb28-475"><a href="#cb28-475"></a><span class="ss">- </span>Try reading in e.g. <span class="in">`opera`</span> or <span class="in">`tenet`</span> and seeing the trimmed vs. untrimmed versions.</span>
-<span id="cb28-476"><a href="#cb28-476"></a><span class="ss">    - </span>You may want to inspect their length, perhaps by converting to characters and using <span class="in">`.nth()`</span>.</span>
-<span id="cb28-477"><a href="#cb28-477"></a></span>
-<span id="cb28-478"><a href="#cb28-478"></a><span class="fu">## `.contains()`</span></span>
-<span id="cb28-479"><a href="#cb28-479"></a></span>
-<span id="cb28-480"><a href="#cb28-480"></a><span class="ss">- </span>You can check if a value is present in an array using <span class="in">`.contains()`</span>.</span>
-<span id="cb28-481"><a href="#cb28-481"></a><span class="ss">- </span>Check to see if the trimmed and untrimmed versions of <span class="in">`opera`</span> or <span class="in">`tenet`</span> are contained in the <span class="in">`WORDS`</span> array.</span>
-<span id="cb28-482"><a href="#cb28-482"></a><span class="ss">    - </span>You will need to fiddle with types a bit!</span>
-<span id="cb28-483"><a href="#cb28-483"></a><span class="ss">    - </span>Will you need to use <span class="in">`&amp;`</span>? <span class="in">`&amp;mut`</span>? <span class="in">`String::from()`</span>? Try each and see what happens - and consider why!</span>
-<span id="cb28-484"><a href="#cb28-484"></a></span>
-<span id="cb28-485"><a href="#cb28-485"></a><span class="fu">## `.clone()`</span></span>
-<span id="cb28-486"><a href="#cb28-486"></a></span>
-<span id="cb28-487"><a href="#cb28-487"></a><span class="ss">- </span>Sometimes you will need to read a word from <span class="in">`stdin`</span> and perhaps both compare it some other word and also decompose it into characters.</span>
-<span id="cb28-488"><a href="#cb28-488"></a><span class="ss">- </span>If you need multiple copies, you may want to use <span class="in">`.clone()`</span> or <span class="in">`cargo`</span> may recommend use of <span class="in">`.clone()`</span>.</span>
-<span id="cb28-489"><a href="#cb28-489"></a></span>
-<span id="cb28-490"><a href="#cb28-490"></a><span class="fu"># Closing Thoughts</span></span>
-<span id="cb28-491"><a href="#cb28-491"></a></span>
-<span id="cb28-492"><a href="#cb28-492"></a><span class="fu">## `range()`</span></span>
-<span id="cb28-493"><a href="#cb28-493"></a></span>
-<span id="cb28-494"><a href="#cb28-494"></a><span class="ss">- </span>You may benefit from using <span class="in">`for`</span> loops of fixed index.</span>
-<span id="cb28-495"><a href="#cb28-495"></a><span class="ss">- </span>Rust has a syntactical rather than functional range.</span>
-<span id="cb28-496"><a href="#cb28-496"></a><span class="ss">- </span>It follows the same start/stop rules as Python.</span>
-<span id="cb28-497"><a href="#cb28-497"></a><span class="in">```{.rs filename="src.main.rs")</span></span>
-<span id="cb28-498"><a href="#cb28-498"></a><span class="in">fn main() {</span></span>
-<span id="cb28-499"><a href="#cb28-499"></a><span class="in">    for i in 1..5 {</span></span>
-<span id="cb28-500"><a href="#cb28-500"></a><span class="in">        println!("{:?}", i);</span></span>
-<span id="cb28-501"><a href="#cb28-501"></a><span class="in">    }</span></span>
-<span id="cb28-502"><a href="#cb28-502"></a><span class="in">}</span></span>
-<span id="cb28-503"><a href="#cb28-503"></a><span class="in">```</span></span>
-<span id="cb28-504"><a href="#cb28-504"></a></span>
-<span id="cb28-505"><a href="#cb28-505"></a><span class="fu">## Vectors</span></span>
-<span id="cb28-506"><a href="#cb28-506"></a></span>
-<span id="cb28-507"><a href="#cb28-507"></a><span class="ss">- </span>A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</span>
-<span id="cb28-508"><a href="#cb28-508"></a><span class="ss">- </span>If you want to learn Vectors instead of arrays, simply consult this documentation.</span>
-<span id="cb28-509"><a href="#cb28-509"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Rust By Example: Vectors</span><span class="co">]</span></span>
-<span id="cb28-510"><a href="#cb28-510"></a><span class="ss">- </span>You will find them similar to Python <span class="in">`list`</span>.</span>
-<span id="cb28-511"><a href="#cb28-511"></a></span>
-<span id="cb28-512"><a href="#cb28-512"></a><span class="fu">## Today</span></span>
-<span id="cb28-513"><a href="#cb28-513"></a></span>
-<span id="cb28-514"><a href="#cb28-514"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
-<span id="cb28-515"><a href="#cb28-515"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
-<span id="cb28-516"><a href="#cb28-516"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
-<span id="cb28-517"><a href="#cb28-517"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`stdin()`</span></span>
-<span id="cb28-518"><a href="#cb28-518"></a><span class="ss">- </span><span class="va">[x]</span> "Fixes"</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co">---</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="ss">- </span>Lab Day</span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="ss">    - </span>Prepare for Wordle</span>
+<span id="cb29-10"><a href="#cb29-10"></a></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="fu">## Homework</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="ss">- </span>Wordle is ready after this class.</span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="ss">  - </span>It is exactly hard enough to use all programming basics.</span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="ss">  - </span>Windows development is no longer supported.</span>
+<span id="cb29-16"><a href="#cb29-16"></a><span class="ss">- </span>Due Friday, 19 Sept. at 1440 ET.</span>
+<span id="cb29-17"><a href="#cb29-17"></a></span>
+<span id="cb29-18"><a href="#cb29-18"></a><span class="fu">## Citation</span></span>
+<span id="cb29-19"><a href="#cb29-19"></a></span>
+<span id="cb29-20"><a href="#cb29-20"></a><span class="ss">- </span>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <span class="co">[</span><span class="ot">Guessing Game</span><span class="co">](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)</span></span>
+<span id="cb29-21"><a href="#cb29-21"></a><span class="ss">- </span>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <span class="co">[</span><span class="ot">same name</span><span class="co">](http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/)</span>.</span>
+<span id="cb29-22"><a href="#cb29-22"></a></span>
+<span id="cb29-23"><a href="#cb29-23"></a><span class="fu">## Today</span></span>
+<span id="cb29-24"><a href="#cb29-24"></a></span>
+<span id="cb29-25"><a href="#cb29-25"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`const`</span></span>
+<span id="cb29-26"><a href="#cb29-26"></a><span class="ss">- </span><span class="va">[ ]</span> Character iteration</span>
+<span id="cb29-27"><a href="#cb29-27"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb29-28"><a href="#cb29-28"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
+<span id="cb29-29"><a href="#cb29-29"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
+<span id="cb29-30"><a href="#cb29-30"></a></span>
+<span id="cb29-31"><a href="#cb29-31"></a></span>
+<span id="cb29-32"><a href="#cb29-32"></a><span class="fu"># consts</span></span>
+<span id="cb29-33"><a href="#cb29-33"></a></span>
+<span id="cb29-34"><a href="#cb29-34"></a><span class="fu">## Compile time</span></span>
+<span id="cb29-35"><a href="#cb29-35"></a></span>
+<span id="cb29-36"><a href="#cb29-36"></a><span class="ss">- </span>In Wordle, you'll likely have two kinds of values that won't change.</span>
+<span id="cb29-37"><a href="#cb29-37"></a><span class="ss">    - </span>The "ANSI Escape Codes" which allow you to print to the terminal in color, which are set when you install your operating system.</span>
+<span id="cb29-38"><a href="#cb29-38"></a><span class="ss">        - </span>For these we may use a Rust <span class="in">`const`</span></span>
+<span id="cb29-39"><a href="#cb29-39"></a><span class="ss">    - </span>The "answer" which will be set as soon as the program begins running, and never be altered thereafter.</span>
+<span id="cb29-40"><a href="#cb29-40"></a><span class="ss">        - </span>For these, we use a <span class="in">`let`</span>.</span>
+<span id="cb29-41"><a href="#cb29-41"></a><span class="ss">- </span>I refer to the first as "compile time constants" and declare them outside of any function.</span>
+<span id="cb29-42"><a href="#cb29-42"></a></span>
+<span id="cb29-43"><a href="#cb29-43"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-44"><a href="#cb29-44"></a><span class="in">const RED : &amp;str = "\u{001b}[31m";</span></span>
+<span id="cb29-45"><a href="#cb29-45"></a><span class="in">const WHT : &amp;str = "\u{001b}[0m";</span></span>
+<span id="cb29-46"><a href="#cb29-46"></a></span>
+<span id="cb29-47"><a href="#cb29-47"></a><span class="in">fn main() {</span></span>
+<span id="cb29-48"><a href="#cb29-48"></a><span class="in">    println!("White text. {RED}Red text. {WHT}White text.");</span></span>
+<span id="cb29-49"><a href="#cb29-49"></a><span class="in">}</span></span>
+<span id="cb29-50"><a href="#cb29-50"></a><span class="in">```</span></span>
+<span id="cb29-51"><a href="#cb29-51"></a></span>
+<span id="cb29-52"><a href="#cb29-52"></a>*This section transparently added in response to a question in class. I do not use `const` in my own code rather than `let`, though perhaps I should.*</span>
+<span id="cb29-53"><a href="#cb29-53"></a></span>
+<span id="cb29-54"><a href="#cb29-54"></a><span class="fu">## Create constants</span></span>
+<span id="cb29-55"><a href="#cb29-55"></a></span>
+<span id="cb29-56"><a href="#cb29-56"></a><span class="ss">- </span>Create your own constants for yellow and green.</span>
+<span id="cb29-57"><a href="#cb29-57"></a><span class="ss">    - </span>You may want to write a loop to try different colors, or consult documentation.</span>
+<span id="cb29-58"><a href="#cb29-58"></a><span class="ss">- </span>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</span>
+<span id="cb29-59"><a href="#cb29-59"></a><span class="in">```{.rs}</span></span>
+<span id="cb29-60"><a href="#cb29-60"></a><span class="in">fn letter(a:char, c:i32)</span></span>
+<span id="cb29-61"><a href="#cb29-61"></a><span class="in">```</span></span>
+<span id="cb29-62"><a href="#cb29-62"></a></span>
+<span id="cb29-63"><a href="#cb29-63"></a><span class="fu"># Character iteration</span></span>
+<span id="cb29-64"><a href="#cb29-64"></a></span>
+<span id="cb29-65"><a href="#cb29-65"></a><span class="fu">## Strings lack indices</span></span>
+<span id="cb29-66"><a href="#cb29-66"></a></span>
+<span id="cb29-67"><a href="#cb29-67"></a><span class="ss">- </span>In Python, we have some packing and unpacking to do to edit strings by character index.</span>
+<span id="cb29-68"><a href="#cb29-68"></a><span class="in">```{.py}</span></span>
+<span id="cb29-69"><a href="#cb29-69"></a><span class="in">&gt;&gt;&gt; s = list("hello, world")</span></span>
+<span id="cb29-70"><a href="#cb29-70"></a><span class="in">&gt;&gt;&gt; s[10] = 'd'</span></span>
+<span id="cb29-71"><a href="#cb29-71"></a><span class="in">&gt;&gt;&gt; s[11] = 'l'</span></span>
+<span id="cb29-72"><a href="#cb29-72"></a><span class="in">&gt;&gt;&gt; "".join(s)</span></span>
+<span id="cb29-73"><a href="#cb29-73"></a><span class="in">'hello, wordl'</span></span>
+<span id="cb29-74"><a href="#cb29-74"></a><span class="in">```</span></span>
+<span id="cb29-75"><a href="#cb29-75"></a></span>
+<span id="cb29-76"><a href="#cb29-76"></a><span class="fu">## Rust uses `.chars()`</span></span>
+<span id="cb29-77"><a href="#cb29-77"></a></span>
+<span id="cb29-78"><a href="#cb29-78"></a><span class="ss">- </span>In the case of Wordle, all solutions are formulated as 5 characters, so we can assume the underlying character-ness of strings.</span>
+<span id="cb29-79"><a href="#cb29-79"></a><span class="ss">    - </span>This is not permitted *generally* in Rust, but in our case we may.</span>
+<span id="cb29-80"><a href="#cb29-80"></a><span class="ss">- </span>To unpack Rust strings into characters, you may use <span class="in">`.chars()`</span></span>
+<span id="cb29-81"><a href="#cb29-81"></a></span>
+<span id="cb29-82"><a href="#cb29-82"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-83"><a href="#cb29-83"></a><span class="in">fn main() {</span></span>
+<span id="cb29-84"><a href="#cb29-84"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb29-85"><a href="#cb29-85"></a><span class="in">    println!("{:?}", s.chars());</span></span>
+<span id="cb29-86"><a href="#cb29-86"></a><span class="in">}</span></span>
+<span id="cb29-87"><a href="#cb29-87"></a><span class="in">```</span></span>
+<span id="cb29-88"><a href="#cb29-88"></a></span>
+<span id="cb29-89"><a href="#cb29-89"></a><span class="ss">- </span>What do you see?</span>
+<span id="cb29-90"><a href="#cb29-90"></a><span class="ss">    - </span>Can you access the <span class="in">`i`</span>th element?</span>
+<span id="cb29-91"><a href="#cb29-91"></a><span class="ss">    - </span>Can you loop over object?</span>
+<span id="cb29-92"><a href="#cb29-92"></a>    </span>
+<span id="cb29-93"><a href="#cb29-93"></a><span class="fu">## Iterators</span></span>
+<span id="cb29-94"><a href="#cb29-94"></a></span>
+<span id="cb29-95"><a href="#cb29-95"></a><span class="ss">- </span>What <span class="in">`.chars()`</span> returns is called an iterator, it is much like a Python generator.</span>
+<span id="cb29-96"><a href="#cb29-96"></a><span class="in">```{.py}</span></span>
+<span id="cb29-97"><a href="#cb29-97"></a><span class="in">&gt;&gt;&gt; gen = (i ** i for i in range(100))</span></span>
+<span id="cb29-98"><a href="#cb29-98"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb29-99"><a href="#cb29-99"></a><span class="in">1</span></span>
+<span id="cb29-100"><a href="#cb29-100"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb29-101"><a href="#cb29-101"></a><span class="in">1</span></span>
+<span id="cb29-102"><a href="#cb29-102"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb29-103"><a href="#cb29-103"></a><span class="in">4</span></span>
+<span id="cb29-104"><a href="#cb29-104"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb29-105"><a href="#cb29-105"></a><span class="in">27</span></span>
+<span id="cb29-106"><a href="#cb29-106"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb29-107"><a href="#cb29-107"></a><span class="in">256</span></span>
+<span id="cb29-108"><a href="#cb29-108"></a><span class="in">```</span></span>
+<span id="cb29-109"><a href="#cb29-109"></a><span class="ss">- </span>Basically, it is a collection type of unknown size where next elements may be queried.</span>
+<span id="cb29-110"><a href="#cb29-110"></a></span>
+<span id="cb29-111"><a href="#cb29-111"></a><span class="fu">## Rust uses `.nth()`</span></span>
+<span id="cb29-112"><a href="#cb29-112"></a></span>
+<span id="cb29-113"><a href="#cb29-113"></a><span class="ss">- </span>You can see the <span class="in">`n`</span>th element of an iterator with <span class="in">`.nth()`</span>, more or less:</span>
+<span id="cb29-114"><a href="#cb29-114"></a></span>
+<span id="cb29-115"><a href="#cb29-115"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-116"><a href="#cb29-116"></a><span class="in">fn main() {</span></span>
+<span id="cb29-117"><a href="#cb29-117"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb29-118"><a href="#cb29-118"></a><span class="in">    println!("{:?}", s.chars().nth(10));</span></span>
+<span id="cb29-119"><a href="#cb29-119"></a><span class="in">}</span></span>
+<span id="cb29-120"><a href="#cb29-120"></a><span class="in">```</span></span>
+<span id="cb29-121"><a href="#cb29-121"></a><span class="ss">- </span>What do you see?</span>
+<span id="cb29-122"><a href="#cb29-122"></a><span class="ss">    - </span>What happens if you ask for the 256th letter?</span>
+<span id="cb29-123"><a href="#cb29-123"></a>    </span>
+<span id="cb29-124"><a href="#cb29-124"></a><span class="fu">## Options</span></span>
+<span id="cb29-125"><a href="#cb29-125"></a></span>
+<span id="cb29-126"><a href="#cb29-126"></a><span class="ss">- </span>Rust library functions almost always return an <span class="in">`Option`</span></span>
+<span id="cb29-127"><a href="#cb29-127"></a><span class="ss">    - </span>This is just good practice, it beats returning e.g. Python <span class="in">`None`</span> sometimes, or crashing.</span>
+<span id="cb29-128"><a href="#cb29-128"></a><span class="ss">- </span>An option is simple:</span>
+<span id="cb29-129"><a href="#cb29-129"></a><span class="in">```rs</span></span>
+<span id="cb29-130"><a href="#cb29-130"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb29-131"><a href="#cb29-131"></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb29-132"><a href="#cb29-132"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb29-133"><a href="#cb29-133"></a><span class="op">}</span></span>
+<span id="cb29-134"><a href="#cb29-134"></a><span class="in">```</span></span>
+<span id="cb29-135"><a href="#cb29-135"></a></span>
+<span id="cb29-136"><a href="#cb29-136"></a><span class="fu">## Options for options</span></span>
+<span id="cb29-137"><a href="#cb29-137"></a></span>
+<span id="cb29-138"><a href="#cb29-138"></a><span class="ss">- </span><span class="va">[ ]</span> Pattern match</span>
+<span id="cb29-139"><a href="#cb29-139"></a><span class="ss">- </span><span class="va">[ ]</span> Expect</span>
+<span id="cb29-140"><a href="#cb29-140"></a><span class="ss">- </span><span class="va">[ ]</span> Unwrap</span>
+<span id="cb29-141"><a href="#cb29-141"></a></span>
+<span id="cb29-142"><a href="#cb29-142"></a><span class="fu">## Pattern match</span></span>
+<span id="cb29-143"><a href="#cb29-143"></a></span>
+<span id="cb29-144"><a href="#cb29-144"></a><span class="ss">- </span>The language designers intend options to be handled as follows:</span>
+<span id="cb29-145"><a href="#cb29-145"></a></span>
+<span id="cb29-146"><a href="#cb29-146"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-147"><a href="#cb29-147"></a><span class="in">fn main() {</span></span>
+<span id="cb29-148"><a href="#cb29-148"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb29-149"><a href="#cb29-149"></a><span class="in">    match s.chars().nth(11) {</span></span>
+<span id="cb29-150"><a href="#cb29-150"></a><span class="in">        Some(c) =&gt; println!("The 11th character is {:?}", c),</span></span>
+<span id="cb29-151"><a href="#cb29-151"></a><span class="in">        None =&gt; println!("String `s` is fewer than 11 characters in length"),</span></span>
+<span id="cb29-152"><a href="#cb29-152"></a><span class="in">    }</span></span>
+<span id="cb29-153"><a href="#cb29-153"></a><span class="in">}</span></span>
+<span id="cb29-154"><a href="#cb29-154"></a><span class="in">```</span></span>
+<span id="cb29-155"><a href="#cb29-155"></a></span>
+<span id="cb29-156"><a href="#cb29-156"></a><span class="ss">- </span>I very rarely see code that looks like this, including in official Rust documentation.</span>
+<span id="cb29-157"><a href="#cb29-157"></a><span class="ss">- </span>For example, the Polars documentation does not manage <span class="in">`Option`</span> return types this way.</span>
+<span id="cb29-158"><a href="#cb29-158"></a><span class="ss">- </span>This is, however, the only way to ensure code does not crash on e.g. arbitrary length input.</span>
+<span id="cb29-159"><a href="#cb29-159"></a></span>
+<span id="cb29-160"><a href="#cb29-160"></a><span class="fu">## Expect</span></span>
+<span id="cb29-161"><a href="#cb29-161"></a></span>
+<span id="cb29-162"><a href="#cb29-162"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.expect()`</span>, a method of options that either:</span>
+<span id="cb29-163"><a href="#cb29-163"></a><span class="ss">    - </span>Sucessful unpacks the option into a usable type, or</span>
+<span id="cb29-164"><a href="#cb29-164"></a><span class="ss">    - </span>Causes a "panic" - a comparatively graceful program crash.</span>
+<span id="cb29-165"><a href="#cb29-165"></a><span class="ss">        - </span>This panic prints the message you furnished to expect.</span>
+<span id="cb29-166"><a href="#cb29-166"></a>        </span>
+<span id="cb29-167"><a href="#cb29-167"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-168"><a href="#cb29-168"></a><span class="in">fn main() {</span></span>
+<span id="cb29-169"><a href="#cb29-169"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb29-170"><a href="#cb29-170"></a><span class="in">    println!("{:?}", s.chars().nth(13).expect("The string literal is known to be of length 11"));</span></span>
+<span id="cb29-171"><a href="#cb29-171"></a><span class="in">}</span></span>
+<span id="cb29-172"><a href="#cb29-172"></a><span class="in">```</span></span>
+<span id="cb29-173"><a href="#cb29-173"></a></span>
+<span id="cb29-174"><a href="#cb29-174"></a><span class="ss">- </span>Try checking for existing and non-existant characters. What do you find?</span>
+<span id="cb29-175"><a href="#cb29-175"></a></span>
+<span id="cb29-176"><a href="#cb29-176"></a><span class="fu">## Rust uses `.unwrap()`</span></span>
+<span id="cb29-177"><a href="#cb29-177"></a></span>
+<span id="cb29-178"><a href="#cb29-178"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.unwrap()`</span>.</span>
+<span id="cb29-179"><a href="#cb29-179"></a><span class="ss">- </span>Unwrap does not require a message but is otherwise just like <span class="in">`.expect()`</span></span>
+<span id="cb29-180"><a href="#cb29-180"></a><span class="ss">- </span>Unwrap is used by e.g. the Polars documentation.</span>
+<span id="cb29-181"><a href="#cb29-181"></a></span>
+<span id="cb29-182"><a href="#cb29-182"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-183"><a href="#cb29-183"></a><span class="in">fn main() {</span></span>
+<span id="cb29-184"><a href="#cb29-184"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb29-185"><a href="#cb29-185"></a><span class="in">    println!("{:?}", s.chars().nth(13).unwrap());</span></span>
+<span id="cb29-186"><a href="#cb29-186"></a><span class="in">}</span></span>
+<span id="cb29-187"><a href="#cb29-187"></a><span class="in">```</span></span>
+<span id="cb29-188"><a href="#cb29-188"></a></span>
+<span id="cb29-189"><a href="#cb29-189"></a><span class="ss">- </span>Try <span class="in">`.unwrap()`</span> on both successful and failed <span class="in">`.nth()`</span> calls.</span>
+<span id="cb29-190"><a href="#cb29-190"></a></span>
+<span id="cb29-191"><a href="#cb29-191"></a><span class="fu">## Unwrap vs. Expect</span></span>
+<span id="cb29-192"><a href="#cb29-192"></a></span>
+<span id="cb29-193"><a href="#cb29-193"></a><span class="ss">- </span>I have never voluntarily used <span class="in">`.expect()`</span> instead of <span class="in">`.unwrap()`</span>, but...</span>
+<span id="cb29-194"><a href="#cb29-194"></a></span>
+<span id="cb29-195"><a href="#cb29-195"></a>::: {.callout-note appearance="simple"}</span>
+<span id="cb29-196"><a href="#cb29-196"></a></span>
+<span id="cb29-197"><a href="#cb29-197"></a><span class="fu">## Help Yourself</span></span>
+<span id="cb29-198"><a href="#cb29-198"></a></span>
+<span id="cb29-199"><a href="#cb29-199"></a></span>
+<span id="cb29-200"><a href="#cb29-200"></a>If your code uses <span class="in">`.unwrap()`</span> instead of <span class="in">`.expect()`</span> you should carefully consider converting any <span class="in">`.unwrap()`</span>s to <span class="in">`.expect()`</span>s before asking someone else, who is less familiar with the assumptions you made when writing your code, for help.</span>
+<span id="cb29-201"><a href="#cb29-201"></a></span>
+<span id="cb29-202"><a href="#cb29-202"></a>This applies to colleagues, QUAD TAs, and potential to the course instructor depending on how busy things are.</span>
+<span id="cb29-203"><a href="#cb29-203"></a></span>
+<span id="cb29-204"><a href="#cb29-204"></a>:::</span>
+<span id="cb29-205"><a href="#cb29-205"></a></span>
+<span id="cb29-206"><a href="#cb29-206"></a><span class="fu"># /dev/random</span></span>
+<span id="cb29-207"><a href="#cb29-207"></a></span>
+<span id="cb29-208"><a href="#cb29-208"></a><span class="fu">## Randomization</span></span>
+<span id="cb29-209"><a href="#cb29-209"></a></span>
+<span id="cb29-210"><a href="#cb29-210"></a><span class="ss">- </span>There are always many ways to generated results that are vaguely random.</span>
+<span id="cb29-211"><a href="#cb29-211"></a><span class="ss">- </span>As a security researcher, I am required to instruct you about <span class="in">`/dev/random`</span> rather than use the Rust Book recommendations.</span>
+<span id="cb29-212"><a href="#cb29-212"></a><span class="ss">- </span>Separately we:</span>
+<span id="cb29-213"><a href="#cb29-213"></a><span class="ss">    - </span>Learn to read from a file.</span>
+<span id="cb29-214"><a href="#cb29-214"></a><span class="ss">    - </span>Get to think about how random different things really are.</span>
+<span id="cb29-215"><a href="#cb29-215"></a></span>
+<span id="cb29-216"><a href="#cb29-216"></a><span class="fu">## Quoth Wikipedia</span></span>
+<span id="cb29-217"><a href="#cb29-217"></a></span>
+<span id="cb29-218"><a href="#cb29-218"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In Unix-like operating systems, /dev/random and /dev/urandom are special files that provide random numbers from a cryptographically secure pseudorandom number generator (CSPRNG). The CSPRNG is seeded with entropy (a value that provides randomness) from environmental noise, collected from device drivers and other sources. Users can obtain random numbers from the CSPRNG simply by reading the file.</span><span class="co">](https://en.wikipedia.org/wiki//dev/random)</span></span>
+<span id="cb29-219"><a href="#cb29-219"></a></span>
+<span id="cb29-220"><a href="#cb29-220"></a><span class="fu">## Peep it</span></span>
+<span id="cb29-221"><a href="#cb29-221"></a></span>
+<span id="cb29-222"><a href="#cb29-222"></a><span class="ss">- </span>Verify you are on a system implementing <span class="in">`/dev/random`</span> with the following, at command line:</span>
+<span id="cb29-223"><a href="#cb29-223"></a><span class="in">```{.bash}</span></span>
+<span id="cb29-224"><a href="#cb29-224"></a><span class="in">head -1 /dev/random</span></span>
+<span id="cb29-225"><a href="#cb29-225"></a><span class="in">```</span></span>
+<span id="cb29-226"><a href="#cb29-226"></a><span class="ss">- </span>For me, I see:</span>
+<span id="cb29-227"><a href="#cb29-227"></a><span class="in">```{.sh}</span></span>
+<span id="cb29-228"><a href="#cb29-228"></a><span class="in">$ head -1 /dev/random</span></span>
+<span id="cb29-229"><a href="#cb29-229"></a><span class="in">6��c�W�Y|S�t��|��=���U�&gt;�$��8�����E���*�&amp;;�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{ ��^"/%!7���vv@�w{p��q�y"� AD�/Ahb��fb��Ed�</span></span>
+<span id="cb29-230"><a href="#cb29-230"></a><span class="in">                                                                                                                      ­�k�:���F�&gt;����09h��Ʊl#�&gt;�J����:J����5|I�E���04�������NH��-�X����l�,k�&lt;�������=.4^qav�}Y��</span></span>
+<span id="cb29-231"><a href="#cb29-231"></a><span class="in">        ��(�)1���B���c)�&amp;*�#r��"H�(�:�e���֩A</span></span>
+<span id="cb29-232"><a href="#cb29-232"></a><span class="in">$</span></span>
+<span id="cb29-233"><a href="#cb29-233"></a><span class="in">```</span></span>
+<span id="cb29-234"><a href="#cb29-234"></a><span class="ss">- </span>You can test what <span class="in">`head`</span> does on a file with which you are familiar, or consult <span class="in">`man head`</span></span>
+<span id="cb29-235"><a href="#cb29-235"></a></span>
+<span id="cb29-236"><a href="#cb29-236"></a><span class="fu"># File I/O</span></span>
+<span id="cb29-237"><a href="#cb29-237"></a></span>
+<span id="cb29-238"><a href="#cb29-238"></a><span class="fu">## `open`</span></span>
+<span id="cb29-239"><a href="#cb29-239"></a></span>
+<span id="cb29-240"><a href="#cb29-240"></a><span class="ss">- </span>A la Python, Rust utilizes <span class="in">`open`</span> to read files.</span>
+<span id="cb29-241"><a href="#cb29-241"></a><span class="ss">- </span>Unlike Python, Rust has a great love for gobs of a text and <span class="in">`Option`</span>s.</span>
+<span id="cb29-242"><a href="#cb29-242"></a><span class="ss">- </span>The following opens <span class="in">`/dev/random`</span> to be read.</span>
+<span id="cb29-243"><a href="#cb29-243"></a><span class="ss">    - </span>Think about why we need to <span class="in">`.unwrap()`</span> when opening a file.</span>
+<span id="cb29-244"><a href="#cb29-244"></a><span class="ss">    - </span>What is the Python equivalent?</span>
+<span id="cb29-245"><a href="#cb29-245"></a><span class="in">```rs</span></span>
+<span id="cb29-246"><a href="#cb29-246"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-247"><a href="#cb29-247"></a><span class="in">```</span></span>
+<span id="cb29-248"><a href="#cb29-248"></a><span class="ss">- </span>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <span class="in">`File`</span> object.</span>
+<span id="cb29-249"><a href="#cb29-249"></a></span>
+<span id="cb29-250"><a href="#cb29-250"></a><span class="at">&gt; An object providing access to an open file on the filesystem.</span></span>
+<span id="cb29-251"><a href="#cb29-251"></a></span>
+<span id="cb29-252"><a href="#cb29-252"></a><span class="fu">## `use`</span></span>
+<span id="cb29-253"><a href="#cb29-253"></a></span>
+<span id="cb29-254"><a href="#cb29-254"></a><span class="ss">- </span>A lot of people who aren't me prefer to use <span class="in">`use`</span> to have shorter names.</span>
+<span id="cb29-255"><a href="#cb29-255"></a><span class="ss">- </span>I don't personally understand this, but I do use <span class="in">`from pgl import *`</span> in Python.</span>
+<span id="cb29-256"><a href="#cb29-256"></a><span class="ss">- </span>Here's an example from <span class="co">[</span><span class="ot">Rust documentation</span><span class="co">](https://doc.rust-lang.org/std/fs/struct.File.html)</span> of a <span class="in">`use`</span>:</span>
+<span id="cb29-257"><a href="#cb29-257"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-258"><a href="#cb29-258"></a><span class="in">use std::fs::File;</span></span>
+<span id="cb29-259"><a href="#cb29-259"></a></span>
+<span id="cb29-260"><a href="#cb29-260"></a><span class="in">fn main() {</span></span>
+<span id="cb29-261"><a href="#cb29-261"></a><span class="in">    let mut devrnd = File::open("/dev/random").unwrap();</span></span>
+<span id="cb29-262"><a href="#cb29-262"></a><span class="in">}</span></span>
+<span id="cb29-263"><a href="#cb29-263"></a><span class="in">```</span></span>
+<span id="cb29-264"><a href="#cb29-264"></a></span>
+<span id="cb29-265"><a href="#cb29-265"></a><span class="ss">- </span><span class="co">[</span><span class="ot">The Used - The Bird And The Worm (Video)</span><span class="co">](https://www.youtube.com/watch?v=12dBCgAo-RA)</span></span>
+<span id="cb29-266"><a href="#cb29-266"></a></span>
+<span id="cb29-267"><a href="#cb29-267"></a><span class="fu">## `read`</span></span>
+<span id="cb29-268"><a href="#cb29-268"></a></span>
+<span id="cb29-269"><a href="#cb29-269"></a><span class="ss">- </span>True to form, <span class="in">`read`</span> has a variety of complexities introduced by:</span>
+<span id="cb29-270"><a href="#cb29-270"></a><span class="ss">    - </span>Not assuming anything about the Rust <span class="in">`File`</span> object</span>
+<span id="cb29-271"><a href="#cb29-271"></a><span class="ss">    - </span>Not assuming anything about how to read or save data.</span>
+<span id="cb29-272"><a href="#cb29-272"></a><span class="ss">    - </span>Not assuming anything about the underlying file within the computer's file system.</span>
+<span id="cb29-273"><a href="#cb29-273"></a><span class="ss">- </span>I use it as follows:</span>
+<span id="cb29-274"><a href="#cb29-274"></a><span class="in">```rs</span></span>
+<span id="cb29-275"><a href="#cb29-275"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-276"><a href="#cb29-276"></a><span class="in">```</span></span>
+<span id="cb29-277"><a href="#cb29-277"></a><span class="ss">- </span>An astute reader will notice a few idiosyncracies.</span>
+<span id="cb29-278"><a href="#cb29-278"></a></span>
+<span id="cb29-279"><a href="#cb29-279"></a><span class="fu">## `&amp;mut`</span></span>
+<span id="cb29-280"><a href="#cb29-280"></a></span>
+<span id="cb29-281"><a href="#cb29-281"></a><span class="ss">- </span>When we:</span>
+<span id="cb29-282"><a href="#cb29-282"></a><span class="ss">    - </span>Have a variable in Rust</span>
+<span id="cb29-283"><a href="#cb29-283"></a><span class="ss">    - </span>For which the ownership model applies, such as a file of arbitrary size</span>
+<span id="cb29-284"><a href="#cb29-284"></a><span class="ss">    - </span>For which mutability is necessary, such as a <span class="in">`File`</span> object from which <span class="in">`n`</span> bytes have been read.</span>
+<span id="cb29-285"><a href="#cb29-285"></a><span class="ss">- </span>We can use this variable:</span>
+<span id="cb29-286"><a href="#cb29-286"></a><span class="ss">    - </span>Within some other function, while</span>
+<span id="cb29-287"><a href="#cb29-287"></a><span class="ss">    - </span>Retaining the ability to use it again in some future function.</span>
+<span id="cb29-288"><a href="#cb29-288"></a><span class="ss">- </span>We do so by passing a "mutable reference", generated by prefixing the variable name with <span class="in">`&amp;mut`</span> and a space.</span>
+<span id="cb29-289"><a href="#cb29-289"></a></span>
+<span id="cb29-290"><a href="#cb29-290"></a><span class="fu">## Buffers</span></span>
+<span id="cb29-291"><a href="#cb29-291"></a></span>
+<span id="cb29-292"><a href="#cb29-292"></a><span class="ss">- </span>It is common in lower level languages to read from a file into a "buffer", a temporary storage space within the executing program.</span>
+<span id="cb29-293"><a href="#cb29-293"></a><span class="ss">- </span>These are commonly implemented as multiple of bytes of some fixed size in that language's array type.</span>
+<span id="cb29-294"><a href="#cb29-294"></a><span class="ss">- </span>These bits are commonly initialized to zero.</span>
+<span id="cb29-295"><a href="#cb29-295"></a><span class="ss">- </span>I am aware of no graceful way to do this in Rust, so I'll tell you what I'm doing now and why.</span>
+<span id="cb29-296"><a href="#cb29-296"></a></span>
+<span id="cb29-297"><a href="#cb29-297"></a><span class="fu">## Arrays</span></span>
+<span id="cb29-298"><a href="#cb29-298"></a></span>
+<span id="cb29-299"><a href="#cb29-299"></a><span class="ss">- </span>Arrays in Rust are fixed size and typed, not unlike NumPy array.</span>
+<span id="cb29-300"><a href="#cb29-300"></a><span class="ss">- </span>They see little use versus the more common vector type, but I preferred arrays for Wordle.</span>
+<span id="cb29-301"><a href="#cb29-301"></a><span class="ss">    - </span>And in fact expect to prefer arrays this term.</span>
+<span id="cb29-302"><a href="#cb29-302"></a></span>
+<span id="cb29-303"><a href="#cb29-303"></a><span class="fu">## Quoth the [Docs](https://doc.rust-lang.org/std/primitive.array.html)</span></span>
+<span id="cb29-304"><a href="#cb29-304"></a></span>
+<span id="cb29-305"><a href="#cb29-305"></a><span class="ss">- </span>A fixed-size array, denoted <span class="in">`[T; N]`</span>, for the element type, <span class="in">`T`</span>, and the non-negative compile-time constant size, <span class="in">`N`</span>.</span>
+<span id="cb29-306"><a href="#cb29-306"></a><span class="ss">- </span>There are two syntactic forms for creating an array:</span>
+<span id="cb29-307"><a href="#cb29-307"></a></span>
+<span id="cb29-308"><a href="#cb29-308"></a><span class="ss">    - </span>A list with each element, i.e., <span class="in">`[x, y, z]`</span>.</span>
+<span id="cb29-309"><a href="#cb29-309"></a></span>
+<span id="cb29-310"><a href="#cb29-310"></a><span class="ss">    - </span>A repeat expression <span class="in">`[expr; N]`</span> where <span class="in">`N`</span> is how many times to repeat expr in the array. expr must either be:</span>
+<span id="cb29-311"><a href="#cb29-311"></a><span class="ss">        - </span>A value of a type implementing the Copy trait</span>
+<span id="cb29-312"><a href="#cb29-312"></a><span class="ss">        - </span>A const value</span>
+<span id="cb29-313"><a href="#cb29-313"></a><span class="ss">- </span>I never read this, I found <span class="co">[</span><span class="ot">this page</span><span class="co">](https://blog.orhun.dev/zero-deps-random-in-rust/)</span> through a search engine and ripped it.</span>
+<span id="cb29-314"><a href="#cb29-314"></a><span class="ss">    - </span>Search for <span class="in">`dev/urandom`</span> on that page.</span>
+<span id="cb29-315"><a href="#cb29-315"></a>    </span>
+<span id="cb29-316"><a href="#cb29-316"></a><span class="fu">## Create an array</span></span>
+<span id="cb29-317"><a href="#cb29-317"></a></span>
+<span id="cb29-318"><a href="#cb29-318"></a><span class="ss">- </span>The following is a mutable - so we can read file data *into* it - array of 8 bytes.</span>
+<span id="cb29-319"><a href="#cb29-319"></a><span class="in">```rs</span></span>
+<span id="cb29-320"><a href="#cb29-320"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span>
+<span id="cb29-321"><a href="#cb29-321"></a><span class="in">```</span></span>
+<span id="cb29-322"><a href="#cb29-322"></a><span class="ss">- </span>Breakdown.</span>
+<span id="cb29-323"><a href="#cb29-323"></a><span class="ss">    - </span>The <span class="in">`0`</span> in <span class="in">`0u8`</span> is the initialization value.</span>
+<span id="cb29-324"><a href="#cb29-324"></a><span class="ss">    - </span>The <span class="in">`u8`</span> is the type, unsigned 8 bit value.</span>
+<span id="cb29-325"><a href="#cb29-325"></a><span class="ss">    - </span>The post comma <span class="in">`8`</span> is the number of 8 bit values to store.</span>
+<span id="cb29-326"><a href="#cb29-326"></a><span class="ss">- </span>There's only one problem here.</span>
+<span id="cb29-327"><a href="#cb29-327"></a><span class="ss">    - </span>That second <span class="in">`8`</span> is a magic number, which to me represents poor style.</span>
+<span id="cb29-328"><a href="#cb29-328"></a><span class="ss">        - </span>Believe me, I wanted to just type 8, but we shouldn't.</span>
+<span id="cb29-329"><a href="#cb29-329"></a>        </span>
+<span id="cb29-330"><a href="#cb29-330"></a><span class="fu">## On Magic Numbers</span></span>
+<span id="cb29-331"><a href="#cb29-331"></a></span>
+<span id="cb29-332"><a href="#cb29-332"></a><span class="ss">- </span>To select a random word, eventually you will probably have:</span>
+<span id="cb29-333"><a href="#cb29-333"></a><span class="ss">    - </span>An array of 5 letter words.</span>
+<span id="cb29-334"><a href="#cb29-334"></a><span class="ss">    - </span>That array will have some length.</span>
+<span id="cb29-335"><a href="#cb29-335"></a><span class="ss">    - </span>That length will be whatever Rust uses to store the size of memory objects.</span>
+<span id="cb29-336"><a href="#cb29-336"></a><span class="ss">    - </span>Different computers have different ways of address memory...</span>
+<span id="cb29-337"><a href="#cb29-337"></a><span class="ss">    - </span>So we cannot make assumptions about the size of values which themselves store the size of memory.</span>
+<span id="cb29-338"><a href="#cb29-338"></a><span class="ss">        - </span>I wish I was kidding! I'm not!</span>
+<span id="cb29-339"><a href="#cb29-339"></a></span>
+<span id="cb29-340"><a href="#cb29-340"></a><span class="fu">## 32 vs 64 bit</span></span>
+<span id="cb29-341"><a href="#cb29-341"></a></span>
+<span id="cb29-342"><a href="#cb29-342"></a><span class="ss">- </span>For example, how many memory locations can be addressed by a 32 bit system?</span>
+<span id="cb29-343"><a href="#cb29-343"></a><span class="ss">- </span>How many on a 64 bit system?</span>
+<span id="cb29-344"><a href="#cb29-344"></a><span class="ss">- </span>Does your device potentially use 48 bit addresses?</span>
+<span id="cb29-345"><a href="#cb29-345"></a><span class="ss">- </span>How could you tell?</span>
+<span id="cb29-346"><a href="#cb29-346"></a><span class="ss">- </span>What if you run code on a 16 bit microcontroller?</span>
+<span id="cb29-347"><a href="#cb29-347"></a><span class="ss">- </span>Enter <span class="in">`usize`</span></span>
+<span id="cb29-348"><a href="#cb29-348"></a><span class="ss">    - </span>The unsigned value that is the right size to store a size.</span>
+<span id="cb29-349"><a href="#cb29-349"></a>    </span>
+<span id="cb29-350"><a href="#cb29-350"></a><span class="fu">## `usize`</span></span>
+<span id="cb29-351"><a href="#cb29-351"></a></span>
+<span id="cb29-352"><a href="#cb29-352"></a><span class="ss">- </span>We will use <span class="in">`usize`</span> by name twice:</span>
+<span id="cb29-353"><a href="#cb29-353"></a><span class="ss">    - </span>We need to read a random usize.</span>
+<span id="cb29-354"><a href="#cb29-354"></a><span class="ss">- </span>We can determine how many <span class="in">`u8`</span>s are required to make up a <span class="in">`usize`</span> by checking how many bits are in a <span class="in">`usize`</span>. and dividing by 8.</span>
+<span id="cb29-355"><a href="#cb29-355"></a><span class="in">```rs</span></span>
+<span id="cb29-356"><a href="#cb29-356"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span>
+<span id="cb29-357"><a href="#cb29-357"></a><span class="in">```</span></span>
+<span id="cb29-358"><a href="#cb29-358"></a><span class="ss">- </span>Only one problem - for some reason <span class="in">`usize`</span> stores *its* size as a <span class="in">`u32`</span>.</span>
+<span id="cb29-359"><a href="#cb29-359"></a><span class="ss">- </span>So to get enough bits to fill I <span class="in">`usize`</span>, I ended up doing... this?</span>
+<span id="cb29-360"><a href="#cb29-360"></a><span class="in">```rs</span></span>
+<span id="cb29-361"><a href="#cb29-361"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb29-362"><a href="#cb29-362"></a><span class="in">```</span></span>
+<span id="cb29-363"><a href="#cb29-363"></a></span>
+<span id="cb29-364"><a href="#cb29-364"></a><span class="al">![](https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif)</span></span>
+<span id="cb29-365"><a href="#cb29-365"></a></span>
+<span id="cb29-366"><a href="#cb29-366"></a>*Presumably I'm doing this wrong.*</span>
+<span id="cb29-367"><a href="#cb29-367"></a></span>
+<span id="cb29-368"><a href="#cb29-368"></a><span class="fu">## Check in</span></span>
+<span id="cb29-369"><a href="#cb29-369"></a></span>
+<span id="cb29-370"><a href="#cb29-370"></a><span class="ss">- </span>I have this so far:</span>
+<span id="cb29-371"><a href="#cb29-371"></a></span>
+<span id="cb29-372"><a href="#cb29-372"></a><span class="in">```rs</span></span>
+<span id="cb29-373"><a href="#cb29-373"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-374"><a href="#cb29-374"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb29-375"><a href="#cb29-375"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-376"><a href="#cb29-376"></a><span class="in">```</span></span>
+<span id="cb29-377"><a href="#cb29-377"></a></span>
+<span id="cb29-378"><a href="#cb29-378"></a><span class="fu">## Candidate Answers</span></span>
+<span id="cb29-379"><a href="#cb29-379"></a></span>
+<span id="cb29-380"><a href="#cb29-380"></a><span class="ss">- </span>You can imagine testing with a smaller word list, like the words of the <span class="co">[</span><span class="ot">Sator Square</span><span class="co">](https://en.wikipedia.org/wiki/Sator_Square)</span></span>
+<span id="cb29-381"><a href="#cb29-381"></a></span>
+<span id="cb29-382"><a href="#cb29-382"></a><span class="in">```rs</span></span>
+<span id="cb29-383"><a href="#cb29-383"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
+<span id="cb29-384"><a href="#cb29-384"></a><span class="in">```</span></span>
+<span id="cb29-385"><a href="#cb29-385"></a></span>
+<span id="cb29-386"><a href="#cb29-386"></a><span class="ss">- </span>Here <span class="in">`&amp;str`</span> is used to refer to string literals, that is, *not* the <span class="in">`String`</span> quasi-data structure of arbitrary size.</span>
+<span id="cb29-387"><a href="#cb29-387"></a><span class="ss">    - </span>This was the type that e.g. <span class="in">`"hello world"`</span> had the whole time under the hood.</span>
+<span id="cb29-388"><a href="#cb29-388"></a></span>
+<span id="cb29-389"><a href="#cb29-389"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-390"><a href="#cb29-390"></a><span class="in">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
+<span id="cb29-391"><a href="#cb29-391"></a></span>
+<span id="cb29-392"><a href="#cb29-392"></a><span class="in">fn main() {</span></span>
+<span id="cb29-393"><a href="#cb29-393"></a><span class="in">    let i : u8 = 2;</span></span>
+<span id="cb29-394"><a href="#cb29-394"></a><span class="in">    println!("{:?}", WORDS[i]);</span></span>
+<span id="cb29-395"><a href="#cb29-395"></a><span class="in">}</span></span>
+<span id="cb29-396"><a href="#cb29-396"></a><span class="in">```</span></span>
+<span id="cb29-397"><a href="#cb29-397"></a><span class="ss">- </span>This doesn't work.</span>
+<span id="cb29-398"><a href="#cb29-398"></a></span>
+<span id="cb29-399"><a href="#cb29-399"></a><span class="fu">## Indices</span></span>
+<span id="cb29-400"><a href="#cb29-400"></a></span>
+<span id="cb29-401"><a href="#cb29-401"></a><span class="ss">- </span>An array can be as large as memory.</span>
+<span id="cb29-402"><a href="#cb29-402"></a><span class="ss">- </span>So it's index can be as large as memory.</span>
+<span id="cb29-403"><a href="#cb29-403"></a><span class="ss">- </span>The thing as large memory is <span class="in">`usize`</span>.</span>
+<span id="cb29-404"><a href="#cb29-404"></a><span class="in">```bash</span></span>
+<span id="cb29-405"><a href="#cb29-405"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
+<span id="cb29-406"><a href="#cb29-406"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
+<span id="cb29-407"><a href="#cb29-407"></a><span class="st">  |</span></span>
+<span id="cb29-408"><a href="#cb29-408"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
+<span id="cb29-409"><a href="#cb29-409"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span>
+<span id="cb29-410"><a href="#cb29-410"></a><span class="st">```</span></span>
+<span id="cb29-411"><a href="#cb29-411"></a></span>
+<span id="cb29-412"><a href="#cb29-412"></a><span class="st">## Byte array to `usize`</span></span>
+<span id="cb29-413"><a href="#cb29-413"></a></span>
+<span id="cb29-414"><a href="#cb29-414"></a><span class="st">- Usize helpfully has "from bytes" methods.</span></span>
+<span id="cb29-415"><a href="#cb29-415"></a><span class="st">    - There are 3 such methods for different *endianness*es, a future topic.</span></span>
+<span id="cb29-416"><a href="#cb29-416"></a><span class="st">- I use little endianness because it doesn'</span><span class="ex">t</span> matter <span class="at">-</span> <span class="kw">`</span>le<span class="kw">`</span></span>
+<span id="cb29-417"><a href="#cb29-417"></a><span class="kw">```</span>rs</span>
+<span id="cb29-418"><a href="#cb29-418"></a><span class="bu">let</span> <span class="va">secret</span> <span class="op">=</span> <span class="va">usize</span><span class="op">::</span><span class="va">from_le_bytes</span><span class="er">(</span><span class="ex">buffer</span><span class="kw">);</span></span>
+<span id="cb29-419"><a href="#cb29-419"></a><span class="in">```</span></span>
+<span id="cb29-420"><a href="#cb29-420"></a><span class="ss">- </span>This can be used as an index, but it's probably too large.</span>
+<span id="cb29-421"><a href="#cb29-421"></a></span>
+<span id="cb29-422"><a href="#cb29-422"></a><span class="fu">## `.len()`</span></span>
+<span id="cb29-423"><a href="#cb29-423"></a></span>
+<span id="cb29-424"><a href="#cb29-424"></a><span class="ss">- </span>Rust furnishes the <span class="in">`.len()`</span> method of arrays to detect their type.</span>
+<span id="cb29-425"><a href="#cb29-425"></a><span class="in">```rs</span></span>
+<span id="cb29-426"><a href="#cb29-426"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span>
+<span id="cb29-427"><a href="#cb29-427"></a><span class="in">```</span></span>
+<span id="cb29-428"><a href="#cb29-428"></a></span>
+<span id="cb29-429"><a href="#cb29-429"></a><span class="fu">## Altogether</span></span>
+<span id="cb29-430"><a href="#cb29-430"></a></span>
+<span id="cb29-431"><a href="#cb29-431"></a><span class="ss">- </span>We use <span class="in">`String::from()`</span> to get a <span class="in">`String`</span> from a <span class="in">`&amp;str`</span>, as the array contains fixed length strings and I use the <span class="in">`String`</span> type for consistency with lecture recommendations.</span>
+<span id="cb29-432"><a href="#cb29-432"></a></span>
+<span id="cb29-433"><a href="#cb29-433"></a><span class="in">```rs</span></span>
+<span id="cb29-434"><a href="#cb29-434"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-435"><a href="#cb29-435"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb29-436"><a href="#cb29-436"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-437"><a href="#cb29-437"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
+<span id="cb29-438"><a href="#cb29-438"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span>
+<span id="cb29-439"><a href="#cb29-439"></a><span class="in">```</span></span>
+<span id="cb29-440"><a href="#cb29-440"></a></span>
+<span id="cb29-441"><a href="#cb29-441"></a></span>
+<span id="cb29-442"><a href="#cb29-442"></a><span class="fu">## Today</span></span>
+<span id="cb29-443"><a href="#cb29-443"></a></span>
+<span id="cb29-444"><a href="#cb29-444"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
+<span id="cb29-445"><a href="#cb29-445"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
+<span id="cb29-446"><a href="#cb29-446"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb29-447"><a href="#cb29-447"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
+<span id="cb29-448"><a href="#cb29-448"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
+<span id="cb29-449"><a href="#cb29-449"></a></span>
+<span id="cb29-450"><a href="#cb29-450"></a></span>
+<span id="cb29-451"><a href="#cb29-451"></a><span class="fu"># stdin</span></span>
+<span id="cb29-452"><a href="#cb29-452"></a></span>
+<span id="cb29-453"><a href="#cb29-453"></a><span class="fu">## `input()`</span></span>
+<span id="cb29-454"><a href="#cb29-454"></a></span>
+<span id="cb29-455"><a href="#cb29-455"></a><span class="ss">- </span>Python furnishes the straight-forward <span class="in">`input()`</span> function.</span>
+<span id="cb29-456"><a href="#cb29-456"></a><span class="ss">- </span>We don't have that in rust, but we do have"</span>
+<span id="cb29-457"><a href="#cb29-457"></a><span class="ss">    - </span><span class="in">`stdin()`</span> - the "standard input" that represents text provided at terminal.</span>
+<span id="cb29-458"><a href="#cb29-458"></a><span class="ss">    - </span><span class="in">`.read_line()`</span> - like Python <span class="in">`.read_line()`</span> in that it reads to the next newline character, but a bit different in type.</span>
+<span id="cb29-459"><a href="#cb29-459"></a><span class="ss">- </span>Essentially, <span class="in">`stdin()`</span> is a function that returns a <span class="in">`File`</span> the refers to the terminal.</span>
+<span id="cb29-460"><a href="#cb29-460"></a></span>
+<span id="cb29-461"><a href="#cb29-461"></a><span class="in">```rs</span></span>
+<span id="cb29-462"><a href="#cb29-462"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb29-463"><a href="#cb29-463"></a><span class="in">```</span></span>
+<span id="cb29-464"><a href="#cb29-464"></a></span>
+<span id="cb29-465"><a href="#cb29-465"></a><span class="ss">- </span>What happens if you don't unwrap?</span>
+<span id="cb29-466"><a href="#cb29-466"></a><span class="ss">- </span>What type is <span class="in">`guess`</span>? Array? <span class="in">`&amp;str`</span>? <span class="in">`String`</span>?</span>
+<span id="cb29-467"><a href="#cb29-467"></a><span class="in">```rs</span></span>
+<span id="cb29-468"><a href="#cb29-468"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb29-469"><a href="#cb29-469"></a><span class="in">```</span></span>
+<span id="cb29-470"><a href="#cb29-470"></a></span>
+<span id="cb29-471"><a href="#cb29-471"></a><span class="fu">## `.trim()`</span></span>
+<span id="cb29-472"><a href="#cb29-472"></a></span>
+<span id="cb29-473"><a href="#cb29-473"></a><span class="ss">- </span>Reading lines will return slightly longer strings that end with a newline character.</span>
+<span id="cb29-474"><a href="#cb29-474"></a><span class="ss">- </span>This can be removed with <span class="in">`.trim()`</span>.</span>
+<span id="cb29-475"><a href="#cb29-475"></a><span class="ss">- </span>Try reading in e.g. <span class="in">`opera`</span> or <span class="in">`tenet`</span> and seeing the trimmed vs. untrimmed versions.</span>
+<span id="cb29-476"><a href="#cb29-476"></a><span class="ss">    - </span>You may want to inspect their length, perhaps by converting to characters and using <span class="in">`.nth()`</span>.</span>
+<span id="cb29-477"><a href="#cb29-477"></a></span>
+<span id="cb29-478"><a href="#cb29-478"></a><span class="fu">## `.contains()`</span></span>
+<span id="cb29-479"><a href="#cb29-479"></a></span>
+<span id="cb29-480"><a href="#cb29-480"></a><span class="ss">- </span>You can check if a value is present in an array using <span class="in">`.contains()`</span>.</span>
+<span id="cb29-481"><a href="#cb29-481"></a><span class="ss">- </span>Check to see if the trimmed and untrimmed versions of <span class="in">`opera`</span> or <span class="in">`tenet`</span> are contained in the <span class="in">`WORDS`</span> array.</span>
+<span id="cb29-482"><a href="#cb29-482"></a><span class="ss">    - </span>You will need to fiddle with types a bit!</span>
+<span id="cb29-483"><a href="#cb29-483"></a><span class="ss">    - </span>Will you need to use <span class="in">`&amp;`</span>? <span class="in">`&amp;mut`</span>? <span class="in">`String::from()`</span>? Try each and see what happens - and consider why!</span>
+<span id="cb29-484"><a href="#cb29-484"></a></span>
+<span id="cb29-485"><a href="#cb29-485"></a><span class="fu">## `.clone()`</span></span>
+<span id="cb29-486"><a href="#cb29-486"></a></span>
+<span id="cb29-487"><a href="#cb29-487"></a><span class="ss">- </span>Sometimes you will need to read a word from <span class="in">`stdin`</span> and perhaps both compare it some other word and also decompose it into characters.</span>
+<span id="cb29-488"><a href="#cb29-488"></a><span class="ss">- </span>If you need multiple copies, you may want to use <span class="in">`.clone()`</span> or <span class="in">`cargo`</span> may recommend use of <span class="in">`.clone()`</span>.</span>
+<span id="cb29-489"><a href="#cb29-489"></a></span>
+<span id="cb29-490"><a href="#cb29-490"></a><span class="fu"># Closing Thoughts</span></span>
+<span id="cb29-491"><a href="#cb29-491"></a></span>
+<span id="cb29-492"><a href="#cb29-492"></a><span class="fu">## `range()`</span></span>
+<span id="cb29-493"><a href="#cb29-493"></a></span>
+<span id="cb29-494"><a href="#cb29-494"></a><span class="ss">- </span>You may benefit from using <span class="in">`for`</span> loops of fixed index.</span>
+<span id="cb29-495"><a href="#cb29-495"></a><span class="ss">- </span>Rust has a syntactical rather than functional range.</span>
+<span id="cb29-496"><a href="#cb29-496"></a><span class="ss">- </span>It follows the same start/stop rules as Python.</span>
+<span id="cb29-497"><a href="#cb29-497"></a></span>
+<span id="cb29-498"><a href="#cb29-498"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-499"><a href="#cb29-499"></a><span class="in">fn main() {</span></span>
+<span id="cb29-500"><a href="#cb29-500"></a><span class="in">    for i in 1..5 {</span></span>
+<span id="cb29-501"><a href="#cb29-501"></a><span class="in">        println!("{:?}", i);</span></span>
+<span id="cb29-502"><a href="#cb29-502"></a><span class="in">    }</span></span>
+<span id="cb29-503"><a href="#cb29-503"></a><span class="in">}</span></span>
+<span id="cb29-504"><a href="#cb29-504"></a><span class="in">```</span></span>
+<span id="cb29-505"><a href="#cb29-505"></a></span>
+<span id="cb29-506"><a href="#cb29-506"></a><span class="fu">## Vectors</span></span>
+<span id="cb29-507"><a href="#cb29-507"></a></span>
+<span id="cb29-508"><a href="#cb29-508"></a><span class="ss">- </span>A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</span>
+<span id="cb29-509"><a href="#cb29-509"></a><span class="ss">- </span>If you want to learn Vectors instead of arrays, simply consult this documentation.</span>
+<span id="cb29-510"><a href="#cb29-510"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Rust By Example: Vectors</span><span class="co">]</span></span>
+<span id="cb29-511"><a href="#cb29-511"></a><span class="ss">- </span>You will find them similar to Python <span class="in">`list`</span>.</span>
+<span id="cb29-512"><a href="#cb29-512"></a></span>
+<span id="cb29-513"><a href="#cb29-513"></a><span class="fu">## Today</span></span>
+<span id="cb29-514"><a href="#cb29-514"></a></span>
+<span id="cb29-515"><a href="#cb29-515"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
+<span id="cb29-516"><a href="#cb29-516"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
+<span id="cb29-517"><a href="#cb29-517"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb29-518"><a href="#cb29-518"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`stdin()`</span></span>
+<span id="cb29-519"><a href="#cb29-519"></a><span class="ss">- </span><span class="va">[x]</span> "Fixes"</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
