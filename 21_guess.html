@@ -194,8 +194,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#consts" id="toc-consts" class="nav-link" data-scroll-target="#consts">consts</a>
+  <ul class="collapse">
+  <li><a href="#compile-time" id="toc-compile-time" class="nav-link" data-scroll-target="#compile-time">Compile time</a></li>
+  <li><a href="#create-constants" id="toc-create-constants" class="nav-link" data-scroll-target="#create-constants">Create constants</a></li>
+  </ul></li>
+  <li><a href="#character-iteration" id="toc-character-iteration" class="nav-link" data-scroll-target="#character-iteration">Character iteration</a>
+  <ul class="collapse">
+  <li><a href="#strings-lack-indices" id="toc-strings-lack-indices" class="nav-link" data-scroll-target="#strings-lack-indices">Strings lack indices</a></li>
+  <li><a href="#rust-uses-.chars" id="toc-rust-uses-.chars" class="nav-link" data-scroll-target="#rust-uses-.chars">Rust uses <code>.chars()</code></a></li>
+  <li><a href="#iterators" id="toc-iterators" class="nav-link" data-scroll-target="#iterators">Iterators</a></li>
+  <li><a href="#rust-uses-.nth" id="toc-rust-uses-.nth" class="nav-link" data-scroll-target="#rust-uses-.nth">Rust uses <code>.nth()</code></a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a></li>
+  <li><a href="#options-for-options" id="toc-options-for-options" class="nav-link" data-scroll-target="#options-for-options">Options for options</a></li>
+  <li><a href="#pattern-match" id="toc-pattern-match" class="nav-link" data-scroll-target="#pattern-match">Pattern match</a></li>
+  <li><a href="#expect" id="toc-expect" class="nav-link" data-scroll-target="#expect">Expect</a></li>
+  <li><a href="#rust-uses-.unwrap" id="toc-rust-uses-.unwrap" class="nav-link" data-scroll-target="#rust-uses-.unwrap">Rust uses <code>.unwrap()</code></a></li>
+  <li><a href="#unwrap-vs.-expect" id="toc-unwrap-vs.-expect" class="nav-link" data-scroll-target="#unwrap-vs.-expect">Unwrap vs.&nbsp;Expect</a></li>
+  </ul></li>
+  <li><a href="#devrandom" id="toc-devrandom" class="nav-link" data-scroll-target="#devrandom">/dev/random</a>
+  <ul class="collapse">
+  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization">Randomization</a></li>
+  <li><a href="#quoth-wikipedia" id="toc-quoth-wikipedia" class="nav-link" data-scroll-target="#quoth-wikipedia">Quoth Wikipedia</a></li>
+  <li><a href="#peep-it" id="toc-peep-it" class="nav-link" data-scroll-target="#peep-it">Peep it</a></li>
+  </ul></li>
+  <li><a href="#file-io" id="toc-file-io" class="nav-link" data-scroll-target="#file-io">File I/O</a>
+  <ul class="collapse">
+  <li><a href="#open" id="toc-open" class="nav-link" data-scroll-target="#open"><code>open</code></a></li>
+  <li><a href="#use" id="toc-use" class="nav-link" data-scroll-target="#use"><code>use</code></a></li>
+  <li><a href="#read" id="toc-read" class="nav-link" data-scroll-target="#read"><code>read</code></a></li>
+  <li><a href="#mut" id="toc-mut" class="nav-link" data-scroll-target="#mut"><code>&amp;mut</code></a></li>
+  <li><a href="#buffers" id="toc-buffers" class="nav-link" data-scroll-target="#buffers">Buffers</a></li>
+  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays">Arrays</a></li>
+  <li><a href="#quoth-the-docs" id="toc-quoth-the-docs" class="nav-link" data-scroll-target="#quoth-the-docs">Quoth the Docs</a></li>
+  <li><a href="#create-an-array" id="toc-create-an-array" class="nav-link" data-scroll-target="#create-an-array">Create an array</a></li>
+  <li><a href="#on-magic-numbers" id="toc-on-magic-numbers" class="nav-link" data-scroll-target="#on-magic-numbers">On Magic Numbers</a></li>
+  <li><a href="#vs-64-bit" id="toc-vs-64-bit" class="nav-link" data-scroll-target="#vs-64-bit">32 vs 64 bit</a></li>
+  <li><a href="#usize" id="toc-usize" class="nav-link" data-scroll-target="#usize"><code>usize</code></a></li>
+  <li><a href="#check-in" id="toc-check-in" class="nav-link" data-scroll-target="#check-in">Check in</a></li>
+  <li><a href="#candidate-answers" id="toc-candidate-answers" class="nav-link" data-scroll-target="#candidate-answers">Candidate Answers</a></li>
+  <li><a href="#indices" id="toc-indices" class="nav-link" data-scroll-target="#indices">Indices</a></li>
+  <li><a href="#byte-array-to-usize" id="toc-byte-array-to-usize" class="nav-link" data-scroll-target="#byte-array-to-usize">Byte array to <code>usize</code></a></li>
+  <li><a href="#len" id="toc-len" class="nav-link" data-scroll-target="#len"><code>.len()</code></a></li>
+  <li><a href="#altogether" id="toc-altogether" class="nav-link" data-scroll-target="#altogether">Altogether</a></li>
+  <li><a href="#today-1" id="toc-today-1" class="nav-link" data-scroll-target="#today-1">Today</a></li>
+  </ul></li>
+  <li><a href="#stdin" id="toc-stdin" class="nav-link" data-scroll-target="#stdin">stdin</a>
+  <ul class="collapse">
+  <li><a href="#input" id="toc-input" class="nav-link" data-scroll-target="#input"><code>input()</code></a></li>
+  <li><a href="#trim" id="toc-trim" class="nav-link" data-scroll-target="#trim"><code>.trim()</code></a></li>
+  <li><a href="#contains" id="toc-contains" class="nav-link" data-scroll-target="#contains"><code>.contains()</code></a></li>
+  <li><a href="#clone" id="toc-clone" class="nav-link" data-scroll-target="#clone"><code>.clone()</code></a></li>
+  </ul></li>
+  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing Thoughts</a>
+  <ul class="collapse">
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><code>range()</code></a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
+  <li><a href="#today-2" id="toc-today-2" class="nav-link" data-scroll-target="#today-2">Today</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -226,10 +293,673 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li>Lab Day
+<ul>
+<li>Prepare for Wordle</li>
+</ul></li>
+</ul>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li>Wordle is ready after this class.
+<ul>
+<li>It is exactly hard enough to use all programming basics.</li>
+<li>Windows development is no longer supported.</li>
+</ul></li>
+<li>Due Friday, 19 Sept.&nbsp;at 1440 ET.</li>
+</ul>
+</section>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<ul>
+<li>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">Guessing Game</a></li>
+<li>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <a href="http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/">same name</a>.</li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>const</code></label></li>
+<li><label><input type="checkbox">Character iteration</label></li>
+<li><label><input type="checkbox"><code>/dev/urandom</code></label></li>
+<li><label><input type="checkbox"><code>stdin()</code></label></li>
+<li><label><input type="checkbox">“Fixes”</label></li>
+</ul>
+</section>
+<section id="consts" class="level1">
+<h1>consts</h1>
+<section id="compile-time" class="level2">
+<h2 class="anchored" data-anchor-id="compile-time">Compile time</h2>
+<ul>
+<li>In Wordle, you’ll likely have two kinds of values that won’t change.
+<ul>
+<li>The “ANSI Escape Codes” which allow you to print to the terminal in color, which are set when you install your operating system.
+<ul>
+<li>For these we may use a Rust <code>const</code></li>
+</ul></li>
+<li>The “answer” which will be set as soon as the program begins running, and never be altered thereafter.
+<ul>
+<li>For these, we use a <code>let</code>.</li>
+</ul></li>
+</ul></li>
+<li>I refer to the first as “compile time constants” and declare them outside of any function.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> RED <span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"</span><span class="sc">\u{001b}</span><span class="st">[31m"</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">const</span> WHT <span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"</span><span class="sc">\u{001b}</span><span class="st">[0m"</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="pp">println!</span>(<span class="st">"White text. {RED}Red text. {WHT}White text."</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>This section transparently added in response to a question in class. I do not use <code>const</code> in my own code rather than <code>let</code>, though perhaps I should.</em></p>
+</section>
+<section id="create-constants" class="level2">
+<h2 class="anchored" data-anchor-id="create-constants">Create constants</h2>
+<ul>
+<li>Create your own constants for yellow and green.
+<ul>
+<li>You may want to write a loop to try different colors, or consult documentation.</li>
+</ul></li>
+<li>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">fn</span> letter(a<span class="op">:</span><span class="dt">char</span><span class="op">,</span> c<span class="op">:</span><span class="dt">i32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="character-iteration" class="level1">
+<h1>Character iteration</h1>
+<section id="strings-lack-indices" class="level2">
+<h2 class="anchored" data-anchor-id="strings-lack-indices">Strings lack indices</h2>
+<ul>
+<li>In Python, we have some packing and unpacking to do to edit strings by character index.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> <span class="bu">list</span>(<span class="st">"hello, world"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">10</span>] <span class="op">=</span> <span class="st">'d'</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">11</span>] <span class="op">=</span> <span class="st">'l'</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">""</span>.join(s)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">'hello, wordl'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rust-uses-.chars" class="level2">
+<h2 class="anchored" data-anchor-id="rust-uses-.chars">Rust uses <code>.chars()</code></h2>
+<ul>
+<li>In the case of Wordle, all solutions are formulated as 5 characters, so we can assume the underlying character-ness of strings.
+<ul>
+<li>This is not permitted <em>generally</em> in Rust, but in our case we may.</li>
+</ul></li>
+<li>To unpack Rust strings into characters, you may use <code>.chars()</code></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars())<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>What do you see?
+<ul>
+<li>Can you access the <code>i</code>th element?</li>
+<li>Can you loop over object?</li>
+</ul></li>
+</ul>
+</section>
+<section id="iterators" class="level2">
+<h2 class="anchored" data-anchor-id="iterators">Iterators</h2>
+<ul>
+<li>What <code>.chars()</code> returns is called an iterator, it is much like a Python generator.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> gen <span class="op">=</span> (i <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="dv">1</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dv">1</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="dv">4</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="dv">27</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Basically, it is a collection type of unknown size where next elements may be queried.</li>
+</ul>
+</section>
+<section id="rust-uses-.nth" class="level2">
+<h2 class="anchored" data-anchor-id="rust-uses-.nth">Rust uses <code>.nth()</code></h2>
+<ul>
+<li>You can see the <code>n</code>th element of an iterator with <code>.nth()</code>, more or less:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">10</span>))<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>What do you see?
+<ul>
+<li>What happens if you ask for the 256th letter?</li>
+</ul></li>
+</ul>
+</section>
+<section id="options" class="level2">
+<h2 class="anchored" data-anchor-id="options">Options</h2>
+<ul>
+<li>Rust library functions almost always return an <code>Option</code>
+<ul>
+<li>This is just good practice, it beats returning e.g.&nbsp;Python <code>None</code> sometimes, or crashing.</li>
+</ul></li>
+<li>An option is simple:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="options-for-options" class="level2">
+<h2 class="anchored" data-anchor-id="options-for-options">Options for options</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Pattern match</label></li>
+<li><label><input type="checkbox">Expect</label></li>
+<li><label><input type="checkbox">Unwrap</label></li>
+</ul>
+</section>
+<section id="pattern-match" class="level2">
+<h2 class="anchored" data-anchor-id="pattern-match">Pattern match</h2>
+<ul>
+<li>The language designers intend options to be handled as follows:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="cf">match</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">11</span>) <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>        <span class="cn">Some</span>(c) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"The 11th character is {:?}"</span><span class="op">,</span> c)<span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="cn">None</span> <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"String `s` is fewer than 11 characters in length"</span>)<span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>I very rarely see code that looks like this, including in official Rust documentation.</li>
+<li>For example, the Polars documentation does not manage <code>Option</code> return types this way.</li>
+<li>This is, however, the only way to ensure code does not crash on e.g.&nbsp;arbitrary length input.</li>
+</ul>
+</section>
+<section id="expect" class="level2">
+<h2 class="anchored" data-anchor-id="expect">Expect</h2>
+<ul>
+<li>The incrementally less heavyweight option is with <code>.expect()</code>, a method of options that either:
+<ul>
+<li>Sucessful unpacks the option into a usable type, or</li>
+<li>Causes a “panic” - a comparatively graceful program crash.
+<ul>
+<li>This panic prints the message you furnished to expect.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">13</span>)<span class="op">.</span>expect(<span class="st">"The string literal is known to be of length 11"</span>))<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Try checking for existing and non-existant characters. What do you find?</li>
+</ul>
+</section>
+<section id="rust-uses-.unwrap" class="level2">
+<h2 class="anchored" data-anchor-id="rust-uses-.unwrap">Rust uses <code>.unwrap()</code></h2>
+<ul>
+<li>The incrementally less heavyweight option is with <code>.unwrap()</code>.</li>
+<li>Unwrap does not require a message but is otherwise just like <code>.expect()</code></li>
+<li>Unwrap is used by e.g.&nbsp;the Polars documentation.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">13</span>)<span class="op">.</span>unwrap())<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Try <code>.unwrap()</code> on both successful and failed <code>.nth()</code> calls.</li>
+</ul>
+</section>
+<section id="unwrap-vs.-expect" class="level2">
+<h2 class="anchored" data-anchor-id="unwrap-vs.-expect">Unwrap vs.&nbsp;Expect</h2>
+<ul>
+<li>I have never voluntarily used <code>.expect()</code> instead of <code>.unwrap()</code>, but…</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Help Yourself
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your code uses <code>.unwrap()</code> instead of <code>.expect()</code> you should carefully consider converting any <code>.unwrap()</code>s to <code>.expect()</code>s before asking someone else, who is less familiar with the assumptions you made when writing your code, for help.</p>
+<p>This applies to colleagues, QUAD TAs, and potential to the course instructor depending on how busy things are.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="devrandom" class="level1">
+<h1>/dev/random</h1>
+<section id="randomization" class="level2">
+<h2 class="anchored" data-anchor-id="randomization">Randomization</h2>
+<ul>
+<li>There are always many ways to generated results that are vaguely random.</li>
+<li>As a security researcher, I am required to instruct you about <code>/dev/random</code> rather than use the Rust Book recommendations.</li>
+<li>Separately we:
+<ul>
+<li>Learn to read from a file.</li>
+<li>Get to think about how random different things really are.</li>
+</ul></li>
+</ul>
+</section>
+<section id="quoth-wikipedia" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-wikipedia">Quoth Wikipedia</h2>
+<blockquote class="blockquote">
+<p><a href="https://en.wikipedia.org/wiki//dev/random">In Unix-like operating systems, /dev/random and /dev/urandom are special files that provide random numbers from a cryptographically secure pseudorandom number generator (CSPRNG). The CSPRNG is seeded with entropy (a value that provides randomness) from environmental noise, collected from device drivers and other sources. Users can obtain random numbers from the CSPRNG simply by reading the file.</a></p>
+</blockquote>
+</section>
+<section id="peep-it" class="level2">
+<h2 class="anchored" data-anchor-id="peep-it">Peep it</h2>
+<ul>
+<li>Verify you are on a system implementing <code>/dev/random</code> with the following, at command line:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span> <span class="at">-1</span> /dev/random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>For me, I see:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> head <span class="at">-1</span> /dev/random</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">6��c�W�Y</span><span class="kw">|</span><span class="ex">S�t��</span><span class="kw">|</span><span class="ex">��=���U�</span><span class="op">&gt;</span>�$��8�����E���<span class="pp">*</span>�<span class="kw">&amp;;</span><span class="ex">�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{</span> ��^<span class="st">"/%!7���vv@�w{p��q�y"</span>� AD�/Ahb��fb��Ed�</span>
+<span id="cb12-3"><a href="#cb12-3"></a>                                                                                                                      <span class="ex">­�k�:���F�</span><span class="op">&gt;</span>����09h��Ʊl#�<span class="op">&gt;</span>�J����:J����5<span class="kw">|</span><span class="ex">I�E���04�������NH��-�X����l�,k�</span><span class="op">&lt;</span>�������=.4^qav�}Y��</span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="ex">��</span><span class="er">(</span><span class="ex">�</span><span class="kw">)</span><span class="ex">1���B���c</span><span class="er">)</span><span class="ex">�</span><span class="kw">&amp;</span><span class="ex">*�#r��</span><span class="st">"H�(�:�e���֩A</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can test what <code>head</code> does on a file with which you are familiar, or consult <code>man head</code></li>
+</ul>
+</section>
+</section>
+<section id="file-io" class="level1">
+<h1>File I/O</h1>
+<section id="open" class="level2">
+<h2 class="anchored" data-anchor-id="open"><code>open</code></h2>
+<ul>
+<li>A la Python, Rust utilizes <code>open</code> to read files.</li>
+<li>Unlike Python, Rust has a great love for gobs of a text and <code>Option</code>s.</li>
+<li>The following opens <code>/dev/random</code> to be read.
+<ul>
+<li>Think about why we need to <code>.unwrap()</code> when opening a file.</li>
+<li>What is the Python equivalent?</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <code>File</code> object.</li>
+</ul>
+<blockquote class="blockquote">
+<p>An object providing access to an open file on the filesystem.</p>
+</blockquote>
+</section>
+<section id="use" class="level2">
+<h2 class="anchored" data-anchor-id="use"><code>use</code></h2>
+<ul>
+<li>A lot of people who aren’t me prefer to use <code>use</code> to have shorter names.</li>
+<li>I don’t personally understand this, but I do use <code>from pgl import *</code> in Python.</li>
+<li>Here’s an example from <a href="https://doc.rust-lang.org/std/fs/struct.File.html">Rust documentation</a> of a <code>use</code>:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=12dBCgAo-RA">The Used - The Bird And The Worm (Video)</a></li>
+</ul>
+</section>
+<section id="read" class="level2">
+<h2 class="anchored" data-anchor-id="read"><code>read</code></h2>
+<ul>
+<li>True to form, <code>read</code> has a variety of complexities introduced by:
+<ul>
+<li>Not assuming anything about the Rust <code>File</code> object</li>
+<li>Not assuming anything about how to read or save data.</li>
+<li>Not assuming anything about the underlying file within the computer’s file system.</li>
+</ul></li>
+<li>I use it as follows:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>An astute reader will notice a few idiosyncracies.</li>
+</ul>
+</section>
+<section id="mut" class="level2">
+<h2 class="anchored" data-anchor-id="mut"><code>&amp;mut</code></h2>
+<ul>
+<li>When we:
+<ul>
+<li>Have a variable in Rust</li>
+<li>For which the ownership model applies, such as a file of arbitrary size</li>
+<li>For which mutability is necessary, such as a <code>File</code> object from which <code>n</code> bytes have been read.</li>
+</ul></li>
+<li>We can use this variable:
+<ul>
+<li>Within some other function, while</li>
+<li>Retaining the ability to use it again in some future function.</li>
+</ul></li>
+<li>We do so by passing a “mutable reference”, generated by prefixing the variable name with <code>&amp;mut</code> and a space.</li>
+</ul>
+</section>
+<section id="buffers" class="level2">
+<h2 class="anchored" data-anchor-id="buffers">Buffers</h2>
+<ul>
+<li>It is common in lower level languages to read from a file into a “buffer”, a temporary storage space within the executing program.</li>
+<li>These are commonly implemented as multiple of bytes of some fixed size in that language’s array type.</li>
+<li>These bits are commonly initialized to zero.</li>
+<li>I am aware of no graceful way to do this in Rust, so I’ll tell you what I’m doing now and why.</li>
+</ul>
+</section>
+<section id="arrays" class="level2">
+<h2 class="anchored" data-anchor-id="arrays">Arrays</h2>
+<ul>
+<li>Arrays in Rust are fixed size and typed, not unlike NumPy array.</li>
+<li>They see little use versus the more common vector type, but I preferred arrays for Wordle.
+<ul>
+<li>And in fact expect to prefer arrays this term.</li>
+</ul></li>
+</ul>
+</section>
+<section id="quoth-the-docs" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-the-docs">Quoth the <a href="https://doc.rust-lang.org/std/primitive.array.html">Docs</a></h2>
+<ul>
+<li><p>A fixed-size array, denoted <code>[T; N]</code>, for the element type, <code>T</code>, and the non-negative compile-time constant size, <code>N</code>.</p></li>
+<li><p>There are two syntactic forms for creating an array:</p>
+<ul>
+<li><p>A list with each element, i.e., <code>[x, y, z]</code>.</p></li>
+<li><p>A repeat expression <code>[expr; N]</code> where <code>N</code> is how many times to repeat expr in the array. expr must either be:</p>
+<ul>
+<li>A value of a type implementing the Copy trait</li>
+<li>A const value</li>
+</ul></li>
+</ul></li>
+<li><p>I never read this, I found <a href="https://blog.orhun.dev/zero-deps-random-in-rust/">this page</a> through a search engine and ripped it.</p>
+<ul>
+<li>Search for <code>dev/urandom</code> on that page.</li>
+</ul></li>
+</ul>
+</section>
+<section id="create-an-array" class="level2">
+<h2 class="anchored" data-anchor-id="create-an-array">Create an array</h2>
+<ul>
+<li>The following is a mutable - so we can read file data <em>into</em> it - array of 8 bytes.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Breakdown.
+<ul>
+<li>The <code>0</code> in <code>0u8</code> is the initialization value.</li>
+<li>The <code>u8</code> is the type, unsigned 8 bit value.</li>
+<li>The post comma <code>8</code> is the number of 8 bit values to store.</li>
+</ul></li>
+<li>There’s only one problem here.
+<ul>
+<li>That second <code>8</code> is a magic number, which to me represents poor style.
+<ul>
+<li>Believe me, I wanted to just type 8, but we shouldn’t.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="on-magic-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="on-magic-numbers">On Magic Numbers</h2>
+<ul>
+<li>To select a random word, eventually you will probably have:
+<ul>
+<li>An array of 5 letter words.</li>
+<li>That array will have some length.</li>
+<li>That length will be whatever Rust uses to store the size of memory objects.</li>
+<li>Different computers have different ways of address memory…</li>
+<li>So we cannot make assumptions about the size of values which themselves store the size of memory.
+<ul>
+<li>I wish I was kidding! I’m not!</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="vs-64-bit" class="level2">
+<h2 class="anchored" data-anchor-id="vs-64-bit">32 vs 64 bit</h2>
+<ul>
+<li>For example, how many memory locations can be addressed by a 32 bit system?</li>
+<li>How many on a 64 bit system?</li>
+<li>Does your device potentially use 48 bit addresses?</li>
+<li>How could you tell?</li>
+<li>What if you run code on a 16 bit microcontroller?</li>
+<li>Enter <code>usize</code>
+<ul>
+<li>The unsigned value that is the right size to store a size.</li>
+</ul></li>
+</ul>
+</section>
+<section id="usize" class="level2">
+<h2 class="anchored" data-anchor-id="usize"><code>usize</code></h2>
+<ul>
+<li>We will use <code>usize</code> by name twice:
+<ul>
+<li>We need to read a random usize.</li>
+</ul></li>
+<li>We can determine how many <code>u8</code>s are required to make up a <code>usize</code> by checking how many bits are in a <code>usize</code>. and dividing by 8.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Only one problem - for some reason <code>usize</code> stores <em>its</em> size as a <code>u32</code>.</li>
+<li>So to get enough bits to fill I <code>usize</code>, I ended up doing… this?</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif" class="img-fluid"></p>
+<p><em>Presumably I’m doing this wrong.</em></p>
+</section>
+<section id="check-in" class="level2">
+<h2 class="anchored" data-anchor-id="check-in">Check in</h2>
+<ul>
+<li>I have this so far:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="candidate-answers" class="level2">
+<h2 class="anchored" data-anchor-id="candidate-answers">Candidate Answers</h2>
+<ul>
+<li>You can imagine testing with a smaller word list, like the words of the <a href="https://en.wikipedia.org/wiki/Sator_Square">Sator Square</a></li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Here <code>&amp;str</code> is used to refer to string literals, that is, <em>not</em> the <code>String</code> quasi-data structure of arbitrary size.
+<ul>
+<li>This was the type that e.g.&nbsp;<code>"hello world"</code> had the whole time under the hood.</li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb21" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="kw">let</span> i <span class="op">:</span> <span class="dt">u8</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> WORDS[i])<span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>This doesn’t work.</li>
+</ul>
+</section>
+<section id="indices" class="level2">
+<h2 class="anchored" data-anchor-id="indices">Indices</h2>
+<ul>
+<li>An array can be as large as memory.</li>
+<li>So it’s index can be as large as memory.</li>
+<li>The thing as large memory is <code>usize</code>.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">  |</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="byte-array-to-usize" class="level2">
+<h2 class="anchored" data-anchor-id="byte-array-to-usize">Byte array to <code>usize</code></h2>
+<ul>
+<li>Usize helpfully has “from bytes” methods.
+<ul>
+<li>There are 3 such methods for different <em>endianness</em>es, a future topic.</li>
+</ul></li>
+<li>I use little endianness because it doesn’t matter - <code>le</code></li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">let</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_le_bytes(buffer)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This can be used as an index, but it’s probably too large.</li>
+</ul>
+</section>
+<section id="len" class="level2">
+<h2 class="anchored" data-anchor-id="len"><code>.len()</code></h2>
+<ul>
+<li>Rust furnishes the <code>.len()</code> method of arrays to detect their type.</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="altogether" class="level2">
+<h2 class="anchored" data-anchor-id="altogether">Altogether</h2>
+<ul>
+<li>We use <code>String::from()</code> to get a <code>String</code> from a <code>&amp;str</code>, as the array contains fixed length strings and I use the <code>String</code> type for consistency with lecture recommendations.</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="today-1" class="level2">
+<h2 class="anchored" data-anchor-id="today-1">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked=""><code>const</code></label></li>
+<li><label><input type="checkbox" checked="">Character iteration</label></li>
+<li><label><input type="checkbox" checked=""><code>/dev/urandom</code></label></li>
+<li><label><input type="checkbox"><code>stdin()</code></label></li>
+<li><label><input type="checkbox">“Fixes”</label></li>
+</ul>
+</section>
+</section>
+<section id="stdin" class="level1">
+<h1>stdin</h1>
+<section id="input" class="level2">
+<h2 class="anchored" data-anchor-id="input"><code>input()</code></h2>
+<ul>
+<li>Python furnishes the straight-forward <code>input()</code> function.</li>
+<li>We don’t have that in rust, but we do have”
+<ul>
+<li><code>stdin()</code> - the “standard input” that represents text provided at terminal.</li>
+<li><code>.read_line()</code> - like Python <code>.read_line()</code> in that it reads to the next newline character, but a bit different in type.</li>
+</ul></li>
+<li>Essentially, <code>stdin()</code> is a function that returns a <code>File</code> the refers to the terminal.</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="#cb26-1"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What happens if you don’t unwrap?</li>
+<li>What type is <code>guess</code>? Array? <code>&amp;str</code>? <code>String</code>?</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="trim" class="level2">
+<h2 class="anchored" data-anchor-id="trim"><code>.trim()</code></h2>
+<ul>
+<li>Reading lines will return slightly longer strings that end with a newline character.</li>
+<li>This can be removed with <code>.trim()</code>.</li>
+<li>Try reading in e.g.&nbsp;<code>opera</code> or <code>tenet</code> and seeing the trimmed vs.&nbsp;untrimmed versions.
+<ul>
+<li>You may want to inspect their length, perhaps by converting to characters and using <code>.nth()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="contains" class="level2">
+<h2 class="anchored" data-anchor-id="contains"><code>.contains()</code></h2>
+<ul>
+<li>You can check if a value is present in an array using <code>.contains()</code>.</li>
+<li>Check to see if the trimmed and untrimmed versions of <code>opera</code> or <code>tenet</code> are contained in the <code>WORDS</code> array.
+<ul>
+<li>You will need to fiddle with types a bit!</li>
+<li>Will you need to use <code>&amp;</code>? <code>&amp;mut</code>? <code>String::from()</code>? Try each and see what happens - and consider why!</li>
+</ul></li>
+</ul>
+</section>
+<section id="clone" class="level2">
+<h2 class="anchored" data-anchor-id="clone"><code>.clone()</code></h2>
+<ul>
+<li>Sometimes you will need to read a word from <code>stdin</code> and perhaps both compare it some other word and also decompose it into characters.</li>
+<li>If you need multiple copies, you may want to use <code>.clone()</code> or <code>cargo</code> may recommend use of <code>.clone()</code>.</li>
+</ul>
+</section>
+</section>
+<section id="closing-thoughts" class="level1">
+<h1>Closing Thoughts</h1>
+<section id="range" class="level2">
+<h2 class="anchored" data-anchor-id="range"><code>range()</code></h2>
+<ul>
+<li>You may benefit from using <code>for</code> loops of fixed index.</li>
+<li>Rust has a syntactical rather than functional range.</li>
+<li>It follows the same start/stop rules as Python. <code>{.rs filename="src.main.rs") fn main() {     for i in 1..5 {         println!("{:?}", i);     } }</code></li>
+</ul>
+</section>
+<section id="vectors" class="level2">
+<h2 class="anchored" data-anchor-id="vectors">Vectors</h2>
+<ul>
+<li>A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</li>
+<li>If you want to learn Vectors instead of arrays, simply consult this documentation.</li>
+<li>[Rust By Example: Vectors]</li>
+<li>You will find them similar to Python <code>list</code>.</li>
+</ul>
+</section>
+<section id="today-2" class="level2">
+<h2 class="anchored" data-anchor-id="today-2">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked=""><code>const</code></label></li>
+<li><label><input type="checkbox" checked="">Character iteration</label></li>
+<li><label><input type="checkbox" checked=""><code>/dev/urandom</code></label></li>
+<li><label><input type="checkbox" checked=""><code>stdin()</code></label></li>
+<li><label><input type="checkbox" checked="">“Fixes”</label></li>
+</ul>
 
 
 <!-- -->
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -715,10 +1445,524 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">---</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co">---</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="ss">- </span>Lab Day</span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="ss">    - </span>Prepare for Wordle</span>
+<span id="cb28-10"><a href="#cb28-10"></a></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="fu">## Homework</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="ss">- </span>Wordle is ready after this class.</span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="ss">  - </span>It is exactly hard enough to use all programming basics.</span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="ss">  - </span>Windows development is no longer supported.</span>
+<span id="cb28-16"><a href="#cb28-16"></a><span class="ss">- </span>Due Friday, 19 Sept. at 1440 ET.</span>
+<span id="cb28-17"><a href="#cb28-17"></a></span>
+<span id="cb28-18"><a href="#cb28-18"></a><span class="fu">## Citation</span></span>
+<span id="cb28-19"><a href="#cb28-19"></a></span>
+<span id="cb28-20"><a href="#cb28-20"></a><span class="ss">- </span>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <span class="co">[</span><span class="ot">Guessing Game</span><span class="co">](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)</span></span>
+<span id="cb28-21"><a href="#cb28-21"></a><span class="ss">- </span>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <span class="co">[</span><span class="ot">same name</span><span class="co">](http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/)</span>.</span>
+<span id="cb28-22"><a href="#cb28-22"></a></span>
+<span id="cb28-23"><a href="#cb28-23"></a><span class="fu">## Today</span></span>
+<span id="cb28-24"><a href="#cb28-24"></a></span>
+<span id="cb28-25"><a href="#cb28-25"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`const`</span></span>
+<span id="cb28-26"><a href="#cb28-26"></a><span class="ss">- </span><span class="va">[ ]</span> Character iteration</span>
+<span id="cb28-27"><a href="#cb28-27"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb28-28"><a href="#cb28-28"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
+<span id="cb28-29"><a href="#cb28-29"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
+<span id="cb28-30"><a href="#cb28-30"></a></span>
+<span id="cb28-31"><a href="#cb28-31"></a></span>
+<span id="cb28-32"><a href="#cb28-32"></a><span class="fu"># consts</span></span>
+<span id="cb28-33"><a href="#cb28-33"></a></span>
+<span id="cb28-34"><a href="#cb28-34"></a><span class="fu">## Compile time</span></span>
+<span id="cb28-35"><a href="#cb28-35"></a></span>
+<span id="cb28-36"><a href="#cb28-36"></a><span class="ss">- </span>In Wordle, you'll likely have two kinds of values that won't change.</span>
+<span id="cb28-37"><a href="#cb28-37"></a><span class="ss">    - </span>The "ANSI Escape Codes" which allow you to print to the terminal in color, which are set when you install your operating system.</span>
+<span id="cb28-38"><a href="#cb28-38"></a><span class="ss">        - </span>For these we may use a Rust <span class="in">`const`</span></span>
+<span id="cb28-39"><a href="#cb28-39"></a><span class="ss">    - </span>The "answer" which will be set as soon as the program begins running, and never be altered thereafter.</span>
+<span id="cb28-40"><a href="#cb28-40"></a><span class="ss">        - </span>For these, we use a <span class="in">`let`</span>.</span>
+<span id="cb28-41"><a href="#cb28-41"></a><span class="ss">- </span>I refer to the first as "compile time constants" and declare them outside of any function.</span>
+<span id="cb28-42"><a href="#cb28-42"></a></span>
+<span id="cb28-43"><a href="#cb28-43"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-44"><a href="#cb28-44"></a><span class="in">const RED : &amp;str = "\u{001b}[31m";</span></span>
+<span id="cb28-45"><a href="#cb28-45"></a><span class="in">const WHT : &amp;str = "\u{001b}[0m";</span></span>
+<span id="cb28-46"><a href="#cb28-46"></a></span>
+<span id="cb28-47"><a href="#cb28-47"></a><span class="in">fn main() {</span></span>
+<span id="cb28-48"><a href="#cb28-48"></a><span class="in">    println!("White text. {RED}Red text. {WHT}White text.");</span></span>
+<span id="cb28-49"><a href="#cb28-49"></a><span class="in">}</span></span>
+<span id="cb28-50"><a href="#cb28-50"></a><span class="in">```</span></span>
+<span id="cb28-51"><a href="#cb28-51"></a></span>
+<span id="cb28-52"><a href="#cb28-52"></a>*This section transparently added in response to a question in class. I do not use `const` in my own code rather than `let`, though perhaps I should.*</span>
+<span id="cb28-53"><a href="#cb28-53"></a></span>
+<span id="cb28-54"><a href="#cb28-54"></a><span class="fu">## Create constants</span></span>
+<span id="cb28-55"><a href="#cb28-55"></a></span>
+<span id="cb28-56"><a href="#cb28-56"></a><span class="ss">- </span>Create your own constants for yellow and green.</span>
+<span id="cb28-57"><a href="#cb28-57"></a><span class="ss">    - </span>You may want to write a loop to try different colors, or consult documentation.</span>
+<span id="cb28-58"><a href="#cb28-58"></a><span class="ss">- </span>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</span>
+<span id="cb28-59"><a href="#cb28-59"></a><span class="in">```{.rs}</span></span>
+<span id="cb28-60"><a href="#cb28-60"></a><span class="in">fn letter(a:char, c:i32)</span></span>
+<span id="cb28-61"><a href="#cb28-61"></a><span class="in">```</span></span>
+<span id="cb28-62"><a href="#cb28-62"></a></span>
+<span id="cb28-63"><a href="#cb28-63"></a><span class="fu"># Character iteration</span></span>
+<span id="cb28-64"><a href="#cb28-64"></a></span>
+<span id="cb28-65"><a href="#cb28-65"></a><span class="fu">## Strings lack indices</span></span>
+<span id="cb28-66"><a href="#cb28-66"></a></span>
+<span id="cb28-67"><a href="#cb28-67"></a><span class="ss">- </span>In Python, we have some packing and unpacking to do to edit strings by character index.</span>
+<span id="cb28-68"><a href="#cb28-68"></a><span class="in">```{.py}</span></span>
+<span id="cb28-69"><a href="#cb28-69"></a><span class="in">&gt;&gt;&gt; s = list("hello, world")</span></span>
+<span id="cb28-70"><a href="#cb28-70"></a><span class="in">&gt;&gt;&gt; s[10] = 'd'</span></span>
+<span id="cb28-71"><a href="#cb28-71"></a><span class="in">&gt;&gt;&gt; s[11] = 'l'</span></span>
+<span id="cb28-72"><a href="#cb28-72"></a><span class="in">&gt;&gt;&gt; "".join(s)</span></span>
+<span id="cb28-73"><a href="#cb28-73"></a><span class="in">'hello, wordl'</span></span>
+<span id="cb28-74"><a href="#cb28-74"></a><span class="in">```</span></span>
+<span id="cb28-75"><a href="#cb28-75"></a></span>
+<span id="cb28-76"><a href="#cb28-76"></a><span class="fu">## Rust uses `.chars()`</span></span>
+<span id="cb28-77"><a href="#cb28-77"></a></span>
+<span id="cb28-78"><a href="#cb28-78"></a><span class="ss">- </span>In the case of Wordle, all solutions are formulated as 5 characters, so we can assume the underlying character-ness of strings.</span>
+<span id="cb28-79"><a href="#cb28-79"></a><span class="ss">    - </span>This is not permitted *generally* in Rust, but in our case we may.</span>
+<span id="cb28-80"><a href="#cb28-80"></a><span class="ss">- </span>To unpack Rust strings into characters, you may use <span class="in">`.chars()`</span></span>
+<span id="cb28-81"><a href="#cb28-81"></a></span>
+<span id="cb28-82"><a href="#cb28-82"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-83"><a href="#cb28-83"></a><span class="in">fn main() {</span></span>
+<span id="cb28-84"><a href="#cb28-84"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb28-85"><a href="#cb28-85"></a><span class="in">    println!("{:?}", s.chars());</span></span>
+<span id="cb28-86"><a href="#cb28-86"></a><span class="in">}</span></span>
+<span id="cb28-87"><a href="#cb28-87"></a><span class="in">```</span></span>
+<span id="cb28-88"><a href="#cb28-88"></a></span>
+<span id="cb28-89"><a href="#cb28-89"></a><span class="ss">- </span>What do you see?</span>
+<span id="cb28-90"><a href="#cb28-90"></a><span class="ss">    - </span>Can you access the <span class="in">`i`</span>th element?</span>
+<span id="cb28-91"><a href="#cb28-91"></a><span class="ss">    - </span>Can you loop over object?</span>
+<span id="cb28-92"><a href="#cb28-92"></a>    </span>
+<span id="cb28-93"><a href="#cb28-93"></a><span class="fu">## Iterators</span></span>
+<span id="cb28-94"><a href="#cb28-94"></a></span>
+<span id="cb28-95"><a href="#cb28-95"></a><span class="ss">- </span>What <span class="in">`.chars()`</span> returns is called an iterator, it is much like a Python generator.</span>
+<span id="cb28-96"><a href="#cb28-96"></a><span class="in">```{.py}</span></span>
+<span id="cb28-97"><a href="#cb28-97"></a><span class="in">&gt;&gt;&gt; gen = (i ** i for i in range(100))</span></span>
+<span id="cb28-98"><a href="#cb28-98"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb28-99"><a href="#cb28-99"></a><span class="in">1</span></span>
+<span id="cb28-100"><a href="#cb28-100"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb28-101"><a href="#cb28-101"></a><span class="in">1</span></span>
+<span id="cb28-102"><a href="#cb28-102"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb28-103"><a href="#cb28-103"></a><span class="in">4</span></span>
+<span id="cb28-104"><a href="#cb28-104"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb28-105"><a href="#cb28-105"></a><span class="in">27</span></span>
+<span id="cb28-106"><a href="#cb28-106"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
+<span id="cb28-107"><a href="#cb28-107"></a><span class="in">256</span></span>
+<span id="cb28-108"><a href="#cb28-108"></a><span class="in">```</span></span>
+<span id="cb28-109"><a href="#cb28-109"></a><span class="ss">- </span>Basically, it is a collection type of unknown size where next elements may be queried.</span>
+<span id="cb28-110"><a href="#cb28-110"></a></span>
+<span id="cb28-111"><a href="#cb28-111"></a><span class="fu">## Rust uses `.nth()`</span></span>
+<span id="cb28-112"><a href="#cb28-112"></a></span>
+<span id="cb28-113"><a href="#cb28-113"></a><span class="ss">- </span>You can see the <span class="in">`n`</span>th element of an iterator with <span class="in">`.nth()`</span>, more or less:</span>
+<span id="cb28-114"><a href="#cb28-114"></a></span>
+<span id="cb28-115"><a href="#cb28-115"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-116"><a href="#cb28-116"></a><span class="in">fn main() {</span></span>
+<span id="cb28-117"><a href="#cb28-117"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb28-118"><a href="#cb28-118"></a><span class="in">    println!("{:?}", s.chars().nth(10));</span></span>
+<span id="cb28-119"><a href="#cb28-119"></a><span class="in">}</span></span>
+<span id="cb28-120"><a href="#cb28-120"></a><span class="in">```</span></span>
+<span id="cb28-121"><a href="#cb28-121"></a><span class="ss">- </span>What do you see?</span>
+<span id="cb28-122"><a href="#cb28-122"></a><span class="ss">    - </span>What happens if you ask for the 256th letter?</span>
+<span id="cb28-123"><a href="#cb28-123"></a>    </span>
+<span id="cb28-124"><a href="#cb28-124"></a><span class="fu">## Options</span></span>
+<span id="cb28-125"><a href="#cb28-125"></a></span>
+<span id="cb28-126"><a href="#cb28-126"></a><span class="ss">- </span>Rust library functions almost always return an <span class="in">`Option`</span></span>
+<span id="cb28-127"><a href="#cb28-127"></a><span class="ss">    - </span>This is just good practice, it beats returning e.g. Python <span class="in">`None`</span> sometimes, or crashing.</span>
+<span id="cb28-128"><a href="#cb28-128"></a><span class="ss">- </span>An option is simple:</span>
+<span id="cb28-129"><a href="#cb28-129"></a><span class="in">```rs</span></span>
+<span id="cb28-130"><a href="#cb28-130"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb28-131"><a href="#cb28-131"></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb28-132"><a href="#cb28-132"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb28-133"><a href="#cb28-133"></a><span class="op">}</span></span>
+<span id="cb28-134"><a href="#cb28-134"></a><span class="in">```</span></span>
+<span id="cb28-135"><a href="#cb28-135"></a></span>
+<span id="cb28-136"><a href="#cb28-136"></a><span class="fu">## Options for options</span></span>
+<span id="cb28-137"><a href="#cb28-137"></a></span>
+<span id="cb28-138"><a href="#cb28-138"></a><span class="ss">- </span><span class="va">[ ]</span> Pattern match</span>
+<span id="cb28-139"><a href="#cb28-139"></a><span class="ss">- </span><span class="va">[ ]</span> Expect</span>
+<span id="cb28-140"><a href="#cb28-140"></a><span class="ss">- </span><span class="va">[ ]</span> Unwrap</span>
+<span id="cb28-141"><a href="#cb28-141"></a></span>
+<span id="cb28-142"><a href="#cb28-142"></a><span class="fu">## Pattern match</span></span>
+<span id="cb28-143"><a href="#cb28-143"></a></span>
+<span id="cb28-144"><a href="#cb28-144"></a><span class="ss">- </span>The language designers intend options to be handled as follows:</span>
+<span id="cb28-145"><a href="#cb28-145"></a></span>
+<span id="cb28-146"><a href="#cb28-146"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-147"><a href="#cb28-147"></a><span class="in">fn main() {</span></span>
+<span id="cb28-148"><a href="#cb28-148"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb28-149"><a href="#cb28-149"></a><span class="in">    match s.chars().nth(11) {</span></span>
+<span id="cb28-150"><a href="#cb28-150"></a><span class="in">        Some(c) =&gt; println!("The 11th character is {:?}", c),</span></span>
+<span id="cb28-151"><a href="#cb28-151"></a><span class="in">        None =&gt; println!("String `s` is fewer than 11 characters in length"),</span></span>
+<span id="cb28-152"><a href="#cb28-152"></a><span class="in">    }</span></span>
+<span id="cb28-153"><a href="#cb28-153"></a><span class="in">}</span></span>
+<span id="cb28-154"><a href="#cb28-154"></a><span class="in">```</span></span>
+<span id="cb28-155"><a href="#cb28-155"></a></span>
+<span id="cb28-156"><a href="#cb28-156"></a><span class="ss">- </span>I very rarely see code that looks like this, including in official Rust documentation.</span>
+<span id="cb28-157"><a href="#cb28-157"></a><span class="ss">- </span>For example, the Polars documentation does not manage <span class="in">`Option`</span> return types this way.</span>
+<span id="cb28-158"><a href="#cb28-158"></a><span class="ss">- </span>This is, however, the only way to ensure code does not crash on e.g. arbitrary length input.</span>
+<span id="cb28-159"><a href="#cb28-159"></a></span>
+<span id="cb28-160"><a href="#cb28-160"></a><span class="fu">## Expect</span></span>
+<span id="cb28-161"><a href="#cb28-161"></a></span>
+<span id="cb28-162"><a href="#cb28-162"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.expect()`</span>, a method of options that either:</span>
+<span id="cb28-163"><a href="#cb28-163"></a><span class="ss">    - </span>Sucessful unpacks the option into a usable type, or</span>
+<span id="cb28-164"><a href="#cb28-164"></a><span class="ss">    - </span>Causes a "panic" - a comparatively graceful program crash.</span>
+<span id="cb28-165"><a href="#cb28-165"></a><span class="ss">        - </span>This panic prints the message you furnished to expect.</span>
+<span id="cb28-166"><a href="#cb28-166"></a>        </span>
+<span id="cb28-167"><a href="#cb28-167"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-168"><a href="#cb28-168"></a><span class="in">fn main() {</span></span>
+<span id="cb28-169"><a href="#cb28-169"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb28-170"><a href="#cb28-170"></a><span class="in">    println!("{:?}", s.chars().nth(13).expect("The string literal is known to be of length 11"));</span></span>
+<span id="cb28-171"><a href="#cb28-171"></a><span class="in">}</span></span>
+<span id="cb28-172"><a href="#cb28-172"></a><span class="in">```</span></span>
+<span id="cb28-173"><a href="#cb28-173"></a></span>
+<span id="cb28-174"><a href="#cb28-174"></a><span class="ss">- </span>Try checking for existing and non-existant characters. What do you find?</span>
+<span id="cb28-175"><a href="#cb28-175"></a></span>
+<span id="cb28-176"><a href="#cb28-176"></a><span class="fu">## Rust uses `.unwrap()`</span></span>
+<span id="cb28-177"><a href="#cb28-177"></a></span>
+<span id="cb28-178"><a href="#cb28-178"></a><span class="ss">- </span>The incrementally less heavyweight option is with <span class="in">`.unwrap()`</span>.</span>
+<span id="cb28-179"><a href="#cb28-179"></a><span class="ss">- </span>Unwrap does not require a message but is otherwise just like <span class="in">`.expect()`</span></span>
+<span id="cb28-180"><a href="#cb28-180"></a><span class="ss">- </span>Unwrap is used by e.g. the Polars documentation.</span>
+<span id="cb28-181"><a href="#cb28-181"></a></span>
+<span id="cb28-182"><a href="#cb28-182"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-183"><a href="#cb28-183"></a><span class="in">fn main() {</span></span>
+<span id="cb28-184"><a href="#cb28-184"></a><span class="in">    let s = "Hello, world";</span></span>
+<span id="cb28-185"><a href="#cb28-185"></a><span class="in">    println!("{:?}", s.chars().nth(13).unwrap());</span></span>
+<span id="cb28-186"><a href="#cb28-186"></a><span class="in">}</span></span>
+<span id="cb28-187"><a href="#cb28-187"></a><span class="in">```</span></span>
+<span id="cb28-188"><a href="#cb28-188"></a></span>
+<span id="cb28-189"><a href="#cb28-189"></a><span class="ss">- </span>Try <span class="in">`.unwrap()`</span> on both successful and failed <span class="in">`.nth()`</span> calls.</span>
+<span id="cb28-190"><a href="#cb28-190"></a></span>
+<span id="cb28-191"><a href="#cb28-191"></a><span class="fu">## Unwrap vs. Expect</span></span>
+<span id="cb28-192"><a href="#cb28-192"></a></span>
+<span id="cb28-193"><a href="#cb28-193"></a><span class="ss">- </span>I have never voluntarily used <span class="in">`.expect()`</span> instead of <span class="in">`.unwrap()`</span>, but...</span>
+<span id="cb28-194"><a href="#cb28-194"></a></span>
+<span id="cb28-195"><a href="#cb28-195"></a>::: {.callout-note appearance="simple"}</span>
+<span id="cb28-196"><a href="#cb28-196"></a></span>
+<span id="cb28-197"><a href="#cb28-197"></a><span class="fu">## Help Yourself</span></span>
+<span id="cb28-198"><a href="#cb28-198"></a></span>
+<span id="cb28-199"><a href="#cb28-199"></a></span>
+<span id="cb28-200"><a href="#cb28-200"></a>If your code uses <span class="in">`.unwrap()`</span> instead of <span class="in">`.expect()`</span> you should carefully consider converting any <span class="in">`.unwrap()`</span>s to <span class="in">`.expect()`</span>s before asking someone else, who is less familiar with the assumptions you made when writing your code, for help.</span>
+<span id="cb28-201"><a href="#cb28-201"></a></span>
+<span id="cb28-202"><a href="#cb28-202"></a>This applies to colleagues, QUAD TAs, and potential to the course instructor depending on how busy things are.</span>
+<span id="cb28-203"><a href="#cb28-203"></a></span>
+<span id="cb28-204"><a href="#cb28-204"></a>:::</span>
+<span id="cb28-205"><a href="#cb28-205"></a></span>
+<span id="cb28-206"><a href="#cb28-206"></a><span class="fu"># /dev/random</span></span>
+<span id="cb28-207"><a href="#cb28-207"></a></span>
+<span id="cb28-208"><a href="#cb28-208"></a><span class="fu">## Randomization</span></span>
+<span id="cb28-209"><a href="#cb28-209"></a></span>
+<span id="cb28-210"><a href="#cb28-210"></a><span class="ss">- </span>There are always many ways to generated results that are vaguely random.</span>
+<span id="cb28-211"><a href="#cb28-211"></a><span class="ss">- </span>As a security researcher, I am required to instruct you about <span class="in">`/dev/random`</span> rather than use the Rust Book recommendations.</span>
+<span id="cb28-212"><a href="#cb28-212"></a><span class="ss">- </span>Separately we:</span>
+<span id="cb28-213"><a href="#cb28-213"></a><span class="ss">    - </span>Learn to read from a file.</span>
+<span id="cb28-214"><a href="#cb28-214"></a><span class="ss">    - </span>Get to think about how random different things really are.</span>
+<span id="cb28-215"><a href="#cb28-215"></a></span>
+<span id="cb28-216"><a href="#cb28-216"></a><span class="fu">## Quoth Wikipedia</span></span>
+<span id="cb28-217"><a href="#cb28-217"></a></span>
+<span id="cb28-218"><a href="#cb28-218"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In Unix-like operating systems, /dev/random and /dev/urandom are special files that provide random numbers from a cryptographically secure pseudorandom number generator (CSPRNG). The CSPRNG is seeded with entropy (a value that provides randomness) from environmental noise, collected from device drivers and other sources. Users can obtain random numbers from the CSPRNG simply by reading the file.</span><span class="co">](https://en.wikipedia.org/wiki//dev/random)</span></span>
+<span id="cb28-219"><a href="#cb28-219"></a></span>
+<span id="cb28-220"><a href="#cb28-220"></a><span class="fu">## Peep it</span></span>
+<span id="cb28-221"><a href="#cb28-221"></a></span>
+<span id="cb28-222"><a href="#cb28-222"></a><span class="ss">- </span>Verify you are on a system implementing <span class="in">`/dev/random`</span> with the following, at command line:</span>
+<span id="cb28-223"><a href="#cb28-223"></a><span class="in">```{.bash}</span></span>
+<span id="cb28-224"><a href="#cb28-224"></a><span class="in">head -1 /dev/random</span></span>
+<span id="cb28-225"><a href="#cb28-225"></a><span class="in">```</span></span>
+<span id="cb28-226"><a href="#cb28-226"></a><span class="ss">- </span>For me, I see:</span>
+<span id="cb28-227"><a href="#cb28-227"></a><span class="in">```{.sh}</span></span>
+<span id="cb28-228"><a href="#cb28-228"></a><span class="in">$ head -1 /dev/random</span></span>
+<span id="cb28-229"><a href="#cb28-229"></a><span class="in">6��c�W�Y|S�t��|��=���U�&gt;�$��8�����E���*�&amp;;�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{ ��^"/%!7���vv@�w{p��q�y"� AD�/Ahb��fb��Ed�</span></span>
+<span id="cb28-230"><a href="#cb28-230"></a><span class="in">                                                                                                                      ­�k�:���F�&gt;����09h��Ʊl#�&gt;�J����:J����5|I�E���04�������NH��-�X����l�,k�&lt;�������=.4^qav�}Y��</span></span>
+<span id="cb28-231"><a href="#cb28-231"></a><span class="in">        ��(�)1���B���c)�&amp;*�#r��"H�(�:�e���֩A</span></span>
+<span id="cb28-232"><a href="#cb28-232"></a><span class="in">$</span></span>
+<span id="cb28-233"><a href="#cb28-233"></a><span class="in">```</span></span>
+<span id="cb28-234"><a href="#cb28-234"></a><span class="ss">- </span>You can test what <span class="in">`head`</span> does on a file with which you are familiar, or consult <span class="in">`man head`</span></span>
+<span id="cb28-235"><a href="#cb28-235"></a></span>
+<span id="cb28-236"><a href="#cb28-236"></a><span class="fu"># File I/O</span></span>
+<span id="cb28-237"><a href="#cb28-237"></a></span>
+<span id="cb28-238"><a href="#cb28-238"></a><span class="fu">## `open`</span></span>
+<span id="cb28-239"><a href="#cb28-239"></a></span>
+<span id="cb28-240"><a href="#cb28-240"></a><span class="ss">- </span>A la Python, Rust utilizes <span class="in">`open`</span> to read files.</span>
+<span id="cb28-241"><a href="#cb28-241"></a><span class="ss">- </span>Unlike Python, Rust has a great love for gobs of a text and <span class="in">`Option`</span>s.</span>
+<span id="cb28-242"><a href="#cb28-242"></a><span class="ss">- </span>The following opens <span class="in">`/dev/random`</span> to be read.</span>
+<span id="cb28-243"><a href="#cb28-243"></a><span class="ss">    - </span>Think about why we need to <span class="in">`.unwrap()`</span> when opening a file.</span>
+<span id="cb28-244"><a href="#cb28-244"></a><span class="ss">    - </span>What is the Python equivalent?</span>
+<span id="cb28-245"><a href="#cb28-245"></a><span class="in">```rs</span></span>
+<span id="cb28-246"><a href="#cb28-246"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-247"><a href="#cb28-247"></a><span class="in">```</span></span>
+<span id="cb28-248"><a href="#cb28-248"></a><span class="ss">- </span>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <span class="in">`File`</span> object.</span>
+<span id="cb28-249"><a href="#cb28-249"></a></span>
+<span id="cb28-250"><a href="#cb28-250"></a><span class="at">&gt; An object providing access to an open file on the filesystem.</span></span>
+<span id="cb28-251"><a href="#cb28-251"></a></span>
+<span id="cb28-252"><a href="#cb28-252"></a><span class="fu">## `use`</span></span>
+<span id="cb28-253"><a href="#cb28-253"></a></span>
+<span id="cb28-254"><a href="#cb28-254"></a><span class="ss">- </span>A lot of people who aren't me prefer to use <span class="in">`use`</span> to have shorter names.</span>
+<span id="cb28-255"><a href="#cb28-255"></a><span class="ss">- </span>I don't personally understand this, but I do use <span class="in">`from pgl import *`</span> in Python.</span>
+<span id="cb28-256"><a href="#cb28-256"></a><span class="ss">- </span>Here's an example from <span class="co">[</span><span class="ot">Rust documentation</span><span class="co">](https://doc.rust-lang.org/std/fs/struct.File.html)</span> of a <span class="in">`use`</span>:</span>
+<span id="cb28-257"><a href="#cb28-257"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-258"><a href="#cb28-258"></a><span class="in">use std::fs::File;</span></span>
+<span id="cb28-259"><a href="#cb28-259"></a></span>
+<span id="cb28-260"><a href="#cb28-260"></a><span class="in">fn main() {</span></span>
+<span id="cb28-261"><a href="#cb28-261"></a><span class="in">    let mut devrnd = File::open("/dev/random").unwrap();</span></span>
+<span id="cb28-262"><a href="#cb28-262"></a><span class="in">}</span></span>
+<span id="cb28-263"><a href="#cb28-263"></a><span class="in">```</span></span>
+<span id="cb28-264"><a href="#cb28-264"></a></span>
+<span id="cb28-265"><a href="#cb28-265"></a><span class="ss">- </span><span class="co">[</span><span class="ot">The Used - The Bird And The Worm (Video)</span><span class="co">](https://www.youtube.com/watch?v=12dBCgAo-RA)</span></span>
+<span id="cb28-266"><a href="#cb28-266"></a></span>
+<span id="cb28-267"><a href="#cb28-267"></a><span class="fu">## `read`</span></span>
+<span id="cb28-268"><a href="#cb28-268"></a></span>
+<span id="cb28-269"><a href="#cb28-269"></a><span class="ss">- </span>True to form, <span class="in">`read`</span> has a variety of complexities introduced by:</span>
+<span id="cb28-270"><a href="#cb28-270"></a><span class="ss">    - </span>Not assuming anything about the Rust <span class="in">`File`</span> object</span>
+<span id="cb28-271"><a href="#cb28-271"></a><span class="ss">    - </span>Not assuming anything about how to read or save data.</span>
+<span id="cb28-272"><a href="#cb28-272"></a><span class="ss">    - </span>Not assuming anything about the underlying file within the computer's file system.</span>
+<span id="cb28-273"><a href="#cb28-273"></a><span class="ss">- </span>I use it as follows:</span>
+<span id="cb28-274"><a href="#cb28-274"></a><span class="in">```rs</span></span>
+<span id="cb28-275"><a href="#cb28-275"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-276"><a href="#cb28-276"></a><span class="in">```</span></span>
+<span id="cb28-277"><a href="#cb28-277"></a><span class="ss">- </span>An astute reader will notice a few idiosyncracies.</span>
+<span id="cb28-278"><a href="#cb28-278"></a></span>
+<span id="cb28-279"><a href="#cb28-279"></a><span class="fu">## `&amp;mut`</span></span>
+<span id="cb28-280"><a href="#cb28-280"></a></span>
+<span id="cb28-281"><a href="#cb28-281"></a><span class="ss">- </span>When we:</span>
+<span id="cb28-282"><a href="#cb28-282"></a><span class="ss">    - </span>Have a variable in Rust</span>
+<span id="cb28-283"><a href="#cb28-283"></a><span class="ss">    - </span>For which the ownership model applies, such as a file of arbitrary size</span>
+<span id="cb28-284"><a href="#cb28-284"></a><span class="ss">    - </span>For which mutability is necessary, such as a <span class="in">`File`</span> object from which <span class="in">`n`</span> bytes have been read.</span>
+<span id="cb28-285"><a href="#cb28-285"></a><span class="ss">- </span>We can use this variable:</span>
+<span id="cb28-286"><a href="#cb28-286"></a><span class="ss">    - </span>Within some other function, while</span>
+<span id="cb28-287"><a href="#cb28-287"></a><span class="ss">    - </span>Retaining the ability to use it again in some future function.</span>
+<span id="cb28-288"><a href="#cb28-288"></a><span class="ss">- </span>We do so by passing a "mutable reference", generated by prefixing the variable name with <span class="in">`&amp;mut`</span> and a space.</span>
+<span id="cb28-289"><a href="#cb28-289"></a></span>
+<span id="cb28-290"><a href="#cb28-290"></a><span class="fu">## Buffers</span></span>
+<span id="cb28-291"><a href="#cb28-291"></a></span>
+<span id="cb28-292"><a href="#cb28-292"></a><span class="ss">- </span>It is common in lower level languages to read from a file into a "buffer", a temporary storage space within the executing program.</span>
+<span id="cb28-293"><a href="#cb28-293"></a><span class="ss">- </span>These are commonly implemented as multiple of bytes of some fixed size in that language's array type.</span>
+<span id="cb28-294"><a href="#cb28-294"></a><span class="ss">- </span>These bits are commonly initialized to zero.</span>
+<span id="cb28-295"><a href="#cb28-295"></a><span class="ss">- </span>I am aware of no graceful way to do this in Rust, so I'll tell you what I'm doing now and why.</span>
+<span id="cb28-296"><a href="#cb28-296"></a></span>
+<span id="cb28-297"><a href="#cb28-297"></a><span class="fu">## Arrays</span></span>
+<span id="cb28-298"><a href="#cb28-298"></a></span>
+<span id="cb28-299"><a href="#cb28-299"></a><span class="ss">- </span>Arrays in Rust are fixed size and typed, not unlike NumPy array.</span>
+<span id="cb28-300"><a href="#cb28-300"></a><span class="ss">- </span>They see little use versus the more common vector type, but I preferred arrays for Wordle.</span>
+<span id="cb28-301"><a href="#cb28-301"></a><span class="ss">    - </span>And in fact expect to prefer arrays this term.</span>
+<span id="cb28-302"><a href="#cb28-302"></a></span>
+<span id="cb28-303"><a href="#cb28-303"></a><span class="fu">## Quoth the [Docs](https://doc.rust-lang.org/std/primitive.array.html)</span></span>
+<span id="cb28-304"><a href="#cb28-304"></a></span>
+<span id="cb28-305"><a href="#cb28-305"></a><span class="ss">- </span>A fixed-size array, denoted <span class="in">`[T; N]`</span>, for the element type, <span class="in">`T`</span>, and the non-negative compile-time constant size, <span class="in">`N`</span>.</span>
+<span id="cb28-306"><a href="#cb28-306"></a><span class="ss">- </span>There are two syntactic forms for creating an array:</span>
+<span id="cb28-307"><a href="#cb28-307"></a></span>
+<span id="cb28-308"><a href="#cb28-308"></a><span class="ss">    - </span>A list with each element, i.e., <span class="in">`[x, y, z]`</span>.</span>
+<span id="cb28-309"><a href="#cb28-309"></a></span>
+<span id="cb28-310"><a href="#cb28-310"></a><span class="ss">    - </span>A repeat expression <span class="in">`[expr; N]`</span> where <span class="in">`N`</span> is how many times to repeat expr in the array. expr must either be:</span>
+<span id="cb28-311"><a href="#cb28-311"></a><span class="ss">        - </span>A value of a type implementing the Copy trait</span>
+<span id="cb28-312"><a href="#cb28-312"></a><span class="ss">        - </span>A const value</span>
+<span id="cb28-313"><a href="#cb28-313"></a><span class="ss">- </span>I never read this, I found <span class="co">[</span><span class="ot">this page</span><span class="co">](https://blog.orhun.dev/zero-deps-random-in-rust/)</span> through a search engine and ripped it.</span>
+<span id="cb28-314"><a href="#cb28-314"></a><span class="ss">    - </span>Search for <span class="in">`dev/urandom`</span> on that page.</span>
+<span id="cb28-315"><a href="#cb28-315"></a>    </span>
+<span id="cb28-316"><a href="#cb28-316"></a><span class="fu">## Create an array</span></span>
+<span id="cb28-317"><a href="#cb28-317"></a></span>
+<span id="cb28-318"><a href="#cb28-318"></a><span class="ss">- </span>The following is a mutable - so we can read file data *into* it - array of 8 bytes.</span>
+<span id="cb28-319"><a href="#cb28-319"></a><span class="in">```rs</span></span>
+<span id="cb28-320"><a href="#cb28-320"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span>
+<span id="cb28-321"><a href="#cb28-321"></a><span class="in">```</span></span>
+<span id="cb28-322"><a href="#cb28-322"></a><span class="ss">- </span>Breakdown.</span>
+<span id="cb28-323"><a href="#cb28-323"></a><span class="ss">    - </span>The <span class="in">`0`</span> in <span class="in">`0u8`</span> is the initialization value.</span>
+<span id="cb28-324"><a href="#cb28-324"></a><span class="ss">    - </span>The <span class="in">`u8`</span> is the type, unsigned 8 bit value.</span>
+<span id="cb28-325"><a href="#cb28-325"></a><span class="ss">    - </span>The post comma <span class="in">`8`</span> is the number of 8 bit values to store.</span>
+<span id="cb28-326"><a href="#cb28-326"></a><span class="ss">- </span>There's only one problem here.</span>
+<span id="cb28-327"><a href="#cb28-327"></a><span class="ss">    - </span>That second <span class="in">`8`</span> is a magic number, which to me represents poor style.</span>
+<span id="cb28-328"><a href="#cb28-328"></a><span class="ss">        - </span>Believe me, I wanted to just type 8, but we shouldn't.</span>
+<span id="cb28-329"><a href="#cb28-329"></a>        </span>
+<span id="cb28-330"><a href="#cb28-330"></a><span class="fu">## On Magic Numbers</span></span>
+<span id="cb28-331"><a href="#cb28-331"></a></span>
+<span id="cb28-332"><a href="#cb28-332"></a><span class="ss">- </span>To select a random word, eventually you will probably have:</span>
+<span id="cb28-333"><a href="#cb28-333"></a><span class="ss">    - </span>An array of 5 letter words.</span>
+<span id="cb28-334"><a href="#cb28-334"></a><span class="ss">    - </span>That array will have some length.</span>
+<span id="cb28-335"><a href="#cb28-335"></a><span class="ss">    - </span>That length will be whatever Rust uses to store the size of memory objects.</span>
+<span id="cb28-336"><a href="#cb28-336"></a><span class="ss">    - </span>Different computers have different ways of address memory...</span>
+<span id="cb28-337"><a href="#cb28-337"></a><span class="ss">    - </span>So we cannot make assumptions about the size of values which themselves store the size of memory.</span>
+<span id="cb28-338"><a href="#cb28-338"></a><span class="ss">        - </span>I wish I was kidding! I'm not!</span>
+<span id="cb28-339"><a href="#cb28-339"></a></span>
+<span id="cb28-340"><a href="#cb28-340"></a><span class="fu">## 32 vs 64 bit</span></span>
+<span id="cb28-341"><a href="#cb28-341"></a></span>
+<span id="cb28-342"><a href="#cb28-342"></a><span class="ss">- </span>For example, how many memory locations can be addressed by a 32 bit system?</span>
+<span id="cb28-343"><a href="#cb28-343"></a><span class="ss">- </span>How many on a 64 bit system?</span>
+<span id="cb28-344"><a href="#cb28-344"></a><span class="ss">- </span>Does your device potentially use 48 bit addresses?</span>
+<span id="cb28-345"><a href="#cb28-345"></a><span class="ss">- </span>How could you tell?</span>
+<span id="cb28-346"><a href="#cb28-346"></a><span class="ss">- </span>What if you run code on a 16 bit microcontroller?</span>
+<span id="cb28-347"><a href="#cb28-347"></a><span class="ss">- </span>Enter <span class="in">`usize`</span></span>
+<span id="cb28-348"><a href="#cb28-348"></a><span class="ss">    - </span>The unsigned value that is the right size to store a size.</span>
+<span id="cb28-349"><a href="#cb28-349"></a>    </span>
+<span id="cb28-350"><a href="#cb28-350"></a><span class="fu">## `usize`</span></span>
+<span id="cb28-351"><a href="#cb28-351"></a></span>
+<span id="cb28-352"><a href="#cb28-352"></a><span class="ss">- </span>We will use <span class="in">`usize`</span> by name twice:</span>
+<span id="cb28-353"><a href="#cb28-353"></a><span class="ss">    - </span>We need to read a random usize.</span>
+<span id="cb28-354"><a href="#cb28-354"></a><span class="ss">- </span>We can determine how many <span class="in">`u8`</span>s are required to make up a <span class="in">`usize`</span> by checking how many bits are in a <span class="in">`usize`</span>. and dividing by 8.</span>
+<span id="cb28-355"><a href="#cb28-355"></a><span class="in">```rs</span></span>
+<span id="cb28-356"><a href="#cb28-356"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span>
+<span id="cb28-357"><a href="#cb28-357"></a><span class="in">```</span></span>
+<span id="cb28-358"><a href="#cb28-358"></a><span class="ss">- </span>Only one problem - for some reason <span class="in">`usize`</span> stores *its* size as a <span class="in">`u32`</span>.</span>
+<span id="cb28-359"><a href="#cb28-359"></a><span class="ss">- </span>So to get enough bits to fill I <span class="in">`usize`</span>, I ended up doing... this?</span>
+<span id="cb28-360"><a href="#cb28-360"></a><span class="in">```rs</span></span>
+<span id="cb28-361"><a href="#cb28-361"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb28-362"><a href="#cb28-362"></a><span class="in">```</span></span>
+<span id="cb28-363"><a href="#cb28-363"></a></span>
+<span id="cb28-364"><a href="#cb28-364"></a><span class="al">![](https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif)</span></span>
+<span id="cb28-365"><a href="#cb28-365"></a></span>
+<span id="cb28-366"><a href="#cb28-366"></a>*Presumably I'm doing this wrong.*</span>
+<span id="cb28-367"><a href="#cb28-367"></a></span>
+<span id="cb28-368"><a href="#cb28-368"></a><span class="fu">## Check in</span></span>
+<span id="cb28-369"><a href="#cb28-369"></a></span>
+<span id="cb28-370"><a href="#cb28-370"></a><span class="ss">- </span>I have this so far:</span>
+<span id="cb28-371"><a href="#cb28-371"></a></span>
+<span id="cb28-372"><a href="#cb28-372"></a><span class="in">```rs</span></span>
+<span id="cb28-373"><a href="#cb28-373"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-374"><a href="#cb28-374"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb28-375"><a href="#cb28-375"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-376"><a href="#cb28-376"></a><span class="in">```</span></span>
+<span id="cb28-377"><a href="#cb28-377"></a></span>
+<span id="cb28-378"><a href="#cb28-378"></a><span class="fu">## Candidate Answers</span></span>
+<span id="cb28-379"><a href="#cb28-379"></a></span>
+<span id="cb28-380"><a href="#cb28-380"></a><span class="ss">- </span>You can imagine testing with a smaller word list, like the words of the <span class="co">[</span><span class="ot">Sator Square</span><span class="co">](https://en.wikipedia.org/wiki/Sator_Square)</span></span>
+<span id="cb28-381"><a href="#cb28-381"></a></span>
+<span id="cb28-382"><a href="#cb28-382"></a><span class="in">```rs</span></span>
+<span id="cb28-383"><a href="#cb28-383"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
+<span id="cb28-384"><a href="#cb28-384"></a><span class="in">```</span></span>
+<span id="cb28-385"><a href="#cb28-385"></a></span>
+<span id="cb28-386"><a href="#cb28-386"></a><span class="ss">- </span>Here <span class="in">`&amp;str`</span> is used to refer to string literals, that is, *not* the <span class="in">`String`</span> quasi-data structure of arbitrary size.</span>
+<span id="cb28-387"><a href="#cb28-387"></a><span class="ss">    - </span>This was the type that e.g. <span class="in">`"hello world"`</span> had the whole time under the hood.</span>
+<span id="cb28-388"><a href="#cb28-388"></a></span>
+<span id="cb28-389"><a href="#cb28-389"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb28-390"><a href="#cb28-390"></a><span class="in">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
+<span id="cb28-391"><a href="#cb28-391"></a></span>
+<span id="cb28-392"><a href="#cb28-392"></a><span class="in">fn main() {</span></span>
+<span id="cb28-393"><a href="#cb28-393"></a><span class="in">    let i : u8 = 2;</span></span>
+<span id="cb28-394"><a href="#cb28-394"></a><span class="in">    println!("{:?}", WORDS[i]);</span></span>
+<span id="cb28-395"><a href="#cb28-395"></a><span class="in">}</span></span>
+<span id="cb28-396"><a href="#cb28-396"></a><span class="in">```</span></span>
+<span id="cb28-397"><a href="#cb28-397"></a><span class="ss">- </span>This doesn't work.</span>
+<span id="cb28-398"><a href="#cb28-398"></a></span>
+<span id="cb28-399"><a href="#cb28-399"></a><span class="fu">## Indices</span></span>
+<span id="cb28-400"><a href="#cb28-400"></a></span>
+<span id="cb28-401"><a href="#cb28-401"></a><span class="ss">- </span>An array can be as large as memory.</span>
+<span id="cb28-402"><a href="#cb28-402"></a><span class="ss">- </span>So it's index can be as large as memory.</span>
+<span id="cb28-403"><a href="#cb28-403"></a><span class="ss">- </span>The thing as large memory is <span class="in">`usize`</span>.</span>
+<span id="cb28-404"><a href="#cb28-404"></a><span class="in">```bash</span></span>
+<span id="cb28-405"><a href="#cb28-405"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
+<span id="cb28-406"><a href="#cb28-406"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
+<span id="cb28-407"><a href="#cb28-407"></a><span class="st">  |</span></span>
+<span id="cb28-408"><a href="#cb28-408"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
+<span id="cb28-409"><a href="#cb28-409"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span>
+<span id="cb28-410"><a href="#cb28-410"></a><span class="st">```</span></span>
+<span id="cb28-411"><a href="#cb28-411"></a></span>
+<span id="cb28-412"><a href="#cb28-412"></a><span class="st">## Byte array to `usize`</span></span>
+<span id="cb28-413"><a href="#cb28-413"></a></span>
+<span id="cb28-414"><a href="#cb28-414"></a><span class="st">- Usize helpfully has "from bytes" methods.</span></span>
+<span id="cb28-415"><a href="#cb28-415"></a><span class="st">    - There are 3 such methods for different *endianness*es, a future topic.</span></span>
+<span id="cb28-416"><a href="#cb28-416"></a><span class="st">- I use little endianness because it doesn'</span><span class="ex">t</span> matter <span class="at">-</span> <span class="kw">`</span>le<span class="kw">`</span></span>
+<span id="cb28-417"><a href="#cb28-417"></a><span class="kw">```</span>rs</span>
+<span id="cb28-418"><a href="#cb28-418"></a><span class="bu">let</span> <span class="va">secret</span> <span class="op">=</span> <span class="va">usize</span><span class="op">::</span><span class="va">from_le_bytes</span><span class="er">(</span><span class="ex">buffer</span><span class="kw">);</span></span>
+<span id="cb28-419"><a href="#cb28-419"></a><span class="in">```</span></span>
+<span id="cb28-420"><a href="#cb28-420"></a><span class="ss">- </span>This can be used as an index, but it's probably too large.</span>
+<span id="cb28-421"><a href="#cb28-421"></a></span>
+<span id="cb28-422"><a href="#cb28-422"></a><span class="fu">## `.len()`</span></span>
+<span id="cb28-423"><a href="#cb28-423"></a></span>
+<span id="cb28-424"><a href="#cb28-424"></a><span class="ss">- </span>Rust furnishes the <span class="in">`.len()`</span> method of arrays to detect their type.</span>
+<span id="cb28-425"><a href="#cb28-425"></a><span class="in">```rs</span></span>
+<span id="cb28-426"><a href="#cb28-426"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span>
+<span id="cb28-427"><a href="#cb28-427"></a><span class="in">```</span></span>
+<span id="cb28-428"><a href="#cb28-428"></a></span>
+<span id="cb28-429"><a href="#cb28-429"></a><span class="fu">## Altogether</span></span>
+<span id="cb28-430"><a href="#cb28-430"></a></span>
+<span id="cb28-431"><a href="#cb28-431"></a><span class="ss">- </span>We use <span class="in">`String::from()`</span> to get a <span class="in">`String`</span> from a <span class="in">`&amp;str`</span>, as the array contains fixed length strings and I use the <span class="in">`String`</span> type for consistency with lecture recommendations.</span>
+<span id="cb28-432"><a href="#cb28-432"></a></span>
+<span id="cb28-433"><a href="#cb28-433"></a><span class="in">```rs</span></span>
+<span id="cb28-434"><a href="#cb28-434"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-435"><a href="#cb28-435"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
+<span id="cb28-436"><a href="#cb28-436"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-437"><a href="#cb28-437"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
+<span id="cb28-438"><a href="#cb28-438"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span>
+<span id="cb28-439"><a href="#cb28-439"></a><span class="in">```</span></span>
+<span id="cb28-440"><a href="#cb28-440"></a></span>
+<span id="cb28-441"><a href="#cb28-441"></a></span>
+<span id="cb28-442"><a href="#cb28-442"></a><span class="fu">## Today</span></span>
+<span id="cb28-443"><a href="#cb28-443"></a></span>
+<span id="cb28-444"><a href="#cb28-444"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
+<span id="cb28-445"><a href="#cb28-445"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
+<span id="cb28-446"><a href="#cb28-446"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb28-447"><a href="#cb28-447"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
+<span id="cb28-448"><a href="#cb28-448"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
+<span id="cb28-449"><a href="#cb28-449"></a></span>
+<span id="cb28-450"><a href="#cb28-450"></a></span>
+<span id="cb28-451"><a href="#cb28-451"></a><span class="fu"># stdin</span></span>
+<span id="cb28-452"><a href="#cb28-452"></a></span>
+<span id="cb28-453"><a href="#cb28-453"></a><span class="fu">## `input()`</span></span>
+<span id="cb28-454"><a href="#cb28-454"></a></span>
+<span id="cb28-455"><a href="#cb28-455"></a><span class="ss">- </span>Python furnishes the straight-forward <span class="in">`input()`</span> function.</span>
+<span id="cb28-456"><a href="#cb28-456"></a><span class="ss">- </span>We don't have that in rust, but we do have"</span>
+<span id="cb28-457"><a href="#cb28-457"></a><span class="ss">    - </span><span class="in">`stdin()`</span> - the "standard input" that represents text provided at terminal.</span>
+<span id="cb28-458"><a href="#cb28-458"></a><span class="ss">    - </span><span class="in">`.read_line()`</span> - like Python <span class="in">`.read_line()`</span> in that it reads to the next newline character, but a bit different in type.</span>
+<span id="cb28-459"><a href="#cb28-459"></a><span class="ss">- </span>Essentially, <span class="in">`stdin()`</span> is a function that returns a <span class="in">`File`</span> the refers to the terminal.</span>
+<span id="cb28-460"><a href="#cb28-460"></a></span>
+<span id="cb28-461"><a href="#cb28-461"></a><span class="in">```rs</span></span>
+<span id="cb28-462"><a href="#cb28-462"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb28-463"><a href="#cb28-463"></a><span class="in">```</span></span>
+<span id="cb28-464"><a href="#cb28-464"></a></span>
+<span id="cb28-465"><a href="#cb28-465"></a><span class="ss">- </span>What happens if you don't unwrap?</span>
+<span id="cb28-466"><a href="#cb28-466"></a><span class="ss">- </span>What type is <span class="in">`guess`</span>? Array? <span class="in">`&amp;str`</span>? <span class="in">`String`</span>?</span>
+<span id="cb28-467"><a href="#cb28-467"></a><span class="in">```rs</span></span>
+<span id="cb28-468"><a href="#cb28-468"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb28-469"><a href="#cb28-469"></a><span class="in">```</span></span>
+<span id="cb28-470"><a href="#cb28-470"></a></span>
+<span id="cb28-471"><a href="#cb28-471"></a><span class="fu">## `.trim()`</span></span>
+<span id="cb28-472"><a href="#cb28-472"></a></span>
+<span id="cb28-473"><a href="#cb28-473"></a><span class="ss">- </span>Reading lines will return slightly longer strings that end with a newline character.</span>
+<span id="cb28-474"><a href="#cb28-474"></a><span class="ss">- </span>This can be removed with <span class="in">`.trim()`</span>.</span>
+<span id="cb28-475"><a href="#cb28-475"></a><span class="ss">- </span>Try reading in e.g. <span class="in">`opera`</span> or <span class="in">`tenet`</span> and seeing the trimmed vs. untrimmed versions.</span>
+<span id="cb28-476"><a href="#cb28-476"></a><span class="ss">    - </span>You may want to inspect their length, perhaps by converting to characters and using <span class="in">`.nth()`</span>.</span>
+<span id="cb28-477"><a href="#cb28-477"></a></span>
+<span id="cb28-478"><a href="#cb28-478"></a><span class="fu">## `.contains()`</span></span>
+<span id="cb28-479"><a href="#cb28-479"></a></span>
+<span id="cb28-480"><a href="#cb28-480"></a><span class="ss">- </span>You can check if a value is present in an array using <span class="in">`.contains()`</span>.</span>
+<span id="cb28-481"><a href="#cb28-481"></a><span class="ss">- </span>Check to see if the trimmed and untrimmed versions of <span class="in">`opera`</span> or <span class="in">`tenet`</span> are contained in the <span class="in">`WORDS`</span> array.</span>
+<span id="cb28-482"><a href="#cb28-482"></a><span class="ss">    - </span>You will need to fiddle with types a bit!</span>
+<span id="cb28-483"><a href="#cb28-483"></a><span class="ss">    - </span>Will you need to use <span class="in">`&amp;`</span>? <span class="in">`&amp;mut`</span>? <span class="in">`String::from()`</span>? Try each and see what happens - and consider why!</span>
+<span id="cb28-484"><a href="#cb28-484"></a></span>
+<span id="cb28-485"><a href="#cb28-485"></a><span class="fu">## `.clone()`</span></span>
+<span id="cb28-486"><a href="#cb28-486"></a></span>
+<span id="cb28-487"><a href="#cb28-487"></a><span class="ss">- </span>Sometimes you will need to read a word from <span class="in">`stdin`</span> and perhaps both compare it some other word and also decompose it into characters.</span>
+<span id="cb28-488"><a href="#cb28-488"></a><span class="ss">- </span>If you need multiple copies, you may want to use <span class="in">`.clone()`</span> or <span class="in">`cargo`</span> may recommend use of <span class="in">`.clone()`</span>.</span>
+<span id="cb28-489"><a href="#cb28-489"></a></span>
+<span id="cb28-490"><a href="#cb28-490"></a><span class="fu"># Closing Thoughts</span></span>
+<span id="cb28-491"><a href="#cb28-491"></a></span>
+<span id="cb28-492"><a href="#cb28-492"></a><span class="fu">## `range()`</span></span>
+<span id="cb28-493"><a href="#cb28-493"></a></span>
+<span id="cb28-494"><a href="#cb28-494"></a><span class="ss">- </span>You may benefit from using <span class="in">`for`</span> loops of fixed index.</span>
+<span id="cb28-495"><a href="#cb28-495"></a><span class="ss">- </span>Rust has a syntactical rather than functional range.</span>
+<span id="cb28-496"><a href="#cb28-496"></a><span class="ss">- </span>It follows the same start/stop rules as Python.</span>
+<span id="cb28-497"><a href="#cb28-497"></a><span class="in">```{.rs filename="src.main.rs")</span></span>
+<span id="cb28-498"><a href="#cb28-498"></a><span class="in">fn main() {</span></span>
+<span id="cb28-499"><a href="#cb28-499"></a><span class="in">    for i in 1..5 {</span></span>
+<span id="cb28-500"><a href="#cb28-500"></a><span class="in">        println!("{:?}", i);</span></span>
+<span id="cb28-501"><a href="#cb28-501"></a><span class="in">    }</span></span>
+<span id="cb28-502"><a href="#cb28-502"></a><span class="in">}</span></span>
+<span id="cb28-503"><a href="#cb28-503"></a><span class="in">```</span></span>
+<span id="cb28-504"><a href="#cb28-504"></a></span>
+<span id="cb28-505"><a href="#cb28-505"></a><span class="fu">## Vectors</span></span>
+<span id="cb28-506"><a href="#cb28-506"></a></span>
+<span id="cb28-507"><a href="#cb28-507"></a><span class="ss">- </span>A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</span>
+<span id="cb28-508"><a href="#cb28-508"></a><span class="ss">- </span>If you want to learn Vectors instead of arrays, simply consult this documentation.</span>
+<span id="cb28-509"><a href="#cb28-509"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Rust By Example: Vectors</span><span class="co">]</span></span>
+<span id="cb28-510"><a href="#cb28-510"></a><span class="ss">- </span>You will find them similar to Python <span class="in">`list`</span>.</span>
+<span id="cb28-511"><a href="#cb28-511"></a></span>
+<span id="cb28-512"><a href="#cb28-512"></a><span class="fu">## Today</span></span>
+<span id="cb28-513"><a href="#cb28-513"></a></span>
+<span id="cb28-514"><a href="#cb28-514"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
+<span id="cb28-515"><a href="#cb28-515"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
+<span id="cb28-516"><a href="#cb28-516"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
+<span id="cb28-517"><a href="#cb28-517"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`stdin()`</span></span>
+<span id="cb28-518"><a href="#cb28-518"></a><span class="ss">- </span><span class="va">[x]</span> "Fixes"</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

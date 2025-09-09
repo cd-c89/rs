@@ -7,6 +7,456 @@
     "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nSigmas\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nNone\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
   },
   {
+    "objectID": "21_guess.html",
+    "href": "21_guess.html",
+    "title": "Guess",
+    "section": "",
+    "text": "Lab Day\n\nPrepare for Wordle",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#announcements",
+    "href": "21_guess.html#announcements",
+    "title": "Guess",
+    "section": "",
+    "text": "Lab Day\n\nPrepare for Wordle",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#homework",
+    "href": "21_guess.html#homework",
+    "title": "Guess",
+    "section": "Homework",
+    "text": "Homework\n\nWordle is ready after this class.\n\nIt is exactly hard enough to use all programming basics.\nWindows development is no longer supported.\n\nDue Friday, 19 Sept. at 1440 ET.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#citation",
+    "href": "21_guess.html#citation",
+    "title": "Guess",
+    "section": "Citation",
+    "text": "Citation\n\nThe idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, Guessing Game\nThe idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the same name.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#today",
+    "href": "21_guess.html#today",
+    "title": "Guess",
+    "section": "Today",
+    "text": "Today\n\nconst\nCharacter iteration\n/dev/urandom\nstdin()\n“Fixes”",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#compile-time",
+    "href": "21_guess.html#compile-time",
+    "title": "Guess",
+    "section": "Compile time",
+    "text": "Compile time\n\nIn Wordle, you’ll likely have two kinds of values that won’t change.\n\nThe “ANSI Escape Codes” which allow you to print to the terminal in color, which are set when you install your operating system.\n\nFor these we may use a Rust const\n\nThe “answer” which will be set as soon as the program begins running, and never be altered thereafter.\n\nFor these, we use a let.\n\n\nI refer to the first as “compile time constants” and declare them outside of any function.\n\n\n\nsrc/main.rs\n\nconst RED : &str = \"\\u{001b}[31m\";\nconst WHT : &str = \"\\u{001b}[0m\";\n\nfn main() {\n    println!(\"White text. {RED}Red text. {WHT}White text.\");\n}\n\nThis section transparently added in response to a question in class. I do not use const in my own code rather than let, though perhaps I should.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#create-constants",
+    "href": "21_guess.html#create-constants",
+    "title": "Guess",
+    "section": "Create constants",
+    "text": "Create constants\n\nCreate your own constants for yellow and green.\n\nYou may want to write a loop to try different colors, or consult documentation.\n\nFor Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.\n\nfn letter(a:char, c:i32)",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#strings-lack-indices",
+    "href": "21_guess.html#strings-lack-indices",
+    "title": "Guess",
+    "section": "Strings lack indices",
+    "text": "Strings lack indices\n\nIn Python, we have some packing and unpacking to do to edit strings by character index.\n\n&gt;&gt;&gt; s = list(\"hello, world\")\n&gt;&gt;&gt; s[10] = 'd'\n&gt;&gt;&gt; s[11] = 'l'\n&gt;&gt;&gt; \"\".join(s)\n'hello, wordl'",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#rust-uses-.chars",
+    "href": "21_guess.html#rust-uses-.chars",
+    "title": "Guess",
+    "section": "Rust uses .chars()",
+    "text": "Rust uses .chars()\n\nIn the case of Wordle, all solutions are formulated as 5 characters, so we can assume the underlying character-ness of strings.\n\nThis is not permitted generally in Rust, but in our case we may.\n\nTo unpack Rust strings into characters, you may use .chars()\n\n\n\nsrc/main.rs\n\nfn main() {\n    let s = \"Hello, world\";\n    println!(\"{:?}\", s.chars());\n}\n\n\nWhat do you see?\n\nCan you access the ith element?\nCan you loop over object?",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#iterators",
+    "href": "21_guess.html#iterators",
+    "title": "Guess",
+    "section": "Iterators",
+    "text": "Iterators\n\nWhat .chars() returns is called an iterator, it is much like a Python generator.\n\n&gt;&gt;&gt; gen = (i ** i for i in range(100))\n&gt;&gt;&gt; next(gen)\n1\n&gt;&gt;&gt; next(gen)\n1\n&gt;&gt;&gt; next(gen)\n4\n&gt;&gt;&gt; next(gen)\n27\n&gt;&gt;&gt; next(gen)\n256\n\nBasically, it is a collection type of unknown size where next elements may be queried.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#rust-uses-.nth",
+    "href": "21_guess.html#rust-uses-.nth",
+    "title": "Guess",
+    "section": "Rust uses .nth()",
+    "text": "Rust uses .nth()\n\nYou can see the nth element of an iterator with .nth(), more or less:\n\n\n\nsrc/main.rs\n\nfn main() {\n    let s = \"Hello, world\";\n    println!(\"{:?}\", s.chars().nth(10));\n}\n\n\nWhat do you see?\n\nWhat happens if you ask for the 256th letter?",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#options",
+    "href": "21_guess.html#options",
+    "title": "Guess",
+    "section": "Options",
+    "text": "Options\n\nRust library functions almost always return an Option\n\nThis is just good practice, it beats returning e.g. Python None sometimes, or crashing.\n\nAn option is simple:\n\npub enum Option&lt;T&gt; {\n    None,\n    Some(T),\n}",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#options-for-options",
+    "href": "21_guess.html#options-for-options",
+    "title": "Guess",
+    "section": "Options for options",
+    "text": "Options for options\n\nPattern match\nExpect\nUnwrap",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#pattern-match",
+    "href": "21_guess.html#pattern-match",
+    "title": "Guess",
+    "section": "Pattern match",
+    "text": "Pattern match\n\nThe language designers intend options to be handled as follows:\n\n\n\nsrc/main.rs\n\nfn main() {\n    let s = \"Hello, world\";\n    match s.chars().nth(11) {\n        Some(c) =&gt; println!(\"The 11th character is {:?}\", c),\n        None =&gt; println!(\"String `s` is fewer than 11 characters in length\"),\n    }\n}\n\n\nI very rarely see code that looks like this, including in official Rust documentation.\nFor example, the Polars documentation does not manage Option return types this way.\nThis is, however, the only way to ensure code does not crash on e.g. arbitrary length input.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#expect",
+    "href": "21_guess.html#expect",
+    "title": "Guess",
+    "section": "Expect",
+    "text": "Expect\n\nThe incrementally less heavyweight option is with .expect(), a method of options that either:\n\nSucessful unpacks the option into a usable type, or\nCauses a “panic” - a comparatively graceful program crash.\n\nThis panic prints the message you furnished to expect.\n\n\n\n\n\nsrc/main.rs\n\nfn main() {\n    let s = \"Hello, world\";\n    println!(\"{:?}\", s.chars().nth(13).expect(\"The string literal is known to be of length 11\"));\n}\n\n\nTry checking for existing and non-existant characters. What do you find?",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#rust-uses-.unwrap",
+    "href": "21_guess.html#rust-uses-.unwrap",
+    "title": "Guess",
+    "section": "Rust uses .unwrap()",
+    "text": "Rust uses .unwrap()\n\nThe incrementally less heavyweight option is with .unwrap().\nUnwrap does not require a message but is otherwise just like .expect()\nUnwrap is used by e.g. the Polars documentation.\n\n\n\nsrc/main.rs\n\nfn main() {\n    let s = \"Hello, world\";\n    println!(\"{:?}\", s.chars().nth(13).unwrap());\n}\n\n\nTry .unwrap() on both successful and failed .nth() calls.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#unwrap-vs.-expect",
+    "href": "21_guess.html#unwrap-vs.-expect",
+    "title": "Guess",
+    "section": "Unwrap vs. Expect",
+    "text": "Unwrap vs. Expect\n\nI have never voluntarily used .expect() instead of .unwrap(), but…\n\n\n\n\n\n\n\nHelp Yourself\n\n\n\nIf your code uses .unwrap() instead of .expect() you should carefully consider converting any .unwrap()s to .expect()s before asking someone else, who is less familiar with the assumptions you made when writing your code, for help.\nThis applies to colleagues, QUAD TAs, and potential to the course instructor depending on how busy things are.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#randomization",
+    "href": "21_guess.html#randomization",
+    "title": "Guess",
+    "section": "Randomization",
+    "text": "Randomization\n\nThere are always many ways to generated results that are vaguely random.\nAs a security researcher, I am required to instruct you about /dev/random rather than use the Rust Book recommendations.\nSeparately we:\n\nLearn to read from a file.\nGet to think about how random different things really are.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#quoth-wikipedia",
+    "href": "21_guess.html#quoth-wikipedia",
+    "title": "Guess",
+    "section": "Quoth Wikipedia",
+    "text": "Quoth Wikipedia\n\nIn Unix-like operating systems, /dev/random and /dev/urandom are special files that provide random numbers from a cryptographically secure pseudorandom number generator (CSPRNG). The CSPRNG is seeded with entropy (a value that provides randomness) from environmental noise, collected from device drivers and other sources. Users can obtain random numbers from the CSPRNG simply by reading the file.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#peep-it",
+    "href": "21_guess.html#peep-it",
+    "title": "Guess",
+    "section": "Peep it",
+    "text": "Peep it\n\nVerify you are on a system implementing /dev/random with the following, at command line:\n\nhead -1 /dev/random\n\nFor me, I see:\n\n$ head -1 /dev/random\n6��c�W�Y|S�t��|��=���U�&gt;�$��8�����E���*�&;�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{ ��^\"/%!7���vv@�w{p��q�y\"� AD�/Ahb��fb��Ed�\n                                                                                                                      ­�k�:���F�&gt;����09h��Ʊl#�&gt;�J����:J����5|I�E���04�������NH��-�X����l�,k�&lt;�������=.4^qav�}Y��\n        ��(�)1���B���c)�&*�#r��\"H�(�:�e���֩A\n$\n\nYou can test what head does on a file with which you are familiar, or consult man head",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#open",
+    "href": "21_guess.html#open",
+    "title": "Guess",
+    "section": "open",
+    "text": "open\n\nA la Python, Rust utilizes open to read files.\nUnlike Python, Rust has a great love for gobs of a text and Options.\nThe following opens /dev/random to be read.\n\nThink about why we need to .unwrap() when opening a file.\nWhat is the Python equivalent?\n\nstd::fs::File::open(\"/dev/random\").unwrap();\nWe require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust File object.\n\n\nAn object providing access to an open file on the filesystem.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#use",
+    "href": "21_guess.html#use",
+    "title": "Guess",
+    "section": "use",
+    "text": "use\n\nA lot of people who aren’t me prefer to use use to have shorter names.\nI don’t personally understand this, but I do use from pgl import * in Python.\nHere’s an example from Rust documentation of a use:\n\n\n\nsrc/main.rs\n\nuse std::fs::File;\n\nfn main() {\n    let mut devrnd = File::open(\"/dev/random\").unwrap();\n}\n\n\nThe Used - The Bird And The Worm (Video)",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#read",
+    "href": "21_guess.html#read",
+    "title": "Guess",
+    "section": "read",
+    "text": "read\n\nTrue to form, read has a variety of complexities introduced by:\n\nNot assuming anything about the Rust File object\nNot assuming anything about how to read or save data.\nNot assuming anything about the underlying file within the computer’s file system.\n\nI use it as follows:\n\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\n\nAn astute reader will notice a few idiosyncracies.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#mut",
+    "href": "21_guess.html#mut",
+    "title": "Guess",
+    "section": "&mut",
+    "text": "&mut\n\nWhen we:\n\nHave a variable in Rust\nFor which the ownership model applies, such as a file of arbitrary size\nFor which mutability is necessary, such as a File object from which n bytes have been read.\n\nWe can use this variable:\n\nWithin some other function, while\nRetaining the ability to use it again in some future function.\n\nWe do so by passing a “mutable reference”, generated by prefixing the variable name with &mut and a space.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#buffers",
+    "href": "21_guess.html#buffers",
+    "title": "Guess",
+    "section": "Buffers",
+    "text": "Buffers\n\nIt is common in lower level languages to read from a file into a “buffer”, a temporary storage space within the executing program.\nThese are commonly implemented as multiple of bytes of some fixed size in that language’s array type.\nThese bits are commonly initialized to zero.\nI am aware of no graceful way to do this in Rust, so I’ll tell you what I’m doing now and why.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#arrays",
+    "href": "21_guess.html#arrays",
+    "title": "Guess",
+    "section": "Arrays",
+    "text": "Arrays\n\nArrays in Rust are fixed size and typed, not unlike NumPy array.\nThey see little use versus the more common vector type, but I preferred arrays for Wordle.\n\nAnd in fact expect to prefer arrays this term.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#quoth-the-docs",
+    "href": "21_guess.html#quoth-the-docs",
+    "title": "Guess",
+    "section": "Quoth the Docs",
+    "text": "Quoth the Docs\n\nA fixed-size array, denoted [T; N], for the element type, T, and the non-negative compile-time constant size, N.\nThere are two syntactic forms for creating an array:\n\nA list with each element, i.e., [x, y, z].\nA repeat expression [expr; N] where N is how many times to repeat expr in the array. expr must either be:\n\nA value of a type implementing the Copy trait\nA const value\n\n\nI never read this, I found this page through a search engine and ripped it.\n\nSearch for dev/urandom on that page.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#create-an-array",
+    "href": "21_guess.html#create-an-array",
+    "title": "Guess",
+    "section": "Create an array",
+    "text": "Create an array\n\nThe following is a mutable - so we can read file data into it - array of 8 bytes.\n\nlet mut buffer = [0u8; 8];\n\nBreakdown.\n\nThe 0 in 0u8 is the initialization value.\nThe u8 is the type, unsigned 8 bit value.\nThe post comma 8 is the number of 8 bit values to store.\n\nThere’s only one problem here.\n\nThat second 8 is a magic number, which to me represents poor style.\n\nBelieve me, I wanted to just type 8, but we shouldn’t.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#on-magic-numbers",
+    "href": "21_guess.html#on-magic-numbers",
+    "title": "Guess",
+    "section": "On Magic Numbers",
+    "text": "On Magic Numbers\n\nTo select a random word, eventually you will probably have:\n\nAn array of 5 letter words.\nThat array will have some length.\nThat length will be whatever Rust uses to store the size of memory objects.\nDifferent computers have different ways of address memory…\nSo we cannot make assumptions about the size of values which themselves store the size of memory.\n\nI wish I was kidding! I’m not!",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#vs-64-bit",
+    "href": "21_guess.html#vs-64-bit",
+    "title": "Guess",
+    "section": "32 vs 64 bit",
+    "text": "32 vs 64 bit\n\nFor example, how many memory locations can be addressed by a 32 bit system?\nHow many on a 64 bit system?\nDoes your device potentially use 48 bit addresses?\nHow could you tell?\nWhat if you run code on a 16 bit microcontroller?\nEnter usize\n\nThe unsigned value that is the right size to store a size.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#usize",
+    "href": "21_guess.html#usize",
+    "title": "Guess",
+    "section": "usize",
+    "text": "usize\n\nWe will use usize by name twice:\n\nWe need to read a random usize.\n\nWe can determine how many u8s are required to make up a usize by checking how many bits are in a usize. and dividing by 8.\n\nusize::BITS / 8\n\nOnly one problem - for some reason usize stores its size as a u32.\nSo to get enough bits to fill I usize, I ended up doing… this?\n\nlet mut buffer = [0u8; (usize::BITS / 8) as usize];\n\nPresumably I’m doing this wrong.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#check-in",
+    "href": "21_guess.html#check-in",
+    "title": "Guess",
+    "section": "Check in",
+    "text": "Check in\n\nI have this so far:\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; (usize::BITS / 8) as usize];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#candidate-answers",
+    "href": "21_guess.html#candidate-answers",
+    "title": "Guess",
+    "section": "Candidate Answers",
+    "text": "Candidate Answers\n\nYou can imagine testing with a smaller word list, like the words of the Sator Square\n\nconst WORDS : [&str; 5] = [\"rotas\", \"opera\", \"tenet\", \"arepo\", \"sator\"];\n\nHere &str is used to refer to string literals, that is, not the String quasi-data structure of arbitrary size.\n\nThis was the type that e.g. \"hello world\" had the whole time under the hood.\n\n\n\n\nsrc/main.rs\n\nconst WORDS : [&str; 5] = [\"rotas\", \"opera\", \"tenet\", \"arepo\", \"sator\"];\n\nfn main() {\n    let i : u8 = 2;\n    println!(\"{:?}\", WORDS[i]);\n}\n\n\nThis doesn’t work.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#indices",
+    "href": "21_guess.html#indices",
+    "title": "Guess",
+    "section": "Indices",
+    "text": "Indices\n\nAn array can be as large as memory.\nSo it’s index can be as large as memory.\nThe thing as large memory is usize.\n\nerror[E0277]: the type `[&'static str]` cannot be indexed by `u8`\n --&gt; src/main.rs:5:28\n  |\n5 |     println!(\"{:?}\", WORDS[i]);\n  |                            ^ slice indices are of type `usize` or ranges of `usize`",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#byte-array-to-usize",
+    "href": "21_guess.html#byte-array-to-usize",
+    "title": "Guess",
+    "section": "Byte array to usize",
+    "text": "Byte array to usize\n\nUsize helpfully has “from bytes” methods.\n\nThere are 3 such methods for different endiannesses, a future topic.\n\nI use little endianness because it doesn’t matter - le\n\nlet secret = usize::from_le_bytes(buffer);\n\nThis can be used as an index, but it’s probably too large.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#len",
+    "href": "21_guess.html#len",
+    "title": "Guess",
+    "section": ".len()",
+    "text": ".len()\n\nRust furnishes the .len() method of arrays to detect their type.\n\nWORDS[secret % WORDS.len()]",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#altogether",
+    "href": "21_guess.html#altogether",
+    "title": "Guess",
+    "section": "Altogether",
+    "text": "Altogether\n\nWe use String::from() to get a String from a &str, as the array contains fixed length strings and I use the String type for consistency with lecture recommendations.\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; (usize::BITS / 8) as usize];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\nlet mut secret = usize::from_ne_bytes(buffer);\nlet answer : String = String::from(WORDS[secret % WORDS.len()]);",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#today-1",
+    "href": "21_guess.html#today-1",
+    "title": "Guess",
+    "section": "Today",
+    "text": "Today\n\nconst\nCharacter iteration\n/dev/urandom\nstdin()\n“Fixes”",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#input",
+    "href": "21_guess.html#input",
+    "title": "Guess",
+    "section": "input()",
+    "text": "input()\n\nPython furnishes the straight-forward input() function.\nWe don’t have that in rust, but we do have”\n\nstdin() - the “standard input” that represents text provided at terminal.\n.read_line() - like Python .read_line() in that it reads to the next newline character, but a bit different in type.\n\nEssentially, stdin() is a function that returns a File the refers to the terminal.\n\nstd::io::stdin().read_line(&mut guess).unwrap();\n\nWhat happens if you don’t unwrap?\nWhat type is guess? Array? &str? String?\n\nlet mut guess = String::new();",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#trim",
+    "href": "21_guess.html#trim",
+    "title": "Guess",
+    "section": ".trim()",
+    "text": ".trim()\n\nReading lines will return slightly longer strings that end with a newline character.\nThis can be removed with .trim().\nTry reading in e.g. opera or tenet and seeing the trimmed vs. untrimmed versions.\n\nYou may want to inspect their length, perhaps by converting to characters and using .nth().",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#contains",
+    "href": "21_guess.html#contains",
+    "title": "Guess",
+    "section": ".contains()",
+    "text": ".contains()\n\nYou can check if a value is present in an array using .contains().\nCheck to see if the trimmed and untrimmed versions of opera or tenet are contained in the WORDS array.\n\nYou will need to fiddle with types a bit!\nWill you need to use &? &mut? String::from()? Try each and see what happens - and consider why!",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#clone",
+    "href": "21_guess.html#clone",
+    "title": "Guess",
+    "section": ".clone()",
+    "text": ".clone()\n\nSometimes you will need to read a word from stdin and perhaps both compare it some other word and also decompose it into characters.\nIf you need multiple copies, you may want to use .clone() or cargo may recommend use of .clone().",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#range",
+    "href": "21_guess.html#range",
+    "title": "Guess",
+    "section": "range()",
+    "text": "range()\n\nYou may benefit from using for loops of fixed index.\nRust has a syntactical rather than functional range.\nIt follows the same start/stop rules as Python. {.rs filename=\"src.main.rs\") fn main() {     for i in 1..5 {         println!(\"{:?}\", i);     } }",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#vectors",
+    "href": "21_guess.html#vectors",
+    "title": "Guess",
+    "section": "Vectors",
+    "text": "Vectors\n\nA lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.\nIf you want to learn Vectors instead of arrays, simply consult this documentation.\n[Rust By Example: Vectors]\nYou will find them similar to Python list.",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
+    "objectID": "21_guess.html#today-2",
+    "href": "21_guess.html#today-2",
+    "title": "Guess",
+    "section": "Today",
+    "text": "Today\n\nconst\nCharacter iteration\n/dev/urandom\nstdin()\n“Fixes”",
+    "crumbs": [
+      "Guess"
+    ]
+  },
+  {
     "objectID": "12_hicargo.html",
     "href": "12_hicargo.html",
     "title": "Hi cargo",
@@ -1160,7 +1610,7 @@
     "href": "01_rustup.rjs.html#homework",
     "title": "Rustup",
     "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 5 Sept. at 1440 ET."
+    "text": "Homework\n\n“Wordle” is ready after this class.\n\nIt will teach you all the Rust you need to know, I think.\nWindows officially no longer supported.\n\nDue Friday, 19 Sept. at 1440 ET."
   },
   {
     "objectID": "01_rustup.rjs.html#today",
@@ -1523,7 +1973,7 @@
     "href": "01_rustup.html#homework",
     "title": "Rustup",
     "section": "Homework",
-    "text": "Homework\n\nThe first homework, “Hi world”, is ready after this class.\n\nIt is comically trivial.\nMostly makes sure you have everything set up.\n\nDue Friday, 5 Sept. at 1440 ET.",
+    "text": "Homework\n\n“Wordle” is ready after this class.\n\nIt will teach you all the Rust you need to know, I think.\nWindows officially no longer supported.\n\nDue Friday, 19 Sept. at 1440 ET.",
     "crumbs": [
       "Rustup"
     ]

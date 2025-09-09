@@ -9,10 +9,10 @@ title: Rustup
 
 ## Homework
 
-- The first homework, "Hi world", is ready after this class.
-  - It is comically trivial.
-  - Mostly makes sure you have everything set up.
-- Due Friday, 5 Sept. at 1440 ET.
+- "Wordle" is ready after this class.
+  - It will teach you all the Rust you need to know, I think.
+  - Windows officially no longer supported.
+- Due Friday, 19 Sept. at 1440 ET.
 
 ## Today
 
