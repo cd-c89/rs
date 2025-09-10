@@ -4085,5 +4085,85 @@
     "crumbs": [
       "Options"
     ]
+  },
+  {
+    "objectID": "22_wordle.html",
+    "href": "22_wordle.html",
+    "title": "Wordle",
+    "section": "",
+    "text": "The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, Guessing Game\nThe idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the same name.\n\n\n\n\n\nWordle exercises the following:\n\nStrings in Rust\nCollection types, like arrays or vectors\nScalar types, like integers or characters\nFile I/O and the UNIX-based file system\nLoops\n\n\n\n\n\n\nTo complete this assignment, you must:\n\nCreate a 22 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 22 --name wordle --vcs none\n\n\n\n\n\nCharacter coloring via ANSI escape codes\nFile I/O for randomization\nFile I/O for input\nConsistency with a randomized answer\nConsistency with word list\nConsistency with prior guesses\nStyling using Box-drawing_characters\n\nThe following is a staged screenshot in VS Code, showing the expected terminal appearance.\n\n\n\nThe following is a staged screenshot in WSL2, showing the expected terminal appearance.",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#citation",
+    "href": "22_wordle.html#citation",
+    "title": "Wordle",
+    "section": "",
+    "text": "The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, Guessing Game\nThe idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the same name.",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#pre-flight-checks",
+    "href": "22_wordle.html#pre-flight-checks",
+    "title": "Wordle",
+    "section": "",
+    "text": "Wordle exercises the following:\n\nStrings in Rust\nCollection types, like arrays or vectors\nScalar types, like integers or characters\nFile I/O and the UNIX-based file system\nLoops",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#requirements",
+    "href": "22_wordle.html#requirements",
+    "title": "Wordle",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 22 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 22 --name wordle --vcs none",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#requirements-1",
+    "href": "22_wordle.html#requirements-1",
+    "title": "Wordle",
+    "section": "",
+    "text": "Character coloring via ANSI escape codes\nFile I/O for randomization\nFile I/O for input\nConsistency with a randomized answer\nConsistency with word list\nConsistency with prior guesses\nStyling using Box-drawing_characters\n\nThe following is a staged screenshot in VS Code, showing the expected terminal appearance.\n\n\n\nThe following is a staged screenshot in WSL2, showing the expected terminal appearance.",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#nifty-assignment-description",
+    "href": "22_wordle.html#nifty-assignment-description",
+    "title": "Wordle",
+    "section": "Nifty Assignment Description",
+    "text": "Nifty Assignment Description\n\nThe object of the Wordle puzzle is to figure out the hidden word for the day using no more than six guesses. When you type in a word and then hit the RETURN or ENTER key, the website gives you information about how close your guess is by coloring the background of the letters. For every letter in your guess that is in its correct position, Wordle colors the [letter green, the “correct color”]. For every letter that appears in the word but is not in the correct position, Wordle colors the [letter yellow, the “present color”]. All letters in the guess that don’t appear in the word are colored [red, the “missing color”]\n\n\nI will assume your familiarity with Wordle, or Read more.",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#aside",
+    "href": "22_wordle.html#aside",
+    "title": "Wordle",
+    "section": "Aside",
+    "text": "Aside\n\nI take an extremely literal interpretation of the following.\n\n\nFor every letter that appears in the word but is not in the correct position.\n\n\nI implemented this in Python as:\n\nguess[i] in answer\n\nI implemented this in JavaScript as:\n\nanswer.include(guess[i])\n\nI did not engage with any complicated rules involving double letters, as I was unaware of those rules as a casual player and do not find them algorithmically interesting.\nSo, in the case that a guess or an answer contains multiples of any letter, the precise correctness of any usage of the “missing color” (in our case yellow) is left undefined and to the discretion of the student.",
+    "crumbs": [
+      "Wordle"
+    ]
+  },
+  {
+    "objectID": "22_wordle.html#python",
+    "href": "22_wordle.html#python",
+    "title": "Wordle",
+    "section": "Python",
+    "text": "Python\n\nThe following Python solution meets all assignment requirements except for usage of /dev/random (I wanted the example to work on Windows).\nIt is not manually written Python, but created by providing a Rust reference solution to an LLM, translating to Python, and editting for correctness.\n\nI did not find LLMs could go the other direction. You may find otherwise.\n\nA few notes:\n\nThe box drawing characters are spaced such that guessed letters have a space between them to the nearest horizontal box drawing character.\nI maintain all letters in lower case. This is implicitly enforced by the requirement that guesses be members of WORDS\nThis is a 5 word Latin word list. You are encouraged to use the actual wordlist, which I can’t find in it’s original form but is present on this webpage (Scroll to bottom).\n\nPlaying using this word list was relatively more challenging, as it omits many common words and plurals.\n\n\n\n\n\nwordle.py\n\n# A list of valid words, truncated for this example.\nWORDS = [\"sator\", \"arepo\", \"tenet\", \"opera\", \"rotas\"]\n\n# ANSI color codes for colored text\n# 31: Red, 32: Green, 33: Yellow\nR = 31  # Red (letter not in word)\nG = 32  # Green (letter in correct position)\nY = 33  # Yellow (letter in word but wrong position)\n\n# Box-drawing characters for the game board\nT = \"┌───┬───┬───┬───┬───┐\"  # Top border\nM = \"├───┼───┼───┼───┼───┤\"  # Middle border\nB = \"└───┴───┴───┴───┴───┘\"  # Bottom border\n\ndef letter(a: str, c: int):\n    \"\"\"\n    Prints a single letter with a specified ANSI color.\n\n    Args:\n        a: The letter to print.\n        c: The ANSI color code.\n    \"\"\"\n    print(f\"│ \\u001b[{c}m{a}\\u001b[0m \", end=\"\")\n\ndef colors(s: str, answer: str):\n    \"\"\"\n    Analyzes a guessed word and prints it with the appropriate colors.\n\n    Args:\n        s: The guessed word.\n        answer: The correct answer word.\n    \"\"\"\n    for i in range(5):\n        char = s[i]\n        color_code = R\n        if answer[i] == char:\n            color_code = G\n        elif char in answer:\n            color_code = Y\n        letter(char, color_code)\n    print(\"│\")\n\ndef game(words: list[str], answer: str):\n    \"\"\"\n    Clears the screen and draws the game board with the current guesses.\n\n    Args:\n        words: A list of guessed words.\n        answer: The correct answer word.\n    \"\"\"\n    print(\"\\u001b[2J\")  # Clear the screen\n    print(T)\n    for i in range(5):\n        colors(words[i], answer)\n        print(M)\n    colors(words[5], answer)\n    print(B)\n\ndef main():\n    \"\"\"\n    The main game loop.\n    \"\"\"\n    words = [\"     \"] * 6\n\n    ###############################################\n    #                                             #\n    # You are required to use /dev/random in Rust #\n    #                                             #\n    ###############################################\n    import random\n    answer = random.choice(WORDS)\n\n    attempts = 0\n\n    print(\"\\u001b[2J\", end=\"\")  # Clear the screen\n    print(\"Use lowercase only btw.\")\n\n    while words[5] == \"     \":\n        guess = input().strip()  # Convert input to lowercase\n        if guess in WORDS:\n            words[attempts] = guess\n            game(words, answer)\n            if guess == answer:\n                print(\"Winner\")\n                return\n            attempts += 1\n        else:\n            print(\"Not a valid word!\")\n\n    print(\"Game over :(\")\n\nif __name__ == \"__main__\":\n    main()",
+    "crumbs": [
+      "Wordle"
+    ]
   }
 ]

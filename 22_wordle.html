@@ -193,8 +193,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#pre-flight-checks" id="toc-pre-flight-checks" class="nav-link" data-scroll-target="#pre-flight-checks">Pre-flight Checks</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#requirements-1" id="toc-requirements-1" class="nav-link" data-scroll-target="#requirements-1">Requirements</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#nifty-assignment-description" id="toc-nifty-assignment-description" class="nav-link" data-scroll-target="#nifty-assignment-description">Nifty Assignment Description</a></li>
+  <li><a href="#aside" id="toc-aside" class="nav-link" data-scroll-target="#aside">Aside</a></li>
+  </ul></li>
+  <li><a href="#reference-solution" id="toc-reference-solution" class="nav-link" data-scroll-target="#reference-solution">Reference Solution</a>
+  <ul class="collapse">
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -219,17 +240,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<!--
-
-saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/
-
-println!("\u{001b}[44mHello, world!\u{001b}[0m")
-
--->
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<ul>
+<li>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">Guessing Game</a></li>
+<li>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <a href="http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/">same name</a>.</li>
+</ul>
+</section>
+<section id="pre-flight-checks" class="level2">
+<h2 class="anchored" data-anchor-id="pre-flight-checks">Pre-flight Checks</h2>
+<ul>
+<li>Wordle exercises the following:
+<ul>
+<li>Strings in Rust</li>
+<li>Collection types, like arrays or vectors</li>
+<li>Scalar types, like integers or characters</li>
+<li>File I/O and the UNIX-based file system</li>
+<li>Loops</li>
+</ul></li>
+</ul>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<ul>
+<li>To complete this assignment, you must:
+<ul>
+<li>Create a <code>22</code> directory in your <code>271rs</code> repository.</li>
+<li>This folder must be a Cargo package.</li>
+<li>It must leverage no <em>other</em> Cargo packages, namely it may not use packages for randomization.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">cargo</span> new 22 <span class="at">--name</span> wordle <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="requirements-1" class="level2">
+<h2 class="anchored" data-anchor-id="requirements-1">Requirements</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Character coloring via ANSI escape codes</label></li>
+<li><label><input type="checkbox">File I/O for randomization</label></li>
+<li><label><input type="checkbox">File I/O for input</label></li>
+<li><label><input type="checkbox">Consistency with a randomized answer</label></li>
+<li><label><input type="checkbox">Consistency with word list</label></li>
+<li><label><input type="checkbox">Consistency with prior guesses</label></li>
+<li><label><input type="checkbox">Styling using <a href="https://en.wikipedia.org/iki/Box-drawing_characters">Box-drawing_characters</a></label></li>
+</ul>
+<p><em>The following is a staged screenshot in VS Code, showing the expected terminal appearance.</em></p>
+<center>
+<img src="img/wordle.png" class="img-fluid">
+</center>
+<p><em>The following is a staged screenshot in WSL2, showing the expected terminal appearance.</em></p>
+<center>
+<img src="img/word_l.png" class="img-fluid">
+</center>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<section id="nifty-assignment-description" class="level2">
+<h2 class="anchored" data-anchor-id="nifty-assignment-description">Nifty Assignment Description</h2>
+<blockquote class="blockquote">
+<p>The object of the Wordle puzzle is to figure out the hidden word for the day using no more than six guesses. When you type in a word and then hit the RETURN or ENTER key, the website gives you information about how close your guess is by coloring the background of the letters. For every letter in your guess that is in its correct position, Wordle colors the [letter green, the “correct color”]. For every letter that appears in the word but is not in the correct position, Wordle colors the [letter yellow, the “present color”]. All letters in the guess that don’t appear in the word are colored [red, the “missing color”]</p>
+</blockquote>
+<ul>
+<li>I will assume your familiarity with Wordle, or <a href="http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/Wordle/python/WordleAssignment.pdf">Read more</a>.</li>
+</ul>
+</section>
+<section id="aside" class="level2">
+<h2 class="anchored" data-anchor-id="aside">Aside</h2>
+<ul>
+<li>I take an extremely literal interpretation of the following.</li>
+</ul>
+<blockquote class="blockquote">
+<p>For every letter that appears in the word but is not in the correct position.</p>
+</blockquote>
+<ul>
+<li>I implemented this in Python as:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>guess[i] <span class="kw">in</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I implemented this in JavaScript as:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>answer<span class="op">.</span><span class="fu">include</span>(guess[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I did not engage with any complicated rules involving double letters, as I was unaware of those rules as a casual player and do not find them algorithmically interesting.</li>
+<li>So, in the case that a guess or an answer contains multiples of any letter, the precise correctness of any usage of the “missing color” (in our case yellow) is left undefined and to the discretion of the student.</li>
+</ul>
+</section>
+</section>
+<section id="reference-solution" class="level1">
+<h1>Reference Solution</h1>
+<section id="python" class="level2">
+<h2 class="anchored" data-anchor-id="python">Python</h2>
+<ul>
+<li>The following Python solution meets all assignment requirements except for usage of <code>/dev/random</code> (I wanted the example to work on Windows).</li>
+<li>It is not manually written Python, but created by providing a Rust reference solution to an LLM, translating to Python, and editting for correctness.
+<ul>
+<li>I did not find LLMs could go the other direction. You may find otherwise.</li>
+</ul></li>
+<li>A few notes:
+<ul>
+<li>The box drawing characters are spaced such that guessed letters have a space between them to the nearest horizontal box drawing character.</li>
+<li>I maintain all letters in lower case. This is implicitly enforced by the requirement that guesses be members of <code>WORDS</code></li>
+<li>This is a 5 word Latin word list. You are encouraged to use the actual wordlist, which I can’t find in it’s original form but is present on <a href="https://reichel.dev/blog/reverse-engineering-wordle.html#looking-at-the-source">this webpage</a> (Scroll to bottom).
+<ul>
+<li>Playing using this word list was relatively more challenging, as it omits many common words and plurals.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>wordle.py</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="wordle.py"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># A list of valid words, truncated for this example.</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>WORDS <span class="op">=</span> [<span class="st">"sator"</span>, <span class="st">"arepo"</span>, <span class="st">"tenet"</span>, <span class="st">"opera"</span>, <span class="st">"rotas"</span>]</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># ANSI color codes for colored text</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># 31: Red, 32: Green, 33: Yellow</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>R <span class="op">=</span> <span class="dv">31</span>  <span class="co"># Red (letter not in word)</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>G <span class="op">=</span> <span class="dv">32</span>  <span class="co"># Green (letter in correct position)</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>Y <span class="op">=</span> <span class="dv">33</span>  <span class="co"># Yellow (letter in word but wrong position)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Box-drawing characters for the game board</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>T <span class="op">=</span> <span class="st">"┌───┬───┬───┬───┬───┐"</span>  <span class="co"># Top border</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>M <span class="op">=</span> <span class="st">"├───┼───┼───┼───┼───┤"</span>  <span class="co"># Middle border</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>B <span class="op">=</span> <span class="st">"└───┴───┴───┴───┴───┘"</span>  <span class="co"># Bottom border</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="kw">def</span> letter(a: <span class="bu">str</span>, c: <span class="bu">int</span>):</span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="co">"""</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">    Prints a single letter with a specified ANSI color.</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">    Args:</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">        a: The letter to print.</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">        c: The ANSI color code.</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">    """</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    <span class="bu">print</span>(<span class="ss">f"│ </span><span class="ch">\u001b</span><span class="ss">[</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">m</span><span class="sc">{</span>a<span class="sc">}</span><span class="ch">\u001b</span><span class="ss">[0m "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb4-24"><a href="#cb4-24"></a></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="kw">def</span> colors(s: <span class="bu">str</span>, answer: <span class="bu">str</span>):</span>
+<span id="cb4-26"><a href="#cb4-26"></a>    <span class="co">"""</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co">    Analyzes a guessed word and prints it with the appropriate colors.</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a></span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co">    Args:</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="co">        s: The guessed word.</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">        answer: The correct answer word.</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">    """</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb4-34"><a href="#cb4-34"></a>        char <span class="op">=</span> s[i]</span>
+<span id="cb4-35"><a href="#cb4-35"></a>        color_code <span class="op">=</span> R</span>
+<span id="cb4-36"><a href="#cb4-36"></a>        <span class="cf">if</span> answer[i] <span class="op">==</span> char:</span>
+<span id="cb4-37"><a href="#cb4-37"></a>            color_code <span class="op">=</span> G</span>
+<span id="cb4-38"><a href="#cb4-38"></a>        <span class="cf">elif</span> char <span class="kw">in</span> answer:</span>
+<span id="cb4-39"><a href="#cb4-39"></a>            color_code <span class="op">=</span> Y</span>
+<span id="cb4-40"><a href="#cb4-40"></a>        letter(char, color_code)</span>
+<span id="cb4-41"><a href="#cb4-41"></a>    <span class="bu">print</span>(<span class="st">"│"</span>)</span>
+<span id="cb4-42"><a href="#cb4-42"></a></span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="kw">def</span> game(words: <span class="bu">list</span>[<span class="bu">str</span>], answer: <span class="bu">str</span>):</span>
+<span id="cb4-44"><a href="#cb4-44"></a>    <span class="co">"""</span></span>
+<span id="cb4-45"><a href="#cb4-45"></a><span class="co">    Clears the screen and draws the game board with the current guesses.</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a></span>
+<span id="cb4-47"><a href="#cb4-47"></a><span class="co">    Args:</span></span>
+<span id="cb4-48"><a href="#cb4-48"></a><span class="co">        words: A list of guessed words.</span></span>
+<span id="cb4-49"><a href="#cb4-49"></a><span class="co">        answer: The correct answer word.</span></span>
+<span id="cb4-50"><a href="#cb4-50"></a><span class="co">    """</span></span>
+<span id="cb4-51"><a href="#cb4-51"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\u001b</span><span class="st">[2J"</span>)  <span class="co"># Clear the screen</span></span>
+<span id="cb4-52"><a href="#cb4-52"></a>    <span class="bu">print</span>(T)</span>
+<span id="cb4-53"><a href="#cb4-53"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb4-54"><a href="#cb4-54"></a>        colors(words[i], answer)</span>
+<span id="cb4-55"><a href="#cb4-55"></a>        <span class="bu">print</span>(M)</span>
+<span id="cb4-56"><a href="#cb4-56"></a>    colors(words[<span class="dv">5</span>], answer)</span>
+<span id="cb4-57"><a href="#cb4-57"></a>    <span class="bu">print</span>(B)</span>
+<span id="cb4-58"><a href="#cb4-58"></a></span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="kw">def</span> main():</span>
+<span id="cb4-60"><a href="#cb4-60"></a>    <span class="co">"""</span></span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="co">    The main game loop.</span></span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="co">    """</span></span>
+<span id="cb4-63"><a href="#cb4-63"></a>    words <span class="op">=</span> [<span class="st">"     "</span>] <span class="op">*</span> <span class="dv">6</span></span>
+<span id="cb4-64"><a href="#cb4-64"></a></span>
+<span id="cb4-65"><a href="#cb4-65"></a>    <span class="co">###############################################</span></span>
+<span id="cb4-66"><a href="#cb4-66"></a>    <span class="co">#                                             #</span></span>
+<span id="cb4-67"><a href="#cb4-67"></a>    <span class="co"># You are required to use /dev/random in Rust #</span></span>
+<span id="cb4-68"><a href="#cb4-68"></a>    <span class="co">#                                             #</span></span>
+<span id="cb4-69"><a href="#cb4-69"></a>    <span class="co">###############################################</span></span>
+<span id="cb4-70"><a href="#cb4-70"></a>    <span class="im">import</span> random</span>
+<span id="cb4-71"><a href="#cb4-71"></a>    answer <span class="op">=</span> random.choice(WORDS)</span>
+<span id="cb4-72"><a href="#cb4-72"></a></span>
+<span id="cb4-73"><a href="#cb4-73"></a>    attempts <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-74"><a href="#cb4-74"></a></span>
+<span id="cb4-75"><a href="#cb4-75"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\u001b</span><span class="st">[2J"</span>, end<span class="op">=</span><span class="st">""</span>)  <span class="co"># Clear the screen</span></span>
+<span id="cb4-76"><a href="#cb4-76"></a>    <span class="bu">print</span>(<span class="st">"Use lowercase only btw."</span>)</span>
+<span id="cb4-77"><a href="#cb4-77"></a></span>
+<span id="cb4-78"><a href="#cb4-78"></a>    <span class="cf">while</span> words[<span class="dv">5</span>] <span class="op">==</span> <span class="st">"     "</span>:</span>
+<span id="cb4-79"><a href="#cb4-79"></a>        guess <span class="op">=</span> <span class="bu">input</span>().strip()  <span class="co"># Convert input to lowercase</span></span>
+<span id="cb4-80"><a href="#cb4-80"></a>        <span class="cf">if</span> guess <span class="kw">in</span> WORDS:</span>
+<span id="cb4-81"><a href="#cb4-81"></a>            words[attempts] <span class="op">=</span> guess</span>
+<span id="cb4-82"><a href="#cb4-82"></a>            game(words, answer)</span>
+<span id="cb4-83"><a href="#cb4-83"></a>            <span class="cf">if</span> guess <span class="op">==</span> answer:</span>
+<span id="cb4-84"><a href="#cb4-84"></a>                <span class="bu">print</span>(<span class="st">"Winner"</span>)</span>
+<span id="cb4-85"><a href="#cb4-85"></a>                <span class="cf">return</span></span>
+<span id="cb4-86"><a href="#cb4-86"></a>            attempts <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-87"><a href="#cb4-87"></a>        <span class="cf">else</span>:</span>
+<span id="cb4-88"><a href="#cb4-88"></a>            <span class="bu">print</span>(<span class="st">"Not a valid word!"</span>)</span>
+<span id="cb4-89"><a href="#cb4-89"></a></span>
+<span id="cb4-90"><a href="#cb4-90"></a>    <span class="bu">print</span>(<span class="st">"Game over :("</span>)</span>
+<span id="cb4-91"><a href="#cb4-91"></a></span>
+<span id="cb4-92"><a href="#cb4-92"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb4-93"><a href="#cb4-93"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <!-- -->
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -712,20 +934,199 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Wordle"</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 19 Sep 1440 ET"</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">---</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">&lt;!--</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">println!("\u{001b}[44mHello, world!\u{001b}[0m")</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co">--&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "Wordle"</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 19 Sep 1440 ET"</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">---</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fu"># Setup</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">## Citation</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">- </span>The idea to do Wordle as the first Rust assignment was inspired by the Chapter 2 of the Rust Book, <span class="co">[</span><span class="ot">Guessing Game</span><span class="co">](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="ss">- </span>The idea to do Wordle as a programming assignment is inspired by the Nifty Assignment of the <span class="co">[</span><span class="ot">same name</span><span class="co">](http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/)</span>.</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="fu">## Pre-flight Checks</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">- </span>Wordle exercises the following:</span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">    - </span>Strings in Rust</span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="ss">    - </span>Collection types, like arrays or vectors</span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="ss">    - </span>Scalar types, like integers or characters</span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="ss">    - </span>File I/O and the UNIX-based file system</span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="ss">    - </span>Loops</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="fu">## Requirements</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="ss">- </span>To complete this assignment, you must:</span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="ss">    - </span>Create a <span class="in">`22`</span> directory in your <span class="in">`271rs`</span> repository.</span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="ss">    - </span>This folder must be a Cargo package.</span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="ss">    - </span>It must leverage no *other* Cargo packages, namely it may not use packages for randomization.</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="in">```bash</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="ex">cargo</span> new 22 <span class="at">--name</span> wordle <span class="at">--vcs</span> none</span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">```</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="fu">## Requirements</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="ss">- </span><span class="va">[ ]</span> Character coloring via ANSI escape codes</span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="ss">- </span><span class="va">[ ]</span> File I/O for randomization</span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="ss">- </span><span class="va">[ ]</span> File I/O for input</span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="ss">- </span><span class="va">[ ]</span> Consistency with a randomized answer</span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="ss">- </span><span class="va">[ ]</span> Consistency with word list</span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="ss">- </span><span class="va">[ ]</span> Consistency with prior guesses</span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="ss">- </span><span class="va">[ ]</span> Styling using <span class="co">[</span><span class="ot">Box-drawing_characters</span><span class="co">](https://en.wikipedia.org/iki/Box-drawing_characters)</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a></span>
+<span id="cb5-44"><a href="#cb5-44"></a>*The following is a staged screenshot in VS Code, showing the expected terminal appearance.*</span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a>&lt;center&gt;</span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="al">![](img/wordle.png)</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a>&lt;/center&gt;</span>
+<span id="cb5-49"><a href="#cb5-49"></a></span>
+<span id="cb5-50"><a href="#cb5-50"></a>*The following is a staged screenshot in WSL2, showing the expected terminal appearance.*</span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a>&lt;center&gt;</span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="al">![](img/word_l.png)</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a>&lt;/center&gt;</span>
+<span id="cb5-55"><a href="#cb5-55"></a></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="fu"># Summary</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="fu">## Nifty Assignment Description</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a></span>
+<span id="cb5-60"><a href="#cb5-60"></a><span class="at">&gt; The object of the Wordle puzzle is to figure out the hidden word for the day using no more than six guesses. When you type in a word and then hit the RETURN or ENTER key, the website gives you information about how close your guess is by coloring the background of the letters. For every letter in your guess that is in its correct position, Wordle colors the </span><span class="co">[</span><span class="ot">letter green, the "correct color"</span><span class="co">]</span><span class="at">. For every</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="at">letter that appears in the word but is not in the correct position, Wordle colors the </span><span class="co">[</span><span class="ot">letter yellow, the "present color"</span><span class="co">]</span><span class="at">. All letters in the guess that don’t appear in the word are colored </span><span class="co">[</span><span class="ot">red, the "missing color"</span><span class="co">]</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a></span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="ss">- </span>I will assume your familiarity with Wordle, or <span class="co">[</span><span class="ot">Read more</span><span class="co">](http://nifty.stanford.edu/2022/eroberts-spelling-bee-wordle/Wordle/python/WordleAssignment.pdf)</span>.</span>
+<span id="cb5-64"><a href="#cb5-64"></a></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="fu">## Aside</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="ss">- </span>I take an extremely literal interpretation of the following.</span>
+<span id="cb5-68"><a href="#cb5-68"></a></span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="at">&gt; For every letter that appears in the word but is not in the correct position.</span></span>
+<span id="cb5-70"><a href="#cb5-70"></a></span>
+<span id="cb5-71"><a href="#cb5-71"></a><span class="ss">- </span>I implemented this in Python as:</span>
+<span id="cb5-72"><a href="#cb5-72"></a></span>
+<span id="cb5-73"><a href="#cb5-73"></a><span class="in">```py</span></span>
+<span id="cb5-74"><a href="#cb5-74"></a>guess[i] <span class="kw">in</span> answer</span>
+<span id="cb5-75"><a href="#cb5-75"></a><span class="in">```</span></span>
+<span id="cb5-76"><a href="#cb5-76"></a></span>
+<span id="cb5-77"><a href="#cb5-77"></a><span class="ss">- </span>I implemented this in JavaScript as:</span>
+<span id="cb5-78"><a href="#cb5-78"></a></span>
+<span id="cb5-79"><a href="#cb5-79"></a><span class="in">```js</span></span>
+<span id="cb5-80"><a href="#cb5-80"></a>answer<span class="op">.</span><span class="fu">include</span>(guess[i])</span>
+<span id="cb5-81"><a href="#cb5-81"></a><span class="in">```</span></span>
+<span id="cb5-82"><a href="#cb5-82"></a></span>
+<span id="cb5-83"><a href="#cb5-83"></a><span class="ss">- </span>I did not engage with any complicated rules involving double letters, as I was unaware of those rules as a casual player and do not find them algorithmically interesting.</span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="ss">- </span>So, in the case that a guess or an answer contains multiples of any letter, the precise correctness of any usage of the "missing color" (in our case yellow) is left undefined and to the discretion of the student.</span>
+<span id="cb5-85"><a href="#cb5-85"></a></span>
+<span id="cb5-86"><a href="#cb5-86"></a><span class="fu"># Reference Solution</span></span>
+<span id="cb5-87"><a href="#cb5-87"></a></span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="fu">## Python</span></span>
+<span id="cb5-89"><a href="#cb5-89"></a></span>
+<span id="cb5-90"><a href="#cb5-90"></a><span class="ss">- </span>The following Python solution meets all assignment requirements except for usage of <span class="in">`/dev/random`</span> (I wanted the example to work on Windows).</span>
+<span id="cb5-91"><a href="#cb5-91"></a><span class="ss">- </span>It is not manually written Python, but created by providing a Rust reference solution to an LLM, translating to Python, and editting for correctness.</span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="ss">    - </span>I did not find LLMs could go the other direction. You may find otherwise.</span>
+<span id="cb5-93"><a href="#cb5-93"></a><span class="ss">- </span>A few notes:</span>
+<span id="cb5-94"><a href="#cb5-94"></a><span class="ss">    - </span>The box drawing characters are spaced such that guessed letters have a space between them to the nearest horizontal box drawing character.</span>
+<span id="cb5-95"><a href="#cb5-95"></a><span class="ss">    - </span>I maintain all letters in lower case. This is implicitly enforced by the requirement that guesses be members of <span class="in">`WORDS`</span></span>
+<span id="cb5-96"><a href="#cb5-96"></a><span class="ss">    - </span>This is a 5 word Latin word list. You are encouraged to use the actual wordlist, which I can't find in it's original form but is present on <span class="co">[</span><span class="ot">this webpage</span><span class="co">](https://reichel.dev/blog/reverse-engineering-wordle.html#looking-at-the-source)</span> (Scroll to bottom).</span>
+<span id="cb5-97"><a href="#cb5-97"></a><span class="ss">        - </span>Playing using this word list was relatively more challenging, as it omits many common words and plurals.</span>
+<span id="cb5-98"><a href="#cb5-98"></a></span>
+<span id="cb5-99"><a href="#cb5-99"></a><span class="in">```{.py filename="wordle.py"}</span></span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="in"># A list of valid words, truncated for this example.</span></span>
+<span id="cb5-101"><a href="#cb5-101"></a><span class="in">WORDS = ["sator", "arepo", "tenet", "opera", "rotas"]</span></span>
+<span id="cb5-102"><a href="#cb5-102"></a></span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="in"># ANSI color codes for colored text</span></span>
+<span id="cb5-104"><a href="#cb5-104"></a><span class="in"># 31: Red, 32: Green, 33: Yellow</span></span>
+<span id="cb5-105"><a href="#cb5-105"></a><span class="in">R = 31  # Red (letter not in word)</span></span>
+<span id="cb5-106"><a href="#cb5-106"></a><span class="in">G = 32  # Green (letter in correct position)</span></span>
+<span id="cb5-107"><a href="#cb5-107"></a><span class="in">Y = 33  # Yellow (letter in word but wrong position)</span></span>
+<span id="cb5-108"><a href="#cb5-108"></a></span>
+<span id="cb5-109"><a href="#cb5-109"></a><span class="in"># Box-drawing characters for the game board</span></span>
+<span id="cb5-110"><a href="#cb5-110"></a><span class="in">T = "┌───┬───┬───┬───┬───┐"  # Top border</span></span>
+<span id="cb5-111"><a href="#cb5-111"></a><span class="in">M = "├───┼───┼───┼───┼───┤"  # Middle border</span></span>
+<span id="cb5-112"><a href="#cb5-112"></a><span class="in">B = "└───┴───┴───┴───┴───┘"  # Bottom border</span></span>
+<span id="cb5-113"><a href="#cb5-113"></a></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="in">def letter(a: str, c: int):</span></span>
+<span id="cb5-115"><a href="#cb5-115"></a><span class="in">    """</span></span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="in">    Prints a single letter with a specified ANSI color.</span></span>
+<span id="cb5-117"><a href="#cb5-117"></a></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="in">    Args:</span></span>
+<span id="cb5-119"><a href="#cb5-119"></a><span class="in">        a: The letter to print.</span></span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="in">        c: The ANSI color code.</span></span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="in">    """</span></span>
+<span id="cb5-122"><a href="#cb5-122"></a><span class="in">    print(f"│ \u001b[{c}m{a}\u001b[0m ", end="")</span></span>
+<span id="cb5-123"><a href="#cb5-123"></a></span>
+<span id="cb5-124"><a href="#cb5-124"></a><span class="in">def colors(s: str, answer: str):</span></span>
+<span id="cb5-125"><a href="#cb5-125"></a><span class="in">    """</span></span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="in">    Analyzes a guessed word and prints it with the appropriate colors.</span></span>
+<span id="cb5-127"><a href="#cb5-127"></a></span>
+<span id="cb5-128"><a href="#cb5-128"></a><span class="in">    Args:</span></span>
+<span id="cb5-129"><a href="#cb5-129"></a><span class="in">        s: The guessed word.</span></span>
+<span id="cb5-130"><a href="#cb5-130"></a><span class="in">        answer: The correct answer word.</span></span>
+<span id="cb5-131"><a href="#cb5-131"></a><span class="in">    """</span></span>
+<span id="cb5-132"><a href="#cb5-132"></a><span class="in">    for i in range(5):</span></span>
+<span id="cb5-133"><a href="#cb5-133"></a><span class="in">        char = s[i]</span></span>
+<span id="cb5-134"><a href="#cb5-134"></a><span class="in">        color_code = R</span></span>
+<span id="cb5-135"><a href="#cb5-135"></a><span class="in">        if answer[i] == char:</span></span>
+<span id="cb5-136"><a href="#cb5-136"></a><span class="in">            color_code = G</span></span>
+<span id="cb5-137"><a href="#cb5-137"></a><span class="in">        elif char in answer:</span></span>
+<span id="cb5-138"><a href="#cb5-138"></a><span class="in">            color_code = Y</span></span>
+<span id="cb5-139"><a href="#cb5-139"></a><span class="in">        letter(char, color_code)</span></span>
+<span id="cb5-140"><a href="#cb5-140"></a><span class="in">    print("│")</span></span>
+<span id="cb5-141"><a href="#cb5-141"></a></span>
+<span id="cb5-142"><a href="#cb5-142"></a><span class="in">def game(words: list[str], answer: str):</span></span>
+<span id="cb5-143"><a href="#cb5-143"></a><span class="in">    """</span></span>
+<span id="cb5-144"><a href="#cb5-144"></a><span class="in">    Clears the screen and draws the game board with the current guesses.</span></span>
+<span id="cb5-145"><a href="#cb5-145"></a></span>
+<span id="cb5-146"><a href="#cb5-146"></a><span class="in">    Args:</span></span>
+<span id="cb5-147"><a href="#cb5-147"></a><span class="in">        words: A list of guessed words.</span></span>
+<span id="cb5-148"><a href="#cb5-148"></a><span class="in">        answer: The correct answer word.</span></span>
+<span id="cb5-149"><a href="#cb5-149"></a><span class="in">    """</span></span>
+<span id="cb5-150"><a href="#cb5-150"></a><span class="in">    print("\u001b[2J")  # Clear the screen</span></span>
+<span id="cb5-151"><a href="#cb5-151"></a><span class="in">    print(T)</span></span>
+<span id="cb5-152"><a href="#cb5-152"></a><span class="in">    for i in range(5):</span></span>
+<span id="cb5-153"><a href="#cb5-153"></a><span class="in">        colors(words[i], answer)</span></span>
+<span id="cb5-154"><a href="#cb5-154"></a><span class="in">        print(M)</span></span>
+<span id="cb5-155"><a href="#cb5-155"></a><span class="in">    colors(words[5], answer)</span></span>
+<span id="cb5-156"><a href="#cb5-156"></a><span class="in">    print(B)</span></span>
+<span id="cb5-157"><a href="#cb5-157"></a></span>
+<span id="cb5-158"><a href="#cb5-158"></a><span class="in">def main():</span></span>
+<span id="cb5-159"><a href="#cb5-159"></a><span class="in">    """</span></span>
+<span id="cb5-160"><a href="#cb5-160"></a><span class="in">    The main game loop.</span></span>
+<span id="cb5-161"><a href="#cb5-161"></a><span class="in">    """</span></span>
+<span id="cb5-162"><a href="#cb5-162"></a><span class="in">    words = ["     "] * 6</span></span>
+<span id="cb5-163"><a href="#cb5-163"></a></span>
+<span id="cb5-164"><a href="#cb5-164"></a><span class="in">    ###############################################</span></span>
+<span id="cb5-165"><a href="#cb5-165"></a><span class="in">    #                                             #</span></span>
+<span id="cb5-166"><a href="#cb5-166"></a><span class="in">    # You are required to use /dev/random in Rust #</span></span>
+<span id="cb5-167"><a href="#cb5-167"></a><span class="in">    #                                             #</span></span>
+<span id="cb5-168"><a href="#cb5-168"></a><span class="in">    ###############################################</span></span>
+<span id="cb5-169"><a href="#cb5-169"></a><span class="in">    import random</span></span>
+<span id="cb5-170"><a href="#cb5-170"></a><span class="in">    answer = random.choice(WORDS)</span></span>
+<span id="cb5-171"><a href="#cb5-171"></a></span>
+<span id="cb5-172"><a href="#cb5-172"></a><span class="in">    attempts = 0</span></span>
+<span id="cb5-173"><a href="#cb5-173"></a></span>
+<span id="cb5-174"><a href="#cb5-174"></a><span class="in">    print("\u001b[2J", end="")  # Clear the screen</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a><span class="in">    print("Use lowercase only btw.")</span></span>
+<span id="cb5-176"><a href="#cb5-176"></a></span>
+<span id="cb5-177"><a href="#cb5-177"></a><span class="in">    while words[5] == "     ":</span></span>
+<span id="cb5-178"><a href="#cb5-178"></a><span class="in">        guess = input().strip()  # Convert input to lowercase</span></span>
+<span id="cb5-179"><a href="#cb5-179"></a><span class="in">        if guess in WORDS:</span></span>
+<span id="cb5-180"><a href="#cb5-180"></a><span class="in">            words[attempts] = guess</span></span>
+<span id="cb5-181"><a href="#cb5-181"></a><span class="in">            game(words, answer)</span></span>
+<span id="cb5-182"><a href="#cb5-182"></a><span class="in">            if guess == answer:</span></span>
+<span id="cb5-183"><a href="#cb5-183"></a><span class="in">                print("Winner")</span></span>
+<span id="cb5-184"><a href="#cb5-184"></a><span class="in">                return</span></span>
+<span id="cb5-185"><a href="#cb5-185"></a><span class="in">            attempts += 1</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a><span class="in">        else:</span></span>
+<span id="cb5-187"><a href="#cb5-187"></a><span class="in">            print("Not a valid word!")</span></span>
+<span id="cb5-188"><a href="#cb5-188"></a></span>
+<span id="cb5-189"><a href="#cb5-189"></a><span class="in">    print("Game over :(")</span></span>
+<span id="cb5-190"><a href="#cb5-190"></a></span>
+<span id="cb5-191"><a href="#cb5-191"></a><span class="in">if __name__ == "__main__":</span></span>
+<span id="cb5-192"><a href="#cb5-192"></a><span class="in">    main()</span></span>
+<span id="cb5-193"><a href="#cb5-193"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
