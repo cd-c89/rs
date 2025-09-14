@@ -5462,5 +5462,22 @@
     "crumbs": [
       "Macros"
     ]
+  },
+  {
+    "objectID": "30_bits.html#bonus",
+    "href": "30_bits.html#bonus",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}",
+    "crumbs": [
+      "Bits"
+    ]
+  },
+  {
+    "objectID": "30_bits.rjs.html#bonus",
+    "href": "30_bits.rjs.html#bonus",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}"
   }
 ]

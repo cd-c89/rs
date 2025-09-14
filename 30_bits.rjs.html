@@ -1827,6 +1827,21 @@ Prof.&nbsp;Calvin
 <li>Endianness</li>
 </ul></li>
 </ul>
+</section>
+<section id="bonus" class="slide level2">
+<h2>Bonus</h2>
+<ul>
+<li>Courtesy Indi of CS Student Assoc.</li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb51-1"><a></a><span class="kw">fn</span> pairs(<span class="kw">mut</span> cs<span class="op">:</span> <span class="pp">std::</span><span class="dt">str</span><span class="pp">::</span>Chars<span class="op">,</span> vals<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">char</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb51-2"><a></a>    <span class="cf">return</span> <span class="cf">match</span> cs<span class="op">.</span>next()<span class="op">?</span> <span class="op">{</span></span>
+<span id="cb51-3"><a></a>        <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span> <span class="op">=&gt;</span> <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb51-4"><a></a>        n <span class="op">=&gt;</span> pairs(cs<span class="op">,</span> vals)<span class="op">.</span>map_or(<span class="cn">Some</span>(n)<span class="op">,</span> <span class="op">|</span>m<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb51-5"><a></a>            vals<span class="op">.</span>push(two_hex(n<span class="op">,</span> m))<span class="op">;</span></span>
+<span id="cb51-6"><a></a>            <span class="cn">None</span></span>
+<span id="cb51-7"><a></a>        <span class="op">}</span>)<span class="op">,</span></span>
+<span id="cb51-8"><a></a>    <span class="op">};</span></span>
+<span id="cb51-9"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!-- start at carries in encode then jump to finite -->
 
 

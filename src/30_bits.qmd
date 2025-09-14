@@ -976,4 +976,20 @@ fn custom_u8s_to_u32(vals : Vec<u8>) -> u32 {
     -   Bitwise operators
     -   Endianness
 
+## Bonus
+
+- Courtesy Indi of CS Student Assoc.
+
+```rs
+fn pairs(mut cs: std::str::Chars, vals: &mut Vec<u8>) -> Option<char> {
+    return match cs.next()? {
+        '\n' => None,
+        n => pairs(cs, vals).map_or(Some(n), |m| {
+            vals.push(two_hex(n, m));
+            None
+        }),
+    };
+}
+```
+
 <!-- start at carries in encode then jump to finite -->
