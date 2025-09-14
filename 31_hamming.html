@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>Guess – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./32_macros.html" rel="next">
+<link href="./30_bits.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./31_hamming.html">Guess</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#hamming" id="toc-hamming" class="nav-link" data-scroll-target="#hamming">Hamming</a>
+  <ul class="collapse">
+  <li><a href="#the-person" id="toc-the-person" class="nav-link" data-scroll-target="#the-person">The person</a></li>
+  <li><a href="#fine-print" id="toc-fine-print" class="nav-link" data-scroll-target="#fine-print">Fine print</a></li>
+  </ul></li>
+  <li><a href="#weight" id="toc-weight" class="nav-link" data-scroll-target="#weight">Weight</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#your-task" id="toc-your-task" class="nav-link" data-scroll-target="#your-task">Your task</a></li>
+  <li><a href="#template-files" id="toc-template-files" class="nav-link" data-scroll-target="#template-files">Template files</a></li>
+  </ul></li>
+  <li><a href="#distance" id="toc-distance" class="nav-link" data-scroll-target="#distance">Distance</a>
+  <ul class="collapse">
+  <li><a href="#definition-1" id="toc-definition-1" class="nav-link" data-scroll-target="#definition-1">Definition</a></li>
+  <li><a href="#your-task-1" id="toc-your-task-1" class="nav-link" data-scroll-target="#your-task-1">Your task</a></li>
+  <li><a href="#today-1" id="toc-today-1" class="nav-link" data-scroll-target="#today-1">Today</a></li>
+  </ul></li>
+  <li><a href="#challenge-problems" id="toc-challenge-problems" class="nav-link" data-scroll-target="#challenge-problems">Challenge Problems</a>
+  <ul class="collapse">
+  <li><a href="#strings-as-bitstrings" id="toc-strings-as-bitstrings" class="nav-link" data-scroll-target="#strings-as-bitstrings">Strings as bitstrings</a></li>
+  <li><a href="#popcnt" id="toc-popcnt" class="nav-link" data-scroll-target="#popcnt">POPCNT</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Guess</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li>Lab Day
+<ul>
+<li>Mixed use assignment.</li>
+<li>Practically useful for HW</li>
+<li>Theoretically useful for Final</li>
+</ul></li>
+</ul>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li>“Macros” is ready.
+<ul>
+<li>Not too hard; just practice with the operators.</li>
+</ul></li>
+<li>Due Friday, 26 Sept.&nbsp;at 1440 ET.</li>
+</ul>
+</section>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<ul>
+<li>I learned the term <em>Hamming distance</em> from Prof.&nbsp;Josh Laison while discussing a possible research collaboration.</li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Hamming</label></li>
+<li><label><input type="checkbox">Hamming weight</label></li>
+<li><label><input type="checkbox">Hamming distance</label></li>
+</ul>
+</section>
+<section id="hamming" class="level1">
+<h1>Hamming</h1>
+<section id="the-person" class="level2">
+<h2 class="anchored" data-anchor-id="the-person">The person</h2>
+<blockquote class="blockquote">
+<p><a href="https://en.wikipedia.org/wiki/Richard_Hamming">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.</a></p>
+</blockquote>
+<p><img src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4.png" class="img-fluid"></p>
+</section>
+<section id="fine-print" class="level2">
+<h2 class="anchored" data-anchor-id="fine-print">Fine print</h2>
+<ul>
+<li>It is a virtual certainty that Hamming did not discover the concepts of Hamming weight or Hamming distance, both of which have limited use in historical record before Hamming was alive.</li>
+<li>Typically I avoid using terms where someone is named after someone who did not invent it.</li>
+<li>I don’t have alternate name in this case.
+<ul>
+<li>It can be called “edit distance” but there are other edit distances.</li>
+</ul></li>
+<li>It must be remarked upon that an abstract mathematical concept was named after a US Ivy Leaguer who worked on the Manhattan Project, and that this naming is highly political.</li>
+</ul>
+</section>
+</section>
+<section id="weight" class="level1">
+<h1>Weight</h1>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<blockquote class="blockquote">
+<p>The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.</p>
+</blockquote>
+<ul>
+<li>This adopts the formal computer science notion of referring to bit strings as:
+<ul>
+<li><em>words</em> in the</li>
+<li><em>languages</em>, which is the set of all possible bitstrings</li>
+<li>that is composed of the <em>symbols</em>, which are the bit values <span class="math inline">\(\{0, 1\}\)</span></li>
+</ul></li>
+<li>So, Hamming weight of a byte is the number of <code>1</code>s in that byte.</li>
+</ul>
+</section>
+<section id="your-task" class="level2">
+<h2 class="anchored" data-anchor-id="your-task">Your task</h2>
+<ul>
+<li>Using the bitwise operators, shifts, and addition, write the following functions:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">fn</span> weight_u8(byte<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">fn</span> weight_u64(word<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">fn</span> weight_bytes(bytes<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">fn</span> weight_words(words<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You may wish to follow the Rust convention of implementing these in a <code>src/lib.rs</code> file.
+<ul>
+<li>You will need to prefix them as <code>pub fn</code> in <code>src/lib.rs</code></li>
+<li>You will need to prefix them with your package name and <code>::</code> in <code>src/main.rs</code>
+<ul>
+<li>I used <code>hamming::weight_u8</code>, for example.</li>
+</ul></li>
+</ul></li>
+<li>This convention will be required for the homework, but is not required now.</li>
+</ul>
+</section>
+<section id="template-files" class="level2">
+<h2 class="anchored" data-anchor-id="template-files">Template files</h2>
+<ul>
+<li>I made a package:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">cargo</span> new 31 <span class="at">--name</span> hamming <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I wrote a library function: ```{.rs filename=“src/lib.rs”) pub fn weight_u8(byte:u8) -&gt; u64 { let mut cnt : u64 = 0; // This is wrong. cnt += 1; // That was wrong. return cnt;</li>
+</ul>
+<pre><code>- I wrote some tests:
+```{.rs filename="src/main.rs")
+fn main() {
+    dbg!(hamming::weight_u8(0x33_u8));
+}</code></pre>
+<ul>
+<li>After fixing my function, I saw the following:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">$</span> cargo run</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="distance" class="level1">
+<h1>Distance</h1>
+<section id="definition-1" class="level2">
+<h2 class="anchored" data-anchor-id="definition-1">Definition</h2>
+<blockquote class="blockquote">
+<p>In information theory, the Hamming distance between two strings or vectors of equal length is the number of positions at which the corresponding symbols are different.</p>
+</blockquote>
+<ul>
+<li>The Hamming weight is the Hamming distance from the string of all <code>0</code> symbols.</li>
+</ul>
+</section>
+<section id="your-task-1" class="level2">
+<h2 class="anchored" data-anchor-id="your-task-1">Your task</h2>
+<ul>
+<li>Using the bitwise operators, shifts, and addition, write the following functions:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You may change the parameter names if those don’t make sense to you.
+<ul>
+<li>They were procedurally generated.</li>
+</ul></li>
+</ul>
+</section>
+<section id="today-1" class="level2">
+<h2 class="anchored" data-anchor-id="today-1">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Hamming</label></li>
+<li><label><input type="checkbox" checked="">Hamming weight</label></li>
+<li><label><input type="checkbox" checked="">Hamming distance</label></li>
+</ul>
+</section>
+</section>
+<section id="challenge-problems" class="level1">
+<h1>Challenge Problems</h1>
+<section id="strings-as-bitstrings" class="level2">
+<h2 class="anchored" data-anchor-id="strings-as-bitstrings">Strings as bitstrings</h2>
+<ul>
+<li>Compute the Hamming distance between the strings <code>Willamette</code> and <code>Xjmmbnfuuf</code>.</li>
+<li>Successfully pronounce <code>Xjmmbnfuuf</code></li>
+</ul>
+</section>
+<section id="popcnt" class="level2">
+<h2 class="anchored" data-anchor-id="popcnt">POPCNT</h2>
+<ul>
+<li>Read <a href="https://arxiv.org/pdf/1611.07612">this paper</a></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./30_bits.html" class="pagination-link" aria-label="Bits">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bits</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./32_macros.html" class="pagination-link" aria-label="Macros">
+        <span class="nav-page-text">Macros</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">---</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ss">- </span>Lab Day</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ss">    - </span>Mixed use assignment.</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">    - </span>Practically useful for HW</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ss">    - </span>Theoretically useful for Final</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">## Homework</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ss">- </span>"Macros" is ready.</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="ss">  - </span>Not too hard; just practice with the operators.</span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="ss">- </span>Due Friday, 26 Sept. at 1440 ET.</span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="fu">## Citation</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="ss">- </span>I learned the term *Hamming distance* from Prof. Josh Laison while discussing a possible research collaboration.</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="fu">## Today</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming</span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming weight</span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming distance</span>
+<span id="cb6-28"><a href="#cb6-28"></a></span>
+<span id="cb6-29"><a href="#cb6-29"></a></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="fu"># Hamming</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="fu">## The person</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.</span><span class="co">](https://en.wikipedia.org/wiki/Richard_Hamming)</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="al">![](https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4)</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="fu">## Fine print</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="ss">- </span>It is a virtual certainty that Hamming did not discover the concepts of Hamming weight or Hamming distance, both of which have limited use in historical record before Hamming was alive.</span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="ss">- </span>Typically I avoid using terms where someone is named after someone who did not invent it.</span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="ss">- </span>I don't have alternate name in this case.</span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="ss">    - </span>It can be called "edit distance" but there are other edit distances.</span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="ss">- </span>It must be remarked upon that an abstract mathematical concept was named after a US Ivy Leaguer who worked on the Manhattan Project, and that this naming is highly political.</span>
+<span id="cb6-45"><a href="#cb6-45"></a></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="fu"># Weight</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="fu">## Definition</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="at">&gt; The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="ss">- </span>This adopts the formal computer science notion of referring to bit strings as:</span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="ss">    - </span>*words* in the </span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="ss">    - </span>*languages*, which is the set of all possible bitstrings</span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="ss">    - </span>that is composed of the *symbols*, which are the bit values $<span class="sc">\{</span>0, 1<span class="sc">\}</span>$</span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="ss">- </span>So, Hamming weight of a byte is the number of <span class="in">`1`</span>s in that byte.</span>
+<span id="cb6-57"><a href="#cb6-57"></a></span>
+<span id="cb6-58"><a href="#cb6-58"></a><span class="fu">## Your task</span></span>
+<span id="cb6-59"><a href="#cb6-59"></a></span>
+<span id="cb6-60"><a href="#cb6-60"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
+<span id="cb6-61"><a href="#cb6-61"></a><span class="in">```rs</span></span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="kw">fn</span> weight_u8(byte<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="kw">fn</span> weight_u64(word<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="kw">fn</span> weight_bytes(bytes<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="kw">fn</span> weight_words(words<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a><span class="in">```</span></span>
+<span id="cb6-67"><a href="#cb6-67"></a></span>
+<span id="cb6-68"><a href="#cb6-68"></a><span class="ss">- </span>You may wish to follow the Rust convention of implementing these in a <span class="in">`src/lib.rs`</span> file.</span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="ss">    - </span>You will need to prefix them as <span class="in">`pub fn`</span> in <span class="in">`src/lib.rs`</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="ss">    - </span>You will need to prefix them with your package name and <span class="in">`::`</span> in <span class="in">`src/main.rs`</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="ss">        - </span>I used <span class="in">`hamming::weight_u8`</span>, for example.</span>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="ss">- </span>This convention will be required for the homework, but is not required now.</span>
+<span id="cb6-73"><a href="#cb6-73"></a></span>
+<span id="cb6-74"><a href="#cb6-74"></a><span class="fu">## Template files</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="ss">- </span>I made a package:</span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="in">```sh</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="ex">cargo</span> new 31 <span class="at">--name</span> hamming <span class="at">--vcs</span> none</span>
+<span id="cb6-79"><a href="#cb6-79"></a><span class="in">```</span></span>
+<span id="cb6-80"><a href="#cb6-80"></a><span class="ss">- </span>I wrote a library function:</span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="in">```{.rs filename="src/lib.rs")</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="in">pub fn weight_u8(byte:u8) -&gt; u64 {</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a><span class="in">    let mut cnt : u64 = 0;</span></span>
+<span id="cb6-84"><a href="#cb6-84"></a><span class="in">    // This is wrong.</span></span>
+<span id="cb6-85"><a href="#cb6-85"></a><span class="in">    cnt += 1;</span></span>
+<span id="cb6-86"><a href="#cb6-86"></a><span class="in">    // That was wrong.</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a><span class="in">    return cnt;</span></span>
+<span id="cb6-88"><a href="#cb6-88"></a></span>
+<span id="cb6-89"><a href="#cb6-89"></a><span class="in">```</span></span>
+<span id="cb6-90"><a href="#cb6-90"></a><span class="ss">- </span>I wrote some tests:</span>
+<span id="cb6-91"><a href="#cb6-91"></a><span class="in">```{.rs filename="src/main.rs")</span></span>
+<span id="cb6-92"><a href="#cb6-92"></a><span class="in">fn main() {</span></span>
+<span id="cb6-93"><a href="#cb6-93"></a><span class="in">    dbg!(hamming::weight_u8(0x33_u8));</span></span>
+<span id="cb6-94"><a href="#cb6-94"></a><span class="in">}</span></span>
+<span id="cb6-95"><a href="#cb6-95"></a><span class="in">```</span></span>
+<span id="cb6-96"><a href="#cb6-96"></a><span class="ss">- </span>After fixing my function, I saw the following:</span>
+<span id="cb6-97"><a href="#cb6-97"></a><span class="in">```sh</span></span>
+<span id="cb6-98"><a href="#cb6-98"></a><span class="ex">$</span> cargo run</span>
+<span id="cb6-99"><a href="#cb6-99"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb6-100"><a href="#cb6-100"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
+<span id="cb6-101"><a href="#cb6-101"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span>
+<span id="cb6-102"><a href="#cb6-102"></a><span class="in">```</span></span>
+<span id="cb6-103"><a href="#cb6-103"></a></span>
+<span id="cb6-104"><a href="#cb6-104"></a><span class="fu"># Distance</span></span>
+<span id="cb6-105"><a href="#cb6-105"></a></span>
+<span id="cb6-106"><a href="#cb6-106"></a><span class="fu">## Definition</span></span>
+<span id="cb6-107"><a href="#cb6-107"></a></span>
+<span id="cb6-108"><a href="#cb6-108"></a><span class="at">&gt; In information theory, the Hamming distance between two strings or vectors of equal length is the number of positions at which the corresponding symbols are different.</span></span>
+<span id="cb6-109"><a href="#cb6-109"></a></span>
+<span id="cb6-110"><a href="#cb6-110"></a><span class="ss">- </span>The Hamming weight is the Hamming distance from the string of all <span class="in">`0`</span> symbols.</span>
+<span id="cb6-111"><a href="#cb6-111"></a></span>
+<span id="cb6-112"><a href="#cb6-112"></a><span class="fu">## Your task</span></span>
+<span id="cb6-113"><a href="#cb6-113"></a></span>
+<span id="cb6-114"><a href="#cb6-114"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
+<span id="cb6-115"><a href="#cb6-115"></a><span class="in">```rs</span></span>
+<span id="cb6-116"><a href="#cb6-116"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-117"><a href="#cb6-117"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-118"><a href="#cb6-118"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-119"><a href="#cb6-119"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-120"><a href="#cb6-120"></a><span class="in">```</span></span>
+<span id="cb6-121"><a href="#cb6-121"></a></span>
+<span id="cb6-122"><a href="#cb6-122"></a><span class="ss">- </span>You may change the parameter names if those don't make sense to you.</span>
+<span id="cb6-123"><a href="#cb6-123"></a><span class="ss">    - </span>They were procedurally generated.</span>
+<span id="cb6-124"><a href="#cb6-124"></a></span>
+<span id="cb6-125"><a href="#cb6-125"></a><span class="fu">## Today</span></span>
+<span id="cb6-126"><a href="#cb6-126"></a></span>
+<span id="cb6-127"><a href="#cb6-127"></a><span class="ss">- </span><span class="va">[x]</span> Hamming</span>
+<span id="cb6-128"><a href="#cb6-128"></a><span class="ss">- </span><span class="va">[x]</span> Hamming weight</span>
+<span id="cb6-129"><a href="#cb6-129"></a><span class="ss">- </span><span class="va">[x]</span> Hamming distance</span>
+<span id="cb6-130"><a href="#cb6-130"></a></span>
+<span id="cb6-131"><a href="#cb6-131"></a><span class="fu"># Challenge Problems</span></span>
+<span id="cb6-132"><a href="#cb6-132"></a></span>
+<span id="cb6-133"><a href="#cb6-133"></a><span class="fu">## Strings as bitstrings</span></span>
+<span id="cb6-134"><a href="#cb6-134"></a></span>
+<span id="cb6-135"><a href="#cb6-135"></a><span class="ss">- </span>Compute the Hamming distance between the strings <span class="in">`Willamette`</span> and <span class="in">`Xjmmbnfuuf`</span>.</span>
+<span id="cb6-136"><a href="#cb6-136"></a><span class="ss">- </span>Successfully pronounce <span class="in">`Xjmmbnfuuf`</span></span>
+<span id="cb6-137"><a href="#cb6-137"></a></span>
+<span id="cb6-138"><a href="#cb6-138"></a><span class="fu">## POPCNT</span></span>
+<span id="cb6-139"><a href="#cb6-139"></a></span>
+<span id="cb6-140"><a href="#cb6-140"></a><span class="ss">- </span>Read <span class="co">[</span><span class="ot">this paper</span><span class="co">](https://arxiv.org/pdf/1611.07612)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

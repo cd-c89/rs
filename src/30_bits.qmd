@@ -1,0 +1,979 @@
+---
+title: Bits
+---
+
+## Announcements
+
+- **Action Items**:
+    - Wordle for Friday
+    - "Macros" assignment ready after class.
+
+## Today
+
+- Encoding
+    -   Bytes
+    -   Bitwise operators
+    -   Endianness
+    
+# Bytes
+
+## "Good at"
+
+- Computers "are good at" storing numerical data.
+    - At a high level *numerical computing*
+        - NumPy / Numba
+        - Julia
+        - Fortran
+- These languages excel at wide ranges of mathematical operations, ranging from addition to solving systems of differential equations.
+
+## "Good at"
+
+- *Electronics* are good at propagating signals, which we often view as ordered collections of zeros and ones.
+    - At a lower level *processing*
+        - C and to a lesser degree C++
+        - Assembly, like AMD/Intel x86 or IBM PowerPC
+        - Rust
+- These languages often have weaker support for say, trigonometry and better support for reading files of arbitrary types, including not just .csv files but e.g. readings from radio telescopes.
+
+## Low-level langauges
+
+- Rust is among the group of languages good at working close to the "hardware-software interface"
+- Many design in decisions in Rust, such as in how Rust read file data `/dev/random`, reflect this:
+```rs
+usize::from_ne_bytes(buffer);
+```
+- Direct references to bytes (or bits) are uncommon but present in higher level languages, and increase in popularity in languages that give more control to programs over how the device operates.
+
+## Bit Manipulation
+
+- One common application of lower-level programming is to precisely control the values of individual bits within a byte.
+
+::: {.callout-note}
+A *byte* is a hardware idea - an ordered collection of 8 bits, which themselves are hardware units either containing, or lacking, some electrical charge. We view them as storing zeros or ones.
+:::
+
+- Importantly, while we can refer to bits or bytes in software, versus types like integers or strings, we are describing *actual physical phenomena* rather than mathematical abstractions.
+
+## Support
+
+- Low level support is provided most commonly through two features:
+    - A type to represent a byte or bytes.
+    - Bitwise operators - operators like the arithmetic infix operators `+` or `-` but that perform operations on pairs of bits rather than pairs of numeric values.
+- We explore each in Rust.
+
+## Byte(s)
+
+- Bytes are referenced by name within in Rust `std` in a few places, though there is no formal `byte` type.
+- Instead, `u8` is used.
+    - This is common - there is little meaningful difference between 8 bits pretending to be a number and 8 bits that aren't doing anything in particular.
+    
+## Bytes 
+
+- Bytes are referenced, both as the function `bytes` and the data structure `Bytes`
+    - The function produces a Rust iterator the produces `u8` values.
+- In other cases, such as `as_bytes`, an array of `u8` is often used (expressed as `[u8]`.
+- In any case, collections of `u8`s.
+
+## Example
+
+- Really, there is no better example than just grabbing some random bits from `/dev/random` and taking a peek.
+- Rust helpfully supports printing in binary, using the `b` format code, to see the individual zeroes and ones of a byte or bytes.
+
+```rs
+let mut devrnd = std::fs::File::open("/dev/urandom").unwrap();
+let mut buffer = [0u8; (usize::BITS / 8) as usize];
+std::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();
+let sample = usize::from_ne_bytes(buffer);
+println!("{:b}", sample);
+```
+
+## Test it
+
+- You can run a few times to see what a random *bitstring* (ordered collection of bits) looks like when using `:b`
+
+```sh
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+1000111011010011001001000110100010011010101101010111100001010101
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+1010101000100001011000111011111111011110010001010010101000111010
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+1001110000001001110011100111110010010101110000010111010111110011
+
+```
+
+
+## Simplify
+
+- To introduce operators, we'll use only single `u8`s, just for simplicity.
+
+```rs
+let mut devrnd = std::fs::File::open("/dev/urandom").unwrap();
+let mut buffer = [0u8; 2];
+std::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();
+let x = x[0];
+let y = y[1];
+println!("x = {x:08b}, y = {y:08b}");
+```
+- By default, `:b` doesn't render leading zeros, which is fine for numbers but not great for bytes.
+- Use `:08b` - where `0` specifies to have leading zeros, and `8` specifies how many digits.
+
+## Fixed
+
+```sh
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+x = 00101010, y = 01100111
+```
+
+- With the benefit of some bits, we can explore operators.
+
+# Bitwise Operators
+
+## Operator Reference
+
+- Rust doesn't clearly delineate bitwise from other operators.
+    - This is pretty reasonable: "bitwise" is something of a social convention.
+- The overall operator reference I follow is [Rust Book Appendix B](https://doc.rust-lang.org/book/appendix-02-operators.html)
+- The next slide lifts a subset of a .md table on that page.
+    - I have included both named bitwise operators and also "shifts", which are a bit (heh) different.
+
+## Bitwise
+
+| Operator                  | Example                                                 | Explanation                                                           |
+| ------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------- |
+| `!`                       | `!expr`                                                 | Bitwise or logical complement                                         |
+| `&`                       | `expr & expr`                                           | Bitwise AND                                                           |
+| `<<`                      | `expr << expr`                                          | Left-shift                                                            |
+| `>>`                      | `expr >> expr`                                          | Right-shift                                                           |
+| `^`                       | `expr ^ expr`                                           | Bitwise exclusive OR                                                  |
+| <code>&vert;</code>       | <code>expr &vert; expr</code>                           | Bitwise OR                                                            |
+
+## Conceptual Model
+
+- One way to model how the bitwise operators is to:
+    - Imagine a byte as an ordered collection of bits
+        - Like a list, array, or vector
+    - Imagine a bit as a boolean.
+        - Zero/one is equally meaningful to False/True
+    - Loop a logical operator over the booleans.
+- We will demonstrate first in Python then in Rust.
+
+## Python Demo - Bytes
+
+- We create two bytes using np.uint8.
+```{.py}
+from numpy import uint8 as byte
+
+x, y = byte(0x0F), byte(0x33)
+```
+- Binary representation using `bin` or `:b`
+```{py}
+print('x = {:08b}, y = {:08b}'.format(x,y))
+```
+- You'll see `x = 00001111, y = 00110011`
+
+## Python Bit XOR
+
+- We can use Pythonic "Bitwise exclusive OR"
+```{py}
+print('{:08b} ^ {:08b} = {:08b}'.format(x, y, x ^ y))
+```
+- What do we see?
+```sh
+00001111 ^ 00110011 = 00111100
+```
+- Why?
+
+## Boolean arrays
+
+- Convert the bytes to arrays of booleans.
+- Via string representation:
+```{.py}
+to_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]
+```
+- Via numeric representation, which requires a reversal:
+```{.py}
+to_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]
+```
+
+## Logical XOR
+
+- Python lacks logical XOR as it is equivalent to `!=`
+```py
+# Print a truth table in markdown
+print("| x   | y   | x!=y| x^y |")
+print("|-----|-----|-----|-----|")
+for left in (True, False):
+    for rite in (True, False):
+        print('|{:<5}|{:<5}|{:<5}|{:<5}|'.format(*[str(b) for b in [left, rite, left != rite, left ^ rite]]))
+```
+- Horizontally aligned:
+```{.email code-line-numbers="false"}
+| x   | y   | x!=y| x^y |
+|-----|-----|-----|-----|
+|True |True |False|False|
+|True |False|True |True |
+|False|True |True |True |
+|False|False|False|False|
+```
+
+## Map XOR
+
+- Apply XOR to each element of the boolean arrays.
+- We would get the same numerical presentation.
+```py
+print(to_bool_num(x ^ y))
+print([a != b for a, b in zip(to_bool_num(x),to_bool_num(y))])
+```
+- Both will yield the same boolean array.
+```py
+[True, True, False, False, False, False, True, True]
+```
+
+## All operators
+
+- We can loop over all operators to inspect them visually.
+
+```py
+from operator import and_, or_ , xor
+
+for op in [and_, or_ , xor]:
+    print('f({:08b}, {:08b}) = {:08b} for f ='.format(x, y, op(x,y)), op)
+```
+
+- `not` is similar but unary.
+```py
+print('~{:08b} = {:08b}'.format(x, ~x))
+```
+- So:
+```sh
+f(11110000, 00110011) = 00110000 for f = <built-in function and_>
+f(11110000, 00110011) = 11110011 for f = <built-in function or_>
+f(11110000, 00110011) = 11000011 for f = <built-in function xor>
+~11110000 = 00001111
+```
+
+## Rust operators
+
+- More common convention to use `!` for not (vs. `~`)
+- I'm not great with Rust format codes yet, so a bit silly.
+```{.rs filename="src/main.rs"}
+fn main() {
+    let mut devrnd = std::fs::File::open("/dev/urandom").unwrap();
+    let mut buffer = [0u8; 2];
+    std::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();
+    let x = buffer[0];
+    let y = buffer[1];
+    let mut z = x | y;
+    println!("x = {x:08b}, y = {y:08b}, x | y = {z:08b}");
+    z = x ^ y;
+    println!("x = {x:08b}, y = {y:08b}, x ^ y = {z:08b}");
+    z = x & y;
+    println!("x = {x:08b}, y = {y:08b}, x & y = {z:08b}");
+    let y = !buffer[0];
+    println!("x = {x:08b},!x = {y:08b}");
+}
+```
+
+## Run it
+
+- See how different random bits are combined!
+```sh
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+x = 01110000, y = 10001110, x | y = 11111110
+x = 01110000, y = 10001110, x ^ y = 11111110
+x = 01110000, y = 10001110, x & y = 00000000
+x = 01110000,!x = 10001111
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+x = 10111111, y = 00110110, x | y = 10111111
+x = 10111111, y = 00110110, x ^ y = 10001001
+x = 10111111, y = 00110110, x & y = 00110110
+x = 10111111,!x = 01000000
+```
+
+
+# Endianness
+
+## Why?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Imagine thinking in digits.
+- To store a ~3 digit number, need $3 \times 10 = 30$ "things" that can hold a number.
+
+:::
+
+::: {.column width="50%"}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff", shape=record];
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  struct [label="{ {<0> 10^0  | <1> 10^1| <2> 10^2}} "];
+  struct0 [label="{0|1|2|3|4|5|6|7|8|9}"];
+  struct1 [label="{0|1|2|3|4|5|6|7|8|9}"];
+  struct2 [label="{0|1|2|3|4|5|6|7|8|9}"];
+  struct:0 -> struct0
+  struct:1 -> struct1
+  struct:2 -> struct2
+
+}
+```
+
+:::
+
+::::
+
+## Binary
+
+- We are familiar with binary encoding.
+- We note: $\log_2(999) \lt 10$
+- *Decimal encoding **squanders** $\dfrac{2}{3}$ of it's storage space.*
+- So we store in binary.
+
+
+```{dot}
+//| echo: false
+//| fig-width: 800px
+//| fig-height: 200px
+digraph finite_automata {
+  rankdir=LR; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff", shape=record];
+
+  struct [label="{2^0|2^1|2^2|2^3|2^4|2^5|2^6|2^7|2^8|2^9}|{0|0|0|0|0|0|0|0|0|0}|{1|1|1|1|1|1|1|1|1|1}"];
+}
+```
+
+## Binary
+
+- The benefit here is that is sufficient to note the presence or absence of a digit (`1`) 
+- Versus the specific digit $\in [1,9]$ and presence of absense (`0`)
+
+```{dot}
+//| echo: false
+//| fig-width: 800px
+//| fig-height: 200px
+digraph finite_automata {
+  rankdir=LR; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff", shape=record];
+
+  struct [label="{2^0|2^1|2^2|2^3|2^4|2^5|2^6|2^7|2^8|2^9}|{|1|||1|1|||1|}"];
+}
+```
+
+## Wait a minute.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Why is the ones digit ($n^0$) leftmost ?
+    - The "least significant bit" or "lsb"
+- In e.g. English place the "lsb" last.
+    - CS 276 &rArr;
+
+:::
+
+::: {.column width="50%"}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+//| fig-height: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff", shape=record];
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  struct [label="{ {<0> 10^0  | <1> 10^1| <2> 10^2}} "];
+  struct0 [label="{||||||6|||}"];
+  struct1 [label="{|||||||7||}"];
+  struct2 [label="{||2|||||||}"];
+  struct:0 -> struct0
+  struct:1 -> struct1
+  struct:2 -> struct2
+}
+```
+
+:::
+
+::::
+
+## Languages
+
+- In e.g. spoken word, makes sense to lead with the biggest value.
+    - 200 of something is closer to 299 of something than 0 of something is to 9 of something.
+- In e.g. programming, we often lead with lowest numerical index.
+    - We look at the `arr[0]` of something before the `arr[1]` of something.
+
+## In Practice
+
+- We end up with
+```{.python}
+"276"[0] == '2' and 276 % (10 ** 1) == 6
+```
+- Confusing!  
+- Recall:
+```{.py}
+# Strings are not reversed.
+to_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]
+# Numerics are reversed.
+to_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]
+```
+
+## Annoyance
+
+- This gets *very annoying* when trying to move numbers around that don't quite fit in some number of bits.
+    - Say I have `0x1234` followers on Instagram📷
+    - Boycott Meta etc etc.
+    - And/or follow me [@calvinallegedly](https://www.instagram.com/calvinallegedly/)
+```sh
+$ python3 -c "print(0x1234)"
+4660
+```
+- Also imagine it is 1969 and you only have 8 bit integers.
+    - Only 2 digits in hexadecimal representation.
+
+## Stdin
+
+- We can use `stdin` and `read_line` to read in some values.
+- Recall:
+```rs
+let mut guess = String::new();
+std::io::stdin().read_line(&mut guess).unwrap();
+```
+
+## Test
+
+- Test it
+```{.rs filename="src/main.rs"}
+fn main() {
+    let mut guess = String::new();
+    std::io::stdin().read_line(&mut guess).unwrap();
+    println!("{:?}", guess);
+}
+```
+
+- `cargo run` -> type some nonsense -> press ENTER
+```sh
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+some nonsense
+"some nonsense\n"
+$
+```
+
+## Hex reader
+
+- To read in hexadecimal values we must:
+    - Read in the string.
+    - Break into chunks.
+    - Convert 2 character chunks to numerical values
+    
+
+## To characters
+
+- We'll just iterate over the characters and print them in pairs.
+```{.rs filename="src/main.rs"}
+fn main() {
+    let mut guess = String::new();
+    std::io::stdin().read_line(&mut guess).unwrap();
+    let mut flip = false;
+    for c in guess.chars() {
+        if flip {
+            println!(c);
+        } else {
+            print!(c);
+        }
+        flip = !flip;
+    println!("{:?}", guess);
+}
+```
+
+## Test it
+
+- Works sometimes better than others
+
+```sh
+$ cargo run
+   Compiling scratch v0.1.0 (/home/user/tmp/scratch)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+     Running `target/debug/scratch`
+0x1234
+0x
+12
+34
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+0x123
+0x
+12
+3
+```
+
+## Missing pieces
+
+- We need to throw out the prefix
+- We need to make sure we begin, rather than end, on a possible singleton.
+- Here's the plan:
+    - Skip the first two
+    - Traverse to the end of string.
+    - Build doubles back up.
+    
+## Skip
+
+- We can apply `next()` to an iterator to read characters.
+- It's basically a pop operation.
+
+```{.rs filename="src/main.rs"}
+fn main() {
+    let mut guess = String::new();
+    std::io::stdin().read_line(&mut guess).unwrap();
+    let mut flip = false;
+    let mut cs = guess.chars();
+    cs.next() // 0
+    cs.next() // x
+    for c in cs {
+        if flip {
+            println!(c);
+        } else {
+            print!(c);
+        }
+        flip = !flip;
+    println!("{:?}", guess);
+}
+```
+
+## Build up
+
+- From there we just need to get pairs somehow.
+- It's not too bad to get the last character...
+```rs
+fn last(cs:std::str::Chars) -> char {
+    let mut final = cs.next()
+    for c in cs {
+        final = c;
+    }
+    return final;
+}
+```
+
+## Uh oh!
+
+- When looping over an iterator, we get the type itself.
+    - The loop just terminates when it has no more elements.
+- When calling `.next()`, we get an option.
+    - There is not always a `.next()` element.
+```sh
+error[E0308]: mismatched types
+ --> src/main.rs:4:16
+  |
+2 |     let mut last = cs.next();
+  |                    --------- expected due to this value
+3 |     for c in cs {
+4 |         last = c;
+  |                ^ expected `Option<char>`, found `char`
+```
+
+## Recurse
+
+```rs
+fn last(mut cs:std::str::Chars) -> Option<char> {
+    return match cs.next() {
+        Some(n) => match last(cs) {  // if there's digits here, look for more
+            Some(m) => Some(m),      // if the last is found, return it
+            None => Some(n),         // no more letters - we are last, return n
+        },
+        None => None,                // required by `rustc` in case we don't input anything
+    }
+}
+```
+
+## Try it out!
+
+```sh
+$ cargo run
+   Compiling scratch v0.1.0 (/home/user/tmp/scratch)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+     Running `target/debug/scratch`
+0x1234
+Some('\n')
+```
+- Whoops! Forgot the newline... match `Some('\n')` to `None`
+```rs
+fn last(mut cs:std::str::Chars) -> Option<char> {
+    return match cs.next() {
+        Some('\n') => None,
+```
+
+## Pair it up
+
+- Let's find the last two values.
+- We already found the last one, just now if we've found it, pair it up and print it.
+```rs
+fn last(mut cs:std::str::Chars) -> Option<char> {
+    return match cs.next() {
+        Some(n) => match last(cs) {  // if there's digits here, look for more
+            Some(m) => {
+                println!("{n}{m}");  // If last is found, print this then last
+                Some(m),             // if the last is found, return it
+            None => Some(n),         // no more letters - we are last, return n
+        },
+        None => None,                // required by `rustc` in case we don't input anything
+    }
+}
+```
+
+## Whoops!
+
+- We print every digit paired with the last one!
+```rs
+$ cargo run
+   Compiling scratch v0.1.0 (/home/user/tmp/scratch)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+     Running `target/debug/scratch`
+0x1234
+34
+24
+14
+Some('4')
+```
+- We can:
+    - Remove the print from `main`
+    - Return `None` after printing a pair.
+    
+## Altogether
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+- Rename `last` to `pairs`
+- Print single digits in `main`
+    - Use `if let` - kind of a single pattern match.
+
+:::
+
+:::{.column width="60%"}
+
+```{.rs filename="src/main.rs"}
+fn pairs(mut cs:std::str::Chars) -> Option<char> {
+    return match cs.next() {
+        Some('\n') => None,
+        Some(n) => match pairs(cs) {
+            Some(m) => {
+                println!("{n}{m}");
+                None
+            }
+            None => Some(n),
+        },
+        None => None,
+    }
+}
+
+fn main() {
+    let mut guess = String::new();
+    std::io::stdin().read_line(&mut guess).unwrap();
+    let mut cs = guess.chars();
+    cs.next();
+    cs.next();
+    if let Some(n) = pairs(cs) {
+        println!("{n}");
+    }
+}
+```
+
+:::
+
+::::
+
+## Just parse `{n}{m}`
+
+- The built-in is `from_str_radix` for e.g. `u8`.
+    - Turn characters into singleton strings..
+    - (We could pattern match `'1' => 1` instead)
+
+```rs
+fn two_hex(n:char, m:char) -> u8 {
+    let n = u8::from_str_radix(&n.to_string(), 16).unwrap();
+    let m = u8::from_str_radix(&m.to_string(), 16).unwrap();
+    return n * 16 + m;
+}
+```
+
+## Bundle into a *vector*
+
+- We introduce vectors.
+    - So close to a Pythonic `<class 'list'>` I can't tell the difference.
+- Vs. printing, toss numeric values into a vectors.
+- This is slightly complicated by the fact that, uh...
+```rs
+fn pairs(mut cs:std::str::Chars) -> Option<char> {
+```
+- There's no vector there!
+    - Can't just return it (because we're using recursion #based)
+    
+## Create vectors
+
+- True to form in Rust, vectors require specific initialization as they are data structure.
+    - In this way they are like big S `String`s with `String::new()`
+- We can use `Vec::new()` or the macro `vec!`. [Read more](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+```rs
+let mut vec1 = vec![1, 2, 3];
+vec1.push(4);
+let vec2 = Vec::from([1, 2, 3, 4]);
+assert_eq!(vec1, vec2);
+```
+
+## Sketch
+
+- Let's convert `pairs` to a helper function.
+- Let's move the odd case handlying from main to a wrapper function.
+    - And also popping the first two vals.
+- Let's initialize a mutable vector in the wrapper.
+- We'll maintain the return type of `pairs` but add an argument.
+- We'll return the vector from the wrapper.
+
+## Wrapper
+
+::::{.columns}
+
+:::{.column width="70%"}
+
+```rs
+fn chars_to_vec(mut cs:std::str::Chars) -> Vec<u8> {
+    let mut vals = Vec::new();
+    // from old main
+    cs.next();
+    cs.next();
+    if let Some(n) = pairs(cs, &mut vals) {
+        vals.push(two_hex('0', n));
+    }
+    // "Prints and returns the value of a given
+    // expression for quick and dirty debugging."
+    dbg!(&vals);
+    return vals;
+}
+```
+
+:::
+
+:::{.column width="30%"}
+
+- Create a vector.
+- Let pairs "borrow" the vector mutably - so it can add stuff.
+
+:::
+
+
+::::
+
+- Let `dbg!` "borrow" the vector to print it.
+- Return the vector when you're done!
+
+## Vector handling
+
+```rs
+fn pairs(mut cs:std::str::Chars, vals:&mut Vec<u8>) -> Option<char> {
+    return match cs.next() {
+        Some('\n') => None,
+        Some(n) => match pairs(cs, vals) {
+            Some(m) => {
+                vals.push(two_hex(n,m));  // only change
+                None
+            },
+            None => Some(n),
+        },
+        None => None,
+    }
+}
+```
+
+- Add a "borrowed mutable vector argument"
+- Push some `u8`s into it.
+
+
+## How do we feel about this?
+
+```sh
+$ cargo r
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+0x01020304
+[src/main.rs:10:5] &vals = [
+    4,
+    3,
+    2,
+    1,
+]
+```
+
+## Quoth Wikipedia
+
+> [In computing, endianness is the order in which bytes within a word data type are transmitted over a data communication medium or addressed in computer memory, counting only byte significance compared to earliness.](https://en.wikipedia.org/wiki/Endianness)
+
+- We can regard our vector as a 32 bit word of 4 bytes.
+- We can regard the indices (`0..4`) as the addresses in computer memory.
+
+## Two endians
+
+> A big-endian system stores the most significant byte (MSB) of a word at the smallest memory address and the least significant byte (LSB) at the largest.
+
+> A little-endian system, in contrast, stores the least-significant byte (LSB) at the smallest address.
+
+- In `0x01020304`, the MSB is `1`, and LSB is `4`
+- `[4, 3, 2, 1]`, the smallest memory address contains a `4`.
+
+## Arrays to Numbers
+
+- We can reverse the operation by:
+    - Looping over the array.
+    - Multiplying by the numerical base, some power of two
+    - Adding up the different values.
+```rs
+fn custom_u8s_to_u32(vals : Vec<u8>) -> u32 {
+    // We'll just take the first four for now
+    let mut ret : u32 = 0;
+    for i in 0..4 {
+        dbg!((i, vals[i]));
+        ret += (vals[i] as u32) * ((2 as u32).pow(8 * (i as u32)));
+    }
+    return ret;
+}
+```
+
+## Try it out
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+- Remember to update `main`
+
+```rs
+let vals = chars_to_vec(cs);
+let val = custom_u8s_to_u32(vals);
+println!("{:x}", val); // hex
+```
+
+:::
+
+:::{.column width="60%"}
+
+```sh
+$ cargo r
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+0x01020304
+[src/main.rs:10:5] &vals = [
+    4,
+    3,
+    2,
+    1,
+]
+[src/main.rs:38:9] (i, vals[i]) = (
+    0,
+    4,
+)
+[src/main.rs:38:9] (i, vals[i]) = (
+    1,
+    3,
+)
+[src/main.rs:38:9] (i, vals[i]) = (
+    2,
+    2,
+)
+[src/main.rs:38:9] (i, vals[i]) = (
+    3,
+    1,
+)
+1020304
+```
+
+:::
+
+::::
+
+## Wait a minute
+
+- Isn't this terrible?
+
+```rs
+ret += (vals[i] as u32) * ((2 as u32).pow(8 * (i as u32)));
+```
+
+- There must be a better way.
+
+## Shifts
+
+- The remaining bitwise operator is the *shift*
+    - Bitwise because it works on bits, but
+    - Takes two arguments:
+        - The bits to "shift"
+        - A numerical value encoding how much "shift"
+        
+## Script it
+
+- Python shift is `<<` (well, left shift)
+```sh
+python3 -c "[print('{} {:03d} {:08b}'.format(x, 1 << x, 1 << x)) for x in range(8)]"
+```
+- I got:
+```{.email code-line-numbers="false"}
+0 001 00000001
+1 002 00000010
+2 004 00000100
+3 008 00001000
+4 016 00010000
+5 032 00100000
+6 064 01000000
+7 128 10000000
+```
+
+## Shift it
+
+```rs
+fn custom_u8s_to_u32(vals : Vec<u8>) -> u32 {
+    // We'll just take the first four for now
+    let mut ret : u32 = 0;
+    for i in 0..4 {
+        dbg!((i, vals[i]));
+        ret += (vals[i] as u32) << (8 * i);
+    }
+    return ret;
+}
+```
+
+- Much better! 
+- Saves an `as u32`!
+
+## Today
+
+- Encoding
+    -   Bytes
+    -   Bitwise operators
+    -   Endianness
+
+<!-- start at carries in encode then jump to finite -->

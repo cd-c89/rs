@@ -34,7 +34,7 @@ format: html
 |0x0|08/25|[Welcome](00_welcome.qmd)|[Rustup](01_rustup.md)|[Hi world](02_hiworld.md)|
 |0x1|09/01|`None`|[Packages](11_packages.qmd)|[Hi cargo](12_hicargo.md)|
 |0x2|09/08|[Options](20_options.md)|[Guess](21_guess.md)|[Wordle](22_wordle.md)|
-|0x3|09/15|Bits|Hamming|Sigmas|
+|0x3|09/15|[Bits](30_bits.qmd)|[Hamming](31_hamming.md)|[Macros](32_macros.md)|
 |0x4|09/22|SHA2|Endian|Chunk|
 |0x5|09/29|IEEE754|Constants|SHA512|
 |0x6|10/06|Review|Midterm|`None`|
