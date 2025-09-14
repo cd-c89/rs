@@ -9,151 +9,151 @@
   {
     "objectID": "31_hamming.html",
     "href": "31_hamming.html",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "",
     "text": "Lab Day\n\nMixed use assignment.\nPractically useful for HW\nTheoretically useful for Final",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#announcements",
     "href": "31_hamming.html#announcements",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "",
     "text": "Lab Day\n\nMixed use assignment.\nPractically useful for HW\nTheoretically useful for Final",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#homework",
     "href": "31_hamming.html#homework",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Homework",
     "text": "Homework\n\n“Macros” is ready.\n\nNot too hard; just practice with the operators.\n\nDue Friday, 26 Sept. at 1440 ET.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#citation",
     "href": "31_hamming.html#citation",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Citation",
     "text": "Citation\n\nI learned the term Hamming distance from Prof. Josh Laison while discussing a possible research collaboration.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#today",
     "href": "31_hamming.html#today",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Today",
     "text": "Today\n\nHamming\nHamming weight\nHamming distance",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#the-person",
     "href": "31_hamming.html#the-person",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "The person",
     "text": "The person\n\nHamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#fine-print",
     "href": "31_hamming.html#fine-print",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Fine print",
     "text": "Fine print\n\nIt is a virtual certainty that Hamming did not discover the concepts of Hamming weight or Hamming distance, both of which have limited use in historical record before Hamming was alive.\nTypically I avoid using terms where someone is named after someone who did not invent it.\nI don’t have alternate name in this case.\n\nIt can be called “edit distance” but there are other edit distances.\n\nIt must be remarked upon that an abstract mathematical concept was named after a US Ivy Leaguer who worked on the Manhattan Project, and that this naming is highly political.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#definition",
     "href": "31_hamming.html#definition",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Definition",
     "text": "Definition\n\nThe Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.\n\n\nThis adopts the formal computer science notion of referring to bit strings as:\n\nwords in the\nlanguages, which is the set of all possible bitstrings\nthat is composed of the symbols, which are the bit values \\(\\{0, 1\\}\\)\n\nSo, Hamming weight of a byte is the number of 1s in that byte.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#your-task",
     "href": "31_hamming.html#your-task",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Your task",
     "text": "Your task\n\nUsing the bitwise operators, shifts, and addition, write the following functions:\n\nfn weight_u8(byte:u8) -&gt; u64\nfn weight_u64(word:u64) -&gt; u64\nfn weight_bytes(bytes:Vec&lt;u8&gt;) -&gt; u64\nfn weight_words(words:Vec&lt;u64&gt;) -&gt; u64\n\nYou may wish to follow the Rust convention of implementing these in a src/lib.rs file.\n\nYou will need to prefix them as pub fn in src/lib.rs\nYou will need to prefix them with your package name and :: in src/main.rs\n\nI used hamming::weight_u8, for example.\n\n\nThis convention will be required for the homework, but is not required now.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#template-files",
     "href": "31_hamming.html#template-files",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Template files",
     "text": "Template files\n\nI made a package:\n\ncargo new 31 --name hamming --vcs none\n\nI wrote a library function: ```{.rs filename=“src/lib.rs”) pub fn weight_u8(byte:u8) -&gt; u64 { let mut cnt : u64 = 0; // This is wrong. cnt += 1; // That was wrong. return cnt;\n\n- I wrote some tests:\n```{.rs filename=\"src/main.rs\")\nfn main() {\n    dbg!(hamming::weight_u8(0x33_u8));\n}\n\nAfter fixing my function, I saw the following:\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/hamming`\n[src/main.rs:2:5] hamming::weight_u8(0x33_u8) = 4",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#definition-1",
     "href": "31_hamming.html#definition-1",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Definition",
     "text": "Definition\n\nIn information theory, the Hamming distance between two strings or vectors of equal length is the number of positions at which the corresponding symbols are different.\n\n\nThe Hamming weight is the Hamming distance from the string of all 0 symbols.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#your-task-1",
     "href": "31_hamming.html#your-task-1",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Your task",
     "text": "Your task\n\nUsing the bitwise operators, shifts, and addition, write the following functions:\n\nfn distance_u8(b:u8, c:u8) -&gt; u64\nfn distance_u64(w:u64, x:u64) -&gt; u64\nfn distance_bytes(bs:Vec&lt;u8&gt;, cs:Vec&lt;u8&gt;) -&gt; u64\nfn distance_words(ws:Vec&lt;u64&gt;, xs:Vec&lt;u64&gt;) -&gt; u64\n\nYou may change the parameter names if those don’t make sense to you.\n\nThey were procedurally generated.",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#today-1",
     "href": "31_hamming.html#today-1",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Today",
     "text": "Today\n\nHamming\nHamming weight\nHamming distance",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#strings-as-bitstrings",
     "href": "31_hamming.html#strings-as-bitstrings",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "Strings as bitstrings",
     "text": "Strings as bitstrings\n\nCompute the Hamming distance between the strings Willamette and Xjmmbnfuuf.\nSuccessfully pronounce Xjmmbnfuuf",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {
     "objectID": "31_hamming.html#popcnt",
     "href": "31_hamming.html#popcnt",
-    "title": "Guess",
+    "title": "Hamming",
     "section": "POPCNT",
     "text": "POPCNT\n\nRead this paper",
     "crumbs": [
-      "Guess"
+      "Hamming"
     ]
   },
   {

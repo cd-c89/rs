@@ -1,5 +1,5 @@
 ---
-title: "Guess"
+title: "Hamming"
 format: html
 ---
 
@@ -33,7 +33,7 @@ format: html
 
 > [Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.](https://en.wikipedia.org/wiki/Richard_Hamming)
 
-![](https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4)
+![](https://upload.wikimedia.org/wikipedia/en/0/08/Richard_Hamming.jpg)
 
 ## Fine print
 
