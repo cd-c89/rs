@@ -35,7 +35,7 @@ title: Bits
         - Rust
 - These languages often have weaker support for say, trigonometry and better support for reading files of arbitrary types, including not just .csv files but e.g. readings from radio telescopes.
 
-## Low-level langauges
+## Low-level languages
 
 - Rust is among the group of languages good at working close to the "hardware-software interface"
 - Many design in decisions in Rust, such as in how Rust read file data `/dev/random`, reflect this:
@@ -71,7 +71,7 @@ A *byte* is a hardware idea - an ordered collection of 8 bits, which themselves 
 
 - Bytes are referenced, both as the function `bytes` and the data structure `Bytes`
     - The function produces a Rust iterator the produces `u8` values.
-- In other cases, such as `as_bytes`, an array of `u8` is often used (expressed as `[u8]`.
+- In other cases, such as `as_bytes`, an array of `u8` is often used (expressed as `[u8]`).
 - In any case, collections of `u8`s.
 
 ## Example
@@ -117,8 +117,8 @@ $ cargo run
 let mut devrnd = std::fs::File::open("/dev/urandom").unwrap();
 let mut buffer = [0u8; 2];
 std::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();
-let x = x[0];
-let y = y[1];
+let x = buffer[0];
+let y = buffer[1];
 println!("x = {x:08b}, y = {y:08b}");
 ```
 - By default, `:b` doesn't render leading zeros, which is fine for numbers but not great for bytes.
@@ -386,9 +386,9 @@ digraph finite_automata {
 ::: {.column width="50%"}
 
 - Why is the ones digit ($n^0$) leftmost ?
-    - The "least significant bit" or "lsb"
-- In e.g. English place the "lsb" last.
-    - CS 276 &rArr;
+    - The "least significant bit" or LSB
+- In e.g. English place the LSB last.
+    - CS 271 &rArr;
 
 :::
 
@@ -405,7 +405,7 @@ digraph finite_automata {
   edge [color = "#ffffff",fontcolor = "#ffffff"]
 
   struct [label="{ {<0> 10^0  | <1> 10^1| <2> 10^2}} "];
-  struct0 [label="{||||||6|||}"];
+  struct0 [label="{|1||||||||}"];
   struct1 [label="{|||||||7||}"];
   struct2 [label="{||2|||||||}"];
   struct:0 -> struct0
@@ -429,7 +429,7 @@ digraph finite_automata {
 
 - We end up with
 ```{.python}
-"276"[0] == '2' and 276 % (10 ** 1) == 6
+"271"[0] == '2' and 271 % (10 ** 1) == 1
 ```
 - Confusing!  
 - Recall:
@@ -992,4 +992,19 @@ fn pairs(mut cs: std::str::Chars, vals: &mut Vec<u8>) -> Option<char> {
 }
 ```
 
-<!-- start at carries in encode then jump to finite -->
+## Bonus
+
+- Courtesy Indi of CS Student Assoc.
+
+```rs
+fn pairs(cs: std::str::Chars, vals: &mut Vec<u8>) -> Option<char> {
+    cs.rev()
+        .filter(|c| *c != '\n')
+        .collect::<Vec<_>>()
+        .chunks(2)
+        .for_each(|x| vals.push(two_hex(x[1], x[0])));
+    return None;
+}
+```
+
+<!-- start at carries in encode then jump to finite --> 

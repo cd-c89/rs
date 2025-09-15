@@ -458,8 +458,8 @@ Prof.&nbsp;Calvin
 <li>These languages often have weaker support for say, trigonometry and better support for reading files of arbitrary types, including not just .csv files but e.g.&nbsp;readings from radio telescopes.</li>
 </ul>
 </section>
-<section id="low-level-langauges" class="slide level2">
-<h2>Low-level langauges</h2>
+<section id="low-level-languages" class="slide level2">
+<h2>Low-level languages</h2>
 <ul>
 <li>Rust is among the group of languages good at working close to the “hardware-software interface”</li>
 <li>Many design in decisions in Rust, such as in how Rust read file data <code>/dev/random</code>, reflect this:</li>
@@ -519,7 +519,7 @@ Prof.&nbsp;Calvin
 <ul>
 <li>The function produces a Rust iterator the produces <code>u8</code> values.</li>
 </ul></li>
-<li>In other cases, such as <code>as_bytes</code>, an array of <code>u8</code> is often used (expressed as <code>[u8]</code>.</li>
+<li>In other cases, such as <code>as_bytes</code>, an array of <code>u8</code> is often used (expressed as <code>[u8]</code>).</li>
 <li>In any case, collections of <code>u8</code>s.</li>
 </ul>
 </section>
@@ -563,8 +563,8 @@ Prof.&nbsp;Calvin
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb4-2"><a></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">2</span>]<span class="op">;</span></span>
 <span id="cb4-3"><a></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb4-4"><a></a><span class="kw">let</span> x <span class="op">=</span> x[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb4-5"><a></a><span class="kw">let</span> y <span class="op">=</span> y[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb4-4"><a></a><span class="kw">let</span> x <span class="op">=</span> buffer[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb4-5"><a></a><span class="kw">let</span> y <span class="op">=</span> buffer[<span class="dv">1</span>]<span class="op">;</span></span>
 <span id="cb4-6"><a></a><span class="pp">println!</span>(<span class="st">"x = {x:08b}, y = {y:08b}"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>By default, <code>:b</code> doesn’t render leading zeros, which is fine for numbers but not great for bytes.</li>
@@ -1106,11 +1106,11 @@ Prof.&nbsp;Calvin
 <ul>
 <li>Why is the ones digit (<span class="math inline">\(n^0\)</span>) leftmost ?
 <ul>
-<li>The “least significant bit” or “lsb”</li>
+<li>The “least significant bit” or LSB</li>
 </ul></li>
-<li>In e.g.&nbsp;English place the “lsb” last.
+<li>In e.g.&nbsp;English place the LSB last.
 <ul>
-<li>CS 276 ⇒</li>
+<li>CS 271 ⇒</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -1139,7 +1139,7 @@ Prof.&nbsp;Calvin
 <polygon fill="none" stroke="#ffffff" points="0,-0.5 0,-248.5 54,-248.5 54,-0.5 0,-0.5"></polygon>
 <text text-anchor="middle" x="27" y="-231.9" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
 <polyline fill="none" stroke="#ffffff" points="0,-223.7 54,-223.7 "></polyline>
-<text text-anchor="middle" x="27" y="-207.1" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
+<text text-anchor="middle" x="27" y="-207.1" font-family="Times,serif" font-size="14.00" fill="#ffffff">1</text>
 <polyline fill="none" stroke="#ffffff" points="0,-198.9 54,-198.9 "></polyline>
 <text text-anchor="middle" x="27" y="-182.3" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
 <polyline fill="none" stroke="#ffffff" points="0,-174.1 54,-174.1 "></polyline>
@@ -1149,7 +1149,7 @@ Prof.&nbsp;Calvin
 <polyline fill="none" stroke="#ffffff" points="0,-124.5 54,-124.5 "></polyline>
 <text text-anchor="middle" x="27" y="-107.9" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
 <polyline fill="none" stroke="#ffffff" points="0,-99.7 54,-99.7 "></polyline>
-<text text-anchor="middle" x="27" y="-83.1" font-family="Times,serif" font-size="14.00" fill="#ffffff">6</text>
+<text text-anchor="middle" x="27" y="-83.1" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
 <polyline fill="none" stroke="#ffffff" points="0,-74.9 54,-74.9 "></polyline>
 <text text-anchor="middle" x="27" y="-58.3" font-family="Times,serif" font-size="14.00" fill="#ffffff"> </text>
 <polyline fill="none" stroke="#ffffff" points="0,-50.1 54,-50.1 "></polyline>
@@ -1250,7 +1250,7 @@ Prof.&nbsp;Calvin
 <ul>
 <li>We end up with</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co">"276"</span>[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'2'</span> <span class="kw">and</span> <span class="dv">276</span> <span class="op">%</span> (<span class="dv">10</span> <span class="op">**</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co">"271"</span>[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'2'</span> <span class="kw">and</span> <span class="dv">271</span> <span class="op">%</span> (<span class="dv">10</span> <span class="op">**</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Confusing!<br>
 </li>
@@ -1842,6 +1842,20 @@ Prof.&nbsp;Calvin
 <span id="cb51-7"><a></a>        <span class="op">}</span>)<span class="op">,</span></span>
 <span id="cb51-8"><a></a>    <span class="op">};</span></span>
 <span id="cb51-9"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bonus-1" class="slide level2">
+<h2>Bonus</h2>
+<ul>
+<li>Courtesy Indi of CS Student Assoc.</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb52-1"><a></a><span class="kw">fn</span> pairs(cs<span class="op">:</span> <span class="pp">std::</span><span class="dt">str</span><span class="pp">::</span>Chars<span class="op">,</span> vals<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">char</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb52-2"><a></a>    cs<span class="op">.</span>rev()</span>
+<span id="cb52-3"><a></a>        <span class="op">.</span>filter(<span class="op">|</span>c<span class="op">|</span> <span class="op">*</span>c <span class="op">!=</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span>)</span>
+<span id="cb52-4"><a></a>        <span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;&gt;</span>()</span>
+<span id="cb52-5"><a></a>        <span class="op">.</span>chunks(<span class="dv">2</span>)</span>
+<span id="cb52-6"><a></a>        <span class="op">.</span>for_each(<span class="op">|</span>x<span class="op">|</span> vals<span class="op">.</span>push(two_hex(x[<span class="dv">1</span>]<span class="op">,</span> x[<span class="dv">0</span>])))<span class="op">;</span></span>
+<span id="cb52-7"><a></a>    <span class="cf">return</span> <span class="cn">None</span><span class="op">;</span></span>
+<span id="cb52-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!-- start at carries in encode then jump to finite -->
 
 

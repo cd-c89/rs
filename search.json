@@ -4345,11 +4345,11 @@
     "text": "“Good at”\n\nElectronics are good at propagating signals, which we often view as ordered collections of zeros and ones.\n\nAt a lower level processing\n\nC and to a lesser degree C++\nAssembly, like AMD/Intel x86 or IBM PowerPC\nRust\n\n\nThese languages often have weaker support for say, trigonometry and better support for reading files of arbitrary types, including not just .csv files but e.g. readings from radio telescopes."
   },
   {
-    "objectID": "30_bits.rjs.html#low-level-langauges",
-    "href": "30_bits.rjs.html#low-level-langauges",
+    "objectID": "30_bits.rjs.html#low-level-languages",
+    "href": "30_bits.rjs.html#low-level-languages",
     "title": "Bits",
-    "section": "Low-level langauges",
-    "text": "Low-level langauges\n\nRust is among the group of languages good at working close to the “hardware-software interface”\nMany design in decisions in Rust, such as in how Rust read file data /dev/random, reflect this:\n\nusize::from_ne_bytes(buffer);\n\nDirect references to bytes (or bits) are uncommon but present in higher level languages, and increase in popularity in languages that give more control to programs over how the device operates."
+    "section": "Low-level languages",
+    "text": "Low-level languages\n\nRust is among the group of languages good at working close to the “hardware-software interface”\nMany design in decisions in Rust, such as in how Rust read file data /dev/random, reflect this:\n\nusize::from_ne_bytes(buffer);\n\nDirect references to bytes (or bits) are uncommon but present in higher level languages, and increase in popularity in languages that give more control to programs over how the device operates."
   },
   {
     "objectID": "30_bits.rjs.html#bit-manipulation",
@@ -4377,7 +4377,7 @@
     "href": "30_bits.rjs.html#bytes-2",
     "title": "Bits",
     "section": "Bytes",
-    "text": "Bytes\n\nBytes are referenced, both as the function bytes and the data structure Bytes\n\nThe function produces a Rust iterator the produces u8 values.\n\nIn other cases, such as as_bytes, an array of u8 is often used (expressed as [u8].\nIn any case, collections of u8s."
+    "text": "Bytes\n\nBytes are referenced, both as the function bytes and the data structure Bytes\n\nThe function produces a Rust iterator the produces u8 values.\n\nIn other cases, such as as_bytes, an array of u8 is often used (expressed as [u8]).\nIn any case, collections of u8s."
   },
   {
     "objectID": "30_bits.rjs.html#example",
@@ -4398,7 +4398,7 @@
     "href": "30_bits.rjs.html#simplify",
     "title": "Bits",
     "section": "Simplify",
-    "text": "Simplify\n\nTo introduce operators, we’ll use only single u8s, just for simplicity.\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; 2];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\nlet x = x[0];\nlet y = y[1];\nprintln!(\"x = {x:08b}, y = {y:08b}\");\n\nBy default, :b doesn’t render leading zeros, which is fine for numbers but not great for bytes.\nUse :08b - where 0 specifies to have leading zeros, and 8 specifies how many digits."
+    "text": "Simplify\n\nTo introduce operators, we’ll use only single u8s, just for simplicity.\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; 2];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\nlet x = buffer[0];\nlet y = buffer[1];\nprintln!(\"x = {x:08b}, y = {y:08b}\");\n\nBy default, :b doesn’t render leading zeros, which is fine for numbers but not great for bytes.\nUse :08b - where 0 specifies to have leading zeros, and 8 specifies how many digits."
   },
   {
     "objectID": "30_bits.rjs.html#fixed",
@@ -4510,7 +4510,7 @@
     "href": "30_bits.rjs.html#wait-a-minute.",
     "title": "Bits",
     "section": "Wait a minute.",
-    "text": "Wait a minute.\n\n\n\nWhy is the ones digit (\\(n^0\\)) leftmost ?\n\nThe “least significant bit” or “lsb”\n\nIn e.g. English place the “lsb” last.\n\nCS 276 ⇒\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nstruct\n\n10^0\n\n10^1\n\n10^2\n\n\n\nstruct0\n\n \n\n \n\n \n\n \n\n \n\n \n\n6\n\n \n\n \n\n \n\n\n\nstruct:0-&gt;struct0\n\n\n\n\n\nstruct1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n7\n\n \n\n \n\n\n\nstruct:1-&gt;struct1\n\n\n\n\n\nstruct2\n\n \n\n \n\n2\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:2-&gt;struct2"
+    "text": "Wait a minute.\n\n\n\nWhy is the ones digit (\\(n^0\\)) leftmost ?\n\nThe “least significant bit” or LSB\n\nIn e.g. English place the LSB last.\n\nCS 271 ⇒\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nstruct\n\n10^0\n\n10^1\n\n10^2\n\n\n\nstruct0\n\n \n\n1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:0-&gt;struct0\n\n\n\n\n\nstruct1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n7\n\n \n\n \n\n\n\nstruct:1-&gt;struct1\n\n\n\n\n\nstruct2\n\n \n\n \n\n2\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:2-&gt;struct2"
   },
   {
     "objectID": "30_bits.rjs.html#languages",
@@ -4524,7 +4524,7 @@
     "href": "30_bits.rjs.html#in-practice",
     "title": "Bits",
     "section": "In Practice",
-    "text": "In Practice\n\nWe end up with\n\n\"276\"[0] == '2' and 276 % (10 ** 1) == 6\n\nConfusing!\n\nRecall:\n\n# Strings are not reversed.\nto_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]\n# Numerics are reversed.\nto_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]"
+    "text": "In Practice\n\nWe end up with\n\n\"271\"[0] == '2' and 271 % (10 ** 1) == 1\n\nConfusing!\n\nRecall:\n\n# Strings are not reversed.\nto_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]\n# Numerics are reversed.\nto_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]"
   },
   {
     "objectID": "30_bits.rjs.html#annoyance",
@@ -4744,6 +4744,20 @@
     "text": "Today\n\nEncoding\n\nBytes\nBitwise operators\nEndianness"
   },
   {
+    "objectID": "30_bits.rjs.html#bonus",
+    "href": "30_bits.rjs.html#bonus",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}"
+  },
+  {
+    "objectID": "30_bits.rjs.html#bonus-1",
+    "href": "30_bits.rjs.html#bonus-1",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    cs.rev()\n        .filter(|c| *c != '\\n')\n        .collect::&lt;Vec&lt;_&gt;&gt;()\n        .chunks(2)\n        .for_each(|x| vals.push(two_hex(x[1], x[0])));\n    return None;\n}"
+  },
+  {
     "objectID": "30_bits.html",
     "href": "30_bits.html",
     "title": "Bits",
@@ -4794,11 +4808,11 @@
     ]
   },
   {
-    "objectID": "30_bits.html#low-level-langauges",
-    "href": "30_bits.html#low-level-langauges",
+    "objectID": "30_bits.html#low-level-languages",
+    "href": "30_bits.html#low-level-languages",
     "title": "Bits",
-    "section": "Low-level langauges",
-    "text": "Low-level langauges\n\nRust is among the group of languages good at working close to the “hardware-software interface”\nMany design in decisions in Rust, such as in how Rust read file data /dev/random, reflect this:\n\nusize::from_ne_bytes(buffer);\n\nDirect references to bytes (or bits) are uncommon but present in higher level languages, and increase in popularity in languages that give more control to programs over how the device operates.",
+    "section": "Low-level languages",
+    "text": "Low-level languages\n\nRust is among the group of languages good at working close to the “hardware-software interface”\nMany design in decisions in Rust, such as in how Rust read file data /dev/random, reflect this:\n\nusize::from_ne_bytes(buffer);\n\nDirect references to bytes (or bits) are uncommon but present in higher level languages, and increase in popularity in languages that give more control to programs over how the device operates.",
     "crumbs": [
       "Bits"
     ]
@@ -4838,7 +4852,7 @@
     "href": "30_bits.html#bytes-2",
     "title": "Bits",
     "section": "Bytes",
-    "text": "Bytes\n\nBytes are referenced, both as the function bytes and the data structure Bytes\n\nThe function produces a Rust iterator the produces u8 values.\n\nIn other cases, such as as_bytes, an array of u8 is often used (expressed as [u8].\nIn any case, collections of u8s.",
+    "text": "Bytes\n\nBytes are referenced, both as the function bytes and the data structure Bytes\n\nThe function produces a Rust iterator the produces u8 values.\n\nIn other cases, such as as_bytes, an array of u8 is often used (expressed as [u8]).\nIn any case, collections of u8s.",
     "crumbs": [
       "Bits"
     ]
@@ -4868,7 +4882,7 @@
     "href": "30_bits.html#simplify",
     "title": "Bits",
     "section": "Simplify",
-    "text": "Simplify\n\nTo introduce operators, we’ll use only single u8s, just for simplicity.\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; 2];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\nlet x = x[0];\nlet y = y[1];\nprintln!(\"x = {x:08b}, y = {y:08b}\");\n\nBy default, :b doesn’t render leading zeros, which is fine for numbers but not great for bytes.\nUse :08b - where 0 specifies to have leading zeros, and 8 specifies how many digits.",
+    "text": "Simplify\n\nTo introduce operators, we’ll use only single u8s, just for simplicity.\n\nlet mut devrnd = std::fs::File::open(\"/dev/urandom\").unwrap();\nlet mut buffer = [0u8; 2];\nstd::io::Read::read_exact(&mut devrnd, &mut buffer).unwrap();\nlet x = buffer[0];\nlet y = buffer[1];\nprintln!(\"x = {x:08b}, y = {y:08b}\");\n\nBy default, :b doesn’t render leading zeros, which is fine for numbers but not great for bytes.\nUse :08b - where 0 specifies to have leading zeros, and 8 specifies how many digits.",
     "crumbs": [
       "Bits"
     ]
@@ -5028,7 +5042,7 @@
     "href": "30_bits.html#wait-a-minute.",
     "title": "Bits",
     "section": "Wait a minute.",
-    "text": "Wait a minute.\n\n\n\nWhy is the ones digit (\\(n^0\\)) leftmost ?\n\nThe “least significant bit” or “lsb”\n\nIn e.g. English place the “lsb” last.\n\nCS 276 ⇒\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nstruct\n\n10^0\n\n10^1\n\n10^2\n\n\n\nstruct0\n\n \n\n \n\n \n\n \n\n \n\n \n\n6\n\n \n\n \n\n \n\n\n\nstruct:0-&gt;struct0\n\n\n\n\n\nstruct1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n7\n\n \n\n \n\n\n\nstruct:1-&gt;struct1\n\n\n\n\n\nstruct2\n\n \n\n \n\n2\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:2-&gt;struct2",
+    "text": "Wait a minute.\n\n\n\nWhy is the ones digit (\\(n^0\\)) leftmost ?\n\nThe “least significant bit” or LSB\n\nIn e.g. English place the LSB last.\n\nCS 271 ⇒\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nstruct\n\n10^0\n\n10^1\n\n10^2\n\n\n\nstruct0\n\n \n\n1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:0-&gt;struct0\n\n\n\n\n\nstruct1\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n7\n\n \n\n \n\n\n\nstruct:1-&gt;struct1\n\n\n\n\n\nstruct2\n\n \n\n \n\n2\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\nstruct:2-&gt;struct2",
     "crumbs": [
       "Bits"
     ]
@@ -5048,7 +5062,7 @@
     "href": "30_bits.html#in-practice",
     "title": "Bits",
     "section": "In Practice",
-    "text": "In Practice\n\nWe end up with\n\n\"276\"[0] == '2' and 276 % (10 ** 1) == 6\n\nConfusing!\n\nRecall:\n\n# Strings are not reversed.\nto_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]\n# Numerics are reversed.\nto_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]",
+    "text": "In Practice\n\nWe end up with\n\n\"271\"[0] == '2' and 271 % (10 ** 1) == 1\n\nConfusing!\n\nRecall:\n\n# Strings are not reversed.\nto_bool_str = lambda x : [c == '1' for c in `{.08b}.format(x)]\n# Numerics are reversed.\nto_bool_num = lambda x : [1 == (x // 2 ** i) % 2 for i in range(8)][::-1]",
     "crumbs": [
       "Bits"
     ]
@@ -5364,6 +5378,26 @@
     ]
   },
   {
+    "objectID": "30_bits.html#bonus",
+    "href": "30_bits.html#bonus",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}",
+    "crumbs": [
+      "Bits"
+    ]
+  },
+  {
+    "objectID": "30_bits.html#bonus-1",
+    "href": "30_bits.html#bonus-1",
+    "title": "Bits",
+    "section": "Bonus",
+    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    cs.rev()\n        .filter(|c| *c != '\\n')\n        .collect::&lt;Vec&lt;_&gt;&gt;()\n        .chunks(2)\n        .for_each(|x| vals.push(two_hex(x[1], x[0])));\n    return None;\n}",
+    "crumbs": [
+      "Bits"
+    ]
+  },
+  {
     "objectID": "32_macros.html",
     "href": "32_macros.html",
     "title": "Macros",
@@ -5462,22 +5496,5 @@
     "crumbs": [
       "Macros"
     ]
-  },
-  {
-    "objectID": "30_bits.html#bonus",
-    "href": "30_bits.html#bonus",
-    "title": "Bits",
-    "section": "Bonus",
-    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}",
-    "crumbs": [
-      "Bits"
-    ]
-  },
-  {
-    "objectID": "30_bits.rjs.html#bonus",
-    "href": "30_bits.rjs.html#bonus",
-    "title": "Bits",
-    "section": "Bonus",
-    "text": "Bonus\n\nCourtesy Indi of CS Student Assoc.\n\nfn pairs(mut cs: std::str::Chars, vals: &mut Vec&lt;u8&gt;) -&gt; Option&lt;char&gt; {\n    return match cs.next()? {\n        '\\n' =&gt; None,\n        n =&gt; pairs(cs, vals).map_or(Some(n), |m| {\n            vals.push(two_hex(n, m));\n            None\n        }),\n    };\n}"
   }
 ]
