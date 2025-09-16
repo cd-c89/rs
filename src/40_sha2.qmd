@@ -1,0 +1,470 @@
+---
+title: SHA-2
+---
+
+## Announcements
+
+- **Action Items**:
+  - How was Macros?
+  - Next homework coming out now - SHA512
+    - Split over two weeks
+    - Intermediate checkpoint recommended not required.
+        - That is, no `42` directory required.
+
+## Today
+
+- SHA-512
+    -   Why?
+    -   What?
+    -   How?
+
+## Slide Credit
+
+-   [**Saravanan Vijayakumaran**](https://www.ee.iitb.ac.in/~sarva/)
+-   sarva@ee.iitb.ac.in  
+-   Department of Electrical Engineering  
+-   Indian Institute of Technology Bombay  
+
+# Why?
+
+## Hash Functions
+
+-   Methods for **deterministically** compress a long input string to a shorter output called a digest
+    -   Also called "signature"
+    -   Can hash *anything stored in computer*
+-   These are also called "compression" or "one-way" hash functions.
+
+## Hash Merits
+
+-   Primary requirement is that it should be infeasible to find collisions, 
+    -   i.e. no two inputs have same digest.
+    -   If I download Ubuntu and check the signature, I should know it's Ubuntu.
+    -   If Ubuntu and a malware package have the same signature, useless.
+
+## Non-Cryptographic
+
+-   Used to build **hash tables**
+    -   Key-value stores with $\mathcal{O}(1)$ lookup time. 
+    -   [My hashtable/hashmap slides](https://cd-public.github.io/slide_portable/hashmap.html#/title-slide)
+-   Example: Python `hash`
+```{python}
+print("\n".join([f"{hash(a):+d}" for a in "ABCDE"]))
+```
+
+## Example.tex
+
+-   Let $M$ be the size of some hash table
+-   Take $a \in \mathbb{N} : a < M \land \gcd(a, M) = 1$
+    -   That is, two positive coprime integers.
+-   Any integer value $x$ can be mapped into $\mathbb{N}/(M) = \{0,1,\ldots, M-1\}$
+    
+```LaTeX
+h_a(x) = a x \pmod{M}
+```
+$$
+h_a(x) = a x \pmod{M}
+$$
+
+## Example.py
+-   We can express in a programming language.
+-   We note that 257 == 0x101 is prime.
+    -   And therefore $\forall M : \gcd(257,M) = 1$
+```{python}
+import math
+h = lambda x, a, M : (a * x) % M
+a, M = 0x05, 1 << 0x08
+assert(all((not math.gcd(a, M) == 1) or h(x, a, M) in range(M) for x in range(M)))
+print('h'+str((0xDA7A,a,M)), '=', h(0xDA7A,a,M))
+```
+
+## Example.rs
+-   We note a high performance special case.
+-   Let $w$ be the bit size used to store numbers
+    -   Likely 32 == 0x20 for Rust `i32`
+    -   $W$ stands for [word](https://en.wikipedia.org/wiki/Word_(computer_architecture)) size
+-   Take $W = 2^w$ and $M = 2^m$
+
+```{.C}
+fn h(x:i32, a:i32, m:i32) -> i32 {
+    return (a * x) >> (i32::BITS * 0x10 - m); 
+}
+```
+
+## Collisions
+
+-   A **collision** occurs if
+$$
+\exists x, x' : x \neq x' \land h(x) = h(x')
+$$
+-   That is, this assertion *fails*:
+```{.py}
+x_0, x_1 = 1,2
+assert(((x_0 != x_1) and (h(x_0, a, M) == h(x_1, a, M))))
+```
+-   **Goal:** minimize:non-crypto::avoid:crypto collisions.
+    -   Achieve this via a large codomain for $h$
+
+## Codomain:
+
+> ["In mathematics, a codomain or set of destination of a function is a set into which all of the output of the function is constrained to fall. It is the set $Y$ in the notation $f: X → Y$. The term range is sometimes ambiguously used to refer to either the codomain or the image of a function."](https://en.wikipedia.org/wiki/Codomain)
+
+## Test it:
+
+```{python}
+h = lambda x, a, M : (a * x) % M
+a, M = 0x05, 1 << 0x08
+assert(set(h(x, a, M) for x in range(M)) == set(range(M)))
+```
+-   As a rule we shouldn't try to write proofs/definitions in Python, but...
+-   Small $M = 2^{0x08} = 256$ means our computer can handle all possibilities.
+
+## Visualize:
+
+<img style="filter: invert(100%);" src="https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/images/codomain-256.svg">
+
+# What?
+
+## Cryptographic
+
+-   Begin with SHA-2 (Secure Hash Algorithm 2).
+    -   A family of cryptographic hash functions.
+    -   By the [U.S. National Security Agency (NSA)](https://www.youtube.com/watch?v=mJHvSp9AKYg)
+-   Published by the U.S. National Institute of Standards and Technology (NIST) in 2001.
+
+## Context
+-   SHA-1, released in 1995, found to have significant vulnerabilities.
+-   Growing concerns about the security of SHA-1 led to the development of SHA-2.
+    -   SHA-3 released in 2015, not in wide use.
+    -   For *if* weakness in SHA-2 discovered.
+    -   SHA-2 regarded as secure in 2025.
+
+## Family
+- Six hash functions release August 2001:
+  - SHA-224
+  - SHA-256
+  - SHA-384
+  - SHA-512
+  - SHA-512/224
+  - SHA-512/256
+
+## Adoption and Usage
+-   SHA-2 has been widely adopted in 
+    -   Digital signatures
+    -   Version control systems
+    -   Other stuff
+
+## SHA-2 Pledge
+
+-   I need a verbal confirmation:
+    -   Even though we will implement cryptography...
+    -   We assume their insecurity as we learn to:
+        -   Test our code
+        -   Write proofs
+        -   Use compilers
+    -   We don't know what side channel attacks are.
+        -   I say: out-of-scope.
+
+## SHA-512 Overview
+
+- **SHA-2** with a **512-bit output length**
+- Accepts bit strings of length up to $2^{128} - 1$
+    -   ~340 undecillion bits
+    -   ~42 septillion terabytes
+
+# How?
+
+## Two Stages
+
+- Output calculation has two stages:
+  1. **Preprocessing**
+  2. **Hash Computation**
+
+## Preprocessing
+
+- A 512-bit state variable $H^{(0)}$ is [initialized](https://www.movable-type.co.uk/scripts/sha512.html):
+
+\begin{align*}
+\begin{split}
+   H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
+   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xA54FF53A},\\
+   H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
+   H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
+\end{split}
+   \end{align*}
+
+- "Fractional parts of square roots of first primes"
+
+## Input Padding
+
+- The input $M$ is padded to a length that is a multiple of 1024.
+
+- Let $M$ be $l$-bits long.
+- Find the smallest non-negative $k$ such that:
+$$
+k + l + 129 \equiv 0 \pmod{512}
+$$
+- $\equiv$ is pronounced "congruent" (in this context)
+
+## Padding Content
+
+- Append $k + 129$ bits to $M$: 
+    -   A single one (`1`), followed by 
+    -   $k$ zeros (`0`), followed by
+    -   The 128-bit representation of $l$.
+$$
+\begin{align*}
+1\underbrace{000 \cdots 000}_{k \textrm{ zeros}}\underbrace{l}_{\textrm{ 128 bits}} \\
+\end{align*}
+$$
+
+## Example.py
+
+-   We can solve numerically in Python, but...
+-   Perhaps easier to show with strings.
+```{python}
+M = "Hello there I am a message.  " * 15
+l = len(M.encode('utf-8')) * 8
+k = 1024 - (l + 129) % 1024
+"l=", l, "k=", k, "pad=", "0x1" + "0" * (k//4) + f"{l:032x}" ## 128 // 4 == 32
+```
+-   The arithmetic form is left an exercise for the interested student.
+    -   My solution was 10-20 characters of code.
+
+## Hash Computation
+
+- Padded input is split into $N$ 1024-bit blocks:
+    - We note this is 1-indexed, by convention.
+$$
+M^{(1)}, M^{(2)}, \ldots, M^{(N)}
+$$
+- When testing, expect to have only $M^{(1)}$
+    - 1024 is a lot of bytes to e.g. type in.
+    - Test more once it works.
+    - You know how to type in bits or get random bits!
+
+## Hash Type
+- The hash function has the following type:
+$$
+f: M:\{0,1\}^{1024} \times H:\{0,1\}^{512} \rightarrow H':\{0,1\}^{512}
+$$
+- Given $H^{(i-1)}$, calculate $H^{(i)}$ using:
+ $$
+ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
+ $$
+    - 1-indexed
+
+
+## Words
+
+-   We specify bitwise operations over **exactly** 64 bit words.
+-   In Rust, we'd use`u64`
+```{.C}
+#include <stdint.h>
+
+/* uint32_t is "unsigned integer of size 32 type" */
+fn rotate(a:u64, b:u64) -> u64 {
+    // Your code here!
+    return a;
+}
+```
+
+## Operations
+
+- Bitwise logical operations
+    -   Unary,
+    -   Binary, and
+    -   Ternary, and
+- Shift/rotate operations
+    -   Simple, and
+    -   Composite
+
+## Words
+
+- Bitwise logical operations accept 1, 2, or 3 words of size 64 (`u64`) and produce one word.
+    -   Term these words $U$, $V$, $W$
+- Shift/rotate operations additionally accept one natural number $n$ < 64.
+    -   Term this $n$
+
+## Unary Bitwise
+
+- There is only one: 
+- 'bitwise complement'/'bitwise logical not':
+$$
+\lnot U
+$$
+- As from the *Bits* lecture
+## Binary Bitwise
+
+- There are four of which we use three (no NAND)
+- $U \land V$, $U \lor V$, $U \oplus V$: AND, OR, XOR
+- As from the *Bits* lecture
+
+## Addition
+
+- Addition is aproximately a binary bitwise operation:
+- Equivalent to integer sum module $2^{64}$
+```{python}
+from ctypes import c_ulong ## this won't work in pypy
+def addition(u:c_ulong, v:c_ulong) -> c_ulong:
+    return c_ulong(u + v)
+
+addition(4000000000, 4000000000) , addition(4, 4)
+```
+- Long used to mean 32 bit, Rust dodges this by being (1) new and (2) good.
+    - Have to use (lol) `c_ulonglong`
+
+## Rust Math
+- Rust addition on `u64` is already modulo $2^{64}$
+    - What else would it be?
+    - Finite number of bits means finite values.
+
+```{.rs filename="src/main.rs"}
+fn main() {
+    let x : u64 = 18_000_000_000_000_000_000;
+    dbg!(x + x);
+}
+```
+
+## We see
+
+```sh
+$ cargo r
+   Compiling bits v0.1.0 (/home/user/tmp/30)
+error: this arithmetic operation will overflow
+ --> src/main.rs:4:10
+  |
+4 |     dbg!(x + x);
+  |          ^^^^^ attempt to compute `18000000000000000000_u64 + 18000000000000000000_u64`, which would overflow
+  |
+  = note: `#[deny(arithmetic_overflow)]` on by default
+
+error: could not compile `bits` (bin "bits") due to 1 previous error
+```
+
+## Ternary Bitwise
+
+- `CHOICE` and `MEDIAN`, expressed logically:
+$$
+\text{CHOICE}(U, V, W) = (U \land V) \oplus (\lnot U \land W)
+$$
+$$
+\text{MEDIAN}(U, V, W) = (U \land V) \oplus (U \land W) \oplus (V \land W)
+$$
+- There exist numerous formulations of median.
+    - This one lifted from [GitHub user B-Con](https://github.com/B-Con/crypto-algorithms)
+
+## Shifts/Rotates
+
+- Compared to bitwise, they:
+    - Still work on a 64 bit word, but
+    - Also work on a value $n : 0 \leq n \leq 63$
+    - Or,
+    ```py
+    assert(n in range(64))
+    ```
+
+## Simple Shift/Rotate
+
+- Bitwise shift right `>>` / x86 `shrl`
+$$
+\textsf{SHR}^n(U) = \underbrace{000 \cdots 000}_{n \textrm{ zeros}} u_0 u_1 \cdots u_{62-n} u_{63-n}
+$$
+- The `ROTATE` macro / x86 `rorl`
+$$
+\textsf{ROTR}^n(U) =  \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_62-n} u_{63-n}
+$$
+
+## Composites
+
+- While not required...
+- ...easier to understand SHA256 with composites:
+$$
+\begin{align*}
+\Sigma_0(U)&= \textsf{ROTR}^{28}(U) \oplus \textsf{ROTR}^{34}(U) \oplus \textsf{ROTR}^{39}(U) \\
+\Sigma_1(U)&= \textsf{ROTR}^{14}(U) \oplus \textsf{ROTR}^{18}(U) \oplus \textsf{ROTR}^{41}(U) \\
+\sigma_0(U)&= \textsf{ROTR}^{01}(U) \oplus \textsf{ROTR}^{08}(U) \oplus \textsf{SHR}^{07}(U) \\
+\sigma_1(U)&= \textsf{ROTR}^{19}(U) \oplus \textsf{ROTR}^{61}(U) \oplus \textsf{SHR}^{06}(U)
+\end{align*}
+$$
+- Macros and helper functions both work well here.
+
+## Hash Computation
+
+- 4 steps for each 1024 bit chunk.
+- First chunk, also use pre-computed $H$ values.
+    - Called, say "initial hash values"
+    - Successive chunks use previous chunk's hash
+- All chunks share pre-computed $K$ values.
+    - Called, say "round contants"
+    - "Fractional parts of cube roots of first primes"
+
+## Parts
+
+0. Preprocess
+1. Set Message Schedule Array
+    -   80 orking Variables
+    -   8 word sized variables
+3. Main Loop
+    -   Word level operations
+4. Update hash value
+
+## 1. Set Message Schedule Array
+- $M^{(i)}_j$ is the $j$-th 0-indexed 64 bit word of the $i$-th 1-indexed 1024 bit chunk of message $M$
+    - A word is 8 letters
+    - A chunk is short tweet (128 chars)
+    - $M$ can be, e.g., Linux, the *Iliad*
+
+$$
+W_j = 
+\begin{cases} 
+M^{(i)}_j & 0 \leq j \leq 15 \\
+\sigma_1(W_{j-2}) + W_{j-7} + \sigma_0(W_{j-15}) + W_{j-16} & 16 \leq j \leq 79
+\end{cases}
+$$
+
+
+
+## 2. Set Working Variables
+
+- Initialize eight 64-bit words based on the prior hash.
+ $$
+ (A, B, C, D, E, F, G, H) = (H^{(i-1)}_0, \ldots, H^{(i-1)}_7).
+ $$
+
+## 3. Main Loop
+
+- Iterate $j = 0$ to $79$:
+```py
+for j in range(79):
+```
+- Precompute two temporary values (or not)
+$$
+\begin{align}
+\begin{split}
+& T_1  = H + \Sigma_1(E) + \textsf{CHOICE}(E,F,G) + K_j + W_j \\
+& T_2  = \Sigma_0(A) + \textsf{MEDIAN}(A,B,C) \\
+\end{split}
+\end{align}
+$$
+- Update the working variables
+$$
+(A,B,C,D,E,F,G,H)  = (T_1+T_2, A, B, C, D+T_1, E, F, G)
+$$
+
+## 4. Update hash value
+
+- Conclude the work on $M^{(i)}$ by finding $H^{(i)}$
+
+$$
+H^{(i)}_j = A + H^{(i-1)}_j, \quad j = 0, \ldots, 7
+$$
+
+# Resources
+
+- All for 256, use Wikipedia to translate to 512.
+- [Wikipedia Pseudocode](https://en.wikipedia.org/wiki/SHA-2#Pseudocode)
+    - I used this to implement.
+- [Saravanan Vijayakumaran's Slides](https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/hash-functions.html#/sha-256)
+    - I used this to typeset the slides.
+- [@manceraio's .js demo](https://sha256algorithm.com/)
+    - Inspired my text-only Enigma.
