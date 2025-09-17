@@ -478,13 +478,13 @@ Prof.&nbsp;Calvin
 </ul></li>
 <li>Example: Python <code>hash</code></li>
 </ul>
-<div id="51cf8943" class="cell" data-execution_count="1">
+<div id="a6612475" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
-<pre><code>-7943304545445145553
--8793769723096739523
-+2653310726086046356
--4709541602345886001
-+2721567894355954210</code></pre>
+<pre><code>-7741451163165820239
+-1861628620423422179
+-5835160025884903865
++7720992047374752885
+-5461840127377647452</code></pre>
 </div>
 </div>
 </section>
@@ -512,7 +512,7 @@ h_a(x) = a x \pmod{M}
 <li>And therefore <span class="math inline">\(\forall M : \gcd(257,M) = 1\)</span></li>
 </ul></li>
 </ul>
-<div id="33c5ba9e" class="cell" data-execution_count="2">
+<div id="e0046af9" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>h(55930, 5, 256) = 98</code></pre>
 </div>
@@ -670,14 +670,16 @@ h_a(x) = a x \pmod{M}
 <ul>
 <li>A 512-bit state variable <span class="math inline">\(H^{(0)}\)</span> is <a href="https://www.movable-type.co.uk/scripts/sha512.html">initialized</a>:</li>
 </ul>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
 \begin{split}
    H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
-   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xA54FF53A},\\
+   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
    H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
    H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
 \end{split}
-   \end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ul>
 <li>“Fractional parts of square roots of first primes”</li>
 </ul>
@@ -714,7 +716,7 @@ k + l + 129 \equiv 0 \pmod{512}
 <li>We can solve numerically in Python, but…</li>
 <li>Perhaps easier to show with strings.</li>
 </ul>
-<div id="076e3a8d" class="cell" data-execution_count="4">
+<div id="c308c796" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>('l=',
  3480,
@@ -824,7 +826,7 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <li>Addition is aproximately a binary bitwise operation:</li>
 <li>Equivalent to integer sum module <span class="math inline">\(2^{64}\)</span></li>
 </ul>
-<div id="7e5408a3" class="cell" data-execution_count="5">
+<div id="0045957b" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(c_ulong(3705032704), c_ulong(8))</code></pre>
 </div>

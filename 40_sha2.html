@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./41_constants.html" rel="next">
 <link href="./32_macros.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -241,6 +242,18 @@ window.Quarto = {
  <span class="menu-text">SHA-2</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -409,14 +422,14 @@ window.Quarto = {
 </ul></li>
 <li>Example: Python <code>hash</code></li>
 </ul>
-<div id="99ad7383" class="cell" data-execution_count="1">
+<div id="560e3cf9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([<span class="ss">f"</span><span class="sc">{</span><span class="bu">hash</span>(a)<span class="sc">:+d}</span><span class="ss">"</span> <span class="cf">for</span> a <span class="kw">in</span> <span class="st">"ABCDE"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-3140011463359298581
--6144836825984122447
-+1798874329963741585
--4167586386330196952
-+676822308474625745</code></pre>
+<pre><code>-9075146904933057618
++806231138570259626
++268372243234363948
++4810208187387723936
+-6667139044082583748</code></pre>
 </div>
 </div>
 </section>
@@ -444,7 +457,7 @@ h_a(x) = a x \pmod{M}
 <li>And therefore <span class="math inline">\(\forall M : \gcd(257,M) = 1\)</span></li>
 </ul></li>
 </ul>
-<div id="3d26ff5a" class="cell" data-execution_count="2">
+<div id="f073b8ba" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> math</span>
 <span id="cb4-2"><a href="#cb4-2"></a>h <span class="op">=</span> <span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
 <span id="cb4-3"><a href="#cb4-3"></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
@@ -495,7 +508,7 @@ h_a(x) = a x \pmod{M}
 </section>
 <section id="test-it" class="level2">
 <h2 class="anchored" data-anchor-id="test-it">Test it:</h2>
-<div id="78f0fda2" class="cell" data-execution_count="3">
+<div id="cb082237" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
 <span id="cb8-2"><a href="#cb8-2"></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="cf">assert</span>(<span class="bu">set</span>(h(x, a, M) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(M)) <span class="op">==</span> <span class="bu">set</span>(<span class="bu">range</span>(M)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,14 +621,16 @@ h_a(x) = a x \pmod{M}
 <ul>
 <li>A 512-bit state variable <span class="math inline">\(H^{(0)}\)</span> is <a href="https://www.movable-type.co.uk/scripts/sha512.html">initialized</a>:</li>
 </ul>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
 \begin{split}
    H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
-   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xA54FF53A},\\
+   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
    H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
    H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
 \end{split}
-   \end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ul>
 <li>“Fractional parts of square roots of first primes”</li>
 </ul>
@@ -652,7 +667,7 @@ k + l + 129 \equiv 0 \pmod{512}
 <li>We can solve numerically in Python, but…</li>
 <li>Perhaps easier to show with strings.</li>
 </ul>
-<div id="23b892ed" class="cell" data-execution_count="4">
+<div id="cbf1b818" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>M <span class="op">=</span> <span class="st">"Hello there I am a message.  "</span> <span class="op">*</span> <span class="dv">15</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
@@ -766,7 +781,7 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <li>Addition is aproximately a binary bitwise operation:</li>
 <li>Equivalent to integer sum module <span class="math inline">\(2^{64}\)</span></li>
 </ul>
-<div id="44a32a42" class="cell" data-execution_count="5">
+<div id="b0e21f73" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">from</span> ctypes <span class="im">import</span> c_ulong <span class="co">## this won't work in pypy</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">def</span> addition(u:c_ulong, v:c_ulong) <span class="op">-&gt;</span> c_ulong:</span>
 <span id="cb12-3"><a href="#cb12-3"></a>    <span class="cf">return</span> c_ulong(u <span class="op">+</span> v)</span>
@@ -1458,6 +1473,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./41_constants.html" class="pagination-link" aria-label="Constants">
+        <span class="nav-page-text">Constants</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">---</span></span>
@@ -1645,291 +1663,293 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-189"><a href="#cb18-189"></a></span>
 <span id="cb18-190"><a href="#cb18-190"></a><span class="ss">- </span>A 512-bit state variable $H^{(0)}$ is <span class="co">[</span><span class="ot">initialized</span><span class="co">](https://www.movable-type.co.uk/scripts/sha512.html)</span>:</span>
 <span id="cb18-191"><a href="#cb18-191"></a></span>
-<span id="cb18-192"><a href="#cb18-192"></a>\begin{align*}</span>
-<span id="cb18-193"><a href="#cb18-193"></a>\begin{split}</span>
-<span id="cb18-194"><a href="#cb18-194"></a>   H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},<span class="sc">\\</span></span>
-<span id="cb18-195"><a href="#cb18-195"></a>   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xA54FF53A},<span class="sc">\\</span></span>
-<span id="cb18-196"><a href="#cb18-196"></a>   H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},<span class="sc">\\</span></span>
-<span id="cb18-197"><a href="#cb18-197"></a>   H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.</span>
-<span id="cb18-198"><a href="#cb18-198"></a>\end{split}</span>
-<span id="cb18-199"><a href="#cb18-199"></a>   \end{align*}</span>
-<span id="cb18-200"><a href="#cb18-200"></a></span>
-<span id="cb18-201"><a href="#cb18-201"></a><span class="ss">- </span>"Fractional parts of square roots of first primes"</span>
+<span id="cb18-192"><a href="#cb18-192"></a>$$</span>
+<span id="cb18-193"><a href="#cb18-193"></a>\begin{align*}</span>
+<span id="cb18-194"><a href="#cb18-194"></a>\begin{split}</span>
+<span id="cb18-195"><a href="#cb18-195"></a>   H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},<span class="sc">\\</span></span>
+<span id="cb18-196"><a href="#cb18-196"></a>   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},<span class="sc">\\</span></span>
+<span id="cb18-197"><a href="#cb18-197"></a>   H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},<span class="sc">\\</span></span>
+<span id="cb18-198"><a href="#cb18-198"></a>   H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.</span>
+<span id="cb18-199"><a href="#cb18-199"></a>\end{split}</span>
+<span id="cb18-200"><a href="#cb18-200"></a>\end{align*}</span>
+<span id="cb18-201"><a href="#cb18-201"></a>$$</span>
 <span id="cb18-202"><a href="#cb18-202"></a></span>
-<span id="cb18-203"><a href="#cb18-203"></a><span class="fu">## Input Padding</span></span>
+<span id="cb18-203"><a href="#cb18-203"></a><span class="ss">- </span>"Fractional parts of square roots of first primes"</span>
 <span id="cb18-204"><a href="#cb18-204"></a></span>
-<span id="cb18-205"><a href="#cb18-205"></a><span class="ss">- </span>The input $M$ is padded to a length that is a multiple of 1024.</span>
+<span id="cb18-205"><a href="#cb18-205"></a><span class="fu">## Input Padding</span></span>
 <span id="cb18-206"><a href="#cb18-206"></a></span>
-<span id="cb18-207"><a href="#cb18-207"></a><span class="ss">- </span>Let $M$ be $l$-bits long.</span>
-<span id="cb18-208"><a href="#cb18-208"></a><span class="ss">- </span>Find the smallest non-negative $k$ such that:</span>
-<span id="cb18-209"><a href="#cb18-209"></a>$$</span>
-<span id="cb18-210"><a href="#cb18-210"></a>k + l + 129 \equiv 0 \pmod{512}</span>
+<span id="cb18-207"><a href="#cb18-207"></a><span class="ss">- </span>The input $M$ is padded to a length that is a multiple of 1024.</span>
+<span id="cb18-208"><a href="#cb18-208"></a></span>
+<span id="cb18-209"><a href="#cb18-209"></a><span class="ss">- </span>Let $M$ be $l$-bits long.</span>
+<span id="cb18-210"><a href="#cb18-210"></a><span class="ss">- </span>Find the smallest non-negative $k$ such that:</span>
 <span id="cb18-211"><a href="#cb18-211"></a>$$</span>
-<span id="cb18-212"><a href="#cb18-212"></a><span class="ss">- </span>$\equiv$ is pronounced "congruent" (in this context)</span>
-<span id="cb18-213"><a href="#cb18-213"></a></span>
-<span id="cb18-214"><a href="#cb18-214"></a><span class="fu">## Padding Content</span></span>
+<span id="cb18-212"><a href="#cb18-212"></a>k + l + 129 \equiv 0 \pmod{512}</span>
+<span id="cb18-213"><a href="#cb18-213"></a>$$</span>
+<span id="cb18-214"><a href="#cb18-214"></a><span class="ss">- </span>$\equiv$ is pronounced "congruent" (in this context)</span>
 <span id="cb18-215"><a href="#cb18-215"></a></span>
-<span id="cb18-216"><a href="#cb18-216"></a><span class="ss">- </span>Append $k + 129$ bits to $M$: </span>
-<span id="cb18-217"><a href="#cb18-217"></a><span class="ss">    -   </span>A single one (<span class="in">`1`</span>), followed by </span>
-<span id="cb18-218"><a href="#cb18-218"></a><span class="ss">    -   </span>$k$ zeros (<span class="in">`0`</span>), followed by</span>
-<span id="cb18-219"><a href="#cb18-219"></a><span class="ss">    -   </span>The 128-bit representation of $l$.</span>
-<span id="cb18-220"><a href="#cb18-220"></a>$$</span>
-<span id="cb18-221"><a href="#cb18-221"></a>\begin{align*}</span>
-<span id="cb18-222"><a href="#cb18-222"></a>1\underbrace{000 \cdots 000}_{k \textrm{ zeros}}\underbrace{l}_{\textrm{ 128 bits}} <span class="sc">\\</span></span>
-<span id="cb18-223"><a href="#cb18-223"></a>\end{align*}</span>
-<span id="cb18-224"><a href="#cb18-224"></a>$$</span>
-<span id="cb18-225"><a href="#cb18-225"></a></span>
-<span id="cb18-226"><a href="#cb18-226"></a><span class="fu">## Example.py</span></span>
+<span id="cb18-216"><a href="#cb18-216"></a><span class="fu">## Padding Content</span></span>
+<span id="cb18-217"><a href="#cb18-217"></a></span>
+<span id="cb18-218"><a href="#cb18-218"></a><span class="ss">- </span>Append $k + 129$ bits to $M$: </span>
+<span id="cb18-219"><a href="#cb18-219"></a><span class="ss">    -   </span>A single one (<span class="in">`1`</span>), followed by </span>
+<span id="cb18-220"><a href="#cb18-220"></a><span class="ss">    -   </span>$k$ zeros (<span class="in">`0`</span>), followed by</span>
+<span id="cb18-221"><a href="#cb18-221"></a><span class="ss">    -   </span>The 128-bit representation of $l$.</span>
+<span id="cb18-222"><a href="#cb18-222"></a>$$</span>
+<span id="cb18-223"><a href="#cb18-223"></a>\begin{align*}</span>
+<span id="cb18-224"><a href="#cb18-224"></a>1\underbrace{000 \cdots 000}_{k \textrm{ zeros}}\underbrace{l}_{\textrm{ 128 bits}} <span class="sc">\\</span></span>
+<span id="cb18-225"><a href="#cb18-225"></a>\end{align*}</span>
+<span id="cb18-226"><a href="#cb18-226"></a>$$</span>
 <span id="cb18-227"><a href="#cb18-227"></a></span>
-<span id="cb18-228"><a href="#cb18-228"></a><span class="ss">-   </span>We can solve numerically in Python, but...</span>
-<span id="cb18-229"><a href="#cb18-229"></a><span class="ss">-   </span>Perhaps easier to show with strings.</span>
-<span id="cb18-232"><a href="#cb18-232"></a><span class="in">```{python}</span></span>
-<span id="cb18-233"><a href="#cb18-233"></a>M <span class="op">=</span> <span class="st">"Hello there I am a message.  "</span> <span class="op">*</span> <span class="dv">15</span></span>
-<span id="cb18-234"><a href="#cb18-234"></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
-<span id="cb18-235"><a href="#cb18-235"></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
-<span id="cb18-236"><a href="#cb18-236"></a><span class="co">"l="</span>, l, <span class="st">"k="</span>, k, <span class="st">"pad="</span>, <span class="st">"0x1"</span> <span class="op">+</span> <span class="st">"0"</span> <span class="op">*</span> (k<span class="op">//</span><span class="dv">4</span>) <span class="op">+</span> <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:032x}</span><span class="ss">"</span> <span class="co">## 128 // 4 == 32</span></span>
-<span id="cb18-237"><a href="#cb18-237"></a><span class="in">```</span></span>
-<span id="cb18-238"><a href="#cb18-238"></a><span class="ss">-   </span>The arithmetic form is left an exercise for the interested student.</span>
-<span id="cb18-239"><a href="#cb18-239"></a><span class="ss">    -   </span>My solution was 10-20 characters of code.</span>
-<span id="cb18-240"><a href="#cb18-240"></a></span>
-<span id="cb18-241"><a href="#cb18-241"></a><span class="fu">## Hash Computation</span></span>
+<span id="cb18-228"><a href="#cb18-228"></a><span class="fu">## Example.py</span></span>
+<span id="cb18-229"><a href="#cb18-229"></a></span>
+<span id="cb18-230"><a href="#cb18-230"></a><span class="ss">-   </span>We can solve numerically in Python, but...</span>
+<span id="cb18-231"><a href="#cb18-231"></a><span class="ss">-   </span>Perhaps easier to show with strings.</span>
+<span id="cb18-234"><a href="#cb18-234"></a><span class="in">```{python}</span></span>
+<span id="cb18-235"><a href="#cb18-235"></a>M <span class="op">=</span> <span class="st">"Hello there I am a message.  "</span> <span class="op">*</span> <span class="dv">15</span></span>
+<span id="cb18-236"><a href="#cb18-236"></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
+<span id="cb18-237"><a href="#cb18-237"></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
+<span id="cb18-238"><a href="#cb18-238"></a><span class="co">"l="</span>, l, <span class="st">"k="</span>, k, <span class="st">"pad="</span>, <span class="st">"0x1"</span> <span class="op">+</span> <span class="st">"0"</span> <span class="op">*</span> (k<span class="op">//</span><span class="dv">4</span>) <span class="op">+</span> <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:032x}</span><span class="ss">"</span> <span class="co">## 128 // 4 == 32</span></span>
+<span id="cb18-239"><a href="#cb18-239"></a><span class="in">```</span></span>
+<span id="cb18-240"><a href="#cb18-240"></a><span class="ss">-   </span>The arithmetic form is left an exercise for the interested student.</span>
+<span id="cb18-241"><a href="#cb18-241"></a><span class="ss">    -   </span>My solution was 10-20 characters of code.</span>
 <span id="cb18-242"><a href="#cb18-242"></a></span>
-<span id="cb18-243"><a href="#cb18-243"></a><span class="ss">- </span>Padded input is split into $N$ 1024-bit blocks:</span>
-<span id="cb18-244"><a href="#cb18-244"></a><span class="ss">    - </span>We note this is 1-indexed, by convention.</span>
-<span id="cb18-245"><a href="#cb18-245"></a>$$</span>
-<span id="cb18-246"><a href="#cb18-246"></a>M^{(1)}, M^{(2)}, \ldots, M^{(N)}</span>
+<span id="cb18-243"><a href="#cb18-243"></a><span class="fu">## Hash Computation</span></span>
+<span id="cb18-244"><a href="#cb18-244"></a></span>
+<span id="cb18-245"><a href="#cb18-245"></a><span class="ss">- </span>Padded input is split into $N$ 1024-bit blocks:</span>
+<span id="cb18-246"><a href="#cb18-246"></a><span class="ss">    - </span>We note this is 1-indexed, by convention.</span>
 <span id="cb18-247"><a href="#cb18-247"></a>$$</span>
-<span id="cb18-248"><a href="#cb18-248"></a><span class="ss">- </span>When testing, expect to have only $M^{(1)}$</span>
-<span id="cb18-249"><a href="#cb18-249"></a><span class="ss">    - </span>1024 is a lot of bytes to e.g. type in.</span>
-<span id="cb18-250"><a href="#cb18-250"></a><span class="ss">    - </span>Test more once it works.</span>
-<span id="cb18-251"><a href="#cb18-251"></a><span class="ss">    - </span>You know how to type in bits or get random bits!</span>
-<span id="cb18-252"><a href="#cb18-252"></a></span>
-<span id="cb18-253"><a href="#cb18-253"></a><span class="fu">## Hash Type</span></span>
-<span id="cb18-254"><a href="#cb18-254"></a><span class="ss">- </span>The hash function has the following type:</span>
-<span id="cb18-255"><a href="#cb18-255"></a>$$</span>
-<span id="cb18-256"><a href="#cb18-256"></a>f: M:<span class="sc">\{</span>0,1<span class="sc">\}</span>^{1024} \times H:<span class="sc">\{</span>0,1<span class="sc">\}</span>^{512} \rightarrow H':<span class="sc">\{</span>0,1<span class="sc">\}</span>^{512}</span>
+<span id="cb18-248"><a href="#cb18-248"></a>M^{(1)}, M^{(2)}, \ldots, M^{(N)}</span>
+<span id="cb18-249"><a href="#cb18-249"></a>$$</span>
+<span id="cb18-250"><a href="#cb18-250"></a><span class="ss">- </span>When testing, expect to have only $M^{(1)}$</span>
+<span id="cb18-251"><a href="#cb18-251"></a><span class="ss">    - </span>1024 is a lot of bytes to e.g. type in.</span>
+<span id="cb18-252"><a href="#cb18-252"></a><span class="ss">    - </span>Test more once it works.</span>
+<span id="cb18-253"><a href="#cb18-253"></a><span class="ss">    - </span>You know how to type in bits or get random bits!</span>
+<span id="cb18-254"><a href="#cb18-254"></a></span>
+<span id="cb18-255"><a href="#cb18-255"></a><span class="fu">## Hash Type</span></span>
+<span id="cb18-256"><a href="#cb18-256"></a><span class="ss">- </span>The hash function has the following type:</span>
 <span id="cb18-257"><a href="#cb18-257"></a>$$</span>
-<span id="cb18-258"><a href="#cb18-258"></a><span class="ss">- </span>Given $H^{(i-1)}$, calculate $H^{(i)}$ using:</span>
-<span id="cb18-259"><a href="#cb18-259"></a> $$</span>
-<span id="cb18-260"><a href="#cb18-260"></a> H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.</span>
+<span id="cb18-258"><a href="#cb18-258"></a>f: M:<span class="sc">\{</span>0,1<span class="sc">\}</span>^{1024} \times H:<span class="sc">\{</span>0,1<span class="sc">\}</span>^{512} \rightarrow H':<span class="sc">\{</span>0,1<span class="sc">\}</span>^{512}</span>
+<span id="cb18-259"><a href="#cb18-259"></a>$$</span>
+<span id="cb18-260"><a href="#cb18-260"></a><span class="ss">- </span>Given $H^{(i-1)}$, calculate $H^{(i)}$ using:</span>
 <span id="cb18-261"><a href="#cb18-261"></a> $$</span>
-<span id="cb18-262"><a href="#cb18-262"></a><span class="ss">    - </span>1-indexed</span>
-<span id="cb18-263"><a href="#cb18-263"></a></span>
-<span id="cb18-264"><a href="#cb18-264"></a></span>
-<span id="cb18-265"><a href="#cb18-265"></a><span class="fu">## Words</span></span>
+<span id="cb18-262"><a href="#cb18-262"></a> H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.</span>
+<span id="cb18-263"><a href="#cb18-263"></a> $$</span>
+<span id="cb18-264"><a href="#cb18-264"></a><span class="ss">    - </span>1-indexed</span>
+<span id="cb18-265"><a href="#cb18-265"></a></span>
 <span id="cb18-266"><a href="#cb18-266"></a></span>
-<span id="cb18-267"><a href="#cb18-267"></a><span class="ss">-   </span>We specify bitwise operations over **exactly** 64 bit words.</span>
-<span id="cb18-268"><a href="#cb18-268"></a><span class="ss">-   </span>In Rust, we'd use<span class="in">`u64`</span></span>
-<span id="cb18-269"><a href="#cb18-269"></a><span class="in">```{.C}</span></span>
-<span id="cb18-270"><a href="#cb18-270"></a><span class="in">#include &lt;stdint.h&gt;</span></span>
-<span id="cb18-271"><a href="#cb18-271"></a></span>
-<span id="cb18-272"><a href="#cb18-272"></a><span class="in">/* uint32_t is "unsigned integer of size 32 type" */</span></span>
-<span id="cb18-273"><a href="#cb18-273"></a><span class="in">fn rotate(a:u64, b:u64) -&gt; u64 {</span></span>
-<span id="cb18-274"><a href="#cb18-274"></a><span class="in">    // Your code here!</span></span>
-<span id="cb18-275"><a href="#cb18-275"></a><span class="in">    return a;</span></span>
-<span id="cb18-276"><a href="#cb18-276"></a><span class="in">}</span></span>
-<span id="cb18-277"><a href="#cb18-277"></a><span class="in">```</span></span>
-<span id="cb18-278"><a href="#cb18-278"></a></span>
-<span id="cb18-279"><a href="#cb18-279"></a><span class="fu">## Operations</span></span>
+<span id="cb18-267"><a href="#cb18-267"></a><span class="fu">## Words</span></span>
+<span id="cb18-268"><a href="#cb18-268"></a></span>
+<span id="cb18-269"><a href="#cb18-269"></a><span class="ss">-   </span>We specify bitwise operations over **exactly** 64 bit words.</span>
+<span id="cb18-270"><a href="#cb18-270"></a><span class="ss">-   </span>In Rust, we'd use<span class="in">`u64`</span></span>
+<span id="cb18-271"><a href="#cb18-271"></a><span class="in">```{.C}</span></span>
+<span id="cb18-272"><a href="#cb18-272"></a><span class="in">#include &lt;stdint.h&gt;</span></span>
+<span id="cb18-273"><a href="#cb18-273"></a></span>
+<span id="cb18-274"><a href="#cb18-274"></a><span class="in">/* uint32_t is "unsigned integer of size 32 type" */</span></span>
+<span id="cb18-275"><a href="#cb18-275"></a><span class="in">fn rotate(a:u64, b:u64) -&gt; u64 {</span></span>
+<span id="cb18-276"><a href="#cb18-276"></a><span class="in">    // Your code here!</span></span>
+<span id="cb18-277"><a href="#cb18-277"></a><span class="in">    return a;</span></span>
+<span id="cb18-278"><a href="#cb18-278"></a><span class="in">}</span></span>
+<span id="cb18-279"><a href="#cb18-279"></a><span class="in">```</span></span>
 <span id="cb18-280"><a href="#cb18-280"></a></span>
-<span id="cb18-281"><a href="#cb18-281"></a><span class="ss">- </span>Bitwise logical operations</span>
-<span id="cb18-282"><a href="#cb18-282"></a><span class="ss">    -   </span>Unary,</span>
-<span id="cb18-283"><a href="#cb18-283"></a><span class="ss">    -   </span>Binary, and</span>
-<span id="cb18-284"><a href="#cb18-284"></a><span class="ss">    -   </span>Ternary, and</span>
-<span id="cb18-285"><a href="#cb18-285"></a><span class="ss">- </span>Shift/rotate operations</span>
-<span id="cb18-286"><a href="#cb18-286"></a><span class="ss">    -   </span>Simple, and</span>
-<span id="cb18-287"><a href="#cb18-287"></a><span class="ss">    -   </span>Composite</span>
-<span id="cb18-288"><a href="#cb18-288"></a></span>
-<span id="cb18-289"><a href="#cb18-289"></a><span class="fu">## Words</span></span>
+<span id="cb18-281"><a href="#cb18-281"></a><span class="fu">## Operations</span></span>
+<span id="cb18-282"><a href="#cb18-282"></a></span>
+<span id="cb18-283"><a href="#cb18-283"></a><span class="ss">- </span>Bitwise logical operations</span>
+<span id="cb18-284"><a href="#cb18-284"></a><span class="ss">    -   </span>Unary,</span>
+<span id="cb18-285"><a href="#cb18-285"></a><span class="ss">    -   </span>Binary, and</span>
+<span id="cb18-286"><a href="#cb18-286"></a><span class="ss">    -   </span>Ternary, and</span>
+<span id="cb18-287"><a href="#cb18-287"></a><span class="ss">- </span>Shift/rotate operations</span>
+<span id="cb18-288"><a href="#cb18-288"></a><span class="ss">    -   </span>Simple, and</span>
+<span id="cb18-289"><a href="#cb18-289"></a><span class="ss">    -   </span>Composite</span>
 <span id="cb18-290"><a href="#cb18-290"></a></span>
-<span id="cb18-291"><a href="#cb18-291"></a><span class="ss">- </span>Bitwise logical operations accept 1, 2, or 3 words of size 64 (<span class="in">`u64`</span>) and produce one word.</span>
-<span id="cb18-292"><a href="#cb18-292"></a><span class="ss">    -   </span>Term these words $U$, $V$, $W$</span>
-<span id="cb18-293"><a href="#cb18-293"></a><span class="ss">- </span>Shift/rotate operations additionally accept one natural number $n$ &lt; 64.</span>
-<span id="cb18-294"><a href="#cb18-294"></a><span class="ss">    -   </span>Term this $n$</span>
-<span id="cb18-295"><a href="#cb18-295"></a></span>
-<span id="cb18-296"><a href="#cb18-296"></a><span class="fu">## Unary Bitwise</span></span>
+<span id="cb18-291"><a href="#cb18-291"></a><span class="fu">## Words</span></span>
+<span id="cb18-292"><a href="#cb18-292"></a></span>
+<span id="cb18-293"><a href="#cb18-293"></a><span class="ss">- </span>Bitwise logical operations accept 1, 2, or 3 words of size 64 (<span class="in">`u64`</span>) and produce one word.</span>
+<span id="cb18-294"><a href="#cb18-294"></a><span class="ss">    -   </span>Term these words $U$, $V$, $W$</span>
+<span id="cb18-295"><a href="#cb18-295"></a><span class="ss">- </span>Shift/rotate operations additionally accept one natural number $n$ &lt; 64.</span>
+<span id="cb18-296"><a href="#cb18-296"></a><span class="ss">    -   </span>Term this $n$</span>
 <span id="cb18-297"><a href="#cb18-297"></a></span>
-<span id="cb18-298"><a href="#cb18-298"></a><span class="ss">- </span>There is only one: </span>
-<span id="cb18-299"><a href="#cb18-299"></a><span class="ss">- </span>'bitwise complement'/'bitwise logical not':</span>
-<span id="cb18-300"><a href="#cb18-300"></a>$$</span>
-<span id="cb18-301"><a href="#cb18-301"></a>\lnot U</span>
+<span id="cb18-298"><a href="#cb18-298"></a><span class="fu">## Unary Bitwise</span></span>
+<span id="cb18-299"><a href="#cb18-299"></a></span>
+<span id="cb18-300"><a href="#cb18-300"></a><span class="ss">- </span>There is only one: </span>
+<span id="cb18-301"><a href="#cb18-301"></a><span class="ss">- </span>'bitwise complement'/'bitwise logical not':</span>
 <span id="cb18-302"><a href="#cb18-302"></a>$$</span>
-<span id="cb18-303"><a href="#cb18-303"></a><span class="ss">- </span>As from the *Bits* lecture</span>
-<span id="cb18-304"><a href="#cb18-304"></a><span class="fu">## Binary Bitwise</span></span>
-<span id="cb18-305"><a href="#cb18-305"></a></span>
-<span id="cb18-306"><a href="#cb18-306"></a><span class="ss">- </span>There are four of which we use three (no NAND)</span>
-<span id="cb18-307"><a href="#cb18-307"></a><span class="ss">- </span>$U \land V$, $U \lor V$, $U \oplus V$: AND, OR, XOR</span>
-<span id="cb18-308"><a href="#cb18-308"></a><span class="ss">- </span>As from the *Bits* lecture</span>
-<span id="cb18-309"><a href="#cb18-309"></a></span>
-<span id="cb18-310"><a href="#cb18-310"></a><span class="fu">## Addition</span></span>
+<span id="cb18-303"><a href="#cb18-303"></a>\lnot U</span>
+<span id="cb18-304"><a href="#cb18-304"></a>$$</span>
+<span id="cb18-305"><a href="#cb18-305"></a><span class="ss">- </span>As from the *Bits* lecture</span>
+<span id="cb18-306"><a href="#cb18-306"></a><span class="fu">## Binary Bitwise</span></span>
+<span id="cb18-307"><a href="#cb18-307"></a></span>
+<span id="cb18-308"><a href="#cb18-308"></a><span class="ss">- </span>There are four of which we use three (no NAND)</span>
+<span id="cb18-309"><a href="#cb18-309"></a><span class="ss">- </span>$U \land V$, $U \lor V$, $U \oplus V$: AND, OR, XOR</span>
+<span id="cb18-310"><a href="#cb18-310"></a><span class="ss">- </span>As from the *Bits* lecture</span>
 <span id="cb18-311"><a href="#cb18-311"></a></span>
-<span id="cb18-312"><a href="#cb18-312"></a><span class="ss">- </span>Addition is aproximately a binary bitwise operation:</span>
-<span id="cb18-313"><a href="#cb18-313"></a><span class="ss">- </span>Equivalent to integer sum module $2^{64}$</span>
-<span id="cb18-316"><a href="#cb18-316"></a><span class="in">```{python}</span></span>
-<span id="cb18-317"><a href="#cb18-317"></a><span class="im">from</span> ctypes <span class="im">import</span> c_ulong <span class="co">## this won't work in pypy</span></span>
-<span id="cb18-318"><a href="#cb18-318"></a><span class="kw">def</span> addition(u:c_ulong, v:c_ulong) <span class="op">-&gt;</span> c_ulong:</span>
-<span id="cb18-319"><a href="#cb18-319"></a>    <span class="cf">return</span> c_ulong(u <span class="op">+</span> v)</span>
-<span id="cb18-320"><a href="#cb18-320"></a></span>
-<span id="cb18-321"><a href="#cb18-321"></a>addition(<span class="dv">4000000000</span>, <span class="dv">4000000000</span>) , addition(<span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb18-322"><a href="#cb18-322"></a><span class="in">```</span></span>
-<span id="cb18-323"><a href="#cb18-323"></a><span class="ss">- </span>Long used to mean 32 bit, Rust dodges this by being (1) new and (2) good.</span>
-<span id="cb18-324"><a href="#cb18-324"></a><span class="ss">    - </span>Have to use (lol) <span class="in">`c_ulonglong`</span></span>
-<span id="cb18-325"><a href="#cb18-325"></a></span>
-<span id="cb18-326"><a href="#cb18-326"></a><span class="fu">## Rust Math</span></span>
-<span id="cb18-327"><a href="#cb18-327"></a><span class="ss">- </span>Rust addition on <span class="in">`u64`</span> is already modulo $2^{64}$</span>
-<span id="cb18-328"><a href="#cb18-328"></a><span class="ss">    - </span>What else would it be?</span>
-<span id="cb18-329"><a href="#cb18-329"></a><span class="ss">    - </span>Finite number of bits means finite values.</span>
-<span id="cb18-330"><a href="#cb18-330"></a></span>
-<span id="cb18-331"><a href="#cb18-331"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb18-332"><a href="#cb18-332"></a><span class="in">fn main() {</span></span>
-<span id="cb18-333"><a href="#cb18-333"></a><span class="in">    let x : u64 = 18_000_000_000_000_000_000;</span></span>
-<span id="cb18-334"><a href="#cb18-334"></a><span class="in">    dbg!(x + x);</span></span>
-<span id="cb18-335"><a href="#cb18-335"></a><span class="in">}</span></span>
-<span id="cb18-336"><a href="#cb18-336"></a><span class="in">```</span></span>
-<span id="cb18-337"><a href="#cb18-337"></a></span>
-<span id="cb18-338"><a href="#cb18-338"></a><span class="fu">## We see</span></span>
+<span id="cb18-312"><a href="#cb18-312"></a><span class="fu">## Addition</span></span>
+<span id="cb18-313"><a href="#cb18-313"></a></span>
+<span id="cb18-314"><a href="#cb18-314"></a><span class="ss">- </span>Addition is aproximately a binary bitwise operation:</span>
+<span id="cb18-315"><a href="#cb18-315"></a><span class="ss">- </span>Equivalent to integer sum module $2^{64}$</span>
+<span id="cb18-318"><a href="#cb18-318"></a><span class="in">```{python}</span></span>
+<span id="cb18-319"><a href="#cb18-319"></a><span class="im">from</span> ctypes <span class="im">import</span> c_ulong <span class="co">## this won't work in pypy</span></span>
+<span id="cb18-320"><a href="#cb18-320"></a><span class="kw">def</span> addition(u:c_ulong, v:c_ulong) <span class="op">-&gt;</span> c_ulong:</span>
+<span id="cb18-321"><a href="#cb18-321"></a>    <span class="cf">return</span> c_ulong(u <span class="op">+</span> v)</span>
+<span id="cb18-322"><a href="#cb18-322"></a></span>
+<span id="cb18-323"><a href="#cb18-323"></a>addition(<span class="dv">4000000000</span>, <span class="dv">4000000000</span>) , addition(<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb18-324"><a href="#cb18-324"></a><span class="in">```</span></span>
+<span id="cb18-325"><a href="#cb18-325"></a><span class="ss">- </span>Long used to mean 32 bit, Rust dodges this by being (1) new and (2) good.</span>
+<span id="cb18-326"><a href="#cb18-326"></a><span class="ss">    - </span>Have to use (lol) <span class="in">`c_ulonglong`</span></span>
+<span id="cb18-327"><a href="#cb18-327"></a></span>
+<span id="cb18-328"><a href="#cb18-328"></a><span class="fu">## Rust Math</span></span>
+<span id="cb18-329"><a href="#cb18-329"></a><span class="ss">- </span>Rust addition on <span class="in">`u64`</span> is already modulo $2^{64}$</span>
+<span id="cb18-330"><a href="#cb18-330"></a><span class="ss">    - </span>What else would it be?</span>
+<span id="cb18-331"><a href="#cb18-331"></a><span class="ss">    - </span>Finite number of bits means finite values.</span>
+<span id="cb18-332"><a href="#cb18-332"></a></span>
+<span id="cb18-333"><a href="#cb18-333"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb18-334"><a href="#cb18-334"></a><span class="in">fn main() {</span></span>
+<span id="cb18-335"><a href="#cb18-335"></a><span class="in">    let x : u64 = 18_000_000_000_000_000_000;</span></span>
+<span id="cb18-336"><a href="#cb18-336"></a><span class="in">    dbg!(x + x);</span></span>
+<span id="cb18-337"><a href="#cb18-337"></a><span class="in">}</span></span>
+<span id="cb18-338"><a href="#cb18-338"></a><span class="in">```</span></span>
 <span id="cb18-339"><a href="#cb18-339"></a></span>
-<span id="cb18-340"><a href="#cb18-340"></a><span class="in">```sh</span></span>
-<span id="cb18-341"><a href="#cb18-341"></a><span class="ex">$</span> cargo r</span>
-<span id="cb18-342"><a href="#cb18-342"></a>   <span class="ex">Compiling</span> bits v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/30</span><span class="kw">)</span></span>
-<span id="cb18-343"><a href="#cb18-343"></a><span class="ex">error:</span> this arithmetic operation will overflow</span>
-<span id="cb18-344"><a href="#cb18-344"></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:4:10</span>
-<span id="cb18-345"><a href="#cb18-345"></a>  <span class="kw">|</span></span>
-<span id="cb18-346"><a href="#cb18-346"></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">dbg!</span><span class="er">(</span><span class="ex">x</span> + x<span class="kw">);</span></span>
-<span id="cb18-347"><a href="#cb18-347"></a>  <span class="kw">|</span>          <span class="ex">^^^^^</span> attempt to compute <span class="kw">`</span><span class="ex">18000000000000000000_u64</span> + 18000000000000000000_u64<span class="kw">`</span>, which would overflow</span>
-<span id="cb18-348"><a href="#cb18-348"></a>  <span class="kw">|</span></span>
-<span id="cb18-349"><a href="#cb18-349"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[deny(arithmetic_overflow)]</span><span class="kw">`</span> on by default</span>
-<span id="cb18-350"><a href="#cb18-350"></a></span>
-<span id="cb18-351"><a href="#cb18-351"></a><span class="ex">error:</span> could not compile <span class="kw">`</span><span class="ex">bits</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"bits"</span><span class="kw">)</span> <span class="ex">due</span> to 1 previous error</span>
-<span id="cb18-352"><a href="#cb18-352"></a><span class="in">```</span></span>
-<span id="cb18-353"><a href="#cb18-353"></a></span>
-<span id="cb18-354"><a href="#cb18-354"></a><span class="fu">## Ternary Bitwise</span></span>
+<span id="cb18-340"><a href="#cb18-340"></a><span class="fu">## We see</span></span>
+<span id="cb18-341"><a href="#cb18-341"></a></span>
+<span id="cb18-342"><a href="#cb18-342"></a><span class="in">```sh</span></span>
+<span id="cb18-343"><a href="#cb18-343"></a><span class="ex">$</span> cargo r</span>
+<span id="cb18-344"><a href="#cb18-344"></a>   <span class="ex">Compiling</span> bits v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/30</span><span class="kw">)</span></span>
+<span id="cb18-345"><a href="#cb18-345"></a><span class="ex">error:</span> this arithmetic operation will overflow</span>
+<span id="cb18-346"><a href="#cb18-346"></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:4:10</span>
+<span id="cb18-347"><a href="#cb18-347"></a>  <span class="kw">|</span></span>
+<span id="cb18-348"><a href="#cb18-348"></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">dbg!</span><span class="er">(</span><span class="ex">x</span> + x<span class="kw">);</span></span>
+<span id="cb18-349"><a href="#cb18-349"></a>  <span class="kw">|</span>          <span class="ex">^^^^^</span> attempt to compute <span class="kw">`</span><span class="ex">18000000000000000000_u64</span> + 18000000000000000000_u64<span class="kw">`</span>, which would overflow</span>
+<span id="cb18-350"><a href="#cb18-350"></a>  <span class="kw">|</span></span>
+<span id="cb18-351"><a href="#cb18-351"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[deny(arithmetic_overflow)]</span><span class="kw">`</span> on by default</span>
+<span id="cb18-352"><a href="#cb18-352"></a></span>
+<span id="cb18-353"><a href="#cb18-353"></a><span class="ex">error:</span> could not compile <span class="kw">`</span><span class="ex">bits</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"bits"</span><span class="kw">)</span> <span class="ex">due</span> to 1 previous error</span>
+<span id="cb18-354"><a href="#cb18-354"></a><span class="in">```</span></span>
 <span id="cb18-355"><a href="#cb18-355"></a></span>
-<span id="cb18-356"><a href="#cb18-356"></a><span class="ss">- </span><span class="in">`CHOICE`</span> and <span class="in">`MEDIAN`</span>, expressed logically:</span>
-<span id="cb18-357"><a href="#cb18-357"></a>$$</span>
-<span id="cb18-358"><a href="#cb18-358"></a>\text{CHOICE}(U, V, W) = (U \land V) \oplus (\lnot U \land W)</span>
+<span id="cb18-356"><a href="#cb18-356"></a><span class="fu">## Ternary Bitwise</span></span>
+<span id="cb18-357"><a href="#cb18-357"></a></span>
+<span id="cb18-358"><a href="#cb18-358"></a><span class="ss">- </span><span class="in">`CHOICE`</span> and <span class="in">`MEDIAN`</span>, expressed logically:</span>
 <span id="cb18-359"><a href="#cb18-359"></a>$$</span>
-<span id="cb18-360"><a href="#cb18-360"></a>$$</span>
-<span id="cb18-361"><a href="#cb18-361"></a>\text{MEDIAN}(U, V, W) = (U \land V) \oplus (U \land W) \oplus (V \land W)</span>
+<span id="cb18-360"><a href="#cb18-360"></a>\text{CHOICE}(U, V, W) = (U \land V) \oplus (\lnot U \land W)</span>
+<span id="cb18-361"><a href="#cb18-361"></a>$$</span>
 <span id="cb18-362"><a href="#cb18-362"></a>$$</span>
-<span id="cb18-363"><a href="#cb18-363"></a><span class="ss">- </span>There exist numerous formulations of median.</span>
-<span id="cb18-364"><a href="#cb18-364"></a><span class="ss">    - </span>This one lifted from <span class="co">[</span><span class="ot">GitHub user B-Con</span><span class="co">](https://github.com/B-Con/crypto-algorithms)</span></span>
-<span id="cb18-365"><a href="#cb18-365"></a></span>
-<span id="cb18-366"><a href="#cb18-366"></a><span class="fu">## Shifts/Rotates</span></span>
+<span id="cb18-363"><a href="#cb18-363"></a>\text{MEDIAN}(U, V, W) = (U \land V) \oplus (U \land W) \oplus (V \land W)</span>
+<span id="cb18-364"><a href="#cb18-364"></a>$$</span>
+<span id="cb18-365"><a href="#cb18-365"></a><span class="ss">- </span>There exist numerous formulations of median.</span>
+<span id="cb18-366"><a href="#cb18-366"></a><span class="ss">    - </span>This one lifted from <span class="co">[</span><span class="ot">GitHub user B-Con</span><span class="co">](https://github.com/B-Con/crypto-algorithms)</span></span>
 <span id="cb18-367"><a href="#cb18-367"></a></span>
-<span id="cb18-368"><a href="#cb18-368"></a><span class="ss">- </span>Compared to bitwise, they:</span>
-<span id="cb18-369"><a href="#cb18-369"></a><span class="ss">    - </span>Still work on a 64 bit word, but</span>
-<span id="cb18-370"><a href="#cb18-370"></a><span class="ss">    - </span>Also work on a value $n : 0 \leq n \leq 63$</span>
-<span id="cb18-371"><a href="#cb18-371"></a><span class="ss">    - </span>Or,</span>
-<span id="cb18-372"><a href="#cb18-372"></a>    <span class="in">```py</span></span>
-<span id="cb18-373"><a href="#cb18-373"></a>    <span class="cf">assert</span>(n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64</span>))</span>
-<span id="cb18-374"><a href="#cb18-374"></a>    <span class="in">```</span></span>
-<span id="cb18-375"><a href="#cb18-375"></a></span>
-<span id="cb18-376"><a href="#cb18-376"></a><span class="fu">## Simple Shift/Rotate</span></span>
+<span id="cb18-368"><a href="#cb18-368"></a><span class="fu">## Shifts/Rotates</span></span>
+<span id="cb18-369"><a href="#cb18-369"></a></span>
+<span id="cb18-370"><a href="#cb18-370"></a><span class="ss">- </span>Compared to bitwise, they:</span>
+<span id="cb18-371"><a href="#cb18-371"></a><span class="ss">    - </span>Still work on a 64 bit word, but</span>
+<span id="cb18-372"><a href="#cb18-372"></a><span class="ss">    - </span>Also work on a value $n : 0 \leq n \leq 63$</span>
+<span id="cb18-373"><a href="#cb18-373"></a><span class="ss">    - </span>Or,</span>
+<span id="cb18-374"><a href="#cb18-374"></a>    <span class="in">```py</span></span>
+<span id="cb18-375"><a href="#cb18-375"></a>    <span class="cf">assert</span>(n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64</span>))</span>
+<span id="cb18-376"><a href="#cb18-376"></a>    <span class="in">```</span></span>
 <span id="cb18-377"><a href="#cb18-377"></a></span>
-<span id="cb18-378"><a href="#cb18-378"></a><span class="ss">- </span>Bitwise shift right <span class="in">`&gt;&gt;`</span> / x86 <span class="in">`shrl`</span></span>
-<span id="cb18-379"><a href="#cb18-379"></a>$$</span>
-<span id="cb18-380"><a href="#cb18-380"></a>\textsf{SHR}^n(U) = \underbrace{000 \cdots 000}_{n \textrm{ zeros}} u_0 u_1 \cdots u_{62-n} u_{63-n}</span>
+<span id="cb18-378"><a href="#cb18-378"></a><span class="fu">## Simple Shift/Rotate</span></span>
+<span id="cb18-379"><a href="#cb18-379"></a></span>
+<span id="cb18-380"><a href="#cb18-380"></a><span class="ss">- </span>Bitwise shift right <span class="in">`&gt;&gt;`</span> / x86 <span class="in">`shrl`</span></span>
 <span id="cb18-381"><a href="#cb18-381"></a>$$</span>
-<span id="cb18-382"><a href="#cb18-382"></a><span class="ss">- </span>The <span class="in">`ROTATE`</span> macro / x86 <span class="in">`rorl`</span></span>
+<span id="cb18-382"><a href="#cb18-382"></a>\textsf{SHR}^n(U) = \underbrace{000 \cdots 000}_{n \textrm{ zeros}} u_0 u_1 \cdots u_{62-n} u_{63-n}</span>
 <span id="cb18-383"><a href="#cb18-383"></a>$$</span>
-<span id="cb18-384"><a href="#cb18-384"></a>\textsf{ROTR}^n(U) =  \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_62-n} u_{63-n}</span>
+<span id="cb18-384"><a href="#cb18-384"></a><span class="ss">- </span>The <span class="in">`ROTATE`</span> macro / x86 <span class="in">`rorl`</span></span>
 <span id="cb18-385"><a href="#cb18-385"></a>$$</span>
-<span id="cb18-386"><a href="#cb18-386"></a></span>
-<span id="cb18-387"><a href="#cb18-387"></a><span class="fu">## Composites</span></span>
+<span id="cb18-386"><a href="#cb18-386"></a>\textsf{ROTR}^n(U) =  \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_62-n} u_{63-n}</span>
+<span id="cb18-387"><a href="#cb18-387"></a>$$</span>
 <span id="cb18-388"><a href="#cb18-388"></a></span>
-<span id="cb18-389"><a href="#cb18-389"></a><span class="ss">- </span>While not required...</span>
-<span id="cb18-390"><a href="#cb18-390"></a><span class="ss">- </span>...easier to understand SHA256 with composites:</span>
-<span id="cb18-391"><a href="#cb18-391"></a>$$</span>
-<span id="cb18-392"><a href="#cb18-392"></a>\begin{align*}</span>
-<span id="cb18-393"><a href="#cb18-393"></a>\Sigma_0(U)&amp;= \textsf{ROTR}^{28}(U) \oplus \textsf{ROTR}^{34}(U) \oplus \textsf{ROTR}^{39}(U) <span class="sc">\\</span></span>
-<span id="cb18-394"><a href="#cb18-394"></a>\Sigma_1(U)&amp;= \textsf{ROTR}^{14}(U) \oplus \textsf{ROTR}^{18}(U) \oplus \textsf{ROTR}^{41}(U) <span class="sc">\\</span></span>
-<span id="cb18-395"><a href="#cb18-395"></a>\sigma_0(U)&amp;= \textsf{ROTR}^{01}(U) \oplus \textsf{ROTR}^{08}(U) \oplus \textsf{SHR}^{07}(U) <span class="sc">\\</span></span>
-<span id="cb18-396"><a href="#cb18-396"></a>\sigma_1(U)&amp;= \textsf{ROTR}^{19}(U) \oplus \textsf{ROTR}^{61}(U) \oplus \textsf{SHR}^{06}(U)</span>
-<span id="cb18-397"><a href="#cb18-397"></a>\end{align*}</span>
-<span id="cb18-398"><a href="#cb18-398"></a>$$</span>
-<span id="cb18-399"><a href="#cb18-399"></a><span class="ss">- </span>Macros and helper functions both work well here.</span>
-<span id="cb18-400"><a href="#cb18-400"></a></span>
-<span id="cb18-401"><a href="#cb18-401"></a><span class="fu">## Hash Computation</span></span>
+<span id="cb18-389"><a href="#cb18-389"></a><span class="fu">## Composites</span></span>
+<span id="cb18-390"><a href="#cb18-390"></a></span>
+<span id="cb18-391"><a href="#cb18-391"></a><span class="ss">- </span>While not required...</span>
+<span id="cb18-392"><a href="#cb18-392"></a><span class="ss">- </span>...easier to understand SHA256 with composites:</span>
+<span id="cb18-393"><a href="#cb18-393"></a>$$</span>
+<span id="cb18-394"><a href="#cb18-394"></a>\begin{align*}</span>
+<span id="cb18-395"><a href="#cb18-395"></a>\Sigma_0(U)&amp;= \textsf{ROTR}^{28}(U) \oplus \textsf{ROTR}^{34}(U) \oplus \textsf{ROTR}^{39}(U) <span class="sc">\\</span></span>
+<span id="cb18-396"><a href="#cb18-396"></a>\Sigma_1(U)&amp;= \textsf{ROTR}^{14}(U) \oplus \textsf{ROTR}^{18}(U) \oplus \textsf{ROTR}^{41}(U) <span class="sc">\\</span></span>
+<span id="cb18-397"><a href="#cb18-397"></a>\sigma_0(U)&amp;= \textsf{ROTR}^{01}(U) \oplus \textsf{ROTR}^{08}(U) \oplus \textsf{SHR}^{07}(U) <span class="sc">\\</span></span>
+<span id="cb18-398"><a href="#cb18-398"></a>\sigma_1(U)&amp;= \textsf{ROTR}^{19}(U) \oplus \textsf{ROTR}^{61}(U) \oplus \textsf{SHR}^{06}(U)</span>
+<span id="cb18-399"><a href="#cb18-399"></a>\end{align*}</span>
+<span id="cb18-400"><a href="#cb18-400"></a>$$</span>
+<span id="cb18-401"><a href="#cb18-401"></a><span class="ss">- </span>Macros and helper functions both work well here.</span>
 <span id="cb18-402"><a href="#cb18-402"></a></span>
-<span id="cb18-403"><a href="#cb18-403"></a><span class="ss">- </span>4 steps for each 1024 bit chunk.</span>
-<span id="cb18-404"><a href="#cb18-404"></a><span class="ss">- </span>First chunk, also use pre-computed $H$ values.</span>
-<span id="cb18-405"><a href="#cb18-405"></a><span class="ss">    - </span>Called, say "initial hash values"</span>
-<span id="cb18-406"><a href="#cb18-406"></a><span class="ss">    - </span>Successive chunks use previous chunk's hash</span>
-<span id="cb18-407"><a href="#cb18-407"></a><span class="ss">- </span>All chunks share pre-computed $K$ values.</span>
-<span id="cb18-408"><a href="#cb18-408"></a><span class="ss">    - </span>Called, say "round contants"</span>
-<span id="cb18-409"><a href="#cb18-409"></a><span class="ss">    - </span>"Fractional parts of cube roots of first primes"</span>
-<span id="cb18-410"><a href="#cb18-410"></a></span>
-<span id="cb18-411"><a href="#cb18-411"></a><span class="fu">## Parts</span></span>
+<span id="cb18-403"><a href="#cb18-403"></a><span class="fu">## Hash Computation</span></span>
+<span id="cb18-404"><a href="#cb18-404"></a></span>
+<span id="cb18-405"><a href="#cb18-405"></a><span class="ss">- </span>4 steps for each 1024 bit chunk.</span>
+<span id="cb18-406"><a href="#cb18-406"></a><span class="ss">- </span>First chunk, also use pre-computed $H$ values.</span>
+<span id="cb18-407"><a href="#cb18-407"></a><span class="ss">    - </span>Called, say "initial hash values"</span>
+<span id="cb18-408"><a href="#cb18-408"></a><span class="ss">    - </span>Successive chunks use previous chunk's hash</span>
+<span id="cb18-409"><a href="#cb18-409"></a><span class="ss">- </span>All chunks share pre-computed $K$ values.</span>
+<span id="cb18-410"><a href="#cb18-410"></a><span class="ss">    - </span>Called, say "round contants"</span>
+<span id="cb18-411"><a href="#cb18-411"></a><span class="ss">    - </span>"Fractional parts of cube roots of first primes"</span>
 <span id="cb18-412"><a href="#cb18-412"></a></span>
-<span id="cb18-413"><a href="#cb18-413"></a><span class="ss">0. </span>Preprocess</span>
-<span id="cb18-414"><a href="#cb18-414"></a><span class="ss">1. </span>Set Message Schedule Array</span>
-<span id="cb18-415"><a href="#cb18-415"></a><span class="ss">    -   </span>80 orking Variables</span>
-<span id="cb18-416"><a href="#cb18-416"></a><span class="ss">    -   </span>8 word sized variables</span>
-<span id="cb18-417"><a href="#cb18-417"></a><span class="ss">3. </span>Main Loop</span>
-<span id="cb18-418"><a href="#cb18-418"></a><span class="ss">    -   </span>Word level operations</span>
-<span id="cb18-419"><a href="#cb18-419"></a><span class="ss">4. </span>Update hash value</span>
-<span id="cb18-420"><a href="#cb18-420"></a></span>
-<span id="cb18-421"><a href="#cb18-421"></a><span class="fu">## 1. Set Message Schedule Array</span></span>
-<span id="cb18-422"><a href="#cb18-422"></a><span class="ss">- </span>$M^{(i)}_j$ is the $j$-th 0-indexed 64 bit word of the $i$-th 1-indexed 1024 bit chunk of message $M$</span>
-<span id="cb18-423"><a href="#cb18-423"></a><span class="ss">    - </span>A word is 8 letters</span>
-<span id="cb18-424"><a href="#cb18-424"></a><span class="ss">    - </span>A chunk is short tweet (128 chars)</span>
-<span id="cb18-425"><a href="#cb18-425"></a><span class="ss">    - </span>$M$ can be, e.g., Linux, the *Iliad*</span>
-<span id="cb18-426"><a href="#cb18-426"></a></span>
-<span id="cb18-427"><a href="#cb18-427"></a>$$</span>
-<span id="cb18-428"><a href="#cb18-428"></a>W_j = </span>
-<span id="cb18-429"><a href="#cb18-429"></a>\begin{cases} </span>
-<span id="cb18-430"><a href="#cb18-430"></a>M^{(i)}_j &amp; 0 \leq j \leq 15 <span class="sc">\\</span></span>
-<span id="cb18-431"><a href="#cb18-431"></a>\sigma_1(W_{j-2}) + W_{j-7} + \sigma_0(W_{j-15}) + W_{j-16} &amp; 16 \leq j \leq 79</span>
-<span id="cb18-432"><a href="#cb18-432"></a>\end{cases}</span>
-<span id="cb18-433"><a href="#cb18-433"></a>$$</span>
-<span id="cb18-434"><a href="#cb18-434"></a></span>
-<span id="cb18-435"><a href="#cb18-435"></a></span>
+<span id="cb18-413"><a href="#cb18-413"></a><span class="fu">## Parts</span></span>
+<span id="cb18-414"><a href="#cb18-414"></a></span>
+<span id="cb18-415"><a href="#cb18-415"></a><span class="ss">0. </span>Preprocess</span>
+<span id="cb18-416"><a href="#cb18-416"></a><span class="ss">1. </span>Set Message Schedule Array</span>
+<span id="cb18-417"><a href="#cb18-417"></a><span class="ss">    -   </span>80 orking Variables</span>
+<span id="cb18-418"><a href="#cb18-418"></a><span class="ss">    -   </span>8 word sized variables</span>
+<span id="cb18-419"><a href="#cb18-419"></a><span class="ss">3. </span>Main Loop</span>
+<span id="cb18-420"><a href="#cb18-420"></a><span class="ss">    -   </span>Word level operations</span>
+<span id="cb18-421"><a href="#cb18-421"></a><span class="ss">4. </span>Update hash value</span>
+<span id="cb18-422"><a href="#cb18-422"></a></span>
+<span id="cb18-423"><a href="#cb18-423"></a><span class="fu">## 1. Set Message Schedule Array</span></span>
+<span id="cb18-424"><a href="#cb18-424"></a><span class="ss">- </span>$M^{(i)}_j$ is the $j$-th 0-indexed 64 bit word of the $i$-th 1-indexed 1024 bit chunk of message $M$</span>
+<span id="cb18-425"><a href="#cb18-425"></a><span class="ss">    - </span>A word is 8 letters</span>
+<span id="cb18-426"><a href="#cb18-426"></a><span class="ss">    - </span>A chunk is short tweet (128 chars)</span>
+<span id="cb18-427"><a href="#cb18-427"></a><span class="ss">    - </span>$M$ can be, e.g., Linux, the *Iliad*</span>
+<span id="cb18-428"><a href="#cb18-428"></a></span>
+<span id="cb18-429"><a href="#cb18-429"></a>$$</span>
+<span id="cb18-430"><a href="#cb18-430"></a>W_j = </span>
+<span id="cb18-431"><a href="#cb18-431"></a>\begin{cases} </span>
+<span id="cb18-432"><a href="#cb18-432"></a>M^{(i)}_j &amp; 0 \leq j \leq 15 <span class="sc">\\</span></span>
+<span id="cb18-433"><a href="#cb18-433"></a>\sigma_1(W_{j-2}) + W_{j-7} + \sigma_0(W_{j-15}) + W_{j-16} &amp; 16 \leq j \leq 79</span>
+<span id="cb18-434"><a href="#cb18-434"></a>\end{cases}</span>
+<span id="cb18-435"><a href="#cb18-435"></a>$$</span>
 <span id="cb18-436"><a href="#cb18-436"></a></span>
-<span id="cb18-437"><a href="#cb18-437"></a><span class="fu">## 2. Set Working Variables</span></span>
+<span id="cb18-437"><a href="#cb18-437"></a></span>
 <span id="cb18-438"><a href="#cb18-438"></a></span>
-<span id="cb18-439"><a href="#cb18-439"></a><span class="ss">- </span>Initialize eight 64-bit words based on the prior hash.</span>
-<span id="cb18-440"><a href="#cb18-440"></a> $$</span>
-<span id="cb18-441"><a href="#cb18-441"></a> (A, B, C, D, E, F, G, H) = (H^{(i-1)}_0, \ldots, H^{(i-1)}_7).</span>
+<span id="cb18-439"><a href="#cb18-439"></a><span class="fu">## 2. Set Working Variables</span></span>
+<span id="cb18-440"><a href="#cb18-440"></a></span>
+<span id="cb18-441"><a href="#cb18-441"></a><span class="ss">- </span>Initialize eight 64-bit words based on the prior hash.</span>
 <span id="cb18-442"><a href="#cb18-442"></a> $$</span>
-<span id="cb18-443"><a href="#cb18-443"></a></span>
-<span id="cb18-444"><a href="#cb18-444"></a><span class="fu">## 3. Main Loop</span></span>
+<span id="cb18-443"><a href="#cb18-443"></a> (A, B, C, D, E, F, G, H) = (H^{(i-1)}_0, \ldots, H^{(i-1)}_7).</span>
+<span id="cb18-444"><a href="#cb18-444"></a> $$</span>
 <span id="cb18-445"><a href="#cb18-445"></a></span>
-<span id="cb18-446"><a href="#cb18-446"></a><span class="ss">- </span>Iterate $j = 0$ to $79$:</span>
-<span id="cb18-447"><a href="#cb18-447"></a><span class="in">```py</span></span>
-<span id="cb18-448"><a href="#cb18-448"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">79</span>):</span>
-<span id="cb18-449"><a href="#cb18-449"></a><span class="in">```</span></span>
-<span id="cb18-450"><a href="#cb18-450"></a><span class="ss">- </span>Precompute two temporary values (or not)</span>
-<span id="cb18-451"><a href="#cb18-451"></a>$$</span>
-<span id="cb18-452"><a href="#cb18-452"></a>\begin{align}</span>
-<span id="cb18-453"><a href="#cb18-453"></a>\begin{split}</span>
-<span id="cb18-454"><a href="#cb18-454"></a>&amp; T_1  = H + \Sigma_1(E) + \textsf{CHOICE}(E,F,G) + K_j + W_j <span class="sc">\\</span></span>
-<span id="cb18-455"><a href="#cb18-455"></a>&amp; T_2  = \Sigma_0(A) + \textsf{MEDIAN}(A,B,C) <span class="sc">\\</span></span>
-<span id="cb18-456"><a href="#cb18-456"></a>\end{split}</span>
-<span id="cb18-457"><a href="#cb18-457"></a>\end{align}</span>
-<span id="cb18-458"><a href="#cb18-458"></a>$$</span>
-<span id="cb18-459"><a href="#cb18-459"></a><span class="ss">- </span>Update the working variables</span>
+<span id="cb18-446"><a href="#cb18-446"></a><span class="fu">## 3. Main Loop</span></span>
+<span id="cb18-447"><a href="#cb18-447"></a></span>
+<span id="cb18-448"><a href="#cb18-448"></a><span class="ss">- </span>Iterate $j = 0$ to $79$:</span>
+<span id="cb18-449"><a href="#cb18-449"></a><span class="in">```py</span></span>
+<span id="cb18-450"><a href="#cb18-450"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">79</span>):</span>
+<span id="cb18-451"><a href="#cb18-451"></a><span class="in">```</span></span>
+<span id="cb18-452"><a href="#cb18-452"></a><span class="ss">- </span>Precompute two temporary values (or not)</span>
+<span id="cb18-453"><a href="#cb18-453"></a>$$</span>
+<span id="cb18-454"><a href="#cb18-454"></a>\begin{align}</span>
+<span id="cb18-455"><a href="#cb18-455"></a>\begin{split}</span>
+<span id="cb18-456"><a href="#cb18-456"></a>&amp; T_1  = H + \Sigma_1(E) + \textsf{CHOICE}(E,F,G) + K_j + W_j <span class="sc">\\</span></span>
+<span id="cb18-457"><a href="#cb18-457"></a>&amp; T_2  = \Sigma_0(A) + \textsf{MEDIAN}(A,B,C) <span class="sc">\\</span></span>
+<span id="cb18-458"><a href="#cb18-458"></a>\end{split}</span>
+<span id="cb18-459"><a href="#cb18-459"></a>\end{align}</span>
 <span id="cb18-460"><a href="#cb18-460"></a>$$</span>
-<span id="cb18-461"><a href="#cb18-461"></a>(A,B,C,D,E,F,G,H)  = (T_1+T_2, A, B, C, D+T_1, E, F, G)</span>
+<span id="cb18-461"><a href="#cb18-461"></a><span class="ss">- </span>Update the working variables</span>
 <span id="cb18-462"><a href="#cb18-462"></a>$$</span>
-<span id="cb18-463"><a href="#cb18-463"></a></span>
-<span id="cb18-464"><a href="#cb18-464"></a><span class="fu">## 4. Update hash value</span></span>
+<span id="cb18-463"><a href="#cb18-463"></a>(A,B,C,D,E,F,G,H)  = (T_1+T_2, A, B, C, D+T_1, E, F, G)</span>
+<span id="cb18-464"><a href="#cb18-464"></a>$$</span>
 <span id="cb18-465"><a href="#cb18-465"></a></span>
-<span id="cb18-466"><a href="#cb18-466"></a><span class="ss">- </span>Conclude the work on $M^{(i)}$ by finding $H^{(i)}$</span>
+<span id="cb18-466"><a href="#cb18-466"></a><span class="fu">## 4. Update hash value</span></span>
 <span id="cb18-467"><a href="#cb18-467"></a></span>
-<span id="cb18-468"><a href="#cb18-468"></a>$$</span>
-<span id="cb18-469"><a href="#cb18-469"></a>H^{(i)}_j = A + H^{(i-1)}_j, \quad j = 0, \ldots, 7</span>
+<span id="cb18-468"><a href="#cb18-468"></a><span class="ss">- </span>Conclude the work on $M^{(i)}$ by finding $H^{(i)}$</span>
+<span id="cb18-469"><a href="#cb18-469"></a></span>
 <span id="cb18-470"><a href="#cb18-470"></a>$$</span>
-<span id="cb18-471"><a href="#cb18-471"></a></span>
-<span id="cb18-472"><a href="#cb18-472"></a><span class="fu"># Resources</span></span>
+<span id="cb18-471"><a href="#cb18-471"></a>H^{(i)}_j = A + H^{(i-1)}_j, \quad j = 0, \ldots, 7</span>
+<span id="cb18-472"><a href="#cb18-472"></a>$$</span>
 <span id="cb18-473"><a href="#cb18-473"></a></span>
-<span id="cb18-474"><a href="#cb18-474"></a><span class="ss">- </span>All for 256, use Wikipedia to translate to 512.</span>
-<span id="cb18-475"><a href="#cb18-475"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Wikipedia Pseudocode</span><span class="co">](https://en.wikipedia.org/wiki/SHA-2#Pseudocode)</span></span>
-<span id="cb18-476"><a href="#cb18-476"></a><span class="ss">    - </span>I used this to implement.</span>
-<span id="cb18-477"><a href="#cb18-477"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Saravanan Vijayakumaran's Slides</span><span class="co">](https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/hash-functions.html#/sha-256)</span></span>
-<span id="cb18-478"><a href="#cb18-478"></a><span class="ss">    - </span>I used this to typeset the slides.</span>
-<span id="cb18-479"><a href="#cb18-479"></a><span class="ss">- </span><span class="co">[</span><span class="ot">@manceraio's .js demo</span><span class="co">](https://sha256algorithm.com/)</span></span>
-<span id="cb18-480"><a href="#cb18-480"></a><span class="ss">    - </span>Inspired my text-only Enigma.</span>
+<span id="cb18-474"><a href="#cb18-474"></a><span class="fu"># Resources</span></span>
+<span id="cb18-475"><a href="#cb18-475"></a></span>
+<span id="cb18-476"><a href="#cb18-476"></a><span class="ss">- </span>All for 256, use Wikipedia to translate to 512.</span>
+<span id="cb18-477"><a href="#cb18-477"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Wikipedia Pseudocode</span><span class="co">](https://en.wikipedia.org/wiki/SHA-2#Pseudocode)</span></span>
+<span id="cb18-478"><a href="#cb18-478"></a><span class="ss">    - </span>I used this to implement.</span>
+<span id="cb18-479"><a href="#cb18-479"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Saravanan Vijayakumaran's Slides</span><span class="co">](https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/hash-functions.html#/sha-256)</span></span>
+<span id="cb18-480"><a href="#cb18-480"></a><span class="ss">    - </span>I used this to typeset the slides.</span>
+<span id="cb18-481"><a href="#cb18-481"></a><span class="ss">- </span><span class="co">[</span><span class="ot">@manceraio's .js demo</span><span class="co">](https://sha256algorithm.com/)</span></span>
+<span id="cb18-482"><a href="#cb18-482"></a><span class="ss">    - </span>Inspired my text-only Enigma.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

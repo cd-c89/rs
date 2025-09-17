@@ -7,11 +7,141 @@
     "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nNone\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
   },
   {
+    "objectID": "41_constants.html",
+    "href": "41_constants.html",
+    "title": "Constants",
+    "section": "",
+    "text": "Enrichment assignment\n\nUse case/limitation of IEEE 754 floating point values\nUse case of binary search\nUse case of pre-compute.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#announcements",
+    "href": "41_constants.html#announcements",
+    "title": "Constants",
+    "section": "",
+    "text": "Enrichment assignment\n\nUse case/limitation of IEEE 754 floating point values\nUse case of binary search\nUse case of pre-compute.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#homework",
+    "href": "41_constants.html#homework",
+    "title": "Constants",
+    "section": "Homework",
+    "text": "Homework\n\nSHA beckons\nDue Friday, 10 Oct. at 1440 ET.\n\nExpect it to take you both weeks.\nDo not work on this instead of that, after lab section today, until you are done with that.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#citation",
+    "href": "41_constants.html#citation",
+    "title": "Constants",
+    "section": "Citation",
+    "text": "Citation\n\nI checked my work vs. this implementation, in C++, of which I have not verified complete correctness.\nRadeelAhmad",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#today",
+    "href": "41_constants.html#today",
+    "title": "Constants",
+    "section": "Today",
+    "text": "Today\n\nFloating point\nBinary search\nPre-compute",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#the-constants",
+    "href": "41_constants.html#the-constants",
+    "title": "Constants",
+    "section": "The Constants",
+    "text": "The Constants\n\nfirst 3264 bits of the fractional parts of the square roots of the first 8 primes 2..19\n\n\nWait how do we calculate that?\n\n\nFloats and Square Roots\n\nThere is square root in Rust… kinda.\nf64::sqrt\nWe recall the rules on floating point:\n\n\nKernel code is normally prohibited from using floating-point (FP) registers or instructions, including the C float and double data types.\n\n\n\nThe Values\n\\[\n\\begin{align*}\n\\begin{split}\n   H_0^{(0)} = \\texttt{0x6a09e667f3bcc908}, \\quad H_1^{(0)} = \\texttt{0xbb67ae8584caa73b},\\\\\n   H_2^{(0)} = \\texttt{0x3c6ef372fe94f82}, \\quad H_3^{(0)} = \\texttt{0xa54ff53a5f1d36f1},\\\\\n   H_4^{(0)} = \\texttt{0xa54ff53a5f1d36f1}, \\quad H_5^{(0)} = \\texttt{0x9b05688c2b3e6c1f},\\\\\n   H_6^{(0)} = \\texttt{0x1f83d9abfb41bd6b}, \\quad H_7^{(0)} = \\texttt{0x5be0cd19137e2179}.\n\\end{split}\n\\end{align*}\n\\]\n\nPerhaps this works?\n\n\n\nFirst \\(n\\) primes\n\nPrimes are annoying, mostly because 2 exists.\nI did the following:\n\nfn main() {\n    for i in [2,3,5,7,11] {\n        println!(\"{i}\");\n    }\n    let mut cnt = 5;\n    let mut val = 13;\n    while cnt &lt; 8 {\n        if is_prime(val) {\n            println!(\"{val}\");\n            cnt += 1;\n        }\n        val += 2;\n    }\n}",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#square-roots",
+    "href": "41_constants.html#square-roots",
+    "title": "Constants",
+    "section": "Square roots",
+    "text": "Square roots\n\nWe can naively attempt to calculate round constants with f64::sqrt\n\ndbg!(f64::sqrt(x as f64));\n\nYou’d see something like the following:\n\nsqrt(2.0) = 1.4142135623730951\nsqrt(3.0) = 1.7320508075688772\nsqrt(5.0) = 2.23606797749979\nsqrt(7.0) = 2.6457513110645907\nsqrt(11.0) = 3.3166247903554\nsqrt(13.0) = 3.605551275463989\nsqrt(17.0) = 4.123105625617661\nsqrt(19.0) = 4.358898943540674\n\nWe should note that is pretty far from the constants!\n\n\nFractional components\n\nCompute only the fractional components of the roots:\n\nThe square root of \\(2\\) is approximately \\(1.414...\\)\nThe fractional component is \\(.414...\\)\nTo express this value in 64 bits, I can multiple by \\(2 ^ 64\\)\nTo view it as represented in the constants, I can represent the value in hexadecimal.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#floating-points",
+    "href": "41_constants.html#floating-points",
+    "title": "Constants",
+    "section": "Floating points",
+    "text": "Floating points\n\nBasically, a f64 can only store 64 bits of information.\nThis means it cannot store 64 bits worth of fractional information and also a whole number, as it must be able to do.\nThis leads to a loss of precision well before calculating 64 bits worth of precision.\nIn practice, they are implemented something like this:\n\n \n\nThis is obviously terrible",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#today-1",
+    "href": "41_constants.html#today-1",
+    "title": "Constants",
+    "section": "Today",
+    "text": "Today\n\nFloating point\nBinary search\nPre-compute",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#a-plan",
+    "href": "41_constants.html#a-plan",
+    "title": "Constants",
+    "section": "A Plan",
+    "text": "A Plan\n\nThat said, we can…\n\nFind the f64 approximation of the root.\nConvert back to an integer type[^1]\nCompute the square.\n\nLet’s see what this may looks like.\n\nsqrt(02) = 1.41421356 -&gt; 16a09e666 ^ 2 = 01fffffffa7a8770a4\nsqrt(03) = 1.73205081 -&gt; 1bb67ae83 ^ 2 = 02fffffff746605709\nsqrt(05) = 2.23606798 -&gt; 23c6ef370 ^ 2 = 04fffffff29bbdd100\nsqrt(07) = 2.64575131 -&gt; 2a54ff537 ^ 2 = 06ffffffee28d451d1\nsqrt(11) = 3.31662479 -&gt; 3510e527c ^ 2 = 0affffffe79823ac10\nsqrt(13) = 3.60555128 -&gt; 39b056888 ^ 2 = 0cffffffe1effec840\nsqrt(17) = 4.12310563 -&gt; 41f83d9a7 ^ 2 = 10ffffffd6ebf68af1\nsqrt(19) = 4.35889894 -&gt; 45be0cd14 ^ 2 = 12ffffffd3bf490990\n\nAn astute student will notice the following:\n\nI am printing precisely 18 hex digits for the square.\nThe lower 64 digits are very close to the maximal value.\nThe upper 2 digits are the hexadecimal representation of the prime, less one.\n\nSo we have slightly underestimated, at least in this case.\n\nI will note I can converting back to integers with 32 bits of precision then squaring with 128 bits of precision.\nThe 32 bits clip values to ensure an undercount.\nThe 128 bits ensure we do not overflow when squaring the 32 bit value.\n\nFrom there, we can conduct a binary search.\n\nFind the highest non-one value in the candidate square root.\nSet it to one.\nCheck for overflow:\n\nIf so, revert to zero.\nIf not, leave as one.\n\nLoop.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#today-2",
+    "href": "41_constants.html#today-2",
+    "title": "Constants",
+    "section": "Today",
+    "text": "Today\n\nFloating point\nBinary search\nPre-compute",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#precompute",
+    "href": "41_constants.html#precompute",
+    "title": "Constants",
+    "section": "Precompute",
+    "text": "Precompute\n\nI hope it suffices to say, there is no obvious reason any application using these values need compute them.\nThis is the usefulness of precomputing constant values - or, perhaps, of numerical computing.",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
+    "objectID": "41_constants.html#today-3",
+    "href": "41_constants.html#today-3",
+    "title": "Constants",
+    "section": "Today",
+    "text": "Today\n\nFloating point\nBinary search\nPre-compute",
+    "crumbs": [
+      "Constants"
+    ]
+  },
+  {
     "objectID": "32_macros.html",
     "href": "32_macros.html",
     "title": "Macros",
     "section": "",
-    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 22 --name macros --vcs none\n\n\n\n\n\nI will provide a reference solution in Python\n\nThe reference will differ in the following ways:\n\nThey will not work on bits, as there isn’t great bit manipulation in Python without libraries.\nI will provide an example of a left rotate while the assignment requires a right rotate.\n\n\nI will provide a testing src/main.rs.\n\nI will provide sample output.\n\n\n\n\n\n\nYou will create a solution in C as an “macros.c” file.\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
+    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 32 --name macros --vcs none\n\n\n\n\n\nI will provide a reference solution in Python\n\nThe reference will differ in the following ways:\n\nThey will not work on bits, as there isn’t great bit manipulation in Python without libraries.\nI will provide an example of a left rotate while the assignment requires a right rotate.\n\n\nI will provide a testing src/main.rs.\n\nI will provide sample output.\n\n\n\n\n\n\nYou will create a solution in C as an “macros.c” file.\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
     "crumbs": [
       "Macros"
     ]
@@ -21,7 +151,7 @@
     "href": "32_macros.html#requirements",
     "title": "Macros",
     "section": "",
-    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 22 --name macros --vcs none",
+    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 32 --name macros --vcs none",
     "crumbs": [
       "Macros"
     ]
@@ -5537,7 +5667,7 @@
     "href": "40_sha2.rjs.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n-7943304545445145553\n-8793769723096739523\n+2653310726086046356\n-4709541602345886001\n+2721567894355954210"
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n-7741451163165820239\n-1861628620423422179\n-5835160025884903865\n+7720992047374752885\n-5461840127377647452"
   },
   {
     "objectID": "40_sha2.rjs.html#example.tex",
@@ -5642,7 +5772,7 @@
     "href": "40_sha2.rjs.html#preprocessing",
     "title": "SHA-2",
     "section": "Preprocessing",
-    "text": "Preprocessing\n\nA 512-bit state variable \\(H^{(0)}\\) is initialized:\n\n\\[\\begin{align*}\n\\begin{split}\n   H_0^{(0)} = \\texttt{0x6a09e667f3bcc908}, \\quad H_1^{(0)} = \\texttt{0xbb67ae8584caa73b},\\\\\n   H_2^{(0)} = \\texttt{0x3c6ef372fe94f82}, \\quad H_3^{(0)} = \\texttt{0xA54FF53A},\\\\\n   H_4^{(0)} = \\texttt{0xa54ff53a5f1d36f1}, \\quad H_5^{(0)} = \\texttt{0x9b05688c2b3e6c1f},\\\\\n   H_6^{(0)} = \\texttt{0x1f83d9abfb41bd6b}, \\quad H_7^{(0)} = \\texttt{0x5be0cd19137e2179}.\n\\end{split}\n   \\end{align*}\\]\n\n“Fractional parts of square roots of first primes”"
+    "text": "Preprocessing\n\nA 512-bit state variable \\(H^{(0)}\\) is initialized:\n\n\\[\n\\begin{align*}\n\\begin{split}\n   H_0^{(0)} = \\texttt{0x6a09e667f3bcc908}, \\quad H_1^{(0)} = \\texttt{0xbb67ae8584caa73b},\\\\\n   H_2^{(0)} = \\texttt{0x3c6ef372fe94f82}, \\quad H_3^{(0)} = \\texttt{0xa54ff53a5f1d36f1},\\\\\n   H_4^{(0)} = \\texttt{0xa54ff53a5f1d36f1}, \\quad H_5^{(0)} = \\texttt{0x9b05688c2b3e6c1f},\\\\\n   H_6^{(0)} = \\texttt{0x1f83d9abfb41bd6b}, \\quad H_7^{(0)} = \\texttt{0x5be0cd19137e2179}.\n\\end{split}\n\\end{align*}\n\\]\n\n“Fractional parts of square roots of first primes”"
   },
   {
     "objectID": "40_sha2.rjs.html#input-padding",
@@ -5863,7 +5993,7 @@
     "href": "40_sha2.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-3140011463359298581\n-6144836825984122447\n+1798874329963741585\n-4167586386330196952\n+676822308474625745",
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-9075146904933057618\n+806231138570259626\n+268372243234363948\n+4810208187387723936\n-6667139044082583748",
     "crumbs": [
       "SHA-2"
     ]
@@ -6013,7 +6143,7 @@
     "href": "40_sha2.html#preprocessing",
     "title": "SHA-2",
     "section": "Preprocessing",
-    "text": "Preprocessing\n\nA 512-bit state variable \\(H^{(0)}\\) is initialized:\n\n\\[\\begin{align*}\n\\begin{split}\n   H_0^{(0)} = \\texttt{0x6a09e667f3bcc908}, \\quad H_1^{(0)} = \\texttt{0xbb67ae8584caa73b},\\\\\n   H_2^{(0)} = \\texttt{0x3c6ef372fe94f82}, \\quad H_3^{(0)} = \\texttt{0xA54FF53A},\\\\\n   H_4^{(0)} = \\texttt{0xa54ff53a5f1d36f1}, \\quad H_5^{(0)} = \\texttt{0x9b05688c2b3e6c1f},\\\\\n   H_6^{(0)} = \\texttt{0x1f83d9abfb41bd6b}, \\quad H_7^{(0)} = \\texttt{0x5be0cd19137e2179}.\n\\end{split}\n   \\end{align*}\\]\n\n“Fractional parts of square roots of first primes”",
+    "text": "Preprocessing\n\nA 512-bit state variable \\(H^{(0)}\\) is initialized:\n\n\\[\n\\begin{align*}\n\\begin{split}\n   H_0^{(0)} = \\texttt{0x6a09e667f3bcc908}, \\quad H_1^{(0)} = \\texttt{0xbb67ae8584caa73b},\\\\\n   H_2^{(0)} = \\texttt{0x3c6ef372fe94f82}, \\quad H_3^{(0)} = \\texttt{0xa54ff53a5f1d36f1},\\\\\n   H_4^{(0)} = \\texttt{0xa54ff53a5f1d36f1}, \\quad H_5^{(0)} = \\texttt{0x9b05688c2b3e6c1f},\\\\\n   H_6^{(0)} = \\texttt{0x1f83d9abfb41bd6b}, \\quad H_7^{(0)} = \\texttt{0x5be0cd19137e2179}.\n\\end{split}\n\\end{align*}\n\\]\n\n“Fractional parts of square roots of first primes”",
     "crumbs": [
       "SHA-2"
     ]
@@ -6236,6 +6366,106 @@
     "text": "4. Update hash value\n\nConclude the work on \\(M^{(i)}\\) by finding \\(H^{(i)}\\)\n\n\\[\nH^{(i)}_j = A + H^{(i-1)}_j, \\quad j = 0, \\ldots, 7\n\\]",
     "crumbs": [
       "SHA-2"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html",
+    "href": "42_sha512.html",
+    "title": "SHA-512",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 42 directory in your 271rs repository.\nThis folder must be a Cargo package.\nYou may leverage other Cargo packages, provided you have written them.\n\nMost likely “Macros”\n[Read more]\n\ncargo new 42 --name macros --vcs none\n\n\n\n\n\n\nI will provide a reference solution\n\nIt is the command line utility sha512sum which I expect you already have on your system.\n\n$ echo \"hello world\" &gt; hi.txt\n$ sha512sum hi.txt\ndb3974a97f2407b7cae1ae637c0030687a11913274d578492558e39c16c017de84eacdc8c62fe34ee4e12b4b1428817f09b6a2760c3f8a664ceae94d2434a593  hi.txt\n\n\n\n\n\nYou will implement SHA-512 in Rust.",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#requirements",
+    "href": "42_sha512.html#requirements",
+    "title": "SHA-512",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 42 directory in your 271rs repository.\nThis folder must be a Cargo package.\nYou may leverage other Cargo packages, provided you have written them.\n\nMost likely “Macros”\n[Read more]\n\ncargo new 42 --name macros --vcs none",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#my-responsibility",
+    "href": "42_sha512.html#my-responsibility",
+    "title": "SHA-512",
+    "section": "",
+    "text": "I will provide a reference solution\n\nIt is the command line utility sha512sum which I expect you already have on your system.\n\n$ echo \"hello world\" &gt; hi.txt\n$ sha512sum hi.txt\ndb3974a97f2407b7cae1ae637c0030687a11913274d578492558e39c16c017de84eacdc8c62fe34ee4e12b4b1428817f09b6a2760c3f8a664ceae94d2434a593  hi.txt",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#your-responsibility",
+    "href": "42_sha512.html#your-responsibility",
+    "title": "SHA-512",
+    "section": "",
+    "text": "You will implement SHA-512 in Rust.",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#description",
+    "href": "42_sha512.html#description",
+    "title": "SHA-512",
+    "section": "Description",
+    "text": "Description\n\nThe purpose of this homework is to write four (4) bitwise macros\n\nTwo trenanry operations\n\nChoice\nMedian, also called Majority\n\nAnd two rotations\n\nRight, which sees use, and\nLeft, as an academic exercise\n\n\nThese will see use in the next assignment, SHA256\nThey are logically and historically interesting within cryptography\nThere is no graceful way, to my knowledge, to describe these on bits in Python\n\nI will provide pseudo code over tuples of integers.\nI provide conversion functions from strings.\nI am aware of plenty non-graceful ways, but\n\nIf you want to show me one you like send me a DM",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#macros",
+    "href": "42_sha512.html#macros",
+    "title": "SHA-512",
+    "section": "Macros",
+    "text": "Macros\n\nRust macros are described in Rust Book 20.5\nBasically, a macro replaces text in a .rs file before the code is compiled.\nWe will right max!\n\n\n\nsrc/main.rs\n\nlet v: Vec&lt;u32&gt; = vec![1, 2, 3];\n\n\nSuppose \\(\\exists\\) the following in lib:\n\nDo note - I wrote this multiline.\ncargo fmt pushed it onto one line!\n\n\n\nsrc/lib.rs\n\n#[macro_export]\nmacro_rules! max {\n  ( $x:expr, $y:expr ) =&gt; {\n      if $x &gt; $y { $x } else { $y }\n  };\n}\n\n\n\nThe #[macro_export] annotation indicates that this macro should be made available…\n\n\nThe body is match-like, but over text not computation.\n\nThere is only one case here: ( $x:expr, $y:expr )\nThis will be more complex than the cases you need.\n\nMacro variables are $ prefixed, to differentiate from code variables.\n\nYou can accept a fixed number, like 2, as ( %x:expr, %y:expr )\nWhere:\n\n$x and $y are variables that may be used within the macro body.\nThat match to Rust expressions (like val or 7+2) via :expr\n\n\nWe can then use the macro:\n\n\n\nsrc/main.rs\n\nfn main() {\n    dbg!(package_name_likely_macros::max!(1, 2));\n    dbg!(package_name_likely_macros::max!(2, 1));\n}\n\n\nWe see the expected result… but how?\n\n$ cargo r\n   Compiling hamming v0.1.0 (/home/user/tmp/scratch)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s\n     Running `target/debug/hamming`\n[src/main.rs:2:5] package_name_likely_macros::max!(1, 2) = 2\n[src/main.rs:3:5] package_name_likely_macros::max!(2, 1) = 2",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#internals",
+    "href": "42_sha512.html#internals",
+    "title": "SHA-512",
+    "section": "Internals",
+    "text": "Internals\n\nrustc comes along and sees max!\nrustc looks into package_name_likely_macros and looks for src/lib.rs\nrustc looks for macro_rules! max\nrustc matches the pattern ( $x:expr, $y:expr ) to (1, 2)\n\nAs 1 and 2 are valid Rust expressions.\n\nrustc replaces max!(1,2) with if $x &gt; $y { $x } else { $y }\nrustc replaces $x with 1 and $y with 2\nThen, at long last, rustc compiles the code and creates an executable.",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#quick-exercises",
+    "href": "42_sha512.html#quick-exercises",
+    "title": "SHA-512",
+    "section": "Quick Exercises",
+    "text": "Quick Exercises\n\nOptionally write min\nOptionally write max to accept 3 arguments.\nChallenge: write max to accept \\(n\\) arguments.\n\n( $( $x:expr ),* )",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#or-majority",
+    "href": "42_sha512.html#or-majority",
+    "title": "SHA-512",
+    "section": "Or “Majority”",
+    "text": "Or “Majority”\n\nHere I provide Pythonic boolean median and bitwise median.\nYou will need Rust bitwise median.\nI will take it as given you know what a median and majority are.\n\nLogicially equivalent with \\(n = 3\\)\n\nThe following code is appended to “macros.py”\n\n\n\n\nmacros.py\n\nimport numpy as np\n\ndef _median(e:bool, f:bool, g:bool) -&gt; bool:\n    return int(np.median([e,f,g]))\n\nprint(\" === Boolean Median === \")\n[print('_median'+str(test), '-&gt;', _median(*test)) for test in tester]\n\ndef median(e:tuple[bool], f:tuple[bool], g:tuple[bool]) -&gt; tuple[bool]:\n    return tuple(_median(_e, _f, _g) for _e, _f, _g in zip(e,f,g))\n\nprint(\" === Bitwise Median === \")\nprint('median'+bsstrs(arrays), '-&gt;', \"'\"+bitstr(median(*arrays))+\"'\")\n\n\nYou can run it yourself, but here is the output for reference.\n\n === Boolean Median === \n_median(0, 0, 0) -&gt; 0\n_median(0, 0, 1) -&gt; 0\n_median(0, 1, 0) -&gt; 0\n_median(0, 1, 1) -&gt; 1\n_median(1, 0, 0) -&gt; 0\n_median(1, 0, 1) -&gt; 1\n_median(1, 1, 0) -&gt; 1\n_median(1, 1, 1) -&gt; 1\n === Bitwise Median ===\nmedian('00001111', '00110011', '01010101') -&gt; '00010111'",
+    "crumbs": [
+      "SHA-512"
+    ]
+  },
+  {
+    "objectID": "42_sha512.html#sometimes-rotright-and-rotleft",
+    "href": "42_sha512.html#sometimes-rotright-and-rotleft",
+    "title": "SHA-512",
+    "section": "Sometimes “Rotright and Rotleft”",
+    "text": "Sometimes “Rotright and Rotleft”\n\nVirtually identical to rotation ciphers.\n\n ____________________________\n[ ABCDEFGHIJKLMNOPQRSTUVWXYZ ] # alphabet\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n ____________________________\n[ DEFGHIJKLMNOPQRSTUVWXYZABC ] # rotate(3)\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n ____________________________\n[ XYZABCDEFGHIJKLMNOPQRSTUVW ] # rotate(-3)\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\nWe understand this as:\n\nTake an array and,\nTake a numerical value…\n\nof less than the length of the array.\n\nMaintain all elements of the array, but\n\nIncrease their index by the numerical value, and\nIndices greater than array length wrap around…\n\nUsing modulo array length.\n\n\n\nWe apply this same idea to the notion of boolean arrays.\n\nA unsigned int is a boolean array of some length.\nIt is possible to determine these lengths.\n\nHere is a Python rotleft on boolean arrays of size 8.\n\n\n\nmacros.py\n\ndef rotleft(a:tuple[bool], n:int) -&gt; tuple[bool]:\n    return a[n:] + a[:n]\n\nprint(\" === Bitwise Rotleft === \")\narray = (0,0,1,0,1,1,0,1)\nfor n in range(len(arrays[0])+1):\n    print('rotleft('+bitstr(array)+','+str(n)+') -&gt;', bitstr(rotate(array,n)))\n\n\nYou can run it yourself, but here is the output for reference.\n\n === Bitwise Rotleft ===\nrotleft(00101101,0) -&gt; 00101101\nrotleft(00101101,1) -&gt; 01011010\nrotleft(00101101,2) -&gt; 10110100\nrotleft(00101101,3) -&gt; 01101001\nrotleft(00101101,4) -&gt; 11010010\nrotleft(00101101,5) -&gt; 10100101\nrotleft(00101101,6) -&gt; 01001011\nrotleft(00101101,7) -&gt; 10010110\nrotleft(00101101,8) -&gt; 00101101\n\nWe note that this forms a “backward” or “leftward” rotate.\n\nThis is a non-standard rotate, often called lotate or rotleft\nA future assignment will use a “forward” or “rightward” rotate.\n\nWithout showing code, it would look like this.\n\n === Bitwise Rotate ===\nrotate(00101101,0) -&gt; 00101101\nrotate(00101101,1) -&gt; 10010110\nrotate(00101101,2) -&gt; 01001011\nrotate(00101101,3) -&gt; 10100101\nrotate(00101101,4) -&gt; 11010010\nrotate(00101101,5) -&gt; 01101001\nrotate(00101101,6) -&gt; 10110100\nrotate(00101101,7) -&gt; 01011010\nrotate(00101101,8) -&gt; 00101101",
+    "crumbs": [
+      "SHA-512"
     ]
   }
 ]
