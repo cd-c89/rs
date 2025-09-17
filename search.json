@@ -5667,7 +5667,7 @@
     "href": "40_sha2.rjs.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n-7741451163165820239\n-1861628620423422179\n-5835160025884903865\n+7720992047374752885\n-5461840127377647452"
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n-8864878175327581260\n+7192958750905625768\n-209717747714599263\n+4583907349904014748\n-6704012895668538384"
   },
   {
     "objectID": "40_sha2.rjs.html#example.tex",
@@ -5993,7 +5993,7 @@
     "href": "40_sha2.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-9075146904933057618\n+806231138570259626\n+268372243234363948\n+4810208187387723936\n-6667139044082583748",
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n+174575750009679364\n-4517232736510893602\n-3875532487217591698\n+4491682813892403611\n+1693452497729351204",
     "crumbs": [
       "SHA-2"
     ]
@@ -6404,66 +6404,6 @@
     "title": "SHA-512",
     "section": "",
     "text": "You will implement SHA-512 in Rust.",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#description",
-    "href": "42_sha512.html#description",
-    "title": "SHA-512",
-    "section": "Description",
-    "text": "Description\n\nThe purpose of this homework is to write four (4) bitwise macros\n\nTwo trenanry operations\n\nChoice\nMedian, also called Majority\n\nAnd two rotations\n\nRight, which sees use, and\nLeft, as an academic exercise\n\n\nThese will see use in the next assignment, SHA256\nThey are logically and historically interesting within cryptography\nThere is no graceful way, to my knowledge, to describe these on bits in Python\n\nI will provide pseudo code over tuples of integers.\nI provide conversion functions from strings.\nI am aware of plenty non-graceful ways, but\n\nIf you want to show me one you like send me a DM",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#macros",
-    "href": "42_sha512.html#macros",
-    "title": "SHA-512",
-    "section": "Macros",
-    "text": "Macros\n\nRust macros are described in Rust Book 20.5\nBasically, a macro replaces text in a .rs file before the code is compiled.\nWe will right max!\n\n\n\nsrc/main.rs\n\nlet v: Vec&lt;u32&gt; = vec![1, 2, 3];\n\n\nSuppose \\(\\exists\\) the following in lib:\n\nDo note - I wrote this multiline.\ncargo fmt pushed it onto one line!\n\n\n\nsrc/lib.rs\n\n#[macro_export]\nmacro_rules! max {\n  ( $x:expr, $y:expr ) =&gt; {\n      if $x &gt; $y { $x } else { $y }\n  };\n}\n\n\n\nThe #[macro_export] annotation indicates that this macro should be made available…\n\n\nThe body is match-like, but over text not computation.\n\nThere is only one case here: ( $x:expr, $y:expr )\nThis will be more complex than the cases you need.\n\nMacro variables are $ prefixed, to differentiate from code variables.\n\nYou can accept a fixed number, like 2, as ( %x:expr, %y:expr )\nWhere:\n\n$x and $y are variables that may be used within the macro body.\nThat match to Rust expressions (like val or 7+2) via :expr\n\n\nWe can then use the macro:\n\n\n\nsrc/main.rs\n\nfn main() {\n    dbg!(package_name_likely_macros::max!(1, 2));\n    dbg!(package_name_likely_macros::max!(2, 1));\n}\n\n\nWe see the expected result… but how?\n\n$ cargo r\n   Compiling hamming v0.1.0 (/home/user/tmp/scratch)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s\n     Running `target/debug/hamming`\n[src/main.rs:2:5] package_name_likely_macros::max!(1, 2) = 2\n[src/main.rs:3:5] package_name_likely_macros::max!(2, 1) = 2",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#internals",
-    "href": "42_sha512.html#internals",
-    "title": "SHA-512",
-    "section": "Internals",
-    "text": "Internals\n\nrustc comes along and sees max!\nrustc looks into package_name_likely_macros and looks for src/lib.rs\nrustc looks for macro_rules! max\nrustc matches the pattern ( $x:expr, $y:expr ) to (1, 2)\n\nAs 1 and 2 are valid Rust expressions.\n\nrustc replaces max!(1,2) with if $x &gt; $y { $x } else { $y }\nrustc replaces $x with 1 and $y with 2\nThen, at long last, rustc compiles the code and creates an executable.",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#quick-exercises",
-    "href": "42_sha512.html#quick-exercises",
-    "title": "SHA-512",
-    "section": "Quick Exercises",
-    "text": "Quick Exercises\n\nOptionally write min\nOptionally write max to accept 3 arguments.\nChallenge: write max to accept \\(n\\) arguments.\n\n( $( $x:expr ),* )",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#or-majority",
-    "href": "42_sha512.html#or-majority",
-    "title": "SHA-512",
-    "section": "Or “Majority”",
-    "text": "Or “Majority”\n\nHere I provide Pythonic boolean median and bitwise median.\nYou will need Rust bitwise median.\nI will take it as given you know what a median and majority are.\n\nLogicially equivalent with \\(n = 3\\)\n\nThe following code is appended to “macros.py”\n\n\n\n\nmacros.py\n\nimport numpy as np\n\ndef _median(e:bool, f:bool, g:bool) -&gt; bool:\n    return int(np.median([e,f,g]))\n\nprint(\" === Boolean Median === \")\n[print('_median'+str(test), '-&gt;', _median(*test)) for test in tester]\n\ndef median(e:tuple[bool], f:tuple[bool], g:tuple[bool]) -&gt; tuple[bool]:\n    return tuple(_median(_e, _f, _g) for _e, _f, _g in zip(e,f,g))\n\nprint(\" === Bitwise Median === \")\nprint('median'+bsstrs(arrays), '-&gt;', \"'\"+bitstr(median(*arrays))+\"'\")\n\n\nYou can run it yourself, but here is the output for reference.\n\n === Boolean Median === \n_median(0, 0, 0) -&gt; 0\n_median(0, 0, 1) -&gt; 0\n_median(0, 1, 0) -&gt; 0\n_median(0, 1, 1) -&gt; 1\n_median(1, 0, 0) -&gt; 0\n_median(1, 0, 1) -&gt; 1\n_median(1, 1, 0) -&gt; 1\n_median(1, 1, 1) -&gt; 1\n === Bitwise Median ===\nmedian('00001111', '00110011', '01010101') -&gt; '00010111'",
-    "crumbs": [
-      "SHA-512"
-    ]
-  },
-  {
-    "objectID": "42_sha512.html#sometimes-rotright-and-rotleft",
-    "href": "42_sha512.html#sometimes-rotright-and-rotleft",
-    "title": "SHA-512",
-    "section": "Sometimes “Rotright and Rotleft”",
-    "text": "Sometimes “Rotright and Rotleft”\n\nVirtually identical to rotation ciphers.\n\n ____________________________\n[ ABCDEFGHIJKLMNOPQRSTUVWXYZ ] # alphabet\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n ____________________________\n[ DEFGHIJKLMNOPQRSTUVWXYZABC ] # rotate(3)\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n ____________________________\n[ XYZABCDEFGHIJKLMNOPQRSTUVW ] # rotate(-3)\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\nWe understand this as:\n\nTake an array and,\nTake a numerical value…\n\nof less than the length of the array.\n\nMaintain all elements of the array, but\n\nIncrease their index by the numerical value, and\nIndices greater than array length wrap around…\n\nUsing modulo array length.\n\n\n\nWe apply this same idea to the notion of boolean arrays.\n\nA unsigned int is a boolean array of some length.\nIt is possible to determine these lengths.\n\nHere is a Python rotleft on boolean arrays of size 8.\n\n\n\nmacros.py\n\ndef rotleft(a:tuple[bool], n:int) -&gt; tuple[bool]:\n    return a[n:] + a[:n]\n\nprint(\" === Bitwise Rotleft === \")\narray = (0,0,1,0,1,1,0,1)\nfor n in range(len(arrays[0])+1):\n    print('rotleft('+bitstr(array)+','+str(n)+') -&gt;', bitstr(rotate(array,n)))\n\n\nYou can run it yourself, but here is the output for reference.\n\n === Bitwise Rotleft ===\nrotleft(00101101,0) -&gt; 00101101\nrotleft(00101101,1) -&gt; 01011010\nrotleft(00101101,2) -&gt; 10110100\nrotleft(00101101,3) -&gt; 01101001\nrotleft(00101101,4) -&gt; 11010010\nrotleft(00101101,5) -&gt; 10100101\nrotleft(00101101,6) -&gt; 01001011\nrotleft(00101101,7) -&gt; 10010110\nrotleft(00101101,8) -&gt; 00101101\n\nWe note that this forms a “backward” or “leftward” rotate.\n\nThis is a non-standard rotate, often called lotate or rotleft\nA future assignment will use a “forward” or “rightward” rotate.\n\nWithout showing code, it would look like this.\n\n === Bitwise Rotate ===\nrotate(00101101,0) -&gt; 00101101\nrotate(00101101,1) -&gt; 10010110\nrotate(00101101,2) -&gt; 01001011\nrotate(00101101,3) -&gt; 10100101\nrotate(00101101,4) -&gt; 11010010\nrotate(00101101,5) -&gt; 01101001\nrotate(00101101,6) -&gt; 10110100\nrotate(00101101,7) -&gt; 01011010\nrotate(00101101,8) -&gt; 00101101",
     "crumbs": [
       "SHA-512"
     ]

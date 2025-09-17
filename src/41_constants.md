@@ -213,6 +213,6 @@ sqrt(19) = 4.35889894 -> 45be0cd14 ^ 2 = 12ffffffd3bf490990
 
 - SHA-512 also uses *round contants*
 
-> first <s>32</s> bits of the fractional parts of the cube roots of the first <s>64</s>80 primes
+> first <s>32</s>64 bits of the fractional parts of the cube roots of the first <s>64</s>80 primes
 
 - Compute the SHA-512 round constants.
