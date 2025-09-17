@@ -80,7 +80,7 @@ fn weight_words(words:Vec<u64>) -> u64
 cargo new 31 --name hamming --vcs none
 ```
 - I wrote a library function:
-```{.rs filename="src/lib.rs")
+```{.rs filename="src/lib.rs"}
 pub fn weight_u8(byte:u8) -> u64 {
     let mut cnt : u64 = 0;
     // This is wrong.
@@ -90,7 +90,7 @@ pub fn weight_u8(byte:u8) -> u64 {
 
 ```
 - I wrote some tests:
-```{.rs filename="src/main.rs")
+```{.rs filename="src/main.rs"}
 fn main() {
     dbg!(hamming::weight_u8(0x33_u8));
 }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,15 +68,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./30_bits.html" rel="next">
 <link href="./21_guess.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bc3769172936e0eadd9ffe6a8de618cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -492,290 +494,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -783,185 +788,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./21_guess.html" class="pagination-link" aria-label="Guess">
@@ -1019,15 +1000,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-43"><a href="#cb5-43"></a></span>
 <span id="cb5-44"><a href="#cb5-44"></a>*The following is a staged screenshot in VS Code, showing the expected terminal appearance.*</span>
 <span id="cb5-45"><a href="#cb5-45"></a></span>
-<span id="cb5-46"><a href="#cb5-46"></a>&lt;center&gt;</span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
 <span id="cb5-47"><a href="#cb5-47"></a><span class="al">![](img/wordle.png)</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a>&lt;/center&gt;</span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
 <span id="cb5-49"><a href="#cb5-49"></a></span>
 <span id="cb5-50"><a href="#cb5-50"></a>*The following is a staged screenshot in WSL2, showing the expected terminal appearance.*</span>
 <span id="cb5-51"><a href="#cb5-51"></a></span>
-<span id="cb5-52"><a href="#cb5-52"></a>&lt;center&gt;</span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
 <span id="cb5-53"><a href="#cb5-53"></a><span class="al">![](img/word_l.png)</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a>&lt;/center&gt;</span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
 <span id="cb5-55"><a href="#cb5-55"></a></span>
 <span id="cb5-56"><a href="#cb5-56"></a><span class="fu"># Summary</span></span>
 <span id="cb5-57"><a href="#cb5-57"></a></span>
@@ -1073,99 +1054,99 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-97"><a href="#cb5-97"></a><span class="ss">        - </span>Playing using this word list was relatively more challenging, as it omits many common words and plurals.</span>
 <span id="cb5-98"><a href="#cb5-98"></a></span>
 <span id="cb5-99"><a href="#cb5-99"></a><span class="in">```{.py filename="wordle.py"}</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a><span class="in"># A list of valid words, truncated for this example.</span></span>
-<span id="cb5-101"><a href="#cb5-101"></a><span class="in">WORDS = ["sator", "arepo", "tenet", "opera", "rotas"]</span></span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="co"># A list of valid words, truncated for this example.</span></span>
+<span id="cb5-101"><a href="#cb5-101"></a>WORDS <span class="op">=</span> [<span class="st">"sator"</span>, <span class="st">"arepo"</span>, <span class="st">"tenet"</span>, <span class="st">"opera"</span>, <span class="st">"rotas"</span>]</span>
 <span id="cb5-102"><a href="#cb5-102"></a></span>
-<span id="cb5-103"><a href="#cb5-103"></a><span class="in"># ANSI color codes for colored text</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a><span class="in"># 31: Red, 32: Green, 33: Yellow</span></span>
-<span id="cb5-105"><a href="#cb5-105"></a><span class="in">R = 31  # Red (letter not in word)</span></span>
-<span id="cb5-106"><a href="#cb5-106"></a><span class="in">G = 32  # Green (letter in correct position)</span></span>
-<span id="cb5-107"><a href="#cb5-107"></a><span class="in">Y = 33  # Yellow (letter in word but wrong position)</span></span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="co"># ANSI color codes for colored text</span></span>
+<span id="cb5-104"><a href="#cb5-104"></a><span class="co"># 31: Red, 32: Green, 33: Yellow</span></span>
+<span id="cb5-105"><a href="#cb5-105"></a>R <span class="op">=</span> <span class="dv">31</span>  <span class="co"># Red (letter not in word)</span></span>
+<span id="cb5-106"><a href="#cb5-106"></a>G <span class="op">=</span> <span class="dv">32</span>  <span class="co"># Green (letter in correct position)</span></span>
+<span id="cb5-107"><a href="#cb5-107"></a>Y <span class="op">=</span> <span class="dv">33</span>  <span class="co"># Yellow (letter in word but wrong position)</span></span>
 <span id="cb5-108"><a href="#cb5-108"></a></span>
-<span id="cb5-109"><a href="#cb5-109"></a><span class="in"># Box-drawing characters for the game board</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a><span class="in">T = "┌───┬───┬───┬───┬───┐"  # Top border</span></span>
-<span id="cb5-111"><a href="#cb5-111"></a><span class="in">M = "├───┼───┼───┼───┼───┤"  # Middle border</span></span>
-<span id="cb5-112"><a href="#cb5-112"></a><span class="in">B = "└───┴───┴───┴───┴───┘"  # Bottom border</span></span>
+<span id="cb5-109"><a href="#cb5-109"></a><span class="co"># Box-drawing characters for the game board</span></span>
+<span id="cb5-110"><a href="#cb5-110"></a>T <span class="op">=</span> <span class="st">"┌───┬───┬───┬───┬───┐"</span>  <span class="co"># Top border</span></span>
+<span id="cb5-111"><a href="#cb5-111"></a>M <span class="op">=</span> <span class="st">"├───┼───┼───┼───┼───┤"</span>  <span class="co"># Middle border</span></span>
+<span id="cb5-112"><a href="#cb5-112"></a>B <span class="op">=</span> <span class="st">"└───┴───┴───┴───┴───┘"</span>  <span class="co"># Bottom border</span></span>
 <span id="cb5-113"><a href="#cb5-113"></a></span>
-<span id="cb5-114"><a href="#cb5-114"></a><span class="in">def letter(a: str, c: int):</span></span>
-<span id="cb5-115"><a href="#cb5-115"></a><span class="in">    """</span></span>
-<span id="cb5-116"><a href="#cb5-116"></a><span class="in">    Prints a single letter with a specified ANSI color.</span></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="kw">def</span> letter(a: <span class="bu">str</span>, c: <span class="bu">int</span>):</span>
+<span id="cb5-115"><a href="#cb5-115"></a>    <span class="co">"""</span></span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="co">    Prints a single letter with a specified ANSI color.</span></span>
 <span id="cb5-117"><a href="#cb5-117"></a></span>
-<span id="cb5-118"><a href="#cb5-118"></a><span class="in">    Args:</span></span>
-<span id="cb5-119"><a href="#cb5-119"></a><span class="in">        a: The letter to print.</span></span>
-<span id="cb5-120"><a href="#cb5-120"></a><span class="in">        c: The ANSI color code.</span></span>
-<span id="cb5-121"><a href="#cb5-121"></a><span class="in">    """</span></span>
-<span id="cb5-122"><a href="#cb5-122"></a><span class="in">    print(f"│ \u001b[{c}m{a}\u001b[0m ", end="")</span></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="co">    Args:</span></span>
+<span id="cb5-119"><a href="#cb5-119"></a><span class="co">        a: The letter to print.</span></span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="co">        c: The ANSI color code.</span></span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="co">    """</span></span>
+<span id="cb5-122"><a href="#cb5-122"></a>    <span class="bu">print</span>(<span class="ss">f"│ </span><span class="ch">\u001b</span><span class="ss">[</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">m</span><span class="sc">{</span>a<span class="sc">}</span><span class="ch">\u001b</span><span class="ss">[0m "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
 <span id="cb5-123"><a href="#cb5-123"></a></span>
-<span id="cb5-124"><a href="#cb5-124"></a><span class="in">def colors(s: str, answer: str):</span></span>
-<span id="cb5-125"><a href="#cb5-125"></a><span class="in">    """</span></span>
-<span id="cb5-126"><a href="#cb5-126"></a><span class="in">    Analyzes a guessed word and prints it with the appropriate colors.</span></span>
+<span id="cb5-124"><a href="#cb5-124"></a><span class="kw">def</span> colors(s: <span class="bu">str</span>, answer: <span class="bu">str</span>):</span>
+<span id="cb5-125"><a href="#cb5-125"></a>    <span class="co">"""</span></span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="co">    Analyzes a guessed word and prints it with the appropriate colors.</span></span>
 <span id="cb5-127"><a href="#cb5-127"></a></span>
-<span id="cb5-128"><a href="#cb5-128"></a><span class="in">    Args:</span></span>
-<span id="cb5-129"><a href="#cb5-129"></a><span class="in">        s: The guessed word.</span></span>
-<span id="cb5-130"><a href="#cb5-130"></a><span class="in">        answer: The correct answer word.</span></span>
-<span id="cb5-131"><a href="#cb5-131"></a><span class="in">    """</span></span>
-<span id="cb5-132"><a href="#cb5-132"></a><span class="in">    for i in range(5):</span></span>
-<span id="cb5-133"><a href="#cb5-133"></a><span class="in">        char = s[i]</span></span>
-<span id="cb5-134"><a href="#cb5-134"></a><span class="in">        color_code = R</span></span>
-<span id="cb5-135"><a href="#cb5-135"></a><span class="in">        if answer[i] == char:</span></span>
-<span id="cb5-136"><a href="#cb5-136"></a><span class="in">            color_code = G</span></span>
-<span id="cb5-137"><a href="#cb5-137"></a><span class="in">        elif char in answer:</span></span>
-<span id="cb5-138"><a href="#cb5-138"></a><span class="in">            color_code = Y</span></span>
-<span id="cb5-139"><a href="#cb5-139"></a><span class="in">        letter(char, color_code)</span></span>
-<span id="cb5-140"><a href="#cb5-140"></a><span class="in">    print("│")</span></span>
+<span id="cb5-128"><a href="#cb5-128"></a><span class="co">    Args:</span></span>
+<span id="cb5-129"><a href="#cb5-129"></a><span class="co">        s: The guessed word.</span></span>
+<span id="cb5-130"><a href="#cb5-130"></a><span class="co">        answer: The correct answer word.</span></span>
+<span id="cb5-131"><a href="#cb5-131"></a><span class="co">    """</span></span>
+<span id="cb5-132"><a href="#cb5-132"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb5-133"><a href="#cb5-133"></a>        char <span class="op">=</span> s[i]</span>
+<span id="cb5-134"><a href="#cb5-134"></a>        color_code <span class="op">=</span> R</span>
+<span id="cb5-135"><a href="#cb5-135"></a>        <span class="cf">if</span> answer[i] <span class="op">==</span> char:</span>
+<span id="cb5-136"><a href="#cb5-136"></a>            color_code <span class="op">=</span> G</span>
+<span id="cb5-137"><a href="#cb5-137"></a>        <span class="cf">elif</span> char <span class="kw">in</span> answer:</span>
+<span id="cb5-138"><a href="#cb5-138"></a>            color_code <span class="op">=</span> Y</span>
+<span id="cb5-139"><a href="#cb5-139"></a>        letter(char, color_code)</span>
+<span id="cb5-140"><a href="#cb5-140"></a>    <span class="bu">print</span>(<span class="st">"│"</span>)</span>
 <span id="cb5-141"><a href="#cb5-141"></a></span>
-<span id="cb5-142"><a href="#cb5-142"></a><span class="in">def game(words: list[str], answer: str):</span></span>
-<span id="cb5-143"><a href="#cb5-143"></a><span class="in">    """</span></span>
-<span id="cb5-144"><a href="#cb5-144"></a><span class="in">    Clears the screen and draws the game board with the current guesses.</span></span>
+<span id="cb5-142"><a href="#cb5-142"></a><span class="kw">def</span> game(words: <span class="bu">list</span>[<span class="bu">str</span>], answer: <span class="bu">str</span>):</span>
+<span id="cb5-143"><a href="#cb5-143"></a>    <span class="co">"""</span></span>
+<span id="cb5-144"><a href="#cb5-144"></a><span class="co">    Clears the screen and draws the game board with the current guesses.</span></span>
 <span id="cb5-145"><a href="#cb5-145"></a></span>
-<span id="cb5-146"><a href="#cb5-146"></a><span class="in">    Args:</span></span>
-<span id="cb5-147"><a href="#cb5-147"></a><span class="in">        words: A list of guessed words.</span></span>
-<span id="cb5-148"><a href="#cb5-148"></a><span class="in">        answer: The correct answer word.</span></span>
-<span id="cb5-149"><a href="#cb5-149"></a><span class="in">    """</span></span>
-<span id="cb5-150"><a href="#cb5-150"></a><span class="in">    print("\u001b[2J")  # Clear the screen</span></span>
-<span id="cb5-151"><a href="#cb5-151"></a><span class="in">    print(T)</span></span>
-<span id="cb5-152"><a href="#cb5-152"></a><span class="in">    for i in range(5):</span></span>
-<span id="cb5-153"><a href="#cb5-153"></a><span class="in">        colors(words[i], answer)</span></span>
-<span id="cb5-154"><a href="#cb5-154"></a><span class="in">        print(M)</span></span>
-<span id="cb5-155"><a href="#cb5-155"></a><span class="in">    colors(words[5], answer)</span></span>
-<span id="cb5-156"><a href="#cb5-156"></a><span class="in">    print(B)</span></span>
+<span id="cb5-146"><a href="#cb5-146"></a><span class="co">    Args:</span></span>
+<span id="cb5-147"><a href="#cb5-147"></a><span class="co">        words: A list of guessed words.</span></span>
+<span id="cb5-148"><a href="#cb5-148"></a><span class="co">        answer: The correct answer word.</span></span>
+<span id="cb5-149"><a href="#cb5-149"></a><span class="co">    """</span></span>
+<span id="cb5-150"><a href="#cb5-150"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\u001b</span><span class="st">[2J"</span>)  <span class="co"># Clear the screen</span></span>
+<span id="cb5-151"><a href="#cb5-151"></a>    <span class="bu">print</span>(T)</span>
+<span id="cb5-152"><a href="#cb5-152"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb5-153"><a href="#cb5-153"></a>        colors(words[i], answer)</span>
+<span id="cb5-154"><a href="#cb5-154"></a>        <span class="bu">print</span>(M)</span>
+<span id="cb5-155"><a href="#cb5-155"></a>    colors(words[<span class="dv">5</span>], answer)</span>
+<span id="cb5-156"><a href="#cb5-156"></a>    <span class="bu">print</span>(B)</span>
 <span id="cb5-157"><a href="#cb5-157"></a></span>
-<span id="cb5-158"><a href="#cb5-158"></a><span class="in">def main():</span></span>
-<span id="cb5-159"><a href="#cb5-159"></a><span class="in">    """</span></span>
-<span id="cb5-160"><a href="#cb5-160"></a><span class="in">    The main game loop.</span></span>
-<span id="cb5-161"><a href="#cb5-161"></a><span class="in">    """</span></span>
-<span id="cb5-162"><a href="#cb5-162"></a><span class="in">    words = ["     "] * 6</span></span>
+<span id="cb5-158"><a href="#cb5-158"></a><span class="kw">def</span> main():</span>
+<span id="cb5-159"><a href="#cb5-159"></a>    <span class="co">"""</span></span>
+<span id="cb5-160"><a href="#cb5-160"></a><span class="co">    The main game loop.</span></span>
+<span id="cb5-161"><a href="#cb5-161"></a><span class="co">    """</span></span>
+<span id="cb5-162"><a href="#cb5-162"></a>    words <span class="op">=</span> [<span class="st">"     "</span>] <span class="op">*</span> <span class="dv">6</span></span>
 <span id="cb5-163"><a href="#cb5-163"></a></span>
-<span id="cb5-164"><a href="#cb5-164"></a><span class="in">    ###############################################</span></span>
-<span id="cb5-165"><a href="#cb5-165"></a><span class="in">    #                                             #</span></span>
-<span id="cb5-166"><a href="#cb5-166"></a><span class="in">    # You are required to use /dev/random in Rust #</span></span>
-<span id="cb5-167"><a href="#cb5-167"></a><span class="in">    #                                             #</span></span>
-<span id="cb5-168"><a href="#cb5-168"></a><span class="in">    ###############################################</span></span>
-<span id="cb5-169"><a href="#cb5-169"></a><span class="in">    import random</span></span>
-<span id="cb5-170"><a href="#cb5-170"></a><span class="in">    answer = random.choice(WORDS)</span></span>
+<span id="cb5-164"><a href="#cb5-164"></a>    <span class="co">###############################################</span></span>
+<span id="cb5-165"><a href="#cb5-165"></a>    <span class="co">#                                             #</span></span>
+<span id="cb5-166"><a href="#cb5-166"></a>    <span class="co"># You are required to use /dev/random in Rust #</span></span>
+<span id="cb5-167"><a href="#cb5-167"></a>    <span class="co">#                                             #</span></span>
+<span id="cb5-168"><a href="#cb5-168"></a>    <span class="co">###############################################</span></span>
+<span id="cb5-169"><a href="#cb5-169"></a>    <span class="im">import</span> random</span>
+<span id="cb5-170"><a href="#cb5-170"></a>    answer <span class="op">=</span> random.choice(WORDS)</span>
 <span id="cb5-171"><a href="#cb5-171"></a></span>
-<span id="cb5-172"><a href="#cb5-172"></a><span class="in">    attempts = 0</span></span>
+<span id="cb5-172"><a href="#cb5-172"></a>    attempts <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-173"><a href="#cb5-173"></a></span>
-<span id="cb5-174"><a href="#cb5-174"></a><span class="in">    print("\u001b[2J", end="")  # Clear the screen</span></span>
-<span id="cb5-175"><a href="#cb5-175"></a><span class="in">    print("Use lowercase only btw.")</span></span>
+<span id="cb5-174"><a href="#cb5-174"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\u001b</span><span class="st">[2J"</span>, end<span class="op">=</span><span class="st">""</span>)  <span class="co"># Clear the screen</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a>    <span class="bu">print</span>(<span class="st">"Use lowercase only btw."</span>)</span>
 <span id="cb5-176"><a href="#cb5-176"></a></span>
-<span id="cb5-177"><a href="#cb5-177"></a><span class="in">    while words[5] == "     ":</span></span>
-<span id="cb5-178"><a href="#cb5-178"></a><span class="in">        guess = input().strip()  # Convert input to lowercase</span></span>
-<span id="cb5-179"><a href="#cb5-179"></a><span class="in">        if guess in WORDS:</span></span>
-<span id="cb5-180"><a href="#cb5-180"></a><span class="in">            words[attempts] = guess</span></span>
-<span id="cb5-181"><a href="#cb5-181"></a><span class="in">            game(words, answer)</span></span>
-<span id="cb5-182"><a href="#cb5-182"></a><span class="in">            if guess == answer:</span></span>
-<span id="cb5-183"><a href="#cb5-183"></a><span class="in">                print("Winner")</span></span>
-<span id="cb5-184"><a href="#cb5-184"></a><span class="in">                return</span></span>
-<span id="cb5-185"><a href="#cb5-185"></a><span class="in">            attempts += 1</span></span>
-<span id="cb5-186"><a href="#cb5-186"></a><span class="in">        else:</span></span>
-<span id="cb5-187"><a href="#cb5-187"></a><span class="in">            print("Not a valid word!")</span></span>
+<span id="cb5-177"><a href="#cb5-177"></a>    <span class="cf">while</span> words[<span class="dv">5</span>] <span class="op">==</span> <span class="st">"     "</span>:</span>
+<span id="cb5-178"><a href="#cb5-178"></a>        guess <span class="op">=</span> <span class="bu">input</span>().strip()  <span class="co"># Convert input to lowercase</span></span>
+<span id="cb5-179"><a href="#cb5-179"></a>        <span class="cf">if</span> guess <span class="kw">in</span> WORDS:</span>
+<span id="cb5-180"><a href="#cb5-180"></a>            words[attempts] <span class="op">=</span> guess</span>
+<span id="cb5-181"><a href="#cb5-181"></a>            game(words, answer)</span>
+<span id="cb5-182"><a href="#cb5-182"></a>            <span class="cf">if</span> guess <span class="op">==</span> answer:</span>
+<span id="cb5-183"><a href="#cb5-183"></a>                <span class="bu">print</span>(<span class="st">"Winner"</span>)</span>
+<span id="cb5-184"><a href="#cb5-184"></a>                <span class="cf">return</span></span>
+<span id="cb5-185"><a href="#cb5-185"></a>            attempts <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-187"><a href="#cb5-187"></a>            <span class="bu">print</span>(<span class="st">"Not a valid word!"</span>)</span>
 <span id="cb5-188"><a href="#cb5-188"></a></span>
-<span id="cb5-189"><a href="#cb5-189"></a><span class="in">    print("Game over :(")</span></span>
+<span id="cb5-189"><a href="#cb5-189"></a>    <span class="bu">print</span>(<span class="st">"Game over :("</span>)</span>
 <span id="cb5-190"><a href="#cb5-190"></a></span>
-<span id="cb5-191"><a href="#cb5-191"></a><span class="in">if __name__ == "__main__":</span></span>
-<span id="cb5-192"><a href="#cb5-192"></a><span class="in">    main()</span></span>
+<span id="cb5-191"><a href="#cb5-191"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb5-192"><a href="#cb5-192"></a>    main()</span>
 <span id="cb5-193"><a href="#cb5-193"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

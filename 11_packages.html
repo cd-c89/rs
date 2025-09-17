@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,15 +68,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./12_hicargo.html" rel="next">
 <link href="./02_hiworld.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bc3769172936e0eadd9ffe6a8de618cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -647,12 +649,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Skip the compile step.</li>
 <li>Be <em>way</em> faster (∞x reported here)</li>
-</ul></li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a>    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span>
-<span id="cb12-2"><a href="#cb12-2"></a>     Running `target/debug/throwaway_example`</span>
-<span id="cb12-3"><a href="#cb12-3"></a>Hello, world!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a>  Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span>
+<span id="cb12-2"><a href="#cb12-2"></a>   Running `target/debug/throwaway_example`</span>
+<span id="cb12-3"><a href="#cb12-3"></a>Hello, world!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li>0.56s -&gt; 0.00s</li>
 </ul>
 </section>
@@ -978,290 +978,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1269,185 +1272,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02_hiworld.html" class="pagination-link" aria-label="Hi world">
@@ -1496,7 +1475,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-34"><a href="#cb31-34"></a><span class="ss">    - </span>Readable to humans</span>
 <span id="cb31-35"><a href="#cb31-35"></a><span class="ss">    - </span>And readable to a *program* (like <span class="in">`python`</span>) which can direct the computer to act</span>
 <span id="cb31-36"><a href="#cb31-36"></a><span class="in">```{.python filename="what_up_earth.py"}</span></span>
-<span id="cb31-37"><a href="#cb31-37"></a><span class="in">print("what up earth")</span></span>
+<span id="cb31-37"><a href="#cb31-37"></a><span class="bu">print</span>(<span class="st">"what up earth"</span>)</span>
 <span id="cb31-38"><a href="#cb31-38"></a><span class="in">```</span></span>
 <span id="cb31-39"><a href="#cb31-39"></a><span class="ss">- </span>We note that this is much closer to being a text file that it is to being a program.</span>
 <span id="cb31-40"><a href="#cb31-40"></a></span>
@@ -1528,430 +1507,430 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-66"><a href="#cb31-66"></a><span class="fu">## .py vs .rs</span></span>
 <span id="cb31-67"><a href="#cb31-67"></a></span>
 <span id="cb31-70"><a href="#cb31-70"></a><span class="in">```{mermaid}</span></span>
-<span id="cb31-71"><a href="#cb31-71"></a><span class="in">%%| theme: Darkly</span></span>
-<span id="cb31-72"><a href="#cb31-72"></a><span class="in">flowchart LR</span></span>
-<span id="cb31-73"><a href="#cb31-73"></a><span class="in">  A(Python) --&gt; B[fname.py file]</span></span>
-<span id="cb31-74"><a href="#cb31-74"></a><span class="in">  B --&gt; C[python fname.py]</span></span>
-<span id="cb31-75"><a href="#cb31-75"></a><span class="in">  C --&gt; D{hello world}</span></span>
-<span id="cb31-76"><a href="#cb31-76"></a><span class="in">  E(Rust) --&gt; F[fname.rs  file]</span></span>
-<span id="cb31-77"><a href="#cb31-77"></a><span class="in">  F --&gt; G[rustc fname.rs]</span></span>
-<span id="cb31-78"><a href="#cb31-78"></a><span class="in">  G --&gt; H[./fname]</span></span>
-<span id="cb31-79"><a href="#cb31-79"></a><span class="in">  H --&gt; I{hello world}</span></span>
-<span id="cb31-80"><a href="#cb31-80"></a><span class="in">```</span></span>
+<span id="cb31-71"><a href="#cb31-71"></a>%%| theme: Darkly</span>
+<span id="cb31-72"><a href="#cb31-72"></a>flowchart LR</span>
+<span id="cb31-73"><a href="#cb31-73"></a>  A(Python) --&gt; B[fname.py file]</span>
+<span id="cb31-74"><a href="#cb31-74"></a>  B --&gt; C[python fname.py]</span>
+<span id="cb31-75"><a href="#cb31-75"></a>  C --&gt; D{hello world}</span>
+<span id="cb31-76"><a href="#cb31-76"></a>  E(Rust) --&gt; F[fname.rs  file]</span>
+<span id="cb31-77"><a href="#cb31-77"></a>  F --&gt; G[rustc fname.rs]</span>
+<span id="cb31-78"><a href="#cb31-78"></a>  G --&gt; H[.<span class="ot">/fname]</span></span>
+<span id="cb31-79"><a href="#cb31-79"></a><span class="ot">  H --&gt; I{hello world}</span></span>
+<span id="cb31-80"><a href="#cb31-80"></a><span class="ot">```</span></span>
 <span id="cb31-81"><a href="#cb31-81"></a></span>
-<span id="cb31-82"><a href="#cb31-82"></a><span class="ss">- </span>_You only have to compile once to have the executable forever._</span>
-<span id="cb31-83"><a href="#cb31-83"></a><span class="ss">- </span>_Most programs are executables, not scripts._</span>
+<span id="cb31-82"><a href="#cb31-82"></a><span class="ot">- _You only have to compile once to have the executable forever._</span></span>
+<span id="cb31-83"><a href="#cb31-83"></a><span class="ot">- _Most programs are executables, not scripts._</span></span>
 <span id="cb31-84"><a href="#cb31-84"></a></span>
-<span id="cb31-85"><a href="#cb31-85"></a><span class="fu">## Rustc</span></span>
+<span id="cb31-85"><a href="#cb31-85"></a><span class="co">## Rustc</span></span>
 <span id="cb31-86"><a href="#cb31-86"></a></span>
-<span id="cb31-87"><a href="#cb31-87"></a><span class="ss">- </span><span class="in">`rustc`</span> is rarely, if ever, used *directly*</span>
-<span id="cb31-88"><a href="#cb31-88"></a><span class="ss">  - </span>Over the years (since like, 1960) code has increased in complexity.</span>
-<span id="cb31-89"><a href="#cb31-89"></a><span class="ss">    - </span>Many files (think pgl.py, WordleGraphics.py, EnigmaRotor.py)</span>
-<span id="cb31-90"><a href="#cb31-90"></a><span class="ss">    - </span>Many libraries (think NumPy, **pandas**, scikit)</span>
-<span id="cb31-91"><a href="#cb31-91"></a><span class="ss">    - </span>Complex file systems (01/rustup.md)</span>
-<span id="cb31-92"><a href="#cb31-92"></a><span class="ss">- </span>The solution was automation.</span>
+<span id="cb31-87"><a href="#cb31-87"></a><span class="ot">- `rustc` is rarely, if ever, used </span><span class="ch">*</span><span class="ot">directly</span><span class="ch">*</span></span>
+<span id="cb31-88"><a href="#cb31-88"></a><span class="ot">  - Over the years </span><span class="ch">(</span><span class="ot">since like, 1960</span><span class="ch">)</span><span class="ot"> code has increased in complexity.</span></span>
+<span id="cb31-89"><a href="#cb31-89"></a><span class="ot">    - Many files </span><span class="ch">(</span><span class="ot">think pgl.py, WordleGraphics.py, EnigmaRotor.py</span><span class="ch">)</span></span>
+<span id="cb31-90"><a href="#cb31-90"></a><span class="ot">    - Many libraries </span><span class="ch">(</span><span class="ot">think NumPy, </span><span class="ch">**</span><span class="ot">pandas</span><span class="ch">**</span><span class="ot">, scikit</span><span class="ch">)</span></span>
+<span id="cb31-91"><a href="#cb31-91"></a><span class="ot">    - Complex file systems </span><span class="ch">(</span><span class="ot">01/</span>rustup.md)</span>
+<span id="cb31-92"><a href="#cb31-92"></a>- The solution was automation.</span>
 <span id="cb31-93"><a href="#cb31-93"></a></span>
-<span id="cb31-94"><a href="#cb31-94"></a><span class="fu">## Build Systems</span></span>
+<span id="cb31-94"><a href="#cb31-94"></a><span class="co">## Build Systems</span></span>
 <span id="cb31-95"><a href="#cb31-95"></a></span>
-<span id="cb31-96"><a href="#cb31-96"></a><span class="ss">- </span>We don't have a real equivalence to compilation for Python.</span>
-<span id="cb31-97"><a href="#cb31-97"></a><span class="ss">    - </span>There is <span class="co">[</span><span class="ot">Numba</span><span class="co">](https://cd-public.github.io/scicom/0C_numba.html)</span></span>
-<span id="cb31-98"><a href="#cb31-98"></a><span class="ss">- </span>We do have a build system equivalent.</span>
-<span id="cb31-99"><a href="#cb31-99"></a><span class="ss">    - </span>I use flit, which is easy.</span>
-<span id="cb31-100"><a href="#cb31-100"></a><span class="ss">    - </span>I think there's others... Setuptools? Hatchling?</span>
+<span id="cb31-96"><a href="#cb31-96"></a>- We don<span class="ot">'</span><span class="ss">t have a real equivalence to compilation for Python.</span></span>
+<span id="cb31-97"><a href="#cb31-97"></a><span class="ss">    - There is [Numba](https://cd-public.github.io/scicom/0C_numba.html)</span></span>
+<span id="cb31-98"><a href="#cb31-98"></a><span class="ss">- We do have a build system equivalent.</span></span>
+<span id="cb31-99"><a href="#cb31-99"></a><span class="ss">    - I use flit, which is easy.</span></span>
+<span id="cb31-100"><a href="#cb31-100"></a><span class="ss">    - I think there</span><span class="ot">'</span>s others... Setuptools? Hatchling?</span>
 <span id="cb31-101"><a href="#cb31-101"></a>    </span>
-<span id="cb31-102"><a href="#cb31-102"></a><span class="fu">## Flit</span></span>
+<span id="cb31-102"><a href="#cb31-102"></a><span class="co">## Flit</span></span>
 <span id="cb31-103"><a href="#cb31-103"></a></span>
-<span id="cb31-104"><a href="#cb31-104"></a><span class="ss">- </span>Flit solves a novel problem for Python programers.</span>
-<span id="cb31-105"><a href="#cb31-105"></a><span class="ss">    - </span>**Not**: Let's make some code that I can run.</span>
-<span id="cb31-106"><a href="#cb31-106"></a><span class="ss">    - </span>**Instead**: Let's make code that can be used in code other people run.</span>
+<span id="cb31-104"><a href="#cb31-104"></a>- Flit solves a novel problem <span class="kw">for</span> Python programers.</span>
+<span id="cb31-105"><a href="#cb31-105"></a>    - *<span class="dt">*Not</span>*<span class="wa">*:</span> Let<span class="ot">'</span><span class="ss">s make some code that I can run.</span></span>
+<span id="cb31-106"><a href="#cb31-106"></a><span class="ss">    - **Instead**: Let</span><span class="ot">'</span>s make code that can be used in code other people run.</span>
 <span id="cb31-107"><a href="#cb31-107"></a>    </span>
-<span id="cb31-108"><a href="#cb31-108"></a><span class="fu">## Packaging</span></span>
+<span id="cb31-108"><a href="#cb31-108"></a><span class="co">## Packaging</span></span>
 <span id="cb31-109"><a href="#cb31-109"></a>    </span>
-<span id="cb31-110"><a href="#cb31-110"></a><span class="ss">- </span>NumPy, **pandas**, and things like CS 151 PGL can be "built" into packages with Flit and friends.</span>
-<span id="cb31-111"><a href="#cb31-111"></a><span class="ss">    - </span>Basically, instead of running e.g. <span class="in">`python3 mycode.py`</span></span>
-<span id="cb31-112"><a href="#cb31-112"></a><span class="ss">    - </span>Run <span class="in">`flit init`</span> to make a new folder, edit some code, then run <span class="in">`flit publish`</span> to add it to <span class="in">`pip`</span></span>
-<span id="cb31-113"><a href="#cb31-113"></a><span class="ss">- </span>Takeaway - package management and build systems work *real* well together.</span>
+<span id="cb31-110"><a href="#cb31-110"></a>- NumPy, *<span class="dt">*pandas</span>*<span class="wa">*,</span> <span class="ot">and</span> things like CS <span class="dv">151</span> PGL can be <span class="ot">"</span><span class="st">built</span><span class="ot">"</span> into packages with Flit <span class="ot">and</span> friends.</span>
+<span id="cb31-111"><a href="#cb31-111"></a>    - Basically, instead of running e.g. <span class="ot">`</span><span class="st">python3 mycode.py</span><span class="ot">`</span></span>
+<span id="cb31-112"><a href="#cb31-112"></a>    - Run <span class="ot">`</span><span class="st">flit init</span><span class="ot">`</span> to make a new folder, edit some code, then run <span class="ot">`</span><span class="st">flit publish</span><span class="ot">`</span> to add it to <span class="ot">`</span><span class="st">pip</span><span class="ot">`</span></span>
+<span id="cb31-113"><a href="#cb31-113"></a>- Takeaway - <span class="kw">package</span> management <span class="ot">and</span> build systems work <span class="dt">*real</span><span class="ot">*</span> well together.</span>
 <span id="cb31-114"><a href="#cb31-114"></a></span>
-<span id="cb31-115"><a href="#cb31-115"></a><span class="fu">## Wheels</span></span>
+<span id="cb31-115"><a href="#cb31-115"></a><span class="co">## Wheels</span></span>
 <span id="cb31-116"><a href="#cb31-116"></a></span>
-<span id="cb31-117"><a href="#cb31-117"></a><span class="ss">- </span>The thing that <span class="in">`flit`</span> and friends create and distribute is not a <span class="in">`.py`</span> file.</span>
-<span id="cb31-118"><a href="#cb31-118"></a><span class="ss">- </span>Rather, they are "wheels" which are not human readable.</span>
-<span id="cb31-119"><a href="#cb31-119"></a><span class="ss">- </span>*A lot like compiled code*</span>
-<span id="cb31-120"><a href="#cb31-120"></a><span class="ss">- </span>Takeaway - a good way to think of Rust is that we're writing packages for ourselves.</span>
+<span id="cb31-117"><a href="#cb31-117"></a>- The thing that <span class="ot">`</span><span class="st">flit</span><span class="ot">`</span> <span class="ot">and</span> friends create <span class="ot">and</span> distribute is <span class="ot">not</span> a <span class="ot">`</span><span class="st">.py</span><span class="ot">`</span> file.</span>
+<span id="cb31-118"><a href="#cb31-118"></a>- Rather, they are <span class="ot">"</span><span class="st">wheels</span><span class="ot">"</span> which are <span class="ot">not</span> human readable.</span>
+<span id="cb31-119"><a href="#cb31-119"></a>- <span class="dt">*A</span> lot like compiled code*</span>
+<span id="cb31-120"><a href="#cb31-120"></a>- Takeaway - a good way to think of Rust is that we<span class="ot">'</span><span class="ss">re writing packages for ourselves.</span></span>
 <span id="cb31-121"><a href="#cb31-121"></a></span>
-<span id="cb31-122"><a href="#cb31-122"></a><span class="fu">## Cargo</span></span>
+<span id="cb31-122"><a href="#cb31-122"></a><span class="ss">## Cargo</span></span>
 <span id="cb31-123"><a href="#cb31-123"></a></span>
-<span id="cb31-124"><a href="#cb31-124"></a><span class="ss">- </span>With Python, we use <span class="in">`python3`</span> (or <span class="in">`pip`</span>, but perhaps as <span class="in">`python3 -m pip`</span>).</span>
-<span id="cb31-125"><a href="#cb31-125"></a><span class="ss">- </span><span class="in">`rustc`</span> is not really the equivalent to that:</span>
-<span id="cb31-126"><a href="#cb31-126"></a><span class="ss">- </span>Rather, we use <span class="in">`cargo`</span>, the Rust build and package manager.</span>
-<span id="cb31-127"><a href="#cb31-127"></a><span class="ss">- </span><span class="in">`cargo`</span> will handle any usage of <span class="in">`rustc`</span> that we may need.</span>
-<span id="cb31-128"><a href="#cb31-128"></a><span class="ss">    - </span>We can easily then distribute code across multiple files.</span>
-<span id="cb31-129"><a href="#cb31-129"></a>    </span>
-<span id="cb31-130"><a href="#cb31-130"></a><span class="fu"># Cargo New</span></span>
+<span id="cb31-124"><a href="#cb31-124"></a><span class="ss">- With Python, we use `python3` (or `pip`, but perhaps as `python3 -m pip`).</span></span>
+<span id="cb31-125"><a href="#cb31-125"></a><span class="ss">- `rustc` is not really the equivalent to that:</span></span>
+<span id="cb31-126"><a href="#cb31-126"></a><span class="ss">- Rather, we use `cargo`, the Rust build and package manager.</span></span>
+<span id="cb31-127"><a href="#cb31-127"></a><span class="ss">- `cargo` will handle any usage of `rustc` that we may need.</span></span>
+<span id="cb31-128"><a href="#cb31-128"></a><span class="ss">    - We can easily then distribute code across multiple files.</span></span>
+<span id="cb31-129"><a href="#cb31-129"></a><span class="ss">    </span></span>
+<span id="cb31-130"><a href="#cb31-130"></a><span class="ss"># Cargo New</span></span>
 <span id="cb31-131"><a href="#cb31-131"></a></span>
-<span id="cb31-132"><a href="#cb31-132"></a><span class="fu">## Build+Package</span></span>
+<span id="cb31-132"><a href="#cb31-132"></a><span class="ss">## Build+Package</span></span>
 <span id="cb31-133"><a href="#cb31-133"></a></span>
-<span id="cb31-134"><a href="#cb31-134"></a><span class="ss">- </span>Cargo is Rust’s *build system* (like `flit`) and *package manager* (like <span class="in">`pip`</span>).</span>
-<span id="cb31-135"><a href="#cb31-135"></a><span class="ss">- </span>We will use Cargo instead of <span class="in">`rustc`</span> for the rest of the term.</span>
-<span id="cb31-136"><a href="#cb31-136"></a><span class="ss">    - </span>My sense is that this is the industry standard.</span>
-<span id="cb31-137"><a href="#cb31-137"></a><span class="ss">- </span>We'll step through an example, then you'll do a (very simple) exercise.</span>
+<span id="cb31-134"><a href="#cb31-134"></a><span class="ss">- Cargo is Rust’s *build system* (like `flit`) and *package manager* (like `pip`).</span></span>
+<span id="cb31-135"><a href="#cb31-135"></a><span class="ss">- We will use Cargo instead of `rustc` for the rest of the term.</span></span>
+<span id="cb31-136"><a href="#cb31-136"></a><span class="ss">    - My sense is that this is the industry standard.</span></span>
+<span id="cb31-137"><a href="#cb31-137"></a><span class="ss">- We</span><span class="ot">'</span>ll step through an example, then you<span class="ot">'</span><span class="ss">ll do a (very simple) exercise.</span></span>
 <span id="cb31-138"><a href="#cb31-138"></a></span>
-<span id="cb31-139"><a href="#cb31-139"></a><span class="fu">## New</span></span>
+<span id="cb31-139"><a href="#cb31-139"></a><span class="ss">## New</span></span>
 <span id="cb31-140"><a href="#cb31-140"></a></span>
-<span id="cb31-141"><a href="#cb31-141"></a><span class="ss">- </span>The first thing to do with Cargo, as a rule, is great a new package.</span>
-<span id="cb31-142"><a href="#cb31-142"></a><span class="ss">    - </span>This is *kinda* like creating a new <span class="in">`.py`</span> file.</span>
-<span id="cb31-143"><a href="#cb31-143"></a><span class="ss">    - </span>It is a bit more like creating a Python project from a template repository.</span>
-<span id="cb31-144"><a href="#cb31-144"></a>    </span>
-<span id="cb31-145"><a href="#cb31-145"></a><span class="fu">## Do it</span></span>
-<span id="cb31-146"><a href="#cb31-146"></a>    </span>
-<span id="cb31-147"><a href="#cb31-147"></a><span class="ss">- </span>To do so:</span>
+<span id="cb31-141"><a href="#cb31-141"></a><span class="ss">- The first thing to do with Cargo, as a rule, is great a new package.</span></span>
+<span id="cb31-142"><a href="#cb31-142"></a><span class="ss">    - This is *kinda* like creating a new `.py` file.</span></span>
+<span id="cb31-143"><a href="#cb31-143"></a><span class="ss">    - It is a bit more like creating a Python project from a template repository.</span></span>
+<span id="cb31-144"><a href="#cb31-144"></a><span class="ss">    </span></span>
+<span id="cb31-145"><a href="#cb31-145"></a><span class="ss">## Do it</span></span>
+<span id="cb31-146"><a href="#cb31-146"></a><span class="ss">    </span></span>
+<span id="cb31-147"><a href="#cb31-147"></a><span class="ss">- To do so:</span></span>
 <span id="cb31-148"><a href="#cb31-148"></a></span>
-<span id="cb31-149"><a href="#cb31-149"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-150"><a href="#cb31-150"></a><span class="in">cargo new throwaway_example</span></span>
-<span id="cb31-151"><a href="#cb31-151"></a><span class="in">```</span></span>
+<span id="cb31-149"><a href="#cb31-149"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-150"><a href="#cb31-150"></a><span class="ss">cargo new throwaway_example</span></span>
+<span id="cb31-151"><a href="#cb31-151"></a><span class="ss">```</span></span>
 <span id="cb31-152"><a href="#cb31-152"></a></span>
-<span id="cb31-153"><a href="#cb31-153"></a><span class="ss">- </span><span class="in">`cargo`</span> is, well, Cargo</span>
-<span id="cb31-154"><a href="#cb31-154"></a><span class="ss">- </span><span class="in">`new`</span> creates a new package.</span>
-<span id="cb31-155"><a href="#cb31-155"></a><span class="ss">- </span><span class="in">`throwaway_example`</span> is the name of the package<span class="ot">[^1]</span>.</span>
+<span id="cb31-153"><a href="#cb31-153"></a><span class="ss">- `cargo` is, well, Cargo</span></span>
+<span id="cb31-154"><a href="#cb31-154"></a><span class="ss">- `new` creates a new package.</span></span>
+<span id="cb31-155"><a href="#cb31-155"></a><span class="ss">- `throwaway_example` is the name of the package[^1].</span></span>
 <span id="cb31-156"><a href="#cb31-156"></a></span>
-<span id="cb31-157"><a href="#cb31-157"></a><span class="ot">[^1]: </span>Well, kinda. We'll get to that.</span>
+<span id="cb31-157"><a href="#cb31-157"></a><span class="ss">[^1]: Well, kinda. We</span><span class="ot">'</span>ll get to that.</span>
 <span id="cb31-158"><a href="#cb31-158"></a></span>
-<span id="cb31-159"><a href="#cb31-159"></a><span class="fu">## Examine</span></span>
+<span id="cb31-159"><a href="#cb31-159"></a><span class="co">## Examine</span></span>
 <span id="cb31-160"><a href="#cb31-160"></a></span>
-<span id="cb31-161"><a href="#cb31-161"></a><span class="ss">- </span>The most natural thing is to see what has changed.</span>
-<span id="cb31-162"><a href="#cb31-162"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-163"><a href="#cb31-163"></a><span class="in">ls</span></span>
-<span id="cb31-164"><a href="#cb31-164"></a><span class="in">```</span></span>
-<span id="cb31-165"><a href="#cb31-165"></a><span class="ss">- </span>For me, I see a new directory: <span class="in">`throwaway_example`</span></span>
-<span id="cb31-166"><a href="#cb31-166"></a><span class="ss">- </span>I change into the directory to examine it.</span>
-<span id="cb31-167"><a href="#cb31-167"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-168"><a href="#cb31-168"></a><span class="in">cd throwaway_example</span></span>
-<span id="cb31-169"><a href="#cb31-169"></a><span class="in">ls</span></span>
-<span id="cb31-170"><a href="#cb31-170"></a><span class="in">```</span></span>
-<span id="cb31-171"><a href="#cb31-171"></a><span class="ss">- </span>Not much there:</span>
-<span id="cb31-172"><a href="#cb31-172"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-173"><a href="#cb31-173"></a><span class="in">Cargo.toml  src</span></span>
-<span id="cb31-174"><a href="#cb31-174"></a><span class="in">```</span></span>
+<span id="cb31-161"><a href="#cb31-161"></a>- The most natural thing is to see what has changed.</span>
+<span id="cb31-162"><a href="#cb31-162"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-163"><a href="#cb31-163"></a><span class="st">ls</span></span>
+<span id="cb31-164"><a href="#cb31-164"></a><span class="ot">```</span></span>
+<span id="cb31-165"><a href="#cb31-165"></a>- For me, I see a new directory: <span class="ot">`</span><span class="st">throwaway_example</span><span class="ot">`</span></span>
+<span id="cb31-166"><a href="#cb31-166"></a>- I change into the directory to examine it.</span>
+<span id="cb31-167"><a href="#cb31-167"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-168"><a href="#cb31-168"></a><span class="st">cd throwaway_example</span></span>
+<span id="cb31-169"><a href="#cb31-169"></a><span class="st">ls</span></span>
+<span id="cb31-170"><a href="#cb31-170"></a><span class="ot">```</span></span>
+<span id="cb31-171"><a href="#cb31-171"></a>- Not much there:</span>
+<span id="cb31-172"><a href="#cb31-172"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-173"><a href="#cb31-173"></a><span class="st">Cargo.toml  src</span></span>
+<span id="cb31-174"><a href="#cb31-174"></a><span class="ot">```</span></span>
 <span id="cb31-175"><a href="#cb31-175"></a></span>
-<span id="cb31-176"><a href="#cb31-176"></a><span class="fu">## Aside: Tree</span></span>
+<span id="cb31-176"><a href="#cb31-176"></a><span class="co">## Aside: Tree</span></span>
 <span id="cb31-177"><a href="#cb31-177"></a></span>
-<span id="cb31-178"><a href="#cb31-178"></a><span class="ss">- </span>Can also see directory structure.</span>
-<span id="cb31-179"><a href="#cb31-179"></a><span class="ss">- </span>Install <span class="in">`tree`</span> with your preferred installer (perhaps <span class="in">`apt`</span> or <span class="in">`brew`</span>)</span>
-<span id="cb31-180"><a href="#cb31-180"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-181"><a href="#cb31-181"></a><span class="in">sudo apt install tree</span></span>
-<span id="cb31-182"><a href="#cb31-182"></a><span class="in">```</span></span>
-<span id="cb31-183"><a href="#cb31-183"></a><span class="ss">- </span>Then use <span class="in">`tree`</span> instead of <span class="in">`ls`</span></span>
-<span id="cb31-184"><a href="#cb31-184"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-185"><a href="#cb31-185"></a><span class="in">.</span></span>
-<span id="cb31-186"><a href="#cb31-186"></a><span class="in">├── Cargo.toml</span></span>
-<span id="cb31-187"><a href="#cb31-187"></a><span class="in">└── src</span></span>
-<span id="cb31-188"><a href="#cb31-188"></a><span class="in">    └── main.rs</span></span>
+<span id="cb31-178"><a href="#cb31-178"></a>- Can also see directory structure.</span>
+<span id="cb31-179"><a href="#cb31-179"></a>- Install <span class="ot">`</span><span class="st">tree</span><span class="ot">`</span> with your preferred installer (perhaps <span class="ot">`</span><span class="st">apt</span><span class="ot">`</span> <span class="ot">or</span> <span class="ot">`</span><span class="st">brew</span><span class="ot">`</span>)</span>
+<span id="cb31-180"><a href="#cb31-180"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-181"><a href="#cb31-181"></a><span class="st">sudo apt install tree</span></span>
+<span id="cb31-182"><a href="#cb31-182"></a><span class="ot">```</span></span>
+<span id="cb31-183"><a href="#cb31-183"></a>- Then <span class="fu">use</span> <span class="ot">`</span><span class="st">tree</span><span class="ot">`</span> instead of <span class="ot">`</span><span class="st">ls</span><span class="ot">`</span></span>
+<span id="cb31-184"><a href="#cb31-184"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-185"><a href="#cb31-185"></a><span class="st">.</span></span>
+<span id="cb31-186"><a href="#cb31-186"></a><span class="st">├── Cargo.toml</span></span>
+<span id="cb31-187"><a href="#cb31-187"></a><span class="st">└── src</span></span>
+<span id="cb31-188"><a href="#cb31-188"></a><span class="st">    └── main.rs</span></span>
 <span id="cb31-189"><a href="#cb31-189"></a></span>
-<span id="cb31-190"><a href="#cb31-190"></a><span class="in">1 directory, 2 files</span></span>
-<span id="cb31-191"><a href="#cb31-191"></a><span class="in">```</span></span>
+<span id="cb31-190"><a href="#cb31-190"></a><span class="st">1 directory, 2 files</span></span>
+<span id="cb31-191"><a href="#cb31-191"></a><span class="ot">```</span></span>
 <span id="cb31-192"><a href="#cb31-192"></a></span>
-<span id="cb31-193"><a href="#cb31-193"></a><span class="fu">## main.rs</span></span>
+<span id="cb31-193"><a href="#cb31-193"></a><span class="co">## main.rs</span></span>
 <span id="cb31-194"><a href="#cb31-194"></a></span>
-<span id="cb31-195"><a href="#cb31-195"></a><span class="ss">- </span>Cargo creates projects with a default main file.</span>
-<span id="cb31-196"><a href="#cb31-196"></a><span class="in">```{.rs filename="main.rs"}</span></span>
-<span id="cb31-197"><a href="#cb31-197"></a><span class="in">fn main() {</span></span>
-<span id="cb31-198"><a href="#cb31-198"></a><span class="in">    println!("Hello, world!");</span></span>
-<span id="cb31-199"><a href="#cb31-199"></a><span class="in">}</span></span>
-<span id="cb31-200"><a href="#cb31-200"></a><span class="in">```</span></span>
-<span id="cb31-201"><a href="#cb31-201"></a><span class="ss">- </span>The name "main" is basically mainful to Cargo - it says which, if multiple, <span class="in">`.rs`</span> files to read first when trying to execute the code in a package.</span>
-<span id="cb31-202"><a href="#cb31-202"></a><span class="ss">    - </span>Make sure you understand that sentence.</span>
+<span id="cb31-195"><a href="#cb31-195"></a>- Cargo creates projects with a <span class="kw">default</span> main file.</span>
+<span id="cb31-196"><a href="#cb31-196"></a><span class="ot">```</span><span class="st">{.rs filename="main.rs"}</span></span>
+<span id="cb31-197"><a href="#cb31-197"></a><span class="st">fn main() {</span></span>
+<span id="cb31-198"><a href="#cb31-198"></a><span class="st">    println!("Hello, world!");</span></span>
+<span id="cb31-199"><a href="#cb31-199"></a><span class="st">}</span></span>
+<span id="cb31-200"><a href="#cb31-200"></a><span class="ot">```</span></span>
+<span id="cb31-201"><a href="#cb31-201"></a>- The name <span class="ot">"</span><span class="st">main</span><span class="ot">"</span> is basically mainful to Cargo - it says which, <span class="kw">if</span> multiple, <span class="ot">`</span><span class="st">.rs</span><span class="ot">`</span> files to <span class="fu">read</span> first <span class="kw">when</span> trying to execute the code in a <span class="kw">package</span>.</span>
+<span id="cb31-202"><a href="#cb31-202"></a>    - Make sure you understand that sentence.</span>
 <span id="cb31-203"><a href="#cb31-203"></a> </span>
-<span id="cb31-204"><a href="#cb31-204"></a><span class="fu"># Cargo Run</span></span>
+<span id="cb31-204"><a href="#cb31-204"></a><span class="co"># Cargo Run</span></span>
 <span id="cb31-205"><a href="#cb31-205"></a> </span>
-<span id="cb31-206"><a href="#cb31-206"></a><span class="fu">## Run</span></span>
+<span id="cb31-206"><a href="#cb31-206"></a><span class="co">## Run</span></span>
 <span id="cb31-207"><a href="#cb31-207"></a></span>
-<span id="cb31-208"><a href="#cb31-208"></a><span class="ss">- </span><span class="in">`cargo run`</span> is probably our closest equivalent to <span class="in">`python3 throwaway_example.py`</span> or the "Run" button in VS Code.</span>
-<span id="cb31-209"><a href="#cb31-209"></a><span class="ss">- </span>Of note, you can **not** simply do "new" then "run".</span>
-<span id="cb31-210"><a href="#cb31-210"></a><span class="ss">    - </span>"New" creates a new folder.</span>
-<span id="cb31-211"><a href="#cb31-211"></a><span class="ss">    - </span>"Run" must be done from *within* that folder.</span>
+<span id="cb31-208"><a href="#cb31-208"></a>- <span class="ot">`</span><span class="st">cargo run</span><span class="ot">`</span> is probably <span class="kw">our</span> closest equivalent to <span class="ot">`</span><span class="st">python3 throwaway_example.py</span><span class="ot">`</span> <span class="ot">or</span> the <span class="ot">"</span><span class="st">Run</span><span class="ot">"</span> button in VS Code.</span>
+<span id="cb31-209"><a href="#cb31-209"></a>- Of note, you can *<span class="dt">*not</span>*<span class="ot">*</span> simply <span class="kw">do</span> <span class="ot">"</span><span class="st">new</span><span class="ot">"</span> then <span class="ot">"</span><span class="st">run</span><span class="ot">"</span>.</span>
+<span id="cb31-210"><a href="#cb31-210"></a>    - <span class="ot">"</span><span class="st">New</span><span class="ot">"</span> creates a new folder.</span>
+<span id="cb31-211"><a href="#cb31-211"></a>    - <span class="ot">"</span><span class="st">Run</span><span class="ot">"</span> must be done from <span class="dt">*within</span><span class="ot">*</span> that folder.</span>
 <span id="cb31-212"><a href="#cb31-212"></a></span>
-<span id="cb31-213"><a href="#cb31-213"></a><span class="fu">## Try it</span></span>
+<span id="cb31-213"><a href="#cb31-213"></a><span class="co">## Try it</span></span>
 <span id="cb31-214"><a href="#cb31-214"></a></span>
-<span id="cb31-215"><a href="#cb31-215"></a><span class="ss">- </span>Do this:</span>
-<span id="cb31-216"><a href="#cb31-216"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-217"><a href="#cb31-217"></a><span class="in">cargo run</span></span>
-<span id="cb31-218"><a href="#cb31-218"></a><span class="in">```</span></span>
-<span id="cb31-219"><a href="#cb31-219"></a><span class="ss">- </span>See this:</span>
-<span id="cb31-220"><a href="#cb31-220"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-221"><a href="#cb31-221"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb31-222"><a href="#cb31-222"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s</span></span>
-<span id="cb31-223"><a href="#cb31-223"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb31-224"><a href="#cb31-224"></a><span class="in">Hello, world!</span></span>
-<span id="cb31-225"><a href="#cb31-225"></a><span class="in">```</span></span>
+<span id="cb31-215"><a href="#cb31-215"></a>- Do this:</span>
+<span id="cb31-216"><a href="#cb31-216"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-217"><a href="#cb31-217"></a><span class="st">cargo run</span></span>
+<span id="cb31-218"><a href="#cb31-218"></a><span class="ot">```</span></span>
+<span id="cb31-219"><a href="#cb31-219"></a>- See this:</span>
+<span id="cb31-220"><a href="#cb31-220"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-221"><a href="#cb31-221"></a><span class="st">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-222"><a href="#cb31-222"></a><span class="st">    Finished </span><span class="ot">`</span>dev<span class="ot">`</span><span class="st"> profile [unoptimized + debuginfo] target(s) in 0.56s</span></span>
+<span id="cb31-223"><a href="#cb31-223"></a><span class="st">     Running </span><span class="ot">`</span>target/debug/throwaway_example<span class="ot">`</span></span>
+<span id="cb31-224"><a href="#cb31-224"></a><span class="st">Hello, world!</span></span>
+<span id="cb31-225"><a href="#cb31-225"></a><span class="ot">```</span></span>
 <span id="cb31-226"><a href="#cb31-226"></a></span>
-<span id="cb31-227"><a href="#cb31-227"></a><span class="fu">## Again!</span></span>
+<span id="cb31-227"><a href="#cb31-227"></a><span class="co">## Again!</span></span>
 <span id="cb31-228"><a href="#cb31-228"></a></span>
-<span id="cb31-229"><a href="#cb31-229"></a><span class="ss">- </span>If you run again, the process will:</span>
-<span id="cb31-230"><a href="#cb31-230"></a><span class="ss">    - </span>Skip the compile step.</span>
-<span id="cb31-231"><a href="#cb31-231"></a><span class="ss">    - </span>Be *way* faster (<span class="dv">&amp;infin;</span>x reported here)</span>
+<span id="cb31-229"><a href="#cb31-229"></a>- If you run again, the process will:</span>
+<span id="cb31-230"><a href="#cb31-230"></a>    - Skip the compile step.</span>
+<span id="cb31-231"><a href="#cb31-231"></a>    - Be <span class="dt">*way</span><span class="ot">*</span> faster (&amp;infin;x reported here)</span>
 <span id="cb31-234"><a href="#cb31-234"></a><span class="in">```{bash}</span></span>
-<span id="cb31-235"><a href="#cb31-235"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
-<span id="cb31-236"><a href="#cb31-236"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/throwaway_example</span><span class="kw">`</span></span>
-<span id="cb31-237"><a href="#cb31-237"></a><span class="ex">Hello,</span> world!</span>
-<span id="cb31-238"><a href="#cb31-238"></a><span class="in">```</span></span>
-<span id="cb31-239"><a href="#cb31-239"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
+<span id="cb31-235"><a href="#cb31-235"></a><span class="st">    Finished </span><span class="ot">`</span>dev<span class="ot">`</span><span class="st"> profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb31-236"><a href="#cb31-236"></a><span class="st">     Running </span><span class="ot">`</span>target/debug/throwaway_example<span class="ot">`</span></span>
+<span id="cb31-237"><a href="#cb31-237"></a><span class="st">Hello, world!</span></span>
+<span id="cb31-238"><a href="#cb31-238"></a><span class="ot">```</span></span>
+<span id="cb31-239"><a href="#cb31-239"></a>- <span class="fl">0.56</span>s -&gt; <span class="fl">0.00</span>s</span>
 <span id="cb31-240"><a href="#cb31-240"></a></span>
-<span id="cb31-241"><a href="#cb31-241"></a><span class="fu">## It's fast</span></span>
+<span id="cb31-241"><a href="#cb31-241"></a><span class="co">## It's fast</span></span>
 <span id="cb31-242"><a href="#cb31-242"></a></span>
-<span id="cb31-243"><a href="#cb31-243"></a><span class="ss">- </span>0.56s -&gt; 0.00s</span>
-<span id="cb31-244"><a href="#cb31-244"></a><span class="ss">- </span>This is why we use languages which compile.</span>
-<span id="cb31-245"><a href="#cb31-245"></a><span class="ss">    - </span>Python took around .04s, for me.</span>
-<span id="cb31-246"><a href="#cb31-246"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-247"><a href="#cb31-247"></a><span class="in">time python3 -c "print('Hello, world')"</span></span>
-<span id="cb31-248"><a href="#cb31-248"></a><span class="in">```</span></span>
-<span id="cb31-249"><a href="#cb31-249"></a><span class="ss">- </span>The results are:</span>
-<span id="cb31-250"><a href="#cb31-250"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-251"><a href="#cb31-251"></a><span class="in">Hello, world</span></span>
+<span id="cb31-243"><a href="#cb31-243"></a>- <span class="fl">0.56</span>s -&gt; <span class="fl">0.00</span>s</span>
+<span id="cb31-244"><a href="#cb31-244"></a>- This is why we <span class="fu">use</span> languages which compile.</span>
+<span id="cb31-245"><a href="#cb31-245"></a>    - Python took around .<span class="bn">04</span>s, <span class="kw">for</span> me.</span>
+<span id="cb31-246"><a href="#cb31-246"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-247"><a href="#cb31-247"></a><span class="st">time python3 -c "print('Hello, world')"</span></span>
+<span id="cb31-248"><a href="#cb31-248"></a><span class="ot">```</span></span>
+<span id="cb31-249"><a href="#cb31-249"></a>- The results are:</span>
+<span id="cb31-250"><a href="#cb31-250"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-251"><a href="#cb31-251"></a><span class="st">Hello, world</span></span>
 <span id="cb31-252"><a href="#cb31-252"></a></span>
-<span id="cb31-253"><a href="#cb31-253"></a><span class="in">real    0m0.039s</span></span>
-<span id="cb31-254"><a href="#cb31-254"></a><span class="in">user    0m0.007s</span></span>
-<span id="cb31-255"><a href="#cb31-255"></a><span class="in">sys     0m0.008s</span></span>
-<span id="cb31-256"><a href="#cb31-256"></a><span class="in">```</span></span>
-<span id="cb31-257"><a href="#cb31-257"></a><span class="ss">- </span>Guess how long it takes to compile <span class="in">`python`</span>, by the way.</span>
+<span id="cb31-253"><a href="#cb31-253"></a><span class="st">real    0m0.039s</span></span>
+<span id="cb31-254"><a href="#cb31-254"></a><span class="st">user    0m0.007s</span></span>
+<span id="cb31-255"><a href="#cb31-255"></a><span class="st">sys     0m0.008s</span></span>
+<span id="cb31-256"><a href="#cb31-256"></a><span class="ot">```</span></span>
+<span id="cb31-257"><a href="#cb31-257"></a>- Guess how long it takes to compile <span class="ot">`</span><span class="st">python</span><span class="ot">`</span>, by the way.</span>
 <span id="cb31-258"><a href="#cb31-258"></a></span>
-<span id="cb31-259"><a href="#cb31-259"></a><span class="fu">## Other files</span></span>
+<span id="cb31-259"><a href="#cb31-259"></a><span class="co">## Other files</span></span>
 <span id="cb31-260"><a href="#cb31-260"></a></span>
-<span id="cb31-261"><a href="#cb31-261"></a><span class="ss">- </span>Go ahead and add another <span class="in">`.rs`</span> file and see what happens.</span>
-<span id="cb31-262"><a href="#cb31-262"></a><span class="ss">    - </span>Add it to the <span class="in">`src`</span> directory!</span>
-<span id="cb31-263"><a href="#cb31-263"></a><span class="ss">- </span>I'll use this one - I change filename and text, but </span>
-<span id="cb31-264"><a href="#cb31-264"></a><span class="in">```{.rs filename="secondary.rs"}</span></span>
-<span id="cb31-265"><a href="#cb31-265"></a><span class="in">fn secondary() {</span></span>
-<span id="cb31-266"><a href="#cb31-266"></a><span class="in">    println!("Goodbye, space!");</span></span>
-<span id="cb31-267"><a href="#cb31-267"></a><span class="in">}</span></span>
-<span id="cb31-268"><a href="#cb31-268"></a><span class="in">```</span></span>
+<span id="cb31-261"><a href="#cb31-261"></a>- Go ahead <span class="ot">and</span> add another <span class="ot">`</span><span class="st">.rs</span><span class="ot">`</span> file <span class="ot">and</span> see what happens.</span>
+<span id="cb31-262"><a href="#cb31-262"></a>    - Add it to the <span class="ot">`</span><span class="st">src</span><span class="ot">`</span> directory!</span>
+<span id="cb31-263"><a href="#cb31-263"></a>- I<span class="ot">'</span><span class="ss">ll use this one - I change filename and text, but </span></span>
+<span id="cb31-264"><a href="#cb31-264"></a><span class="ss">```{.rs filename="secondary.rs"}</span></span>
+<span id="cb31-265"><a href="#cb31-265"></a><span class="ss">fn secondary() {</span></span>
+<span id="cb31-266"><a href="#cb31-266"></a><span class="ss">    println!("Goodbye, space!");</span></span>
+<span id="cb31-267"><a href="#cb31-267"></a><span class="ss">}</span></span>
+<span id="cb31-268"><a href="#cb31-268"></a><span class="ss">```</span></span>
 <span id="cb31-269"><a href="#cb31-269"></a></span>
-<span id="cb31-270"><a href="#cb31-270"></a><span class="fu">## Run it again...</span></span>
+<span id="cb31-270"><a href="#cb31-270"></a><span class="ss">## Run it again...</span></span>
 <span id="cb31-271"><a href="#cb31-271"></a></span>
-<span id="cb31-272"><a href="#cb31-272"></a><span class="ss">- </span>Nothing changes.</span>
-<span id="cb31-273"><a href="#cb31-273"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-274"><a href="#cb31-274"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
-<span id="cb31-275"><a href="#cb31-275"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb31-276"><a href="#cb31-276"></a><span class="in">Hello, world!</span></span>
-<span id="cb31-277"><a href="#cb31-277"></a><span class="in">```</span></span>
-<span id="cb31-278"><a href="#cb31-278"></a><span class="ss">- </span>This is the same as adding another <span class="in">`.py`</span> file then not using <span class="in">`import`</span> or including its code in any other way.</span>
+<span id="cb31-272"><a href="#cb31-272"></a><span class="ss">- Nothing changes.</span></span>
+<span id="cb31-273"><a href="#cb31-273"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-274"><a href="#cb31-274"></a><span class="ss">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb31-275"><a href="#cb31-275"></a><span class="ss">     Running `target/debug/throwaway_example`</span></span>
+<span id="cb31-276"><a href="#cb31-276"></a><span class="ss">Hello, world!</span></span>
+<span id="cb31-277"><a href="#cb31-277"></a><span class="ss">```</span></span>
+<span id="cb31-278"><a href="#cb31-278"></a><span class="ss">- This is the same as adding another `.py` file then not using `import` or including its code in any other way.</span></span>
 <span id="cb31-279"><a href="#cb31-279"></a></span>
-<span id="cb31-280"><a href="#cb31-280"></a><span class="fu">## Swap the names.</span></span>
+<span id="cb31-280"><a href="#cb31-280"></a><span class="ss">## Swap the names.</span></span>
 <span id="cb31-281"><a href="#cb31-281"></a></span>
-<span id="cb31-282"><a href="#cb31-282"></a><span class="ss">- </span>I use <span class="in">`mv`</span> (move) to change:</span>
-<span id="cb31-283"><a href="#cb31-283"></a><span class="ss">    - </span><span class="in">`main.rs`</span> to <span class="in">`old_main.rs`</span></span>
-<span id="cb31-284"><a href="#cb31-284"></a><span class="ss">    - </span><span class="in">`secondary.rs`</span> to <span class="in">`main.rs`</span></span>
-<span id="cb31-285"><a href="#cb31-285"></a><span class="ss">- </span>Things change!</span>
-<span id="cb31-286"><a href="#cb31-286"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-287"><a href="#cb31-287"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb31-288"><a href="#cb31-288"></a><span class="in">error[E0601]: `main` function not found in crate `throwaway_example`</span></span>
-<span id="cb31-289"><a href="#cb31-289"></a><span class="in"> --&gt; src/main.rs:3:2</span></span>
-<span id="cb31-290"><a href="#cb31-290"></a><span class="in">  |</span></span>
-<span id="cb31-291"><a href="#cb31-291"></a><span class="in">3 | }</span></span>
-<span id="cb31-292"><a href="#cb31-292"></a><span class="in">  |  ^ consider adding a `main` function to `src/main.rs`</span></span>
+<span id="cb31-282"><a href="#cb31-282"></a><span class="ss">- I use `mv` (move) to change:</span></span>
+<span id="cb31-283"><a href="#cb31-283"></a><span class="ss">    - `main.rs` to `old_main.rs`</span></span>
+<span id="cb31-284"><a href="#cb31-284"></a><span class="ss">    - `secondary.rs` to `main.rs`</span></span>
+<span id="cb31-285"><a href="#cb31-285"></a><span class="ss">- Things change!</span></span>
+<span id="cb31-286"><a href="#cb31-286"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-287"><a href="#cb31-287"></a><span class="ss">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-288"><a href="#cb31-288"></a><span class="ss">error[E0601]: `main` function not found in crate `throwaway_example`</span></span>
+<span id="cb31-289"><a href="#cb31-289"></a><span class="ss"> --&gt; src/main.rs:3:2</span></span>
+<span id="cb31-290"><a href="#cb31-290"></a><span class="ss">  |</span></span>
+<span id="cb31-291"><a href="#cb31-291"></a><span class="ss">3 | }</span></span>
+<span id="cb31-292"><a href="#cb31-292"></a><span class="ss">  |  ^ consider adding a `main` function to `src/main.rs`</span></span>
 <span id="cb31-293"><a href="#cb31-293"></a></span>
-<span id="cb31-294"><a href="#cb31-294"></a><span class="in">For more information about this error, try `rustc --explain E0601`.</span></span>
-<span id="cb31-295"><a href="#cb31-295"></a><span class="in">error: could not compile `throwaway_example` (bin "throwaway_example") due to 1 previous error</span></span>
-<span id="cb31-296"><a href="#cb31-296"></a><span class="in">```</span></span>
+<span id="cb31-294"><a href="#cb31-294"></a><span class="ss">For more information about this error, try `rustc --explain E0601`.</span></span>
+<span id="cb31-295"><a href="#cb31-295"></a><span class="ss">error: could not compile `throwaway_example` (bin "throwaway_example") due to 1 previous error</span></span>
+<span id="cb31-296"><a href="#cb31-296"></a><span class="ss">```</span></span>
 <span id="cb31-297"><a href="#cb31-297"></a></span>
-<span id="cb31-298"><a href="#cb31-298"></a><span class="fu">## Requirements</span></span>
+<span id="cb31-298"><a href="#cb31-298"></a><span class="ss">## Requirements</span></span>
 <span id="cb31-299"><a href="#cb31-299"></a></span>
-<span id="cb31-300"><a href="#cb31-300"></a><span class="ss">- </span>You need a <span class="in">`main.rs`</span> with a function named <span class="in">`main`</span>.</span>
-<span id="cb31-301"><a href="#cb31-301"></a><span class="ss">- </span><span class="in">`nvim src/main.rs`</span> -&gt; Change "secondary" to "main" -&gt; "cargo run"</span>
-<span id="cb31-302"><a href="#cb31-302"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-303"><a href="#cb31-303"></a><span class="in">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
-<span id="cb31-304"><a href="#cb31-304"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s</span></span>
-<span id="cb31-305"><a href="#cb31-305"></a><span class="in">     Running `target/debug/throwaway_example`</span></span>
-<span id="cb31-306"><a href="#cb31-306"></a><span class="in">Goodbye, space!</span></span>
-<span id="cb31-307"><a href="#cb31-307"></a><span class="in">```</span></span>
+<span id="cb31-300"><a href="#cb31-300"></a><span class="ss">- You need a `main.rs` with a function named `main`.</span></span>
+<span id="cb31-301"><a href="#cb31-301"></a><span class="ss">- `nvim src/main.rs` -&gt; Change "secondary" to "main" -&gt; "cargo run"</span></span>
+<span id="cb31-302"><a href="#cb31-302"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-303"><a href="#cb31-303"></a><span class="ss">   Compiling throwaway_example v0.1.0 (/home/user/throwaway_example)</span></span>
+<span id="cb31-304"><a href="#cb31-304"></a><span class="ss">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s</span></span>
+<span id="cb31-305"><a href="#cb31-305"></a><span class="ss">     Running `target/debug/throwaway_example`</span></span>
+<span id="cb31-306"><a href="#cb31-306"></a><span class="ss">Goodbye, space!</span></span>
+<span id="cb31-307"><a href="#cb31-307"></a><span class="ss">```</span></span>
 <span id="cb31-308"><a href="#cb31-308"></a></span>
-<span id="cb31-309"><a href="#cb31-309"></a><span class="fu"># Options</span></span>
+<span id="cb31-309"><a href="#cb31-309"></a><span class="ss"># Options</span></span>
 <span id="cb31-310"><a href="#cb31-310"></a></span>
-<span id="cb31-311"><a href="#cb31-311"></a><span class="fu">## Carry-on only</span></span>
+<span id="cb31-311"><a href="#cb31-311"></a><span class="ss">## Carry-on only</span></span>
 <span id="cb31-312"><a href="#cb31-312"></a></span>
-<span id="cb31-313"><a href="#cb31-313"></a><span class="ss">- </span>I try to live me life without baggage.</span>
-<span id="cb31-314"><a href="#cb31-314"></a><span class="ss">    - </span>(I don't like <span class="in">`cargo`</span>)</span>
-<span id="cb31-315"><a href="#cb31-315"></a><span class="ss">- </span>Why? Well...</span>
-<span id="cb31-316"><a href="#cb31-316"></a><span class="ss">    - </span>I can't name things the way I want</span>
-<span id="cb31-317"><a href="#cb31-317"></a><span class="ss">    - </span>I can't add <span class="in">`cargo`</span> created directories to repositories.</span>
-<span id="cb31-318"><a href="#cb31-318"></a><span class="ss">- </span>Well, I can, but it I have to use options.</span>
+<span id="cb31-313"><a href="#cb31-313"></a><span class="ss">- I try to live me life without baggage.</span></span>
+<span id="cb31-314"><a href="#cb31-314"></a><span class="ss">    - (I don</span><span class="ot">'</span>t like <span class="ot">`</span><span class="st">cargo</span><span class="ot">`</span>)</span>
+<span id="cb31-315"><a href="#cb31-315"></a>- Why? Well...</span>
+<span id="cb31-316"><a href="#cb31-316"></a>    - I can<span class="ot">'</span><span class="ss">t name things the way I want</span></span>
+<span id="cb31-317"><a href="#cb31-317"></a><span class="ss">    - I can</span><span class="ot">'</span>t add <span class="ot">`</span><span class="st">cargo</span><span class="ot">`</span> created directories to repositories.</span>
+<span id="cb31-318"><a href="#cb31-318"></a>- Well, I can, but it I have to <span class="fu">use</span> options.</span>
 <span id="cb31-319"><a href="#cb31-319"></a></span>
-<span id="cb31-320"><a href="#cb31-320"></a><span class="fu">## Option 1: Names</span></span>
+<span id="cb31-320"><a href="#cb31-320"></a><span class="co">## Option 1: Names</span></span>
 <span id="cb31-321"><a href="#cb31-321"></a></span>
-<span id="cb31-322"><a href="#cb31-322"></a><span class="ss">- </span>It is uncommon to name a package numerically.</span>
-<span id="cb31-323"><a href="#cb31-323"></a><span class="ss">- </span>It is however, I think, useful in a course.</span>
-<span id="cb31-324"><a href="#cb31-324"></a><span class="ss">- </span>It is also, I think, useful to write packages for a course.</span>
-<span id="cb31-325"><a href="#cb31-325"></a><span class="ss">- </span>So we do so.</span>
+<span id="cb31-322"><a href="#cb31-322"></a>- It is uncommon to name a <span class="kw">package</span> numerically.</span>
+<span id="cb31-323"><a href="#cb31-323"></a>- It is however, I think, useful in a course.</span>
+<span id="cb31-324"><a href="#cb31-324"></a>- It is also, I think, useful to <span class="fu">write</span> packages <span class="kw">for</span> a course.</span>
+<span id="cb31-325"><a href="#cb31-325"></a>- So we <span class="kw">do</span> so.</span>
 <span id="cb31-326"><a href="#cb31-326"></a></span>
-<span id="cb31-327"><a href="#cb31-327"></a><span class="fu">## Name Scheme</span></span>
+<span id="cb31-327"><a href="#cb31-327"></a><span class="co">## Name Scheme</span></span>
 <span id="cb31-328"><a href="#cb31-328"></a></span>
-<span id="cb31-329"><a href="#cb31-329"></a><span class="ss">- </span>I have used the following scheme this term:</span>
-<span id="cb31-330"><a href="#cb31-330"></a><span class="ss">    - </span>Each class day is denoted as a two digit value.</span>
-<span id="cb31-331"><a href="#cb31-331"></a><span class="ss">    - </span>The first digit represents the zero-indexed week.</span>
-<span id="cb31-332"><a href="#cb31-332"></a><span class="ss">    - </span>The second digit represents the zero-index position in <span class="in">`["Lecture", "Lab", "Homework"]`</span></span>
+<span id="cb31-329"><a href="#cb31-329"></a>- I have used the following scheme this term:</span>
+<span id="cb31-330"><a href="#cb31-330"></a>    - Each class day is denoted as a two digit value.</span>
+<span id="cb31-331"><a href="#cb31-331"></a>    - The first digit represents the zero-indexed week.</span>
+<span id="cb31-332"><a href="#cb31-332"></a>    - The second digit represents the zero-<span class="fu">index</span> position in <span class="ot">`</span><span class="st">["Lecture", "Lab", "Homework"]</span><span class="ot">`</span></span>
 <span id="cb31-333"><a href="#cb31-333"></a></span>
 <span id="cb31-334"><a href="#cb31-334"></a></span>
-<span id="cb31-335"><a href="#cb31-335"></a><span class="fu">## Today</span></span>
+<span id="cb31-335"><a href="#cb31-335"></a><span class="co">## Today</span></span>
 <span id="cb31-336"><a href="#cb31-336"></a></span>
-<span id="cb31-337"><a href="#cb31-337"></a><span class="ss">- </span>Today is one week from the first day of class, last week.</span>
-<span id="cb31-338"><a href="#cb31-338"></a><span class="ss">- </span>Today is one day from the first day of the week, Monday.</span>
-<span id="cb31-339"><a href="#cb31-339"></a><span class="ss">- </span>So I denote today <span class="in">`11`</span></span>
+<span id="cb31-337"><a href="#cb31-337"></a>- Today is one week from the first day of class, <span class="kw">last</span> week.</span>
+<span id="cb31-338"><a href="#cb31-338"></a>- Today is one day from the first day of the week, Monday.</span>
+<span id="cb31-339"><a href="#cb31-339"></a>- So I denote today <span class="ot">`</span><span class="st">11</span><span class="ot">`</span></span>
 <span id="cb31-340"><a href="#cb31-340"></a></span>
-<span id="cb31-341"><a href="#cb31-341"></a><span class="fu">## Use Cargo</span></span>
+<span id="cb31-341"><a href="#cb31-341"></a><span class="co">## Use Cargo</span></span>
 <span id="cb31-342"><a href="#cb31-342"></a></span>
-<span id="cb31-343"><a href="#cb31-343"></a><span class="ss">- </span>Let's use <span class="in">`cargo`</span> to make a package called <span class="in">`11`</span>.</span>
-<span id="cb31-344"><a href="#cb31-344"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-345"><a href="#cb31-345"></a><span class="in">cargo new 11</span></span>
-<span id="cb31-346"><a href="#cb31-346"></a><span class="in">```</span></span>
-<span id="cb31-347"><a href="#cb31-347"></a><span class="ss">- </span>What happens?</span>
+<span id="cb31-343"><a href="#cb31-343"></a>- Let<span class="ot">'</span><span class="ss">s use `cargo` to make a package called `11`.</span></span>
+<span id="cb31-344"><a href="#cb31-344"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-345"><a href="#cb31-345"></a><span class="ss">cargo new 11</span></span>
+<span id="cb31-346"><a href="#cb31-346"></a><span class="ss">```</span></span>
+<span id="cb31-347"><a href="#cb31-347"></a><span class="ss">- What happens?</span></span>
 <span id="cb31-348"><a href="#cb31-348"></a></span>
-<span id="cb31-349"><a href="#cb31-349"></a><span class="fu">## Problem</span></span>
+<span id="cb31-349"><a href="#cb31-349"></a><span class="ss">## Problem</span></span>
 <span id="cb31-350"><a href="#cb31-350"></a></span>
-<span id="cb31-351"><a href="#cb31-351"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-352"><a href="#cb31-352"></a><span class="in">    Creating binary (application) `11` package</span></span>
-<span id="cb31-353"><a href="#cb31-353"></a><span class="in">error: invalid character `1` in package name: `11`, the name cannot start with a digit</span></span>
-<span id="cb31-354"><a href="#cb31-354"></a><span class="in">If you need a package name to not match the directory name, consider using --name flag.</span></span>
-<span id="cb31-355"><a href="#cb31-355"></a><span class="in">If you need a binary with the name "11", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:</span></span>
+<span id="cb31-351"><a href="#cb31-351"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-352"><a href="#cb31-352"></a><span class="ss">    Creating binary (application) `11` package</span></span>
+<span id="cb31-353"><a href="#cb31-353"></a><span class="ss">error: invalid character `1` in package name: `11`, the name cannot start with a digit</span></span>
+<span id="cb31-354"><a href="#cb31-354"></a><span class="ss">If you need a package name to not match the directory name, consider using --name flag.</span></span>
+<span id="cb31-355"><a href="#cb31-355"></a><span class="ss">If you need a binary with the name "11", use a valid package name, and set the binary name to be different from the package. This can be done by setting the binary filename to `src/bin/11.rs` or change the name in Cargo.toml with:</span></span>
 <span id="cb31-356"><a href="#cb31-356"></a></span>
-<span id="cb31-357"><a href="#cb31-357"></a><span class="in">    [[bin]]</span></span>
-<span id="cb31-358"><a href="#cb31-358"></a><span class="in">    name = "11"</span></span>
-<span id="cb31-359"><a href="#cb31-359"></a><span class="in">    path = "src/main.rs"</span></span>
-<span id="cb31-360"><a href="#cb31-360"></a><span class="in">```</span></span>
+<span id="cb31-357"><a href="#cb31-357"></a><span class="ss">    [[bin]]</span></span>
+<span id="cb31-358"><a href="#cb31-358"></a><span class="ss">    name = "11"</span></span>
+<span id="cb31-359"><a href="#cb31-359"></a><span class="ss">    path = "src/main.rs"</span></span>
+<span id="cb31-360"><a href="#cb31-360"></a><span class="ss">```</span></span>
 <span id="cb31-361"><a href="#cb31-361"></a></span>
-<span id="cb31-362"><a href="#cb31-362"></a><span class="fu">## Solution</span></span>
+<span id="cb31-362"><a href="#cb31-362"></a><span class="ss">## Solution</span></span>
 <span id="cb31-363"><a href="#cb31-363"></a></span>
-<span id="cb31-364"><a href="#cb31-364"></a><span class="ss">- </span>We can make a folder named <span class="in">`11`</span></span>
-<span id="cb31-365"><a href="#cb31-365"></a><span class="ss">- </span>But not a package named <span class="in">`11`</span>.</span>
-<span id="cb31-366"><a href="#cb31-366"></a><span class="ss">- </span>We use the <span class="in">`--name`</span> flag.</span>
-<span id="cb31-367"><a href="#cb31-367"></a><span class="ss">    - </span>I use the name of these slides, rather than the number, as the package name.</span>
-<span id="cb31-368"><a href="#cb31-368"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-369"><a href="#cb31-369"></a><span class="in">cargo new 11 --name packages</span></span>
-<span id="cb31-370"><a href="#cb31-370"></a><span class="in">```</span></span>
-<span id="cb31-371"><a href="#cb31-371"></a><span class="ss">- </span>This should be allowed.</span>
+<span id="cb31-364"><a href="#cb31-364"></a><span class="ss">- We can make a folder named `11`</span></span>
+<span id="cb31-365"><a href="#cb31-365"></a><span class="ss">- But not a package named `11`.</span></span>
+<span id="cb31-366"><a href="#cb31-366"></a><span class="ss">- We use the `--name` flag.</span></span>
+<span id="cb31-367"><a href="#cb31-367"></a><span class="ss">    - I use the name of these slides, rather than the number, as the package name.</span></span>
+<span id="cb31-368"><a href="#cb31-368"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-369"><a href="#cb31-369"></a><span class="ss">cargo new 11 --name packages</span></span>
+<span id="cb31-370"><a href="#cb31-370"></a><span class="ss">```</span></span>
+<span id="cb31-371"><a href="#cb31-371"></a><span class="ss">- This should be allowed.</span></span>
 <span id="cb31-372"><a href="#cb31-372"></a></span>
-<span id="cb31-373"><a href="#cb31-373"></a><span class="fu">## Option 2: VCS</span></span>
+<span id="cb31-373"><a href="#cb31-373"></a><span class="ss">## Option 2: VCS</span></span>
 <span id="cb31-374"><a href="#cb31-374"></a></span>
-<span id="cb31-375"><a href="#cb31-375"></a><span class="ss">- </span>It may be the case that you created a <span class="in">`11`</span> folder outside of your <span class="in">`271rs`</span> directory.</span>
-<span id="cb31-376"><a href="#cb31-376"></a><span class="ss">    - </span>I do this often, then plan to move it in latter.</span>
-<span id="cb31-377"><a href="#cb31-377"></a><span class="ss">- </span>This can pose a problem.</span>
+<span id="cb31-375"><a href="#cb31-375"></a><span class="ss">- It may be the case that you created a `11` folder outside of your `271rs` directory.</span></span>
+<span id="cb31-376"><a href="#cb31-376"></a><span class="ss">    - I do this often, then plan to move it in latter.</span></span>
+<span id="cb31-377"><a href="#cb31-377"></a><span class="ss">- This can pose a problem.</span></span>
 <span id="cb31-378"><a href="#cb31-378"></a></span>
-<span id="cb31-379"><a href="#cb31-379"></a><span class="fu">## Situation</span></span>
+<span id="cb31-379"><a href="#cb31-379"></a><span class="ss">## Situation</span></span>
 <span id="cb31-380"><a href="#cb31-380"></a></span>
-<span id="cb31-381"><a href="#cb31-381"></a><span class="ss">- </span><span class="in">`git clone`</span> a <span class="in">`271rs`</span> repository, e.g.:</span>
-<span id="cb31-382"><a href="#cb31-382"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-383"><a href="#cb31-383"></a><span class="in">git clone git@github.com:cd-c89/271rs.git</span></span>
-<span id="cb31-384"><a href="#cb31-384"></a><span class="in">- `cargo new 11 --name packages` before `cd 271rs`</span></span>
-<span id="cb31-385"><a href="#cb31-385"></a><span class="in">- It would look like this:</span></span>
+<span id="cb31-381"><a href="#cb31-381"></a><span class="ss">- `git clone` a `271rs` repository, e.g.:</span></span>
+<span id="cb31-382"><a href="#cb31-382"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-383"><a href="#cb31-383"></a><span class="ss">git clone git@github.com:cd-c89/271rs.git</span></span>
+<span id="cb31-384"><a href="#cb31-384"></a><span class="ss">- `cargo new 11 --name packages` before `cd 271rs`</span></span>
+<span id="cb31-385"><a href="#cb31-385"></a><span class="ss">- It would look like this:</span></span>
 <span id="cb31-386"><a href="#cb31-386"></a></span>
-<span id="cb31-387"><a href="#cb31-387"></a><span class="in">```{.bash filename="tree"}</span></span>
-<span id="cb31-388"><a href="#cb31-388"></a><span class="in">.</span></span>
-<span id="cb31-389"><a href="#cb31-389"></a><span class="in">├── 11</span></span>
-<span id="cb31-390"><a href="#cb31-390"></a><span class="in">│&nbsp;&nbsp; ├── Cargo.toml</span></span>
-<span id="cb31-391"><a href="#cb31-391"></a><span class="in">│&nbsp;&nbsp; └── src</span></span>
-<span id="cb31-392"><a href="#cb31-392"></a><span class="in">│&nbsp;&nbsp;     └── main.rs</span></span>
-<span id="cb31-393"><a href="#cb31-393"></a><span class="in">└── 271rs</span></span>
-<span id="cb31-394"><a href="#cb31-394"></a><span class="in">    ├── LICENSE</span></span>
-<span id="cb31-395"><a href="#cb31-395"></a><span class="in">    └── README.md</span></span>
+<span id="cb31-387"><a href="#cb31-387"></a><span class="ss">```{.bash filename="tree"}</span></span>
+<span id="cb31-388"><a href="#cb31-388"></a><span class="ss">.</span></span>
+<span id="cb31-389"><a href="#cb31-389"></a><span class="ss">├── 11</span></span>
+<span id="cb31-390"><a href="#cb31-390"></a><span class="ss">│&nbsp;&nbsp; ├── Cargo.toml</span></span>
+<span id="cb31-391"><a href="#cb31-391"></a><span class="ss">│&nbsp;&nbsp; └── src</span></span>
+<span id="cb31-392"><a href="#cb31-392"></a><span class="ss">│&nbsp;&nbsp;     └── main.rs</span></span>
+<span id="cb31-393"><a href="#cb31-393"></a><span class="ss">└── 271rs</span></span>
+<span id="cb31-394"><a href="#cb31-394"></a><span class="ss">    ├── LICENSE</span></span>
+<span id="cb31-395"><a href="#cb31-395"></a><span class="ss">    └── README.md</span></span>
 <span id="cb31-396"><a href="#cb31-396"></a></span>
-<span id="cb31-397"><a href="#cb31-397"></a><span class="in">3 directories, 4 files</span></span>
-<span id="cb31-398"><a href="#cb31-398"></a><span class="in">```</span></span>
+<span id="cb31-397"><a href="#cb31-397"></a><span class="ss">3 directories, 4 files</span></span>
+<span id="cb31-398"><a href="#cb31-398"></a><span class="ss">```</span></span>
 <span id="cb31-399"><a href="#cb31-399"></a></span>
-<span id="cb31-400"><a href="#cb31-400"></a><span class="fu">## Move</span></span>
+<span id="cb31-400"><a href="#cb31-400"></a><span class="ss">## Move</span></span>
 <span id="cb31-401"><a href="#cb31-401"></a></span>
-<span id="cb31-402"><a href="#cb31-402"></a><span class="ss">- </span>I'd like to use the <span class="in">`mv`</span> command to put <span class="in">`11`</span> in <span class="in">`271`</span> rs.</span>
-<span id="cb31-403"><a href="#cb31-403"></a><span class="ss">    - </span>Notation is "mv" then "source" then "destination"</span>
-<span id="cb31-404"><a href="#cb31-404"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-405"><a href="#cb31-405"></a><span class="in">mv 11 271rs</span></span>
-<span id="cb31-406"><a href="#cb31-406"></a><span class="in">```</span></span>
-<span id="cb31-407"><a href="#cb31-407"></a><span class="ss">- </span>I have this:</span>
-<span id="cb31-408"><a href="#cb31-408"></a><span class="in">```{.bash filename="tree"}</span></span>
-<span id="cb31-409"><a href="#cb31-409"></a><span class="in">.</span></span>
-<span id="cb31-410"><a href="#cb31-410"></a><span class="in">└── 271rs</span></span>
-<span id="cb31-411"><a href="#cb31-411"></a><span class="in">    ├── 11</span></span>
-<span id="cb31-412"><a href="#cb31-412"></a><span class="in">    │&nbsp;&nbsp; ├── Cargo.toml</span></span>
-<span id="cb31-413"><a href="#cb31-413"></a><span class="in">    │&nbsp;&nbsp; └── src</span></span>
-<span id="cb31-414"><a href="#cb31-414"></a><span class="in">    │&nbsp;&nbsp;     └── main.rs</span></span>
-<span id="cb31-415"><a href="#cb31-415"></a><span class="in">    ├── LICENSE</span></span>
-<span id="cb31-416"><a href="#cb31-416"></a><span class="in">    └── README.md</span></span>
+<span id="cb31-402"><a href="#cb31-402"></a><span class="ss">- I</span><span class="ot">'</span>d like to <span class="fu">use</span> the <span class="ot">`</span><span class="st">mv</span><span class="ot">`</span> command to put <span class="ot">`</span><span class="st">11</span><span class="ot">`</span> in <span class="ot">`</span><span class="st">271</span><span class="ot">`</span> rs.</span>
+<span id="cb31-403"><a href="#cb31-403"></a>    - Notation is <span class="ot">"</span><span class="st">mv</span><span class="ot">"</span> then <span class="ot">"</span><span class="st">source</span><span class="ot">"</span> then <span class="ot">"</span><span class="st">destination</span><span class="ot">"</span></span>
+<span id="cb31-404"><a href="#cb31-404"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-405"><a href="#cb31-405"></a><span class="st">mv 11 271rs</span></span>
+<span id="cb31-406"><a href="#cb31-406"></a><span class="ot">```</span></span>
+<span id="cb31-407"><a href="#cb31-407"></a>- I have this:</span>
+<span id="cb31-408"><a href="#cb31-408"></a><span class="ot">```</span><span class="st">{.bash filename="tree"}</span></span>
+<span id="cb31-409"><a href="#cb31-409"></a><span class="st">.</span></span>
+<span id="cb31-410"><a href="#cb31-410"></a><span class="st">└── 271rs</span></span>
+<span id="cb31-411"><a href="#cb31-411"></a><span class="st">    ├── 11</span></span>
+<span id="cb31-412"><a href="#cb31-412"></a><span class="st">    │&nbsp;&nbsp; ├── Cargo.toml</span></span>
+<span id="cb31-413"><a href="#cb31-413"></a><span class="st">    │&nbsp;&nbsp; └── src</span></span>
+<span id="cb31-414"><a href="#cb31-414"></a><span class="st">    │&nbsp;&nbsp;     └── main.rs</span></span>
+<span id="cb31-415"><a href="#cb31-415"></a><span class="st">    ├── LICENSE</span></span>
+<span id="cb31-416"><a href="#cb31-416"></a><span class="st">    └── README.md</span></span>
 <span id="cb31-417"><a href="#cb31-417"></a></span>
-<span id="cb31-418"><a href="#cb31-418"></a><span class="in">3 directories, 4 files</span></span>
-<span id="cb31-419"><a href="#cb31-419"></a><span class="in">```</span></span>
+<span id="cb31-418"><a href="#cb31-418"></a><span class="st">3 directories, 4 files</span></span>
+<span id="cb31-419"><a href="#cb31-419"></a><span class="ot">```</span></span>
 <span id="cb31-420"><a href="#cb31-420"></a></span>
-<span id="cb31-421"><a href="#cb31-421"></a><span class="fu">## Status</span></span>
+<span id="cb31-421"><a href="#cb31-421"></a><span class="co">## Status</span></span>
 <span id="cb31-422"><a href="#cb31-422"></a></span>
-<span id="cb31-423"><a href="#cb31-423"></a><span class="ss">- </span>Then I <span class="in">`cd`</span> into <span class="in">`271rs`</span> to add/commit/push</span>
+<span id="cb31-423"><a href="#cb31-423"></a>- Then I <span class="ot">`</span><span class="st">cd</span><span class="ot">`</span> into <span class="ot">`</span><span class="st">271rs</span><span class="ot">`</span> to add/commit/<span class="fu">push</span></span>
 <span id="cb31-424"><a href="#cb31-424"></a></span>
-<span id="cb31-425"><a href="#cb31-425"></a><span class="in">```{.bash filename="git status"}</span></span>
-<span id="cb31-426"><a href="#cb31-426"></a><span class="in">On branch main</span></span>
-<span id="cb31-427"><a href="#cb31-427"></a><span class="in">Your branch is up to date with 'origin/main'.</span></span>
+<span id="cb31-425"><a href="#cb31-425"></a><span class="ot">```</span><span class="st">{.bash filename="git status"}</span></span>
+<span id="cb31-426"><a href="#cb31-426"></a><span class="st">On branch main</span></span>
+<span id="cb31-427"><a href="#cb31-427"></a><span class="st">Your branch is up to date with 'origin/main'.</span></span>
 <span id="cb31-428"><a href="#cb31-428"></a></span>
-<span id="cb31-429"><a href="#cb31-429"></a><span class="in">Untracked files:</span></span>
-<span id="cb31-430"><a href="#cb31-430"></a><span class="in">  (use "git add &lt;file&gt;..." to include in what will be committed)</span></span>
-<span id="cb31-431"><a href="#cb31-431"></a><span class="in">        11/</span></span>
+<span id="cb31-429"><a href="#cb31-429"></a><span class="st">Untracked files:</span></span>
+<span id="cb31-430"><a href="#cb31-430"></a><span class="st">  (use "git add &lt;file&gt;..." to include in what will be committed)</span></span>
+<span id="cb31-431"><a href="#cb31-431"></a><span class="st">        11/</span></span>
 <span id="cb31-432"><a href="#cb31-432"></a></span>
-<span id="cb31-433"><a href="#cb31-433"></a><span class="in">nothing added to commit but untracked files present (use "git add" to track)</span></span>
-<span id="cb31-434"><a href="#cb31-434"></a><span class="in">```</span></span>
+<span id="cb31-433"><a href="#cb31-433"></a><span class="st">nothing added to commit but untracked files present (use "git add" to track)</span></span>
+<span id="cb31-434"><a href="#cb31-434"></a><span class="ot">```</span></span>
 <span id="cb31-435"><a href="#cb31-435"></a></span>
-<span id="cb31-436"><a href="#cb31-436"></a><span class="fu">## Add</span></span>
+<span id="cb31-436"><a href="#cb31-436"></a><span class="co">## Add</span></span>
 <span id="cb31-437"><a href="#cb31-437"></a></span>
-<span id="cb31-438"><a href="#cb31-438"></a><span class="ss">- </span>Add doesn't work:</span>
+<span id="cb31-438"><a href="#cb31-438"></a>- Add doesn<span class="ot">'</span><span class="ss">t work:</span></span>
 <span id="cb31-439"><a href="#cb31-439"></a></span>
 <span id="cb31-440"><a href="#cb31-440"></a></span>
-<span id="cb31-441"><a href="#cb31-441"></a><span class="in">```{.bash filename="git add 11"}</span></span>
-<span id="cb31-442"><a href="#cb31-442"></a><span class="in">error: '11/' does not have a commit checked out</span></span>
-<span id="cb31-443"><a href="#cb31-443"></a><span class="in">fatal: adding files failed</span></span>
-<span id="cb31-444"><a href="#cb31-444"></a><span class="in">```</span></span>
+<span id="cb31-441"><a href="#cb31-441"></a><span class="ss">```{.bash filename="git add 11"}</span></span>
+<span id="cb31-442"><a href="#cb31-442"></a><span class="ss">error: </span><span class="ot">'</span><span class="dv">11</span>/<span class="ot">'</span><span class="ss"> does not have a commit checked out</span></span>
+<span id="cb31-443"><a href="#cb31-443"></a><span class="ss">fatal: adding files failed</span></span>
+<span id="cb31-444"><a href="#cb31-444"></a><span class="ss">```</span></span>
 <span id="cb31-445"><a href="#cb31-445"></a></span>
-<span id="cb31-446"><a href="#cb31-446"></a><span class="ss">- </span>By default, <span class="in">`cargo`</span> initializes new projects as a git repository.</span>
-<span id="cb31-447"><a href="#cb31-447"></a><span class="ss">- </span>Putting a git repository inside another git repository is non-trivial.</span>
+<span id="cb31-446"><a href="#cb31-446"></a><span class="ss">- By default, `cargo` initializes new projects as a git repository.</span></span>
+<span id="cb31-447"><a href="#cb31-447"></a><span class="ss">- Putting a git repository inside another git repository is non-trivial.</span></span>
 <span id="cb31-448"><a href="#cb31-448"></a></span>
-<span id="cb31-449"><a href="#cb31-449"></a><span class="fu">## Confirm</span></span>
+<span id="cb31-449"><a href="#cb31-449"></a><span class="ss">## Confirm</span></span>
 <span id="cb31-450"><a href="#cb31-450"></a></span>
-<span id="cb31-451"><a href="#cb31-451"></a><span class="ss">- </span>You can tell by looking for the hidden <span class="in">`.git`</span> folder in <span class="in">`11`</span>.</span>
-<span id="cb31-452"><a href="#cb31-452"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-453"><a href="#cb31-453"></a><span class="in">cd 11</span></span>
-<span id="cb31-454"><a href="#cb31-454"></a><span class="in">ls -al</span></span>
-<span id="cb31-455"><a href="#cb31-455"></a><span class="in">```</span></span>
-<span id="cb31-456"><a href="#cb31-456"></a><span class="ss">- </span>You'll see something called <span class="in">`.git`</span>.</span>
-<span id="cb31-457"><a href="#cb31-457"></a><span class="ss">- </span>You can delete it, but this is inelegant.</span>
+<span id="cb31-451"><a href="#cb31-451"></a><span class="ss">- You can tell by looking for the hidden `.git` folder in `11`.</span></span>
+<span id="cb31-452"><a href="#cb31-452"></a><span class="ss">```{.bash}</span></span>
+<span id="cb31-453"><a href="#cb31-453"></a><span class="ss">cd 11</span></span>
+<span id="cb31-454"><a href="#cb31-454"></a><span class="ss">ls -al</span></span>
+<span id="cb31-455"><a href="#cb31-455"></a><span class="ss">```</span></span>
+<span id="cb31-456"><a href="#cb31-456"></a><span class="ss">- You</span><span class="ot">'</span>ll see something called <span class="ot">`</span><span class="st">.git</span><span class="ot">`</span>.</span>
+<span id="cb31-457"><a href="#cb31-457"></a>- You can <span class="fu">delete</span> it, but this is inelegant.</span>
 <span id="cb31-458"><a href="#cb31-458"></a></span>
-<span id="cb31-459"><a href="#cb31-459"></a><span class="fu">## Solution</span></span>
+<span id="cb31-459"><a href="#cb31-459"></a><span class="co">## Solution</span></span>
 <span id="cb31-460"><a href="#cb31-460"></a></span>
-<span id="cb31-461"><a href="#cb31-461"></a><span class="ss">- </span>Use <span class="in">`cargo new`</span> with the option to have no "version control system" used.</span>
+<span id="cb31-461"><a href="#cb31-461"></a>- Use <span class="ot">`</span><span class="st">cargo new</span><span class="ot">`</span> with the option to have <span class="fu">no</span> <span class="ot">"</span><span class="st">version control system</span><span class="ot">"</span> used.</span>
 <span id="cb31-462"><a href="#cb31-462"></a></span>
-<span id="cb31-463"><a href="#cb31-463"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-464"><a href="#cb31-464"></a><span class="in">cargo new 11 --name packages --vcs none</span></span>
-<span id="cb31-465"><a href="#cb31-465"></a><span class="in">```</span></span>
+<span id="cb31-463"><a href="#cb31-463"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-464"><a href="#cb31-464"></a><span class="st">cargo new 11 --name packages --vcs none</span></span>
+<span id="cb31-465"><a href="#cb31-465"></a><span class="ot">```</span></span>
 <span id="cb31-466"><a href="#cb31-466"></a></span>
-<span id="cb31-467"><a href="#cb31-467"></a><span class="ss">- </span>You can confirm there is no hidden <span class="in">`.git`</span> folder.</span>
-<span id="cb31-468"><a href="#cb31-468"></a><span class="ss">- </span>This can be moved into <span class="in">`271rs`</span> or created within <span class="in">`271rs`</span></span>
+<span id="cb31-467"><a href="#cb31-467"></a>- You can confirm there is <span class="fu">no</span> hidden <span class="ot">`</span><span class="st">.git</span><span class="ot">`</span> folder.</span>
+<span id="cb31-468"><a href="#cb31-468"></a>- This can be moved into <span class="ot">`</span><span class="st">271rs</span><span class="ot">`</span> <span class="ot">or</span> created within <span class="ot">`</span><span class="st">271rs</span><span class="ot">`</span></span>
 <span id="cb31-469"><a href="#cb31-469"></a></span>
 <span id="cb31-470"><a href="#cb31-470"></a></span>
-<span id="cb31-471"><a href="#cb31-471"></a><span class="fu"># Exercise</span></span>
+<span id="cb31-471"><a href="#cb31-471"></a><span class="co"># Exercise</span></span>
 <span id="cb31-472"><a href="#cb31-472"></a></span>
-<span id="cb31-473"><a href="#cb31-473"></a><span class="fu">## Exercise</span></span>
+<span id="cb31-473"><a href="#cb31-473"></a><span class="co">## Exercise</span></span>
 <span id="cb31-474"><a href="#cb31-474"></a></span>
-<span id="cb31-475"><a href="#cb31-475"></a><span class="ss">- </span>New Cargo project, in</span>
-<span id="cb31-476"><a href="#cb31-476"></a><span class="ss">- </span>A folder named <span class="in">`11`</span>, with</span>
-<span id="cb31-477"><a href="#cb31-477"></a><span class="ss">- </span>A valid Cargo name (not <span class="in">`11`</span>), that is</span>
-<span id="cb31-478"><a href="#cb31-478"></a><span class="ss">- </span>In your *course* repository and therefore</span>
-<span id="cb31-479"><a href="#cb31-479"></a><span class="ss">- </span>Has no <span class="in">`cargo`</span> managed repository, and</span>
-<span id="cb31-480"><a href="#cb31-480"></a><span class="ss">- </span>Present on your remote GitHub repository</span>
-<span id="cb31-481"><a href="#cb31-481"></a><span class="ss">- </span>The conents of the project are immaterial.</span>
+<span id="cb31-475"><a href="#cb31-475"></a>- New Cargo project, in</span>
+<span id="cb31-476"><a href="#cb31-476"></a>- A folder named <span class="ot">`</span><span class="st">11</span><span class="ot">`</span>, with</span>
+<span id="cb31-477"><a href="#cb31-477"></a>- A valid Cargo name (<span class="ot">not</span> <span class="ot">`</span><span class="st">11</span><span class="ot">`</span>), that is</span>
+<span id="cb31-478"><a href="#cb31-478"></a>- In your <span class="dt">*course</span><span class="ot">*</span> repository <span class="ot">and</span> therefore</span>
+<span id="cb31-479"><a href="#cb31-479"></a>- Has <span class="fu">no</span> <span class="ot">`</span><span class="st">cargo</span><span class="ot">`</span> managed repository, <span class="ot">and</span></span>
+<span id="cb31-480"><a href="#cb31-480"></a>- Present on your remote GitHub repository</span>
+<span id="cb31-481"><a href="#cb31-481"></a>- The conents of the project are immaterial.</span>
 <span id="cb31-482"><a href="#cb31-482"></a></span>
-<span id="cb31-483"><a href="#cb31-483"></a><span class="fu">## Disambiguity</span></span>
+<span id="cb31-483"><a href="#cb31-483"></a><span class="co">## Disambiguity</span></span>
 <span id="cb31-484"><a href="#cb31-484"></a></span>
-<span id="cb31-485"><a href="#cb31-485"></a><span class="ss">- </span>I have seen students take extreme liberties with naming folders and assignments.</span>
-<span id="cb31-486"><a href="#cb31-486"></a><span class="ss">- </span>I believe no ambiguity exists within the instructions.</span>
-<span id="cb31-487"><a href="#cb31-487"></a><span class="ss">- </span>It is trivial to check the following:</span>
-<span id="cb31-488"><a href="#cb31-488"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-489"><a href="#cb31-489"></a><span class="in">ls 271</span></span>
-<span id="cb31-490"><a href="#cb31-490"></a><span class="in">```</span></span>
-<span id="cb31-491"><a href="#cb31-491"></a><span class="ss">- </span>Unless you are working ahead, a file readout other than the following is wrong, and would be worth no points as it does not constitute submission of assigned work.</span>
-<span id="cb31-492"><a href="#cb31-492"></a><span class="in">```{.bash}</span></span>
-<span id="cb31-493"><a href="#cb31-493"></a><span class="in">01  02  11  LICENSE  README.md</span></span>
-<span id="cb31-494"><a href="#cb31-494"></a><span class="in">```</span></span>
+<span id="cb31-485"><a href="#cb31-485"></a>- I have seen students take extreme liberties with naming folders <span class="ot">and</span> assignments.</span>
+<span id="cb31-486"><a href="#cb31-486"></a>- I believe <span class="fu">no</span> ambiguity <span class="fu">exists</span> within the instructions.</span>
+<span id="cb31-487"><a href="#cb31-487"></a>- It is trivial to check the following:</span>
+<span id="cb31-488"><a href="#cb31-488"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-489"><a href="#cb31-489"></a><span class="st">ls 271</span></span>
+<span id="cb31-490"><a href="#cb31-490"></a><span class="ot">```</span></span>
+<span id="cb31-491"><a href="#cb31-491"></a>- Unless you are working ahead, a file readout other than the following is wrong, <span class="ot">and</span> would be worth <span class="fu">no</span> points as it does <span class="ot">not</span> constitute submission of assigned work.</span>
+<span id="cb31-492"><a href="#cb31-492"></a><span class="ot">```</span><span class="st">{.bash}</span></span>
+<span id="cb31-493"><a href="#cb31-493"></a><span class="st">01  02  11  LICENSE  README.md</span></span>
+<span id="cb31-494"><a href="#cb31-494"></a><span class="ot">```</span></span>
 <span id="cb31-495"><a href="#cb31-495"></a></span>
-<span id="cb31-496"><a href="#cb31-496"></a><span class="fu"># Fin</span></span>
+<span id="cb31-496"><a href="#cb31-496"></a><span class="co"># Fin</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
