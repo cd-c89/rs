@@ -31,7 +31,7 @@ format: html
 
 ## The person
 
-> [Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.](https://en.wikipedia.org/wiki/Richard_Hamming)
+> [Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.](https://en.wikipedia.org/wiki/Richard_Hamming)
 
 <center>
 <img style="width:50%" src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4">

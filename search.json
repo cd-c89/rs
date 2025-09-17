@@ -3166,7 +3166,7 @@
     "href": "40_sha2.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-3191694105502416429\n+1624518068245978507\n+3812466949721254715\n+7572419772468039731\n-8223492978089777086",
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-2194643308122426404\n-4713371599066851964\n-7856542739851357730\n-3048359889494602246\n-6719426568370649337",
     "crumbs": [
       "SHA-2"
     ]
@@ -3581,7 +3581,7 @@
     "href": "40_sha2.rjs.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n+2463874766769460450\n-8067088427718240369\n+494644335979598987\n-5317934385222930997\n+8998214093569176518"
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n+112948658613944952\n+8149708211674750878\n+1389208119197362574\n-6157865063199678940\n-6883763341808660633"
   },
   {
     "objectID": "40_sha2.rjs.html#example.tex",
@@ -5521,7 +5521,7 @@
     "href": "31_hamming.html#the-person",
     "title": "Hamming",
     "section": "The person",
-    "text": "The person\n\nHamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.",
+    "text": "The person\n\nHamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.",
     "crumbs": [
       "Hamming"
     ]
