@@ -422,14 +422,14 @@ window.Quarto = {
 </ul></li>
 <li>Example: Python <code>hash</code></li>
 </ul>
-<div id="dc0397f0" class="cell" data-execution_count="1">
+<div id="c876ecff" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([<span class="ss">f"</span><span class="sc">{</span><span class="bu">hash</span>(a)<span class="sc">:+d}</span><span class="ss">"</span> <span class="cf">for</span> a <span class="kw">in</span> <span class="st">"ABCDE"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+174575750009679364
--4517232736510893602
--3875532487217591698
-+4491682813892403611
-+1693452497729351204</code></pre>
+<pre><code>-1423220045309747523
+-5453503906698589768
++6970383257662359492
++8727377015348636392
+-3654322618810249818</code></pre>
 </div>
 </div>
 </section>
@@ -457,7 +457,7 @@ h_a(x) = a x \pmod{M}
 <li>And therefore <span class="math inline">\(\forall M : \gcd(257,M) = 1\)</span></li>
 </ul></li>
 </ul>
-<div id="b71c3c40" class="cell" data-execution_count="2">
+<div id="294ef270" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> math</span>
 <span id="cb4-2"><a href="#cb4-2"></a>h <span class="op">=</span> <span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
 <span id="cb4-3"><a href="#cb4-3"></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
@@ -508,7 +508,7 @@ h_a(x) = a x \pmod{M}
 </section>
 <section id="test-it" class="level2">
 <h2 class="anchored" data-anchor-id="test-it">Test it:</h2>
-<div id="25fc6f51" class="cell" data-execution_count="3">
+<div id="70809cab" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
 <span id="cb8-2"><a href="#cb8-2"></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="cf">assert</span>(<span class="bu">set</span>(h(x, a, M) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(M)) <span class="op">==</span> <span class="bu">set</span>(<span class="bu">range</span>(M)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -667,7 +667,7 @@ k + l + 129 \equiv 0 \pmod{512}
 <li>We can solve numerically in Python, but…</li>
 <li>Perhaps easier to show with strings.</li>
 </ul>
-<div id="09a1cbf0" class="cell" data-execution_count="4">
+<div id="69884d40" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>M <span class="op">=</span> <span class="st">"Hello there I am a message.  "</span> <span class="op">*</span> <span class="dv">15</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
@@ -781,7 +781,7 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <li>Addition is aproximately a binary bitwise operation:</li>
 <li>Equivalent to integer sum module <span class="math inline">\(2^{64}\)</span></li>
 </ul>
-<div id="cece0472" class="cell" data-execution_count="5">
+<div id="a03db844" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">from</span> ctypes <span class="im">import</span> c_ulong <span class="co">## this won't work in pypy</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">def</span> addition(u:c_ulong, v:c_ulong) <span class="op">-&gt;</span> c_ulong:</span>
 <span id="cb12-3"><a href="#cb12-3"></a>    <span class="cf">return</span> c_ulong(u <span class="op">+</span> v)</span>
