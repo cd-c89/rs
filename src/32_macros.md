@@ -28,7 +28,7 @@ cargo new 32 --name macros --vcs none
     
 ## Your responsibility
 
-- You will create a solution in C as an "macros.c" file.
+- You will create a solution in Rust
   - It will contain 3 macros
     - `choice`
     - `median`
@@ -40,7 +40,7 @@ cargo new 32 --name macros --vcs none
 ## Description
 
 - The purpose of this homework is to write four (4) bitwise macros
-  - Two trenanry operations
+  - Two ternary operations
     - Choice
     - Median, also called Majority
   - And two rotations
