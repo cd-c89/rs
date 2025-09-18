@@ -5677,7 +5677,7 @@
     "href": "40_sha2.rjs.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n+5481808883410415403\n+3010883304629760351\n-3742437654070914950\n+4645921300015693841\n-1615120723961524763"
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\n\n-7829037819550732879\n-3403026910584348492\n-5552425753041947887\n-3352300400195116566\n+1561785613034069062"
   },
   {
     "objectID": "40_sha2.rjs.html#example.tex",
@@ -6003,7 +6003,7 @@
     "href": "40_sha2.html#non-cryptographic",
     "title": "SHA-2",
     "section": "Non-Cryptographic",
-    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n-1423220045309747523\n-5453503906698589768\n+6970383257662359492\n+8727377015348636392\n-3654322618810249818",
+    "text": "Non-Cryptographic\n\nUsed to build hash tables\n\nKey-value stores with \\(\\mathcal{O}(1)\\) lookup time.\nMy hashtable/hashmap slides\n\nExample: Python hash\n\n\nprint(\"\\n\".join([f\"{hash(a):+d}\" for a in \"ABCDE\"]))\n\n+795431127739145652\n-236563999486377598\n+4232549821750859688\n-9037893009529725217\n-2807289490387078249",
     "crumbs": [
       "SHA-2"
     ]
