@@ -28,7 +28,7 @@ cargo new 32 --name macros --vcs none
     
 ## Your responsibility
 
-- You will create a solution in C as an "macros.c" file.
+- You will create a solution in Rust
   - It will contain 3 macros
     - `choice`
     - `median`

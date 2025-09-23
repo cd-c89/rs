@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nEndian\nChunk\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nNone\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nConstants\nSHA512\n\n\n0x6\n10/06\nReview\nMidterm\nNone\n\n\n0x7\n10/13\nBigInt\nBigAdd\nu512\n\n\n0x8\n10/20\nECDSA\nPython\nECDSA\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\n\n\n\n0xE\n11/24\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
   },
   {
     "objectID": "42_sha512.html",
@@ -181,7 +181,7 @@
     "href": "40_sha2.html#test-it",
     "title": "SHA-2",
     "section": "Test it:",
-    "text": "Test it:\n\nh = lambda x, a, M : (a * x) % M\na, M = 0x05, 1 &lt;&lt; 0x08\nassert(set(h(x, a, M) for x in range(M)) == set(range(M)))\n\n\nAs a rule we shouldn’t try to write proofs/definitions in Python, but…\nSmall \\(M = 2^{0x08} = 256\\) means our computer can handle all possibilities.",
+    "text": "Test it:\nh = lambda x, a, M : (a * x) % M\na, M = 0x05, 1 &lt;&lt; 0x08\nassert(set(h(x, a, M) for x in range(M)) == set(range(M)))\n\nAs a rule we shouldn’t try to write proofs/definitions in Python, but…\nSmall \\(M = 2^{0x08} = 256\\) means our computer can handle all possibilities.",
     "crumbs": [
       "SHA-2"
     ]
@@ -578,7 +578,7 @@
     "href": "40_sha2.rjs.html#test-it",
     "title": "SHA-2",
     "section": "Test it:",
-    "text": "Test it:\n\nAs a rule we shouldn’t try to write proofs/definitions in Python, but…\nSmall \\(M = 2^{0x08} = 256\\) means our computer can handle all possibilities."
+    "text": "Test it:\nh = lambda x, a, M : (a * x) % M\na, M = 0x05, 1 &lt;&lt; 0x08\nassert(set(h(x, a, M) for x in range(M)) == set(range(M)))\n\nAs a rule we shouldn’t try to write proofs/definitions in Python, but…\nSmall \\(M = 2^{0x08} = 256\\) means our computer can handle all possibilities."
   },
   {
     "objectID": "40_sha2.rjs.html#visualize",
@@ -852,7 +852,7 @@
     "href": "31_hamming.html#the-person",
     "title": "Hamming",
     "section": "The person",
-    "text": "The person\n\nHamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.",
+    "text": "The person\n\nHamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.",
     "crumbs": [
       "Hamming"
     ]
@@ -892,7 +892,7 @@
     "href": "31_hamming.html#template-files",
     "title": "Hamming",
     "section": "Template files",
-    "text": "Template files\n\nI made a package:\n\ncargo new 31 --name hamming --vcs none\n\nI wrote a library function: ```{.rs filename=“src/lib.rs”) pub fn weight_u8(byte:u8) -&gt; u64 { let mut cnt : u64 = 0; // This is wrong. cnt += 1; // That was wrong. return cnt;\n\n- I wrote some tests:\n```{.rs filename=\"src/main.rs\")\nfn main() {\n    dbg!(hamming::weight_u8(0x33_u8));\n}\n\nAfter fixing my function, I saw the following:\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/hamming`\n[src/main.rs:2:5] hamming::weight_u8(0x33_u8) = 4",
+    "text": "Template files\n\nI made a package:\n\ncargo new 31 --name hamming --vcs none\n\nI wrote a library function:\n\n\n\nsrc/lib.rs\n\npub fn weight_u8(byte:u8) -&gt; u64 {\n    let mut cnt : u64 = 0;\n    // This is wrong.\n    cnt += 1;\n    // That was wrong.\n    return cnt;\n\n\nI wrote some tests:\n\n\n\nsrc/main.rs\n\nfn main() {\n    dbg!(hamming::weight_u8(0x33_u8));\n}\n\n\nAfter fixing my function, I saw the following:\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/hamming`\n[src/main.rs:2:5] hamming::weight_u8(0x33_u8) = 4",
     "crumbs": [
       "Hamming"
     ]
@@ -6193,7 +6193,7 @@
     "href": "32_macros.html",
     "title": "Macros",
     "section": "",
-    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 32 --name macros --vcs none\n\n\n\n\n\nI will provide a reference solution in Python\n\nThe reference will differ in the following ways:\n\nThey will not work on bits, as there isn’t great bit manipulation in Python without libraries.\nI will provide an example of a left rotate while the assignment requires a right rotate.\n\n\nI will provide a testing src/main.rs.\n\nI will provide sample output.\n\n\n\n\n\n\nYou will create a solution in C as an “macros.c” file.\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
+    "text": "To complete this assignment, you must:\n\nCreate a 32 directory in your 271rs repository.\nThis folder must be a Cargo package.\nIt must leverage no other Cargo packages, namely it may not use packages for randomization.\n\ncargo new 32 --name macros --vcs none\n\n\n\n\n\nI will provide a reference solution in Python\n\nThe reference will differ in the following ways:\n\nThey will not work on bits, as there isn’t great bit manipulation in Python without libraries.\nI will provide an example of a left rotate while the assignment requires a right rotate.\n\n\nI will provide a testing src/main.rs.\n\nI will provide sample output.\n\n\n\n\n\n\nYou will create a solution in Rust\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
     "crumbs": [
       "Macros"
     ]
@@ -6223,7 +6223,7 @@
     "href": "32_macros.html#your-responsibility",
     "title": "Macros",
     "section": "",
-    "text": "You will create a solution in C as an “macros.c” file.\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
+    "text": "You will create a solution in Rust\n\nIt will contain 3 macros\n\nchoice\nmedian\nrotate - a “right” rotate.\n\nYou are advised, but not required, to make left rotate.",
     "crumbs": [
       "Macros"
     ]

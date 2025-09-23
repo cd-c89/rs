@@ -368,7 +368,7 @@ window.Quarto = {
 <section id="the-person" class="level2">
 <h2 class="anchored" data-anchor-id="the-person">The person</h2>
 <blockquote class="blockquote">
-<p><a href="https://en.wikipedia.org/wiki/Richard_Hamming">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Richard_Hamming">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.</a></p>
 </blockquote>
 <center>
 <img style="width:50%" src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4">
@@ -432,20 +432,37 @@ window.Quarto = {
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">cargo</span> new 31 <span class="at">--name</span> hamming <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>I wrote a library function: ```{.rs filename=“src/lib.rs”) pub fn weight_u8(byte:u8) -&gt; u64 { let mut cnt : u64 = 0; // This is wrong. cnt += 1; // That was wrong. return cnt;</li>
+<li>I wrote a library function:</li>
 </ul>
-<pre><code>- I wrote some tests:
-```{.rs filename="src/main.rs")
-fn main() {
-    dbg!(hamming::weight_u8(0x33_u8));
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/lib.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">pub</span> <span class="kw">fn</span> weight_u8(byte<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> cnt <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="co">// This is wrong.</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    cnt <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="co">// That was wrong.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="cf">return</span> cnt<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>I wrote some tests:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="pp">dbg!</span>(<span class="pp">hamming::</span>weight_u8(<span class="dv">0x33_u8</span>))<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>After fixing my function, I saw the following:</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">$</span> cargo run</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">$</span> cargo run</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="distance" class="level1">
@@ -464,10 +481,10 @@ fn main() {
 <ul>
 <li>Using the bitwise operators, shifts, and addition, write the following functions:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You may change the parameter names if those don’t make sense to you.
 <ul>
@@ -989,148 +1006,148 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="an">title:</span><span class="co"> "Hamming"</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">---</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">## Announcements</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="ss">- </span>Lab Day</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="ss">    - </span>Mixed use assignment.</span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">    - </span>Practically useful for HW</span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="ss">    - </span>Theoretically useful for Final</span>
-<span id="cb6-12"><a href="#cb6-12"></a></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">## Homework</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="ss">- </span>"Macros" is ready.</span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="ss">  - </span>Not too hard; just practice with the operators.</span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="ss">- </span>Due Friday, 26 Sept. at 1440 ET.</span>
-<span id="cb6-18"><a href="#cb6-18"></a></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="fu">## Citation</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="ss">- </span>I learned the term *Hamming distance* from Prof. Josh Laison while discussing a possible research collaboration.</span>
-<span id="cb6-22"><a href="#cb6-22"></a></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="fu">## Today</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming</span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming weight</span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming distance</span>
-<span id="cb6-28"><a href="#cb6-28"></a></span>
-<span id="cb6-29"><a href="#cb6-29"></a></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="fu"># Hamming</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="fu">## The person</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.</span><span class="co">](https://en.wikipedia.org/wiki/Richard_Hamming)</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a></span>
-<span id="cb6-36"><a href="#cb6-36"></a>&lt;center&gt;</span>
-<span id="cb6-37"><a href="#cb6-37"></a>&lt;img style="width:50%" src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4"&gt;</span>
-<span id="cb6-38"><a href="#cb6-38"></a>&lt;/center&gt;</span>
-<span id="cb6-39"><a href="#cb6-39"></a></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="fu">## Fine print</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a></span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="ss">- </span>It is a virtual certainty that Hamming did not discover the concepts of Hamming weight or Hamming distance, both of which have limited use in historical record before Hamming was alive.</span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="ss">- </span>Typically I avoid using terms where someone is named after someone who did not invent it.</span>
-<span id="cb6-44"><a href="#cb6-44"></a><span class="ss">- </span>I don't have alternate name in this case.</span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="ss">    - </span>It can be called "edit distance" but there are other edit distances.</span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="ss">- </span>It must be remarked upon that an abstract mathematical concept was named after a US Ivy Leaguer who worked on the Manhattan Project, and that this naming is highly political.</span>
-<span id="cb6-47"><a href="#cb6-47"></a></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="fu"># Weight</span></span>
-<span id="cb6-49"><a href="#cb6-49"></a></span>
-<span id="cb6-50"><a href="#cb6-50"></a><span class="fu">## Definition</span></span>
-<span id="cb6-51"><a href="#cb6-51"></a></span>
-<span id="cb6-52"><a href="#cb6-52"></a><span class="at">&gt; The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="ss">- </span>This adopts the formal computer science notion of referring to bit strings as:</span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="ss">    - </span>*words* in the </span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="ss">    - </span>*languages*, which is the set of all possible bitstrings</span>
-<span id="cb6-57"><a href="#cb6-57"></a><span class="ss">    - </span>that is composed of the *symbols*, which are the bit values $<span class="sc">\{</span>0, 1<span class="sc">\}</span>$</span>
-<span id="cb6-58"><a href="#cb6-58"></a><span class="ss">- </span>So, Hamming weight of a byte is the number of <span class="in">`1`</span>s in that byte.</span>
-<span id="cb6-59"><a href="#cb6-59"></a></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="fu">## Your task</span></span>
-<span id="cb6-61"><a href="#cb6-61"></a></span>
-<span id="cb6-62"><a href="#cb6-62"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="in">```rs</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a><span class="kw">fn</span> weight_u8(byte<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-65"><a href="#cb6-65"></a><span class="kw">fn</span> weight_u64(word<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-66"><a href="#cb6-66"></a><span class="kw">fn</span> weight_bytes(bytes<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-67"><a href="#cb6-67"></a><span class="kw">fn</span> weight_words(words<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-68"><a href="#cb6-68"></a><span class="in">```</span></span>
-<span id="cb6-69"><a href="#cb6-69"></a></span>
-<span id="cb6-70"><a href="#cb6-70"></a><span class="ss">- </span>You may wish to follow the Rust convention of implementing these in a <span class="in">`src/lib.rs`</span> file.</span>
-<span id="cb6-71"><a href="#cb6-71"></a><span class="ss">    - </span>You will need to prefix them as <span class="in">`pub fn`</span> in <span class="in">`src/lib.rs`</span></span>
-<span id="cb6-72"><a href="#cb6-72"></a><span class="ss">    - </span>You will need to prefix them with your package name and <span class="in">`::`</span> in <span class="in">`src/main.rs`</span></span>
-<span id="cb6-73"><a href="#cb6-73"></a><span class="ss">        - </span>I used <span class="in">`hamming::weight_u8`</span>, for example.</span>
-<span id="cb6-74"><a href="#cb6-74"></a><span class="ss">- </span>This convention will be required for the homework, but is not required now.</span>
-<span id="cb6-75"><a href="#cb6-75"></a></span>
-<span id="cb6-76"><a href="#cb6-76"></a><span class="fu">## Template files</span></span>
-<span id="cb6-77"><a href="#cb6-77"></a></span>
-<span id="cb6-78"><a href="#cb6-78"></a><span class="ss">- </span>I made a package:</span>
-<span id="cb6-79"><a href="#cb6-79"></a><span class="in">```sh</span></span>
-<span id="cb6-80"><a href="#cb6-80"></a><span class="ex">cargo</span> new 31 <span class="at">--name</span> hamming <span class="at">--vcs</span> none</span>
-<span id="cb6-81"><a href="#cb6-81"></a><span class="in">```</span></span>
-<span id="cb6-82"><a href="#cb6-82"></a><span class="ss">- </span>I wrote a library function:</span>
-<span id="cb6-83"><a href="#cb6-83"></a><span class="in">```{.rs filename="src/lib.rs")</span></span>
-<span id="cb6-84"><a href="#cb6-84"></a><span class="in">pub fn weight_u8(byte:u8) -&gt; u64 {</span></span>
-<span id="cb6-85"><a href="#cb6-85"></a><span class="in">    let mut cnt : u64 = 0;</span></span>
-<span id="cb6-86"><a href="#cb6-86"></a><span class="in">    // This is wrong.</span></span>
-<span id="cb6-87"><a href="#cb6-87"></a><span class="in">    cnt += 1;</span></span>
-<span id="cb6-88"><a href="#cb6-88"></a><span class="in">    // That was wrong.</span></span>
-<span id="cb6-89"><a href="#cb6-89"></a><span class="in">    return cnt;</span></span>
-<span id="cb6-90"><a href="#cb6-90"></a></span>
-<span id="cb6-91"><a href="#cb6-91"></a><span class="in">```</span></span>
-<span id="cb6-92"><a href="#cb6-92"></a><span class="ss">- </span>I wrote some tests:</span>
-<span id="cb6-93"><a href="#cb6-93"></a><span class="in">```{.rs filename="src/main.rs")</span></span>
-<span id="cb6-94"><a href="#cb6-94"></a><span class="in">fn main() {</span></span>
-<span id="cb6-95"><a href="#cb6-95"></a><span class="in">    dbg!(hamming::weight_u8(0x33_u8));</span></span>
-<span id="cb6-96"><a href="#cb6-96"></a><span class="in">}</span></span>
-<span id="cb6-97"><a href="#cb6-97"></a><span class="in">```</span></span>
-<span id="cb6-98"><a href="#cb6-98"></a><span class="ss">- </span>After fixing my function, I saw the following:</span>
-<span id="cb6-99"><a href="#cb6-99"></a><span class="in">```sh</span></span>
-<span id="cb6-100"><a href="#cb6-100"></a><span class="ex">$</span> cargo run</span>
-<span id="cb6-101"><a href="#cb6-101"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
-<span id="cb6-102"><a href="#cb6-102"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
-<span id="cb6-103"><a href="#cb6-103"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span>
-<span id="cb6-104"><a href="#cb6-104"></a><span class="in">```</span></span>
-<span id="cb6-105"><a href="#cb6-105"></a></span>
-<span id="cb6-106"><a href="#cb6-106"></a><span class="fu"># Distance</span></span>
-<span id="cb6-107"><a href="#cb6-107"></a></span>
-<span id="cb6-108"><a href="#cb6-108"></a><span class="fu">## Definition</span></span>
-<span id="cb6-109"><a href="#cb6-109"></a></span>
-<span id="cb6-110"><a href="#cb6-110"></a><span class="at">&gt; In information theory, the Hamming distance between two strings or vectors of equal length is the number of positions at which the corresponding symbols are different.</span></span>
-<span id="cb6-111"><a href="#cb6-111"></a></span>
-<span id="cb6-112"><a href="#cb6-112"></a><span class="ss">- </span>The Hamming weight is the Hamming distance from the string of all <span class="in">`0`</span> symbols.</span>
-<span id="cb6-113"><a href="#cb6-113"></a></span>
-<span id="cb6-114"><a href="#cb6-114"></a><span class="fu">## Your task</span></span>
-<span id="cb6-115"><a href="#cb6-115"></a></span>
-<span id="cb6-116"><a href="#cb6-116"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
-<span id="cb6-117"><a href="#cb6-117"></a><span class="in">```rs</span></span>
-<span id="cb6-118"><a href="#cb6-118"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-119"><a href="#cb6-119"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-120"><a href="#cb6-120"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-121"><a href="#cb6-121"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
-<span id="cb6-122"><a href="#cb6-122"></a><span class="in">```</span></span>
-<span id="cb6-123"><a href="#cb6-123"></a></span>
-<span id="cb6-124"><a href="#cb6-124"></a><span class="ss">- </span>You may change the parameter names if those don't make sense to you.</span>
-<span id="cb6-125"><a href="#cb6-125"></a><span class="ss">    - </span>They were procedurally generated.</span>
-<span id="cb6-126"><a href="#cb6-126"></a></span>
-<span id="cb6-127"><a href="#cb6-127"></a><span class="fu">## Today</span></span>
-<span id="cb6-128"><a href="#cb6-128"></a></span>
-<span id="cb6-129"><a href="#cb6-129"></a><span class="ss">- </span><span class="va">[x]</span> Hamming</span>
-<span id="cb6-130"><a href="#cb6-130"></a><span class="ss">- </span><span class="va">[x]</span> Hamming weight</span>
-<span id="cb6-131"><a href="#cb6-131"></a><span class="ss">- </span><span class="va">[x]</span> Hamming distance</span>
-<span id="cb6-132"><a href="#cb6-132"></a></span>
-<span id="cb6-133"><a href="#cb6-133"></a><span class="fu"># Challenge Problems</span></span>
-<span id="cb6-134"><a href="#cb6-134"></a></span>
-<span id="cb6-135"><a href="#cb6-135"></a><span class="fu">## Strings as bitstrings</span></span>
-<span id="cb6-136"><a href="#cb6-136"></a></span>
-<span id="cb6-137"><a href="#cb6-137"></a><span class="ss">- </span>Compute the Hamming distance between the strings <span class="in">`Willamette`</span> and <span class="in">`Xjmmbnfuuf`</span>.</span>
-<span id="cb6-138"><a href="#cb6-138"></a><span class="ss">- </span>Successfully pronounce <span class="in">`Xjmmbnfuuf`</span></span>
-<span id="cb6-139"><a href="#cb6-139"></a></span>
-<span id="cb6-140"><a href="#cb6-140"></a><span class="fu">## POPCNT</span></span>
-<span id="cb6-141"><a href="#cb6-141"></a></span>
-<span id="cb6-142"><a href="#cb6-142"></a><span class="ss">- </span>Read <span class="co">[</span><span class="ot">this paper</span><span class="co">](https://arxiv.org/pdf/1611.07612)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "Hamming"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">---</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ss">- </span>Lab Day</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ss">    - </span>Mixed use assignment.</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ss">    - </span>Practically useful for HW</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ss">    - </span>Theoretically useful for Final</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">## Homework</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="ss">- </span>"Macros" is ready.</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="ss">  - </span>Not too hard; just practice with the operators.</span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="ss">- </span>Due Friday, 26 Sept. at 1440 ET.</span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="fu">## Citation</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="ss">- </span>I learned the term *Hamming distance* from Prof. Josh Laison while discussing a possible research collaboration.</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="fu">## Today</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming</span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming weight</span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="ss">- </span><span class="va">[ ]</span> Hamming distance</span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="fu"># Hamming</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="fu">## The person</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.</span><span class="co">](https://en.wikipedia.org/wiki/Richard_Hamming)</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a>&lt;center&gt;</span>
+<span id="cb7-37"><a href="#cb7-37"></a>&lt;img style="width:50%" src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4"&gt;</span>
+<span id="cb7-38"><a href="#cb7-38"></a>&lt;/center&gt;</span>
+<span id="cb7-39"><a href="#cb7-39"></a></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="fu">## Fine print</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="ss">- </span>It is a virtual certainty that Hamming did not discover the concepts of Hamming weight or Hamming distance, both of which have limited use in historical record before Hamming was alive.</span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="ss">- </span>Typically I avoid using terms where someone is named after someone who did not invent it.</span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="ss">- </span>I don't have alternate name in this case.</span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="ss">    - </span>It can be called "edit distance" but there are other edit distances.</span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="ss">- </span>It must be remarked upon that an abstract mathematical concept was named after a US Ivy Leaguer who worked on the Manhattan Project, and that this naming is highly political.</span>
+<span id="cb7-47"><a href="#cb7-47"></a></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="fu"># Weight</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="fu">## Definition</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="at">&gt; The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a></span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="ss">- </span>This adopts the formal computer science notion of referring to bit strings as:</span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="ss">    - </span>*words* in the </span>
+<span id="cb7-56"><a href="#cb7-56"></a><span class="ss">    - </span>*languages*, which is the set of all possible bitstrings</span>
+<span id="cb7-57"><a href="#cb7-57"></a><span class="ss">    - </span>that is composed of the *symbols*, which are the bit values $<span class="sc">\{</span>0, 1<span class="sc">\}</span>$</span>
+<span id="cb7-58"><a href="#cb7-58"></a><span class="ss">- </span>So, Hamming weight of a byte is the number of <span class="in">`1`</span>s in that byte.</span>
+<span id="cb7-59"><a href="#cb7-59"></a></span>
+<span id="cb7-60"><a href="#cb7-60"></a><span class="fu">## Your task</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="in">```rs</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="kw">fn</span> weight_u8(byte<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="kw">fn</span> weight_u64(word<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="kw">fn</span> weight_bytes(bytes<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a><span class="kw">fn</span> weight_words(words<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="in">```</span></span>
+<span id="cb7-69"><a href="#cb7-69"></a></span>
+<span id="cb7-70"><a href="#cb7-70"></a><span class="ss">- </span>You may wish to follow the Rust convention of implementing these in a <span class="in">`src/lib.rs`</span> file.</span>
+<span id="cb7-71"><a href="#cb7-71"></a><span class="ss">    - </span>You will need to prefix them as <span class="in">`pub fn`</span> in <span class="in">`src/lib.rs`</span></span>
+<span id="cb7-72"><a href="#cb7-72"></a><span class="ss">    - </span>You will need to prefix them with your package name and <span class="in">`::`</span> in <span class="in">`src/main.rs`</span></span>
+<span id="cb7-73"><a href="#cb7-73"></a><span class="ss">        - </span>I used <span class="in">`hamming::weight_u8`</span>, for example.</span>
+<span id="cb7-74"><a href="#cb7-74"></a><span class="ss">- </span>This convention will be required for the homework, but is not required now.</span>
+<span id="cb7-75"><a href="#cb7-75"></a></span>
+<span id="cb7-76"><a href="#cb7-76"></a><span class="fu">## Template files</span></span>
+<span id="cb7-77"><a href="#cb7-77"></a></span>
+<span id="cb7-78"><a href="#cb7-78"></a><span class="ss">- </span>I made a package:</span>
+<span id="cb7-79"><a href="#cb7-79"></a><span class="in">```sh</span></span>
+<span id="cb7-80"><a href="#cb7-80"></a><span class="ex">cargo</span> new 31 <span class="at">--name</span> hamming <span class="at">--vcs</span> none</span>
+<span id="cb7-81"><a href="#cb7-81"></a><span class="in">```</span></span>
+<span id="cb7-82"><a href="#cb7-82"></a><span class="ss">- </span>I wrote a library function:</span>
+<span id="cb7-83"><a href="#cb7-83"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a><span class="in">pub fn weight_u8(byte:u8) -&gt; u64 {</span></span>
+<span id="cb7-85"><a href="#cb7-85"></a><span class="in">    let mut cnt : u64 = 0;</span></span>
+<span id="cb7-86"><a href="#cb7-86"></a><span class="in">    // This is wrong.</span></span>
+<span id="cb7-87"><a href="#cb7-87"></a><span class="in">    cnt += 1;</span></span>
+<span id="cb7-88"><a href="#cb7-88"></a><span class="in">    // That was wrong.</span></span>
+<span id="cb7-89"><a href="#cb7-89"></a><span class="in">    return cnt;</span></span>
+<span id="cb7-90"><a href="#cb7-90"></a></span>
+<span id="cb7-91"><a href="#cb7-91"></a><span class="in">```</span></span>
+<span id="cb7-92"><a href="#cb7-92"></a><span class="ss">- </span>I wrote some tests:</span>
+<span id="cb7-93"><a href="#cb7-93"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb7-94"><a href="#cb7-94"></a><span class="in">fn main() {</span></span>
+<span id="cb7-95"><a href="#cb7-95"></a><span class="in">    dbg!(hamming::weight_u8(0x33_u8));</span></span>
+<span id="cb7-96"><a href="#cb7-96"></a><span class="in">}</span></span>
+<span id="cb7-97"><a href="#cb7-97"></a><span class="in">```</span></span>
+<span id="cb7-98"><a href="#cb7-98"></a><span class="ss">- </span>After fixing my function, I saw the following:</span>
+<span id="cb7-99"><a href="#cb7-99"></a><span class="in">```sh</span></span>
+<span id="cb7-100"><a href="#cb7-100"></a><span class="ex">$</span> cargo run</span>
+<span id="cb7-101"><a href="#cb7-101"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb7-102"><a href="#cb7-102"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/hamming</span><span class="kw">`</span></span>
+<span id="cb7-103"><a href="#cb7-103"></a><span class="ex">[src/main.rs:2:5]</span> hamming::weight_u8<span class="er">(</span><span class="ex">0x33_u8</span><span class="kw">)</span> <span class="ex">=</span> 4</span>
+<span id="cb7-104"><a href="#cb7-104"></a><span class="in">```</span></span>
+<span id="cb7-105"><a href="#cb7-105"></a></span>
+<span id="cb7-106"><a href="#cb7-106"></a><span class="fu"># Distance</span></span>
+<span id="cb7-107"><a href="#cb7-107"></a></span>
+<span id="cb7-108"><a href="#cb7-108"></a><span class="fu">## Definition</span></span>
+<span id="cb7-109"><a href="#cb7-109"></a></span>
+<span id="cb7-110"><a href="#cb7-110"></a><span class="at">&gt; In information theory, the Hamming distance between two strings or vectors of equal length is the number of positions at which the corresponding symbols are different.</span></span>
+<span id="cb7-111"><a href="#cb7-111"></a></span>
+<span id="cb7-112"><a href="#cb7-112"></a><span class="ss">- </span>The Hamming weight is the Hamming distance from the string of all <span class="in">`0`</span> symbols.</span>
+<span id="cb7-113"><a href="#cb7-113"></a></span>
+<span id="cb7-114"><a href="#cb7-114"></a><span class="fu">## Your task</span></span>
+<span id="cb7-115"><a href="#cb7-115"></a></span>
+<span id="cb7-116"><a href="#cb7-116"></a><span class="ss">- </span>Using the bitwise operators, shifts, and addition, write the following functions:</span>
+<span id="cb7-117"><a href="#cb7-117"></a><span class="in">```rs</span></span>
+<span id="cb7-118"><a href="#cb7-118"></a><span class="kw">fn</span> distance_u8(b<span class="op">:</span><span class="dt">u8</span><span class="op">,</span> c<span class="op">:</span><span class="dt">u8</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-119"><a href="#cb7-119"></a><span class="kw">fn</span> distance_u64(w<span class="op">:</span><span class="dt">u64</span><span class="op">,</span> x<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-120"><a href="#cb7-120"></a><span class="kw">fn</span> distance_bytes(bs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;,</span> cs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-121"><a href="#cb7-121"></a><span class="kw">fn</span> distance_words(ws<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> xs<span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">u64</span></span>
+<span id="cb7-122"><a href="#cb7-122"></a><span class="in">```</span></span>
+<span id="cb7-123"><a href="#cb7-123"></a></span>
+<span id="cb7-124"><a href="#cb7-124"></a><span class="ss">- </span>You may change the parameter names if those don't make sense to you.</span>
+<span id="cb7-125"><a href="#cb7-125"></a><span class="ss">    - </span>They were procedurally generated.</span>
+<span id="cb7-126"><a href="#cb7-126"></a></span>
+<span id="cb7-127"><a href="#cb7-127"></a><span class="fu">## Today</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a></span>
+<span id="cb7-129"><a href="#cb7-129"></a><span class="ss">- </span><span class="va">[x]</span> Hamming</span>
+<span id="cb7-130"><a href="#cb7-130"></a><span class="ss">- </span><span class="va">[x]</span> Hamming weight</span>
+<span id="cb7-131"><a href="#cb7-131"></a><span class="ss">- </span><span class="va">[x]</span> Hamming distance</span>
+<span id="cb7-132"><a href="#cb7-132"></a></span>
+<span id="cb7-133"><a href="#cb7-133"></a><span class="fu"># Challenge Problems</span></span>
+<span id="cb7-134"><a href="#cb7-134"></a></span>
+<span id="cb7-135"><a href="#cb7-135"></a><span class="fu">## Strings as bitstrings</span></span>
+<span id="cb7-136"><a href="#cb7-136"></a></span>
+<span id="cb7-137"><a href="#cb7-137"></a><span class="ss">- </span>Compute the Hamming distance between the strings <span class="in">`Willamette`</span> and <span class="in">`Xjmmbnfuuf`</span>.</span>
+<span id="cb7-138"><a href="#cb7-138"></a><span class="ss">- </span>Successfully pronounce <span class="in">`Xjmmbnfuuf`</span></span>
+<span id="cb7-139"><a href="#cb7-139"></a></span>
+<span id="cb7-140"><a href="#cb7-140"></a><span class="fu">## POPCNT</span></span>
+<span id="cb7-141"><a href="#cb7-141"></a></span>
+<span id="cb7-142"><a href="#cb7-142"></a><span class="ss">- </span>Read <span class="co">[</span><span class="ot">this paper</span><span class="co">](https://arxiv.org/pdf/1611.07612)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

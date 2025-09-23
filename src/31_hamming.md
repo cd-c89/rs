@@ -31,7 +31,7 @@ format: html
 
 ## The person
 
-> [Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics,[5] and received his Bachelor of Science degree in 1937.](https://en.wikipedia.org/wiki/Richard_Hamming)
+> [Hamming initially wanted to study engineering, but money was scarce during the Great Depression, and the only scholarship offer he received came from the University of Chicago, which had no engineering school. Instead, he became a science student, majoring in mathematics, and received his Bachelor of Science degree in 1937.](https://en.wikipedia.org/wiki/Richard_Hamming)
 
 <center>
 <img style="width:50%" src="https://i.kym-cdn.com/photos/images/newsfeed/002/519/734/df4">
@@ -80,7 +80,7 @@ fn weight_words(words:Vec<u64>) -> u64
 cargo new 31 --name hamming --vcs none
 ```
 - I wrote a library function:
-```{.rs filename="src/lib.rs")
+```{.rs filename="src/lib.rs"}
 pub fn weight_u8(byte:u8) -> u64 {
     let mut cnt : u64 = 0;
     // This is wrong.
@@ -90,7 +90,7 @@ pub fn weight_u8(byte:u8) -> u64 {
 
 ```
 - I wrote some tests:
-```{.rs filename="src/main.rs")
+```{.rs filename="src/main.rs"}
 fn main() {
     dbg!(hamming::weight_u8(0x33_u8));
 }

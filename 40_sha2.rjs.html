@@ -559,6 +559,9 @@ h_a(x) = a x \pmod{M}
 </section>
 <section id="test-it" class="slide level2">
 <h2>Test it:</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>h <span class="op">=</span> <span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
+<span id="cb7-2"><a></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
+<span id="cb7-3"><a></a><span class="cf">assert</span>(<span class="bu">set</span>(h(x, a, M) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(M)) <span class="op">==</span> <span class="bu">set</span>(<span class="bu">range</span>(M)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>As a rule we shouldn’t try to write proofs/definitions in Python, but…</li>
 <li>Small <span class="math inline">\(M = 2^{0x08} = 256\)</span> means our computer can handle all possibilities.</li>
@@ -716,16 +719,16 @@ k + l + 129 \equiv 0 \pmod{1024}
 <ul>
 <li>Perhaps easier to show with strings.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>M <span class="op">=</span> <span class="st">"Hello I am a message of some length. "</span> <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb7-2"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
-<span id="cb7-3"><a></a>k <span class="op">=</span> <span class="dv">1024</span></span>
-<span id="cb7-4"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
-<span id="cb7-5"><a></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
-<span id="cb7-6"><a></a><span class="bu">print</span>(<span class="st">"l="</span>, l, <span class="st">"k="</span>, k, <span class="st">"pad="</span>, <span class="st">"0x8"</span> <span class="op">+</span> <span class="st">"0"</span> <span class="op">*</span> (k<span class="op">//</span><span class="dv">4</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:032x}</span><span class="ss">"</span>) <span class="co">## 128 // 4 == 32</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>M <span class="op">=</span> <span class="st">"Hello I am a message of some length. "</span> <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb8-2"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
+<span id="cb8-3"><a></a>k <span class="op">=</span> <span class="dv">1024</span></span>
+<span id="cb8-4"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
+<span id="cb8-5"><a></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
+<span id="cb8-6"><a></a><span class="bu">print</span>(<span class="st">"l="</span>, l, <span class="st">"k="</span>, k, <span class="st">"pad="</span>, <span class="st">"0x8"</span> <span class="op">+</span> <span class="st">"0"</span> <span class="op">*</span> (k<span class="op">//</span><span class="dv">4</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:032x}</span><span class="ss">"</span>) <span class="co">## 128 // 4 == 32</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>We see:</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="va">l</span><span class="op">=</span> <span class="ex">888</span> k= 7 pad= 0x800000000000000000000000000000378</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a></a><span class="va">l</span><span class="op">=</span> <span class="ex">888</span> k= 7 pad= 0x800000000000000000000000000000378</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="hash-computation" class="slide level2">
 <h2>Hash Computation</h2>
@@ -764,10 +767,10 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <li>We specify bitwise operations over <strong>exactly</strong> 64 bit words.</li>
 <li>In Rust, we’d use<code>u64</code></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource C number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a></a>fn rotate<span class="op">(</span>a<span class="op">:</span>u64<span class="op">,</span> b<span class="op">:</span>u64<span class="op">)</span> <span class="op">-&gt;</span> u64 <span class="op">{</span></span>
-<span id="cb9-2"><a></a>    <span class="co">// Your code here!</span></span>
-<span id="cb9-3"><a></a>    <span class="cf">return</span> a<span class="op">;</span></span>
-<span id="cb9-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource C number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a></a>fn rotate<span class="op">(</span>a<span class="op">:</span>u64<span class="op">,</span> b<span class="op">:</span>u64<span class="op">)</span> <span class="op">-&gt;</span> u64 <span class="op">{</span></span>
+<span id="cb10-2"><a></a>    <span class="co">// Your code here!</span></span>
+<span id="cb10-3"><a></a>    <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb10-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="operations" class="slide level2">
 <h2>Operations</h2>
@@ -829,25 +832,25 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb10-2"><a></a>    <span class="kw">let</span> x <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">18_000_000_000_000_000_000</span><span class="op">;</span></span>
-<span id="cb10-3"><a></a>    <span class="pp">dbg!</span>(x <span class="op">+</span> x)<span class="op">;</span></span>
-<span id="cb10-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-2"><a></a>    <span class="kw">let</span> x <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">18_000_000_000_000_000_000</span><span class="op">;</span></span>
+<span id="cb11-3"><a></a>    <span class="pp">dbg!</span>(x <span class="op">+</span> x)<span class="op">;</span></span>
+<span id="cb11-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="we-see" class="slide level2">
 <h2>We see</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a></a><span class="ex">$</span> cargo r</span>
-<span id="cb11-2"><a></a>   <span class="ex">Compiling</span> bits v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/30</span><span class="kw">)</span></span>
-<span id="cb11-3"><a></a><span class="ex">error:</span> this arithmetic operation will overflow</span>
-<span id="cb11-4"><a></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:4:10</span>
-<span id="cb11-5"><a></a>  <span class="kw">|</span></span>
-<span id="cb11-6"><a></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">dbg!</span><span class="er">(</span><span class="ex">x</span> + x<span class="kw">);</span></span>
-<span id="cb11-7"><a></a>  <span class="kw">|</span>          <span class="ex">^^^^^</span> attempt to compute <span class="kw">`</span><span class="ex">18000000000000000000_u64</span> + 18000000000000000000_u64<span class="kw">`</span>, which would overflow</span>
-<span id="cb11-8"><a></a>  <span class="kw">|</span></span>
-<span id="cb11-9"><a></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[deny(arithmetic_overflow)]</span><span class="kw">`</span> on by default</span>
-<span id="cb11-10"><a></a></span>
-<span id="cb11-11"><a></a><span class="ex">error:</span> could not compile <span class="kw">`</span><span class="ex">bits</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"bits"</span><span class="kw">)</span> <span class="ex">due</span> to 1 previous error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="ex">$</span> cargo r</span>
+<span id="cb12-2"><a></a>   <span class="ex">Compiling</span> bits v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/30</span><span class="kw">)</span></span>
+<span id="cb12-3"><a></a><span class="ex">error:</span> this arithmetic operation will overflow</span>
+<span id="cb12-4"><a></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:4:10</span>
+<span id="cb12-5"><a></a>  <span class="kw">|</span></span>
+<span id="cb12-6"><a></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">dbg!</span><span class="er">(</span><span class="ex">x</span> + x<span class="kw">);</span></span>
+<span id="cb12-7"><a></a>  <span class="kw">|</span>          <span class="ex">^^^^^</span> attempt to compute <span class="kw">`</span><span class="ex">18000000000000000000_u64</span> + 18000000000000000000_u64<span class="kw">`</span>, which would overflow</span>
+<span id="cb12-8"><a></a>  <span class="kw">|</span></span>
+<span id="cb12-9"><a></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[deny(arithmetic_overflow)]</span><span class="kw">`</span> on by default</span>
+<span id="cb12-10"><a></a></span>
+<span id="cb12-11"><a></a><span class="ex">error:</span> could not compile <span class="kw">`</span><span class="ex">bits</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"bits"</span><span class="kw">)</span> <span class="ex">due</span> to 1 previous error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="ternary-bitwise" class="slide level2">
 <h2>Ternary Bitwise</h2>
@@ -872,7 +875,7 @@ H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
 <li>Also work on a value <span class="math inline">\(n : 0 \leq n \leq 63\)</span></li>
 <li>Or,</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="cf">assert</span>(n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="cf">assert</span>(n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="simple-shiftrotate" class="slide level2">
@@ -967,7 +970,7 @@ M^{(i)}_j &amp; 0 \leq j \leq 15 \\
 <ul>
 <li>Iterate <span class="math inline">\(j = 0\)</span> to <span class="math inline">\(79\)</span>:</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">79</span>):</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">79</span>):</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Precompute two temporary values (or not) <span class="math display">\[
 \begin{align}
