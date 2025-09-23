@@ -1,0 +1,2567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>IEEE 754 – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./42_sha512.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./50_754.html">IEEE 754</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hamming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_sha2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50_754.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">IEEE 754</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#mission-statement" id="toc-mission-statement" class="nav-link" data-scroll-target="#mission-statement">Mission Statement</a></li>
+  <li><a href="#common-fallacies" id="toc-common-fallacies" class="nav-link" data-scroll-target="#common-fallacies">Common Fallacies</a></li>
+  <li><a href="#common-fallacies-2.0" id="toc-common-fallacies-2.0" class="nav-link" data-scroll-target="#common-fallacies-2.0">Common Fallacies 2.0</a></li>
+  <li><a href="#anatomy-of-ieee-floats" id="toc-anatomy-of-ieee-floats" class="nav-link" data-scroll-target="#anatomy-of-ieee-floats">Anatomy of IEEE Floats</a></li>
+  <li><a href="#ieee-float-specification" id="toc-ieee-float-specification" class="nav-link" data-scroll-target="#ieee-float-specification">IEEE Float Specification</a></li>
+  <li><a href="#assurances" id="toc-assurances" class="nav-link" data-scroll-target="#assurances">Assurances</a></li>
+  <li><a href="#assurances-2.0" id="toc-assurances-2.0" class="nav-link" data-scroll-target="#assurances-2.0">Assurances 2.0</a></li>
+  <li><a href="#ieee-float-specification-1" id="toc-ieee-float-specification-1" class="nav-link" data-scroll-target="#ieee-float-specification-1">IEEE Float Specification</a></li>
+  <li><a href="#aside-scientific-notation" id="toc-aside-scientific-notation" class="nav-link" data-scroll-target="#aside-scientific-notation">Aside: Scientific Notation</a></li>
+  <li><a href="#aside-explanation" id="toc-aside-explanation" class="nav-link" data-scroll-target="#aside-explanation">Aside: Explanation</a></li>
+  <li><a href="#aside-physical-examples" id="toc-aside-physical-examples" class="nav-link" data-scroll-target="#aside-physical-examples">Aside: Physical Examples</a></li>
+  <li><a href="#aside-economic-examples" id="toc-aside-economic-examples" class="nav-link" data-scroll-target="#aside-economic-examples">Aside: Economic Examples</a></li>
+  <li><a href="#ieee-layout" id="toc-ieee-layout" class="nav-link" data-scroll-target="#ieee-layout">IEEE Layout</a></li>
+  <li><a href="#with-binary" id="toc-with-binary" class="nav-link" data-scroll-target="#with-binary">With Binary</a></li>
+  <li><a href="#singles-and-doubles" id="toc-singles-and-doubles" class="nav-link" data-scroll-target="#singles-and-doubles">Singles and Doubles</a></li>
+  <li><a href="#understanding-check" id="toc-understanding-check" class="nav-link" data-scroll-target="#understanding-check">Understanding check</a></li>
+  <li><a href="#special-floats---nan" id="toc-special-floats---nan" class="nav-link" data-scroll-target="#special-floats---nan">Special Floats - NaN</a></li>
+  <li><a href="#special-floats" id="toc-special-floats" class="nav-link" data-scroll-target="#special-floats">Special Floats</a>
+  <ul class="collapse">
+  <li><a href="#simple-example" id="toc-simple-example" class="nav-link" data-scroll-target="#simple-example">Simple Example</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">0.012345000170171261000000000000 !=</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.0148140005767345430</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">(-0.002469000406563282000000000000)</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">12.345000267028809000000000000000 !=</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">11.701118469238281000000000000000</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">(0.643881797790527340000000000000)</a></li>
+  <li><a href="#𝑥" id="toc-𝑥" class="nav-link" data-scroll-target="#𝑥">𝑥</a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">10. 0</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#demystifying-floating-point" id="toc-demystifying-floating-point" class="nav-link" data-scroll-target="#demystifying-floating-point">Demystifying Floating Point</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="50_754.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">IEEE 754</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li><strong>Welcome</strong> to Systems in Rust</li>
+<li><strong>Action Items</strong>:
+<ul>
+<li>“SHA-512” is due on next Friday</li>
+<li>Lecture on numbers, inspired by the lab, while we wait.</li>
+</ul></li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul>
+<li>Understand the basics of floats</li>
+<li>Understand the language of floats</li>
+<li>Get a feel for when further investigation is required</li>
+<li>Have a few tools ready to help</li>
+<li>Be prepared to keep learning about IEEE floats</li>
+</ul>
+</section>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<ul>
+<li>Yoinked</li>
+<li><a href="https://github.com/DigitalInBlue/CPPCon2015">url</a></li>
+<li>Author John Farrier, Booz Allen Hamilton</li>
+</ul>
+</section>
+<section id="mission-statement" class="level2">
+<h2 class="anchored" data-anchor-id="mission-statement">Mission Statement</h2>
+<ul>
+<li>I’m a normal person.
+<ul>
+<li>I think 5/2 is 2.5.</li>
+</ul></li>
+<li>I’m a scientist.
+<ul>
+<li>I’m solving “Black-Scholes”</li>
+<li><a href="https://numba.pydata.org/numba-examples/examples/finance/blackscholes/results.html">Does anyone know what this is doing?</a> <span class="math display">\[
+d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\frac{S_t}{K}\right) + \left(r - q - \frac{1}{2}\sigma^2\right)(T - t)\right]
+\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="common-fallacies" class="level2">
+<h2 class="anchored" data-anchor-id="common-fallacies">Common Fallacies</h2>
+<ul>
+<li>“Floating point numbers are numbers”
+<ul>
+<li><code>max(count())</code> Pinocchios</li>
+</ul></li>
+<li>“It’s floating point error”
+<ul>
+<li>“All floating point involves magical rounding errors”</li>
+</ul></li>
+<li>“Linux and Windows handle floats differently”</li>
+<li>“Floating point represents an interval value near the actual value”</li>
+</ul>
+</section>
+<section id="common-fallacies-2.0" class="level2">
+<h2 class="anchored" data-anchor-id="common-fallacies-2.0">Common Fallacies 2.0</h2>
+<ul>
+<li>“A double (an <code>f64</code>) holds 15 decimal places and I only need 3, so I have nothing to worry about”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>“My programming language does better math than your programming language”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li>“Why can’t computers just store whatever number I use”<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</ul>
+</section>
+<section id="anatomy-of-ieee-floats" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-ieee-floats">Anatomy of IEEE Floats</h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IEEE754.svg/550px-IEEE754.svg.png" class="img-fluid"></p>
+</section>
+<section id="ieee-float-specification" class="level2">
+<h2 class="anchored" data-anchor-id="ieee-float-specification">IEEE Float Specification</h2>
+<ul>
+<li>IEEE 754-1985, IEEE 854-1987, IEEE 754-2008
+<ul>
+<li>These are paywalled.</li>
+<li>Those are years.</li>
+</ul></li>
+<li>Provide for portable, provably consistent math
+<ul>
+<li>Consistent, not correct.</li>
+</ul></li>
+</ul>
+</section>
+<section id="assurances" class="level2">
+<h2 class="anchored" data-anchor-id="assurances">Assurances</h2>
+<ul>
+<li>Ensure some significant mathematical identities hold true:
+<ul>
+<li><span class="math inline">\(x + y  = y + x\)</span>
+<ul>
+<li>Symmetry of addition</li>
+</ul></li>
+<li><span class="math inline">\(x + 0 = x\)</span>
+<ul>
+<li>Additive identity</li>
+</ul></li>
+<li><span class="math inline">\(x = y \implies x - y = 0\)</span>
+<ul>
+<li>Identify under subtraction</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="assurances-2.0" class="level2">
+<h2 class="anchored" data-anchor-id="assurances-2.0">Assurances 2.0</h2>
+<pre><code>$$\frac{x}{\sqrt{x^2+y^2}} \leq 1$$</code></pre>
+<ul>
+<li>What is missing?</li>
+</ul>
+</section>
+<section id="ieee-float-specification-1" class="level2">
+<h2 class="anchored" data-anchor-id="ieee-float-specification-1">IEEE Float Specification</h2>
+<ul>
+<li>Ensure every floating point number is unique</li>
+<li>Ensure every floating point number has an opposite
+<ul>
+<li><em>Zero</em> is a special case because of this</li>
+</ul></li>
+<li>Specifies algorithms for addition, subtraction, multiplication, division, and square-root
+<ul>
+<li>Not really operations/relations! They are algorithms.</li>
+</ul></li>
+</ul>
+</section>
+<section id="aside-scientific-notation" class="level2">
+<h2 class="anchored" data-anchor-id="aside-scientific-notation">Aside: Scientific Notation</h2>
+<blockquote class="blockquote">
+<p><a href="https://en.wikipedia.org/wiki/Scientific_notation">Scientific notation is a way of expressing numbers that are too large or too small to be conveniently written in decimal form, since to do so would require writing out an inconveniently long string of digits.</a></p>
+</blockquote>
+<ul>
+<li>In scientific notation, nonzero numbers are written in the form</li>
+</ul>
+<p><span class="math display">\[a \times 10^b\]</span></p>
+</section>
+<section id="aside-explanation" class="level2">
+<h2 class="anchored" data-anchor-id="aside-explanation">Aside: Explanation</h2>
+<ul>
+<li>In scientific notation, nonzero numbers are written in the form</li>
+</ul>
+<p><span class="math display">\[a \times 10^b\]</span></p>
+<ul>
+<li><span class="math inline">\(a\)</span> (the coefficient or mantissa) is a number greater than or equal to 1 and less than 10 (<span class="math inline">\(1 \le |a| &lt; 10\)</span>).</li>
+<li><span class="math inline">\(10\)</span> is the base.</li>
+<li><span class="math inline">\(b\)</span> (the exponent) is an integer.</li>
+</ul>
+</section>
+<section id="aside-physical-examples" class="level2">
+<h2 class="anchored" data-anchor-id="aside-physical-examples">Aside: Physical Examples</h2>
+<ol type="1">
+<li><p><strong>Speed of light:</strong> The speed of light in a vacuum is approximately <span class="math inline">\(300,000,000 \text{ m/s}\)</span> <span class="math display">\[
+3 \times 10^8 \text{ m/s}
+\]</span></p></li>
+<li><p><strong>Mass of an electron:</strong> The mass of an electron is approximately <span class="math inline">\(0.00000000000000000000000000091093837 \text{ g}\)</span>. <span class="math display">\[
+9.1093837 \times 10^{-28} \text{ g}
+\]</span></p></li>
+</ol>
+</section>
+<section id="aside-economic-examples" class="level2">
+<h2 class="anchored" data-anchor-id="aside-economic-examples">Aside: Economic Examples</h2>
+<ul>
+<li>We can use social science numbers.</li>
+<li><a href="https://www.newyorkfed.org/research/college-labor-market#--:explore:outcomes-by-major">Labor Market Outcomes of College Graduates by Major</a></li>
+<li>Computer Science majors in 2023 have a $80,000 median wage “early career”
+<ul>
+<li><span class="math inline">\(8.0000 \times 10^4\)</span></li>
+</ul></li>
+<li>And 6.1% unemployment
+<ul>
+<li><span class="math inline">\(6.1 \times 10^{-2}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="ieee-layout" class="level2">
+<h2 class="anchored" data-anchor-id="ieee-layout">IEEE Layout</h2>
+<ul>
+<li>An approximation using scientific notation
+<ul>
+<li><span class="math inline">\(x = -1^s \times 2^e \times 1.m\)</span></li>
+<li><span class="math inline">\(x = -1^{\text{sign bit}} \times \text{base} 2^{\text{exponent}} \times 1.\text{mantissa}\)</span>
+<ul>
+<li>Where the mantissa is the technical term for the the digits after the decimal point.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="with-binary" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="with-binary">With Binary</h2>
+<ul>
+<li><span class="math inline">\(x = -0b1^{\text{0b0}} \times 0b10^{\text{0b10000000}}  \times 0b1.10010010000111111011011\)</span></li>
+<li>Express in memory as the concatenation:
+<ul>
+<li><code>0b0</code> to <code>0b10000000</code> to <code>0b10010010000111111011011</code></li>
+<li><code>01000000010010010000111111011011</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="singles-and-doubles" class="level2">
+<h2 class="anchored" data-anchor-id="singles-and-doubles">Singles and Doubles</h2>
+<ul>
+<li>32 - bits = 1 sign bit + 8 exponent bits + 23 mantissa bits
+<ul>
+<li><code>0b0</code> to <code>0b10000000</code> to <code>0b10010010000111111011011</code></li>
+</ul></li>
+<li>64 - bits = 1 sign bit + 12 exponent bits + 52 mantissa bits</li>
+</ul>
+</section>
+<section id="understanding-check" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-check">Understanding check</h2>
+<ul>
+<li>What is the probability a <em>real number</em> <span class="math inline">\(a \in \mathbb{R}\)</span> has an exact float representation?</li>
+<li>What is the probability an <em>integer</em> <span class="math inline">\(n \in \mathbb{Z}\)</span> has an exact float representation?</li>
+<li>What is the probability a <em>course number</em> <span class="math inline">\(n &lt; 600\)</span> has an exact float representation?</li>
+</ul>
+</section>
+<section id="special-floats---nan" class="level1">
+<h1>Special Floats - NaN</h1>
+<ul>
+<li>Divide by Zero
+<ul>
+<li>1 / 0</li>
+</ul></li>
+<li>Not a Number (NaN)</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
+<span id="cb2-4"><a href="#cb2-4"></a>np.float32(inf)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>Traceback (most recent call last):</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="special-floats" class="level1">
+<h1>Special Floats</h1>
+<ul>
+<li>Signed Infinity
+<ul>
+<li>Overflow protection</li>
+</ul></li>
+<li>Signed Zero
+<ul>
+<li>Underflow protection, preserves sign</li>
+<li><ul>
+<li>0 =− 0</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Now that we are experts…</p>
+<p>https://github.com/DigitalInBlue/CPPCon</p>
+<p>Simple Example</p>
+<pre><code>auto zeroPointOne = 0.1f;
+auto zeroPointTwo = 0.2f;
+auto zeroPointThree = 0.3f;
+auto sum = zeroPointOne + zeroPointTwo;</code></pre>
+<pre><code>cppCon() &lt;&lt; "zeroPointOne == " &lt;&lt; zeroPointOne &lt;&lt; "\n";
+cppCon() &lt;&lt; "zeroPointTwo == " &lt;&lt; zeroPointTwo &lt;&lt; "\n";
+cppCon() &lt;&lt; "zeroPointThree == " &lt;&lt; zeroPointThree &lt;&lt; "\n";
+cppCon() &lt;&lt; "sum == " &lt;&lt; sum &lt;&lt; "\n";</code></pre>
+<section id="simple-example" class="level2">
+<h2 class="anchored" data-anchor-id="simple-example">Simple Example</h2>
+<ul>
+<li>zeroPointOne == 0.</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+<li>zeroPointOne == 0. Simple Example</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+<li>zeroPointOne == 0.</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+</ul>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][00000000][ 00000000000000000000000 ]</p>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.</p>
+<ul>
+<li>The exponent is <em>shift- 127</em> encoded</li>
+<li>0xeeeeeeee - 127</li>
+</ul>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.0</p>
+<p>1.0000000000000000</p>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>[0][01111111][00000000000000000000001]</p>
+<p>1.0000001192092896</p>
+<p>“Epsilon”</p>
+<ul>
+<li>The difference between 1.0 and the next available floating point number</li>
+<li>Useful for programmatic “almost equal” computations</li>
+<li>std::numeric_limits<t>::epsilon</t></li>
+</ul>
+<p>Significant Digits</p>
+<ul>
+<li>Significant digits measure precision
+<ul>
+<li>Remember the “exponent” field</li>
+<li>They are not a magnitude</li>
+</ul></li>
+<li>How close is close enough?
+<ul>
+<li>Define as significant digits, not absolute error</li>
+</ul></li>
+</ul>
+<pre><code>Sign ExponentMantissa TotalExponent bias Bits precision Significant Digits
+Half(IEEE 754-2008) 1 5 10 16 15 11 3 - 4
+Single 1 8 23 32 127 24 6 - 9
+Double 1 11 52 64 1023 53 15 - 17
+x86 extended precision 1 15 64 80 16383 64 18 - 21
+Quad 1 15 112 128 16383 113 33 - 36
+http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</code></pre>
+<p>Storage of the Very Small</p>
+<ul>
+<li>For 32-bit floats, the minimum base 10 exponent is -36.</li>
+<li>How is 1. 0 𝑒−^37 represented?</li>
+</ul>
+<p>1.0e- 37</p>
+<p>[0][00000000][11011001110001111101110]</p>
+<p>0.09999999e- 37</p>
+<p>“Denormalized Number”</p>
+<ul>
+<li>Numbers that have a zero exponent</li>
+<li>Required when the exponent is below the minimum exponent</li>
+<li>Helps prevent underflow</li>
+</ul>
+<p>1.0e- 37</p>
+<p>[0][00000000][11011001110001111101110]</p>
+<p>0.09999999e- 37</p>
+<p>Floating Point Precision</p>
+<ul>
+<li>Representation is not uniform between numbers</li>
+<li>Most precision lies between 0.0 and 0.1</li>
+<li>Precision falls away</li>
+<li>std::nextafter</li>
+</ul>
+<p>Floating Point Precision</p>
+<pre><code>http://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx</code></pre>
+<p>Floating Point Precision</p>
+<p>The number of floats from 0.0</p>
+<ul>
+<li>…to 0.1 = 1,036,831,949</li>
+<li>…to 0.2 = 8,388,608</li>
+<li>… to 0.4 = 8,388,608</li>
+<li>… to 0.8 = 8,388,608</li>
+<li>… to 1.6 = 8,388,608</li>
+<li>… to 3.2 = 8,388,608</li>
+</ul>
+<p>Errors in Floating Point</p>
+<p>https://github.com/DigitalInBlue/CPPCon2015</p>
+<p>Storage of π</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>Measuring Error: “Ulps”</p>
+<ul>
+<li>Units in Last Place
+<ul>
+<li>“Harrison” and “Goldberg” definitions</li>
+<li>(6-8 definitions floating around)</li>
+</ul></li>
+<li>“The gap between the two floating-point numbers</li>
+</ul>
+<p>nearest to x, even if x is one of them.” –W. Kahan</p>
+<ul>
+<li>https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT</li>
+<li>IEEE 754 requires that that elementary arithmetic</li>
+</ul>
+<p>operations are correctly rounded to within 0. 5 ulps</p>
+<ul>
+<li>Transcendental functions are generally rounded to</li>
+</ul>
+<p>between 0. 5 and 1. 0 ulps</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>9 ulps</p>
+<p>Measuring Error: “Relative Error”</p>
+<ul>
+<li>The difference between the “real” number and the</li>
+</ul>
+<p>approximated number, divided by the “real” number.</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>9 ulps</p>
+<p>2.864789e- 8 β</p>
+<p>𝜋 − (𝜋𝑓)</p>
+<p>𝜋</p>
+<pre><code>= 2. 864789 𝑒
+− 8</code></pre>
+<p>Rounding Error</p>
+<ul>
+<li>Induced by approximating an infinite range of numbers into a finite number of bits</li>
+<li>Math is done exactly, then rounded*
+<ul>
+<li>Towards the nearest</li>
+<li>Towards Zero</li>
+<li>Towards positive infinity (round up)</li>
+<li>Towards negative infinity (round down)</li>
+</ul></li>
+</ul>
+<p>*Look up “exactly rounded” as well</p>
+<p>Rounding Error</p>
+<ul>
+<li>What about rounding the half-way case? (i.e.&nbsp;0.5)
+<ul>
+<li>Round Up vs.&nbsp;Round Even</li>
+</ul></li>
+<li>Correct Rounding:
+<ul>
+<li>Basic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.</li>
+<li>If there is a tie, round to the number with an even mantissa</li>
+</ul></li>
+</ul>
+<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
+<ul>
+<li>Only used while doing calculations
+<ul>
+<li>Not stored in the float itself</li>
+<li>The mantissa is shifted in calculations to align radix</li>
+</ul></li>
+<li>The guard bits and round bits are extra precision</li>
+<li>The sticky bit is an OR of anything that shifts through it</li>
+</ul>
+<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
+<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
+<p><strong>[G][R][S]</strong></p>
+<p><strong>[0][-][-]</strong> - Round Down (do nothing)</p>
+<p><strong>[1][0][0]</strong> - Round Up if the mantissa LSB is 1</p>
+<p><strong>[1][0][1]</strong> - Round Up</p>
+<p><strong>[1][1][0]</strong> - Round Up</p>
+<p><strong>[1][1][1]</strong> - Round Up</p>
+<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
+<p>Significance Error</p>
+<ul>
+<li>Compute the Area of a Triangle
+<ul>
+<li>Heron’s Formula:
+<ul>
+<li>𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧</li>
+</ul></li>
+<li>Kahan’sAlgorithm:
+<ul>
+<li>Sort x, y, z such that 𝑥≥𝑦 ≥𝑧</li>
+<li>If 𝑧&lt; 𝑥−𝑦, then no such triangle exists.</li>
+<li>Else 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Significance Error</p>
+<pre><code>/// Area of a triangle
+/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf
+TEST(CPPCon2015, AreaOfATriangleFloat)
+{
+const auto a = 100000.0f;
+const auto b = 99999.99979f;
+const auto c = 0.00029f;</code></pre>
+<pre><code>ASSERT_TRUE(a &gt;= b);
+ASSERT_TRUE(b &gt;= c);</code></pre>
+<pre><code>auto heronsFormula = HeronsFormula(a, b, c);
+auto kahansFormula = KahansFormula(a, b, c);
+EXPECT_NE(kahansFormula, heronsFormula);
+cppCon() &lt;&lt; "Kahan: " &lt;&lt; kahansFormula;
+cppCon() &lt;&lt; "Heron: " &lt;&lt; heronsFormula;
+cppCon() &lt;&lt; "delta: " &lt;&lt; kahansFormula - heronsFormula &lt;&lt; "\n";
+}</code></pre>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Hint: The Answer is 10.0</p>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Heron: 9.999999809638328700000000000000</p>
+<p>Kahan: 10.000000077021038000000000000000</p>
+<p>delta: 0.000000267382709751018410000000</p>
+<p>Significance Error - Use Stable Algorithms</p>
+<ul>
+<li>Loss of Significance
+<ul>
+<li>Keep big numbers with big numbers, little numbers with little numbers.</li>
+</ul></li>
+<li>Parentheses can help</li>
+<li>Analysis of Algorithms is Critical</li>
+<li>The compiler won’t re-arrange your math if it cannot prove it would yield the same</li>
+</ul>
+<p>result, even if the computation would be faster</p>
+<ul>
+<li>𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0</li>
+<li>See the “Kahan’sAlgorithm” example</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>Time is used to compute distance, velocity, acceleration
+<ul>
+<li>High frequency phenomena</li>
+<li>Sensors: Doppler shift, pulse compression, PRF</li>
+</ul></li>
+<li>These computed values feed into other computed values which may or may not</li>
+</ul>
+<p>require a time component</p>
+<ul>
+<li>Thousands of computations per frame of simulation
+<ul>
+<li>Thousands of little compounding errors per frame</li>
+</ul></li>
+<li>Combine with poor or nonexistent testing</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>Accumulate Time (works for arbitrary</li>
+</ul>
+<p>time steps)</p>
+<p>auto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;</p>
+<p>// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }</p>
+<pre><code>auto totalFrames = size_t(0);
+auto frameLength = 0.01f;
+auto simTime = 0.0f;</code></pre>
+<pre><code>// Run 120 Frames
+auto simTime120Frames = 1.20f;
+totalFrames = 120;
+simTime = totalFrames * frameLength;</code></pre>
+<ul>
+<li>Delta Time (works for fixed time steps)</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<p>Accumulate Time (works for arbitrary time steps)</p>
+<ul>
+<li>1.199999999999999955591079014994 != <strong>1.199999213218688964843750000000</strong> (0.000000786781310990747329014994)</li>
+<li>12.000000000000000000000000000000 != <strong>12.000179290771484375000000000000</strong> (- 0.000179290771484375000000000000)</li>
+<li>120.000000000000000000000000000000 != <strong>120.007225036621093750000000000000</strong> (- 0.007225036621093750000000000000)</li>
+<li>600.000000000000000000000000000000 != <strong>600.274414062500000000000000000000</strong> (- 0.274414062500000000000000000000)</li>
+<li>3600.000000000000000000000000000000 != <strong>3603.204101562500000000000000000000</strong> (- 3.204101562500000000000000000000)</li>
+</ul>
+<p>Delta Time (works for fixed time steps)</p>
+<ul>
+<li>1.200000047683715820312500000000 != <strong>1.199999928474426269531250000000</strong> (0.000000119209289550781250000000)</li>
+<li>12.000000000000000000000000000000 == <strong>12.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>120.000000000000000000000000000000 == <strong>120.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>600.000000000000000000000000000000 == <strong>600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>-3600.000000000000000000000000000000 == <strong>3600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>“Sub-Microsecond Precision”
+<ul>
+<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
+</ul></li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>“Sub-Microsecond Precision”
+<ul>
+<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
+</ul></li>
+</ul>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section">0.012345000170171261000000000000 !=</h3>
+</section>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1">0.0148140005767345430</h3>
+</section>
+<section id="section-2" class="level3">
+<h3 class="anchored" data-anchor-id="section-2">(-0.002469000406563282000000000000)</h3>
+</section>
+<section id="section-3" class="level3">
+<h3 class="anchored" data-anchor-id="section-3">12.345000267028809000000000000000 !=</h3>
+</section>
+<section id="section-4" class="level3">
+<h3 class="anchored" data-anchor-id="section-4">11.701118469238281000000000000000</h3>
+</section>
+<section id="section-5" class="level3">
+<h3 class="anchored" data-anchor-id="section-5">(0.643881797790527340000000000000)</h3>
+<p>Significance Error – Don’t use IEEE Floats?</p>
+<ul>
+<li>Use integers
+<ul>
+<li>Very fast</li>
+<li>Trade more precision for less range</li>
+<li>Only input/output may be impacted by floating point conversions</li>
+<li>Financial applications represent dollars as only cents or tenth’s of cents</li>
+</ul></li>
+<li>Use a math library
+<ul>
+<li>Slower</li>
+<li>Define your own level of accuracy</li>
+<li>MPFR (w/C++ Wrapper), TTMath, Boost, GMP C++</li>
+<li>CRlibm(Correctly Rounded Mathematical Library)</li>
+</ul></li>
+</ul>
+<p>(Store simTimeas uint64_tand get microsecond precision for 584555 years.)</p>
+<p>Algebraic Assumption Error</p>
+<ul>
+<li>Mathematical Identities
+<ul>
+<li>Traditional identities (associative, commutative, distributive) do not hold</li>
+</ul></li>
+<li>Distributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)</li>
+<li>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</li>
+<li>Cannot interchange division and multiplication:</li>
+</ul>
+</section>
+<section id="𝑥" class="level3">
+<h3 class="anchored" data-anchor-id="𝑥">𝑥</h3>
+</section>
+<section id="section-6" class="level3">
+<h3 class="anchored" data-anchor-id="section-6">10. 0</h3>
+<p>≠ 𝑥 × 0. 1</p>
+<p>Does a naïve compiler make these assumptions too?</p>
+<p>https://msdn.microsoft.com/library/aa289157.aspx</p>
+<p>Algebraic Assumption Error</p>
+<pre><code>const auto oneRadian = 0.15915494309f;
+const auto control = 0.000000000015915494309f;</code></pre>
+<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
+const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
+<p>Algebraic Assumption Error</p>
+<pre><code>const auto oneRadian = 0.15915494309f;
+const auto control = 0.000000000015915494309f;</code></pre>
+<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
+const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
+<p>Control: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000</p>
+<p>Floating Point Exceptions</p>
+<ul>
+<li>Enable floating point exceptions to be alerted when things go awry.</li>
+</ul>
+<pre><code>𝑥is the exact result of the operation
+α= 192 for single precision, 1536 for double
+𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.
+See &lt;cfenv&gt; -Floating Point Environment</code></pre>
+<p>IEEE 754 Exception Result when traps disabled Argument to trap handler</p>
+<p>overflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)</p>
+<p>underflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)</p>
+<p>divide by zero ±∞ invalid operation</p>
+<p>invalid NaN invalid operation</p>
+<p>inexact round( <em>x</em> ) round( <em>x</em> )</p>
+<p>But Wait! There’s More!</p>
+<ul>
+<li>Binary to Decimal Conversion Error</li>
+<li>Summation Error</li>
+<li>Propagation Error</li>
+<li>Underflow, Overflow</li>
+<li>Type Narrowing/Widening Rules</li>
+</ul>
+<p>Miscellaneous Notes</p>
+<p><a href="http://preshing.com/images/float-point-perf.png">http://preshing.com/images/float-point-perf.png</a> https://github.com/DigitalInBlue/CPPCon2015</p>
+<p>Use Your Compiler’s Output</p>
+<ul>
+<li>warning C4244: ‘initializing’ : conversion from ‘double’ to</li>
+</ul>
+<p>‘float’, possible loss of data</p>
+<ul>
+<li>warning C4056: overflow in floating point constant arithmetic</li>
+<li>warning C4305: ‘identifier’ : truncation from ‘type1’ to</li>
+</ul>
+<p>‘type2’</p>
+<ul>
+<li>warning: conversion to ‘float’ from ‘int’ may alter its value</li>
+<li>warning: floating constant exceeds range of ‘double’</li>
+</ul>
+<p>Fused Multiply-Add (FMA)</p>
+<ul>
+<li>a = a + (b * c); a += b * c;</li>
+<li>Multiplier-accumulator (MAC Unit)</li>
+<li>One rounding</li>
+<li>Compiler Options
+<ul>
+<li>GCC = -mfma</li>
+<li>VC++ = #pragma fp_contract (off)</li>
+</ul></li>
+<li>Reference: FMA3, FMA4
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/FMA_instruction_set">http://en.wikipedia.org/wiki/FMA_instruction_set</a></li>
+</ul></li>
+</ul>
+<p>Streaming SIMD Extensions (SSE)</p>
+<ul>
+<li>SSE can provide significant performance gains
+<ul>
+<li>Supports integer, floating point, logical, conversion, shift, and shuffle operations</li>
+</ul></li>
+<li>C, C++, Fortran do not natively support SSE, but compiler-specific support exists</li>
+</ul>
+<p>Float Tricks</p>
+<pre><code>/// Fast reciprocal square root approximation for x &gt; 0.25
+/// Quake’s float Q_rsqrt(float number) is much more entertaining.
+inline float FastInvSqrt(float x)
+{
+int tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&amp;x) &gt;&gt; 1;
+auto y = *(float*)&amp;tmp;
+return y * (1.47f – 0.47f * x * y * y);
+}</code></pre>
+<p>Testing</p>
+<ul>
+<li>Design for Numerical Stability</li>
+<li>Perform Meaningful Testing</li>
+<li>Document assumptions</li>
+<li>Track sources of approximation</li>
+<li>Quantify goodness
+<ul>
+<li>Well conditioned algorithms</li>
+</ul></li>
+<li>Backward error analysis
+<ul>
+<li>Are the outputs identical for slightly modified inputs?</li>
+</ul></li>
+</ul>
+<pre><code>TEST(CPPCon2015, pointOnePlusPointTwo)
+{
+auto zeroPointOne = 0.1f;
+auto zeroPointTwo = 0.2f;
+auto zeroPointThree = 0.3f;
+auto sum = zeroPointOne + zeroPointTwo;</code></pre>
+<pre><code>EXPECT_DOUBLE_EQ(0.3f, zeroPointThree);
+EXPECT_EQ(0.3f, zeroPointThree);
+EXPECT_EQ(0.3f, sum);</code></pre>
+<pre><code>EXPECT_EQ(zeroPointThree, sum);
+EXPECT_DOUBLE_EQ(zeroPointThree, sum);
+}</code></pre>
+<p><a href="http://xkcd.com/217/">http://xkcd.com/217/</a> <a href="http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi">http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi</a></p>
+<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
+</section>
+</section>
+</section>
+<section id="demystifying-floating-point" class="level1">
+<h1>Demystifying Floating Point</h1>
+<p>John Farrier, Booz Allen Hamilton</p>
+<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
+
+
+<!-- -->
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Grammatically, this statement should be “so I have nothing about which to worry.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is true in the special case that your programming language is Rust.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is due to how many numbers there are.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./42_sha512.html" class="pagination-link" aria-label="SHA-512">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SHA-512</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb40" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1"></a><span class="co">---</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="an">title:</span><span class="co"> "IEEE 754"</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="co">---</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="fu">## Announcements</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a></span>
+<span id="cb40-7"><a href="#cb40-7"></a><span class="ss">- </span>**Welcome** to Systems in Rust</span>
+<span id="cb40-8"><a href="#cb40-8"></a><span class="ss">- </span>**Action Items**:</span>
+<span id="cb40-9"><a href="#cb40-9"></a><span class="ss">  - </span>"SHA-512" is due on next Friday</span>
+<span id="cb40-10"><a href="#cb40-10"></a><span class="ss">  - </span>Lecture on numbers, inspired by the lab, while we wait.</span>
+<span id="cb40-11"><a href="#cb40-11"></a></span>
+<span id="cb40-12"><a href="#cb40-12"></a><span class="fu">## Today</span></span>
+<span id="cb40-13"><a href="#cb40-13"></a></span>
+<span id="cb40-14"><a href="#cb40-14"></a><span class="ss">- </span>Understand the basics of floats</span>
+<span id="cb40-15"><a href="#cb40-15"></a><span class="ss">- </span>Understand the language of floats</span>
+<span id="cb40-16"><a href="#cb40-16"></a><span class="ss">- </span>Get a feel for when further investigation is required</span>
+<span id="cb40-17"><a href="#cb40-17"></a><span class="ss">- </span>Have a few tools ready to help</span>
+<span id="cb40-18"><a href="#cb40-18"></a><span class="ss">- </span>Be prepared to keep learning about IEEE floats</span>
+<span id="cb40-19"><a href="#cb40-19"></a></span>
+<span id="cb40-20"><a href="#cb40-20"></a><span class="fu">## Citation</span></span>
+<span id="cb40-21"><a href="#cb40-21"></a></span>
+<span id="cb40-22"><a href="#cb40-22"></a><span class="ss">- </span>Yoinked</span>
+<span id="cb40-23"><a href="#cb40-23"></a><span class="ss">- </span><span class="co">[</span><span class="ot">url</span><span class="co">](https://github.com/DigitalInBlue/CPPCon2015)</span></span>
+<span id="cb40-24"><a href="#cb40-24"></a><span class="ss">- </span>Author John Farrier, Booz Allen Hamilton</span>
+<span id="cb40-25"><a href="#cb40-25"></a></span>
+<span id="cb40-26"><a href="#cb40-26"></a><span class="fu">## Mission Statement</span></span>
+<span id="cb40-27"><a href="#cb40-27"></a></span>
+<span id="cb40-28"><a href="#cb40-28"></a><span class="ss">- </span>I'm a normal person.</span>
+<span id="cb40-29"><a href="#cb40-29"></a><span class="ss">    -   </span>I think 5/2 is 2.5.</span>
+<span id="cb40-30"><a href="#cb40-30"></a><span class="ss">- </span>I'm a scientist.</span>
+<span id="cb40-31"><a href="#cb40-31"></a><span class="ss">    - </span>I'm solving "Black-Scholes"</span>
+<span id="cb40-32"><a href="#cb40-32"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Does anyone know what this is doing?</span><span class="co">](https://numba.pydata.org/numba-examples/examples/finance/blackscholes/results.html)</span></span>
+<span id="cb40-33"><a href="#cb40-33"></a>$$</span>
+<span id="cb40-34"><a href="#cb40-34"></a>d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left<span class="co">[</span><span class="ot">\ln\left(\frac{S_t}{K}\right) + \left(r - q - \frac{1}{2}\sigma^2\right)(T - t)\right</span><span class="co">]</span></span>
+<span id="cb40-35"><a href="#cb40-35"></a>$$</span>
+<span id="cb40-36"><a href="#cb40-36"></a></span>
+<span id="cb40-37"><a href="#cb40-37"></a><span class="fu">## Common Fallacies</span></span>
+<span id="cb40-38"><a href="#cb40-38"></a></span>
+<span id="cb40-39"><a href="#cb40-39"></a><span class="ss">- </span>"Floating point numbers are numbers"</span>
+<span id="cb40-40"><a href="#cb40-40"></a><span class="ss">    - </span><span class="in">`max(count())`</span> Pinocchios</span>
+<span id="cb40-41"><a href="#cb40-41"></a><span class="ss">- </span>"It’s floating point error"</span>
+<span id="cb40-42"><a href="#cb40-42"></a><span class="ss">    - </span>"All floating point involves magical rounding errors"</span>
+<span id="cb40-43"><a href="#cb40-43"></a><span class="ss">- </span>"Linux and Windows handle floats differently"</span>
+<span id="cb40-44"><a href="#cb40-44"></a><span class="ss">- </span>"Floating point represents an interval value near the actual value"</span>
+<span id="cb40-45"><a href="#cb40-45"></a></span>
+<span id="cb40-46"><a href="#cb40-46"></a><span class="fu">## Common Fallacies 2.0</span></span>
+<span id="cb40-47"><a href="#cb40-47"></a></span>
+<span id="cb40-48"><a href="#cb40-48"></a><span class="ss">- </span>"A double (an <span class="in">`f64`</span>) holds 15 decimal places and I only need 3, so I have nothing to worry about"<span class="ot">[^1]</span></span>
+<span id="cb40-49"><a href="#cb40-49"></a><span class="ss">- </span>"My programming language does better math than your programming language"<span class="ot">[^2]</span></span>
+<span id="cb40-50"><a href="#cb40-50"></a><span class="ss">- </span>"Why can't computers just store whatever number I use"<span class="ot">[^3]</span></span>
+<span id="cb40-51"><a href="#cb40-51"></a></span>
+<span id="cb40-52"><a href="#cb40-52"></a><span class="ot">[^1]: </span>Grammatically, this statement should be "so I have nothing about which to worry."</span>
+<span id="cb40-53"><a href="#cb40-53"></a><span class="ot">[^2]: </span>This is true in the special case that your programming language is Rust.</span>
+<span id="cb40-54"><a href="#cb40-54"></a><span class="ot">[^3]: </span>This is due to how many numbers there are.</span>
+<span id="cb40-55"><a href="#cb40-55"></a></span>
+<span id="cb40-56"><a href="#cb40-56"></a><span class="fu">## Anatomy of IEEE Floats</span></span>
+<span id="cb40-57"><a href="#cb40-57"></a></span>
+<span id="cb40-58"><a href="#cb40-58"></a><span class="al">![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IEEE754.svg/550px-IEEE754.svg.png)</span></span>
+<span id="cb40-59"><a href="#cb40-59"></a></span>
+<span id="cb40-60"><a href="#cb40-60"></a><span class="fu">## IEEE Float Specification</span></span>
+<span id="cb40-61"><a href="#cb40-61"></a></span>
+<span id="cb40-62"><a href="#cb40-62"></a><span class="ss">- </span>IEEE 754-1985, IEEE 854-1987, IEEE 754-2008</span>
+<span id="cb40-63"><a href="#cb40-63"></a><span class="ss">    - </span>These are paywalled.</span>
+<span id="cb40-64"><a href="#cb40-64"></a><span class="ss">    - </span>Those are years.</span>
+<span id="cb40-65"><a href="#cb40-65"></a><span class="ss">- </span>Provide for portable, provably consistent math</span>
+<span id="cb40-66"><a href="#cb40-66"></a><span class="ss">    - </span>Consistent, not correct.</span>
+<span id="cb40-67"><a href="#cb40-67"></a></span>
+<span id="cb40-68"><a href="#cb40-68"></a><span class="fu">## Assurances</span></span>
+<span id="cb40-69"><a href="#cb40-69"></a></span>
+<span id="cb40-70"><a href="#cb40-70"></a><span class="ss">- </span>Ensure some significant mathematical identities hold true:</span>
+<span id="cb40-71"><a href="#cb40-71"></a><span class="ss">    - </span>$x + y  = y + x$</span>
+<span id="cb40-72"><a href="#cb40-72"></a><span class="ss">        - </span>Symmetry of addition</span>
+<span id="cb40-73"><a href="#cb40-73"></a><span class="ss">    - </span>$x + 0 = x$</span>
+<span id="cb40-74"><a href="#cb40-74"></a><span class="ss">        - </span>Additive identity</span>
+<span id="cb40-75"><a href="#cb40-75"></a><span class="ss">    - </span>$x = y \implies x - y = 0$</span>
+<span id="cb40-76"><a href="#cb40-76"></a><span class="ss">        - </span>Identify under subtraction</span>
+<span id="cb40-77"><a href="#cb40-77"></a>        </span>
+<span id="cb40-78"><a href="#cb40-78"></a><span class="fu">## Assurances 2.0</span></span>
+<span id="cb40-79"><a href="#cb40-79"></a></span>
+<span id="cb40-80"><a href="#cb40-80"></a><span class="in">    $$\frac{x}{\sqrt{x^2+y^2}} \leq 1$$</span></span>
+<span id="cb40-81"><a href="#cb40-81"></a></span>
+<span id="cb40-82"><a href="#cb40-82"></a><span class="ss">- </span>What is missing?</span>
+<span id="cb40-83"><a href="#cb40-83"></a></span>
+<span id="cb40-84"><a href="#cb40-84"></a><span class="fu">## IEEE Float Specification</span></span>
+<span id="cb40-85"><a href="#cb40-85"></a></span>
+<span id="cb40-86"><a href="#cb40-86"></a><span class="ss">- </span>Ensure every floating point number is unique</span>
+<span id="cb40-87"><a href="#cb40-87"></a><span class="ss">- </span>Ensure every floating point number has an opposite</span>
+<span id="cb40-88"><a href="#cb40-88"></a><span class="ss">    - </span>_Zero_ is a special case because of this</span>
+<span id="cb40-89"><a href="#cb40-89"></a><span class="ss">- </span>Specifies algorithms for addition, subtraction, multiplication, division, and square-root</span>
+<span id="cb40-90"><a href="#cb40-90"></a><span class="ss">    - </span>Not really operations/relations! They are algorithms.</span>
+<span id="cb40-91"><a href="#cb40-91"></a>    </span>
+<span id="cb40-92"><a href="#cb40-92"></a>    </span>
+<span id="cb40-93"><a href="#cb40-93"></a><span class="fu">## Aside: Scientific Notation</span></span>
+<span id="cb40-94"><a href="#cb40-94"></a></span>
+<span id="cb40-95"><a href="#cb40-95"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Scientific notation is a way of expressing numbers that are too large or too small to be conveniently written in decimal form, since to do so would require writing out an inconveniently long string of digits.</span><span class="co">](https://en.wikipedia.org/wiki/Scientific_notation)</span></span>
+<span id="cb40-96"><a href="#cb40-96"></a></span>
+<span id="cb40-97"><a href="#cb40-97"></a><span class="ss">- </span>In scientific notation, nonzero numbers are written in the form </span>
+<span id="cb40-98"><a href="#cb40-98"></a></span>
+<span id="cb40-99"><a href="#cb40-99"></a>$$a \times 10^b$$</span>
+<span id="cb40-100"><a href="#cb40-100"></a></span>
+<span id="cb40-101"><a href="#cb40-101"></a><span class="fu">## Aside: Explanation</span></span>
+<span id="cb40-102"><a href="#cb40-102"></a></span>
+<span id="cb40-103"><a href="#cb40-103"></a></span>
+<span id="cb40-104"><a href="#cb40-104"></a><span class="ss">- </span>In scientific notation, nonzero numbers are written in the form </span>
+<span id="cb40-105"><a href="#cb40-105"></a></span>
+<span id="cb40-106"><a href="#cb40-106"></a>$$a \times 10^b$$</span>
+<span id="cb40-107"><a href="#cb40-107"></a></span>
+<span id="cb40-108"><a href="#cb40-108"></a></span>
+<span id="cb40-109"><a href="#cb40-109"></a><span class="ss">* </span>$a$ (the coefficient or mantissa) is a number greater than or equal to 1 and less than 10 ($1 \le |a| &lt; 10$).</span>
+<span id="cb40-110"><a href="#cb40-110"></a><span class="ss">* </span>$10$ is the base.</span>
+<span id="cb40-111"><a href="#cb40-111"></a><span class="ss">* </span>$b$ (the exponent) is an integer.</span>
+<span id="cb40-112"><a href="#cb40-112"></a></span>
+<span id="cb40-113"><a href="#cb40-113"></a></span>
+<span id="cb40-114"><a href="#cb40-114"></a><span class="fu">## Aside: Physical Examples</span></span>
+<span id="cb40-115"><a href="#cb40-115"></a></span>
+<span id="cb40-116"><a href="#cb40-116"></a><span class="ss">1.  </span>**Speed of light:** The speed of light in a vacuum is approximately $300,000,000 \text{ m/s}$</span>
+<span id="cb40-117"><a href="#cb40-117"></a>$$</span>
+<span id="cb40-118"><a href="#cb40-118"></a>3 \times 10^8 \text{ m/s}</span>
+<span id="cb40-119"><a href="#cb40-119"></a>$$</span>
+<span id="cb40-120"><a href="#cb40-120"></a></span>
+<span id="cb40-121"><a href="#cb40-121"></a><span class="ss">2.  </span>**Mass of an electron:** The mass of an electron is approximately $0.00000000000000000000000000091093837 \text{ g}$.</span>
+<span id="cb40-122"><a href="#cb40-122"></a>$$</span>
+<span id="cb40-123"><a href="#cb40-123"></a>9.1093837 \times 10^{-28} \text{ g}</span>
+<span id="cb40-124"><a href="#cb40-124"></a>$$</span>
+<span id="cb40-125"><a href="#cb40-125"></a></span>
+<span id="cb40-126"><a href="#cb40-126"></a><span class="fu">## Aside: Economic Examples</span></span>
+<span id="cb40-127"><a href="#cb40-127"></a></span>
+<span id="cb40-128"><a href="#cb40-128"></a><span class="ss">- </span>We can use social science numbers.</span>
+<span id="cb40-129"><a href="#cb40-129"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Labor Market Outcomes of College Graduates by Major</span><span class="co">](https://www.newyorkfed.org/research/college-labor-market#--:explore:outcomes-by-major)</span></span>
+<span id="cb40-130"><a href="#cb40-130"></a><span class="ss">- </span>Computer Science majors in 2023 have a \$80,000 median wage "early career"</span>
+<span id="cb40-131"><a href="#cb40-131"></a><span class="ss">    - </span>$8.0000 \times 10^4$</span>
+<span id="cb40-132"><a href="#cb40-132"></a><span class="ss">- </span>And 6.1% unemployment</span>
+<span id="cb40-133"><a href="#cb40-133"></a><span class="ss">    - </span>$6.1 \times 10^{-2}$</span>
+<span id="cb40-134"><a href="#cb40-134"></a></span>
+<span id="cb40-135"><a href="#cb40-135"></a><span class="fu">## IEEE Layout</span></span>
+<span id="cb40-136"><a href="#cb40-136"></a></span>
+<span id="cb40-137"><a href="#cb40-137"></a><span class="ss">- </span>An approximation using scientific notation</span>
+<span id="cb40-138"><a href="#cb40-138"></a><span class="ss">    - </span>$x = -1^s \times 2^e \times 1.m$</span>
+<span id="cb40-139"><a href="#cb40-139"></a><span class="ss">    - </span>$x = -1^{\text{sign bit}} \times \text{base} 2^{\text{exponent}} \times 1.\text{mantissa}$</span>
+<span id="cb40-140"><a href="#cb40-140"></a><span class="ss">        - </span>Where the mantissa is the technical term for the the digits after the decimal point.</span>
+<span id="cb40-141"><a href="#cb40-141"></a>        </span>
+<span id="cb40-142"><a href="#cb40-142"></a><span class="fu">## With Binary{.smaller}</span></span>
+<span id="cb40-143"><a href="#cb40-143"></a></span>
+<span id="cb40-144"><a href="#cb40-144"></a><span class="ss">- </span>$x = -0b1^{\text{0b0}} \times 0b10^{\text{0b10000000}}  \times 0b1.10010010000111111011011$</span>
+<span id="cb40-145"><a href="#cb40-145"></a><span class="ss">- </span>Express in memory as the concatenation:</span>
+<span id="cb40-146"><a href="#cb40-146"></a><span class="ss">    - </span><span class="in">`0b0`</span> to <span class="in">`0b10000000`</span> to <span class="in">`0b10010010000111111011011`</span></span>
+<span id="cb40-147"><a href="#cb40-147"></a><span class="ss">    - </span><span class="in">`01000000010010010000111111011011`</span></span>
+<span id="cb40-148"><a href="#cb40-148"></a>        </span>
+<span id="cb40-149"><a href="#cb40-149"></a><span class="fu">## Singles and Doubles</span></span>
+<span id="cb40-150"><a href="#cb40-150"></a>        </span>
+<span id="cb40-151"><a href="#cb40-151"></a><span class="ss">- </span>32 - bits = 1 sign bit + 8 exponent bits + 23 mantissa bits</span>
+<span id="cb40-152"><a href="#cb40-152"></a><span class="ss">    - </span><span class="in">`0b0`</span> to <span class="in">`0b10000000`</span> to <span class="in">`0b10010010000111111011011`</span></span>
+<span id="cb40-153"><a href="#cb40-153"></a><span class="ss">- </span>64 - bits = 1 sign bit + 12 exponent bits + 52 mantissa bits</span>
+<span id="cb40-154"><a href="#cb40-154"></a></span>
+<span id="cb40-155"><a href="#cb40-155"></a><span class="fu">## Understanding check</span></span>
+<span id="cb40-156"><a href="#cb40-156"></a></span>
+<span id="cb40-157"><a href="#cb40-157"></a><span class="ss">- </span>What is the probability a *real number* $a \in \mathbb{R}$ has an exact float representation?</span>
+<span id="cb40-158"><a href="#cb40-158"></a><span class="ss">- </span>What is the probability an *integer* $n \in \mathbb{Z}$ has an exact float representation?</span>
+<span id="cb40-159"><a href="#cb40-159"></a><span class="ss">- </span>What is the probability a *course number* $n &lt; 600$ has an exact float representation?</span>
+<span id="cb40-160"><a href="#cb40-160"></a></span>
+<span id="cb40-161"><a href="#cb40-161"></a></span>
+<span id="cb40-162"><a href="#cb40-162"></a><span class="fu"># Special Floats - NaN</span></span>
+<span id="cb40-163"><a href="#cb40-163"></a></span>
+<span id="cb40-164"><a href="#cb40-164"></a><span class="ss">- </span>Divide by Zero</span>
+<span id="cb40-165"><a href="#cb40-165"></a><span class="ss">    - </span>1 / 0</span>
+<span id="cb40-166"><a href="#cb40-166"></a><span class="ss">- </span>Not a Number (NaN)</span>
+<span id="cb40-167"><a href="#cb40-167"></a></span>
+<span id="cb40-168"><a href="#cb40-168"></a><span class="in">```py</span></span>
+<span id="cb40-169"><a href="#cb40-169"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
+<span id="cb40-170"><a href="#cb40-170"></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
+<span id="cb40-171"><a href="#cb40-171"></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
+<span id="cb40-172"><a href="#cb40-172"></a>np.float32(inf)</span>
+<span id="cb40-173"><a href="#cb40-173"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
+<span id="cb40-174"><a href="#cb40-174"></a>Traceback (most recent call last):</span>
+<span id="cb40-175"><a href="#cb40-175"></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb40-176"><a href="#cb40-176"></a><span class="pp">ZeroDivisionError</span>: division by zero</span>
+<span id="cb40-177"><a href="#cb40-177"></a><span class="in">```</span></span>
+<span id="cb40-178"><a href="#cb40-178"></a></span>
+<span id="cb40-179"><a href="#cb40-179"></a><span class="fu"># Special Floats</span></span>
+<span id="cb40-180"><a href="#cb40-180"></a></span>
+<span id="cb40-181"><a href="#cb40-181"></a><span class="ss">- </span>Signed Infinity</span>
+<span id="cb40-182"><a href="#cb40-182"></a><span class="ss">    - </span>Overflow protection</span>
+<span id="cb40-183"><a href="#cb40-183"></a><span class="ss">- </span>Signed Zero</span>
+<span id="cb40-184"><a href="#cb40-184"></a><span class="ss">    - </span>Underflow protection, preserves sign</span>
+<span id="cb40-185"><a href="#cb40-185"></a><span class="ss">    - </span>+ 0 =− 0</span>
+<span id="cb40-186"><a href="#cb40-186"></a></span>
+<span id="cb40-187"><a href="#cb40-187"></a></span>
+<span id="cb40-188"><a href="#cb40-188"></a>Now that we are experts...</span>
+<span id="cb40-189"><a href="#cb40-189"></a></span>
+<span id="cb40-190"><a href="#cb40-190"></a>https://github.com/DigitalInBlue/CPPCon</span>
+<span id="cb40-191"><a href="#cb40-191"></a></span>
+<span id="cb40-192"><a href="#cb40-192"></a></span>
+<span id="cb40-193"><a href="#cb40-193"></a>Simple Example</span>
+<span id="cb40-194"><a href="#cb40-194"></a></span>
+<span id="cb40-195"><a href="#cb40-195"></a><span class="in">```</span></span>
+<span id="cb40-196"><a href="#cb40-196"></a><span class="in">auto zeroPointOne = 0.1f;</span></span>
+<span id="cb40-197"><a href="#cb40-197"></a><span class="in">auto zeroPointTwo = 0.2f;</span></span>
+<span id="cb40-198"><a href="#cb40-198"></a><span class="in">auto zeroPointThree = 0.3f;</span></span>
+<span id="cb40-199"><a href="#cb40-199"></a><span class="in">auto sum = zeroPointOne + zeroPointTwo;</span></span>
+<span id="cb40-200"><a href="#cb40-200"></a><span class="in">```</span></span>
+<span id="cb40-201"><a href="#cb40-201"></a><span class="in">```</span></span>
+<span id="cb40-202"><a href="#cb40-202"></a><span class="in">cppCon() &lt;&lt; "zeroPointOne == " &lt;&lt; zeroPointOne &lt;&lt; "\n";</span></span>
+<span id="cb40-203"><a href="#cb40-203"></a><span class="in">cppCon() &lt;&lt; "zeroPointTwo == " &lt;&lt; zeroPointTwo &lt;&lt; "\n";</span></span>
+<span id="cb40-204"><a href="#cb40-204"></a><span class="in">cppCon() &lt;&lt; "zeroPointThree == " &lt;&lt; zeroPointThree &lt;&lt; "\n";</span></span>
+<span id="cb40-205"><a href="#cb40-205"></a><span class="in">cppCon() &lt;&lt; "sum == " &lt;&lt; sum &lt;&lt; "\n";</span></span>
+<span id="cb40-206"><a href="#cb40-206"></a><span class="in">```</span></span>
+<span id="cb40-207"><a href="#cb40-207"></a></span>
+<span id="cb40-208"><a href="#cb40-208"></a><span class="fu">## Simple Example</span></span>
+<span id="cb40-209"><a href="#cb40-209"></a></span>
+<span id="cb40-210"><a href="#cb40-210"></a></span>
+<span id="cb40-211"><a href="#cb40-211"></a><span class="ss">- </span>zeroPointOne == 0.</span>
+<span id="cb40-212"><a href="#cb40-212"></a><span class="ss">- </span>zeroPointTwo == 0.</span>
+<span id="cb40-213"><a href="#cb40-213"></a><span class="ss">- </span>zeroPointThree == 0.</span>
+<span id="cb40-214"><a href="#cb40-214"></a><span class="ss">- </span>sum == 0.</span>
+<span id="cb40-215"><a href="#cb40-215"></a><span class="ss">- </span>zeroPointOne == 0. Simple Example</span>
+<span id="cb40-216"><a href="#cb40-216"></a><span class="ss">- </span>zeroPointTwo == 0.</span>
+<span id="cb40-217"><a href="#cb40-217"></a><span class="ss">- </span>zeroPointThree == 0.</span>
+<span id="cb40-218"><a href="#cb40-218"></a><span class="ss">- </span>sum == 0.</span>
+<span id="cb40-219"><a href="#cb40-219"></a><span class="ss">- </span>zeroPointOne == 0.</span>
+<span id="cb40-220"><a href="#cb40-220"></a><span class="ss">- </span>zeroPointTwo == 0.</span>
+<span id="cb40-221"><a href="#cb40-221"></a><span class="ss">- </span>zeroPointThree == 0.</span>
+<span id="cb40-222"><a href="#cb40-222"></a><span class="ss">- </span>sum == 0.</span>
+<span id="cb40-223"><a href="#cb40-223"></a></span>
+<span id="cb40-224"><a href="#cb40-224"></a></span>
+<span id="cb40-225"><a href="#cb40-225"></a>Storage of 1.</span>
+<span id="cb40-226"><a href="#cb40-226"></a></span>
+<span id="cb40-227"><a href="#cb40-227"></a>1.</span>
+<span id="cb40-228"><a href="#cb40-228"></a></span>
+<span id="cb40-229"><a href="#cb40-229"></a>− 1</span>
+<span id="cb40-230"><a href="#cb40-230"></a></span>
+<span id="cb40-231"><a href="#cb40-231"></a><span class="in">```</span></span>
+<span id="cb40-232"><a href="#cb40-232"></a><span class="in">𝑠𝑖𝑔𝑛𝐵𝑖𝑡</span></span>
+<span id="cb40-233"><a href="#cb40-233"></a><span class="in">× 𝑏𝑎𝑠𝑒</span></span>
+<span id="cb40-234"><a href="#cb40-234"></a><span class="in">```</span></span>
+<span id="cb40-235"><a href="#cb40-235"></a><span class="in">```</span></span>
+<span id="cb40-236"><a href="#cb40-236"></a><span class="in">𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡</span></span>
+<span id="cb40-237"><a href="#cb40-237"></a><span class="in">× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</span></span>
+<span id="cb40-238"><a href="#cb40-238"></a><span class="in">```</span></span>
+<span id="cb40-239"><a href="#cb40-239"></a>− 1</span>
+<span id="cb40-240"><a href="#cb40-240"></a></span>
+<span id="cb40-241"><a href="#cb40-241"></a><span class="in">```</span></span>
+<span id="cb40-242"><a href="#cb40-242"></a><span class="in">0</span></span>
+<span id="cb40-243"><a href="#cb40-243"></a><span class="in">× 2</span></span>
+<span id="cb40-244"><a href="#cb40-244"></a><span class="in">```</span></span>
+<span id="cb40-245"><a href="#cb40-245"></a><span class="in">```</span></span>
+<span id="cb40-246"><a href="#cb40-246"></a><span class="in">0</span></span>
+<span id="cb40-247"><a href="#cb40-247"></a><span class="in">× 1. 0</span></span>
+<span id="cb40-248"><a href="#cb40-248"></a><span class="in">```</span></span>
+<span id="cb40-249"><a href="#cb40-249"></a></span>
+<span id="cb40-250"><a href="#cb40-250"></a>Storage of 1.</span>
+<span id="cb40-251"><a href="#cb40-251"></a></span>
+<span id="cb40-252"><a href="#cb40-252"></a>1.</span>
+<span id="cb40-253"><a href="#cb40-253"></a></span>
+<span id="cb40-254"><a href="#cb40-254"></a>− 1</span>
+<span id="cb40-255"><a href="#cb40-255"></a></span>
+<span id="cb40-256"><a href="#cb40-256"></a><span class="in">```</span></span>
+<span id="cb40-257"><a href="#cb40-257"></a><span class="in">𝑠𝑖𝑔𝑛𝐵𝑖𝑡</span></span>
+<span id="cb40-258"><a href="#cb40-258"></a><span class="in">× 𝑏𝑎𝑠𝑒</span></span>
+<span id="cb40-259"><a href="#cb40-259"></a><span class="in">```</span></span>
+<span id="cb40-260"><a href="#cb40-260"></a><span class="in">```</span></span>
+<span id="cb40-261"><a href="#cb40-261"></a><span class="in">𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡</span></span>
+<span id="cb40-262"><a href="#cb40-262"></a><span class="in">× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</span></span>
+<span id="cb40-263"><a href="#cb40-263"></a><span class="in">```</span></span>
+<span id="cb40-264"><a href="#cb40-264"></a>− 1</span>
+<span id="cb40-265"><a href="#cb40-265"></a></span>
+<span id="cb40-266"><a href="#cb40-266"></a><span class="in">```</span></span>
+<span id="cb40-267"><a href="#cb40-267"></a><span class="in">0</span></span>
+<span id="cb40-268"><a href="#cb40-268"></a><span class="in">× 2</span></span>
+<span id="cb40-269"><a href="#cb40-269"></a><span class="in">```</span></span>
+<span id="cb40-270"><a href="#cb40-270"></a><span class="in">```</span></span>
+<span id="cb40-271"><a href="#cb40-271"></a><span class="in">0</span></span>
+<span id="cb40-272"><a href="#cb40-272"></a><span class="in">× 1. 0</span></span>
+<span id="cb40-273"><a href="#cb40-273"></a><span class="in">```</span></span>
+<span id="cb40-274"><a href="#cb40-274"></a><span class="co">[</span><span class="ot">0</span><span class="co">][00000000][</span><span class="ot"> 00000000000000000000000 </span><span class="co">]</span></span>
+<span id="cb40-275"><a href="#cb40-275"></a></span>
+<span id="cb40-276"><a href="#cb40-276"></a></span>
+<span id="cb40-277"><a href="#cb40-277"></a>Storage of 1.</span>
+<span id="cb40-278"><a href="#cb40-278"></a></span>
+<span id="cb40-279"><a href="#cb40-279"></a>1.</span>
+<span id="cb40-280"><a href="#cb40-280"></a></span>
+<span id="cb40-281"><a href="#cb40-281"></a>− 1</span>
+<span id="cb40-282"><a href="#cb40-282"></a></span>
+<span id="cb40-283"><a href="#cb40-283"></a><span class="in">```</span></span>
+<span id="cb40-284"><a href="#cb40-284"></a><span class="in">𝑠𝑖𝑔𝑛𝐵𝑖𝑡</span></span>
+<span id="cb40-285"><a href="#cb40-285"></a><span class="in">× 𝑏𝑎𝑠𝑒</span></span>
+<span id="cb40-286"><a href="#cb40-286"></a><span class="in">```</span></span>
+<span id="cb40-287"><a href="#cb40-287"></a><span class="in">```</span></span>
+<span id="cb40-288"><a href="#cb40-288"></a><span class="in">𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡</span></span>
+<span id="cb40-289"><a href="#cb40-289"></a><span class="in">× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</span></span>
+<span id="cb40-290"><a href="#cb40-290"></a><span class="in">```</span></span>
+<span id="cb40-291"><a href="#cb40-291"></a>− 1</span>
+<span id="cb40-292"><a href="#cb40-292"></a></span>
+<span id="cb40-293"><a href="#cb40-293"></a><span class="in">```</span></span>
+<span id="cb40-294"><a href="#cb40-294"></a><span class="in">0</span></span>
+<span id="cb40-295"><a href="#cb40-295"></a><span class="in">× 2</span></span>
+<span id="cb40-296"><a href="#cb40-296"></a><span class="in">```</span></span>
+<span id="cb40-297"><a href="#cb40-297"></a><span class="in">```</span></span>
+<span id="cb40-298"><a href="#cb40-298"></a><span class="in">0</span></span>
+<span id="cb40-299"><a href="#cb40-299"></a><span class="in">× 1. 0</span></span>
+<span id="cb40-300"><a href="#cb40-300"></a><span class="in">```</span></span>
+<span id="cb40-301"><a href="#cb40-301"></a><span class="co">[</span><span class="ot">0</span><span class="co">][01111111][</span><span class="ot">00000000000000000000000</span><span class="co">]</span></span>
+<span id="cb40-302"><a href="#cb40-302"></a></span>
+<span id="cb40-303"><a href="#cb40-303"></a></span>
+<span id="cb40-304"><a href="#cb40-304"></a>Storage of 1.</span>
+<span id="cb40-305"><a href="#cb40-305"></a></span>
+<span id="cb40-306"><a href="#cb40-306"></a><span class="ss">- </span>The exponent is _shift- 127_ encoded</span>
+<span id="cb40-307"><a href="#cb40-307"></a><span class="ss">- </span>0xeeeeeeee - 127</span>
+<span id="cb40-308"><a href="#cb40-308"></a></span>
+<span id="cb40-309"><a href="#cb40-309"></a>1.</span>
+<span id="cb40-310"><a href="#cb40-310"></a></span>
+<span id="cb40-311"><a href="#cb40-311"></a>− 1</span>
+<span id="cb40-312"><a href="#cb40-312"></a></span>
+<span id="cb40-313"><a href="#cb40-313"></a><span class="in">```</span></span>
+<span id="cb40-314"><a href="#cb40-314"></a><span class="in">𝑠𝑖𝑔𝑛𝐵𝑖𝑡</span></span>
+<span id="cb40-315"><a href="#cb40-315"></a><span class="in">× 𝑏𝑎𝑠𝑒</span></span>
+<span id="cb40-316"><a href="#cb40-316"></a><span class="in">```</span></span>
+<span id="cb40-317"><a href="#cb40-317"></a><span class="in">```</span></span>
+<span id="cb40-318"><a href="#cb40-318"></a><span class="in">𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡</span></span>
+<span id="cb40-319"><a href="#cb40-319"></a><span class="in">× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</span></span>
+<span id="cb40-320"><a href="#cb40-320"></a><span class="in">```</span></span>
+<span id="cb40-321"><a href="#cb40-321"></a>− 1</span>
+<span id="cb40-322"><a href="#cb40-322"></a></span>
+<span id="cb40-323"><a href="#cb40-323"></a><span class="in">```</span></span>
+<span id="cb40-324"><a href="#cb40-324"></a><span class="in">0</span></span>
+<span id="cb40-325"><a href="#cb40-325"></a><span class="in">× 2</span></span>
+<span id="cb40-326"><a href="#cb40-326"></a><span class="in">```</span></span>
+<span id="cb40-327"><a href="#cb40-327"></a><span class="in">```</span></span>
+<span id="cb40-328"><a href="#cb40-328"></a><span class="in">0</span></span>
+<span id="cb40-329"><a href="#cb40-329"></a><span class="in">× 1. 0</span></span>
+<span id="cb40-330"><a href="#cb40-330"></a><span class="in">```</span></span>
+<span id="cb40-331"><a href="#cb40-331"></a><span class="co">[</span><span class="ot">0</span><span class="co">][01111111][</span><span class="ot">00000000000000000000000</span><span class="co">]</span></span>
+<span id="cb40-332"><a href="#cb40-332"></a></span>
+<span id="cb40-333"><a href="#cb40-333"></a></span>
+<span id="cb40-334"><a href="#cb40-334"></a>Storage of 1.</span>
+<span id="cb40-335"><a href="#cb40-335"></a></span>
+<span id="cb40-336"><a href="#cb40-336"></a>1.</span>
+<span id="cb40-337"><a href="#cb40-337"></a></span>
+<span id="cb40-338"><a href="#cb40-338"></a><span class="co">[</span><span class="ot">0</span><span class="co">][01111111][</span><span class="ot">00000000000000000000000</span><span class="co">]</span></span>
+<span id="cb40-339"><a href="#cb40-339"></a></span>
+<span id="cb40-340"><a href="#cb40-340"></a></span>
+<span id="cb40-341"><a href="#cb40-341"></a>Storage of 1.0</span>
+<span id="cb40-342"><a href="#cb40-342"></a></span>
+<span id="cb40-343"><a href="#cb40-343"></a>1.0000000000000000</span>
+<span id="cb40-344"><a href="#cb40-344"></a></span>
+<span id="cb40-345"><a href="#cb40-345"></a><span class="co">[</span><span class="ot">0</span><span class="co">][01111111][</span><span class="ot">00000000000000000000000</span><span class="co">]</span></span>
+<span id="cb40-346"><a href="#cb40-346"></a></span>
+<span id="cb40-347"><a href="#cb40-347"></a><span class="co">[</span><span class="ot">0</span><span class="co">][01111111][</span><span class="ot">00000000000000000000001</span><span class="co">]</span></span>
+<span id="cb40-348"><a href="#cb40-348"></a></span>
+<span id="cb40-349"><a href="#cb40-349"></a>1.0000001192092896</span>
+<span id="cb40-350"><a href="#cb40-350"></a></span>
+<span id="cb40-351"><a href="#cb40-351"></a></span>
+<span id="cb40-352"><a href="#cb40-352"></a>"Epsilon"</span>
+<span id="cb40-353"><a href="#cb40-353"></a></span>
+<span id="cb40-354"><a href="#cb40-354"></a><span class="ss">- </span>The difference between 1.0 and the next available floating point number</span>
+<span id="cb40-355"><a href="#cb40-355"></a><span class="ss">- </span>Useful for programmatic "almost equal" computations</span>
+<span id="cb40-356"><a href="#cb40-356"></a><span class="ss">- </span>std::numeric_limits&lt;T&gt;::epsilon</span>
+<span id="cb40-357"><a href="#cb40-357"></a></span>
+<span id="cb40-358"><a href="#cb40-358"></a></span>
+<span id="cb40-359"><a href="#cb40-359"></a>Significant Digits</span>
+<span id="cb40-360"><a href="#cb40-360"></a></span>
+<span id="cb40-361"><a href="#cb40-361"></a><span class="ss">- </span>Significant digits measure precision</span>
+<span id="cb40-362"><a href="#cb40-362"></a><span class="ss">    - </span>Remember the "exponent" field</span>
+<span id="cb40-363"><a href="#cb40-363"></a><span class="ss">    - </span>They are not a magnitude</span>
+<span id="cb40-364"><a href="#cb40-364"></a><span class="ss">- </span>How close is close enough?</span>
+<span id="cb40-365"><a href="#cb40-365"></a><span class="ss">    - </span>Define as significant digits, not absolute error</span>
+<span id="cb40-366"><a href="#cb40-366"></a></span>
+<span id="cb40-367"><a href="#cb40-367"></a><span class="in">```</span></span>
+<span id="cb40-368"><a href="#cb40-368"></a><span class="in">Sign ExponentMantissa TotalExponent bias Bits precision Significant Digits</span></span>
+<span id="cb40-369"><a href="#cb40-369"></a><span class="in">Half(IEEE 754-2008) 1 5 10 16 15 11 3 - 4</span></span>
+<span id="cb40-370"><a href="#cb40-370"></a><span class="in">Single 1 8 23 32 127 24 6 - 9</span></span>
+<span id="cb40-371"><a href="#cb40-371"></a><span class="in">Double 1 11 52 64 1023 53 15 - 17</span></span>
+<span id="cb40-372"><a href="#cb40-372"></a><span class="in">x86 extended precision 1 15 64 80 16383 64 18 - 21</span></span>
+<span id="cb40-373"><a href="#cb40-373"></a><span class="in">Quad 1 15 112 128 16383 113 33 - 36</span></span>
+<span id="cb40-374"><a href="#cb40-374"></a><span class="in">http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</span></span>
+<span id="cb40-375"><a href="#cb40-375"></a><span class="in">```</span></span>
+<span id="cb40-376"><a href="#cb40-376"></a></span>
+<span id="cb40-377"><a href="#cb40-377"></a>Storage of the Very Small</span>
+<span id="cb40-378"><a href="#cb40-378"></a></span>
+<span id="cb40-379"><a href="#cb40-379"></a><span class="ss">- </span>For 32-bit floats, the minimum base 10 exponent is -36.</span>
+<span id="cb40-380"><a href="#cb40-380"></a><span class="ss">- </span>How is 1. 0 𝑒−^37 represented?</span>
+<span id="cb40-381"><a href="#cb40-381"></a></span>
+<span id="cb40-382"><a href="#cb40-382"></a>1.0e- 37</span>
+<span id="cb40-383"><a href="#cb40-383"></a></span>
+<span id="cb40-384"><a href="#cb40-384"></a><span class="co">[</span><span class="ot">0</span><span class="co">][00000000][</span><span class="ot">11011001110001111101110</span><span class="co">]</span></span>
+<span id="cb40-385"><a href="#cb40-385"></a></span>
+<span id="cb40-386"><a href="#cb40-386"></a>0.09999999e- 37</span>
+<span id="cb40-387"><a href="#cb40-387"></a></span>
+<span id="cb40-388"><a href="#cb40-388"></a></span>
+<span id="cb40-389"><a href="#cb40-389"></a>"Denormalized Number"</span>
+<span id="cb40-390"><a href="#cb40-390"></a></span>
+<span id="cb40-391"><a href="#cb40-391"></a><span class="ss">- </span>Numbers that have a zero exponent</span>
+<span id="cb40-392"><a href="#cb40-392"></a><span class="ss">- </span>Required when the exponent is below the minimum exponent</span>
+<span id="cb40-393"><a href="#cb40-393"></a><span class="ss">- </span>Helps prevent underflow</span>
+<span id="cb40-394"><a href="#cb40-394"></a></span>
+<span id="cb40-395"><a href="#cb40-395"></a>1.0e- 37</span>
+<span id="cb40-396"><a href="#cb40-396"></a></span>
+<span id="cb40-397"><a href="#cb40-397"></a><span class="co">[</span><span class="ot">0</span><span class="co">][00000000][</span><span class="ot">11011001110001111101110</span><span class="co">]</span></span>
+<span id="cb40-398"><a href="#cb40-398"></a></span>
+<span id="cb40-399"><a href="#cb40-399"></a>0.09999999e- 37</span>
+<span id="cb40-400"><a href="#cb40-400"></a></span>
+<span id="cb40-401"><a href="#cb40-401"></a></span>
+<span id="cb40-402"><a href="#cb40-402"></a>Floating Point Precision</span>
+<span id="cb40-403"><a href="#cb40-403"></a></span>
+<span id="cb40-404"><a href="#cb40-404"></a><span class="ss">- </span>Representation is not uniform between numbers</span>
+<span id="cb40-405"><a href="#cb40-405"></a><span class="ss">- </span>Most precision lies between 0.0 and 0.1</span>
+<span id="cb40-406"><a href="#cb40-406"></a><span class="ss">- </span>Precision falls away</span>
+<span id="cb40-407"><a href="#cb40-407"></a><span class="ss">- </span>std::nextafter</span>
+<span id="cb40-408"><a href="#cb40-408"></a></span>
+<span id="cb40-409"><a href="#cb40-409"></a></span>
+<span id="cb40-410"><a href="#cb40-410"></a>Floating Point Precision</span>
+<span id="cb40-411"><a href="#cb40-411"></a></span>
+<span id="cb40-412"><a href="#cb40-412"></a><span class="in">```</span></span>
+<span id="cb40-413"><a href="#cb40-413"></a><span class="in">http://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx</span></span>
+<span id="cb40-414"><a href="#cb40-414"></a><span class="in">```</span></span>
+<span id="cb40-415"><a href="#cb40-415"></a></span>
+<span id="cb40-416"><a href="#cb40-416"></a>Floating Point Precision</span>
+<span id="cb40-417"><a href="#cb40-417"></a></span>
+<span id="cb40-418"><a href="#cb40-418"></a>The number of floats from 0.0</span>
+<span id="cb40-419"><a href="#cb40-419"></a></span>
+<span id="cb40-420"><a href="#cb40-420"></a><span class="ss">- </span>...to 0.1 = 1,036,831,949</span>
+<span id="cb40-421"><a href="#cb40-421"></a><span class="ss">- </span>...to 0.2 = 8,388,608</span>
+<span id="cb40-422"><a href="#cb40-422"></a><span class="ss">- </span>... to 0.4 = 8,388,608</span>
+<span id="cb40-423"><a href="#cb40-423"></a><span class="ss">- </span>... to 0.8 = 8,388,608</span>
+<span id="cb40-424"><a href="#cb40-424"></a><span class="ss">- </span>... to 1.6 = 8,388,608</span>
+<span id="cb40-425"><a href="#cb40-425"></a><span class="ss">- </span>... to 3.2 = 8,388,608</span>
+<span id="cb40-426"><a href="#cb40-426"></a></span>
+<span id="cb40-427"><a href="#cb40-427"></a></span>
+<span id="cb40-428"><a href="#cb40-428"></a>Errors in Floating Point</span>
+<span id="cb40-429"><a href="#cb40-429"></a></span>
+<span id="cb40-430"><a href="#cb40-430"></a>https://github.com/DigitalInBlue/CPPCon2015</span>
+<span id="cb40-431"><a href="#cb40-431"></a></span>
+<span id="cb40-432"><a href="#cb40-432"></a></span>
+<span id="cb40-433"><a href="#cb40-433"></a>Storage of π</span>
+<span id="cb40-434"><a href="#cb40-434"></a></span>
+<span id="cb40-435"><a href="#cb40-435"></a>π = 3.14159265</span>
+<span id="cb40-436"><a href="#cb40-436"></a></span>
+<span id="cb40-437"><a href="#cb40-437"></a>πf= 3.14159274</span>
+<span id="cb40-438"><a href="#cb40-438"></a></span>
+<span id="cb40-439"><a href="#cb40-439"></a>Δ = 0.00000009</span>
+<span id="cb40-440"><a href="#cb40-440"></a></span>
+<span id="cb40-441"><a href="#cb40-441"></a></span>
+<span id="cb40-442"><a href="#cb40-442"></a>Measuring Error: "Ulps"</span>
+<span id="cb40-443"><a href="#cb40-443"></a></span>
+<span id="cb40-444"><a href="#cb40-444"></a><span class="ss">- </span>Units in Last Place</span>
+<span id="cb40-445"><a href="#cb40-445"></a><span class="ss">    - </span>"Harrison" and "Goldberg" definitions</span>
+<span id="cb40-446"><a href="#cb40-446"></a><span class="ss">    - </span>(6-8 definitions floating around)</span>
+<span id="cb40-447"><a href="#cb40-447"></a><span class="ss">- </span>"The gap between the two floating-point numbers</span>
+<span id="cb40-448"><a href="#cb40-448"></a></span>
+<span id="cb40-449"><a href="#cb40-449"></a>nearest to x, even if x is one of them." –W. Kahan</span>
+<span id="cb40-450"><a href="#cb40-450"></a></span>
+<span id="cb40-451"><a href="#cb40-451"></a><span class="ss">- </span>https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT</span>
+<span id="cb40-452"><a href="#cb40-452"></a><span class="ss">- </span>IEEE 754 requires that that elementary arithmetic</span>
+<span id="cb40-453"><a href="#cb40-453"></a></span>
+<span id="cb40-454"><a href="#cb40-454"></a>operations are correctly rounded to within 0. 5 ulps</span>
+<span id="cb40-455"><a href="#cb40-455"></a></span>
+<span id="cb40-456"><a href="#cb40-456"></a><span class="ss">- </span>Transcendental functions are generally rounded to</span>
+<span id="cb40-457"><a href="#cb40-457"></a></span>
+<span id="cb40-458"><a href="#cb40-458"></a>between 0. 5 and 1. 0 ulps</span>
+<span id="cb40-459"><a href="#cb40-459"></a></span>
+<span id="cb40-460"><a href="#cb40-460"></a>π = 3.14159265</span>
+<span id="cb40-461"><a href="#cb40-461"></a></span>
+<span id="cb40-462"><a href="#cb40-462"></a>πf= 3.14159274</span>
+<span id="cb40-463"><a href="#cb40-463"></a></span>
+<span id="cb40-464"><a href="#cb40-464"></a>Δ = 0.00000009</span>
+<span id="cb40-465"><a href="#cb40-465"></a></span>
+<span id="cb40-466"><a href="#cb40-466"></a>9 ulps</span>
+<span id="cb40-467"><a href="#cb40-467"></a></span>
+<span id="cb40-468"><a href="#cb40-468"></a></span>
+<span id="cb40-469"><a href="#cb40-469"></a>Measuring Error: "Relative Error"</span>
+<span id="cb40-470"><a href="#cb40-470"></a></span>
+<span id="cb40-471"><a href="#cb40-471"></a><span class="ss">- </span>The difference between the "real" number and the</span>
+<span id="cb40-472"><a href="#cb40-472"></a></span>
+<span id="cb40-473"><a href="#cb40-473"></a>approximated number, divided by the "real" number.</span>
+<span id="cb40-474"><a href="#cb40-474"></a></span>
+<span id="cb40-475"><a href="#cb40-475"></a>π = 3.14159265</span>
+<span id="cb40-476"><a href="#cb40-476"></a></span>
+<span id="cb40-477"><a href="#cb40-477"></a>πf= 3.14159274</span>
+<span id="cb40-478"><a href="#cb40-478"></a></span>
+<span id="cb40-479"><a href="#cb40-479"></a>Δ = 0.00000009</span>
+<span id="cb40-480"><a href="#cb40-480"></a></span>
+<span id="cb40-481"><a href="#cb40-481"></a>9 ulps</span>
+<span id="cb40-482"><a href="#cb40-482"></a></span>
+<span id="cb40-483"><a href="#cb40-483"></a>2.864789e- 8 β</span>
+<span id="cb40-484"><a href="#cb40-484"></a></span>
+<span id="cb40-485"><a href="#cb40-485"></a>𝜋 − (𝜋𝑓)</span>
+<span id="cb40-486"><a href="#cb40-486"></a></span>
+<span id="cb40-487"><a href="#cb40-487"></a>𝜋</span>
+<span id="cb40-488"><a href="#cb40-488"></a></span>
+<span id="cb40-489"><a href="#cb40-489"></a><span class="in">```</span></span>
+<span id="cb40-490"><a href="#cb40-490"></a><span class="in">= 2. 864789 𝑒</span></span>
+<span id="cb40-491"><a href="#cb40-491"></a><span class="in">− 8</span></span>
+<span id="cb40-492"><a href="#cb40-492"></a><span class="in">```</span></span>
+<span id="cb40-493"><a href="#cb40-493"></a></span>
+<span id="cb40-494"><a href="#cb40-494"></a>Rounding Error</span>
+<span id="cb40-495"><a href="#cb40-495"></a></span>
+<span id="cb40-496"><a href="#cb40-496"></a><span class="ss">- </span>Induced by approximating an infinite range of numbers into a finite number of bits</span>
+<span id="cb40-497"><a href="#cb40-497"></a><span class="ss">- </span>Math is done exactly, then rounded*</span>
+<span id="cb40-498"><a href="#cb40-498"></a><span class="ss">    - </span>Towards the nearest</span>
+<span id="cb40-499"><a href="#cb40-499"></a><span class="ss">    - </span>Towards Zero</span>
+<span id="cb40-500"><a href="#cb40-500"></a><span class="ss">    - </span>Towards positive infinity (round up)</span>
+<span id="cb40-501"><a href="#cb40-501"></a><span class="ss">    - </span>Towards negative infinity (round down)</span>
+<span id="cb40-502"><a href="#cb40-502"></a></span>
+<span id="cb40-503"><a href="#cb40-503"></a>*Look up "exactly rounded" as well</span>
+<span id="cb40-504"><a href="#cb40-504"></a></span>
+<span id="cb40-505"><a href="#cb40-505"></a></span>
+<span id="cb40-506"><a href="#cb40-506"></a>Rounding Error</span>
+<span id="cb40-507"><a href="#cb40-507"></a></span>
+<span id="cb40-508"><a href="#cb40-508"></a><span class="ss">- </span>What about rounding the half-way case? (i.e. 0.5)</span>
+<span id="cb40-509"><a href="#cb40-509"></a><span class="ss">    - </span>Round Up vs. Round Even</span>
+<span id="cb40-510"><a href="#cb40-510"></a><span class="ss">- </span>Correct Rounding:</span>
+<span id="cb40-511"><a href="#cb40-511"></a><span class="ss">    - </span>Basic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the</span>
+<span id="cb40-512"><a href="#cb40-512"></a>       mathematical result.</span>
+<span id="cb40-513"><a href="#cb40-513"></a><span class="ss">    - </span>If there is a tie, round to the number with an even mantissa</span>
+<span id="cb40-514"><a href="#cb40-514"></a></span>
+<span id="cb40-515"><a href="#cb40-515"></a></span>
+<span id="cb40-516"><a href="#cb40-516"></a>"Guard Bit", "Round Bit", "Sticky Bit"</span>
+<span id="cb40-517"><a href="#cb40-517"></a></span>
+<span id="cb40-518"><a href="#cb40-518"></a><span class="ss">- </span>Only used while doing calculations</span>
+<span id="cb40-519"><a href="#cb40-519"></a><span class="ss">    - </span>Not stored in the float itself</span>
+<span id="cb40-520"><a href="#cb40-520"></a><span class="ss">    - </span>The mantissa is shifted in calculations to align radix</span>
+<span id="cb40-521"><a href="#cb40-521"></a><span class="ss">- </span>The guard bits and round bits are extra precision</span>
+<span id="cb40-522"><a href="#cb40-522"></a><span class="ss">- </span>The sticky bit is an OR of anything that shifts through it</span>
+<span id="cb40-523"><a href="#cb40-523"></a></span>
+<span id="cb40-524"><a href="#cb40-524"></a><span class="co">[</span><span class="ot">0</span><span class="co">][00000000][</span><span class="ot">00000000000000000000000</span><span class="co">][G][</span><span class="ot">R</span><span class="co">][S...]</span></span>
+<span id="cb40-525"><a href="#cb40-525"></a></span>
+<span id="cb40-526"><a href="#cb40-526"></a></span>
+<span id="cb40-527"><a href="#cb40-527"></a>"Guard Bit", "Round Bit", "Sticky Bit"</span>
+<span id="cb40-528"><a href="#cb40-528"></a></span>
+<span id="cb40-529"><a href="#cb40-529"></a>**[G][R][S]**</span>
+<span id="cb40-530"><a href="#cb40-530"></a></span>
+<span id="cb40-531"><a href="#cb40-531"></a>**[0][-][-]** - Round Down (do nothing)</span>
+<span id="cb40-532"><a href="#cb40-532"></a></span>
+<span id="cb40-533"><a href="#cb40-533"></a>**[1][0][0]** - Round Up if the mantissa LSB is 1</span>
+<span id="cb40-534"><a href="#cb40-534"></a></span>
+<span id="cb40-535"><a href="#cb40-535"></a>**[1][0][1]** - Round Up</span>
+<span id="cb40-536"><a href="#cb40-536"></a></span>
+<span id="cb40-537"><a href="#cb40-537"></a>**[1][1][0]** - Round Up</span>
+<span id="cb40-538"><a href="#cb40-538"></a></span>
+<span id="cb40-539"><a href="#cb40-539"></a>**[1][1][1]** - Round Up</span>
+<span id="cb40-540"><a href="#cb40-540"></a></span>
+<span id="cb40-541"><a href="#cb40-541"></a><span class="co">[</span><span class="ot">0</span><span class="co">][00000000][</span><span class="ot">00000000000000000000000</span><span class="co">][G][</span><span class="ot">R</span><span class="co">][S...]</span></span>
+<span id="cb40-542"><a href="#cb40-542"></a></span>
+<span id="cb40-543"><a href="#cb40-543"></a></span>
+<span id="cb40-544"><a href="#cb40-544"></a>Significance Error</span>
+<span id="cb40-545"><a href="#cb40-545"></a></span>
+<span id="cb40-546"><a href="#cb40-546"></a><span class="ss">- </span>Compute the Area of a Triangle</span>
+<span id="cb40-547"><a href="#cb40-547"></a><span class="ss">    - </span>Heron’s Formula:</span>
+<span id="cb40-548"><a href="#cb40-548"></a><span class="ss">       - </span>𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧</span>
+<span id="cb40-549"><a href="#cb40-549"></a><span class="ss">    - </span>Kahan’sAlgorithm:</span>
+<span id="cb40-550"><a href="#cb40-550"></a><span class="ss">       - </span>Sort x, y, z such that 𝑥≥𝑦 ≥𝑧</span>
+<span id="cb40-551"><a href="#cb40-551"></a><span class="ss">       - </span>If 𝑧&lt; 𝑥−𝑦, then no such triangle exists.</span>
+<span id="cb40-552"><a href="#cb40-552"></a><span class="ss">       - </span>Else 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)</span>
+<span id="cb40-553"><a href="#cb40-553"></a></span>
+<span id="cb40-554"><a href="#cb40-554"></a></span>
+<span id="cb40-555"><a href="#cb40-555"></a>Significance Error</span>
+<span id="cb40-556"><a href="#cb40-556"></a></span>
+<span id="cb40-557"><a href="#cb40-557"></a><span class="in">```</span></span>
+<span id="cb40-558"><a href="#cb40-558"></a><span class="in">/// Area of a triangle</span></span>
+<span id="cb40-559"><a href="#cb40-559"></a><span class="in">/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html</span></span>
+<span id="cb40-560"><a href="#cb40-560"></a><span class="in">/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf</span></span>
+<span id="cb40-561"><a href="#cb40-561"></a><span class="in">TEST(CPPCon2015, AreaOfATriangleFloat)</span></span>
+<span id="cb40-562"><a href="#cb40-562"></a><span class="in">{</span></span>
+<span id="cb40-563"><a href="#cb40-563"></a><span class="in">const auto a = 100000.0f;</span></span>
+<span id="cb40-564"><a href="#cb40-564"></a><span class="in">const auto b = 99999.99979f;</span></span>
+<span id="cb40-565"><a href="#cb40-565"></a><span class="in">const auto c = 0.00029f;</span></span>
+<span id="cb40-566"><a href="#cb40-566"></a><span class="in">```</span></span>
+<span id="cb40-567"><a href="#cb40-567"></a><span class="in">```</span></span>
+<span id="cb40-568"><a href="#cb40-568"></a><span class="in">ASSERT_TRUE(a &gt;= b);</span></span>
+<span id="cb40-569"><a href="#cb40-569"></a><span class="in">ASSERT_TRUE(b &gt;= c);</span></span>
+<span id="cb40-570"><a href="#cb40-570"></a><span class="in">```</span></span>
+<span id="cb40-571"><a href="#cb40-571"></a><span class="in">```</span></span>
+<span id="cb40-572"><a href="#cb40-572"></a><span class="in">auto heronsFormula = HeronsFormula(a, b, c);</span></span>
+<span id="cb40-573"><a href="#cb40-573"></a><span class="in">auto kahansFormula = KahansFormula(a, b, c);</span></span>
+<span id="cb40-574"><a href="#cb40-574"></a><span class="in">EXPECT_NE(kahansFormula, heronsFormula);</span></span>
+<span id="cb40-575"><a href="#cb40-575"></a><span class="in">cppCon() &lt;&lt; "Kahan: " &lt;&lt; kahansFormula;</span></span>
+<span id="cb40-576"><a href="#cb40-576"></a><span class="in">cppCon() &lt;&lt; "Heron: " &lt;&lt; heronsFormula;</span></span>
+<span id="cb40-577"><a href="#cb40-577"></a><span class="in">cppCon() &lt;&lt; "delta: " &lt;&lt; kahansFormula - heronsFormula &lt;&lt; "\n";</span></span>
+<span id="cb40-578"><a href="#cb40-578"></a><span class="in">}</span></span>
+<span id="cb40-579"><a href="#cb40-579"></a><span class="in">```</span></span>
+<span id="cb40-580"><a href="#cb40-580"></a></span>
+<span id="cb40-581"><a href="#cb40-581"></a>Significance Error</span>
+<span id="cb40-582"><a href="#cb40-582"></a></span>
+<span id="cb40-583"><a href="#cb40-583"></a>Heron: 0.000000000000000000000000000000</span>
+<span id="cb40-584"><a href="#cb40-584"></a></span>
+<span id="cb40-585"><a href="#cb40-585"></a>Kahan: 14.500000000000000000000000000000</span>
+<span id="cb40-586"><a href="#cb40-586"></a></span>
+<span id="cb40-587"><a href="#cb40-587"></a>delta: 14.500000000000000000000000000000</span>
+<span id="cb40-588"><a href="#cb40-588"></a></span>
+<span id="cb40-589"><a href="#cb40-589"></a></span>
+<span id="cb40-590"><a href="#cb40-590"></a>Significance Error</span>
+<span id="cb40-591"><a href="#cb40-591"></a></span>
+<span id="cb40-592"><a href="#cb40-592"></a>Heron: 0.000000000000000000000000000000</span>
+<span id="cb40-593"><a href="#cb40-593"></a></span>
+<span id="cb40-594"><a href="#cb40-594"></a>Kahan: 14.500000000000000000000000000000</span>
+<span id="cb40-595"><a href="#cb40-595"></a></span>
+<span id="cb40-596"><a href="#cb40-596"></a>delta: 14.500000000000000000000000000000</span>
+<span id="cb40-597"><a href="#cb40-597"></a></span>
+<span id="cb40-598"><a href="#cb40-598"></a>Hint: The Answer is 10.0</span>
+<span id="cb40-599"><a href="#cb40-599"></a></span>
+<span id="cb40-600"><a href="#cb40-600"></a></span>
+<span id="cb40-601"><a href="#cb40-601"></a>Significance Error</span>
+<span id="cb40-602"><a href="#cb40-602"></a></span>
+<span id="cb40-603"><a href="#cb40-603"></a>Heron: 0.000000000000000000000000000000</span>
+<span id="cb40-604"><a href="#cb40-604"></a></span>
+<span id="cb40-605"><a href="#cb40-605"></a>Kahan: 14.500000000000000000000000000000</span>
+<span id="cb40-606"><a href="#cb40-606"></a></span>
+<span id="cb40-607"><a href="#cb40-607"></a>delta: 14.500000000000000000000000000000</span>
+<span id="cb40-608"><a href="#cb40-608"></a></span>
+<span id="cb40-609"><a href="#cb40-609"></a>Heron: 9.999999809638328700000000000000</span>
+<span id="cb40-610"><a href="#cb40-610"></a></span>
+<span id="cb40-611"><a href="#cb40-611"></a>Kahan: 10.000000077021038000000000000000</span>
+<span id="cb40-612"><a href="#cb40-612"></a></span>
+<span id="cb40-613"><a href="#cb40-613"></a>delta: 0.000000267382709751018410000000</span>
+<span id="cb40-614"><a href="#cb40-614"></a></span>
+<span id="cb40-615"><a href="#cb40-615"></a></span>
+<span id="cb40-616"><a href="#cb40-616"></a>Significance Error - Use Stable Algorithms</span>
+<span id="cb40-617"><a href="#cb40-617"></a></span>
+<span id="cb40-618"><a href="#cb40-618"></a><span class="ss">- </span>Loss of Significance</span>
+<span id="cb40-619"><a href="#cb40-619"></a><span class="ss">    - </span>Keep big numbers with big numbers, little numbers with little numbers.</span>
+<span id="cb40-620"><a href="#cb40-620"></a><span class="ss">- </span>Parentheses can help</span>
+<span id="cb40-621"><a href="#cb40-621"></a><span class="ss">- </span>Analysis of Algorithms is Critical</span>
+<span id="cb40-622"><a href="#cb40-622"></a><span class="ss">- </span>The compiler won’t re-arrange your math if it cannot prove it would yield the same</span>
+<span id="cb40-623"><a href="#cb40-623"></a></span>
+<span id="cb40-624"><a href="#cb40-624"></a>result, even if the computation would be faster</span>
+<span id="cb40-625"><a href="#cb40-625"></a></span>
+<span id="cb40-626"><a href="#cb40-626"></a><span class="ss">- </span>𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0</span>
+<span id="cb40-627"><a href="#cb40-627"></a><span class="ss">- </span>See the "Kahan’sAlgorithm" example</span>
+<span id="cb40-628"><a href="#cb40-628"></a></span>
+<span id="cb40-629"><a href="#cb40-629"></a></span>
+<span id="cb40-630"><a href="#cb40-630"></a>Significance Error – Simulation Time</span>
+<span id="cb40-631"><a href="#cb40-631"></a></span>
+<span id="cb40-632"><a href="#cb40-632"></a><span class="ss">- </span>Time is used to compute distance, velocity, acceleration</span>
+<span id="cb40-633"><a href="#cb40-633"></a><span class="ss">    - </span>High frequency phenomena</span>
+<span id="cb40-634"><a href="#cb40-634"></a><span class="ss">    - </span>Sensors: Doppler shift, pulse compression, PRF</span>
+<span id="cb40-635"><a href="#cb40-635"></a><span class="ss">- </span>These computed values feed into other computed values which may or may not</span>
+<span id="cb40-636"><a href="#cb40-636"></a></span>
+<span id="cb40-637"><a href="#cb40-637"></a>require a time component</span>
+<span id="cb40-638"><a href="#cb40-638"></a></span>
+<span id="cb40-639"><a href="#cb40-639"></a><span class="ss">- </span>Thousands of computations per frame of simulation</span>
+<span id="cb40-640"><a href="#cb40-640"></a><span class="ss">    - </span>Thousands of little compounding errors per frame</span>
+<span id="cb40-641"><a href="#cb40-641"></a><span class="ss">- </span>Combine with poor or nonexistent testing</span>
+<span id="cb40-642"><a href="#cb40-642"></a></span>
+<span id="cb40-643"><a href="#cb40-643"></a></span>
+<span id="cb40-644"><a href="#cb40-644"></a>Significance Error – Simulation Time</span>
+<span id="cb40-645"><a href="#cb40-645"></a></span>
+<span id="cb40-646"><a href="#cb40-646"></a><span class="ss">- </span>Accumulate Time (works for arbitrary</span>
+<span id="cb40-647"><a href="#cb40-647"></a></span>
+<span id="cb40-648"><a href="#cb40-648"></a>time steps)</span>
+<span id="cb40-649"><a href="#cb40-649"></a></span>
+<span id="cb40-650"><a href="#cb40-650"></a>auto totalFrames = size_t(0);</span>
+<span id="cb40-651"><a href="#cb40-651"></a>auto frameLength = 0.01f;</span>
+<span id="cb40-652"><a href="#cb40-652"></a>auto simTime = 0.0f;</span>
+<span id="cb40-653"><a href="#cb40-653"></a></span>
+<span id="cb40-654"><a href="#cb40-654"></a>// Run 120 Frames</span>
+<span id="cb40-655"><a href="#cb40-655"></a>auto simTime120Frames = 1.20f;</span>
+<span id="cb40-656"><a href="#cb40-656"></a>for(; totalFrames &lt; 120; totalFrames++)</span>
+<span id="cb40-657"><a href="#cb40-657"></a>{</span>
+<span id="cb40-658"><a href="#cb40-658"></a>simTime += frameLength;</span>
+<span id="cb40-659"><a href="#cb40-659"></a>}</span>
+<span id="cb40-660"><a href="#cb40-660"></a></span>
+<span id="cb40-661"><a href="#cb40-661"></a><span class="in">```</span></span>
+<span id="cb40-662"><a href="#cb40-662"></a><span class="in">auto totalFrames = size_t(0);</span></span>
+<span id="cb40-663"><a href="#cb40-663"></a><span class="in">auto frameLength = 0.01f;</span></span>
+<span id="cb40-664"><a href="#cb40-664"></a><span class="in">auto simTime = 0.0f;</span></span>
+<span id="cb40-665"><a href="#cb40-665"></a><span class="in">```</span></span>
+<span id="cb40-666"><a href="#cb40-666"></a><span class="in">```</span></span>
+<span id="cb40-667"><a href="#cb40-667"></a><span class="in">// Run 120 Frames</span></span>
+<span id="cb40-668"><a href="#cb40-668"></a><span class="in">auto simTime120Frames = 1.20f;</span></span>
+<span id="cb40-669"><a href="#cb40-669"></a><span class="in">totalFrames = 120;</span></span>
+<span id="cb40-670"><a href="#cb40-670"></a><span class="in">simTime = totalFrames * frameLength;</span></span>
+<span id="cb40-671"><a href="#cb40-671"></a><span class="in">```</span></span>
+<span id="cb40-672"><a href="#cb40-672"></a><span class="ss">- </span>Delta Time (works for fixed time steps)</span>
+<span id="cb40-673"><a href="#cb40-673"></a></span>
+<span id="cb40-674"><a href="#cb40-674"></a></span>
+<span id="cb40-675"><a href="#cb40-675"></a>Significance Error – Simulation Time</span>
+<span id="cb40-676"><a href="#cb40-676"></a></span>
+<span id="cb40-677"><a href="#cb40-677"></a>Accumulate Time (works for arbitrary time steps)</span>
+<span id="cb40-678"><a href="#cb40-678"></a></span>
+<span id="cb40-679"><a href="#cb40-679"></a><span class="ss">- </span>1.199999999999999955591079014994 !=</span>
+<span id="cb40-680"><a href="#cb40-680"></a>    **1.199999213218688964843750000000**</span>
+<span id="cb40-681"><a href="#cb40-681"></a>    (0.000000786781310990747329014994)</span>
+<span id="cb40-682"><a href="#cb40-682"></a><span class="ss">- </span>12.000000000000000000000000000000 !=</span>
+<span id="cb40-683"><a href="#cb40-683"></a>    **12.000179290771484375000000000000** (-</span>
+<span id="cb40-684"><a href="#cb40-684"></a>    0.000179290771484375000000000000)</span>
+<span id="cb40-685"><a href="#cb40-685"></a><span class="ss">- </span>120.000000000000000000000000000000 !=</span>
+<span id="cb40-686"><a href="#cb40-686"></a>    **120.007225036621093750000000000000** (-</span>
+<span id="cb40-687"><a href="#cb40-687"></a>    0.007225036621093750000000000000)</span>
+<span id="cb40-688"><a href="#cb40-688"></a><span class="ss">- </span>600.000000000000000000000000000000 !=</span>
+<span id="cb40-689"><a href="#cb40-689"></a>    **600.274414062500000000000000000000** (-</span>
+<span id="cb40-690"><a href="#cb40-690"></a>    0.274414062500000000000000000000)</span>
+<span id="cb40-691"><a href="#cb40-691"></a><span class="ss">- </span>3600.000000000000000000000000000000 !=</span>
+<span id="cb40-692"><a href="#cb40-692"></a>    **3603.204101562500000000000000000000** (-</span>
+<span id="cb40-693"><a href="#cb40-693"></a>    3.204101562500000000000000000000)</span>
+<span id="cb40-694"><a href="#cb40-694"></a></span>
+<span id="cb40-695"><a href="#cb40-695"></a>Delta Time (works for fixed time steps)</span>
+<span id="cb40-696"><a href="#cb40-696"></a></span>
+<span id="cb40-697"><a href="#cb40-697"></a><span class="ss">- </span>1.200000047683715820312500000000 !=</span>
+<span id="cb40-698"><a href="#cb40-698"></a>    **1.199999928474426269531250000000**</span>
+<span id="cb40-699"><a href="#cb40-699"></a>    (0.000000119209289550781250000000)</span>
+<span id="cb40-700"><a href="#cb40-700"></a><span class="ss">- </span>12.000000000000000000000000000000 ==</span>
+<span id="cb40-701"><a href="#cb40-701"></a>    **12.000000000000000000000000000000**</span>
+<span id="cb40-702"><a href="#cb40-702"></a>    (0.000000000000000000000000000000)</span>
+<span id="cb40-703"><a href="#cb40-703"></a><span class="ss">- </span>120.000000000000000000000000000000 ==</span>
+<span id="cb40-704"><a href="#cb40-704"></a>    **120.000000000000000000000000000000**</span>
+<span id="cb40-705"><a href="#cb40-705"></a>    (0.000000000000000000000000000000)</span>
+<span id="cb40-706"><a href="#cb40-706"></a><span class="ss">- </span>600.000000000000000000000000000000 ==</span>
+<span id="cb40-707"><a href="#cb40-707"></a>    **600.000000000000000000000000000000**</span>
+<span id="cb40-708"><a href="#cb40-708"></a>    (0.000000000000000000000000000000)</span>
+<span id="cb40-709"><a href="#cb40-709"></a><span class="ss">- </span>-3600.000000000000000000000000000000 ==</span>
+<span id="cb40-710"><a href="#cb40-710"></a>    **3600.000000000000000000000000000000**</span>
+<span id="cb40-711"><a href="#cb40-711"></a>    (0.000000000000000000000000000000)</span>
+<span id="cb40-712"><a href="#cb40-712"></a></span>
+<span id="cb40-713"><a href="#cb40-713"></a></span>
+<span id="cb40-714"><a href="#cb40-714"></a>Significance Error – Simulation Time</span>
+<span id="cb40-715"><a href="#cb40-715"></a></span>
+<span id="cb40-716"><a href="#cb40-716"></a><span class="ss">- </span>"Sub-Microsecond Precision"</span>
+<span id="cb40-717"><a href="#cb40-717"></a><span class="ss">    - </span>1.2345e-6 seconds per frame (810044.5 Hz)</span>
+<span id="cb40-718"><a href="#cb40-718"></a></span>
+<span id="cb40-719"><a href="#cb40-719"></a></span>
+<span id="cb40-720"><a href="#cb40-720"></a>Significance Error – Simulation Time</span>
+<span id="cb40-721"><a href="#cb40-721"></a></span>
+<span id="cb40-722"><a href="#cb40-722"></a><span class="ss">- </span>"Sub-Microsecond Precision"</span>
+<span id="cb40-723"><a href="#cb40-723"></a><span class="ss">    - </span>1.2345e-6 seconds per frame (810044.5 Hz)</span>
+<span id="cb40-724"><a href="#cb40-724"></a></span>
+<span id="cb40-725"><a href="#cb40-725"></a><span class="fu">### 0.012345000170171261000000000000 !=</span></span>
+<span id="cb40-726"><a href="#cb40-726"></a></span>
+<span id="cb40-727"><a href="#cb40-727"></a><span class="fu">### 0.0148140005767345430</span></span>
+<span id="cb40-728"><a href="#cb40-728"></a></span>
+<span id="cb40-729"><a href="#cb40-729"></a><span class="fu">### (-0.002469000406563282000000000000)</span></span>
+<span id="cb40-730"><a href="#cb40-730"></a></span>
+<span id="cb40-731"><a href="#cb40-731"></a><span class="fu">### 12.345000267028809000000000000000 !=</span></span>
+<span id="cb40-732"><a href="#cb40-732"></a></span>
+<span id="cb40-733"><a href="#cb40-733"></a><span class="fu">### 11.701118469238281000000000000000</span></span>
+<span id="cb40-734"><a href="#cb40-734"></a></span>
+<span id="cb40-735"><a href="#cb40-735"></a><span class="fu">### (0.643881797790527340000000000000)</span></span>
+<span id="cb40-736"><a href="#cb40-736"></a></span>
+<span id="cb40-737"><a href="#cb40-737"></a></span>
+<span id="cb40-738"><a href="#cb40-738"></a>Significance Error – Don’t use IEEE Floats?</span>
+<span id="cb40-739"><a href="#cb40-739"></a></span>
+<span id="cb40-740"><a href="#cb40-740"></a><span class="ss">- </span>Use integers</span>
+<span id="cb40-741"><a href="#cb40-741"></a><span class="ss">    - </span>Very fast</span>
+<span id="cb40-742"><a href="#cb40-742"></a><span class="ss">    - </span>Trade more precision for less range</span>
+<span id="cb40-743"><a href="#cb40-743"></a><span class="ss">    - </span>Only input/output may be impacted by floating point conversions</span>
+<span id="cb40-744"><a href="#cb40-744"></a><span class="ss">    - </span>Financial applications represent dollars as only cents or tenth’s of cents</span>
+<span id="cb40-745"><a href="#cb40-745"></a><span class="ss">- </span>Use a math library</span>
+<span id="cb40-746"><a href="#cb40-746"></a><span class="ss">    - </span>Slower</span>
+<span id="cb40-747"><a href="#cb40-747"></a><span class="ss">    - </span>Define your own level of accuracy</span>
+<span id="cb40-748"><a href="#cb40-748"></a><span class="ss">    - </span>MPFR (w/C++ Wrapper), TTMath, Boost, GMP C++</span>
+<span id="cb40-749"><a href="#cb40-749"></a><span class="ss">    - </span>CRlibm(Correctly Rounded Mathematical Library)</span>
+<span id="cb40-750"><a href="#cb40-750"></a></span>
+<span id="cb40-751"><a href="#cb40-751"></a>(Store simTimeas uint64_tand get microsecond precision for 584555 years.)</span>
+<span id="cb40-752"><a href="#cb40-752"></a></span>
+<span id="cb40-753"><a href="#cb40-753"></a></span>
+<span id="cb40-754"><a href="#cb40-754"></a>Algebraic Assumption Error</span>
+<span id="cb40-755"><a href="#cb40-755"></a></span>
+<span id="cb40-756"><a href="#cb40-756"></a><span class="ss">- </span>Mathematical Identities</span>
+<span id="cb40-757"><a href="#cb40-757"></a><span class="ss">    - </span>Traditional identities (associative, commutative, distributive) do not hold</span>
+<span id="cb40-758"><a href="#cb40-758"></a><span class="ss">- </span>Distributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)</span>
+<span id="cb40-759"><a href="#cb40-759"></a><span class="ss">- </span>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</span>
+<span id="cb40-760"><a href="#cb40-760"></a><span class="ss">- </span>Cannot interchange division and multiplication:</span>
+<span id="cb40-761"><a href="#cb40-761"></a></span>
+<span id="cb40-762"><a href="#cb40-762"></a><span class="fu">### 𝑥</span></span>
+<span id="cb40-763"><a href="#cb40-763"></a></span>
+<span id="cb40-764"><a href="#cb40-764"></a><span class="fu">### 10. 0</span></span>
+<span id="cb40-765"><a href="#cb40-765"></a></span>
+<span id="cb40-766"><a href="#cb40-766"></a>≠ 𝑥 × 0. 1</span>
+<span id="cb40-767"><a href="#cb40-767"></a></span>
+<span id="cb40-768"><a href="#cb40-768"></a>Does a naïve compiler make these assumptions too?</span>
+<span id="cb40-769"><a href="#cb40-769"></a></span>
+<span id="cb40-770"><a href="#cb40-770"></a>https://msdn.microsoft.com/library/aa289157.aspx</span>
+<span id="cb40-771"><a href="#cb40-771"></a></span>
+<span id="cb40-772"><a href="#cb40-772"></a></span>
+<span id="cb40-773"><a href="#cb40-773"></a>Algebraic Assumption Error</span>
+<span id="cb40-774"><a href="#cb40-774"></a></span>
+<span id="cb40-775"><a href="#cb40-775"></a><span class="in">```</span></span>
+<span id="cb40-776"><a href="#cb40-776"></a><span class="in">const auto oneRadian = 0.15915494309f;</span></span>
+<span id="cb40-777"><a href="#cb40-777"></a><span class="in">const auto control = 0.000000000015915494309f;</span></span>
+<span id="cb40-778"><a href="#cb40-778"></a><span class="in">```</span></span>
+<span id="cb40-779"><a href="#cb40-779"></a><span class="in">```</span></span>
+<span id="cb40-780"><a href="#cb40-780"></a><span class="in">const auto oneRadianMultiplied = oneRadian * 1.0e-10f;</span></span>
+<span id="cb40-781"><a href="#cb40-781"></a><span class="in">const auto oneRadianDivided = oneRadian / 1.0e10f;</span></span>
+<span id="cb40-782"><a href="#cb40-782"></a><span class="in">```</span></span>
+<span id="cb40-783"><a href="#cb40-783"></a></span>
+<span id="cb40-784"><a href="#cb40-784"></a>Algebraic Assumption Error</span>
+<span id="cb40-785"><a href="#cb40-785"></a></span>
+<span id="cb40-786"><a href="#cb40-786"></a><span class="in">```</span></span>
+<span id="cb40-787"><a href="#cb40-787"></a><span class="in">const auto oneRadian = 0.15915494309f;</span></span>
+<span id="cb40-788"><a href="#cb40-788"></a><span class="in">const auto control = 0.000000000015915494309f;</span></span>
+<span id="cb40-789"><a href="#cb40-789"></a><span class="in">```</span></span>
+<span id="cb40-790"><a href="#cb40-790"></a><span class="in">```</span></span>
+<span id="cb40-791"><a href="#cb40-791"></a><span class="in">const auto oneRadianMultiplied = oneRadian * 1.0e-10f;</span></span>
+<span id="cb40-792"><a href="#cb40-792"></a><span class="in">const auto oneRadianDivided = oneRadian / 1.0e10f;</span></span>
+<span id="cb40-793"><a href="#cb40-793"></a><span class="in">```</span></span>
+<span id="cb40-794"><a href="#cb40-794"></a>Control: 0.000000000015915494616658421000</span>
+<span id="cb40-795"><a href="#cb40-795"></a>x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000)</span>
+<span id="cb40-796"><a href="#cb40-796"></a>x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977)</span>
+<span id="cb40-797"><a href="#cb40-797"></a>Relative Error: 0.000000108995891423546710000000</span>
+<span id="cb40-798"><a href="#cb40-798"></a></span>
+<span id="cb40-799"><a href="#cb40-799"></a></span>
+<span id="cb40-800"><a href="#cb40-800"></a>Floating Point Exceptions</span>
+<span id="cb40-801"><a href="#cb40-801"></a></span>
+<span id="cb40-802"><a href="#cb40-802"></a><span class="ss">- </span>Enable floating point exceptions to be alerted when things go awry.</span>
+<span id="cb40-803"><a href="#cb40-803"></a></span>
+<span id="cb40-804"><a href="#cb40-804"></a><span class="in">```</span></span>
+<span id="cb40-805"><a href="#cb40-805"></a><span class="in">𝑥is the exact result of the operation</span></span>
+<span id="cb40-806"><a href="#cb40-806"></a><span class="in">α= 192 for single precision, 1536 for double</span></span>
+<span id="cb40-807"><a href="#cb40-807"></a><span class="in">𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.</span></span>
+<span id="cb40-808"><a href="#cb40-808"></a><span class="in">See &lt;cfenv&gt; -Floating Point Environment</span></span>
+<span id="cb40-809"><a href="#cb40-809"></a><span class="in">```</span></span>
+<span id="cb40-810"><a href="#cb40-810"></a>IEEE 754 Exception Result when traps disabled Argument to trap handler</span>
+<span id="cb40-811"><a href="#cb40-811"></a></span>
+<span id="cb40-812"><a href="#cb40-812"></a>overflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)</span>
+<span id="cb40-813"><a href="#cb40-813"></a></span>
+<span id="cb40-814"><a href="#cb40-814"></a>underflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)</span>
+<span id="cb40-815"><a href="#cb40-815"></a></span>
+<span id="cb40-816"><a href="#cb40-816"></a>divide by zero ±∞ invalid operation</span>
+<span id="cb40-817"><a href="#cb40-817"></a></span>
+<span id="cb40-818"><a href="#cb40-818"></a>invalid NaN invalid operation</span>
+<span id="cb40-819"><a href="#cb40-819"></a></span>
+<span id="cb40-820"><a href="#cb40-820"></a>inexact round( _x_ ) round( _x_ )</span>
+<span id="cb40-821"><a href="#cb40-821"></a></span>
+<span id="cb40-822"><a href="#cb40-822"></a></span>
+<span id="cb40-823"><a href="#cb40-823"></a>But Wait! There’s More!</span>
+<span id="cb40-824"><a href="#cb40-824"></a></span>
+<span id="cb40-825"><a href="#cb40-825"></a><span class="ss">- </span>Binary to Decimal Conversion Error</span>
+<span id="cb40-826"><a href="#cb40-826"></a><span class="ss">- </span>Summation Error</span>
+<span id="cb40-827"><a href="#cb40-827"></a><span class="ss">- </span>Propagation Error</span>
+<span id="cb40-828"><a href="#cb40-828"></a><span class="ss">- </span>Underflow, Overflow</span>
+<span id="cb40-829"><a href="#cb40-829"></a><span class="ss">- </span>Type Narrowing/Widening Rules</span>
+<span id="cb40-830"><a href="#cb40-830"></a></span>
+<span id="cb40-831"><a href="#cb40-831"></a></span>
+<span id="cb40-832"><a href="#cb40-832"></a>Miscellaneous Notes</span>
+<span id="cb40-833"><a href="#cb40-833"></a></span>
+<span id="cb40-834"><a href="#cb40-834"></a><span class="co">[</span><span class="ot">http://preshing.com/images/float-point-perf.png</span><span class="co">](http://preshing.com/images/float-point-perf.png)</span></span>
+<span id="cb40-835"><a href="#cb40-835"></a>https://github.com/DigitalInBlue/CPPCon2015</span>
+<span id="cb40-836"><a href="#cb40-836"></a></span>
+<span id="cb40-837"><a href="#cb40-837"></a></span>
+<span id="cb40-838"><a href="#cb40-838"></a>Use Your Compiler’s Output</span>
+<span id="cb40-839"><a href="#cb40-839"></a></span>
+<span id="cb40-840"><a href="#cb40-840"></a><span class="ss">- </span>warning C4244: ‘initializing’ : conversion from ‘double’ to</span>
+<span id="cb40-841"><a href="#cb40-841"></a></span>
+<span id="cb40-842"><a href="#cb40-842"></a>‘float’, possible loss of data</span>
+<span id="cb40-843"><a href="#cb40-843"></a></span>
+<span id="cb40-844"><a href="#cb40-844"></a><span class="ss">- </span>warning C4056: overflow in floating point constant arithmetic</span>
+<span id="cb40-845"><a href="#cb40-845"></a><span class="ss">- </span>warning C4305: 'identifier' : truncation from 'type1' to</span>
+<span id="cb40-846"><a href="#cb40-846"></a></span>
+<span id="cb40-847"><a href="#cb40-847"></a>'type2'</span>
+<span id="cb40-848"><a href="#cb40-848"></a></span>
+<span id="cb40-849"><a href="#cb40-849"></a><span class="ss">- </span>warning: conversion to 'float' from 'int' may alter its value</span>
+<span id="cb40-850"><a href="#cb40-850"></a><span class="ss">- </span>warning: floating constant exceeds range of ‘double’</span>
+<span id="cb40-851"><a href="#cb40-851"></a></span>
+<span id="cb40-852"><a href="#cb40-852"></a></span>
+<span id="cb40-853"><a href="#cb40-853"></a>Fused Multiply-Add (FMA)</span>
+<span id="cb40-854"><a href="#cb40-854"></a></span>
+<span id="cb40-855"><a href="#cb40-855"></a><span class="ss">- </span>a = a + (b * c); a += b * c;</span>
+<span id="cb40-856"><a href="#cb40-856"></a><span class="ss">- </span>Multiplier-accumulator (MAC Unit)</span>
+<span id="cb40-857"><a href="#cb40-857"></a><span class="ss">- </span>One rounding</span>
+<span id="cb40-858"><a href="#cb40-858"></a><span class="ss">- </span>Compiler Options</span>
+<span id="cb40-859"><a href="#cb40-859"></a><span class="ss">    - </span>GCC = -mfma</span>
+<span id="cb40-860"><a href="#cb40-860"></a><span class="ss">    - </span>VC++ = #pragma fp_contract (off)</span>
+<span id="cb40-861"><a href="#cb40-861"></a><span class="ss">- </span>Reference: FMA3, FMA4</span>
+<span id="cb40-862"><a href="#cb40-862"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">http://en.wikipedia.org/wiki/FMA_instruction_set</span><span class="co">](http://en.wikipedia.org/wiki/FMA_instruction_set)</span></span>
+<span id="cb40-863"><a href="#cb40-863"></a></span>
+<span id="cb40-864"><a href="#cb40-864"></a></span>
+<span id="cb40-865"><a href="#cb40-865"></a>Streaming SIMD Extensions (SSE)</span>
+<span id="cb40-866"><a href="#cb40-866"></a></span>
+<span id="cb40-867"><a href="#cb40-867"></a><span class="ss">- </span>SSE can provide significant performance gains</span>
+<span id="cb40-868"><a href="#cb40-868"></a><span class="ss">    - </span>Supports integer, floating point, logical, conversion, shift, and shuffle operations</span>
+<span id="cb40-869"><a href="#cb40-869"></a><span class="ss">- </span>C, C++, Fortran do not natively support SSE, but compiler-specific support exists</span>
+<span id="cb40-870"><a href="#cb40-870"></a></span>
+<span id="cb40-871"><a href="#cb40-871"></a></span>
+<span id="cb40-872"><a href="#cb40-872"></a>Float Tricks</span>
+<span id="cb40-873"><a href="#cb40-873"></a></span>
+<span id="cb40-874"><a href="#cb40-874"></a><span class="in">```</span></span>
+<span id="cb40-875"><a href="#cb40-875"></a><span class="in">/// Fast reciprocal square root approximation for x &gt; 0.25</span></span>
+<span id="cb40-876"><a href="#cb40-876"></a><span class="in">/// Quake’s float Q_rsqrt(float number) is much more entertaining.</span></span>
+<span id="cb40-877"><a href="#cb40-877"></a><span class="in">inline float FastInvSqrt(float x)</span></span>
+<span id="cb40-878"><a href="#cb40-878"></a><span class="in">{</span></span>
+<span id="cb40-879"><a href="#cb40-879"></a><span class="in">int tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&amp;x) &gt;&gt; 1;</span></span>
+<span id="cb40-880"><a href="#cb40-880"></a><span class="in">auto y = *(float*)&amp;tmp;</span></span>
+<span id="cb40-881"><a href="#cb40-881"></a><span class="in">return y * (1.47f – 0.47f * x * y * y);</span></span>
+<span id="cb40-882"><a href="#cb40-882"></a><span class="in">}</span></span>
+<span id="cb40-883"><a href="#cb40-883"></a><span class="in">```</span></span>
+<span id="cb40-884"><a href="#cb40-884"></a></span>
+<span id="cb40-885"><a href="#cb40-885"></a>Testing</span>
+<span id="cb40-886"><a href="#cb40-886"></a></span>
+<span id="cb40-887"><a href="#cb40-887"></a><span class="ss">- </span>Design for Numerical Stability</span>
+<span id="cb40-888"><a href="#cb40-888"></a><span class="ss">- </span>Perform Meaningful Testing</span>
+<span id="cb40-889"><a href="#cb40-889"></a><span class="ss">- </span>Document assumptions</span>
+<span id="cb40-890"><a href="#cb40-890"></a><span class="ss">- </span>Track sources of approximation</span>
+<span id="cb40-891"><a href="#cb40-891"></a><span class="ss">- </span>Quantify goodness</span>
+<span id="cb40-892"><a href="#cb40-892"></a><span class="ss">    - </span>Well conditioned algorithms</span>
+<span id="cb40-893"><a href="#cb40-893"></a><span class="ss">- </span>Backward error analysis</span>
+<span id="cb40-894"><a href="#cb40-894"></a><span class="ss">    - </span>Are the outputs identical for slightly</span>
+<span id="cb40-895"><a href="#cb40-895"></a>       modified inputs?</span>
+<span id="cb40-896"><a href="#cb40-896"></a></span>
+<span id="cb40-897"><a href="#cb40-897"></a><span class="in">```</span></span>
+<span id="cb40-898"><a href="#cb40-898"></a><span class="in">TEST(CPPCon2015, pointOnePlusPointTwo)</span></span>
+<span id="cb40-899"><a href="#cb40-899"></a><span class="in">{</span></span>
+<span id="cb40-900"><a href="#cb40-900"></a><span class="in">auto zeroPointOne = 0.1f;</span></span>
+<span id="cb40-901"><a href="#cb40-901"></a><span class="in">auto zeroPointTwo = 0.2f;</span></span>
+<span id="cb40-902"><a href="#cb40-902"></a><span class="in">auto zeroPointThree = 0.3f;</span></span>
+<span id="cb40-903"><a href="#cb40-903"></a><span class="in">auto sum = zeroPointOne + zeroPointTwo;</span></span>
+<span id="cb40-904"><a href="#cb40-904"></a><span class="in">```</span></span>
+<span id="cb40-905"><a href="#cb40-905"></a><span class="in">```</span></span>
+<span id="cb40-906"><a href="#cb40-906"></a><span class="in">EXPECT_DOUBLE_EQ(0.3f, zeroPointThree);</span></span>
+<span id="cb40-907"><a href="#cb40-907"></a><span class="in">EXPECT_EQ(0.3f, zeroPointThree);</span></span>
+<span id="cb40-908"><a href="#cb40-908"></a><span class="in">EXPECT_EQ(0.3f, sum);</span></span>
+<span id="cb40-909"><a href="#cb40-909"></a><span class="in">```</span></span>
+<span id="cb40-910"><a href="#cb40-910"></a><span class="in">```</span></span>
+<span id="cb40-911"><a href="#cb40-911"></a><span class="in">EXPECT_EQ(zeroPointThree, sum);</span></span>
+<span id="cb40-912"><a href="#cb40-912"></a><span class="in">EXPECT_DOUBLE_EQ(zeroPointThree, sum);</span></span>
+<span id="cb40-913"><a href="#cb40-913"></a><span class="in">}</span></span>
+<span id="cb40-914"><a href="#cb40-914"></a><span class="in">```</span></span>
+<span id="cb40-915"><a href="#cb40-915"></a></span>
+<span id="cb40-916"><a href="#cb40-916"></a><span class="co">[</span><span class="ot">http://xkcd.com/217/</span><span class="co">](http://xkcd.com/217/)</span></span>
+<span id="cb40-917"><a href="#cb40-917"></a><span class="co">[</span><span class="ot">http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi</span><span class="co">](http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi)</span></span>
+<span id="cb40-918"><a href="#cb40-918"></a></span>
+<span id="cb40-919"><a href="#cb40-919"></a><span class="in">```</span></span>
+<span id="cb40-920"><a href="#cb40-920"></a><span class="in">https://github.com/DigitalInBlue/CPPCon2015</span></span>
+<span id="cb40-921"><a href="#cb40-921"></a><span class="in">```</span></span>
+<span id="cb40-922"><a href="#cb40-922"></a></span>
+<span id="cb40-923"><a href="#cb40-923"></a><span class="fu"># Demystifying Floating Point</span></span>
+<span id="cb40-924"><a href="#cb40-924"></a></span>
+<span id="cb40-925"><a href="#cb40-925"></a>John Farrier, Booz Allen Hamilton</span>
+<span id="cb40-926"><a href="#cb40-926"></a></span>
+<span id="cb40-927"><a href="#cb40-927"></a><span class="in">```</span></span>
+<span id="cb40-928"><a href="#cb40-928"></a><span class="in">https://github.com/DigitalInBlue/CPPCon2015</span></span>
+<span id="cb40-929"><a href="#cb40-929"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

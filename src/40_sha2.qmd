@@ -47,8 +47,13 @@ title: SHA-2
     -   Key-value stores with $\mathcal{O}(1)$ lookup time. 
     -   [My hashtable/hashmap slides](https://cd-public.github.io/slide_portable/hashmap.html#/title-slide)
 -   Example: Python `hash`
-```{python}
-print("\n".join([f"{hash(a):+d}" for a in "ABCDE"]))
+```{.sh}
+>>> print("\n".join([f"{hash(a):+d}" for a in "ABCDE"]))
+-8631190624005339361
++5631042488191293803
+-2170806150006979524
++6678617945331639637
++8928069711880473582
 ```
 
 ## Example.tex
@@ -69,12 +74,17 @@ $$
 -   We can express in a programming language.
 -   We note that 257 == 0x101 is prime.
     -   And therefore $\forall M : \gcd(257,M) = 1$
-```{python}
+
+```{.py}
 import math
-h = lambda x, a, M : (a * x) % M
+lambda x, a, M : (a * x) % M
 a, M = 0x05, 1 << 0x08
 assert(all((not math.gcd(a, M) == 1) or h(x, a, M) in range(M) for x in range(M)))
 print('h'+str((0xDA7A,a,M)), '=', h(0xDA7A,a,M))
+```
+- We see:
+```{.sh}
+h(55930, 5, 256) = 98
 ```
 
 ## Example.rs
@@ -84,7 +94,7 @@ print('h'+str((0xDA7A,a,M)), '=', h(0xDA7A,a,M))
     -   $W$ stands for [word](https://en.wikipedia.org/wiki/Word_(computer_architecture)) size
 -   Take $W = 2^w$ and $M = 2^m$
 
-```{.C}
+```{.rs}
 fn h(x:i32, a:i32, m:i32) -> i32 {
     return (a * x) >> (i32::BITS * 0x10 - m); 
 }
@@ -179,17 +189,17 @@ assert(set(h(x, a, M) for x in range(M)) == set(range(M)))
   1. **Preprocessing**
   2. **Hash Computation**
 
-## Preprocessing
+## Preprocessing{.smaller}
 
 - A 512-bit state variable $H^{(0)}$ is [initialized](https://www.movable-type.co.uk/scripts/sha512.html):
 
 $$
 \begin{align*}
 \begin{split}
-   H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
-   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
-   H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
-   H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
+H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
+H_2^{(0)} = \texttt{0x3c6ef372fe94f82b}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
+H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
+H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
 \end{split}
 \end{align*}
 $$
@@ -203,7 +213,7 @@ $$
 - Let $M$ be $l$-bits long.
 - Find the smallest non-negative $k$ such that:
 $$
-k + l + 129 \equiv 0 \pmod{512}
+k + l + 129 \equiv 0 \pmod{1024}
 $$
 - $\equiv$ is pronounced "congruent" (in this context)
 
@@ -221,16 +231,19 @@ $$
 
 ## Example.py
 
--   We can solve numerically in Python, but...
 -   Perhaps easier to show with strings.
-```{python}
-M = "Hello there I am a message.  " * 15
+```{.py}
+M = "Hello I am a message of some length. " * 3
+l = len(M.encode('utf-8')) * 8
+k = 1024
 l = len(M.encode('utf-8')) * 8
 k = 1024 - (l + 129) % 1024
-"l=", l, "k=", k, "pad=", "0x1" + "0" * (k//4) + f"{l:032x}" ## 128 // 4 == 32
+print("l=", l, "k=", k, "pad=", "0x8" + "0" * (k//4 - 1) + f"{l:032x}") ## 128 // 4 == 32
 ```
--   The arithmetic form is left an exercise for the interested student.
-    -   My solution was 10-20 characters of code.
+- We see:
+```{.sh}
+l= 888 k= 7 pad= 0x800000000000000000000000000000378
+```
 
 ## Hash Computation
 
@@ -250,9 +263,9 @@ $$
 f: M:\{0,1\}^{1024} \times H:\{0,1\}^{512} \rightarrow H':\{0,1\}^{512}
 $$
 - Given $H^{(i-1)}$, calculate $H^{(i)}$ using:
- $$
- H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
- $$
+$$
+H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
+$$
     - 1-indexed
 
 
@@ -261,9 +274,6 @@ $$
 -   We specify bitwise operations over **exactly** 64 bit words.
 -   In Rust, we'd use`u64`
 ```{.C}
-#include <stdint.h>
-
-/* uint32_t is "unsigned integer of size 32 type" */
 fn rotate(a:u64, b:u64) -> u64 {
     // Your code here!
     return a;
@@ -295,28 +305,15 @@ $$
 \lnot U
 $$
 - As from the *Bits* lecture
+
 ## Binary Bitwise
 
 - There are four of which we use three (no NAND)
 - $U \land V$, $U \lor V$, $U \oplus V$: AND, OR, XOR
 - As from the *Bits* lecture
 
-## Addition
-
-- Addition is aproximately a binary bitwise operation:
-- Equivalent to integer sum module $2^{64}$
-```{python}
-from ctypes import c_ulong ## this won't work in pypy
-def addition(u:c_ulong, v:c_ulong) -> c_ulong:
-    return c_ulong(u + v)
-
-addition(4000000000, 4000000000) , addition(4, 4)
-```
-- Long used to mean 32 bit, Rust dodges this by being (1) new and (2) good.
-    - Have to use (lol) `c_ulonglong`
-
 ## Rust Math
-- Rust addition on `u64` is already modulo $2^{64}$
+- Rust addition on `u64` can already only be conducted modulo $2^{64}$
     - What else would it be?
     - Finite number of bits means finite values.
 
@@ -368,12 +365,15 @@ $$
 ## Simple Shift/Rotate
 
 - Bitwise shift right `>>` / x86 `shrl`
+
 $$
 \textsf{SHR}^n(U) = \underbrace{000 \cdots 000}_{n \textrm{ zeros}} u_0 u_1 \cdots u_{62-n} u_{63-n}
 $$
-- The `ROTATE` macro / x86 `rorl`
+
+
+- The `ROTATE` macro / x86 `ror`
 $$
-\textsf{ROTR}^n(U) =  \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_62-n} u_{63-n}
+\textsf{ROTR}^n(U) = \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_{62-n} u_{63-n}
 $$
 
 ## Composites

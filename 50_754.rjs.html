@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.30">
 
   <meta name="author" content="Prof.&nbsp;Calvin">
-  <title>Systems in Rust – SHA-2</title>
+  <title>Systems in Rust – IEEE 754</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -390,7 +390,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">SHA-2</h1>
+  <h1 class="title">IEEE 754</h1>
   <p class="subtitle">Systems in Rust</p>
 
 <div class="quarto-title-authors">
@@ -405,612 +405,792 @@ Prof.&nbsp;Calvin
 <section id="announcements" class="slide level2">
 <h2>Announcements</h2>
 <ul>
+<li><strong>Welcome</strong> to Systems in Rust</li>
 <li><strong>Action Items</strong>:
 <ul>
-<li>How was Macros?</li>
-<li>Next homework coming out now - SHA512
-<ul>
-<li>Split over two weeks</li>
-<li>Intermediate checkpoint recommended not required.
-<ul>
-<li>That is, no <code>42</code> directory required.</li>
-</ul></li>
-</ul></li>
+<li>“SHA-512” is due on next Friday</li>
+<li>Lecture on numbers, inspired by the lab, while we wait.</li>
 </ul></li>
 </ul>
 </section>
 <section id="today" class="slide level2">
 <h2>Today</h2>
 <ul>
-<li>SHA-512
+<li>Understand the basics of floats</li>
+<li>Understand the language of floats</li>
+<li>Get a feel for when further investigation is required</li>
+<li>Have a few tools ready to help</li>
+<li>Be prepared to keep learning about IEEE floats</li>
+</ul>
+</section>
+<section id="citation" class="slide level2">
+<h2>Citation</h2>
 <ul>
-<li>Why?</li>
-<li>What?</li>
-<li>How?</li>
+<li>Yoinked</li>
+<li><a href="https://github.com/DigitalInBlue/CPPCon2015">url</a></li>
+<li>Author John Farrier, Booz Allen Hamilton</li>
+</ul>
+</section>
+<section id="mission-statement" class="slide level2">
+<h2>Mission Statement</h2>
+<ul>
+<li>I’m a normal person.
+<ul>
+<li>I think 5/2 is 2.5.</li>
 </ul></li>
-</ul>
-</section>
-<section id="slide-credit" class="slide level2">
-<h2>Slide Credit</h2>
+<li>I’m a scientist.
 <ul>
-<li><a href="https://www.ee.iitb.ac.in/~sarva/"><strong>Saravanan Vijayakumaran</strong></a></li>
-<li>sarva@ee.iitb.ac.in<br>
-</li>
-<li>Department of Electrical Engineering<br>
-</li>
-<li>Indian Institute of Technology Bombay</li>
-</ul>
-</section>
-<section>
-<section id="why" class="title-slide slide level1 center">
-<h1>Why?</h1>
-
-</section>
-<section id="hash-functions" class="slide level2">
-<h2>Hash Functions</h2>
-<ul>
-<li>Methods for <strong>deterministically</strong> compress a long input string to a shorter output called a digest
-<ul>
-<li>Also called “signature”</li>
-<li>Can hash <em>anything stored in computer</em></li>
-</ul></li>
-<li>These are also called “compression” or “one-way” hash functions.</li>
-</ul>
-</section>
-<section id="hash-merits" class="slide level2">
-<h2>Hash Merits</h2>
-<ul>
-<li>Primary requirement is that it should be infeasible to find collisions,
-<ul>
-<li>i.e.&nbsp;no two inputs have same digest.</li>
-<li>If I download Ubuntu and check the signature, I should know it’s Ubuntu.</li>
-<li>If Ubuntu and a malware package have the same signature, useless.</li>
-</ul></li>
-</ul>
-</section>
-<section id="non-cryptographic" class="slide level2">
-<h2>Non-Cryptographic</h2>
-<ul>
-<li>Used to build <strong>hash tables</strong>
-<ul>
-<li>Key-value stores with <span class="math inline">\(\mathcal{O}(1)\)</span> lookup time.</li>
-<li><a href="https://cd-public.github.io/slide_portable/hashmap.html#/title-slide">My hashtable/hashmap slides</a></li>
-</ul></li>
-<li>Example: Python <code>hash</code></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> print<span class="kw">(</span><span class="st">"\n"</span><span class="ex">.join</span><span class="er">(</span><span class="ex">[f</span><span class="st">"{hash(a):+d}"</span> for a in <span class="st">"ABCDE"</span>]<span class="kw">))</span></span>
-<span id="cb1-2"><a></a><span class="ex">-8631190624005339361</span></span>
-<span id="cb1-3"><a></a><span class="ex">+5631042488191293803</span></span>
-<span id="cb1-4"><a></a><span class="ex">-2170806150006979524</span></span>
-<span id="cb1-5"><a></a><span class="ex">+6678617945331639637</span></span>
-<span id="cb1-6"><a></a><span class="ex">+8928069711880473582</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="example.tex" class="slide level2">
-<h2>Example.tex</h2>
-<ul>
-<li>Let <span class="math inline">\(M\)</span> be the size of some hash table</li>
-<li>Take <span class="math inline">\(a \in \mathbb{N} : a &lt; M \land \gcd(a, M) = 1\)</span>
-<ul>
-<li>That is, two positive coprime integers.</li>
-</ul></li>
-<li>Any integer value <span class="math inline">\(x\)</span> can be mapped into <span class="math inline">\(\mathbb{N}/(M) = \{0,1,\ldots, M-1\}\)</span></li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a></a>h_a(x) = a x <span class="fu">\pmod</span>{M}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[
-h_a(x) = a x \pmod{M}
-\]</span></p>
-</section>
-<section id="example.py" class="slide level2">
-<h2>Example.py</h2>
-<ul>
-<li>We can express in a programming language.</li>
-<li>We note that 257 == 0x101 is prime.
-<ul>
-<li>And therefore <span class="math inline">\(\forall M : \gcd(257,M) = 1\)</span></li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> math</span>
-<span id="cb3-2"><a></a><span class="kw">lambda</span> x, a, M : (a <span class="op">*</span> x) <span class="op">%</span> M</span>
-<span id="cb3-3"><a></a>a, M <span class="op">=</span> <span class="bn">0x05</span>, <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="bn">0x08</span></span>
-<span id="cb3-4"><a></a><span class="cf">assert</span>(<span class="bu">all</span>((<span class="kw">not</span> math.gcd(a, M) <span class="op">==</span> <span class="dv">1</span>) <span class="kw">or</span> h(x, a, M) <span class="kw">in</span> <span class="bu">range</span>(M) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(M)))</span>
-<span id="cb3-5"><a></a><span class="bu">print</span>(<span class="st">'h'</span><span class="op">+</span><span class="bu">str</span>((<span class="bn">0xDA7A</span>,a,M)), <span class="st">'='</span>, h(<span class="bn">0xDA7A</span>,a,M))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>We see:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="ex">h</span><span class="er">(</span><span class="ex">55930,</span> 5, 256<span class="kw">)</span> <span class="ex">=</span> 98</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="example.rs" class="slide level2">
-<h2>Example.rs</h2>
-<ul>
-<li>We note a high performance special case.</li>
-<li>Let <span class="math inline">\(w\)</span> be the bit size used to store numbers
-<ul>
-<li>Likely 32 == 0x20 for Rust <code>i32</code></li>
-<li><span class="math inline">\(W\)</span> stands for <a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)">word</a> size</li>
-</ul></li>
-<li>Take <span class="math inline">\(W = 2^w\)</span> and <span class="math inline">\(M = 2^m\)</span></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">fn</span> h(x<span class="op">:</span><span class="dt">i32</span><span class="op">,</span> a<span class="op">:</span><span class="dt">i32</span><span class="op">,</span> m<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb5-2"><a></a>    <span class="cf">return</span> (a <span class="op">*</span> x) <span class="op">&gt;&gt;</span> (<span class="dt">i32</span><span class="pp">::</span>BITS <span class="op">*</span> <span class="dv">0x10</span> <span class="op">-</span> m)<span class="op">;</span> </span>
-<span id="cb5-3"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="collisions" class="slide level2">
-<h2>Collisions</h2>
-<ul>
-<li>A <strong>collision</strong> occurs if <span class="math display">\[
-\exists x, x' : x \neq x' \land h(x) = h(x')
+<li>I’m solving “Black-Scholes”</li>
+<li><a href="https://numba.pydata.org/numba-examples/examples/finance/blackscholes/results.html">Does anyone know what this is doing?</a> <span class="math display">\[
+d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\frac{S_t}{K}\right) + \left(r - q - \frac{1}{2}\sigma^2\right)(T - t)\right]
 \]</span></li>
-<li>That is, this assertion <em>fails</em>:</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>x_0, x_1 <span class="op">=</span> <span class="dv">1</span>,<span class="dv">2</span></span>
-<span id="cb6-2"><a></a><span class="cf">assert</span>(((x_0 <span class="op">!=</span> x_1) <span class="kw">and</span> (h(x_0, a, M) <span class="op">==</span> h(x_1, a, M))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><strong>Goal:</strong> minimize:non-crypto::avoid:crypto collisions.
-<ul>
-<li>Achieve this via a large codomain for <span class="math inline">\(h\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="codomain" class="slide level2">
-<h2>Codomain:</h2>
+<section id="common-fallacies" class="slide level2">
+<h2>Common Fallacies</h2>
+<ul>
+<li>“Floating point numbers are numbers”
+<ul>
+<li><code>max(count())</code> Pinocchios</li>
+</ul></li>
+<li>“It’s floating point error”
+<ul>
+<li>“All floating point involves magical rounding errors”</li>
+</ul></li>
+<li>“Linux and Windows handle floats differently”</li>
+<li>“Floating point represents an interval value near the actual value”</li>
+</ul>
+</section>
+<section id="common-fallacies-2.0" class="slide level2">
+<h2>Common Fallacies 2.0</h2>
+<ul>
+<li>“A double (an <code>f64</code>) holds 15 decimal places and I only need 3, so I have nothing to worry about”<sup>1</sup></li>
+<li>“My programming language does better math than your programming language”<sup>2</sup></li>
+<li>“Why can’t computers just store whatever number I use”<sup>3</sup></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Grammatically, this statement should be “so I have nothing about which to worry.”</p></li><li id="fn2"><p>This is true in the special case that your programming language is Rust.</p></li><li id="fn3"><p>This is due to how many numbers there are.</p></li></ol></aside></section>
+<section id="anatomy-of-ieee-floats" class="slide level2">
+<h2>Anatomy of IEEE Floats</h2>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IEEE754.svg/550px-IEEE754.svg.png" class="r-stretch"></section>
+<section id="ieee-float-specification" class="slide level2">
+<h2>IEEE Float Specification</h2>
+<ul>
+<li>IEEE 754-1985, IEEE 854-1987, IEEE 754-2008
+<ul>
+<li>These are paywalled.</li>
+<li>Those are years.</li>
+</ul></li>
+<li>Provide for portable, provably consistent math
+<ul>
+<li>Consistent, not correct.</li>
+</ul></li>
+</ul>
+</section>
+<section id="assurances" class="slide level2">
+<h2>Assurances</h2>
+<ul>
+<li>Ensure some significant mathematical identities hold true:
+<ul>
+<li><span class="math inline">\(x + y  = y + x\)</span>
+<ul>
+<li>Symmetry of addition</li>
+</ul></li>
+<li><span class="math inline">\(x + 0 = x\)</span>
+<ul>
+<li>Additive identity</li>
+</ul></li>
+<li><span class="math inline">\(x = y \implies x - y = 0\)</span>
+<ul>
+<li>Identify under subtraction</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="assurances-2.0" class="slide level2">
+<h2>Assurances 2.0</h2>
+<pre><code>$$\frac{x}{\sqrt{x^2+y^2}} \leq 1$$</code></pre>
+<ul>
+<li>What is missing?</li>
+</ul>
+</section>
+<section id="ieee-float-specification-1" class="slide level2">
+<h2>IEEE Float Specification</h2>
+<ul>
+<li>Ensure every floating point number is unique</li>
+<li>Ensure every floating point number has an opposite
+<ul>
+<li><em>Zero</em> is a special case because of this</li>
+</ul></li>
+<li>Specifies algorithms for addition, subtraction, multiplication, division, and square-root
+<ul>
+<li>Not really operations/relations! They are algorithms.</li>
+</ul></li>
+</ul>
+</section>
+<section id="aside-scientific-notation" class="slide level2">
+<h2>Aside: Scientific Notation</h2>
 <blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Codomain">“In mathematics, a codomain or set of destination of a function is a set into which all of the output of the function is constrained to fall. It is the set <span class="math inline">\(Y\)</span> in the notation <span class="math inline">\(f: X → Y\)</span>. The term range is sometimes ambiguously used to refer to either the codomain or the image of a function.”</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Scientific_notation">Scientific notation is a way of expressing numbers that are too large or too small to be conveniently written in decimal form, since to do so would require writing out an inconveniently long string of digits.</a></p>
 </blockquote>
-</section>
-<section id="test-it" class="slide level2">
-<h2>Test it:</h2>
 <ul>
-<li>As a rule we shouldn’t try to write proofs/definitions in Python, but…</li>
-<li>Small <span class="math inline">\(M = 2^{0x08} = 256\)</span> means our computer can handle all possibilities.</li>
+<li>In scientific notation, nonzero numbers are written in the form</li>
+</ul>
+<p><span class="math display">\[a \times 10^b\]</span></p>
+</section>
+<section id="aside-explanation" class="slide level2">
+<h2>Aside: Explanation</h2>
+<ul>
+<li>In scientific notation, nonzero numbers are written in the form</li>
+</ul>
+<p><span class="math display">\[a \times 10^b\]</span></p>
+<ul>
+<li><span class="math inline">\(a\)</span> (the coefficient or mantissa) is a number greater than or equal to 1 and less than 10 (<span class="math inline">\(1 \le |a| &lt; 10\)</span>).</li>
+<li><span class="math inline">\(10\)</span> is the base.</li>
+<li><span class="math inline">\(b\)</span> (the exponent) is an integer.</li>
 </ul>
 </section>
-<section id="visualize" class="slide level2">
-<h2>Visualize:</h2>
-
-<img style="filter: invert(100%);" src="https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/images/codomain-256.svg" class="r-stretch"></section></section>
-<section>
-<section id="what" class="title-slide slide level1 center">
-<h1>What?</h1>
-
-</section>
-<section id="cryptographic" class="slide level2">
-<h2>Cryptographic</h2>
-<ul>
-<li>Begin with SHA-2 (Secure Hash Algorithm 2).
-<ul>
-<li>A family of cryptographic hash functions.</li>
-<li>By the <a href="https://www.youtube.com/watch?v=mJHvSp9AKYg">U.S. National Security Agency (NSA)</a></li>
-</ul></li>
-<li>Published by the U.S. National Institute of Standards and Technology (NIST) in 2001.</li>
-</ul>
-</section>
-<section id="context" class="slide level2">
-<h2>Context</h2>
-<ul>
-<li>SHA-1, released in 1995, found to have significant vulnerabilities.</li>
-<li>Growing concerns about the security of SHA-1 led to the development of SHA-2.
-<ul>
-<li>SHA-3 released in 2015, not in wide use.</li>
-<li>For <em>if</em> weakness in SHA-2 discovered.</li>
-<li>SHA-2 regarded as secure in 2025.</li>
-</ul></li>
-</ul>
-</section>
-<section id="family" class="slide level2">
-<h2>Family</h2>
-<ul>
-<li>Six hash functions release August 2001:
-<ul>
-<li>SHA-224</li>
-<li>SHA-256</li>
-<li>SHA-384</li>
-<li>SHA-512</li>
-<li>SHA-512/224</li>
-<li>SHA-512/256</li>
-</ul></li>
-</ul>
-</section>
-<section id="adoption-and-usage" class="slide level2">
-<h2>Adoption and Usage</h2>
-<ul>
-<li>SHA-2 has been widely adopted in
-<ul>
-<li>Digital signatures</li>
-<li>Version control systems</li>
-<li>Other stuff</li>
-</ul></li>
-</ul>
-</section>
-<section id="sha-2-pledge" class="slide level2">
-<h2>SHA-2 Pledge</h2>
-<ul>
-<li>I need a verbal confirmation:
-<ul>
-<li>Even though we will implement cryptography…</li>
-<li>We assume their insecurity as we learn to:
-<ul>
-<li>Test our code</li>
-<li>Write proofs</li>
-<li>Use compilers</li>
-</ul></li>
-<li>We don’t know what side channel attacks are.
-<ul>
-<li>I say: out-of-scope.</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="sha-512-overview" class="slide level2">
-<h2>SHA-512 Overview</h2>
-<ul>
-<li><strong>SHA-2</strong> with a <strong>512-bit output length</strong></li>
-<li>Accepts bit strings of length up to <span class="math inline">\(2^{128} - 1\)</span>
-<ul>
-<li>~340 undecillion bits</li>
-<li>~42 septillion terabytes</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="how" class="title-slide slide level1 center">
-<h1>How?</h1>
-
-</section>
-<section id="two-stages" class="slide level2">
-<h2>Two Stages</h2>
-<ul>
-<li>Output calculation has two stages:
+<section id="aside-physical-examples" class="slide level2">
+<h2>Aside: Physical Examples</h2>
 <ol type="1">
-<li><strong>Preprocessing</strong></li>
-<li><strong>Hash Computation</strong></li>
-</ol></li>
-</ul>
-</section>
-<section id="preprocessing" class="slide level2 smaller">
-<h2>Preprocessing</h2>
-<ul>
-<li>A 512-bit state variable <span class="math inline">\(H^{(0)}\)</span> is <a href="https://www.movable-type.co.uk/scripts/sha512.html">initialized</a>:</li>
-</ul>
-<p><span class="math display">\[
-\begin{align*}
-\begin{split}
-H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
-H_2^{(0)} = \texttt{0x3c6ef372fe94f82b}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
-H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
-H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
-\end{split}
-\end{align*}
-\]</span></p>
-<ul>
-<li>“Fractional parts of square roots of first primes”</li>
-</ul>
-</section>
-<section id="input-padding" class="slide level2">
-<h2>Input Padding</h2>
-<ul>
-<li><p>The input <span class="math inline">\(M\)</span> is padded to a length that is a multiple of 1024.</p></li>
-<li><p>Let <span class="math inline">\(M\)</span> be <span class="math inline">\(l\)</span>-bits long.</p></li>
-<li><p>Find the smallest non-negative <span class="math inline">\(k\)</span> such that: <span class="math display">\[
-k + l + 129 \equiv 0 \pmod{1024}
+<li><p><strong>Speed of light:</strong> The speed of light in a vacuum is approximately <span class="math inline">\(300,000,000 \text{ m/s}\)</span> <span class="math display">\[
+3 \times 10^8 \text{ m/s}
 \]</span></p></li>
-<li><p><span class="math inline">\(\equiv\)</span> is pronounced “congruent” (in this context)</p></li>
-</ul>
-</section>
-<section id="padding-content" class="slide level2">
-<h2>Padding Content</h2>
-<ul>
-<li>Append <span class="math inline">\(k + 129\)</span> bits to <span class="math inline">\(M\)</span>:
-<ul>
-<li>A single one (<code>1</code>), followed by</li>
-<li><span class="math inline">\(k\)</span> zeros (<code>0</code>), followed by</li>
-<li>The 128-bit representation of <span class="math inline">\(l\)</span>. <span class="math display">\[
-\begin{align*}
-1\underbrace{000 \cdots 000}_{k \textrm{ zeros}}\underbrace{l}_{\textrm{ 128 bits}} \\
-\end{align*}
-\]</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="example.py-1" class="slide level2">
-<h2>Example.py</h2>
-<ul>
-<li>Perhaps easier to show with strings.</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>M <span class="op">=</span> <span class="st">"Hello I am a message of some length. "</span> <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb7-2"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
-<span id="cb7-3"><a></a>k <span class="op">=</span> <span class="dv">1024</span></span>
-<span id="cb7-4"><a></a>l <span class="op">=</span> <span class="bu">len</span>(M.encode(<span class="st">'utf-8'</span>)) <span class="op">*</span> <span class="dv">8</span></span>
-<span id="cb7-5"><a></a>k <span class="op">=</span> <span class="dv">1024</span> <span class="op">-</span> (l <span class="op">+</span> <span class="dv">129</span>) <span class="op">%</span> <span class="dv">1024</span></span>
-<span id="cb7-6"><a></a><span class="bu">print</span>(<span class="st">"l="</span>, l, <span class="st">"k="</span>, k, <span class="st">"pad="</span>, <span class="st">"0x8"</span> <span class="op">+</span> <span class="st">"0"</span> <span class="op">*</span> (k<span class="op">//</span><span class="dv">4</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:032x}</span><span class="ss">"</span>) <span class="co">## 128 // 4 == 32</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>We see:</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="va">l</span><span class="op">=</span> <span class="ex">888</span> k= 7 pad= 0x800000000000000000000000000000378</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="hash-computation" class="slide level2">
-<h2>Hash Computation</h2>
-<ul>
-<li>Padded input is split into <span class="math inline">\(N\)</span> 1024-bit blocks:
-<ul>
-<li>We note this is 1-indexed, by convention. <span class="math display">\[
-M^{(1)}, M^{(2)}, \ldots, M^{(N)}
-\]</span></li>
-</ul></li>
-<li>When testing, expect to have only <span class="math inline">\(M^{(1)}\)</span>
-<ul>
-<li>1024 is a lot of bytes to e.g.&nbsp;type in.</li>
-<li>Test more once it works.</li>
-<li>You know how to type in bits or get random bits!</li>
-</ul></li>
-</ul>
-</section>
-<section id="hash-type" class="slide level2">
-<h2>Hash Type</h2>
-<ul>
-<li>The hash function has the following type: <span class="math display">\[
-f: M:\{0,1\}^{1024} \times H:\{0,1\}^{512} \rightarrow H':\{0,1\}^{512}
-\]</span></li>
-<li>Given <span class="math inline">\(H^{(i-1)}\)</span>, calculate <span class="math inline">\(H^{(i)}\)</span> using: <span class="math display">\[
-H^{(i)} = f(M^{(i)}, H^{(i-1)}), \quad 1 \leq i \leq N.
-\]</span>
-<ul>
-<li>1-indexed</li>
-</ul></li>
-</ul>
-</section>
-<section id="words" class="slide level2">
-<h2>Words</h2>
-<ul>
-<li>We specify bitwise operations over <strong>exactly</strong> 64 bit words.</li>
-<li>In Rust, we’d use<code>u64</code></li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource C number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a></a>fn rotate<span class="op">(</span>a<span class="op">:</span>u64<span class="op">,</span> b<span class="op">:</span>u64<span class="op">)</span> <span class="op">-&gt;</span> u64 <span class="op">{</span></span>
-<span id="cb9-2"><a></a>    <span class="co">// Your code here!</span></span>
-<span id="cb9-3"><a></a>    <span class="cf">return</span> a<span class="op">;</span></span>
-<span id="cb9-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="operations" class="slide level2">
-<h2>Operations</h2>
-<ul>
-<li>Bitwise logical operations
-<ul>
-<li>Unary,</li>
-<li>Binary, and</li>
-<li>Ternary, and</li>
-</ul></li>
-<li>Shift/rotate operations
-<ul>
-<li>Simple, and</li>
-<li>Composite</li>
-</ul></li>
-</ul>
-</section>
-<section id="words-1" class="slide level2">
-<h2>Words</h2>
-<ul>
-<li>Bitwise logical operations accept 1, 2, or 3 words of size 64 (<code>u64</code>) and produce one word.
-<ul>
-<li>Term these words <span class="math inline">\(U\)</span>, <span class="math inline">\(V\)</span>, <span class="math inline">\(W\)</span></li>
-</ul></li>
-<li>Shift/rotate operations additionally accept one natural number <span class="math inline">\(n\)</span> &lt; 64.
-<ul>
-<li>Term this <span class="math inline">\(n\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="unary-bitwise" class="slide level2">
-<h2>Unary Bitwise</h2>
-<ul>
-<li>There is only one:</li>
-<li>‘bitwise complement’/‘bitwise logical not’: <span class="math display">\[
-\lnot U
-\]</span></li>
-<li>As from the <em>Bits</em> lecture</li>
-</ul>
-</section>
-<section id="binary-bitwise" class="slide level2">
-<h2>Binary Bitwise</h2>
-<ul>
-<li>There are four of which we use three (no NAND)</li>
-<li><span class="math inline">\(U \land V\)</span>, <span class="math inline">\(U \lor V\)</span>, <span class="math inline">\(U \oplus V\)</span>: AND, OR, XOR</li>
-<li>As from the <em>Bits</em> lecture</li>
-</ul>
-</section>
-<section id="rust-math" class="slide level2">
-<h2>Rust Math</h2>
-<ul>
-<li>Rust addition on <code>u64</code> can already only be conducted modulo <span class="math inline">\(2^{64}\)</span>
-<ul>
-<li>What else would it be?</li>
-<li>Finite number of bits means finite values.</li>
-</ul></li>
-</ul>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>src/main.rs</strong></pre>
-</div>
-<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb10-2"><a></a>    <span class="kw">let</span> x <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">18_000_000_000_000_000_000</span><span class="op">;</span></span>
-<span id="cb10-3"><a></a>    <span class="pp">dbg!</span>(x <span class="op">+</span> x)<span class="op">;</span></span>
-<span id="cb10-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="we-see" class="slide level2">
-<h2>We see</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a></a><span class="ex">$</span> cargo r</span>
-<span id="cb11-2"><a></a>   <span class="ex">Compiling</span> bits v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/30</span><span class="kw">)</span></span>
-<span id="cb11-3"><a></a><span class="ex">error:</span> this arithmetic operation will overflow</span>
-<span id="cb11-4"><a></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:4:10</span>
-<span id="cb11-5"><a></a>  <span class="kw">|</span></span>
-<span id="cb11-6"><a></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">dbg!</span><span class="er">(</span><span class="ex">x</span> + x<span class="kw">);</span></span>
-<span id="cb11-7"><a></a>  <span class="kw">|</span>          <span class="ex">^^^^^</span> attempt to compute <span class="kw">`</span><span class="ex">18000000000000000000_u64</span> + 18000000000000000000_u64<span class="kw">`</span>, which would overflow</span>
-<span id="cb11-8"><a></a>  <span class="kw">|</span></span>
-<span id="cb11-9"><a></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[deny(arithmetic_overflow)]</span><span class="kw">`</span> on by default</span>
-<span id="cb11-10"><a></a></span>
-<span id="cb11-11"><a></a><span class="ex">error:</span> could not compile <span class="kw">`</span><span class="ex">bits</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"bits"</span><span class="kw">)</span> <span class="ex">due</span> to 1 previous error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ternary-bitwise" class="slide level2">
-<h2>Ternary Bitwise</h2>
-<ul>
-<li><code>CHOICE</code> and <code>MEDIAN</code>, expressed logically: <span class="math display">\[
-\text{CHOICE}(U, V, W) = (U \land V) \oplus (\lnot U \land W)
-\]</span> <span class="math display">\[
-\text{MEDIAN}(U, V, W) = (U \land V) \oplus (U \land W) \oplus (V \land W)
-\]</span></li>
-<li>There exist numerous formulations of median.
-<ul>
-<li>This one lifted from <a href="https://github.com/B-Con/crypto-algorithms">GitHub user B-Con</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="shiftsrotates" class="slide level2">
-<h2>Shifts/Rotates</h2>
-<ul>
-<li>Compared to bitwise, they:
-<ul>
-<li>Still work on a 64 bit word, but</li>
-<li>Also work on a value <span class="math inline">\(n : 0 \leq n \leq 63\)</span></li>
-<li>Or,</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="cf">assert</span>(n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</section>
-<section id="simple-shiftrotate" class="slide level2">
-<h2>Simple Shift/Rotate</h2>
-<ul>
-<li>Bitwise shift right <code>&gt;&gt;</code> / x86 <code>shrl</code></li>
-</ul>
-<p><span class="math display">\[
-\textsf{SHR}^n(U) = \underbrace{000 \cdots 000}_{n \textrm{ zeros}} u_0 u_1 \cdots u_{62-n} u_{63-n}
-\]</span></p>
-<ul>
-<li>The <code>ROTATE</code> macro / x86 <code>ror</code> <span class="math display">\[
-\textsf{ROTR}^n(U) = \underbrace{u_{64-n} u_{65-n} \cdots u_{62} u_{63}}_{n \textrm{ bits}} u_0 u_1 \cdots u_{62-n} u_{63-n}
-\]</span></li>
-</ul>
-</section>
-<section id="composites" class="slide level2">
-<h2>Composites</h2>
-<ul>
-<li>While not required…</li>
-<li>…easier to understand SHA256 with composites: <span class="math display">\[
-\begin{align*}
-\Sigma_0(U)&amp;= \textsf{ROTR}^{28}(U) \oplus \textsf{ROTR}^{34}(U) \oplus \textsf{ROTR}^{39}(U) \\
-\Sigma_1(U)&amp;= \textsf{ROTR}^{14}(U) \oplus \textsf{ROTR}^{18}(U) \oplus \textsf{ROTR}^{41}(U) \\
-\sigma_0(U)&amp;= \textsf{ROTR}^{01}(U) \oplus \textsf{ROTR}^{08}(U) \oplus \textsf{SHR}^{07}(U) \\
-\sigma_1(U)&amp;= \textsf{ROTR}^{19}(U) \oplus \textsf{ROTR}^{61}(U) \oplus \textsf{SHR}^{06}(U)
-\end{align*}
-\]</span></li>
-<li>Macros and helper functions both work well here.</li>
-</ul>
-</section>
-<section id="hash-computation-1" class="slide level2">
-<h2>Hash Computation</h2>
-<ul>
-<li>4 steps for each 1024 bit chunk.</li>
-<li>First chunk, also use pre-computed <span class="math inline">\(H\)</span> values.
-<ul>
-<li>Called, say “initial hash values”</li>
-<li>Successive chunks use previous chunk’s hash</li>
-</ul></li>
-<li>All chunks share pre-computed <span class="math inline">\(K\)</span> values.
-<ul>
-<li>Called, say “round contants”</li>
-<li>“Fractional parts of cube roots of first primes”</li>
-</ul></li>
-</ul>
-</section>
-<section id="parts" class="slide level2">
-<h2>Parts</h2>
-<ol start="0" type="1">
-<li>Preprocess</li>
-<li>Set Message Schedule Array
-<ul>
-<li>80 orking Variables</li>
-<li>8 word sized variables</li>
-</ul></li>
-<li>Main Loop
-<ul>
-<li>Word level operations</li>
-</ul></li>
-<li>Update hash value</li>
+<li><p><strong>Mass of an electron:</strong> The mass of an electron is approximately <span class="math inline">\(0.00000000000000000000000000091093837 \text{ g}\)</span>. <span class="math display">\[
+9.1093837 \times 10^{-28} \text{ g}
+\]</span></p></li>
 </ol>
 </section>
-<section id="set-message-schedule-array" class="slide level2">
-<h2>1. Set Message Schedule Array</h2>
+<section id="aside-economic-examples" class="slide level2">
+<h2>Aside: Economic Examples</h2>
 <ul>
-<li><span class="math inline">\(M^{(i)}_j\)</span> is the <span class="math inline">\(j\)</span>-th 0-indexed 64 bit word of the <span class="math inline">\(i\)</span>-th 1-indexed 1024 bit chunk of message <span class="math inline">\(M\)</span>
+<li>We can use social science numbers.</li>
+<li><a href="https://www.newyorkfed.org/research/college-labor-market#--:explore:outcomes-by-major">Labor Market Outcomes of College Graduates by Major</a></li>
+<li>Computer Science majors in 2023 have a $80,000 median wage “early career”
 <ul>
-<li>A word is 8 letters</li>
-<li>A chunk is short tweet (128 chars)</li>
-<li><span class="math inline">\(M\)</span> can be, e.g., Linux, the <em>Iliad</em></li>
+<li><span class="math inline">\(8.0000 \times 10^4\)</span></li>
+</ul></li>
+<li>And 6.1% unemployment
+<ul>
+<li><span class="math inline">\(6.1 \times 10^{-2}\)</span></li>
 </ul></li>
 </ul>
-<p><span class="math display">\[
-W_j =
-\begin{cases}
-M^{(i)}_j &amp; 0 \leq j \leq 15 \\
-\sigma_1(W_{j-2}) + W_{j-7} + \sigma_0(W_{j-15}) + W_{j-16} &amp; 16 \leq j \leq 79
-\end{cases}
-\]</span></p>
 </section>
-<section id="set-working-variables" class="slide level2">
-<h2>2. Set Working Variables</h2>
+<section id="ieee-layout" class="slide level2">
+<h2>IEEE Layout</h2>
 <ul>
-<li>Initialize eight 64-bit words based on the prior hash. <span class="math display">\[
-(A, B, C, D, E, F, G, H) = (H^{(i-1)}_0, \ldots, H^{(i-1)}_7).
-\]</span></li>
+<li>An approximation using scientific notation
+<ul>
+<li><span class="math inline">\(x = -1^s \times 2^e \times 1.m\)</span></li>
+<li><span class="math inline">\(x = -1^{\text{sign bit}} \times \text{base} 2^{\text{exponent}} \times 1.\text{mantissa}\)</span>
+<ul>
+<li>Where the mantissa is the technical term for the the digits after the decimal point.</li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
-<section id="main-loop" class="slide level2">
-<h2>3. Main Loop</h2>
+<section id="with-binary" class="slide level2 smaller">
+<h2>With Binary</h2>
 <ul>
-<li>Iterate <span class="math inline">\(j = 0\)</span> to <span class="math inline">\(79\)</span>:</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">79</span>):</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li><span class="math inline">\(x = -0b1^{\text{0b0}} \times 0b10^{\text{0b10000000}}  \times 0b1.10010010000111111011011\)</span></li>
+<li>Express in memory as the concatenation:
 <ul>
-<li>Precompute two temporary values (or not) <span class="math display">\[
-\begin{align}
-\begin{split}
-&amp; T_1  = H + \Sigma_1(E) + \textsf{CHOICE}(E,F,G) + K_j + W_j \\
-&amp; T_2  = \Sigma_0(A) + \textsf{MEDIAN}(A,B,C) \\
-\end{split}
-\end{align}
-\]</span></li>
-<li>Update the working variables <span class="math display">\[
-(A,B,C,D,E,F,G,H)  = (T_1+T_2, A, B, C, D+T_1, E, F, G)
-\]</span></li>
+<li><code>0b0</code> to <code>0b10000000</code> to <code>0b10010010000111111011011</code></li>
+<li><code>01000000010010010000111111011011</code></li>
+</ul></li>
 </ul>
 </section>
-<section id="update-hash-value" class="slide level2">
-<h2>4. Update hash value</h2>
+<section id="singles-and-doubles" class="slide level2">
+<h2>Singles and Doubles</h2>
 <ul>
-<li>Conclude the work on <span class="math inline">\(M^{(i)}\)</span> by finding <span class="math inline">\(H^{(i)}\)</span></li>
+<li>32 - bits = 1 sign bit + 8 exponent bits + 23 mantissa bits
+<ul>
+<li><code>0b0</code> to <code>0b10000000</code> to <code>0b10010010000111111011011</code></li>
+</ul></li>
+<li>64 - bits = 1 sign bit + 12 exponent bits + 52 mantissa bits</li>
 </ul>
-<p><span class="math display">\[
-H^{(i)}_j = A + H^{(i-1)}_j, \quad j = 0, \ldots, 7
-\]</span></p>
+</section>
+<section id="understanding-check" class="slide level2">
+<h2>Understanding check</h2>
+<ul>
+<li>What is the probability a <em>real number</em> <span class="math inline">\(a \in \mathbb{R}\)</span> has an exact float representation?</li>
+<li>What is the probability an <em>integer</em> <span class="math inline">\(n \in \mathbb{Z}\)</span> has an exact float representation?</li>
+<li>What is the probability a <em>course number</em> <span class="math inline">\(n &lt; 600\)</span> has an exact float representation?</li>
+</ul>
+</section>
+<section id="special-floats---nan" class="title-slide slide level1 center">
+<h1>Special Floats - NaN</h1>
+<ul>
+<li>Divide by Zero
+<ul>
+<li>1 / 0</li>
+</ul></li>
+<li>Not a Number (NaN)</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
+<span id="cb2-2"><a></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
+<span id="cb2-3"><a></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
+<span id="cb2-4"><a></a>np.float32(inf)</span>
+<span id="cb2-5"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
+<span id="cb2-6"><a></a>Traceback (most recent call last):</span>
+<span id="cb2-7"><a></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb2-8"><a></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+
+<section>
+<section id="special-floats" class="title-slide slide level1 center">
+<h1>Special Floats</h1>
+<ul>
+<li>Signed Infinity
+<ul>
+<li>Overflow protection</li>
+</ul></li>
+<li>Signed Zero
+<ul>
+<li>Underflow protection, preserves sign</li>
+<li><ul>
+<li>0 =− 0</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Now that we are experts…</p>
+<p>https://github.com/DigitalInBlue/CPPCon</p>
+<p>Simple Example</p>
+<pre><code>auto zeroPointOne = 0.1f;
+auto zeroPointTwo = 0.2f;
+auto zeroPointThree = 0.3f;
+auto sum = zeroPointOne + zeroPointTwo;</code></pre>
+<pre><code>cppCon() &lt;&lt; "zeroPointOne == " &lt;&lt; zeroPointOne &lt;&lt; "\n";
+cppCon() &lt;&lt; "zeroPointTwo == " &lt;&lt; zeroPointTwo &lt;&lt; "\n";
+cppCon() &lt;&lt; "zeroPointThree == " &lt;&lt; zeroPointThree &lt;&lt; "\n";
+cppCon() &lt;&lt; "sum == " &lt;&lt; sum &lt;&lt; "\n";</code></pre>
+</section>
+<section id="simple-example" class="slide level2">
+<h2>Simple Example</h2>
+<ul>
+<li>zeroPointOne == 0.</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+<li>zeroPointOne == 0. Simple Example</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+<li>zeroPointOne == 0.</li>
+<li>zeroPointTwo == 0.</li>
+<li>zeroPointThree == 0.</li>
+<li>sum == 0.</li>
+</ul>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][00000000][ 00000000000000000000000 ]</p>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.</p>
+<ul>
+<li>The exponent is <em>shift- 127</em> encoded</li>
+<li>0xeeeeeeee - 127</li>
+</ul>
+<ol type="1">
+<li></li>
+</ol>
+<p>− 1</p>
+<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
+× 𝑏𝑎𝑠𝑒</code></pre>
+<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
+× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
+<p>− 1</p>
+<pre><code>0
+× 2</code></pre>
+<pre><code>0
+× 1. 0</code></pre>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>Storage of 1.0</p>
+<p>1.0000000000000000</p>
+<p>[0][01111111][00000000000000000000000]</p>
+<p>[0][01111111][00000000000000000000001]</p>
+<p>1.0000001192092896</p>
+<p>“Epsilon”</p>
+<ul>
+<li>The difference between 1.0 and the next available floating point number</li>
+<li>Useful for programmatic “almost equal” computations</li>
+<li>std::numeric_limits<t>::epsilon</t></li>
+</ul>
+<p>Significant Digits</p>
+<ul>
+<li>Significant digits measure precision
+<ul>
+<li>Remember the “exponent” field</li>
+<li>They are not a magnitude</li>
+</ul></li>
+<li>How close is close enough?
+<ul>
+<li>Define as significant digits, not absolute error</li>
+</ul></li>
+</ul>
+<pre><code>Sign ExponentMantissa TotalExponent bias Bits precision Significant Digits
+Half(IEEE 754-2008) 1 5 10 16 15 11 3 - 4
+Single 1 8 23 32 127 24 6 - 9
+Double 1 11 52 64 1023 53 15 - 17
+x86 extended precision 1 15 64 80 16383 64 18 - 21
+Quad 1 15 112 128 16383 113 33 - 36
+http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</code></pre>
+<p>Storage of the Very Small</p>
+<ul>
+<li>For 32-bit floats, the minimum base 10 exponent is -36.</li>
+<li>How is 1. 0 𝑒−^37 represented?</li>
+</ul>
+<p>1.0e- 37</p>
+<p>[0][00000000][11011001110001111101110]</p>
+<p>0.09999999e- 37</p>
+<p>“Denormalized Number”</p>
+<ul>
+<li>Numbers that have a zero exponent</li>
+<li>Required when the exponent is below the minimum exponent</li>
+<li>Helps prevent underflow</li>
+</ul>
+<p>1.0e- 37</p>
+<p>[0][00000000][11011001110001111101110]</p>
+<p>0.09999999e- 37</p>
+<p>Floating Point Precision</p>
+<ul>
+<li>Representation is not uniform between numbers</li>
+<li>Most precision lies between 0.0 and 0.1</li>
+<li>Precision falls away</li>
+<li>std::nextafter</li>
+</ul>
+<p>Floating Point Precision</p>
+<pre><code>http://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx</code></pre>
+<p>Floating Point Precision</p>
+<p>The number of floats from 0.0</p>
+<ul>
+<li>…to 0.1 = 1,036,831,949</li>
+<li>…to 0.2 = 8,388,608</li>
+<li>… to 0.4 = 8,388,608</li>
+<li>… to 0.8 = 8,388,608</li>
+<li>… to 1.6 = 8,388,608</li>
+<li>… to 3.2 = 8,388,608</li>
+</ul>
+<p>Errors in Floating Point</p>
+<p>https://github.com/DigitalInBlue/CPPCon2015</p>
+<p>Storage of π</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>Measuring Error: “Ulps”</p>
+<ul>
+<li>Units in Last Place
+<ul>
+<li>“Harrison” and “Goldberg” definitions</li>
+<li>(6-8 definitions floating around)</li>
+</ul></li>
+<li>“The gap between the two floating-point numbers</li>
+</ul>
+<p>nearest to x, even if x is one of them.” –W. Kahan</p>
+<ul>
+<li>https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT</li>
+<li>IEEE 754 requires that that elementary arithmetic</li>
+</ul>
+<p>operations are correctly rounded to within 0. 5 ulps</p>
+<ul>
+<li>Transcendental functions are generally rounded to</li>
+</ul>
+<p>between 0. 5 and 1. 0 ulps</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>9 ulps</p>
+<p>Measuring Error: “Relative Error”</p>
+<ul>
+<li>The difference between the “real” number and the</li>
+</ul>
+<p>approximated number, divided by the “real” number.</p>
+<p>π = 3.14159265</p>
+<p>πf= 3.14159274</p>
+<p>Δ = 0.00000009</p>
+<p>9 ulps</p>
+<p>2.864789e- 8 β</p>
+<p>𝜋 − (𝜋𝑓)</p>
+<p>𝜋</p>
+<pre><code>= 2. 864789 𝑒
+− 8</code></pre>
+<p>Rounding Error</p>
+<ul>
+<li>Induced by approximating an infinite range of numbers into a finite number of bits</li>
+<li>Math is done exactly, then rounded*
+<ul>
+<li>Towards the nearest</li>
+<li>Towards Zero</li>
+<li>Towards positive infinity (round up)</li>
+<li>Towards negative infinity (round down)</li>
+</ul></li>
+</ul>
+<p>*Look up “exactly rounded” as well</p>
+<p>Rounding Error</p>
+<ul>
+<li>What about rounding the half-way case? (i.e.&nbsp;0.5)
+<ul>
+<li>Round Up vs.&nbsp;Round Even</li>
+</ul></li>
+<li>Correct Rounding:
+<ul>
+<li>Basic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.</li>
+<li>If there is a tie, round to the number with an even mantissa</li>
+</ul></li>
+</ul>
+<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
+<ul>
+<li>Only used while doing calculations
+<ul>
+<li>Not stored in the float itself</li>
+<li>The mantissa is shifted in calculations to align radix</li>
+</ul></li>
+<li>The guard bits and round bits are extra precision</li>
+<li>The sticky bit is an OR of anything that shifts through it</li>
+</ul>
+<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
+<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
+<p><strong>[G][R][S]</strong></p>
+<p><strong>[0][-][-]</strong> - Round Down (do nothing)</p>
+<p><strong>[1][0][0]</strong> - Round Up if the mantissa LSB is 1</p>
+<p><strong>[1][0][1]</strong> - Round Up</p>
+<p><strong>[1][1][0]</strong> - Round Up</p>
+<p><strong>[1][1][1]</strong> - Round Up</p>
+<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
+<p>Significance Error</p>
+<ul>
+<li>Compute the Area of a Triangle
+<ul>
+<li>Heron’s Formula:
+<ul>
+<li>𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧</li>
+</ul></li>
+<li>Kahan’sAlgorithm:
+<ul>
+<li>Sort x, y, z such that 𝑥≥𝑦 ≥𝑧</li>
+<li>If 𝑧&lt; 𝑥−𝑦, then no such triangle exists.</li>
+<li>Else 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Significance Error</p>
+<pre><code>/// Area of a triangle
+/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf
+TEST(CPPCon2015, AreaOfATriangleFloat)
+{
+const auto a = 100000.0f;
+const auto b = 99999.99979f;
+const auto c = 0.00029f;</code></pre>
+<pre><code>ASSERT_TRUE(a &gt;= b);
+ASSERT_TRUE(b &gt;= c);</code></pre>
+<pre><code>auto heronsFormula = HeronsFormula(a, b, c);
+auto kahansFormula = KahansFormula(a, b, c);
+EXPECT_NE(kahansFormula, heronsFormula);
+cppCon() &lt;&lt; "Kahan: " &lt;&lt; kahansFormula;
+cppCon() &lt;&lt; "Heron: " &lt;&lt; heronsFormula;
+cppCon() &lt;&lt; "delta: " &lt;&lt; kahansFormula - heronsFormula &lt;&lt; "\n";
+}</code></pre>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Hint: The Answer is 10.0</p>
+<p>Significance Error</p>
+<p>Heron: 0.000000000000000000000000000000</p>
+<p>Kahan: 14.500000000000000000000000000000</p>
+<p>delta: 14.500000000000000000000000000000</p>
+<p>Heron: 9.999999809638328700000000000000</p>
+<p>Kahan: 10.000000077021038000000000000000</p>
+<p>delta: 0.000000267382709751018410000000</p>
+<p>Significance Error - Use Stable Algorithms</p>
+<ul>
+<li>Loss of Significance
+<ul>
+<li>Keep big numbers with big numbers, little numbers with little numbers.</li>
+</ul></li>
+<li>Parentheses can help</li>
+<li>Analysis of Algorithms is Critical</li>
+<li>The compiler won’t re-arrange your math if it cannot prove it would yield the same</li>
+</ul>
+<p>result, even if the computation would be faster</p>
+<ul>
+<li>𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0</li>
+<li>See the “Kahan’sAlgorithm” example</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>Time is used to compute distance, velocity, acceleration
+<ul>
+<li>High frequency phenomena</li>
+<li>Sensors: Doppler shift, pulse compression, PRF</li>
+</ul></li>
+<li>These computed values feed into other computed values which may or may not</li>
+</ul>
+<p>require a time component</p>
+<ul>
+<li>Thousands of computations per frame of simulation
+<ul>
+<li>Thousands of little compounding errors per frame</li>
+</ul></li>
+<li>Combine with poor or nonexistent testing</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>Accumulate Time (works for arbitrary</li>
+</ul>
+<p>time steps)</p>
+<p>auto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;</p>
+<p>// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }</p>
+<pre><code>auto totalFrames = size_t(0);
+auto frameLength = 0.01f;
+auto simTime = 0.0f;</code></pre>
+<pre><code>// Run 120 Frames
+auto simTime120Frames = 1.20f;
+totalFrames = 120;
+simTime = totalFrames * frameLength;</code></pre>
+<ul>
+<li>Delta Time (works for fixed time steps)</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<p>Accumulate Time (works for arbitrary time steps)</p>
+<ul>
+<li>1.199999999999999955591079014994 != <strong>1.199999213218688964843750000000</strong> (0.000000786781310990747329014994)</li>
+<li>12.000000000000000000000000000000 != <strong>12.000179290771484375000000000000</strong> (- 0.000179290771484375000000000000)</li>
+<li>120.000000000000000000000000000000 != <strong>120.007225036621093750000000000000</strong> (- 0.007225036621093750000000000000)</li>
+<li>600.000000000000000000000000000000 != <strong>600.274414062500000000000000000000</strong> (- 0.274414062500000000000000000000)</li>
+<li>3600.000000000000000000000000000000 != <strong>3603.204101562500000000000000000000</strong> (- 3.204101562500000000000000000000)</li>
+</ul>
+<p>Delta Time (works for fixed time steps)</p>
+<ul>
+<li>1.200000047683715820312500000000 != <strong>1.199999928474426269531250000000</strong> (0.000000119209289550781250000000)</li>
+<li>12.000000000000000000000000000000 == <strong>12.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>120.000000000000000000000000000000 == <strong>120.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>600.000000000000000000000000000000 == <strong>600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+<li>-3600.000000000000000000000000000000 == <strong>3600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>“Sub-Microsecond Precision”
+<ul>
+<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
+</ul></li>
+</ul>
+<p>Significance Error – Simulation Time</p>
+<ul>
+<li>“Sub-Microsecond Precision”
+<ul>
+<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
+</ul></li>
+</ul>
+<h3 id="section">0.012345000170171261000000000000 !=</h3>
+<h3 id="section-1">0.0148140005767345430</h3>
+<h3 id="section-2">(-0.002469000406563282000000000000)</h3>
+<h3 id="section-3">12.345000267028809000000000000000 !=</h3>
+<h3 id="section-4">11.701118469238281000000000000000</h3>
+<h3 id="section-5">(0.643881797790527340000000000000)</h3>
+<p>Significance Error – Don’t use IEEE Floats?</p>
+<ul>
+<li>Use integers
+<ul>
+<li>Very fast</li>
+<li>Trade more precision for less range</li>
+<li>Only input/output may be impacted by floating point conversions</li>
+<li>Financial applications represent dollars as only cents or tenth’s of cents</li>
+</ul></li>
+<li>Use a math library
+<ul>
+<li>Slower</li>
+<li>Define your own level of accuracy</li>
+<li>MPFR (w/C++ Wrapper), TTMath, Boost, GMP C++</li>
+<li>CRlibm(Correctly Rounded Mathematical Library)</li>
+</ul></li>
+</ul>
+<p>(Store simTimeas uint64_tand get microsecond precision for 584555 years.)</p>
+<p>Algebraic Assumption Error</p>
+<ul>
+<li>Mathematical Identities
+<ul>
+<li>Traditional identities (associative, commutative, distributive) do not hold</li>
+</ul></li>
+<li>Distributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)</li>
+<li>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</li>
+<li>Cannot interchange division and multiplication:</li>
+</ul>
+<h3 id="𝑥">𝑥</h3>
+<h3 id="section-6">10. 0</h3>
+<p>≠ 𝑥 × 0. 1</p>
+<p>Does a naïve compiler make these assumptions too?</p>
+<p>https://msdn.microsoft.com/library/aa289157.aspx</p>
+<p>Algebraic Assumption Error</p>
+<pre><code>const auto oneRadian = 0.15915494309f;
+const auto control = 0.000000000015915494309f;</code></pre>
+<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
+const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
+<p>Algebraic Assumption Error</p>
+<pre><code>const auto oneRadian = 0.15915494309f;
+const auto control = 0.000000000015915494309f;</code></pre>
+<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
+const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
+<p>Control: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000</p>
+<p>Floating Point Exceptions</p>
+<ul>
+<li>Enable floating point exceptions to be alerted when things go awry.</li>
+</ul>
+<pre><code>𝑥is the exact result of the operation
+α= 192 for single precision, 1536 for double
+𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.
+See &lt;cfenv&gt; -Floating Point Environment</code></pre>
+<p>IEEE 754 Exception Result when traps disabled Argument to trap handler</p>
+<p>overflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)</p>
+<p>underflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)</p>
+<p>divide by zero ±∞ invalid operation</p>
+<p>invalid NaN invalid operation</p>
+<p>inexact round( <em>x</em> ) round( <em>x</em> )</p>
+<p>But Wait! There’s More!</p>
+<ul>
+<li>Binary to Decimal Conversion Error</li>
+<li>Summation Error</li>
+<li>Propagation Error</li>
+<li>Underflow, Overflow</li>
+<li>Type Narrowing/Widening Rules</li>
+</ul>
+<p>Miscellaneous Notes</p>
+<p><a href="http://preshing.com/images/float-point-perf.png">http://preshing.com/images/float-point-perf.png</a> https://github.com/DigitalInBlue/CPPCon2015</p>
+<p>Use Your Compiler’s Output</p>
+<ul>
+<li>warning C4244: ‘initializing’ : conversion from ‘double’ to</li>
+</ul>
+<p>‘float’, possible loss of data</p>
+<ul>
+<li>warning C4056: overflow in floating point constant arithmetic</li>
+<li>warning C4305: ‘identifier’ : truncation from ‘type1’ to</li>
+</ul>
+<p>‘type2’</p>
+<ul>
+<li>warning: conversion to ‘float’ from ‘int’ may alter its value</li>
+<li>warning: floating constant exceeds range of ‘double’</li>
+</ul>
+<p>Fused Multiply-Add (FMA)</p>
+<ul>
+<li>a = a + (b * c); a += b * c;</li>
+<li>Multiplier-accumulator (MAC Unit)</li>
+<li>One rounding</li>
+<li>Compiler Options
+<ul>
+<li>GCC = -mfma</li>
+<li>VC++ = #pragma fp_contract (off)</li>
+</ul></li>
+<li>Reference: FMA3, FMA4
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/FMA_instruction_set">http://en.wikipedia.org/wiki/FMA_instruction_set</a></li>
+</ul></li>
+</ul>
+<p>Streaming SIMD Extensions (SSE)</p>
+<ul>
+<li>SSE can provide significant performance gains
+<ul>
+<li>Supports integer, floating point, logical, conversion, shift, and shuffle operations</li>
+</ul></li>
+<li>C, C++, Fortran do not natively support SSE, but compiler-specific support exists</li>
+</ul>
+<p>Float Tricks</p>
+<pre><code>/// Fast reciprocal square root approximation for x &gt; 0.25
+/// Quake’s float Q_rsqrt(float number) is much more entertaining.
+inline float FastInvSqrt(float x)
+{
+int tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&amp;x) &gt;&gt; 1;
+auto y = *(float*)&amp;tmp;
+return y * (1.47f – 0.47f * x * y * y);
+}</code></pre>
+<p>Testing</p>
+<ul>
+<li>Design for Numerical Stability</li>
+<li>Perform Meaningful Testing</li>
+<li>Document assumptions</li>
+<li>Track sources of approximation</li>
+<li>Quantify goodness
+<ul>
+<li>Well conditioned algorithms</li>
+</ul></li>
+<li>Backward error analysis
+<ul>
+<li>Are the outputs identical for slightly modified inputs?</li>
+</ul></li>
+</ul>
+<pre><code>TEST(CPPCon2015, pointOnePlusPointTwo)
+{
+auto zeroPointOne = 0.1f;
+auto zeroPointTwo = 0.2f;
+auto zeroPointThree = 0.3f;
+auto sum = zeroPointOne + zeroPointTwo;</code></pre>
+<pre><code>EXPECT_DOUBLE_EQ(0.3f, zeroPointThree);
+EXPECT_EQ(0.3f, zeroPointThree);
+EXPECT_EQ(0.3f, sum);</code></pre>
+<pre><code>EXPECT_EQ(zeroPointThree, sum);
+EXPECT_DOUBLE_EQ(zeroPointThree, sum);
+}</code></pre>
+<p><a href="http://xkcd.com/217/">http://xkcd.com/217/</a> <a href="http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi">http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi</a></p>
+<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
 </section></section>
-<section id="resources" class="title-slide slide level1 center">
-<h1>Resources</h1>
-<ul>
-<li>All for 256, use Wikipedia to translate to 512.</li>
-<li><a href="https://en.wikipedia.org/wiki/SHA-2#Pseudocode">Wikipedia Pseudocode</a>
-<ul>
-<li>I used this to implement.</li>
-</ul></li>
-<li><a href="https://www.ee.iitb.ac.in/~sarva/courses/EE720/2023/slides/hash-functions.html#/sha-256">Saravanan Vijayakumaran’s Slides</a>
-<ul>
-<li>I used this to typeset the slides.</li>
-</ul></li>
-<li><a href="https://sha256algorithm.com/"><span class="citation" data-cites="manceraio">@manceraio</span>’s .js demo</a>
-<ul>
-<li>Inspired my text-only Enigma.</li>
-</ul></li>
-</ul>
+<section id="demystifying-floating-point" class="title-slide slide level1 center">
+<h1>Demystifying Floating Point</h1>
+<p>John Farrier, Booz Allen Hamilton</p>
+<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
 
 
 </section>
+
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

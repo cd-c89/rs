@@ -50,7 +50,7 @@ $$
 \begin{align*}
 \begin{split}
    H_0^{(0)} = \texttt{0x6a09e667f3bcc908}, \quad H_1^{(0)} = \texttt{0xbb67ae8584caa73b},\\
-   H_2^{(0)} = \texttt{0x3c6ef372fe94f82}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
+   H_2^{(0)} = \texttt{0x3c6ef372fe94f82b}, \quad H_3^{(0)} = \texttt{0xa54ff53a5f1d36f1},\\
    H_4^{(0)} = \texttt{0xa54ff53a5f1d36f1}, \quad H_5^{(0)} = \texttt{0x9b05688c2b3e6c1f},\\
    H_6^{(0)} = \texttt{0x1f83d9abfb41bd6b}, \quad H_7^{(0)} = \texttt{0x5be0cd19137e2179}.
 \end{split}
