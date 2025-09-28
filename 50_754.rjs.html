@@ -436,7 +436,7 @@ Prof.&nbsp;Calvin
 <ul>
 <li>I’m a normal person.
 <ul>
-<li>I think 5/2 is 2.5.</li>
+<li>I think <code>5/2</code> is <code>2.5</code> or perhaps 2½.</li>
 </ul></li>
 <li>I’m a scientist.
 <ul>
@@ -469,7 +469,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>“My programming language does better math than your programming language”<sup>2</sup></li>
 <li>“Why can’t computers just store whatever number I use”<sup>3</sup></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Grammatically, this statement should be “so I have nothing about which to worry.”</p></li><li id="fn2"><p>This is true in the special case that your programming language is Rust.</p></li><li id="fn3"><p>This is due to how many numbers there are.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Grammatically, this statement should be “so I have nothing about which to worry.”</p></li><li id="fn2"><p>This is true in the special case that your programming language is Haskell.</p></li><li id="fn3"><p>This is due to how many numbers there are.</p></li></ol></aside></section>
 <section id="anatomy-of-ieee-floats" class="slide level2">
 <h2>Anatomy of IEEE Floats</h2>
 
@@ -503,14 +503,16 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 </ul></li>
 <li><span class="math inline">\(x = y \implies x - y = 0\)</span>
 <ul>
-<li>Identify under subtraction</li>
+<li>Identity under subtraction</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
 <section id="assurances-2.0" class="slide level2">
 <h2>Assurances 2.0</h2>
-<pre><code>$$\frac{x}{\sqrt{x^2+y^2}} \leq 1$$</code></pre>
+<p><span class="math display">\[
+\frac{x}{\sqrt{x^2+y^2}} \leq 1
+\]</span></p>
 <ul>
 <li>What is missing?</li>
 </ul>
@@ -619,8 +621,8 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>What is the probability a <em>course number</em> <span class="math inline">\(n &lt; 600\)</span> has an exact float representation?</li>
 </ul>
 </section>
-<section id="special-floats---nan" class="title-slide slide level1 center">
-<h1>Special Floats - NaN</h1>
+<section id="special-floats---nan" class="slide level2">
+<h2>Special Floats - NaN</h2>
 <ul>
 <li>Divide by Zero
 <ul>
@@ -628,250 +630,448 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 </ul></li>
 <li>Not a Number (NaN)</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
-<span id="cb2-2"><a></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
-<span id="cb2-3"><a></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
-<span id="cb2-4"><a></a>np.float32(inf)</span>
-<span id="cb2-5"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
-<span id="cb2-6"><a></a>Traceback (most recent call last):</span>
-<span id="cb2-7"><a></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
-<span id="cb2-8"><a></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
+<span id="cb1-2"><a></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
+<span id="cb1-3"><a></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
+<span id="cb1-4"><a></a>np.float32(inf)</span>
+<span id="cb1-5"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
+<span id="cb1-6"><a></a>Traceback (most recent call last):</span>
+<span id="cb1-7"><a></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb1-8"><a></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-
-<section>
-<section id="special-floats" class="title-slide slide level1 center">
-<h1>Special Floats</h1>
+<section id="special-floats---inf" class="slide level2">
+<h2>Special Floats - inf</h2>
 <ul>
 <li>Signed Infinity
 <ul>
 <li>Overflow protection</li>
-</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>)</span>
+<span id="cb2-2"><a></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: overflow encountered <span class="kw">in</span> scalar power</span>
+<span id="cb2-3"><a></a>np.float32(inf)</span>
+<span id="cb2-4"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">10.0</span> <span class="op">**</span> <span class="dv">10000</span></span>
+<span id="cb2-5"><a></a>Traceback (most recent call last):</span>
+<span id="cb2-6"><a></a>File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb2-7"><a></a><span class="pp">OverflowError</span>: (<span class="dv">34</span>, <span class="st">'Numerical result out of range'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="infinity-is-signed" class="slide level2">
+<h2>Infinity is signed</h2>
+<ul>
+<li>We can get negative infinity through a variety of means.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span>(f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>))</span>
+<span id="cb3-2"><a></a>np.float32(<span class="op">-</span>inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We note that this suppresses the overflow error use <code>()</code></li>
+<li>In some languages this is not ever regarded as an overflow error, like Julia (where we have to use larger powers due to the f64 default)</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jl number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a>julia<span class="op">&gt;</span> <span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span></span>
+<span id="cb4-2"><a></a><span class="cn">Inf</span></span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>julia<span class="op">&gt;</span> <span class="fu">-</span>(<span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span>)</span>
+<span id="cb4-5"><a></a><span class="op">-</span><span class="cn">Inf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="signed-zero" class="slide level2">
+<h2>Signed Zero</h2>
+<ul>
 <li>Signed Zero
 <ul>
 <li>Underflow protection, preserves sign</li>
 <li><ul>
 <li>0 =− 0</li>
 </ul></li>
-</ul></li>
 </ul>
-<p>Now that we are experts…</p>
-<p>https://github.com/DigitalInBlue/CPPCon</p>
-<p>Simple Example</p>
-<pre><code>auto zeroPointOne = 0.1f;
-auto zeroPointTwo = 0.2f;
-auto zeroPointThree = 0.3f;
-auto sum = zeroPointOne + zeroPointTwo;</code></pre>
-<pre><code>cppCon() &lt;&lt; "zeroPointOne == " &lt;&lt; zeroPointOne &lt;&lt; "\n";
-cppCon() &lt;&lt; "zeroPointTwo == " &lt;&lt; zeroPointTwo &lt;&lt; "\n";
-cppCon() &lt;&lt; "zeroPointThree == " &lt;&lt; zeroPointThree &lt;&lt; "\n";
-cppCon() &lt;&lt; "sum == " &lt;&lt; sum &lt;&lt; "\n";</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">1000</span></span>
+<span id="cb5-2"><a></a><span class="op">-</span><span class="fl">0.0</span></span>
+<span id="cb5-3"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.0</span> <span class="op">==</span> (<span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">1000</span>)</span>
+<span id="cb5-4"><a></a><span class="va">True</span></span>
+<span id="cb5-5"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span><span class="fl">0.0</span></span>
+<span id="cb5-6"><a></a><span class="op">-</span><span class="fl">0.0</span></span>
+<span id="cb5-7"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.0</span> <span class="op">-</span> <span class="fl">0.0</span></span>
+<span id="cb5-8"><a></a><span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>Works in base Python (e.g.&nbsp;don’t need NumPy).</li>
+<li>Couldn’t get it to work in Julia actually (went to -inf or NaN)</li>
+</ul>
 </section>
 <section id="simple-example" class="slide level2">
 <h2>Simple Example</h2>
 <ul>
-<li>zeroPointOne == 0.</li>
-<li>zeroPointTwo == 0.</li>
-<li>zeroPointThree == 0.</li>
-<li>sum == 0.</li>
-<li>zeroPointOne == 0. Simple Example</li>
-<li>zeroPointTwo == 0.</li>
-<li>zeroPointThree == 0.</li>
-<li>sum == 0.</li>
-<li>zeroPointOne == 0.</li>
-<li>zeroPointTwo == 0.</li>
-<li>zeroPointThree == 0.</li>
-<li>sum == 0.</li>
+<li>Floating point is great because it will work exactly how you expect.</li>
 </ul>
-<p>Storage of 1.</p>
-<ol type="1">
-<li></li>
-</ol>
-<p>− 1</p>
-<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
-× 𝑏𝑎𝑠𝑒</code></pre>
-<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
-× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
-<p>− 1</p>
-<pre><code>0
-× 2</code></pre>
-<pre><code>0
-× 1. 0</code></pre>
-<p>Storage of 1.</p>
-<ol type="1">
-<li></li>
-</ol>
-<p>− 1</p>
-<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
-× 𝑏𝑎𝑠𝑒</code></pre>
-<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
-× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
-<p>− 1</p>
-<pre><code>0
-× 2</code></pre>
-<pre><code>0
-× 1. 0</code></pre>
-<p>[0][00000000][ 00000000000000000000000 ]</p>
-<p>Storage of 1.</p>
-<ol type="1">
-<li></li>
-</ol>
-<p>− 1</p>
-<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
-× 𝑏𝑎𝑠𝑒</code></pre>
-<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
-× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
-<p>− 1</p>
-<pre><code>0
-× 2</code></pre>
-<pre><code>0
-× 1. 0</code></pre>
-<p>[0][01111111][00000000000000000000000]</p>
-<p>Storage of 1.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span> <span class="op">==</span> <span class="fl">0.3</span></span>
+<span id="cb6-2"><a></a><span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>The exponent is <em>shift- 127</em> encoded</li>
-<li>0xeeeeeeee - 127</li>
+<li>More or less.</li>
 </ul>
-<ol type="1">
-<li></li>
-</ol>
-<p>− 1</p>
-<pre><code>𝑠𝑖𝑔𝑛𝐵𝑖𝑡
-× 𝑏𝑎𝑠𝑒</code></pre>
-<pre><code>𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡
-× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎</code></pre>
-<p>− 1</p>
-<pre><code>0
-× 2</code></pre>
-<pre><code>0
-× 1. 0</code></pre>
-<p>[0][01111111][00000000000000000000000]</p>
-<p>Storage of 1.</p>
-<ol type="1">
-<li></li>
-</ol>
-<p>[0][01111111][00000000000000000000000]</p>
-<p>Storage of 1.0</p>
-<p>1.0000000000000000</p>
-<p>[0][01111111][00000000000000000000000]</p>
-<p>[0][01111111][00000000000000000000001]</p>
-<p>1.0000001192092896</p>
-<p>“Epsilon”</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span>
+<span id="cb7-2"><a></a><span class="fl">0.30000000000000004</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="simple-example-1" class="slide level2">
+<h2>Simple Example</h2>
 <ul>
-<li>The difference between 1.0 and the next available floating point number</li>
-<li>Useful for programmatic “almost equal” computations</li>
-<li>std::numeric_limits<t>::epsilon</t></li>
+<li>We shouldn’t be suprised by this!</li>
 </ul>
-<p>Significant Digits</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [<span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>f32(i<span class="op">/</span><span class="dv">10</span>)<span class="sc">:1.100}</span><span class="ss">"</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
+<span id="cb8-2"><a></a><span class="fl">0.100000001490116119384765625</span></span>
+<span id="cb8-3"><a></a><span class="fl">0.20000000298023223876953125</span></span>
+<span id="cb8-4"><a></a><span class="fl">0.300000011920928955078125</span></span>
+<span id="cb8-5"><a></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [<span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>f64(i<span class="op">/</span><span class="dv">10</span>)<span class="sc">:1.100}</span><span class="ss">"</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
+<span id="cb8-6"><a></a><span class="fl">0.1000000000000000055511151231257827021181583404541015625</span></span>
+<span id="cb8-7"><a></a><span class="fl">0.200000000000000011102230246251565404236316680908203125</span></span>
+<span id="cb8-8"><a></a><span class="fl">0.299999999999999988897769753748434595763683319091796875</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="storage-of-1." class="slide level2">
+<h2>Storage of 1.</h2>
 <ul>
-<li>Significant digits measure precision
+<li><span class="math inline">\(x = -1^s \times 2^e \times 1.m\)</span></li>
+<li><span class="math inline">\(x = -1^{\text{sign bit}} \times \text{base} 2^{\text{exponent}} \times 1.\text{mantissa}\)</span></li>
+<li><span class="math inline">\(x = -1^{\text{sign bit}} \times \text{base} 2^{\text{exponent}} \times 1 + \text{mantissa} \times \frac{1}{2^n}\)</span></li>
+<li><span class="math inline">\(1 = -1^0 \times 2^0 \times (1 + 0 \times \frac{1}{2^n}\)</span></li>
+<li>So each of the sign bit, the base, and the mantissa are zero.
 <ul>
-<li>Remember the “exponent” field</li>
-<li>They are not a magnitude</li>
-</ul></li>
-<li>How close is close enough?
-<ul>
-<li>Define as significant digits, not absolute error</li>
+<li>I should note I was unable to reproduce this in Rust or C.</li>
+<li>I’m not really a floating pointer.</li>
 </ul></li>
 </ul>
-<pre><code>Sign ExponentMantissa TotalExponent bias Bits precision Significant Digits
-Half(IEEE 754-2008) 1 5 10 16 15 11 3 - 4
-Single 1 8 23 32 127 24 6 - 9
-Double 1 11 52 64 1023 53 15 - 17
-x86 extended precision 1 15 64 80 16383 64 18 - 21
-Quad 1 15 112 128 16383 113 33 - 36
-http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</code></pre>
-<p>Storage of the Very Small</p>
+</section>
+<section id="except" class="slide level2">
+<h2>Except…</h2>
+<ul>
+<li>This is actually a little bit fake.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a></a><span class="op">$</span> cat src<span class="op">/</span>main<span class="op">.</span>rs</span>
+<span id="cb9-2"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb9-3"><a></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">1.0</span><span class="op">;</span></span>
+<span id="cb9-4"><a></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> x<span class="op">.</span>to_bits())<span class="op">;</span></span>
+<span id="cb9-5"><a></a><span class="op">}</span></span>
+<span id="cb9-6"><a></a><span class="op">$</span> cargo run</span>
+<span id="cb9-7"><a></a>    Finished `dev` profile [unoptimized <span class="op">+</span> debuginfo] target(s) <span class="kw">in</span> <span class="dv">0</span><span class="op">.</span>00s</span>
+<span id="cb9-8"><a></a>     Running `target<span class="op">/</span>debug<span class="op">/</span>bits`</span>
+<span id="cb9-9"><a></a><span class="dv">00111111100000000000000000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What is that?</li>
+</ul>
+</section>
+<section id="shift-127" class="slide level2">
+<h2>Shift 127</h2>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Internal_representation">While the exponent can be positive or negative, in binary formats it is stored as an unsigned number that has a fixed “bias” added to it.</a></p>
+</blockquote>
+<ul>
+<li>The IEEE 754 binary format specifies a hardware implementation of such that the exponent, be it positive or negative, in binary formats is stored as an unsigned number that has a fixed “bias” added to it.</li>
+<li>In the case of 32 bit floats, the bias is 127.</li>
+</ul>
+</section>
+<section id="breakdown" class="slide level2">
+<h2>Breakdown</h2>
+<ul>
+<li>Take the following:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a></a><span class="ex">00111111100000000000000000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>That is:
+<ul>
+<li>Sign bit of <code>0</code></li>
+<li>Exponent of <code>01111111</code>
+<ul>
+<li>All zeroes and all ones are reserved for <code>NaN</code>, <code>inf</code>, etc.</li>
+</ul></li>
+<li>Mantissa of 23 zeroes.</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-precise" class="slide level2">
+<h2>How precise?</h2>
+<ul>
+<li>I have referred to <code>f32</code> as having “32 bits of precision”.</li>
+<li>How much precision is that?</li>
+<li>Well, let’s set the least significant bit of the mantissa to one.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-2"><a></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">1.0</span><span class="op">;</span></span>
+<span id="cb11-3"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> b<span class="op">:</span><span class="dt">u32</span> <span class="op">=</span> x<span class="op">.</span>to_bits()<span class="op">;</span></span>
+<span id="cb11-4"><a></a>    b <span class="op">|=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb11-5"><a></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> b)<span class="op">;</span></span>
+<span id="cb11-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{:1.32}"</span><span class="op">,</span> <span class="dt">f32</span><span class="pp">::</span>from_bits(b))<span class="op">;</span></span>
+<span id="cb11-7"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="epsilon" class="slide level2">
+<h2>“Epsilon”</h2>
+<ul>
+<li>What do we get?</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="ex">$</span> cargo run</span>
+<span id="cb12-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb12-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bits</span><span class="kw">`</span></span>
+<span id="cb12-4"><a></a><span class="ex">00111111100000000000000000000001</span></span>
+<span id="cb12-5"><a></a><span class="ex">1.00000011920928955078125000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We refer to this value (less one) as <a href="https://en.wikipedia.org/wiki/Machine_epsilon">machine epsilon</a>, or perhaps <span class="math inline">\(\varepsilon\)</span>.</li>
+<li>The difference between 1.0 and the next available floating point number.</li>
+<li>Much lower, of course, with double and quad precision.</li>
+</ul>
+</section>
+<section id="easier-sig-figs" class="slide level2">
+<h2>Easier: “Sig figs”</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Format</th>
+<th style="text-align: center;">Sign</th>
+<th style="text-align: center;">Exp.</th>
+<th style="text-align: center;">Mant.</th>
+<th style="text-align: center;">Bits</th>
+<th style="text-align: center;">Bias</th>
+<th style="text-align: center;">Prec.</th>
+<th style="text-align: center;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Half</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><strong>3-4</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Single</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">127</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;"><strong>6-9</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Double</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">1023</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;"><strong>15-17</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quad</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">112</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">16383</td>
+<td style="text-align: center;">113</td>
+<td style="text-align: center;"><strong>33-36</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://people.eecs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF">Prof.&nbsp;Kahan, UCB EECS</a></li>
+</ul>
+</section>
+<section id="sig-figs" class="slide level2">
+<h2>Sig figs</h2>
+<ul>
+<li>IEEE 754 was intended for <em>scientific computing</em></li>
+<li>That is, not systems computing, software etc.</li>
+<li>Useful to us to think about information and how bits work.</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Significant_figures">Significant figures, also referred to as significant digits, are specific digits within a number that is written in positional notation that carry both reliability and necessity in conveying a particular quantity.</a></p>
+</blockquote>
+</section>
+<section id="small-values" class="slide level2">
+<h2>Small Values</h2>
 <ul>
 <li>For 32-bit floats, the minimum base 10 exponent is -36.</li>
-<li>How is 1. 0 𝑒−^37 represented?</li>
+<li>How is <span class="math inline">\(1.0 \times 10^{-37}\)</span> represented?</li>
 </ul>
-<p>1.0e- 37</p>
-<p>[0][00000000][11011001110001111101110]</p>
-<p>0.09999999e- 37</p>
-<p>“Denormalized Number”</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="co">// In Rust, we may use '0b' prefix for binary representation.</span></span>
+<span id="cb13-2"><a></a><span class="co">// In Rust, we may us underscores within numerical values.</span></span>
+<span id="cb13-3"><a></a><span class="dv">0b0_00000000_11011001110001111101110</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="test-it" class="slide level2">
+<h2>Test it</h2>
+<ul>
+<li>Write a simple test…</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb14-2"><a></a>    <span class="kw">let</span> b<span class="op">:</span><span class="dt">u32</span> <span class="op">=</span> <span class="dv">0b0_00000000_11011001110001111101110</span><span class="op">;</span></span>
+<span id="cb14-3"><a></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> b)<span class="op">;</span></span>
+<span id="cb14-4"><a></a>    <span class="pp">println!</span>(<span class="st">"{:1.100}"</span><span class="op">,</span> <span class="dt">f32</span><span class="pp">::</span>from_bits(b))<span class="op">;</span></span>
+<span id="cb14-5"><a></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">10.0_f32</span><span class="op">.</span>powf(<span class="op">-</span><span class="dv">38.0_f32</span>)<span class="op">;</span></span>
+<span id="cb14-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> x<span class="op">.</span>to_bits())<span class="op">;</span></span>
+<span id="cb14-7"><a></a>    <span class="pp">println!</span>(<span class="st">"{:1.100}"</span><span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb14-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Results are as expected.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a></a><span class="ex">00000000011011001110001111101110</span></span>
+<span id="cb15-2"><a></a><span class="ex">0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175</span></span>
+<span id="cb15-3"><a></a><span class="ex">00000000011011001110001111101110</span></span>
+<span id="cb15-4"><a></a><span class="ex">0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="denormalized-number" class="slide level2">
+<h2>“Denormalized Number”</h2>
 <ul>
 <li>Numbers that have a zero exponent</li>
 <li>Required when the exponent is below the minimum exponent</li>
 <li>Helps prevent underflow</li>
+<li>Generally speaking, if you are using one these, the math is about to get wronger than you’d think.</li>
+<li>The good (???) language C++ provides a <code>std::nextafter</code> for which Rust crates exist.</li>
 </ul>
-<p>1.0e- 37</p>
-<p>[0][00000000][11011001110001111101110]</p>
-<p>0.09999999e- 37</p>
-<p>Floating Point Precision</p>
+</section>
+<section id="floating-point-precision" class="slide level2">
+<h2>Floating Point Precision</h2>
 <ul>
 <li>Representation is not uniform between numbers</li>
 <li>Most precision lies between 0.0 and 0.1</li>
 <li>Precision falls away</li>
-<li>std::nextafter</li>
 </ul>
-<p>Floating Point Precision</p>
-<pre><code>http://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx</code></pre>
-<p>Floating Point Precision</p>
+</section>
+<section id="visually" class="slide level2">
+<h2>Visually</h2>
+
+<img data-src="https://dwayneneed.github.io/static/img/2010-05-06-fun-with-floating-point_6bit-float-distribution.png" class="r-stretch"><ul>
+<li><a href="https://dwayneneed.github.io/.net/2010/05/06/fun-with-floating-point.html">Fun with floating point, Dwayne Need</a></li>
+</ul>
+</section>
+<section id="floating-point-precision-1" class="slide level2">
+<h2>Floating Point Precision</h2>
 <p>The number of floats from 0.0</p>
 <ul>
-<li>…to 0.1 = 1,036,831,949</li>
-<li>…to 0.2 = 8,388,608</li>
+<li>… to 0.1 = 1,036,831,949</li>
+<li>… to 0.2 = 8,388,608</li>
 <li>… to 0.4 = 8,388,608</li>
 <li>… to 0.8 = 8,388,608</li>
 <li>… to 1.6 = 8,388,608</li>
 <li>… to 3.2 = 8,388,608</li>
 </ul>
-<p>Errors in Floating Point</p>
-<p>https://github.com/DigitalInBlue/CPPCon2015</p>
-<p>Storage of π</p>
-<p>π = 3.14159265</p>
-<p>πf= 3.14159274</p>
-<p>Δ = 0.00000009</p>
-<p>Measuring Error: “Ulps”</p>
+</section>
+<section id="errors-in-floating-point" class="slide level2">
+<h2>Errors in Floating Point</h2>
 <ul>
-<li>Units in Last Place
+<li>Storage of <span class="math inline">\(\pi\)</span></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> pi <span class="im">as</span> pi</span>
+<span id="cb16-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># copy paste Wolfram|Alpha</span></span>
+<span id="cb16-3"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="st">'3.14159265358979323846264338327950288419716939937510582097494459230781640628'</span></span>
+<span id="cb16-4"><a></a><span class="co">'3.14159265358979323846264338327950288419716939937510582097494459230781640628'</span></span>
+<span id="cb16-5"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="ss">f'</span><span class="sc">{</span>pi<span class="sc">:1.100}</span><span class="ss">'</span></span>
+<span id="cb16-6"><a></a><span class="co">'3.141592653589793115997963468544185161590576171875'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>“Harrison” and “Goldberg” definitions</li>
-<li>(6-8 definitions floating around)</li>
+<li>They differ fairly early on!</li>
+</ul>
+</section>
+<section id="measuring-error-ulps" class="slide level2">
+<h2>Measuring Error: “Ulps”</h2>
+<ul>
+<li>Units in Last Place</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Unit_in_the_last_place">In computer science and numerical analysis, unit in the last place or unit of least precision (ulp) is the spacing between two consecutive floating-point numbers, i.e., the value the least significant digit (rightmost digit) represents if it is 1. It is used as a measure of accuracy in numeric calculations.</a></p>
+</blockquote>
+</section>
+<section id="generators" class="slide level2">
+<h2>Generators</h2>
+<ul>
+<li>By convention we check number theoretic results with lazily evaluated generator expressions in Python.</li>
+<li>The following generators all powers of two for a which adding one does not change the value within Python floating points.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
+<span id="cb17-2"><a></a></span>
+<span id="cb17-3"><a></a>gen <span class="op">=</span> (i <span class="cf">for</span> i <span class="kw">in</span> count() <span class="cf">if</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i))</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a>x <span class="op">=</span> <span class="bu">next</span>(gen)</span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 0.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
+<span id="cb17-8"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="iterators" class="slide level2">
+<h2>Iterators</h2>
+<ul>
+<li>Rust doesn’t require iterators, supporting the infinite iterator by default using <code>unwrap</code>.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a></a><span class="kw">let</span> x <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i) <span class="op">+</span> <span class="dv">1.0</span> <span class="op">==</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i))<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="kw">let</span> base <span class="op">=</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="co">// Prints the result (2^53 = 9007199254740992.0)</span></span>
+<span id="cb18-6"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span><span class="op">,</span> base)<span class="op">;</span></span>
+<span id="cb18-7"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span><span class="op">,</span> base <span class="op">+</span> <span class="dv">1.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I haven’t used <code>find</code> before, this is an LLM donation to our knowledge base.</li>
+<li>By the way, that is basically <code>2 ** 53</code> and there are 52 bits of mantissa precision.</li>
+</ul>
+</section>
+<section id="on-ulps" class="slide level2">
+<h2>On “Ulps”</h2>
+<ul>
+<li>We can measure error using ULPs.</li>
+</ul>
+<blockquote>
+<p><a href="https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT">The gap between the two floating-point numbers nearest to x, even if x is one of )them.</a></p>
+</blockquote>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
+<span id="cb19-2"><a></a><span class="op">&gt;&gt;&gt;</span> f64(pi) <span class="op">-</span> f64(f32(pi))</span>
+<span id="cb19-3"><a></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rounding" class="slide level2">
+<h2>Rounding</h2>
+<ul>
+<li>We have some guarantees:
+<ul>
+<li>IEEE 754 requires that that elementary arithmetic operations are correctly rounded to within 0.5 ulps</li>
+<li>Transcendental functions are generally rounded to between 0.5 and 1.0 ulps
+<ul>
+<li>Transcendental as in <span class="math inline">\(\pi\)</span> or <span class="math inline">\(e\)</span></li>
 </ul></li>
-<li>“The gap between the two floating-point numbers</li>
+</ul></li>
+<li>~9 ulps</li>
 </ul>
-<p>nearest to x, even if x is one of them.” –W. Kahan</p>
+</section>
+<section>
+<section id="relative-error" class="title-slide slide level1 center">
+<h1>Relative Error</h1>
 <ul>
-<li>https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT</li>
-<li>IEEE 754 requires that that elementary arithmetic</li>
+<li>The difference between the “real” number and the approximated number, divided by the “real” number.</li>
 </ul>
-<p>operations are correctly rounded to within 0. 5 ulps</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
+<span id="cb20-2"><a></a>np.float64(<span class="fl">1.0000000278275352</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Transcendental functions are generally rounded to</li>
+<li>So for <code>pi</code> in <code>f32</code>, around <span class="math inline">\(2.9 \times 10^{-8}\)</span></li>
 </ul>
-<p>between 0. 5 and 1. 0 ulps</p>
-<p>π = 3.14159265</p>
-<p>πf= 3.14159274</p>
-<p>Δ = 0.00000009</p>
-<p>9 ulps</p>
-<p>Measuring Error: “Relative Error”</p>
-<ul>
-<li>The difference between the “real” number and the</li>
-</ul>
-<p>approximated number, divided by the “real” number.</p>
-<p>π = 3.14159265</p>
-<p>πf= 3.14159274</p>
-<p>Δ = 0.00000009</p>
-<p>9 ulps</p>
-<p>2.864789e- 8 β</p>
-<p>𝜋 − (𝜋𝑓)</p>
-<p>𝜋</p>
-<pre><code>= 2. 864789 𝑒
-− 8</code></pre>
-<p>Rounding Error</p>
+</section>
+<section id="rounding-error" class="slide level2">
+<h2>Rounding Error</h2>
 <ul>
 <li>Induced by approximating an infinite range of numbers into a finite number of bits</li>
-<li>Math is done exactly, then rounded*
+<li>Rounding is:
 <ul>
 <li>Towards the nearest</li>
-<li>Towards Zero</li>
+<li>Towards zero</li>
 <li>Towards positive infinity (round up)</li>
 <li>Towards negative infinity (round down)</li>
 </ul></li>
 </ul>
-<p>*Look up “exactly rounded” as well</p>
-<p>Rounding Error</p>
+</section>
+<section id="rounding-error-1" class="slide level2">
+<h2>Rounding Error</h2>
 <ul>
 <li>What about rounding the half-way case? (i.e.&nbsp;0.5)
 <ul>
@@ -883,8 +1083,11 @@ http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</code></pre>
 <li>If there is a tie, round to the number with an even mantissa</li>
 </ul></li>
 </ul>
-<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
+</section>
+<section id="implementation" class="slide level2">
+<h2>Implementation</h2>
 <ul>
+<li>“Guard Bit”, “Round Bit”, “Sticky Bit”</li>
 <li>Only used while doing calculations
 <ul>
 <li>Not stored in the float itself</li>
@@ -893,16 +1096,23 @@ http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF</code></pre>
 <li>The guard bits and round bits are extra precision</li>
 <li>The sticky bit is an OR of anything that shifts through it</li>
 </ul>
-<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
-<p>“Guard Bit”, “Round Bit”, “Sticky Bit”</p>
-<p><strong>[G][R][S]</strong></p>
-<p><strong>[0][-][-]</strong> - Round Down (do nothing)</p>
-<p><strong>[1][0][0]</strong> - Round Up if the mantissa LSB is 1</p>
-<p><strong>[1][0][1]</strong> - Round Up</p>
-<p><strong>[1][1][0]</strong> - Round Up</p>
-<p><strong>[1][1][1]</strong> - Round Up</p>
-<p>[0][00000000][00000000000000000000000][G][R][S…]</p>
-<p>Significance Error</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="special-bits" class="slide level2">
+<h2>Special bits</h2>
+<ul>
+<li>“Guard Bit”, “Round Bit”, “Sticky Bit”</li>
+<li><strong>[G][R][S]</strong></li>
+<li><strong>[0][-][-]</strong> - Round Down (do nothing)</li>
+<li><strong>[1][0][0]</strong> - Round Up if the mantissa LSB is 1</li>
+<li><strong>[1][0][1]</strong> - Round Up</li>
+<li><strong>[1][1][0]</strong> - Round Up</li>
+<li><strong>[1][1][1]</strong> - Round Up</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="significance-error" class="slide level2">
+<h2>Significance Error</h2>
 <ul>
 <li>Compute the Area of a Triangle
 <ul>

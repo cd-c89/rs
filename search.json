@@ -11,7 +11,7 @@
     "href": "42_sha512.html",
     "title": "SHA-512",
     "section": "",
-    "text": "To complete this assignment, you must:\n\nCreate a 42 directory in your 271rs repository.\nThis folder must be a Cargo package.\nYou may leverage other Cargo packages, provided you have written them.\n\nMost likely “Macros”\n[Read more]\n\ncargo new 42 --name sha512 --vcs none\n\n\n\n\n\n\nI will provide a reference solution\n\nIt is the command line utility sha512sum which I expect you already have on your system.\n\n$ echo \"hello world\" &gt; hi.txt\n$ sha512sum hi.txt\ndb3974a97f2407b7cae1ae637c0030687a11913274d578492558e39c16c017de84eacdc8c62fe34ee4e12b4b1428817f09b6a2760c3f8a664ceae94d2434a593  hi.txt\n\n\n\n\n\nYou will implement SHA-512 in Rust.\n\n\n\n\n\nCopy/paste or,\n\n\n\ntester.sh\n\ncargo build --release\necho \"15 characters.\" &gt; 15char.txt\necho \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\" &gt; lipsum.txt\ncurl https://github.com/cd-public/books/raw/main/pg1342.txt -o austen.txt 2&gt;/dev/null\necho \" === Finding errors vs. reference implementation. === \"\ndiff &lt;(sha256sum 15char.txt) &lt;(./target/release/sha512 15char.txt)\ndiff &lt;(sha256sum lipsum.txt) &lt;(./target/release/sha512 lipsum.txt)\ndiff &lt;(sha256sum austen.txt) &lt;(./target/release/sha512 austen.txt)\nrm 15char.txt lipsum.txt austen.txt\necho \" === Errors printed. No errors denotes \\\"Perfect!\\\" === \"\n\n\nSave as tester.sh and run in the manner you run other scripts, such as via:\n\n/bin/bash tester.sh",
+    "text": "To complete this assignment, you must:\n\nCreate a 42 directory in your 271rs repository.\nThis folder must be a Cargo package.\nYou may leverage other Cargo packages, provided you have written them.\n\nMost likely “Macros”\n[Read more]\n\ncargo new 42 --name sha512 --vcs none\n\n\n\n\n\n\nI will provide a reference solution\n\nIt is the command line utility sha512sum which I expect you already have on your system.\n\n$ echo \"hello world\" &gt; hi.txt\n$ sha512sum hi.txt\ndb3974a97f2407b7cae1ae637c0030687a11913274d578492558e39c16c017de84eacdc8c62fe34ee4e12b4b1428817f09b6a2760c3f8a664ceae94d2434a593  hi.txt\n\n\n\n\n\nYou will implement SHA-512 in Rust.\n\n\n\n\n\nCopy/paste or,\n\n\n\ntester.sh\n\ncargo build --release\necho \"15 characters.\" &gt; 15char.txt\necho \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\" &gt; lipsum.txt\ncurl https://github.com/cd-public/books/raw/main/pg1342.txt -o austen.txt 2&gt;/dev/null\necho \" === Finding errors vs. reference implementation. === \"\ndiff &lt;(sha512sum 15char.txt) &lt;(./target/release/sha512 15char.txt)\ndiff &lt;(sha512sum lipsum.txt) &lt;(./target/release/sha512 lipsum.txt)\ndiff &lt;(sha512sum austen.txt) &lt;(./target/release/sha512 austen.txt)\nrm 15char.txt lipsum.txt austen.txt\necho \" === Errors printed. No errors denotes \\\"Perfect!\\\" === \"\n\n\nSave as tester.sh and run in the manner you run other scripts, such as via:\n\n/bin/bash tester.sh",
     "crumbs": [
       "SHA-512"
     ]
@@ -51,7 +51,7 @@
     "href": "42_sha512.html#test",
     "title": "SHA-512",
     "section": "",
-    "text": "Copy/paste or,\n\n\n\ntester.sh\n\ncargo build --release\necho \"15 characters.\" &gt; 15char.txt\necho \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\" &gt; lipsum.txt\ncurl https://github.com/cd-public/books/raw/main/pg1342.txt -o austen.txt 2&gt;/dev/null\necho \" === Finding errors vs. reference implementation. === \"\ndiff &lt;(sha256sum 15char.txt) &lt;(./target/release/sha512 15char.txt)\ndiff &lt;(sha256sum lipsum.txt) &lt;(./target/release/sha512 lipsum.txt)\ndiff &lt;(sha256sum austen.txt) &lt;(./target/release/sha512 austen.txt)\nrm 15char.txt lipsum.txt austen.txt\necho \" === Errors printed. No errors denotes \\\"Perfect!\\\" === \"\n\n\nSave as tester.sh and run in the manner you run other scripts, such as via:\n\n/bin/bash tester.sh",
+    "text": "Copy/paste or,\n\n\n\ntester.sh\n\ncargo build --release\necho \"15 characters.\" &gt; 15char.txt\necho \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\" &gt; lipsum.txt\ncurl https://github.com/cd-public/books/raw/main/pg1342.txt -o austen.txt 2&gt;/dev/null\necho \" === Finding errors vs. reference implementation. === \"\ndiff &lt;(sha512sum 15char.txt) &lt;(./target/release/sha512 15char.txt)\ndiff &lt;(sha512sum lipsum.txt) &lt;(./target/release/sha512 lipsum.txt)\ndiff &lt;(sha512sum austen.txt) &lt;(./target/release/sha512 austen.txt)\nrm 15char.txt lipsum.txt austen.txt\necho \" === Errors printed. No errors denotes \\\"Perfect!\\\" === \"\n\n\nSave as tester.sh and run in the manner you run other scripts, such as via:\n\n/bin/bash tester.sh",
     "crumbs": [
       "SHA-512"
     ]
@@ -6454,7 +6454,7 @@
     "href": "50_754.rjs.html#mission-statement",
     "title": "IEEE 754",
     "section": "Mission Statement",
-    "text": "Mission Statement\n\nI’m a normal person.\n\nI think 5/2 is 2.5.\n\nI’m a scientist.\n\nI’m solving “Black-Scholes”\nDoes anyone know what this is doing? \\[\nd_2 = d_1 - \\sigma\\sqrt{T - t} = \\frac{1}{\\sigma\\sqrt{T - t}}\\left[\\ln\\left(\\frac{S_t}{K}\\right) + \\left(r - q - \\frac{1}{2}\\sigma^2\\right)(T - t)\\right]\n\\]"
+    "text": "Mission Statement\n\nI’m a normal person.\n\nI think 5/2 is 2.5 or perhaps 2½.\n\nI’m a scientist.\n\nI’m solving “Black-Scholes”\nDoes anyone know what this is doing? \\[\nd_2 = d_1 - \\sigma\\sqrt{T - t} = \\frac{1}{\\sigma\\sqrt{T - t}}\\left[\\ln\\left(\\frac{S_t}{K}\\right) + \\left(r - q - \\frac{1}{2}\\sigma^2\\right)(T - t)\\right]\n\\]"
   },
   {
     "objectID": "50_754.rjs.html#common-fallacies",
@@ -6468,7 +6468,7 @@
     "href": "50_754.rjs.html#common-fallacies-2.0",
     "title": "IEEE 754",
     "section": "Common Fallacies 2.0",
-    "text": "Common Fallacies 2.0\n\n“A double (an f64) holds 15 decimal places and I only need 3, so I have nothing to worry about”1\n“My programming language does better math than your programming language”2\n“Why can’t computers just store whatever number I use”3\n\nGrammatically, this statement should be “so I have nothing about which to worry.”This is true in the special case that your programming language is Rust.This is due to how many numbers there are."
+    "text": "Common Fallacies 2.0\n\n“A double (an f64) holds 15 decimal places and I only need 3, so I have nothing to worry about”1\n“My programming language does better math than your programming language”2\n“Why can’t computers just store whatever number I use”3\n\nGrammatically, this statement should be “so I have nothing about which to worry.”This is true in the special case that your programming language is Haskell.This is due to how many numbers there are."
   },
   {
     "objectID": "50_754.rjs.html#anatomy-of-ieee-floats",
@@ -6489,14 +6489,14 @@
     "href": "50_754.rjs.html#assurances",
     "title": "IEEE 754",
     "section": "Assurances",
-    "text": "Assurances\n\nEnsure some significant mathematical identities hold true:\n\n\\(x + y  = y + x\\)\n\nSymmetry of addition\n\n\\(x + 0 = x\\)\n\nAdditive identity\n\n\\(x = y \\implies x - y = 0\\)\n\nIdentify under subtraction"
+    "text": "Assurances\n\nEnsure some significant mathematical identities hold true:\n\n\\(x + y  = y + x\\)\n\nSymmetry of addition\n\n\\(x + 0 = x\\)\n\nAdditive identity\n\n\\(x = y \\implies x - y = 0\\)\n\nIdentity under subtraction"
   },
   {
     "objectID": "50_754.rjs.html#assurances-2.0",
     "href": "50_754.rjs.html#assurances-2.0",
     "title": "IEEE 754",
     "section": "Assurances 2.0",
-    "text": "Assurances 2.0\n$$\\frac{x}{\\sqrt{x^2+y^2}} \\leq 1$$\n\nWhat is missing?"
+    "text": "Assurances 2.0\n\\[\n\\frac{x}{\\sqrt{x^2+y^2}} \\leq 1\n\\]\n\nWhat is missing?"
   },
   {
     "objectID": "50_754.rjs.html#ieee-float-specification-1",
@@ -6562,11 +6562,221 @@
     "text": "Understanding check\n\nWhat is the probability a real number \\(a \\in \\mathbb{R}\\) has an exact float representation?\nWhat is the probability an integer \\(n \\in \\mathbb{Z}\\) has an exact float representation?\nWhat is the probability a course number \\(n &lt; 600\\) has an exact float representation?"
   },
   {
+    "objectID": "50_754.rjs.html#special-floats---nan",
+    "href": "50_754.rjs.html#special-floats---nan",
+    "title": "IEEE 754",
+    "section": "Special Floats - NaN",
+    "text": "Special Floats - NaN\n\nDivide by Zero\n\n1 / 0\n\nNot a Number (NaN)\n\n&gt;&gt;&gt; from numpy import float32 as f32\n&gt;&gt;&gt; f32(1)/f32(0)\n&lt;stdin&gt;:1: RuntimeWarning: divide by zero encountered in scalar divide\nnp.float32(inf)\n&gt;&gt;&gt; 1/0\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nZeroDivisionError: division by zero"
+  },
+  {
+    "objectID": "50_754.rjs.html#special-floats---inf",
+    "href": "50_754.rjs.html#special-floats---inf",
+    "title": "IEEE 754",
+    "section": "Special Floats - inf",
+    "text": "Special Floats - inf\n\nSigned Infinity\n\nOverflow protection\n\n&gt;&gt;&gt; f32(10) ** f32(100)\n&lt;stdin&gt;:1: RuntimeWarning: overflow encountered in scalar power\nnp.float32(inf)\n&gt;&gt;&gt; 10.0 ** 10000\nTraceback (most recent call last):\nFile \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nOverflowError: (34, 'Numerical result out of range')"
+  },
+  {
+    "objectID": "50_754.rjs.html#infinity-is-signed",
+    "href": "50_754.rjs.html#infinity-is-signed",
+    "title": "IEEE 754",
+    "section": "Infinity is signed",
+    "text": "Infinity is signed\n\nWe can get negative infinity through a variety of means.\n\n&gt;&gt;&gt; -(f32(10) ** f32(100))\nnp.float32(-inf)\n\nWe note that this suppresses the overflow error use ()\nIn some languages this is not ever regarded as an overflow error, like Julia (where we have to use larger powers due to the f64 default)\n\njulia&gt; 10.0^10000\nInf\n\njulia&gt; -(10.0^10000)\n-Inf"
+  },
+  {
+    "objectID": "50_754.rjs.html#signed-zero",
+    "href": "50_754.rjs.html#signed-zero",
+    "title": "IEEE 754",
+    "section": "Signed Zero",
+    "text": "Signed Zero\n\nSigned Zero\n\nUnderflow protection, preserves sign\n\n0 =− 0\n\n\n&gt;&gt;&gt; -1 / 10 ** 1000\n-0.0\n&gt;&gt;&gt; 0.0 == (-1 / 10 ** 1000)\nTrue\n&gt;&gt;&gt; -0.0\n-0.0\n&gt;&gt;&gt; 0.0 - 0.0\n0.0\nWorks in base Python (e.g. don’t need NumPy).\nCouldn’t get it to work in Julia actually (went to -inf or NaN)"
+  },
+  {
     "objectID": "50_754.rjs.html#simple-example",
     "href": "50_754.rjs.html#simple-example",
     "title": "IEEE 754",
     "section": "Simple Example",
-    "text": "Simple Example\n\nzeroPointOne == 0.\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\nzeroPointOne == 0. Simple Example\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\nzeroPointOne == 0.\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\n\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][00000000][ 00000000000000000000000 ]\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][01111111][00000000000000000000000]\nStorage of 1.\n\nThe exponent is shift- 127 encoded\n0xeeeeeeee - 127\n\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][01111111][00000000000000000000000]\nStorage of 1.\n\n\n\n[0][01111111][00000000000000000000000]\nStorage of 1.0\n1.0000000000000000\n[0][01111111][00000000000000000000000]\n[0][01111111][00000000000000000000001]\n1.0000001192092896\n“Epsilon”\n\nThe difference between 1.0 and the next available floating point number\nUseful for programmatic “almost equal” computations\nstd::numeric_limits::epsilon\n\nSignificant Digits\n\nSignificant digits measure precision\n\nRemember the “exponent” field\nThey are not a magnitude\n\nHow close is close enough?\n\nDefine as significant digits, not absolute error\n\n\nSign ExponentMantissa TotalExponent bias Bits precision Significant Digits\nHalf(IEEE 754-2008) 1 5 10 16 15 11 3 - 4\nSingle 1 8 23 32 127 24 6 - 9\nDouble 1 11 52 64 1023 53 15 - 17\nx86 extended precision 1 15 64 80 16383 64 18 - 21\nQuad 1 15 112 128 16383 113 33 - 36\nhttp://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF\nStorage of the Very Small\n\nFor 32-bit floats, the minimum base 10 exponent is -36.\nHow is 1. 0 𝑒−^37 represented?\n\n1.0e- 37\n[0][00000000][11011001110001111101110]\n0.09999999e- 37\n“Denormalized Number”\n\nNumbers that have a zero exponent\nRequired when the exponent is below the minimum exponent\nHelps prevent underflow\n\n1.0e- 37\n[0][00000000][11011001110001111101110]\n0.09999999e- 37\nFloating Point Precision\n\nRepresentation is not uniform between numbers\nMost precision lies between 0.0 and 0.1\nPrecision falls away\nstd::nextafter\n\nFloating Point Precision\nhttp://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx\nFloating Point Precision\nThe number of floats from 0.0\n\n…to 0.1 = 1,036,831,949\n…to 0.2 = 8,388,608\n… to 0.4 = 8,388,608\n… to 0.8 = 8,388,608\n… to 1.6 = 8,388,608\n… to 3.2 = 8,388,608\n\nErrors in Floating Point\nhttps://github.com/DigitalInBlue/CPPCon2015\nStorage of π\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\nMeasuring Error: “Ulps”\n\nUnits in Last Place\n\n“Harrison” and “Goldberg” definitions\n(6-8 definitions floating around)\n\n“The gap between the two floating-point numbers\n\nnearest to x, even if x is one of them.” –W. Kahan\n\nhttps://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT\nIEEE 754 requires that that elementary arithmetic\n\noperations are correctly rounded to within 0. 5 ulps\n\nTranscendental functions are generally rounded to\n\nbetween 0. 5 and 1. 0 ulps\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\n9 ulps\nMeasuring Error: “Relative Error”\n\nThe difference between the “real” number and the\n\napproximated number, divided by the “real” number.\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\n9 ulps\n2.864789e- 8 β\n𝜋 − (𝜋𝑓)\n𝜋\n= 2. 864789 𝑒\n− 8\nRounding Error\n\nInduced by approximating an infinite range of numbers into a finite number of bits\nMath is done exactly, then rounded*\n\nTowards the nearest\nTowards Zero\nTowards positive infinity (round up)\nTowards negative infinity (round down)\n\n\n*Look up “exactly rounded” as well\nRounding Error\n\nWhat about rounding the half-way case? (i.e. 0.5)\n\nRound Up vs. Round Even\n\nCorrect Rounding:\n\nBasic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.\nIf there is a tie, round to the number with an even mantissa\n\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n\nOnly used while doing calculations\n\nNot stored in the float itself\nThe mantissa is shifted in calculations to align radix\n\nThe guard bits and round bits are extra precision\nThe sticky bit is an OR of anything that shifts through it\n\n[0][00000000][00000000000000000000000][G][R][S…]\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n[G][R][S]\n[0][-][-] - Round Down (do nothing)\n[1][0][0] - Round Up if the mantissa LSB is 1\n[1][0][1] - Round Up\n[1][1][0] - Round Up\n[1][1][1] - Round Up\n[0][00000000][00000000000000000000000][G][R][S…]\nSignificance Error\n\nCompute the Area of a Triangle\n\nHeron’s Formula:\n\n𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧\n\nKahan’sAlgorithm:\n\nSort x, y, z such that 𝑥≥𝑦 ≥𝑧\nIf 𝑧&lt; 𝑥−𝑦, then no such triangle exists.\nElse 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)\n\n\n\nSignificance Error\n/// Area of a triangle\n/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html\n/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf\nTEST(CPPCon2015, AreaOfATriangleFloat)\n{\nconst auto a = 100000.0f;\nconst auto b = 99999.99979f;\nconst auto c = 0.00029f;\nASSERT_TRUE(a &gt;= b);\nASSERT_TRUE(b &gt;= c);\nauto heronsFormula = HeronsFormula(a, b, c);\nauto kahansFormula = KahansFormula(a, b, c);\nEXPECT_NE(kahansFormula, heronsFormula);\ncppCon() &lt;&lt; \"Kahan: \" &lt;&lt; kahansFormula;\ncppCon() &lt;&lt; \"Heron: \" &lt;&lt; heronsFormula;\ncppCon() &lt;&lt; \"delta: \" &lt;&lt; kahansFormula - heronsFormula &lt;&lt; \"\\n\";\n}\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHint: The Answer is 10.0\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHeron: 9.999999809638328700000000000000\nKahan: 10.000000077021038000000000000000\ndelta: 0.000000267382709751018410000000\nSignificance Error - Use Stable Algorithms\n\nLoss of Significance\n\nKeep big numbers with big numbers, little numbers with little numbers.\n\nParentheses can help\nAnalysis of Algorithms is Critical\nThe compiler won’t re-arrange your math if it cannot prove it would yield the same\n\nresult, even if the computation would be faster\n\n𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0\nSee the “Kahan’sAlgorithm” example\n\nSignificance Error – Simulation Time\n\nTime is used to compute distance, velocity, acceleration\n\nHigh frequency phenomena\nSensors: Doppler shift, pulse compression, PRF\n\nThese computed values feed into other computed values which may or may not\n\nrequire a time component\n\nThousands of computations per frame of simulation\n\nThousands of little compounding errors per frame\n\nCombine with poor or nonexistent testing\n\nSignificance Error – Simulation Time\n\nAccumulate Time (works for arbitrary\n\ntime steps)\nauto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;\n// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }\nauto totalFrames = size_t(0);\nauto frameLength = 0.01f;\nauto simTime = 0.0f;\n// Run 120 Frames\nauto simTime120Frames = 1.20f;\ntotalFrames = 120;\nsimTime = totalFrames * frameLength;\n\nDelta Time (works for fixed time steps)\n\nSignificance Error – Simulation Time\nAccumulate Time (works for arbitrary time steps)\n\n1.199999999999999955591079014994 != 1.199999213218688964843750000000 (0.000000786781310990747329014994)\n12.000000000000000000000000000000 != 12.000179290771484375000000000000 (- 0.000179290771484375000000000000)\n120.000000000000000000000000000000 != 120.007225036621093750000000000000 (- 0.007225036621093750000000000000)\n600.000000000000000000000000000000 != 600.274414062500000000000000000000 (- 0.274414062500000000000000000000)\n3600.000000000000000000000000000000 != 3603.204101562500000000000000000000 (- 3.204101562500000000000000000000)\n\nDelta Time (works for fixed time steps)\n\n1.200000047683715820312500000000 != 1.199999928474426269531250000000 (0.000000119209289550781250000000)\n12.000000000000000000000000000000 == 12.000000000000000000000000000000 (0.000000000000000000000000000000)\n120.000000000000000000000000000000 == 120.000000000000000000000000000000 (0.000000000000000000000000000000)\n600.000000000000000000000000000000 == 600.000000000000000000000000000000 (0.000000000000000000000000000000)\n-3600.000000000000000000000000000000 == 3600.000000000000000000000000000000 (0.000000000000000000000000000000)\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\n0.012345000170171261000000000000 !=\n0.0148140005767345430\n(-0.002469000406563282000000000000)\n12.345000267028809000000000000000 !=\n11.701118469238281000000000000000\n(0.643881797790527340000000000000)\nSignificance Error – Don’t use IEEE Floats?\n\nUse integers\n\nVery fast\nTrade more precision for less range\nOnly input/output may be impacted by floating point conversions\nFinancial applications represent dollars as only cents or tenth’s of cents\n\nUse a math library\n\nSlower\nDefine your own level of accuracy\nMPFR (w/C++ Wrapper), TTMath, Boost, GMP C++\nCRlibm(Correctly Rounded Mathematical Library)\n\n\n(Store simTimeas uint64_tand get microsecond precision for 584555 years.)\nAlgebraic Assumption Error\n\nMathematical Identities\n\nTraditional identities (associative, commutative, distributive) do not hold\n\nDistributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\nCannot interchange division and multiplication:\n\n𝑥\n10. 0\n≠ 𝑥 × 0. 1\nDoes a naïve compiler make these assumptions too?\nhttps://msdn.microsoft.com/library/aa289157.aspx\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nControl: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000\nFloating Point Exceptions\n\nEnable floating point exceptions to be alerted when things go awry.\n\n𝑥is the exact result of the operation\nα= 192 for single precision, 1536 for double\n𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.\nSee &lt;cfenv&gt; -Floating Point Environment\nIEEE 754 Exception Result when traps disabled Argument to trap handler\noverflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)\nunderflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)\ndivide by zero ±∞ invalid operation\ninvalid NaN invalid operation\ninexact round( x ) round( x )\nBut Wait! There’s More!\n\nBinary to Decimal Conversion Error\nSummation Error\nPropagation Error\nUnderflow, Overflow\nType Narrowing/Widening Rules\n\nMiscellaneous Notes\nhttp://preshing.com/images/float-point-perf.png https://github.com/DigitalInBlue/CPPCon2015\nUse Your Compiler’s Output\n\nwarning C4244: ‘initializing’ : conversion from ‘double’ to\n\n‘float’, possible loss of data\n\nwarning C4056: overflow in floating point constant arithmetic\nwarning C4305: ‘identifier’ : truncation from ‘type1’ to\n\n‘type2’\n\nwarning: conversion to ‘float’ from ‘int’ may alter its value\nwarning: floating constant exceeds range of ‘double’\n\nFused Multiply-Add (FMA)\n\na = a + (b * c); a += b * c;\nMultiplier-accumulator (MAC Unit)\nOne rounding\nCompiler Options\n\nGCC = -mfma\nVC++ = #pragma fp_contract (off)\n\nReference: FMA3, FMA4\n\nhttp://en.wikipedia.org/wiki/FMA_instruction_set\n\n\nStreaming SIMD Extensions (SSE)\n\nSSE can provide significant performance gains\n\nSupports integer, floating point, logical, conversion, shift, and shuffle operations\n\nC, C++, Fortran do not natively support SSE, but compiler-specific support exists\n\nFloat Tricks\n/// Fast reciprocal square root approximation for x &gt; 0.25\n/// Quake’s float Q_rsqrt(float number) is much more entertaining.\ninline float FastInvSqrt(float x)\n{\nint tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&x) &gt;&gt; 1;\nauto y = *(float*)&tmp;\nreturn y * (1.47f – 0.47f * x * y * y);\n}\nTesting\n\nDesign for Numerical Stability\nPerform Meaningful Testing\nDocument assumptions\nTrack sources of approximation\nQuantify goodness\n\nWell conditioned algorithms\n\nBackward error analysis\n\nAre the outputs identical for slightly modified inputs?\n\n\nTEST(CPPCon2015, pointOnePlusPointTwo)\n{\nauto zeroPointOne = 0.1f;\nauto zeroPointTwo = 0.2f;\nauto zeroPointThree = 0.3f;\nauto sum = zeroPointOne + zeroPointTwo;\nEXPECT_DOUBLE_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, sum);\nEXPECT_EQ(zeroPointThree, sum);\nEXPECT_DOUBLE_EQ(zeroPointThree, sum);\n}\nhttp://xkcd.com/217/ http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi\nhttps://github.com/DigitalInBlue/CPPCon2015"
+    "text": "Simple Example\n\nFloating point is great because it will work exactly how you expect.\n\n&gt;&gt;&gt; 0.1 + 0.2 == 0.3\nFalse\n\nMore or less.\n\n&gt;&gt;&gt; 0.1 + 0.2\n0.30000000000000004"
+  },
+  {
+    "objectID": "50_754.rjs.html#simple-example-1",
+    "href": "50_754.rjs.html#simple-example-1",
+    "title": "IEEE 754",
+    "section": "Simple Example",
+    "text": "Simple Example\n\nWe shouldn’t be suprised by this!\n\n&gt;&gt;&gt; _ = [print(f\"{f32(i/10):1.100}\") for i in range(1,4)]\n0.100000001490116119384765625\n0.20000000298023223876953125\n0.300000011920928955078125\n&gt;&gt;&gt; _ = [print(f\"{f64(i/10):1.100}\") for i in range(1,4)]\n0.1000000000000000055511151231257827021181583404541015625\n0.200000000000000011102230246251565404236316680908203125\n0.299999999999999988897769753748434595763683319091796875"
+  },
+  {
+    "objectID": "50_754.rjs.html#storage-of-1.",
+    "href": "50_754.rjs.html#storage-of-1.",
+    "title": "IEEE 754",
+    "section": "Storage of 1.",
+    "text": "Storage of 1.\n\n\\(x = -1^s \\times 2^e \\times 1.m\\)\n\\(x = -1^{\\text{sign bit}} \\times \\text{base} 2^{\\text{exponent}} \\times 1.\\text{mantissa}\\)\n\\(x = -1^{\\text{sign bit}} \\times \\text{base} 2^{\\text{exponent}} \\times 1 + \\text{mantissa} \\times \\frac{1}{2^n}\\)\n\\(1 = -1^0 \\times 2^0 \\times (1 + 0 \\times \\frac{1}{2^n}\\)\nSo each of the sign bit, the base, and the mantissa are zero.\n\nI should note I was unable to reproduce this in Rust or C.\nI’m not really a floating pointer."
+  },
+  {
+    "objectID": "50_754.rjs.html#except",
+    "href": "50_754.rjs.html#except",
+    "title": "IEEE 754",
+    "section": "Except…",
+    "text": "Except…\n\nThis is actually a little bit fake.\n\n$ cat src/main.rs\nfn main() {\n    let x:f32 = 1.0;\n    println!(\"{:032b}\", x.to_bits());\n}\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/bits`\n00111111100000000000000000000000\n\nWhat is that?"
+  },
+  {
+    "objectID": "50_754.rjs.html#shift-127",
+    "href": "50_754.rjs.html#shift-127",
+    "title": "IEEE 754",
+    "section": "Shift 127",
+    "text": "Shift 127\n\nWhile the exponent can be positive or negative, in binary formats it is stored as an unsigned number that has a fixed “bias” added to it.\n\n\nThe IEEE 754 binary format specifies a hardware implementation of such that the exponent, be it positive or negative, in binary formats is stored as an unsigned number that has a fixed “bias” added to it.\nIn the case of 32 bit floats, the bias is 127."
+  },
+  {
+    "objectID": "50_754.rjs.html#breakdown",
+    "href": "50_754.rjs.html#breakdown",
+    "title": "IEEE 754",
+    "section": "Breakdown",
+    "text": "Breakdown\n\nTake the following:\n\n00111111100000000000000000000000\n\nThat is:\n\nSign bit of 0\nExponent of 01111111\n\nAll zeroes and all ones are reserved for NaN, inf, etc.\n\nMantissa of 23 zeroes."
+  },
+  {
+    "objectID": "50_754.rjs.html#how-precise",
+    "href": "50_754.rjs.html#how-precise",
+    "title": "IEEE 754",
+    "section": "How precise?",
+    "text": "How precise?\n\nI have referred to f32 as having “32 bits of precision”.\nHow much precision is that?\nWell, let’s set the least significant bit of the mantissa to one.\n\n\n\nmain.rs\n\nfn main() {\n    let x:f32 = 1.0;\n    let mut b:u32 = x.to_bits();\n    b |= 1;\n    println!(\"{:032b}\", b);\n    println!(\"{:1.32}\", f32::from_bits(b));\n}"
+  },
+  {
+    "objectID": "50_754.rjs.html#epsilon",
+    "href": "50_754.rjs.html#epsilon",
+    "title": "IEEE 754",
+    "section": "“Epsilon”",
+    "text": "“Epsilon”\n\nWhat do we get?\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/bits`\n00111111100000000000000000000001\n1.00000011920928955078125000000000\n\nWe refer to this value (less one) as machine epsilon, or perhaps \\(\\varepsilon\\).\nThe difference between 1.0 and the next available floating point number.\nMuch lower, of course, with double and quad precision."
+  },
+  {
+    "objectID": "50_754.rjs.html#easier-sig-figs",
+    "href": "50_754.rjs.html#easier-sig-figs",
+    "title": "IEEE 754",
+    "section": "Easier: “Sig figs”",
+    "text": "Easier: “Sig figs”\n\n\n\nFormat\nSign\nExp.\nMant.\nBits\nBias\nPrec.\nSignificance\n\n\n\n\nHalf\n1\n5\n10\n16\n15\n11\n3-4\n\n\nSingle\n1\n8\n23\n32\n127\n24\n6-9\n\n\nDouble\n1\n11\n52\n64\n1023\n53\n15-17\n\n\nQuad\n1\n15\n112\n128\n16383\n113\n33-36\n\n\n\n\nProf. Kahan, UCB EECS"
+  },
+  {
+    "objectID": "50_754.rjs.html#sig-figs",
+    "href": "50_754.rjs.html#sig-figs",
+    "title": "IEEE 754",
+    "section": "Sig figs",
+    "text": "Sig figs\n\nIEEE 754 was intended for scientific computing\nThat is, not systems computing, software etc.\nUseful to us to think about information and how bits work.\n\n\nSignificant figures, also referred to as significant digits, are specific digits within a number that is written in positional notation that carry both reliability and necessity in conveying a particular quantity."
+  },
+  {
+    "objectID": "50_754.rjs.html#small-values",
+    "href": "50_754.rjs.html#small-values",
+    "title": "IEEE 754",
+    "section": "Small Values",
+    "text": "Small Values\n\nFor 32-bit floats, the minimum base 10 exponent is -36.\nHow is \\(1.0 \\times 10^{-37}\\) represented?\n\n// In Rust, we may use '0b' prefix for binary representation.\n// In Rust, we may us underscores within numerical values.\n0b0_00000000_11011001110001111101110"
+  },
+  {
+    "objectID": "50_754.rjs.html#test-it",
+    "href": "50_754.rjs.html#test-it",
+    "title": "IEEE 754",
+    "section": "Test it",
+    "text": "Test it\n\nWrite a simple test…\n\n\n\nsrc/main.rs\n\nfn main() {\n    let b:u32 = 0b0_00000000_11011001110001111101110;\n    println!(\"{:032b}\", b);\n    println!(\"{:1.100}\", f32::from_bits(b));\n    let x:f32 = 10.0_f32.powf(-38.0_f32);\n    println!(\"{:032b}\", x.to_bits());\n    println!(\"{:1.100}\", x);\n}\n\n\nResults are as expected.\n\n00000000011011001110001111101110\n0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175\n00000000011011001110001111101110\n0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175"
+  },
+  {
+    "objectID": "50_754.rjs.html#denormalized-number",
+    "href": "50_754.rjs.html#denormalized-number",
+    "title": "IEEE 754",
+    "section": "“Denormalized Number”",
+    "text": "“Denormalized Number”\n\nNumbers that have a zero exponent\nRequired when the exponent is below the minimum exponent\nHelps prevent underflow\nGenerally speaking, if you are using one these, the math is about to get wronger than you’d think.\nThe good (???) language C++ provides a std::nextafter for which Rust crates exist."
+  },
+  {
+    "objectID": "50_754.rjs.html#floating-point-precision",
+    "href": "50_754.rjs.html#floating-point-precision",
+    "title": "IEEE 754",
+    "section": "Floating Point Precision",
+    "text": "Floating Point Precision\n\nRepresentation is not uniform between numbers\nMost precision lies between 0.0 and 0.1\nPrecision falls away"
+  },
+  {
+    "objectID": "50_754.rjs.html#visually",
+    "href": "50_754.rjs.html#visually",
+    "title": "IEEE 754",
+    "section": "Visually",
+    "text": "Visually\n\n\nFun with floating point, Dwayne Need"
+  },
+  {
+    "objectID": "50_754.rjs.html#floating-point-precision-1",
+    "href": "50_754.rjs.html#floating-point-precision-1",
+    "title": "IEEE 754",
+    "section": "Floating Point Precision",
+    "text": "Floating Point Precision\nThe number of floats from 0.0\n\n… to 0.1 = 1,036,831,949\n… to 0.2 = 8,388,608\n… to 0.4 = 8,388,608\n… to 0.8 = 8,388,608\n… to 1.6 = 8,388,608\n… to 3.2 = 8,388,608"
+  },
+  {
+    "objectID": "50_754.rjs.html#errors-in-floating-point",
+    "href": "50_754.rjs.html#errors-in-floating-point",
+    "title": "IEEE 754",
+    "section": "Errors in Floating Point",
+    "text": "Errors in Floating Point\n\nStorage of \\(\\pi\\)\n\n&gt;&gt;&gt; from numpy import pi as pi\n&gt;&gt;&gt; # copy paste Wolfram|Alpha\n&gt;&gt;&gt; '3.14159265358979323846264338327950288419716939937510582097494459230781640628'\n'3.14159265358979323846264338327950288419716939937510582097494459230781640628'\n&gt;&gt;&gt; f'{pi:1.100}'\n'3.141592653589793115997963468544185161590576171875'\n\nThey differ fairly early on!"
+  },
+  {
+    "objectID": "50_754.rjs.html#measuring-error-ulps",
+    "href": "50_754.rjs.html#measuring-error-ulps",
+    "title": "IEEE 754",
+    "section": "Measuring Error: “Ulps”",
+    "text": "Measuring Error: “Ulps”\n\nUnits in Last Place\n\n\nIn computer science and numerical analysis, unit in the last place or unit of least precision (ulp) is the spacing between two consecutive floating-point numbers, i.e., the value the least significant digit (rightmost digit) represents if it is 1. It is used as a measure of accuracy in numeric calculations."
+  },
+  {
+    "objectID": "50_754.rjs.html#generators",
+    "href": "50_754.rjs.html#generators",
+    "title": "IEEE 754",
+    "section": "Generators",
+    "text": "Generators\n\nBy convention we check number theoretic results with lazily evaluated generator expressions in Python.\nThe following generators all powers of two for a which adding one does not change the value within Python floating points.\n\nfrom itertools import count\n\ngen = (i for i in count() if 2.0 ** float(i) + 1.0 == 2.0 ** float(i))\n\nx = next(gen)\n\nprint('2.0 ** x + 0.0 = ', 2.0 ** x + 0.0)\nprint('2.0 ** x + 1.0 = ', 2.0 ** x + 1.0)"
+  },
+  {
+    "objectID": "50_754.rjs.html#iterators",
+    "href": "50_754.rjs.html#iterators",
+    "title": "IEEE 754",
+    "section": "Iterators",
+    "text": "Iterators\n\nRust doesn’t require iterators, supporting the infinite iterator by default using unwrap.\n\nlet x = (0..).find(|&i| f64::powi(2.0, i) + 1.0 == f64::powi(2.0, i)).unwrap();\n\nlet base = f64::powi(2.0, x);\n\n// Prints the result (2^53 = 9007199254740992.0)\nprintln!(\"2.0 ** x + 0.0 = {:.1}\", base);\nprintln!(\"2.0 ** x + 1.0 = {:.1}\", base + 1.0);\n\nI haven’t used find before, this is an LLM donation to our knowledge base.\nBy the way, that is basically 2 ** 53 and there are 52 bits of mantissa precision."
+  },
+  {
+    "objectID": "50_754.rjs.html#on-ulps",
+    "href": "50_754.rjs.html#on-ulps",
+    "title": "IEEE 754",
+    "section": "On “Ulps”",
+    "text": "On “Ulps”\n\nWe can measure error using ULPs.\n\n\nThe gap between the two floating-point numbers nearest to x, even if x is one of )them.\n\n&gt;&gt;&gt; from numpy import float32 as f32, pi as pi, float64 as f64\n&gt;&gt;&gt; f64(pi) - f64(f32(pi))\nnp.float64(-8.742278012618954e-08)"
+  },
+  {
+    "objectID": "50_754.rjs.html#rounding",
+    "href": "50_754.rjs.html#rounding",
+    "title": "IEEE 754",
+    "section": "Rounding",
+    "text": "Rounding\n\nWe have some guarantees:\n\nIEEE 754 requires that that elementary arithmetic operations are correctly rounded to within 0.5 ulps\nTranscendental functions are generally rounded to between 0.5 and 1.0 ulps\n\nTranscendental as in \\(\\pi\\) or \\(e\\)\n\n\n~9 ulps"
+  },
+  {
+    "objectID": "50_754.rjs.html#rounding-error",
+    "href": "50_754.rjs.html#rounding-error",
+    "title": "IEEE 754",
+    "section": "Rounding Error",
+    "text": "Rounding Error\n\nInduced by approximating an infinite range of numbers into a finite number of bits\nRounding is:\n\nTowards the nearest\nTowards zero\nTowards positive infinity (round up)\nTowards negative infinity (round down)"
+  },
+  {
+    "objectID": "50_754.rjs.html#rounding-error-1",
+    "href": "50_754.rjs.html#rounding-error-1",
+    "title": "IEEE 754",
+    "section": "Rounding Error",
+    "text": "Rounding Error\n\nWhat about rounding the half-way case? (i.e. 0.5)\n\nRound Up vs. Round Even\n\nCorrect Rounding:\n\nBasic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.\nIf there is a tie, round to the number with an even mantissa"
+  },
+  {
+    "objectID": "50_754.rjs.html#implementation",
+    "href": "50_754.rjs.html#implementation",
+    "title": "IEEE 754",
+    "section": "Implementation",
+    "text": "Implementation\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\nOnly used while doing calculations\n\nNot stored in the float itself\nThe mantissa is shifted in calculations to align radix\n\nThe guard bits and round bits are extra precision\nThe sticky bit is an OR of anything that shifts through it\n\n0_00000000_00000000000000000000000_G_R_S.."
+  },
+  {
+    "objectID": "50_754.rjs.html#special-bits",
+    "href": "50_754.rjs.html#special-bits",
+    "title": "IEEE 754",
+    "section": "Special bits",
+    "text": "Special bits\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n[G][R][S]\n[0][-][-] - Round Down (do nothing)\n[1][0][0] - Round Up if the mantissa LSB is 1\n[1][0][1] - Round Up\n[1][1][0] - Round Up\n[1][1][1] - Round Up\n\n0_00000000_00000000000000000000000_G_R_S.."
+  },
+  {
+    "objectID": "50_754.rjs.html#significance-error",
+    "href": "50_754.rjs.html#significance-error",
+    "title": "IEEE 754",
+    "section": "Significance Error",
+    "text": "Significance Error\n\nCompute the Area of a Triangle\n\nHeron’s Formula:\n\n𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧\n\nKahan’sAlgorithm:\n\nSort x, y, z such that 𝑥≥𝑦 ≥𝑧\nIf 𝑧&lt; 𝑥−𝑦, then no such triangle exists.\nElse 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)\n\n\n\nSignificance Error\n/// Area of a triangle\n/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html\n/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf\nTEST(CPPCon2015, AreaOfATriangleFloat)\n{\nconst auto a = 100000.0f;\nconst auto b = 99999.99979f;\nconst auto c = 0.00029f;\nASSERT_TRUE(a &gt;= b);\nASSERT_TRUE(b &gt;= c);\nauto heronsFormula = HeronsFormula(a, b, c);\nauto kahansFormula = KahansFormula(a, b, c);\nEXPECT_NE(kahansFormula, heronsFormula);\ncppCon() &lt;&lt; \"Kahan: \" &lt;&lt; kahansFormula;\ncppCon() &lt;&lt; \"Heron: \" &lt;&lt; heronsFormula;\ncppCon() &lt;&lt; \"delta: \" &lt;&lt; kahansFormula - heronsFormula &lt;&lt; \"\\n\";\n}\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHint: The Answer is 10.0\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHeron: 9.999999809638328700000000000000\nKahan: 10.000000077021038000000000000000\ndelta: 0.000000267382709751018410000000\nSignificance Error - Use Stable Algorithms\n\nLoss of Significance\n\nKeep big numbers with big numbers, little numbers with little numbers.\n\nParentheses can help\nAnalysis of Algorithms is Critical\nThe compiler won’t re-arrange your math if it cannot prove it would yield the same\n\nresult, even if the computation would be faster\n\n𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0\nSee the “Kahan’sAlgorithm” example\n\nSignificance Error – Simulation Time\n\nTime is used to compute distance, velocity, acceleration\n\nHigh frequency phenomena\nSensors: Doppler shift, pulse compression, PRF\n\nThese computed values feed into other computed values which may or may not\n\nrequire a time component\n\nThousands of computations per frame of simulation\n\nThousands of little compounding errors per frame\n\nCombine with poor or nonexistent testing\n\nSignificance Error – Simulation Time\n\nAccumulate Time (works for arbitrary\n\ntime steps)\nauto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;\n// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }\nauto totalFrames = size_t(0);\nauto frameLength = 0.01f;\nauto simTime = 0.0f;\n// Run 120 Frames\nauto simTime120Frames = 1.20f;\ntotalFrames = 120;\nsimTime = totalFrames * frameLength;\n\nDelta Time (works for fixed time steps)\n\nSignificance Error – Simulation Time\nAccumulate Time (works for arbitrary time steps)\n\n1.199999999999999955591079014994 != 1.199999213218688964843750000000 (0.000000786781310990747329014994)\n12.000000000000000000000000000000 != 12.000179290771484375000000000000 (- 0.000179290771484375000000000000)\n120.000000000000000000000000000000 != 120.007225036621093750000000000000 (- 0.007225036621093750000000000000)\n600.000000000000000000000000000000 != 600.274414062500000000000000000000 (- 0.274414062500000000000000000000)\n3600.000000000000000000000000000000 != 3603.204101562500000000000000000000 (- 3.204101562500000000000000000000)\n\nDelta Time (works for fixed time steps)\n\n1.200000047683715820312500000000 != 1.199999928474426269531250000000 (0.000000119209289550781250000000)\n12.000000000000000000000000000000 == 12.000000000000000000000000000000 (0.000000000000000000000000000000)\n120.000000000000000000000000000000 == 120.000000000000000000000000000000 (0.000000000000000000000000000000)\n600.000000000000000000000000000000 == 600.000000000000000000000000000000 (0.000000000000000000000000000000)\n-3600.000000000000000000000000000000 == 3600.000000000000000000000000000000 (0.000000000000000000000000000000)\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\n0.012345000170171261000000000000 !=\n0.0148140005767345430\n(-0.002469000406563282000000000000)\n12.345000267028809000000000000000 !=\n11.701118469238281000000000000000\n(0.643881797790527340000000000000)\nSignificance Error – Don’t use IEEE Floats?\n\nUse integers\n\nVery fast\nTrade more precision for less range\nOnly input/output may be impacted by floating point conversions\nFinancial applications represent dollars as only cents or tenth’s of cents\n\nUse a math library\n\nSlower\nDefine your own level of accuracy\nMPFR (w/C++ Wrapper), TTMath, Boost, GMP C++\nCRlibm(Correctly Rounded Mathematical Library)\n\n\n(Store simTimeas uint64_tand get microsecond precision for 584555 years.)\nAlgebraic Assumption Error\n\nMathematical Identities\n\nTraditional identities (associative, commutative, distributive) do not hold\n\nDistributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\nCannot interchange division and multiplication:\n\n𝑥\n10. 0\n≠ 𝑥 × 0. 1\nDoes a naïve compiler make these assumptions too?\nhttps://msdn.microsoft.com/library/aa289157.aspx\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nControl: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000\nFloating Point Exceptions\n\nEnable floating point exceptions to be alerted when things go awry.\n\n𝑥is the exact result of the operation\nα= 192 for single precision, 1536 for double\n𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.\nSee &lt;cfenv&gt; -Floating Point Environment\nIEEE 754 Exception Result when traps disabled Argument to trap handler\noverflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)\nunderflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)\ndivide by zero ±∞ invalid operation\ninvalid NaN invalid operation\ninexact round( x ) round( x )\nBut Wait! There’s More!\n\nBinary to Decimal Conversion Error\nSummation Error\nPropagation Error\nUnderflow, Overflow\nType Narrowing/Widening Rules\n\nMiscellaneous Notes\nhttp://preshing.com/images/float-point-perf.png https://github.com/DigitalInBlue/CPPCon2015\nUse Your Compiler’s Output\n\nwarning C4244: ‘initializing’ : conversion from ‘double’ to\n\n‘float’, possible loss of data\n\nwarning C4056: overflow in floating point constant arithmetic\nwarning C4305: ‘identifier’ : truncation from ‘type1’ to\n\n‘type2’\n\nwarning: conversion to ‘float’ from ‘int’ may alter its value\nwarning: floating constant exceeds range of ‘double’\n\nFused Multiply-Add (FMA)\n\na = a + (b * c); a += b * c;\nMultiplier-accumulator (MAC Unit)\nOne rounding\nCompiler Options\n\nGCC = -mfma\nVC++ = #pragma fp_contract (off)\n\nReference: FMA3, FMA4\n\nhttp://en.wikipedia.org/wiki/FMA_instruction_set\n\n\nStreaming SIMD Extensions (SSE)\n\nSSE can provide significant performance gains\n\nSupports integer, floating point, logical, conversion, shift, and shuffle operations\n\nC, C++, Fortran do not natively support SSE, but compiler-specific support exists\n\nFloat Tricks\n/// Fast reciprocal square root approximation for x &gt; 0.25\n/// Quake’s float Q_rsqrt(float number) is much more entertaining.\ninline float FastInvSqrt(float x)\n{\nint tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&x) &gt;&gt; 1;\nauto y = *(float*)&tmp;\nreturn y * (1.47f – 0.47f * x * y * y);\n}\nTesting\n\nDesign for Numerical Stability\nPerform Meaningful Testing\nDocument assumptions\nTrack sources of approximation\nQuantify goodness\n\nWell conditioned algorithms\n\nBackward error analysis\n\nAre the outputs identical for slightly modified inputs?\n\n\nTEST(CPPCon2015, pointOnePlusPointTwo)\n{\nauto zeroPointOne = 0.1f;\nauto zeroPointTwo = 0.2f;\nauto zeroPointThree = 0.3f;\nauto sum = zeroPointOne + zeroPointTwo;\nEXPECT_DOUBLE_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, sum);\nEXPECT_EQ(zeroPointThree, sum);\nEXPECT_DOUBLE_EQ(zeroPointThree, sum);\n}\nhttp://xkcd.com/217/ http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi\nhttps://github.com/DigitalInBlue/CPPCon2015"
   },
   {
     "objectID": "50_754.html",
@@ -6613,7 +6823,7 @@
     "href": "50_754.html#mission-statement",
     "title": "IEEE 754",
     "section": "Mission Statement",
-    "text": "Mission Statement\n\nI’m a normal person.\n\nI think 5/2 is 2.5.\n\nI’m a scientist.\n\nI’m solving “Black-Scholes”\nDoes anyone know what this is doing? \\[\nd_2 = d_1 - \\sigma\\sqrt{T - t} = \\frac{1}{\\sigma\\sqrt{T - t}}\\left[\\ln\\left(\\frac{S_t}{K}\\right) + \\left(r - q - \\frac{1}{2}\\sigma^2\\right)(T - t)\\right]\n\\]",
+    "text": "Mission Statement\n\nI’m a normal person.\n\nI think 5/2 is 2.5 or perhaps 2½.\n\nI’m a scientist.\n\nI’m solving “Black-Scholes”\nDoes anyone know what this is doing? \\[\nd_2 = d_1 - \\sigma\\sqrt{T - t} = \\frac{1}{\\sigma\\sqrt{T - t}}\\left[\\ln\\left(\\frac{S_t}{K}\\right) + \\left(r - q - \\frac{1}{2}\\sigma^2\\right)(T - t)\\right]\n\\]",
     "crumbs": [
       "IEEE 754"
     ]
@@ -6663,7 +6873,7 @@
     "href": "50_754.html#assurances",
     "title": "IEEE 754",
     "section": "Assurances",
-    "text": "Assurances\n\nEnsure some significant mathematical identities hold true:\n\n\\(x + y  = y + x\\)\n\nSymmetry of addition\n\n\\(x + 0 = x\\)\n\nAdditive identity\n\n\\(x = y \\implies x - y = 0\\)\n\nIdentify under subtraction",
+    "text": "Assurances\n\nEnsure some significant mathematical identities hold true:\n\n\\(x + y  = y + x\\)\n\nSymmetry of addition\n\n\\(x + 0 = x\\)\n\nAdditive identity\n\n\\(x = y \\implies x - y = 0\\)\n\nIdentity under subtraction",
     "crumbs": [
       "IEEE 754"
     ]
@@ -6673,7 +6883,7 @@
     "href": "50_754.html#assurances-2.0",
     "title": "IEEE 754",
     "section": "Assurances 2.0",
-    "text": "Assurances 2.0\n$$\\frac{x}{\\sqrt{x^2+y^2}} \\leq 1$$\n\nWhat is missing?",
+    "text": "Assurances 2.0\n\\[\n\\frac{x}{\\sqrt{x^2+y^2}} \\leq 1\n\\]\n\nWhat is missing?",
     "crumbs": [
       "IEEE 754"
     ]
@@ -6769,11 +6979,311 @@
     ]
   },
   {
+    "objectID": "50_754.html#special-floats---nan",
+    "href": "50_754.html#special-floats---nan",
+    "title": "IEEE 754",
+    "section": "Special Floats - NaN",
+    "text": "Special Floats - NaN\n\nDivide by Zero\n\n1 / 0\n\nNot a Number (NaN)\n\n&gt;&gt;&gt; from numpy import float32 as f32\n&gt;&gt;&gt; f32(1)/f32(0)\n&lt;stdin&gt;:1: RuntimeWarning: divide by zero encountered in scalar divide\nnp.float32(inf)\n&gt;&gt;&gt; 1/0\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nZeroDivisionError: division by zero",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#special-floats---inf",
+    "href": "50_754.html#special-floats---inf",
+    "title": "IEEE 754",
+    "section": "Special Floats - inf",
+    "text": "Special Floats - inf\n\nSigned Infinity\n\nOverflow protection\n\n&gt;&gt;&gt; f32(10) ** f32(100)\n&lt;stdin&gt;:1: RuntimeWarning: overflow encountered in scalar power\nnp.float32(inf)\n&gt;&gt;&gt; 10.0 ** 10000\nTraceback (most recent call last):\nFile \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nOverflowError: (34, 'Numerical result out of range')",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#infinity-is-signed",
+    "href": "50_754.html#infinity-is-signed",
+    "title": "IEEE 754",
+    "section": "Infinity is signed",
+    "text": "Infinity is signed\n\nWe can get negative infinity through a variety of means.\n\n&gt;&gt;&gt; -(f32(10) ** f32(100))\nnp.float32(-inf)\n\nWe note that this suppresses the overflow error use ()\nIn some languages this is not ever regarded as an overflow error, like Julia (where we have to use larger powers due to the f64 default)\n\njulia&gt; 10.0^10000\nInf\n\njulia&gt; -(10.0^10000)\n-Inf",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#signed-zero",
+    "href": "50_754.html#signed-zero",
+    "title": "IEEE 754",
+    "section": "Signed Zero",
+    "text": "Signed Zero\n\nSigned Zero\n\nUnderflow protection, preserves sign\n\n0 =− 0\n\n\n&gt;&gt;&gt; -1 / 10 ** 1000\n-0.0\n&gt;&gt;&gt; 0.0 == (-1 / 10 ** 1000)\nTrue\n&gt;&gt;&gt; -0.0\n-0.0\n&gt;&gt;&gt; 0.0 - 0.0\n0.0\nWorks in base Python (e.g. don’t need NumPy).\nCouldn’t get it to work in Julia actually (went to -inf or NaN)",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
     "objectID": "50_754.html#simple-example",
     "href": "50_754.html#simple-example",
     "title": "IEEE 754",
     "section": "Simple Example",
-    "text": "Simple Example\n\nzeroPointOne == 0.\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\nzeroPointOne == 0. Simple Example\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\nzeroPointOne == 0.\nzeroPointTwo == 0.\nzeroPointThree == 0.\nsum == 0.\n\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][00000000][ 00000000000000000000000 ]\nStorage of 1.\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][01111111][00000000000000000000000]\nStorage of 1.\n\nThe exponent is shift- 127 encoded\n0xeeeeeeee - 127\n\n\n\n\n− 1\n𝑠𝑖𝑔𝑛𝐵𝑖𝑡\n× 𝑏𝑎𝑠𝑒\n𝑒𝑥𝑝𝑜𝑛𝑒𝑛𝑡\n× 1. 𝑚𝑎𝑛𝑡𝑖𝑠𝑠𝑎\n− 1\n0\n× 2\n0\n× 1. 0\n[0][01111111][00000000000000000000000]\nStorage of 1.\n\n\n\n[0][01111111][00000000000000000000000]\nStorage of 1.0\n1.0000000000000000\n[0][01111111][00000000000000000000000]\n[0][01111111][00000000000000000000001]\n1.0000001192092896\n“Epsilon”\n\nThe difference between 1.0 and the next available floating point number\nUseful for programmatic “almost equal” computations\nstd::numeric_limits::epsilon\n\nSignificant Digits\n\nSignificant digits measure precision\n\nRemember the “exponent” field\nThey are not a magnitude\n\nHow close is close enough?\n\nDefine as significant digits, not absolute error\n\n\nSign ExponentMantissa TotalExponent bias Bits precision Significant Digits\nHalf(IEEE 754-2008) 1 5 10 16 15 11 3 - 4\nSingle 1 8 23 32 127 24 6 - 9\nDouble 1 11 52 64 1023 53 15 - 17\nx86 extended precision 1 15 64 80 16383 64 18 - 21\nQuad 1 15 112 128 16383 113 33 - 36\nhttp://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF\nStorage of the Very Small\n\nFor 32-bit floats, the minimum base 10 exponent is -36.\nHow is 1. 0 𝑒−^37 represented?\n\n1.0e- 37\n[0][00000000][11011001110001111101110]\n0.09999999e- 37\n“Denormalized Number”\n\nNumbers that have a zero exponent\nRequired when the exponent is below the minimum exponent\nHelps prevent underflow\n\n1.0e- 37\n[0][00000000][11011001110001111101110]\n0.09999999e- 37\nFloating Point Precision\n\nRepresentation is not uniform between numbers\nMost precision lies between 0.0 and 0.1\nPrecision falls away\nstd::nextafter\n\nFloating Point Precision\nhttp://blogs.msdn.com/b/dwayneneed/archive/2010/05/07/fun-with-floating-point.aspx\nFloating Point Precision\nThe number of floats from 0.0\n\n…to 0.1 = 1,036,831,949\n…to 0.2 = 8,388,608\n… to 0.4 = 8,388,608\n… to 0.8 = 8,388,608\n… to 1.6 = 8,388,608\n… to 3.2 = 8,388,608\n\nErrors in Floating Point\nhttps://github.com/DigitalInBlue/CPPCon2015\nStorage of π\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\nMeasuring Error: “Ulps”\n\nUnits in Last Place\n\n“Harrison” and “Goldberg” definitions\n(6-8 definitions floating around)\n\n“The gap between the two floating-point numbers\n\nnearest to x, even if x is one of them.” –W. Kahan\n\nhttps://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT\nIEEE 754 requires that that elementary arithmetic\n\noperations are correctly rounded to within 0. 5 ulps\n\nTranscendental functions are generally rounded to\n\nbetween 0. 5 and 1. 0 ulps\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\n9 ulps\nMeasuring Error: “Relative Error”\n\nThe difference between the “real” number and the\n\napproximated number, divided by the “real” number.\nπ = 3.14159265\nπf= 3.14159274\nΔ = 0.00000009\n9 ulps\n2.864789e- 8 β\n𝜋 − (𝜋𝑓)\n𝜋\n= 2. 864789 𝑒\n− 8\nRounding Error\n\nInduced by approximating an infinite range of numbers into a finite number of bits\nMath is done exactly, then rounded*\n\nTowards the nearest\nTowards Zero\nTowards positive infinity (round up)\nTowards negative infinity (round down)\n\n\n*Look up “exactly rounded” as well\nRounding Error\n\nWhat about rounding the half-way case? (i.e. 0.5)\n\nRound Up vs. Round Even\n\nCorrect Rounding:\n\nBasic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.\nIf there is a tie, round to the number with an even mantissa\n\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n\nOnly used while doing calculations\n\nNot stored in the float itself\nThe mantissa is shifted in calculations to align radix\n\nThe guard bits and round bits are extra precision\nThe sticky bit is an OR of anything that shifts through it\n\n[0][00000000][00000000000000000000000][G][R][S…]\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n[G][R][S]\n[0][-][-] - Round Down (do nothing)\n[1][0][0] - Round Up if the mantissa LSB is 1\n[1][0][1] - Round Up\n[1][1][0] - Round Up\n[1][1][1] - Round Up\n[0][00000000][00000000000000000000000][G][R][S…]\nSignificance Error\n\nCompute the Area of a Triangle\n\nHeron’s Formula:\n\n𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧\n\nKahan’sAlgorithm:\n\nSort x, y, z such that 𝑥≥𝑦 ≥𝑧\nIf 𝑧&lt; 𝑥−𝑦, then no such triangle exists.\nElse 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)\n\n\n\nSignificance Error\n/// Area of a triangle\n/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html\n/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf\nTEST(CPPCon2015, AreaOfATriangleFloat)\n{\nconst auto a = 100000.0f;\nconst auto b = 99999.99979f;\nconst auto c = 0.00029f;\nASSERT_TRUE(a &gt;= b);\nASSERT_TRUE(b &gt;= c);\nauto heronsFormula = HeronsFormula(a, b, c);\nauto kahansFormula = KahansFormula(a, b, c);\nEXPECT_NE(kahansFormula, heronsFormula);\ncppCon() &lt;&lt; \"Kahan: \" &lt;&lt; kahansFormula;\ncppCon() &lt;&lt; \"Heron: \" &lt;&lt; heronsFormula;\ncppCon() &lt;&lt; \"delta: \" &lt;&lt; kahansFormula - heronsFormula &lt;&lt; \"\\n\";\n}\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHint: The Answer is 10.0\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHeron: 9.999999809638328700000000000000\nKahan: 10.000000077021038000000000000000\ndelta: 0.000000267382709751018410000000\nSignificance Error - Use Stable Algorithms\n\nLoss of Significance\n\nKeep big numbers with big numbers, little numbers with little numbers.\n\nParentheses can help\nAnalysis of Algorithms is Critical\nThe compiler won’t re-arrange your math if it cannot prove it would yield the same\n\nresult, even if the computation would be faster\n\n𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0\nSee the “Kahan’sAlgorithm” example\n\nSignificance Error – Simulation Time\n\nTime is used to compute distance, velocity, acceleration\n\nHigh frequency phenomena\nSensors: Doppler shift, pulse compression, PRF\n\nThese computed values feed into other computed values which may or may not\n\nrequire a time component\n\nThousands of computations per frame of simulation\n\nThousands of little compounding errors per frame\n\nCombine with poor or nonexistent testing\n\nSignificance Error – Simulation Time\n\nAccumulate Time (works for arbitrary\n\ntime steps)\nauto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;\n// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }\nauto totalFrames = size_t(0);\nauto frameLength = 0.01f;\nauto simTime = 0.0f;\n// Run 120 Frames\nauto simTime120Frames = 1.20f;\ntotalFrames = 120;\nsimTime = totalFrames * frameLength;\n\nDelta Time (works for fixed time steps)\n\nSignificance Error – Simulation Time\nAccumulate Time (works for arbitrary time steps)\n\n1.199999999999999955591079014994 != 1.199999213218688964843750000000 (0.000000786781310990747329014994)\n12.000000000000000000000000000000 != 12.000179290771484375000000000000 (- 0.000179290771484375000000000000)\n120.000000000000000000000000000000 != 120.007225036621093750000000000000 (- 0.007225036621093750000000000000)\n600.000000000000000000000000000000 != 600.274414062500000000000000000000 (- 0.274414062500000000000000000000)\n3600.000000000000000000000000000000 != 3603.204101562500000000000000000000 (- 3.204101562500000000000000000000)\n\nDelta Time (works for fixed time steps)\n\n1.200000047683715820312500000000 != 1.199999928474426269531250000000 (0.000000119209289550781250000000)\n12.000000000000000000000000000000 == 12.000000000000000000000000000000 (0.000000000000000000000000000000)\n120.000000000000000000000000000000 == 120.000000000000000000000000000000 (0.000000000000000000000000000000)\n600.000000000000000000000000000000 == 600.000000000000000000000000000000 (0.000000000000000000000000000000)\n-3600.000000000000000000000000000000 == 3600.000000000000000000000000000000 (0.000000000000000000000000000000)\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\n\n0.012345000170171261000000000000 !=\n\n\n0.0148140005767345430\n\n\n(-0.002469000406563282000000000000)\n\n\n12.345000267028809000000000000000 !=\n\n\n11.701118469238281000000000000000\n\n\n(0.643881797790527340000000000000)\nSignificance Error – Don’t use IEEE Floats?\n\nUse integers\n\nVery fast\nTrade more precision for less range\nOnly input/output may be impacted by floating point conversions\nFinancial applications represent dollars as only cents or tenth’s of cents\n\nUse a math library\n\nSlower\nDefine your own level of accuracy\nMPFR (w/C++ Wrapper), TTMath, Boost, GMP C++\nCRlibm(Correctly Rounded Mathematical Library)\n\n\n(Store simTimeas uint64_tand get microsecond precision for 584555 years.)\nAlgebraic Assumption Error\n\nMathematical Identities\n\nTraditional identities (associative, commutative, distributive) do not hold\n\nDistributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\nCannot interchange division and multiplication:\n\n\n\n𝑥\n\n\n10. 0\n≠ 𝑥 × 0. 1\nDoes a naïve compiler make these assumptions too?\nhttps://msdn.microsoft.com/library/aa289157.aspx\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nControl: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000\nFloating Point Exceptions\n\nEnable floating point exceptions to be alerted when things go awry.\n\n𝑥is the exact result of the operation\nα= 192 for single precision, 1536 for double\n𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.\nSee &lt;cfenv&gt; -Floating Point Environment\nIEEE 754 Exception Result when traps disabled Argument to trap handler\noverflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)\nunderflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)\ndivide by zero ±∞ invalid operation\ninvalid NaN invalid operation\ninexact round( x ) round( x )\nBut Wait! There’s More!\n\nBinary to Decimal Conversion Error\nSummation Error\nPropagation Error\nUnderflow, Overflow\nType Narrowing/Widening Rules\n\nMiscellaneous Notes\nhttp://preshing.com/images/float-point-perf.png https://github.com/DigitalInBlue/CPPCon2015\nUse Your Compiler’s Output\n\nwarning C4244: ‘initializing’ : conversion from ‘double’ to\n\n‘float’, possible loss of data\n\nwarning C4056: overflow in floating point constant arithmetic\nwarning C4305: ‘identifier’ : truncation from ‘type1’ to\n\n‘type2’\n\nwarning: conversion to ‘float’ from ‘int’ may alter its value\nwarning: floating constant exceeds range of ‘double’\n\nFused Multiply-Add (FMA)\n\na = a + (b * c); a += b * c;\nMultiplier-accumulator (MAC Unit)\nOne rounding\nCompiler Options\n\nGCC = -mfma\nVC++ = #pragma fp_contract (off)\n\nReference: FMA3, FMA4\n\nhttp://en.wikipedia.org/wiki/FMA_instruction_set\n\n\nStreaming SIMD Extensions (SSE)\n\nSSE can provide significant performance gains\n\nSupports integer, floating point, logical, conversion, shift, and shuffle operations\n\nC, C++, Fortran do not natively support SSE, but compiler-specific support exists\n\nFloat Tricks\n/// Fast reciprocal square root approximation for x &gt; 0.25\n/// Quake’s float Q_rsqrt(float number) is much more entertaining.\ninline float FastInvSqrt(float x)\n{\nint tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&x) &gt;&gt; 1;\nauto y = *(float*)&tmp;\nreturn y * (1.47f – 0.47f * x * y * y);\n}\nTesting\n\nDesign for Numerical Stability\nPerform Meaningful Testing\nDocument assumptions\nTrack sources of approximation\nQuantify goodness\n\nWell conditioned algorithms\n\nBackward error analysis\n\nAre the outputs identical for slightly modified inputs?\n\n\nTEST(CPPCon2015, pointOnePlusPointTwo)\n{\nauto zeroPointOne = 0.1f;\nauto zeroPointTwo = 0.2f;\nauto zeroPointThree = 0.3f;\nauto sum = zeroPointOne + zeroPointTwo;\nEXPECT_DOUBLE_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, sum);\nEXPECT_EQ(zeroPointThree, sum);\nEXPECT_DOUBLE_EQ(zeroPointThree, sum);\n}\nhttp://xkcd.com/217/ http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi\nhttps://github.com/DigitalInBlue/CPPCon2015",
+    "text": "Simple Example\n\nFloating point is great because it will work exactly how you expect.\n\n&gt;&gt;&gt; 0.1 + 0.2 == 0.3\nFalse\n\nMore or less.\n\n&gt;&gt;&gt; 0.1 + 0.2\n0.30000000000000004",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#simple-example-1",
+    "href": "50_754.html#simple-example-1",
+    "title": "IEEE 754",
+    "section": "Simple Example",
+    "text": "Simple Example\n\nWe shouldn’t be suprised by this!\n\n&gt;&gt;&gt; _ = [print(f\"{f32(i/10):1.100}\") for i in range(1,4)]\n0.100000001490116119384765625\n0.20000000298023223876953125\n0.300000011920928955078125\n&gt;&gt;&gt; _ = [print(f\"{f64(i/10):1.100}\") for i in range(1,4)]\n0.1000000000000000055511151231257827021181583404541015625\n0.200000000000000011102230246251565404236316680908203125\n0.299999999999999988897769753748434595763683319091796875",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#storage-of-1.",
+    "href": "50_754.html#storage-of-1.",
+    "title": "IEEE 754",
+    "section": "Storage of 1.",
+    "text": "Storage of 1.\n\n\\(x = -1^s \\times 2^e \\times 1.m\\)\n\\(x = -1^{\\text{sign bit}} \\times \\text{base} 2^{\\text{exponent}} \\times 1.\\text{mantissa}\\)\n\\(x = -1^{\\text{sign bit}} \\times \\text{base} 2^{\\text{exponent}} \\times 1 + \\text{mantissa} \\times \\frac{1}{2^n}\\)\n\\(1 = -1^0 \\times 2^0 \\times (1 + 0 \\times \\frac{1}{2^n}\\)\nSo each of the sign bit, the base, and the mantissa are zero.\n\nI should note I was unable to reproduce this in Rust or C.\nI’m not really a floating pointer.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#except",
+    "href": "50_754.html#except",
+    "title": "IEEE 754",
+    "section": "Except…",
+    "text": "Except…\n\nThis is actually a little bit fake.\n\n$ cat src/main.rs\nfn main() {\n    let x:f32 = 1.0;\n    println!(\"{:032b}\", x.to_bits());\n}\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/bits`\n00111111100000000000000000000000\n\nWhat is that?",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#shift-127",
+    "href": "50_754.html#shift-127",
+    "title": "IEEE 754",
+    "section": "Shift 127",
+    "text": "Shift 127\n\nWhile the exponent can be positive or negative, in binary formats it is stored as an unsigned number that has a fixed “bias” added to it.\n\n\nThe IEEE 754 binary format specifies a hardware implementation of such that the exponent, be it positive or negative, in binary formats is stored as an unsigned number that has a fixed “bias” added to it.\nIn the case of 32 bit floats, the bias is 127.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#breakdown",
+    "href": "50_754.html#breakdown",
+    "title": "IEEE 754",
+    "section": "Breakdown",
+    "text": "Breakdown\n\nTake the following:\n\n00111111100000000000000000000000\n\nThat is:\n\nSign bit of 0\nExponent of 01111111\n\nAll zeroes and all ones are reserved for NaN, inf, etc.\n\nMantissa of 23 zeroes.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#how-precise",
+    "href": "50_754.html#how-precise",
+    "title": "IEEE 754",
+    "section": "How precise?",
+    "text": "How precise?\n\nI have referred to f32 as having “32 bits of precision”.\nHow much precision is that?\nWell, let’s set the least significant bit of the mantissa to one.\n\n\n\nmain.rs\n\nfn main() {\n    let x:f32 = 1.0;\n    let mut b:u32 = x.to_bits();\n    b |= 1;\n    println!(\"{:032b}\", b);\n    println!(\"{:1.32}\", f32::from_bits(b));\n}",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#epsilon",
+    "href": "50_754.html#epsilon",
+    "title": "IEEE 754",
+    "section": "“Epsilon”",
+    "text": "“Epsilon”\n\nWhat do we get?\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/bits`\n00111111100000000000000000000001\n1.00000011920928955078125000000000\n\nWe refer to this value (less one) as machine epsilon, or perhaps \\(\\varepsilon\\).\nThe difference between 1.0 and the next available floating point number.\nMuch lower, of course, with double and quad precision.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#easier-sig-figs",
+    "href": "50_754.html#easier-sig-figs",
+    "title": "IEEE 754",
+    "section": "Easier: “Sig figs”",
+    "text": "Easier: “Sig figs”\n\n\n\nFormat\nSign\nExp.\nMant.\nBits\nBias\nPrec.\nSignificance\n\n\n\n\nHalf\n1\n5\n10\n16\n15\n11\n3-4\n\n\nSingle\n1\n8\n23\n32\n127\n24\n6-9\n\n\nDouble\n1\n11\n52\n64\n1023\n53\n15-17\n\n\nQuad\n1\n15\n112\n128\n16383\n113\n33-36\n\n\n\n\nProf. Kahan, UCB EECS",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#sig-figs",
+    "href": "50_754.html#sig-figs",
+    "title": "IEEE 754",
+    "section": "Sig figs",
+    "text": "Sig figs\n\nIEEE 754 was intended for scientific computing\nThat is, not systems computing, software etc.\nUseful to us to think about information and how bits work.\n\n\nSignificant figures, also referred to as significant digits, are specific digits within a number that is written in positional notation that carry both reliability and necessity in conveying a particular quantity.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#small-values",
+    "href": "50_754.html#small-values",
+    "title": "IEEE 754",
+    "section": "Small Values",
+    "text": "Small Values\n\nFor 32-bit floats, the minimum base 10 exponent is -36.\nHow is \\(1.0 \\times 10^{-37}\\) represented?\n\n// In Rust, we may use '0b' prefix for binary representation.\n// In Rust, we may us underscores within numerical values.\n0b0_00000000_11011001110001111101110",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#test-it",
+    "href": "50_754.html#test-it",
+    "title": "IEEE 754",
+    "section": "Test it",
+    "text": "Test it\n\nWrite a simple test…\n\n\n\nsrc/main.rs\n\nfn main() {\n    let b:u32 = 0b0_00000000_11011001110001111101110;\n    println!(\"{:032b}\", b);\n    println!(\"{:1.100}\", f32::from_bits(b));\n    let x:f32 = 10.0_f32.powf(-38.0_f32);\n    println!(\"{:032b}\", x.to_bits());\n    println!(\"{:1.100}\", x);\n}\n\n\nResults are as expected.\n\n00000000011011001110001111101110\n0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175\n00000000011011001110001111101110\n0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#denormalized-number",
+    "href": "50_754.html#denormalized-number",
+    "title": "IEEE 754",
+    "section": "“Denormalized Number”",
+    "text": "“Denormalized Number”\n\nNumbers that have a zero exponent\nRequired when the exponent is below the minimum exponent\nHelps prevent underflow\nGenerally speaking, if you are using one these, the math is about to get wronger than you’d think.\nThe good (???) language C++ provides a std::nextafter for which Rust crates exist.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#floating-point-precision",
+    "href": "50_754.html#floating-point-precision",
+    "title": "IEEE 754",
+    "section": "Floating Point Precision",
+    "text": "Floating Point Precision\n\nRepresentation is not uniform between numbers\nMost precision lies between 0.0 and 0.1\nPrecision falls away",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#visually",
+    "href": "50_754.html#visually",
+    "title": "IEEE 754",
+    "section": "Visually",
+    "text": "Visually\n\n\nFun with floating point, Dwayne Need",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#floating-point-precision-1",
+    "href": "50_754.html#floating-point-precision-1",
+    "title": "IEEE 754",
+    "section": "Floating Point Precision",
+    "text": "Floating Point Precision\nThe number of floats from 0.0\n\n… to 0.1 = 1,036,831,949\n… to 0.2 = 8,388,608\n… to 0.4 = 8,388,608\n… to 0.8 = 8,388,608\n… to 1.6 = 8,388,608\n… to 3.2 = 8,388,608",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#errors-in-floating-point",
+    "href": "50_754.html#errors-in-floating-point",
+    "title": "IEEE 754",
+    "section": "Errors in Floating Point",
+    "text": "Errors in Floating Point\n\nStorage of \\(\\pi\\)\n\n&gt;&gt;&gt; from numpy import pi as pi\n&gt;&gt;&gt; # copy paste Wolfram|Alpha\n&gt;&gt;&gt; '3.14159265358979323846264338327950288419716939937510582097494459230781640628'\n'3.14159265358979323846264338327950288419716939937510582097494459230781640628'\n&gt;&gt;&gt; f'{pi:1.100}'\n'3.141592653589793115997963468544185161590576171875'\n\nThey differ fairly early on!",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#measuring-error-ulps",
+    "href": "50_754.html#measuring-error-ulps",
+    "title": "IEEE 754",
+    "section": "Measuring Error: “Ulps”",
+    "text": "Measuring Error: “Ulps”\n\nUnits in Last Place\n\n\nIn computer science and numerical analysis, unit in the last place or unit of least precision (ulp) is the spacing between two consecutive floating-point numbers, i.e., the value the least significant digit (rightmost digit) represents if it is 1. It is used as a measure of accuracy in numeric calculations.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#generators",
+    "href": "50_754.html#generators",
+    "title": "IEEE 754",
+    "section": "Generators",
+    "text": "Generators\n\nBy convention we check number theoretic results with lazily evaluated generator expressions in Python.\nThe following generators all powers of two for a which adding one does not change the value within Python floating points.\n\nfrom itertools import count\n\ngen = (i for i in count() if 2.0 ** float(i) + 1.0 == 2.0 ** float(i))\n\nx = next(gen)\n\nprint('2.0 ** x + 0.0 = ', 2.0 ** x + 0.0)\nprint('2.0 ** x + 1.0 = ', 2.0 ** x + 1.0)",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#iterators",
+    "href": "50_754.html#iterators",
+    "title": "IEEE 754",
+    "section": "Iterators",
+    "text": "Iterators\n\nRust doesn’t require iterators, supporting the infinite iterator by default using unwrap.\n\nlet x = (0..).find(|&i| f64::powi(2.0, i) + 1.0 == f64::powi(2.0, i)).unwrap();\n\nlet base = f64::powi(2.0, x);\n\n// Prints the result (2^53 = 9007199254740992.0)\nprintln!(\"2.0 ** x + 0.0 = {:.1}\", base);\nprintln!(\"2.0 ** x + 1.0 = {:.1}\", base + 1.0);\n\nI haven’t used find before, this is an LLM donation to our knowledge base.\nBy the way, that is basically 2 ** 53 and there are 52 bits of mantissa precision.",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#on-ulps",
+    "href": "50_754.html#on-ulps",
+    "title": "IEEE 754",
+    "section": "On “Ulps”",
+    "text": "On “Ulps”\n\nWe can measure error using ULPs.\n\n\nThe gap between the two floating-point numbers nearest to x, even if x is one of )them.\n\n&gt;&gt;&gt; from numpy import float32 as f32, pi as pi, float64 as f64\n&gt;&gt;&gt; f64(pi) - f64(f32(pi))\nnp.float64(-8.742278012618954e-08)",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#rounding",
+    "href": "50_754.html#rounding",
+    "title": "IEEE 754",
+    "section": "Rounding",
+    "text": "Rounding\n\nWe have some guarantees:\n\nIEEE 754 requires that that elementary arithmetic operations are correctly rounded to within 0.5 ulps\nTranscendental functions are generally rounded to between 0.5 and 1.0 ulps\n\nTranscendental as in \\(\\pi\\) or \\(e\\)\n\n\n~9 ulps",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#rounding-error",
+    "href": "50_754.html#rounding-error",
+    "title": "IEEE 754",
+    "section": "Rounding Error",
+    "text": "Rounding Error\n\nInduced by approximating an infinite range of numbers into a finite number of bits\nRounding is:\n\nTowards the nearest\nTowards zero\nTowards positive infinity (round up)\nTowards negative infinity (round down)",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#rounding-error-1",
+    "href": "50_754.html#rounding-error-1",
+    "title": "IEEE 754",
+    "section": "Rounding Error",
+    "text": "Rounding Error\n\nWhat about rounding the half-way case? (i.e. 0.5)\n\nRound Up vs. Round Even\n\nCorrect Rounding:\n\nBasic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the mathematical result.\nIf there is a tie, round to the number with an even mantissa",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#implementation",
+    "href": "50_754.html#implementation",
+    "title": "IEEE 754",
+    "section": "Implementation",
+    "text": "Implementation\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\nOnly used while doing calculations\n\nNot stored in the float itself\nThe mantissa is shifted in calculations to align radix\n\nThe guard bits and round bits are extra precision\nThe sticky bit is an OR of anything that shifts through it\n\n0_00000000_00000000000000000000000_G_R_S..",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#special-bits",
+    "href": "50_754.html#special-bits",
+    "title": "IEEE 754",
+    "section": "Special bits",
+    "text": "Special bits\n\n“Guard Bit”, “Round Bit”, “Sticky Bit”\n[G][R][S]\n[0][-][-] - Round Down (do nothing)\n[1][0][0] - Round Up if the mantissa LSB is 1\n[1][0][1] - Round Up\n[1][1][0] - Round Up\n[1][1][1] - Round Up\n\n0_00000000_00000000000000000000000_G_R_S..",
+    "crumbs": [
+      "IEEE 754"
+    ]
+  },
+  {
+    "objectID": "50_754.html#significance-error",
+    "href": "50_754.html#significance-error",
+    "title": "IEEE 754",
+    "section": "Significance Error",
+    "text": "Significance Error\n\nCompute the Area of a Triangle\n\nHeron’s Formula:\n\n𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧\n\nKahan’sAlgorithm:\n\nSort x, y, z such that 𝑥≥𝑦 ≥𝑧\nIf 𝑧&lt; 𝑥−𝑦, then no such triangle exists.\nElse 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)\n\n\n\nSignificance Error\n/// Area of a triangle\n/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html\n/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf\nTEST(CPPCon2015, AreaOfATriangleFloat)\n{\nconst auto a = 100000.0f;\nconst auto b = 99999.99979f;\nconst auto c = 0.00029f;\nASSERT_TRUE(a &gt;= b);\nASSERT_TRUE(b &gt;= c);\nauto heronsFormula = HeronsFormula(a, b, c);\nauto kahansFormula = KahansFormula(a, b, c);\nEXPECT_NE(kahansFormula, heronsFormula);\ncppCon() &lt;&lt; \"Kahan: \" &lt;&lt; kahansFormula;\ncppCon() &lt;&lt; \"Heron: \" &lt;&lt; heronsFormula;\ncppCon() &lt;&lt; \"delta: \" &lt;&lt; kahansFormula - heronsFormula &lt;&lt; \"\\n\";\n}\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHint: The Answer is 10.0\nSignificance Error\nHeron: 0.000000000000000000000000000000\nKahan: 14.500000000000000000000000000000\ndelta: 14.500000000000000000000000000000\nHeron: 9.999999809638328700000000000000\nKahan: 10.000000077021038000000000000000\ndelta: 0.000000267382709751018410000000\nSignificance Error - Use Stable Algorithms\n\nLoss of Significance\n\nKeep big numbers with big numbers, little numbers with little numbers.\n\nParentheses can help\nAnalysis of Algorithms is Critical\nThe compiler won’t re-arrange your math if it cannot prove it would yield the same\n\nresult, even if the computation would be faster\n\n𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0\nSee the “Kahan’sAlgorithm” example\n\nSignificance Error – Simulation Time\n\nTime is used to compute distance, velocity, acceleration\n\nHigh frequency phenomena\nSensors: Doppler shift, pulse compression, PRF\n\nThese computed values feed into other computed values which may or may not\n\nrequire a time component\n\nThousands of computations per frame of simulation\n\nThousands of little compounding errors per frame\n\nCombine with poor or nonexistent testing\n\nSignificance Error – Simulation Time\n\nAccumulate Time (works for arbitrary\n\ntime steps)\nauto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;\n// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }\nauto totalFrames = size_t(0);\nauto frameLength = 0.01f;\nauto simTime = 0.0f;\n// Run 120 Frames\nauto simTime120Frames = 1.20f;\ntotalFrames = 120;\nsimTime = totalFrames * frameLength;\n\nDelta Time (works for fixed time steps)\n\nSignificance Error – Simulation Time\nAccumulate Time (works for arbitrary time steps)\n\n1.199999999999999955591079014994 != 1.199999213218688964843750000000 (0.000000786781310990747329014994)\n12.000000000000000000000000000000 != 12.000179290771484375000000000000 (- 0.000179290771484375000000000000)\n120.000000000000000000000000000000 != 120.007225036621093750000000000000 (- 0.007225036621093750000000000000)\n600.000000000000000000000000000000 != 600.274414062500000000000000000000 (- 0.274414062500000000000000000000)\n3600.000000000000000000000000000000 != 3603.204101562500000000000000000000 (- 3.204101562500000000000000000000)\n\nDelta Time (works for fixed time steps)\n\n1.200000047683715820312500000000 != 1.199999928474426269531250000000 (0.000000119209289550781250000000)\n12.000000000000000000000000000000 == 12.000000000000000000000000000000 (0.000000000000000000000000000000)\n120.000000000000000000000000000000 == 120.000000000000000000000000000000 (0.000000000000000000000000000000)\n600.000000000000000000000000000000 == 600.000000000000000000000000000000 (0.000000000000000000000000000000)\n-3600.000000000000000000000000000000 == 3600.000000000000000000000000000000 (0.000000000000000000000000000000)\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\nSignificance Error – Simulation Time\n\n“Sub-Microsecond Precision”\n\n1.2345e-6 seconds per frame (810044.5 Hz)\n\n\n\n0.012345000170171261000000000000 !=\n\n\n0.0148140005767345430\n\n\n(-0.002469000406563282000000000000)\n\n\n12.345000267028809000000000000000 !=\n\n\n11.701118469238281000000000000000\n\n\n(0.643881797790527340000000000000)\nSignificance Error – Don’t use IEEE Floats?\n\nUse integers\n\nVery fast\nTrade more precision for less range\nOnly input/output may be impacted by floating point conversions\nFinancial applications represent dollars as only cents or tenth’s of cents\n\nUse a math library\n\nSlower\nDefine your own level of accuracy\nMPFR (w/C++ Wrapper), TTMath, Boost, GMP C++\nCRlibm(Correctly Rounded Mathematical Library)\n\n\n(Store simTimeas uint64_tand get microsecond precision for 584555 years.)\nAlgebraic Assumption Error\n\nMathematical Identities\n\nTraditional identities (associative, commutative, distributive) do not hold\n\nDistributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\nCannot interchange division and multiplication:\n\n\n\n𝑥\n\n\n10. 0\n≠ 𝑥 × 0. 1\nDoes a naïve compiler make these assumptions too?\nhttps://msdn.microsoft.com/library/aa289157.aspx\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nAlgebraic Assumption Error\nconst auto oneRadian = 0.15915494309f;\nconst auto control = 0.000000000015915494309f;\nconst auto oneRadianMultiplied = oneRadian * 1.0e-10f;\nconst auto oneRadianDivided = oneRadian / 1.0e10f;\nControl: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000\nFloating Point Exceptions\n\nEnable floating point exceptions to be alerted when things go awry.\n\n𝑥is the exact result of the operation\nα= 192 for single precision, 1536 for double\n𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.\nSee &lt;cfenv&gt; -Floating Point Environment\nIEEE 754 Exception Result when traps disabled Argument to trap handler\noverflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)\nunderflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)\ndivide by zero ±∞ invalid operation\ninvalid NaN invalid operation\ninexact round( x ) round( x )\nBut Wait! There’s More!\n\nBinary to Decimal Conversion Error\nSummation Error\nPropagation Error\nUnderflow, Overflow\nType Narrowing/Widening Rules\n\nMiscellaneous Notes\nhttp://preshing.com/images/float-point-perf.png https://github.com/DigitalInBlue/CPPCon2015\nUse Your Compiler’s Output\n\nwarning C4244: ‘initializing’ : conversion from ‘double’ to\n\n‘float’, possible loss of data\n\nwarning C4056: overflow in floating point constant arithmetic\nwarning C4305: ‘identifier’ : truncation from ‘type1’ to\n\n‘type2’\n\nwarning: conversion to ‘float’ from ‘int’ may alter its value\nwarning: floating constant exceeds range of ‘double’\n\nFused Multiply-Add (FMA)\n\na = a + (b * c); a += b * c;\nMultiplier-accumulator (MAC Unit)\nOne rounding\nCompiler Options\n\nGCC = -mfma\nVC++ = #pragma fp_contract (off)\n\nReference: FMA3, FMA4\n\nhttp://en.wikipedia.org/wiki/FMA_instruction_set\n\n\nStreaming SIMD Extensions (SSE)\n\nSSE can provide significant performance gains\n\nSupports integer, floating point, logical, conversion, shift, and shuffle operations\n\nC, C++, Fortran do not natively support SSE, but compiler-specific support exists\n\nFloat Tricks\n/// Fast reciprocal square root approximation for x &gt; 0.25\n/// Quake’s float Q_rsqrt(float number) is much more entertaining.\ninline float FastInvSqrt(float x)\n{\nint tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&x) &gt;&gt; 1;\nauto y = *(float*)&tmp;\nreturn y * (1.47f – 0.47f * x * y * y);\n}\nTesting\n\nDesign for Numerical Stability\nPerform Meaningful Testing\nDocument assumptions\nTrack sources of approximation\nQuantify goodness\n\nWell conditioned algorithms\n\nBackward error analysis\n\nAre the outputs identical for slightly modified inputs?\n\n\nTEST(CPPCon2015, pointOnePlusPointTwo)\n{\nauto zeroPointOne = 0.1f;\nauto zeroPointTwo = 0.2f;\nauto zeroPointThree = 0.3f;\nauto sum = zeroPointOne + zeroPointTwo;\nEXPECT_DOUBLE_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, zeroPointThree);\nEXPECT_EQ(0.3f, sum);\nEXPECT_EQ(zeroPointThree, sum);\nEXPECT_DOUBLE_EQ(zeroPointThree, sum);\n}\nhttp://xkcd.com/217/ http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi\nhttps://github.com/DigitalInBlue/CPPCon2015",
     "crumbs": [
       "IEEE 754"
     ]
@@ -6783,7 +7293,7 @@
     "href": "50_754.html#footnotes",
     "title": "IEEE 754",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nGrammatically, this statement should be “so I have nothing about which to worry.”↩︎\nThis is true in the special case that your programming language is Rust.↩︎\nThis is due to how many numbers there are.↩︎",
+    "text": "Footnotes\n\n\nGrammatically, this statement should be “so I have nothing about which to worry.”↩︎\nThis is true in the special case that your programming language is Haskell.↩︎\nThis is due to how many numbers there are.↩︎",
     "crumbs": [
       "IEEE 754"
     ]
