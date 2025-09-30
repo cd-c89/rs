@@ -601,7 +601,7 @@
     "href": "50_754.html#algebraic-assumption-error",
     "title": "IEEE 754",
     "section": "Algebraic Assumption Error",
-    "text": "Algebraic Assumption Error\n\nDistributive Rule does not apply:\n\n\\(a = x \\times y - x \\times z \\not\\implies a = x (y - z)\\)\n\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\n\n\\(a = x + (y + z) \\not\\implies a = (x + y) + z\\)\n\nCannot interchange division and multiplication:\n\n\\(a = \\frac{x}{10.0} \\not\\implies a = x \\times 0.1\\)",
+    "text": "Algebraic Assumption Error\n\nDistributive Rule does not apply:\n\n\\(a = x \\times y - x \\times z \\nRightarrow a = x (y - z)\\)\n\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\n\n\\(a = x + (y + z) \\nRightarrow a = (x + y) + z\\)\n\nCannot interchange division and multiplication:\n\n\\(a = \\frac{x}{10.0} \\nRightarrow a = x \\times 0.1\\)",
     "crumbs": [
       "IEEE 754"
     ]
@@ -1097,7 +1097,7 @@
     "href": "50_754.rjs.html#algebraic-assumption-error",
     "title": "IEEE 754",
     "section": "Algebraic Assumption Error",
-    "text": "Algebraic Assumption Error\n\nDistributive Rule does not apply:\n\n\\(a = x \\times y - x \\times z \\not\\implies a = x (y - z)\\)\n\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\n\n\\(a = x + (y + z) \\not\\implies a = (x + y) + z\\)\n\nCannot interchange division and multiplication:\n\n\\(a = \\frac{x}{10.0} \\not\\implies a = x \\times 0.1\\)"
+    "text": "Algebraic Assumption Error\n\nDistributive Rule does not apply:\n\n\\(a = x \\times y - x \\times z \\nRightarrow a = x (y - z)\\)\n\nAssociative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧\n\n\\(a = x + (y + z) \\nRightarrow a = (x + y) + z\\)\n\nCannot interchange division and multiplication:\n\n\\(a = \\frac{x}{10.0} \\nRightarrow a = x \\times 0.1\\)"
   },
   {
     "objectID": "50_754.rjs.html#distribution",
