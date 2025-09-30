@@ -416,11 +416,12 @@ Prof.&nbsp;Calvin
 <section id="today" class="slide level2">
 <h2>Today</h2>
 <ul>
+<li>Understand precision through the lens of floats.
+<ul>
 <li>Understand the basics of floats</li>
 <li>Understand the language of floats</li>
 <li>Get a feel for when further investigation is required</li>
-<li>Have a few tools ready to help</li>
-<li>Be prepared to keep learning about IEEE floats</li>
+</ul></li>
 </ul>
 </section>
 <section id="citation" class="slide level2">
@@ -431,7 +432,7 @@ Prof.&nbsp;Calvin
 <li>Author John Farrier, Booz Allen Hamilton</li>
 </ul>
 </section>
-<section id="mission-statement" class="slide level2">
+<section id="mission-statement" class="slide level2 smaller">
 <h2>Mission Statement</h2>
 <ul>
 <li>I’m a normal person.
@@ -987,33 +988,48 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <p><a href="https://en.wikipedia.org/wiki/Unit_in_the_last_place">In computer science and numerical analysis, unit in the last place or unit of least precision (ulp) is the spacing between two consecutive floating-point numbers, i.e., the value the least significant digit (rightmost digit) represents if it is 1. It is used as a measure of accuracy in numeric calculations.</a></p>
 </blockquote>
 </section>
+<section id="haskell" class="slide level2">
+<h2>Haskell</h2>
+<ul>
+<li>Usually ULP is taught using <a href="https://en.wikipedia.org/wiki/Unit_in_the_last_place#Example_1">Haskell</a>.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource haskell number-lines code-with-copy"><code class="sourceCode haskell"><span id="cb17-1"><a></a><span class="op">&gt;</span> <span class="fu">until</span> (\x <span class="ot">-&gt;</span> x <span class="op">==</span> x<span class="op">+</span><span class="dv">1</span>) (<span class="op">+</span><span class="dv">1</span>) <span class="dv">0</span><span class="ot"> ::</span> <span class="dt">Float</span></span>
+<span id="cb17-2"><a></a><span class="fl">1.6777216e7</span></span>
+<span id="cb17-3"><a></a><span class="op">&gt;</span> it<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb17-4"><a></a><span class="fl">1.6777215e7</span></span>
+<span id="cb17-5"><a></a><span class="op">&gt;</span> it<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb17-6"><a></a><span class="fl">1.6777216e7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I’ll translate to .py/.rs</li>
+</ul>
+</section>
 <section id="generators" class="slide level2">
 <h2>Generators</h2>
 <ul>
 <li>By convention we check number theoretic results with lazily evaluated generator expressions in Python.</li>
 <li>The following generators all powers of two for a which adding one does not change the value within Python floating points.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
-<span id="cb17-2"><a></a></span>
-<span id="cb17-3"><a></a>gen <span class="op">=</span> (i <span class="cf">for</span> i <span class="kw">in</span> count() <span class="cf">if</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i))</span>
-<span id="cb17-4"><a></a></span>
-<span id="cb17-5"><a></a>x <span class="op">=</span> <span class="bu">next</span>(gen)</span>
-<span id="cb17-6"><a></a></span>
-<span id="cb17-7"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 0.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
-<span id="cb17-8"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>gen <span class="op">=</span> (i <span class="cf">for</span> i <span class="kw">in</span> count() <span class="cf">if</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i))</span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a>x <span class="op">=</span> <span class="bu">next</span>(gen)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 0.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
+<span id="cb18-8"><a></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="iterators" class="slide level2">
 <h2>Iterators</h2>
 <ul>
 <li>Rust doesn’t require iterators, supporting the infinite iterator by default using <code>unwrap</code>.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a></a><span class="kw">let</span> x <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i) <span class="op">+</span> <span class="dv">1.0</span> <span class="op">==</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i))<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb18-2"><a></a></span>
-<span id="cb18-3"><a></a><span class="kw">let</span> base <span class="op">=</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> x)<span class="op">;</span></span>
-<span id="cb18-4"><a></a></span>
-<span id="cb18-5"><a></a><span class="co">// Prints the result (2^53 = 9007199254740992.0)</span></span>
-<span id="cb18-6"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span><span class="op">,</span> base)<span class="op">;</span></span>
-<span id="cb18-7"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span><span class="op">,</span> base <span class="op">+</span> <span class="dv">1.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a></a><span class="kw">let</span> x <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i) <span class="op">+</span> <span class="dv">1.0</span> <span class="op">==</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i))<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb19-2"><a></a></span>
+<span id="cb19-3"><a></a><span class="kw">let</span> base <span class="op">=</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb19-4"><a></a></span>
+<span id="cb19-5"><a></a><span class="co">// Prints the result (2^53 = 9007199254740992.0)</span></span>
+<span id="cb19-6"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span><span class="op">,</span> base)<span class="op">;</span></span>
+<span id="cb19-7"><a></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span><span class="op">,</span> base <span class="op">+</span> <span class="dv">1.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>I haven’t used <code>find</code> before, this is an LLM donation to our knowledge base.</li>
 <li>By the way, that is basically <code>2 ** 53</code> and there are 52 bits of mantissa precision.</li>
@@ -1027,9 +1043,9 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <blockquote>
 <p><a href="https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT">The gap between the two floating-point numbers nearest to x, even if x is one of )them.</a></p>
 </blockquote>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
-<span id="cb19-2"><a></a><span class="op">&gt;&gt;&gt;</span> f64(pi) <span class="op">-</span> f64(f32(pi))</span>
-<span id="cb19-3"><a></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
+<span id="cb20-2"><a></a><span class="op">&gt;&gt;&gt;</span> f64(pi) <span class="op">-</span> f64(f32(pi))</span>
+<span id="cb20-3"><a></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="rounding" class="slide level2">
 <h2>Rounding</h2>
@@ -1051,8 +1067,8 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>The difference between the “real” number and the approximated number, divided by the “real” number.</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
-<span id="cb20-2"><a></a>np.float64(<span class="fl">1.0000000278275352</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
+<span id="cb21-2"><a></a>np.float64(<span class="fl">1.0000000278275352</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>So for <code>pi</code> in <code>f32</code>, around <span class="math inline">\(2.9 \times 10^{-8}\)</span></li>
 </ul>
@@ -1096,7 +1112,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>The guard bits and round bits are extra precision</li>
 <li>The sticky bit is an OR of anything that shifts through it</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="special-bits" class="slide level2">
 <h2>Special bits</h2>
@@ -1109,146 +1125,88 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li><strong>[1][1][0]</strong> - Round Up</li>
 <li><strong>[1][1][1]</strong> - Round Up</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="significance-error" class="slide level2">
 <h2>Significance Error</h2>
 <ul>
-<li>Compute the Area of a Triangle
+<li>Compute the Area of a Triangle given side lengths</li>
+<li><a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Hero(n)’s Formula</a>:
 <ul>
-<li>Heron’s Formula:
-<ul>
-<li>𝐴 = 𝑥+𝑦 2 +𝑍 𝑥+𝑦 2 +𝑍 −𝑥 𝑥+𝑦 2 +𝑍 −𝑦 𝑥+𝑦 2 +𝑍 −𝑧</li>
+<li>Take <span class="math inline">\(s = \frac{1}{2}(a + b + c)\)</span></li>
+<li>Then <span class="math inline">\(\sqrt{s(s-a)(s-b)(s-c)}\)</span></li>
 </ul></li>
-<li>Kahan’sAlgorithm:
+<li><a href="https://people.eecs.berkeley.edu/~wkahan/Triangle.pdf">Kahan’s Algorithm</a>:
 <ul>
-<li>Sort x, y, z such that 𝑥≥𝑦 ≥𝑧</li>
-<li>If 𝑧&lt; 𝑥−𝑦, then no such triangle exists.</li>
-<li>Else 𝐴 = (𝑥+𝑦+𝑧) × 𝑧−(𝑥−𝑦 )× 4 (𝑧+𝑥−𝑦 )×(𝑥+𝑦−𝑧)</li>
-</ul></li>
+<li>Take <span class="math inline">\(((a, b, c) | a \leq b \leq c)\)</span></li>
+<li>Then <span class="math inline">\(\sqrt{\frac{(x + (y + z)) \times (z - (x - y)) \times (z + (x - y)) \times (x + (y - z))}{4}}\)</span></li>
 </ul></li>
 </ul>
-<p>Significance Error</p>
-<pre><code>/// Area of a triangle
-/// From http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
-/// From https://www.cs.berkeley.edu/~wkahan/Triangle.pdf
-TEST(CPPCon2015, AreaOfATriangleFloat)
-{
-const auto a = 100000.0f;
-const auto b = 99999.99979f;
-const auto c = 0.00029f;</code></pre>
-<pre><code>ASSERT_TRUE(a &gt;= b);
-ASSERT_TRUE(b &gt;= c);</code></pre>
-<pre><code>auto heronsFormula = HeronsFormula(a, b, c);
-auto kahansFormula = KahansFormula(a, b, c);
-EXPECT_NE(kahansFormula, heronsFormula);
-cppCon() &lt;&lt; "Kahan: " &lt;&lt; kahansFormula;
-cppCon() &lt;&lt; "Heron: " &lt;&lt; heronsFormula;
-cppCon() &lt;&lt; "delta: " &lt;&lt; kahansFormula - heronsFormula &lt;&lt; "\n";
-}</code></pre>
-<p>Significance Error</p>
-<p>Heron: 0.000000000000000000000000000000</p>
-<p>Kahan: 14.500000000000000000000000000000</p>
-<p>delta: 14.500000000000000000000000000000</p>
-<p>Significance Error</p>
-<p>Heron: 0.000000000000000000000000000000</p>
-<p>Kahan: 14.500000000000000000000000000000</p>
-<p>delta: 14.500000000000000000000000000000</p>
-<p>Hint: The Answer is 10.0</p>
-<p>Significance Error</p>
-<p>Heron: 0.000000000000000000000000000000</p>
-<p>Kahan: 14.500000000000000000000000000000</p>
-<p>delta: 14.500000000000000000000000000000</p>
-<p>Heron: 9.999999809638328700000000000000</p>
-<p>Kahan: 10.000000077021038000000000000000</p>
-<p>delta: 0.000000267382709751018410000000</p>
-<p>Significance Error - Use Stable Algorithms</p>
+</section>
+<section id="write-them" class="slide level2">
+<h2>Write them</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/lib.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a></a><span class="kw">fn</span> heron(a<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> b<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> c<span class="op">:</span><span class="dt">f32</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
+<span id="cb24-2"><a></a>    <span class="kw">let</span> s <span class="op">=</span> (a <span class="op">+</span> b <span class="op">+</span> c)<span class="op">/</span><span class="dv">2.0_f32</span><span class="op">;</span></span>
+<span id="cb24-3"><a></a>    <span class="cf">return</span> (s <span class="op">*</span> (s <span class="op">-</span> a) <span class="op">*</span> (s <span class="op">-</span> b) <span class="op">*</span> (s <span class="op">-</span> c))<span class="op">.</span>sqrt()<span class="op">;</span></span>
+<span id="cb24-4"><a></a><span class="op">}</span></span>
+<span id="cb24-5"><a></a></span>
+<span id="cb24-6"><a></a><span class="kw">fn</span> kahan(a<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> b<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> c<span class="op">:</span><span class="dt">f32</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
+<span id="cb24-7"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="pp">vec!</span>[a<span class="op">,</span>b<span class="op">,</span>c]<span class="op">;</span></span>
+<span id="cb24-8"><a></a>    s<span class="op">.</span>sort_by(<span class="op">|</span>a<span class="op">,</span> b<span class="op">|</span> a<span class="op">.</span>partial_cmp(b)<span class="op">.</span>unwrap())<span class="op">;</span> <span class="co">// "partial"? Why not `.sort`?</span></span>
+<span id="cb24-9"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> prod <span class="op">=</span> s[<span class="dv">0</span>] <span class="op">+</span> s[<span class="dv">1</span>] <span class="op">+</span> s[<span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb24-10"><a></a>    prod <span class="op">*=</span> s[<span class="dv">2</span>] <span class="op">-</span> (s[<span class="dv">0</span>] <span class="op">-</span> s[<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb24-11"><a></a>    prod <span class="op">*=</span> s[<span class="dv">2</span>] <span class="op">+</span> (s[<span class="dv">0</span>] <span class="op">-</span> s[<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb24-12"><a></a>    prod <span class="op">*=</span> s[<span class="dv">0</span>] <span class="op">+</span> (s[<span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb24-13"><a></a>    <span class="cf">return</span> prod<span class="op">.</span>sqrt() <span class="op">/</span> <span class="dv">4.0</span><span class="op">;</span></span>
+<span id="cb24-14"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="test-them" class="slide level2">
+<h2>Test them</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a></a><span class="kw">fn</span> main()<span class="op">{</span></span>
+<span id="cb25-2"><a></a>    <span class="pp">dbg!</span>(heron(<span class="dv">3.0</span><span class="op">,</span><span class="dv">4.0</span><span class="op">,</span><span class="dv">5.0</span>))<span class="op">;</span></span>
+<span id="cb25-3"><a></a>    <span class="pp">dbg!</span>(kahan(<span class="dv">3.0</span><span class="op">,</span><span class="dv">4.0</span><span class="op">,</span><span class="dv">5.0</span>))<span class="op">;</span></span>
+<span id="cb25-4"><a></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="dv">100_000.0_f32</span><span class="op">;</span></span>
+<span id="cb25-5"><a></a>    <span class="kw">let</span> c <span class="op">=</span> <span class="dv">0.01_f32</span><span class="op">;</span></span>
+<span id="cb25-6"><a></a>    <span class="pp">dbg!</span>(heron(a<span class="op">,</span>a<span class="op">,</span>c))<span class="op">;</span></span>
+<span id="cb25-7"><a></a>    <span class="pp">dbg!</span>(kahan(a<span class="op">,</span>a<span class="op">,</span>c))<span class="op">;</span></span>
+<span id="cb25-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>Loss of Significance
+<li>Oh what’s that?</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a></a><span class="ex">[src/main.rs:21:5]</span> heron<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
+<span id="cb26-2"><a></a><span class="ex">[src/main.rs:22:5]</span> kahan<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
+<span id="cb26-3"><a></a><span class="ex">[src/main.rs:25:5]</span> heron<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 781.25006</span>
+<span id="cb26-4"><a></a><span class="ex">[src/main.rs:26:5]</span> kahan<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 500.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Using <code>f64</code> (vs <code>f32</code>) we get 499.9999999999994</li>
+</ul>
+</section>
+<section id="significance-error-1" class="slide level2">
+<h2>Significance Error</h2>
+<ul>
+<li>Use Stable Algorithms
 <ul>
 <li>Keep big numbers with big numbers, little numbers with little numbers.</li>
 </ul></li>
 <li>Parentheses can help</li>
-<li>Analysis of Algorithms is Critical</li>
-<li>The compiler won’t re-arrange your math if it cannot prove it would yield the same</li>
-</ul>
-<p>result, even if the computation would be faster</p>
+<li>The compiler won’t re-arrange your math if it cannot prove it would yield the same!
 <ul>
-<li>𝑥 = 𝑏− 𝑎+𝑏 −𝑎 should not be replaced with 𝑥= 0</li>
-<li>See the “Kahan’sAlgorithm” example</li>
-</ul>
-<p>Significance Error – Simulation Time</p>
-<ul>
-<li>Time is used to compute distance, velocity, acceleration
-<ul>
-<li>High frequency phenomena</li>
-<li>Sensors: Doppler shift, pulse compression, PRF</li>
-</ul></li>
-<li>These computed values feed into other computed values which may or may not</li>
-</ul>
-<p>require a time component</p>
-<ul>
-<li>Thousands of computations per frame of simulation
-<ul>
-<li>Thousands of little compounding errors per frame</li>
-</ul></li>
-<li>Combine with poor or nonexistent testing</li>
-</ul>
-<p>Significance Error – Simulation Time</p>
-<ul>
-<li>Accumulate Time (works for arbitrary</li>
-</ul>
-<p>time steps)</p>
-<p>auto totalFrames = size_t(0); auto frameLength = 0.01f; auto simTime = 0.0f;</p>
-<p>// Run 120 Frames auto simTime120Frames = 1.20f; for(; totalFrames &lt; 120; totalFrames++) { simTime += frameLength; }</p>
-<pre><code>auto totalFrames = size_t(0);
-auto frameLength = 0.01f;
-auto simTime = 0.0f;</code></pre>
-<pre><code>// Run 120 Frames
-auto simTime120Frames = 1.20f;
-totalFrames = 120;
-simTime = totalFrames * frameLength;</code></pre>
-<ul>
-<li>Delta Time (works for fixed time steps)</li>
-</ul>
-<p>Significance Error – Simulation Time</p>
-<p>Accumulate Time (works for arbitrary time steps)</p>
-<ul>
-<li>1.199999999999999955591079014994 != <strong>1.199999213218688964843750000000</strong> (0.000000786781310990747329014994)</li>
-<li>12.000000000000000000000000000000 != <strong>12.000179290771484375000000000000</strong> (- 0.000179290771484375000000000000)</li>
-<li>120.000000000000000000000000000000 != <strong>120.007225036621093750000000000000</strong> (- 0.007225036621093750000000000000)</li>
-<li>600.000000000000000000000000000000 != <strong>600.274414062500000000000000000000</strong> (- 0.274414062500000000000000000000)</li>
-<li>3600.000000000000000000000000000000 != <strong>3603.204101562500000000000000000000</strong> (- 3.204101562500000000000000000000)</li>
-</ul>
-<p>Delta Time (works for fixed time steps)</p>
-<ul>
-<li>1.200000047683715820312500000000 != <strong>1.199999928474426269531250000000</strong> (0.000000119209289550781250000000)</li>
-<li>12.000000000000000000000000000000 == <strong>12.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
-<li>120.000000000000000000000000000000 == <strong>120.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
-<li>600.000000000000000000000000000000 == <strong>600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
-<li>-3600.000000000000000000000000000000 == <strong>3600.000000000000000000000000000000</strong> (0.000000000000000000000000000000)</li>
-</ul>
-<p>Significance Error – Simulation Time</p>
-<ul>
-<li>“Sub-Microsecond Precision”
-<ul>
-<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
+<li>E.g. you can’t use <code>&lt;</code> in Rust as you may provide a <code>NaN</code>.</li>
 </ul></li>
 </ul>
-<p>Significance Error – Simulation Time</p>
-<ul>
-<li>“Sub-Microsecond Precision”
-<ul>
-<li>1.2345e-6 seconds per frame (810044.5 Hz)</li>
-</ul></li>
-</ul>
-<h3 id="section">0.012345000170171261000000000000 !=</h3>
-<h3 id="section-1">0.0148140005767345430</h3>
-<h3 id="section-2">(-0.002469000406563282000000000000)</h3>
-<h3 id="section-3">12.345000267028809000000000000000 !=</h3>
-<h3 id="section-4">11.701118469238281000000000000000</h3>
-<h3 id="section-5">(0.643881797790527340000000000000)</h3>
-<p>Significance Error – Don’t use IEEE Floats?</p>
+</section>
+<section id="significance-error-dont-floats" class="slide level2">
+<h2>Significance Error – Don’t floats?</h2>
 <ul>
 <li>Use integers
 <ul>
@@ -1257,56 +1215,131 @@ simTime = totalFrames * frameLength;</code></pre>
 <li>Only input/output may be impacted by floating point conversions</li>
 <li>Financial applications represent dollars as only cents or tenth’s of cents</li>
 </ul></li>
+</ul>
+</section>
+<section id="significance-error-dont-floats-1" class="slide level2">
+<h2>Significance Error – Don’t floats?</h2>
+<ul>
 <li>Use a math library
 <ul>
 <li>Slower</li>
 <li>Define your own level of accuracy</li>
-<li>MPFR (w/C++ Wrapper), TTMath, Boost, GMP C++</li>
-<li>CRlibm(Correctly Rounded Mathematical Library)</li>
+<li>Usually GMP or hardware specific.</li>
 </ul></li>
 </ul>
-<p>(Store simTimeas uint64_tand get microsecond precision for 584555 years.)</p>
-<p>Algebraic Assumption Error</p>
+</section>
+<section id="significance-error-dont-floats-2" class="slide level2">
+<h2>Significance Error – Don’t floats?</h2>
 <ul>
-<li>Mathematical Identities
+<li>Execute symbolically
 <ul>
-<li>Traditional identities (associative, commutative, distributive) do not hold</li>
+<li>Slowest</li>
+<li>Arbitrary accuracy</li>
+<li>Round only at output</li>
 </ul></li>
-<li>Distributive Rule does not apply: 𝑥 ×𝑦 −𝑥 × 𝑧 ≠ 𝑥 (𝑦 −𝑧)</li>
-<li>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</li>
-<li>Cannot interchange division and multiplication:</li>
 </ul>
-<h3 id="𝑥">𝑥</h3>
-<h3 id="section-6">10. 0</h3>
-<p>≠ 𝑥 × 0. 1</p>
-<p>Does a naïve compiler make these assumptions too?</p>
-<p>https://msdn.microsoft.com/library/aa289157.aspx</p>
-<p>Algebraic Assumption Error</p>
-<pre><code>const auto oneRadian = 0.15915494309f;
-const auto control = 0.000000000015915494309f;</code></pre>
-<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
-const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
-<p>Algebraic Assumption Error</p>
-<pre><code>const auto oneRadian = 0.15915494309f;
-const auto control = 0.000000000015915494309f;</code></pre>
-<pre><code>const auto oneRadianMultiplied = oneRadian * 1.0e-10f;
-const auto oneRadianDivided = oneRadian / 1.0e10f;</code></pre>
-<p>Control: 0.000000000015915494616658421000 x*1.0e-10f: 0.000000000015915494616658421000(0.000000000000000000000000000000) x/1.0e10f: 0.00000000001591549 2881934945000 (0.000000000000000001734723475977) Relative Error: 0.000000108995891423546710000000</p>
-<p>Floating Point Exceptions</p>
+</section>
+<section id="significance-error-dont-floats-3" class="slide level2">
+<h2>Significance Error – Don’t floats?</h2>
 <ul>
-<li>Enable floating point exceptions to be alerted when things go awry.</li>
+<li>Write your own library?
+<ul>
+<li>Use vectors of bits or bytes.</li>
+<li>Write your own arithmetic operations.</li>
+<li>Test and debug your own implemention.</li>
+</ul></li>
+<li>Coming soon to a homework near you!</li>
 </ul>
-<pre><code>𝑥is the exact result of the operation
-α= 192 for single precision, 1536 for double
-𝑥𝑚𝑎𝑥= 1. 111 ... 111 × 2 𝑒𝑚𝑖𝑛.
-See &lt;cfenv&gt; -Floating Point Environment</code></pre>
-<p>IEEE 754 Exception Result when traps disabled Argument to trap handler</p>
-<p>overflow ±∞ or ±𝑥𝑚𝑎𝑥 round(𝑥 2 −𝛼)</p>
-<p>underflow 0, 2 𝑒𝑚𝑖𝑛or denormalized round(𝑥 2 𝛼)</p>
-<p>divide by zero ±∞ invalid operation</p>
-<p>invalid NaN invalid operation</p>
-<p>inexact round( <em>x</em> ) round( <em>x</em> )</p>
-<p>But Wait! There’s More!</p>
+</section>
+<section id="algebraic-assumption-error" class="slide level2">
+<h2>Algebraic Assumption Error</h2>
+<ul>
+<li>Distributive Rule does not apply:
+<ul>
+<li><span class="math inline">\(a = x \times y - x \times z \not\implies a = x (y - z)\)</span></li>
+</ul></li>
+<li>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧
+<ul>
+<li><span class="math inline">\(a = x + (y + z) \not\implies a = (x + y) + z\)</span></li>
+</ul></li>
+<li>Cannot interchange division and multiplication:
+<ul>
+<li><span class="math inline">\(a = \frac{x}{10.0} \not\implies a = x \times 0.1\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="distribution" class="slide level2">
+<h2>Distribution</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
+<span id="cb27-2"><a></a>(np.float32(<span class="fl">1000000000.0</span>), np.float32(<span class="fl">1.0000005</span>), np.float32(<span class="fl">1.0</span>))</span>
+<span id="cb27-3"><a></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">*</span> y <span class="op">-</span> x <span class="op">*</span> z <span class="op">;</span> x <span class="op">*</span> (y <span class="op">-</span> z)</span>
+<span id="cb27-4"><a></a>np.float32(<span class="fl">448.0</span>)</span>
+<span id="cb27-5"><a></a>np.float32(<span class="fl">476.83716</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="association" class="slide level2">
+<h2>Association</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
+<span id="cb28-2"><a></a>(np.float32(<span class="fl">16777216.0</span>), np.float32(<span class="fl">1.0</span>), np.float32(<span class="fl">1.0</span>))</span>
+<span id="cb28-3"><a></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">+</span> (y <span class="op">+</span> z) <span class="op">;</span> (x <span class="op">+</span> y) <span class="op">+</span> z</span>
+<span id="cb28-4"><a></a>np.float32(<span class="fl">16777218.0</span>)</span>
+<span id="cb28-5"><a></a>np.float32(<span class="fl">16777216.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="interchange" class="slide level2">
+<h2>Interchange</h2>
+<ul>
+<li>Check last digit</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">100000000</span></span>
+<span id="cb29-2"><a></a><span class="fl">1.4285714285714284e-09</span></span>
+<span id="cb29-3"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">100000000</span> <span class="op">/</span> <span class="dv">7</span></span>
+<span id="cb29-4"><a></a><span class="fl">1.4285714285714286e-09</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="floating-point-exceptions" class="slide level2">
+<h2>Floating Point Exceptions</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">IEEE 754 Exception</th>
+<th style="text-align: left;">Result when traps disabled</th>
+<th style="text-align: left;">Argument to trap handler</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>overflow</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\pm \infty\)</span> or <span class="math inline">\(\pm x_{\text{max}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{round}(x 2^{-a})\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>underflow</strong></td>
+<td style="text-align: left;"><span class="math inline">\(0, \pm 2^{\text{min}}\)</span> or denormalized</td>
+<td style="text-align: left;"><span class="math inline">\(\text{round}(x 2^{a})\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>divide by zero</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\pm \infty\)</span></td>
+<td style="text-align: left;">invalid operation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>invalid</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\text{NaN}\)</span></td>
+<td style="text-align: left;">invalid operation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>inexact</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\text{round}(x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{round}(x)\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="but-wait-theres-more" class="slide level2">
+<h2>But Wait! There’s More!</h2>
 <ul>
 <li>Binary to Decimal Conversion Error</li>
 <li>Summation Error</li>
@@ -1314,55 +1347,9 @@ See &lt;cfenv&gt; -Floating Point Environment</code></pre>
 <li>Underflow, Overflow</li>
 <li>Type Narrowing/Widening Rules</li>
 </ul>
-<p>Miscellaneous Notes</p>
-<p><a href="http://preshing.com/images/float-point-perf.png">http://preshing.com/images/float-point-perf.png</a> https://github.com/DigitalInBlue/CPPCon2015</p>
-<p>Use Your Compiler’s Output</p>
-<ul>
-<li>warning C4244: ‘initializing’ : conversion from ‘double’ to</li>
-</ul>
-<p>‘float’, possible loss of data</p>
-<ul>
-<li>warning C4056: overflow in floating point constant arithmetic</li>
-<li>warning C4305: ‘identifier’ : truncation from ‘type1’ to</li>
-</ul>
-<p>‘type2’</p>
-<ul>
-<li>warning: conversion to ‘float’ from ‘int’ may alter its value</li>
-<li>warning: floating constant exceeds range of ‘double’</li>
-</ul>
-<p>Fused Multiply-Add (FMA)</p>
-<ul>
-<li>a = a + (b * c); a += b * c;</li>
-<li>Multiplier-accumulator (MAC Unit)</li>
-<li>One rounding</li>
-<li>Compiler Options
-<ul>
-<li>GCC = -mfma</li>
-<li>VC++ = #pragma fp_contract (off)</li>
-</ul></li>
-<li>Reference: FMA3, FMA4
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/FMA_instruction_set">http://en.wikipedia.org/wiki/FMA_instruction_set</a></li>
-</ul></li>
-</ul>
-<p>Streaming SIMD Extensions (SSE)</p>
-<ul>
-<li>SSE can provide significant performance gains
-<ul>
-<li>Supports integer, floating point, logical, conversion, shift, and shuffle operations</li>
-</ul></li>
-<li>C, C++, Fortran do not natively support SSE, but compiler-specific support exists</li>
-</ul>
-<p>Float Tricks</p>
-<pre><code>/// Fast reciprocal square root approximation for x &gt; 0.25
-/// Quake’s float Q_rsqrt(float number) is much more entertaining.
-inline float FastInvSqrt(float x)
-{
-int tmp = ((0x3f800000 &lt;&lt; 1) + 0x3f800000 - *(long*)&amp;x) &gt;&gt; 1;
-auto y = *(float*)&amp;tmp;
-return y * (1.47f – 0.47f * x * y * y);
-}</code></pre>
-<p>Testing</p>
+</section>
+<section id="testing" class="slide level2">
+<h2>Testing</h2>
 <ul>
 <li>Design for Numerical Stability</li>
 <li>Perform Meaningful Testing</li>
@@ -1377,29 +1364,20 @@ return y * (1.47f – 0.47f * x * y * y);
 <li>Are the outputs identical for slightly modified inputs?</li>
 </ul></li>
 </ul>
-<pre><code>TEST(CPPCon2015, pointOnePlusPointTwo)
-{
-auto zeroPointOne = 0.1f;
-auto zeroPointTwo = 0.2f;
-auto zeroPointThree = 0.3f;
-auto sum = zeroPointOne + zeroPointTwo;</code></pre>
-<pre><code>EXPECT_DOUBLE_EQ(0.3f, zeroPointThree);
-EXPECT_EQ(0.3f, zeroPointThree);
-EXPECT_EQ(0.3f, sum);</code></pre>
-<pre><code>EXPECT_EQ(zeroPointThree, sum);
-EXPECT_DOUBLE_EQ(zeroPointThree, sum);
-}</code></pre>
-<p><a href="http://xkcd.com/217/">http://xkcd.com/217/</a> <a href="http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi">http://www.explainxkcd.com/wiki/index.php/217:_e_to_the_pi_Minus_pi</a></p>
-<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
-</section></section>
-<section id="demystifying-floating-point" class="title-slide slide level1 center">
-<h1>Demystifying Floating Point</h1>
-<p>John Farrier, Booz Allen Hamilton</p>
-<pre><code>https://github.com/DigitalInBlue/CPPCon2015</code></pre>
-
-
 </section>
+<section id="today-1" class="slide level2">
+<h2>Today</h2>
+<ul>
+<li>Understand precision through the lens of floats.
+<ul>
+<li>Understand the basics of floats</li>
+<li>Understand the language of floats</li>
+<li>Get a feel for when further investigation is required</li>
+</ul></li>
+</ul>
 
+
+</section></section>
 
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
