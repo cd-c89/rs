@@ -254,8 +254,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#aside" id="toc-aside" class="nav-link" data-scroll-target="#aside">Aside</a></li>
   <li><a href="#aside-1" id="toc-aside-1" class="nav-link" data-scroll-target="#aside-1">Aside</a></li>
-  <li><a href="#inputoutput" id="toc-inputoutput" class="nav-link" data-scroll-target="#inputoutput">Input/Output</a></li>
+  <li><a href="#aside-2" id="toc-aside-2" class="nav-link" data-scroll-target="#aside-2">Aside</a></li>
   </ul></li>
+  <li><a href="#inputoutput" id="toc-inputoutput" class="nav-link" data-scroll-target="#inputoutput">Input/Output</a>
+  <ul class="collapse">
+  <li><a href="#aside-3" id="toc-aside-3" class="nav-link" data-scroll-target="#aside-3">Aside</a></li>
+  <li><a href="#aside-4" id="toc-aside-4" class="nav-link" data-scroll-target="#aside-4">Aside</a></li>
+  </ul></li>
+  <li><a href="#addsub" id="toc-addsub" class="nav-link" data-scroll-target="#addsub">Add/sub</a></li>
+  <li><a href="#muldiv" id="toc-muldiv" class="nav-link" data-scroll-target="#muldiv">Mul/div</a></li>
+  <li><a href="#today-1" id="toc-today-1" class="nav-link" data-scroll-target="#today-1">Today</a></li>
+  <li><a href="#optional" id="toc-optional" class="nav-link" data-scroll-target="#optional">Optional</a>
+  <ul class="collapse">
+  <li><a href="#implement-infinities" id="toc-implement-infinities" class="nav-link" data-scroll-target="#implement-infinities">Implement infinities</a></li>
+  <li><a href="#implement-nan" id="toc-implement-nan" class="nav-link" data-scroll-target="#implement-nan">Implement NaN</a></li>
+  </ul></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">See also</a></li>
   </ul>
 </nav>
     </div>
@@ -356,8 +370,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>The first <code>f16</code> is the crate name, the second is the type name.</li>
 </ul>
-<section id="aside" class="level3">
-<h3 class="anchored" data-anchor-id="aside">Aside</h3>
+<section id="aside" class="level2">
+<h2 class="anchored" data-anchor-id="aside">Aside</h2>
 <ul>
 <li>For my money, <code>f16::f16</code> looks terrible.</li>
 </ul>
@@ -372,8 +386,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="aside-1" class="level3">
-<h3 class="anchored" data-anchor-id="aside-1">Aside</h3>
+<section id="aside-1" class="level2">
+<h2 class="anchored" data-anchor-id="aside-1">Aside</h2>
+<ul>
+<li>Rust will admonish you for using <code>f16</code> instead of <code>F16</code>.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">warning:</span> type <span class="kw">`</span><span class="ex">f16</span><span class="kw">`</span> should have an upper camel case name</span>
+<span id="cb4-2"><a href="#cb4-2"></a> <span class="ex">--</span><span class="op">&gt;</span> src/lib.rs:1:12</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">|</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">1</span> <span class="kw">|</span> <span class="ex">pub</span> struct f16 {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">|</span>            <span class="ex">^^^</span> help: convert the identifier to upper camel case <span class="er">(</span><span class="ex">notice</span> the capitalization<span class="kw">)</span><span class="bu">:</span> <span class="kw">`</span><span class="ex">F16</span><span class="kw">`</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">|</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[warn(non_camel_case_types)]</span><span class="kw">`</span> on by default</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Everyone is a critic!</li>
+</ul>
+</section>
+<section id="aside-2" class="level2">
+<h2 class="anchored" data-anchor-id="aside-2">Aside</h2>
 <ul>
 <li>We aren’t really all the way to teaching structs yet, but feel free to play around with them.</li>
 <li>In particular, you want to have 3 fields, <code>sign</code>, <code>exp</code>, and <code>mantissa</code>, rather than a single <code>bits</code> field.</li>
@@ -385,16 +415,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can read more on <code>struct</code> here: <a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html">Rust Book 05.01</a></li>
 </ul>
 </section>
-<section id="inputoutput" class="level2">
-<h2 class="anchored" data-anchor-id="inputoutput">Input/Output</h2>
+</section>
+<section id="inputoutput" class="level1">
+<h1>Input/Output</h1>
 <ul>
 <li><p>Versus built-in types, we’ll just provide a ways to get values in and out.</p></li>
 <li><p>We’ll use the Rust default integer, <code>i32</code>.</p></li>
 <li><p>Write the following functions:</p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> i32_to_f16(n<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> f16</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">fn</span> f16_to_i32(x<span class="op">:</span>f16) <span class="op">-&gt;</span> <span class="dt">i32</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">fn</span> print_f16(x<span class="op">:</span>f16)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">fn</span> i32_to_f16(n<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> f16</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">fn</span> print_f16(x<span class="op">:</span>f16)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">// optional, but i used it - print_f16 and a newline.</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">fn</span> println_f16(x<span class="op">:</span>f16)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You may implement more complex handling, or set every overflow to <code>inf</code> and underflow to <code>0</code>.</li>
 <li>The following table should be helpful, from the lecture:</li>
@@ -453,11 +485,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Here is an example:</li>
 </ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">1.512*2^3</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">[src/main.rs:4:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">12</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">1.944*2^6</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">[src/main.rs:5:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">123</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">1.210*2^10</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">[src/main.rs:6:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">1234</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Not the debug stating logging the function call prints after the value is displayed, as the debug statement is only printed <em>after</em> the function call returns.</li>
+</ul>
+<section id="aside-3" class="level2">
+<h2 class="anchored" data-anchor-id="aside-3">Aside</h2>
+<ul>
+<li>It is admittedly odd to print values in decimal multpiplied by a power of 2.</li>
+<li>If you which to print in binary, simply prefix with <code>0b</code></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">0b1.1000000000*10^11</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">[src/main.rs:4:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">12</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">0b1.1110110000*10^110</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">[src/main.rs:5:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">123</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">0b1.11010010*10^1010</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">[src/main.rs:6:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">1234</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I didn’t find this easier (I just yeeted the output into Ye Olde Python III) but you may.</li>
+</ul>
+</section>
+<section id="aside-4" class="level2">
+<h2 class="anchored" data-anchor-id="aside-4">Aside</h2>
+<ul>
+<li>Speaking of yeeting, if you prefer this formulation:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex"></span>    Finished <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bits</span><span class="kw">`</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="ex">1.512*2**3</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="ex">1.944*2**6</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">1.210*2**10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I won’t say anything if you don’t.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.512</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fl">12.096</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.944</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">6</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fl">124.416</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.210</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">10</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fl">1239.04</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="addsub" class="level1">
+<h1>Add/sub</h1>
+<ul>
+<li>Write the following functions:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> add_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">fn</span> sub_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="muldiv" class="level1">
+<h1>Mul/div</h1>
+<ul>
+<li>Write the following functions:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">fn</span> mul_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">fn</span> div_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="today-1" class="level1">
+<h1>Today</h1>
+<ul class="task-list">
+<li><label><input type="checkbox">Struct</label></li>
+<li><label><input type="checkbox">Input/Output</label></li>
+<li><label><input type="checkbox">Addition/Subtraction</label></li>
+<li><label><input type="checkbox">Multiplication/Division</label></li>
+<li><label><input type="checkbox">Optional: Special cases</label></li>
+</ul>
+</section>
+<section id="optional" class="level1">
+<h1>Optional</h1>
+<section id="implement-infinities" class="level2">
+<h2 class="anchored" data-anchor-id="implement-infinities">Implement infinities</h2>
+<ul>
+<li>Ensure when any value is divided by zero, or any arithmetic results overflows, that the value is set to infinity.</li>
+<li>Ensure infinity is printed consistently, perhaps as <code>inf</code> or as unicode ∞.</li>
+<li>Ensure positive and negative infinity.</li>
+<li>Ensure infinity matches IEEE 754 requirements:
+<ul>
+<li>Sign: Either.</li>
+<li>Exponent: All <code>1</code>s.</li>
+<li>Mantissa: All <code>0</code>s.</li>
+</ul></li>
+</ul>
+</section>
+<section id="implement-nan" class="level2">
+<h2 class="anchored" data-anchor-id="implement-nan">Implement NaN</h2>
+<ul>
+<li>Ensure when infinities of differing signs are summed (whether via add or sub), <code>NaN</code> is returned.</li>
+<li>Ensure when zero is divided by zero or <code>inf</code> by <code>inf</code> returns <code>NaN</code> or <code>nan</code> (up to you).</li>
+<li>Ensure any operations over <code>NaN</code> and any other value return <code>NaN</code>.</li>
+<li>Ensure <code>NaN</code> is printed consistently.</li>
+<li>Ensure <code>NaN</code> matches IEEE 754 requirements:
+<ul>
+<li>Sign: Either.</li>
+<li>Exponent: All <code>1</code>s.</li>
+<li>Mantissa: Anyting but all <code>0</code>s.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="see-also" class="level1">
+<h1>See also</h1>
+<p><em>Floating point values like f16 see use across a range of disciplines, and each of these has a major result named after the f16, more or less:</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Aeronautical Engineering</label></li>
+<li><label><input type="checkbox">Bioinformatics</label></li>
+<li><label><input type="checkbox">Chemistry</label></li>
+<li><label><input type="checkbox">Automative Engineering</label></li>
+</ul>
+<table style="width:100%">
+<tbody><tr>
+<td style="width:50%">
+<img style="width:100%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/F-16_June_2008.jpg/960px-F-16_June_2008.jpg">
+</td>
+<td style="width:50%">
+<img style="width:100%" src="https://media.scbt.com/product/cyp2a6-antibody-f16-p2-d8-immunohistochemistry_13_72_b_137248.jpg">
+</td>
+</tr>
+<tr>
+<td style="width:50%">
+<img style="width:100%" src="https://www.chemlin.org/chemical-formulae/elements/fluorine/Fluorine-16.svg">
+</td>
+<td style="width:50%">
+<img style="width:100%" src="https://www.italeri.com/uploads/products/3923_tavola_latiLR.jpg">
+</td>
+</tr>
+</tbody></table>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -941,103 +1103,240 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "f16"</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">---</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">## Announcements</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="ss">- </span>Enrichment assignment</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="ss">    - </span>Implementation of half precision IEEE 754 floating point values</span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">    - </span>Use bitwise operations</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">    - </span>Use numeric operations</span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">    - </span>Combine them.</span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Homework</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="ss">- </span>SHA beckons</span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">- </span>Due Friday, 10 Oct. at 1440 ET.</span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">    - </span>Do not work on this instead of that, after lab section today, until you are done with that.</span>
-<span id="cb5-19"><a href="#cb5-19"></a></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="fu">## Citation</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="ss">- </span>Basically I try to take Python.Numpy.float16 as the reference implementation, but break from Python on float16 the same places <span class="in">`f32`</span> breaks from <span class="in">`numpy.float32`</span>.</span>
-<span id="cb5-23"><a href="#cb5-23"></a></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="fu">## Today</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="ss">- </span><span class="va">[ ]</span> Struct</span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="ss">- </span><span class="va">[ ]</span> Input/Output</span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="ss">- </span><span class="va">[ ]</span> Addition/Subtraction</span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="ss">- </span><span class="va">[ ]</span> Multiplication/Division</span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="ss">- </span><span class="va">[ ]</span> Optional: Special cases</span>
-<span id="cb5-31"><a href="#cb5-31"></a></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="fu"># Struct</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="ss">- </span>Before anything else, have to find a way to make an <span class="in">`f16`</span>.</span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="ss">    - </span>We will just use a <span class="in">`u16`</span> and treat it differently.</span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="ss">- </span>We will make a custom data structure that contains precisely a <span class="in">`u16`</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a></span>
-<span id="cb5-38"><a href="#cb5-38"></a><span class="in">```rs</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="kw">pub</span> <span class="kw">struct</span> f16 <span class="op">{</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a>    bits<span class="op">:</span> <span class="dt">u16</span><span class="op">,</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a><span class="op">}</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in">```</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="ss">- </span>This probably goes in <span class="in">`lib.rs`</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="ss">    - </span>Hence the <span class="in">`pub`</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a>    </span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="ss">- </span>You can test that you created a type as follows:</span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="in">fn main() {</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="in">    let x : f16::f16;</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">}</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">```</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="ss">- </span>The first <span class="in">`f16`</span> is the crate name, the second is the type name.</span>
-<span id="cb5-54"><a href="#cb5-54"></a></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="fu">### Aside</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="ss">- </span>For my money, <span class="in">`f16::f16`</span> looks terrible.</span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a><span class="in">use f16::*;</span></span>
-<span id="cb5-60"><a href="#cb5-60"></a></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="in">fn main() {</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="in">    let x : f16;</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">}</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">```</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="fu">### Aside</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="ss">- </span>We aren't really all the way to teaching structs yet, but feel free to play around with them.</span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="ss">- </span>In particular, you want to have 3 fields, <span class="in">`sign`</span>, <span class="in">`exp`</span>, and <span class="in">`mantissa`</span>, rather than a single <span class="in">`bits`</span> field.</span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="ss">- </span>The internal implementation is up to you with one exception:</span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="ss">    - </span>Only use *integer* operations to emulate floating point operations.</span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="ss">    - </span>(That's what we're trying to learn how to do here).</span>
-<span id="cb5-73"><a href="#cb5-73"></a><span class="ss">- </span>You can read more on <span class="in">`struct`</span> here:  <span class="co">[</span><span class="ot">Rust Book 05.01</span><span class="co">](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)</span></span>
-<span id="cb5-74"><a href="#cb5-74"></a></span>
-<span id="cb5-75"><a href="#cb5-75"></a></span>
-<span id="cb5-76"><a href="#cb5-76"></a><span class="fu">## Input/Output</span></span>
-<span id="cb5-77"><a href="#cb5-77"></a></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="ss">- </span>Versus built-in types, we'll just provide a ways to get values in and out.</span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="ss">- </span>We'll use the Rust default integer, <span class="in">`i32`</span>.</span>
-<span id="cb5-80"><a href="#cb5-80"></a></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="ss">- </span>Write the following functions:</span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">```rs</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="kw">fn</span> i32_to_f16(n<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> f16</span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="kw">fn</span> f16_to_i32(x<span class="op">:</span>f16) <span class="op">-&gt;</span> <span class="dt">i32</span></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="kw">fn</span> print_f16(x<span class="op">:</span>f16)</span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="in">```</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="ss">- </span>You may implement more complex handling, or set every overflow to <span class="in">`inf`</span> and underflow to <span class="in">`0`</span>.</span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="ss">- </span>The following table should be helpful, from the lecture:</span>
-<span id="cb5-89"><a href="#cb5-89"></a></span>
-<span id="cb5-90"><a href="#cb5-90"></a>| Format | Sign | Exp.  | Mant. | Bits  | Bias | Prec. | </span>
-<span id="cb5-91"><a href="#cb5-91"></a>| :--- | :---: | :---: | :---: | :---: | :---: | :---: |</span>
-<span id="cb5-92"><a href="#cb5-92"></a>| Half  | 1 | 5 | 10 | 16 | 15 | 11 |</span>
-<span id="cb5-93"><a href="#cb5-93"></a>| Single | 1 | 8 | 23 | 32 | 127 | 24 | </span>
-<span id="cb5-94"><a href="#cb5-94"></a>| Double | 1 | 11 | 52 | 64 | 1023 | 53 | </span>
-<span id="cb5-95"><a href="#cb5-95"></a>| Quad | 1 | 15 | 112 | 128 | 16383 | 113 |</span>
-<span id="cb5-96"><a href="#cb5-96"></a></span>
-<span id="cb5-97"><a href="#cb5-97"></a><span class="ss">- </span>Here is an example:</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "f16"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="ss">- </span>Enrichment assignment</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="ss">    - </span>Implementation of half precision IEEE 754 floating point values</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="ss">    - </span>Use bitwise operations</span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="ss">    - </span>Use numeric operations</span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="ss">    - </span>Combine them.</span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="fu">## Homework</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="ss">- </span>SHA beckons</span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="ss">- </span>Due Friday, 10 Oct. at 1440 ET.</span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="ss">    - </span>Do not work on this instead of that, after lab section today, until you are done with that.</span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="fu">## Citation</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="ss">- </span>Basically I try to take Python.Numpy.float16 as the reference implementation, but break from Python on float16 the same places <span class="in">`f32`</span> breaks from <span class="in">`numpy.float32`</span>.</span>
+<span id="cb12-23"><a href="#cb12-23"></a></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="fu">## Today</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="ss">- </span><span class="va">[ ]</span> Struct</span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="ss">- </span><span class="va">[ ]</span> Input/Output</span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="ss">- </span><span class="va">[ ]</span> Addition/Subtraction</span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="ss">- </span><span class="va">[ ]</span> Multiplication/Division</span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="ss">- </span><span class="va">[ ]</span> Optional: Special cases</span>
+<span id="cb12-31"><a href="#cb12-31"></a></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="fu"># Struct</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a></span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="ss">- </span>Before anything else, have to find a way to make an <span class="in">`f16`</span>.</span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="ss">    - </span>We will just use a <span class="in">`u16`</span> and treat it differently.</span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="ss">- </span>We will make a custom data structure that contains precisely a <span class="in">`u16`</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a></span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="in">```rs</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="kw">pub</span> <span class="kw">struct</span> f16 <span class="op">{</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a>    bits<span class="op">:</span> <span class="dt">u16</span><span class="op">,</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="op">}</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="in">```</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a></span>
+<span id="cb12-44"><a href="#cb12-44"></a><span class="ss">- </span>This probably goes in <span class="in">`lib.rs`</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a><span class="ss">    - </span>Hence the <span class="in">`pub`</span></span>
+<span id="cb12-46"><a href="#cb12-46"></a>    </span>
+<span id="cb12-47"><a href="#cb12-47"></a><span class="ss">- </span>You can test that you created a type as follows:</span>
+<span id="cb12-48"><a href="#cb12-48"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a><span class="in">fn main() {</span></span>
+<span id="cb12-50"><a href="#cb12-50"></a><span class="in">    let x : f16::f16;</span></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="in">}</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a><span class="in">```</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a><span class="ss">- </span>The first <span class="in">`f16`</span> is the crate name, the second is the type name.</span>
+<span id="cb12-54"><a href="#cb12-54"></a></span>
+<span id="cb12-55"><a href="#cb12-55"></a><span class="fu">## Aside</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a></span>
+<span id="cb12-57"><a href="#cb12-57"></a><span class="ss">- </span>For my money, <span class="in">`f16::f16`</span> looks terrible.</span>
+<span id="cb12-58"><a href="#cb12-58"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-59"><a href="#cb12-59"></a><span class="in">use f16::*;</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a></span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="in">fn main() {</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a><span class="in">    let x : f16;</span></span>
+<span id="cb12-63"><a href="#cb12-63"></a><span class="in">}</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a><span class="in">```</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a></span>
+<span id="cb12-66"><a href="#cb12-66"></a><span class="fu">## Aside</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a></span>
+<span id="cb12-68"><a href="#cb12-68"></a><span class="ss">- </span>Rust will admonish you for using <span class="in">`f16`</span> instead of <span class="in">`F16`</span>. </span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="in">```sh</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a><span class="ex">warning:</span> type <span class="kw">`</span><span class="ex">f16</span><span class="kw">`</span> should have an upper camel case name</span>
+<span id="cb12-71"><a href="#cb12-71"></a> <span class="ex">--</span><span class="op">&gt;</span> src/lib.rs:1:12</span>
+<span id="cb12-72"><a href="#cb12-72"></a>  <span class="kw">|</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a><span class="ex">1</span> <span class="kw">|</span> <span class="ex">pub</span> struct f16 {</span>
+<span id="cb12-74"><a href="#cb12-74"></a>  <span class="kw">|</span>            <span class="ex">^^^</span> help: convert the identifier to upper camel case <span class="er">(</span><span class="ex">notice</span> the capitalization<span class="kw">)</span><span class="bu">:</span> <span class="kw">`</span><span class="ex">F16</span><span class="kw">`</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a>  <span class="kw">|</span></span>
+<span id="cb12-76"><a href="#cb12-76"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[warn(non_camel_case_types)]</span><span class="kw">`</span> on by default</span>
+<span id="cb12-77"><a href="#cb12-77"></a><span class="in">```</span></span>
+<span id="cb12-78"><a href="#cb12-78"></a><span class="ss">- </span>Everyone is a critic!</span>
+<span id="cb12-79"><a href="#cb12-79"></a></span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="fu">## Aside</span></span>
+<span id="cb12-81"><a href="#cb12-81"></a></span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="ss">- </span>We aren't really all the way to teaching structs yet, but feel free to play around with them.</span>
+<span id="cb12-83"><a href="#cb12-83"></a><span class="ss">- </span>In particular, you want to have 3 fields, <span class="in">`sign`</span>, <span class="in">`exp`</span>, and <span class="in">`mantissa`</span>, rather than a single <span class="in">`bits`</span> field.</span>
+<span id="cb12-84"><a href="#cb12-84"></a><span class="ss">- </span>The internal implementation is up to you with one exception:</span>
+<span id="cb12-85"><a href="#cb12-85"></a><span class="ss">    - </span>Only use *integer* operations to emulate floating point operations.</span>
+<span id="cb12-86"><a href="#cb12-86"></a><span class="ss">    - </span>(That's what we're trying to learn how to do here).</span>
+<span id="cb12-87"><a href="#cb12-87"></a><span class="ss">- </span>You can read more on <span class="in">`struct`</span> here:  <span class="co">[</span><span class="ot">Rust Book 05.01</span><span class="co">](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)</span></span>
+<span id="cb12-88"><a href="#cb12-88"></a></span>
+<span id="cb12-89"><a href="#cb12-89"></a></span>
+<span id="cb12-90"><a href="#cb12-90"></a><span class="fu"># Input/Output</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a></span>
+<span id="cb12-92"><a href="#cb12-92"></a><span class="ss">- </span>Versus built-in types, we'll just provide a ways to get values in and out.</span>
+<span id="cb12-93"><a href="#cb12-93"></a><span class="ss">- </span>We'll use the Rust default integer, <span class="in">`i32`</span>.</span>
+<span id="cb12-94"><a href="#cb12-94"></a></span>
+<span id="cb12-95"><a href="#cb12-95"></a><span class="ss">- </span>Write the following functions:</span>
+<span id="cb12-96"><a href="#cb12-96"></a><span class="in">```rs</span></span>
+<span id="cb12-97"><a href="#cb12-97"></a><span class="kw">fn</span> i32_to_f16(n<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> f16</span>
+<span id="cb12-98"><a href="#cb12-98"></a><span class="kw">fn</span> print_f16(x<span class="op">:</span>f16)</span>
+<span id="cb12-99"><a href="#cb12-99"></a><span class="co">// optional, but i used it - print_f16 and a newline.</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a><span class="kw">fn</span> println_f16(x<span class="op">:</span>f16)</span>
+<span id="cb12-101"><a href="#cb12-101"></a><span class="in">```</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a><span class="ss">- </span>You may implement more complex handling, or set every overflow to <span class="in">`inf`</span> and underflow to <span class="in">`0`</span>.</span>
+<span id="cb12-103"><a href="#cb12-103"></a><span class="ss">- </span>The following table should be helpful, from the lecture:</span>
+<span id="cb12-104"><a href="#cb12-104"></a></span>
+<span id="cb12-105"><a href="#cb12-105"></a>| Format | Sign | Exp.  | Mant. | Bits  | Bias | Prec. | </span>
+<span id="cb12-106"><a href="#cb12-106"></a>| :--- | :---: | :---: | :---: | :---: | :---: | :---: |</span>
+<span id="cb12-107"><a href="#cb12-107"></a>| Half  | 1 | 5 | 10 | 16 | 15 | 11 |</span>
+<span id="cb12-108"><a href="#cb12-108"></a>| Single | 1 | 8 | 23 | 32 | 127 | 24 | </span>
+<span id="cb12-109"><a href="#cb12-109"></a>| Double | 1 | 11 | 52 | 64 | 1023 | 53 | </span>
+<span id="cb12-110"><a href="#cb12-110"></a>| Quad | 1 | 15 | 112 | 128 | 16383 | 113 |</span>
+<span id="cb12-111"><a href="#cb12-111"></a></span>
+<span id="cb12-112"><a href="#cb12-112"></a><span class="ss">- </span>Here is an example:</span>
+<span id="cb12-113"><a href="#cb12-113"></a></span>
+<span id="cb12-114"><a href="#cb12-114"></a><span class="in">```sh</span></span>
+<span id="cb12-115"><a href="#cb12-115"></a><span class="ex">1.512*2^3</span></span>
+<span id="cb12-116"><a href="#cb12-116"></a><span class="ex">[src/main.rs:4:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">12</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-117"><a href="#cb12-117"></a><span class="ex">1.944*2^6</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a><span class="ex">[src/main.rs:5:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">123</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-119"><a href="#cb12-119"></a><span class="ex">1.210*2^10</span></span>
+<span id="cb12-120"><a href="#cb12-120"></a><span class="ex">[src/main.rs:6:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">1234</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-121"><a href="#cb12-121"></a><span class="in">```</span></span>
+<span id="cb12-122"><a href="#cb12-122"></a></span>
+<span id="cb12-123"><a href="#cb12-123"></a><span class="ss">- </span>Not the debug stating logging the function call prints after the value is displayed, as the debug statement is only printed *after* the function call returns.</span>
+<span id="cb12-124"><a href="#cb12-124"></a></span>
+<span id="cb12-125"><a href="#cb12-125"></a><span class="fu">## Aside</span></span>
+<span id="cb12-126"><a href="#cb12-126"></a></span>
+<span id="cb12-127"><a href="#cb12-127"></a><span class="ss">- </span>It is admittedly odd to print values in decimal multpiplied by a power of 2.</span>
+<span id="cb12-128"><a href="#cb12-128"></a><span class="ss">- </span>If you which to print in binary, simply prefix with <span class="in">`0b`</span></span>
+<span id="cb12-129"><a href="#cb12-129"></a><span class="in">```sh</span></span>
+<span id="cb12-130"><a href="#cb12-130"></a><span class="ex">0b1.1000000000*10^11</span></span>
+<span id="cb12-131"><a href="#cb12-131"></a><span class="ex">[src/main.rs:4:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">12</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-132"><a href="#cb12-132"></a><span class="ex">0b1.1110110000*10^110</span></span>
+<span id="cb12-133"><a href="#cb12-133"></a><span class="ex">[src/main.rs:5:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">123</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-134"><a href="#cb12-134"></a><span class="ex">0b1.11010010*10^1010</span></span>
+<span id="cb12-135"><a href="#cb12-135"></a><span class="ex">[src/main.rs:6:5]</span> println_f16<span class="er">(</span><span class="ex">i32_to_f16</span><span class="er">(</span><span class="ex">1234</span><span class="kw">))</span> <span class="ex">=</span> <span class="er">(</span><span class="kw">)</span></span>
+<span id="cb12-136"><a href="#cb12-136"></a><span class="in">```</span></span>
+<span id="cb12-137"><a href="#cb12-137"></a><span class="ss">- </span>I didn't find this easier (I just yeeted the output into Ye Olde Python III) but you may.</span>
+<span id="cb12-138"><a href="#cb12-138"></a></span>
+<span id="cb12-139"><a href="#cb12-139"></a><span class="fu">## Aside</span></span>
+<span id="cb12-140"><a href="#cb12-140"></a></span>
+<span id="cb12-141"><a href="#cb12-141"></a><span class="ss">- </span>Speaking of yeeting, if you prefer this formulation:</span>
+<span id="cb12-142"><a href="#cb12-142"></a><span class="in">```sh</span></span>
+<span id="cb12-143"><a href="#cb12-143"></a><span class="ex"></span>    Finished <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb12-144"><a href="#cb12-144"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bits</span><span class="kw">`</span></span>
+<span id="cb12-145"><a href="#cb12-145"></a><span class="ex">1.512*2**3</span></span>
+<span id="cb12-146"><a href="#cb12-146"></a><span class="ex">1.944*2**6</span></span>
+<span id="cb12-147"><a href="#cb12-147"></a><span class="ex">1.210*2**10</span></span>
+<span id="cb12-148"><a href="#cb12-148"></a><span class="in">```</span></span>
+<span id="cb12-149"><a href="#cb12-149"></a><span class="ss">- </span>I won't say anything if you don't.</span>
+<span id="cb12-150"><a href="#cb12-150"></a><span class="in">```py</span></span>
+<span id="cb12-151"><a href="#cb12-151"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.512</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span></span>
+<span id="cb12-152"><a href="#cb12-152"></a><span class="fl">12.096</span></span>
+<span id="cb12-153"><a href="#cb12-153"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.944</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">6</span></span>
+<span id="cb12-154"><a href="#cb12-154"></a><span class="fl">124.416</span></span>
+<span id="cb12-155"><a href="#cb12-155"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">1.210</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">10</span></span>
+<span id="cb12-156"><a href="#cb12-156"></a><span class="fl">1239.04</span></span>
+<span id="cb12-157"><a href="#cb12-157"></a><span class="in">```</span></span>
+<span id="cb12-158"><a href="#cb12-158"></a></span>
+<span id="cb12-159"><a href="#cb12-159"></a><span class="fu"># Add/sub</span></span>
+<span id="cb12-160"><a href="#cb12-160"></a></span>
+<span id="cb12-161"><a href="#cb12-161"></a><span class="ss">- </span>Write the following functions:</span>
+<span id="cb12-162"><a href="#cb12-162"></a><span class="in">```rs</span></span>
+<span id="cb12-163"><a href="#cb12-163"></a><span class="kw">fn</span> add_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb12-164"><a href="#cb12-164"></a><span class="kw">fn</span> sub_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb12-165"><a href="#cb12-165"></a><span class="in">```</span></span>
+<span id="cb12-166"><a href="#cb12-166"></a></span>
+<span id="cb12-167"><a href="#cb12-167"></a><span class="fu"># Mul/div</span></span>
+<span id="cb12-168"><a href="#cb12-168"></a></span>
+<span id="cb12-169"><a href="#cb12-169"></a><span class="ss">- </span>Write the following functions:</span>
+<span id="cb12-170"><a href="#cb12-170"></a><span class="in">```rs</span></span>
+<span id="cb12-171"><a href="#cb12-171"></a><span class="kw">fn</span> mul_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb12-172"><a href="#cb12-172"></a><span class="kw">fn</span> div_f16s(x<span class="op">:</span>f16<span class="op">,</span> y<span class="op">:</span>f16) <span class="op">-&gt;</span> f16</span>
+<span id="cb12-173"><a href="#cb12-173"></a><span class="in">```</span></span>
+<span id="cb12-174"><a href="#cb12-174"></a></span>
+<span id="cb12-175"><a href="#cb12-175"></a><span class="fu"># Today</span></span>
+<span id="cb12-176"><a href="#cb12-176"></a></span>
+<span id="cb12-177"><a href="#cb12-177"></a><span class="ss">- </span><span class="va">[ ]</span> Struct</span>
+<span id="cb12-178"><a href="#cb12-178"></a><span class="ss">- </span><span class="va">[ ]</span> Input/Output</span>
+<span id="cb12-179"><a href="#cb12-179"></a><span class="ss">- </span><span class="va">[ ]</span> Addition/Subtraction</span>
+<span id="cb12-180"><a href="#cb12-180"></a><span class="ss">- </span><span class="va">[ ]</span> Multiplication/Division</span>
+<span id="cb12-181"><a href="#cb12-181"></a><span class="ss">- </span><span class="va">[ ]</span> Optional: Special cases</span>
+<span id="cb12-182"><a href="#cb12-182"></a></span>
+<span id="cb12-183"><a href="#cb12-183"></a><span class="fu"># Optional</span></span>
+<span id="cb12-184"><a href="#cb12-184"></a></span>
+<span id="cb12-185"><a href="#cb12-185"></a><span class="fu">## Implement infinities</span></span>
+<span id="cb12-186"><a href="#cb12-186"></a></span>
+<span id="cb12-187"><a href="#cb12-187"></a><span class="ss">- </span>Ensure when any value is divided by zero, or any arithmetic results overflows, that the value is set to infinity.</span>
+<span id="cb12-188"><a href="#cb12-188"></a><span class="ss">- </span>Ensure infinity is printed consistently, perhaps as <span class="in">`inf`</span> or as unicode ∞.</span>
+<span id="cb12-189"><a href="#cb12-189"></a><span class="ss">- </span>Ensure positive and negative infinity.</span>
+<span id="cb12-190"><a href="#cb12-190"></a><span class="ss">- </span>Ensure infinity matches IEEE 754 requirements:</span>
+<span id="cb12-191"><a href="#cb12-191"></a><span class="ss">    - </span>Sign: Either.</span>
+<span id="cb12-192"><a href="#cb12-192"></a><span class="ss">    - </span>Exponent: All <span class="in">`1`</span>s.</span>
+<span id="cb12-193"><a href="#cb12-193"></a><span class="ss">    - </span>Mantissa: All <span class="in">`0`</span>s.</span>
+<span id="cb12-194"><a href="#cb12-194"></a>    </span>
+<span id="cb12-195"><a href="#cb12-195"></a><span class="fu">## Implement NaN</span></span>
+<span id="cb12-196"><a href="#cb12-196"></a></span>
+<span id="cb12-197"><a href="#cb12-197"></a><span class="ss">- </span>Ensure when infinities of differing signs are summed (whether via add or sub), <span class="in">`NaN`</span> is returned.</span>
+<span id="cb12-198"><a href="#cb12-198"></a><span class="ss">- </span>Ensure when zero is divided by zero or <span class="in">`inf`</span> by <span class="in">`inf`</span> returns <span class="in">`NaN`</span> or <span class="in">`nan`</span> (up to you).</span>
+<span id="cb12-199"><a href="#cb12-199"></a><span class="ss">- </span>Ensure any operations over <span class="in">`NaN`</span> and any other value return <span class="in">`NaN`</span>.</span>
+<span id="cb12-200"><a href="#cb12-200"></a><span class="ss">- </span>Ensure <span class="in">`NaN`</span> is printed consistently.</span>
+<span id="cb12-201"><a href="#cb12-201"></a><span class="ss">- </span>Ensure <span class="in">`NaN`</span> matches IEEE 754 requirements:</span>
+<span id="cb12-202"><a href="#cb12-202"></a><span class="ss">    - </span>Sign: Either.</span>
+<span id="cb12-203"><a href="#cb12-203"></a><span class="ss">    - </span>Exponent: All <span class="in">`1`</span>s.</span>
+<span id="cb12-204"><a href="#cb12-204"></a><span class="ss">    - </span>Mantissa: Anyting but all <span class="in">`0`</span>s.</span>
+<span id="cb12-205"><a href="#cb12-205"></a></span>
+<span id="cb12-206"><a href="#cb12-206"></a></span>
+<span id="cb12-207"><a href="#cb12-207"></a><span class="fu"># See also</span></span>
+<span id="cb12-208"><a href="#cb12-208"></a></span>
+<span id="cb12-209"><a href="#cb12-209"></a>*Floating point values like f16 see use across a range of disciplines, and each of these has a major result named after the f16, more or less:*</span>
+<span id="cb12-210"><a href="#cb12-210"></a></span>
+<span id="cb12-211"><a href="#cb12-211"></a><span class="ss">- </span><span class="va">[ ]</span> Aeronautical Engineering</span>
+<span id="cb12-212"><a href="#cb12-212"></a><span class="ss">- </span><span class="va">[ ]</span> Bioinformatics</span>
+<span id="cb12-213"><a href="#cb12-213"></a><span class="ss">- </span><span class="va">[ ]</span> Chemistry</span>
+<span id="cb12-214"><a href="#cb12-214"></a><span class="ss">- </span><span class="va">[ ]</span> Automative Engineering</span>
+<span id="cb12-215"><a href="#cb12-215"></a></span>
+<span id="cb12-216"><a href="#cb12-216"></a>&lt;table style="width:100%"&gt;</span>
+<span id="cb12-217"><a href="#cb12-217"></a>    &lt;tr&gt;</span>
+<span id="cb12-218"><a href="#cb12-218"></a>        &lt;td style="width:50%" &gt;</span>
+<span id="cb12-219"><a href="#cb12-219"></a>            &lt;img style="width:100%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/F-16_June_2008.jpg/960px-F-16_June_2008.jpg"&gt;</span>
+<span id="cb12-220"><a href="#cb12-220"></a>        &lt;/td&gt;</span>
+<span id="cb12-221"><a href="#cb12-221"></a>        &lt;td style="width:50%" &gt;</span>
+<span id="cb12-222"><a href="#cb12-222"></a>            &lt;img style="width:100%" src="https://media.scbt.com/product/cyp2a6-antibody-f16-p2-d8-immunohistochemistry_13_72_b_137248.jpg"&gt;</span>
+<span id="cb12-223"><a href="#cb12-223"></a>        &lt;/td&gt;</span>
+<span id="cb12-224"><a href="#cb12-224"></a>    &lt;/tr&gt;</span>
+<span id="cb12-225"><a href="#cb12-225"></a>    &lt;tr&gt;</span>
+<span id="cb12-226"><a href="#cb12-226"></a>        &lt;td style="width:50%" &gt;</span>
+<span id="cb12-227"><a href="#cb12-227"></a>            &lt;img style="width:100%" src="https://www.chemlin.org/chemical-formulae/elements/fluorine/Fluorine-16.svg"&gt;</span>
+<span id="cb12-228"><a href="#cb12-228"></a>        &lt;/td&gt;</span>
+<span id="cb12-229"><a href="#cb12-229"></a>        &lt;td style="width:50%" &gt;</span>
+<span id="cb12-230"><a href="#cb12-230"></a>            &lt;img style="width:100%" src="https://www.italeri.com/uploads/products/3923_tavola_latiLR.jpg"&gt;</span>
+<span id="cb12-231"><a href="#cb12-231"></a>        &lt;/td&gt;</span>
+<span id="cb12-232"><a href="#cb12-232"></a>    &lt;/tr&gt;</span>
+<span id="cb12-233"><a href="#cb12-233"></a>&lt;/table&gt;</span>
+<span id="cb12-234"><a href="#cb12-234"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

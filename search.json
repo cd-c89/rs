@@ -7621,11 +7621,71 @@
     ]
   },
   {
-    "objectID": "51_f16.html#inputoutput",
-    "href": "51_f16.html#inputoutput",
+    "objectID": "51_f16.html#aside",
+    "href": "51_f16.html#aside",
     "title": "f16",
-    "section": "Input/Output",
-    "text": "Input/Output\n\nVersus built-in types, we’ll just provide a ways to get values in and out.\nWe’ll use the Rust default integer, i32.\nWrite the following functions:\n\nfn i32_to_f16(n:i32) -&gt; f16\nfn f16_to_i32(x:f16) -&gt; i32\nfn print_f16(x:f16)\n\nYou may implement more complex handling, or set every overflow to inf and underflow to 0.\nThe following table should be helpful, from the lecture:\n\n\n\n\nFormat\nSign\nExp.\nMant.\nBits\nBias\nPrec.\n\n\n\n\nHalf\n1\n5\n10\n16\n15\n11\n\n\nSingle\n1\n8\n23\n32\n127\n24\n\n\nDouble\n1\n11\n52\n64\n1023\n53\n\n\nQuad\n1\n15\n112\n128\n16383\n113\n\n\n\n\nHere is an example:",
+    "section": "Aside",
+    "text": "Aside\n\nFor my money, f16::f16 looks terrible.\n\n\n\nsrc/main.rs\n\nuse f16::*;\n\nfn main() {\n    let x : f16;\n}",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#aside-1",
+    "href": "51_f16.html#aside-1",
+    "title": "f16",
+    "section": "Aside",
+    "text": "Aside\n\nRust will admonish you for using f16 instead of F16.\n\nwarning: type `f16` should have an upper camel case name\n --&gt; src/lib.rs:1:12\n  |\n1 | pub struct f16 {\n  |            ^^^ help: convert the identifier to upper camel case (notice the capitalization): `F16`\n  |\n  = note: `#[warn(non_camel_case_types)]` on by default\n\nEveryone is a critic!",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#aside-2",
+    "href": "51_f16.html#aside-2",
+    "title": "f16",
+    "section": "Aside",
+    "text": "Aside\n\nWe aren’t really all the way to teaching structs yet, but feel free to play around with them.\nIn particular, you want to have 3 fields, sign, exp, and mantissa, rather than a single bits field.\nThe internal implementation is up to you with one exception:\n\nOnly use integer operations to emulate floating point operations.\n(That’s what we’re trying to learn how to do here).\n\nYou can read more on struct here: Rust Book 05.01",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#aside-3",
+    "href": "51_f16.html#aside-3",
+    "title": "f16",
+    "section": "Aside",
+    "text": "Aside\n\nIt is admittedly odd to print values in decimal multpiplied by a power of 2.\nIf you which to print in binary, simply prefix with 0b\n\n0b1.1000000000*10^11\n[src/main.rs:4:5] println_f16(i32_to_f16(12)) = ()\n0b1.1110110000*10^110\n[src/main.rs:5:5] println_f16(i32_to_f16(123)) = ()\n0b1.11010010*10^1010\n[src/main.rs:6:5] println_f16(i32_to_f16(1234)) = ()\n\nI didn’t find this easier (I just yeeted the output into Ye Olde Python III) but you may.",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#aside-4",
+    "href": "51_f16.html#aside-4",
+    "title": "f16",
+    "section": "Aside",
+    "text": "Aside\n\nSpeaking of yeeting, if you prefer this formulation:\n\n\u0016\u0016    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/bits`\n1.512*2**3\n1.944*2**6\n1.210*2**10\n\nI won’t say anything if you don’t.\n\n&gt;&gt;&gt; 1.512*2**3\n12.096\n&gt;&gt;&gt; 1.944*2**6\n124.416\n&gt;&gt;&gt; 1.210*2**10\n1239.04",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#implement-infinities",
+    "href": "51_f16.html#implement-infinities",
+    "title": "f16",
+    "section": "Implement infinities",
+    "text": "Implement infinities\n\nEnsure when any value is divided by zero, or any arithmetic results overflows, that the value is set to infinity.\nEnsure infinity is printed consistently, perhaps as inf or as unicode ∞.\nEnsure positive and negative infinity.\nEnsure infinity matches IEEE 754 requirements:\n\nSign: Either.\nExponent: All 1s.\nMantissa: All 0s.",
+    "crumbs": [
+      "f16"
+    ]
+  },
+  {
+    "objectID": "51_f16.html#implement-nan",
+    "href": "51_f16.html#implement-nan",
+    "title": "f16",
+    "section": "Implement NaN",
+    "text": "Implement NaN\n\nEnsure when infinities of differing signs are summed (whether via add or sub), NaN is returned.\nEnsure when zero is divided by zero or inf by inf returns NaN or nan (up to you).\nEnsure any operations over NaN and any other value return NaN.\nEnsure NaN is printed consistently.\nEnsure NaN matches IEEE 754 requirements:\n\nSign: Either.\nExponent: All 1s.\nMantissa: Anyting but all 0s.",
     "crumbs": [
       "f16"
     ]
