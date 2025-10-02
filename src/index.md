@@ -36,10 +36,10 @@ format: html
 |0x2|09/08|[Options](20_options.md)|[Guess](21_guess.md)|[Wordle](22_wordle.md)|
 |0x3|09/15|[Bits](30_bits.qmd)|[Hamming](31_hamming.md)|[Macros](32_macros.md)|
 |0x4|09/22|[SHA2](40_sha2.md)|[Constants](41_constants.md)|[SHA512](42_sha512.md)|
-|0x5|09/29|[IEEE754](50_754.md)|Constants|[SHA512](42_sha512.md)|
-|0x6|10/06|Review|Midterm|`None`|
-|0x7|10/13|BigInt|BigAdd|u512|
-|0x8|10/20|ECDSA|Python|ECDSA|
+|0x5|09/29|[IEEE754](50_754.md)|[`f16`](51_f16.md)|[SHA512](42_sha512.md)|
+|0x6|10/06|[Practice](https://classroom.github.com/a/opvHddb-)|**Midterm**|`None`|
+|0x7|10/13|BigInt|BigAdd|ix|
+|0x8|10/20|ECDSA|Python|Ed25519|
 |0x9|10/27|Stacks|List|Tree|
 |0xA|11/03|Graphs|BFS|Djikstra|
 |0xB|11/10|Merkle|||
