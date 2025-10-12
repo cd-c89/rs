@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>Numerical I/O – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./72_ix.md.html" rel="next">
+<link href="./70_numbers.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./71_ix_io.html">Numerical I/O</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hamming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_sha2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50_754.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IEEE 754</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51_f16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">f16</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numbers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71_ix_io.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Numerical I/O</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./72_ix.md.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#struct" id="toc-struct" class="nav-link" data-scroll-target="#struct">Struct</a>
+  <ul class="collapse">
+  <li><a href="#test-it" id="toc-test-it" class="nav-link" data-scroll-target="#test-it">Test it</a></li>
+  <li><a href="#aside" id="toc-aside" class="nav-link" data-scroll-target="#aside">Aside</a></li>
+  <li><a href="#aside-1" id="toc-aside-1" class="nav-link" data-scroll-target="#aside-1">Aside</a></li>
+  <li><a href="#aside-2" id="toc-aside-2" class="nav-link" data-scroll-target="#aside-2">Aside</a></li>
+  </ul></li>
+  <li><a href="#inputoutput" id="toc-inputoutput" class="nav-link" data-scroll-target="#inputoutput">Input/Output</a>
+  <ul class="collapse">
+  <li><a href="#srcmain.rs" id="toc-srcmain.rs" class="nav-link" data-scroll-target="#srcmain.rs"><code>src/main.rs</code></a>
+  <ul class="collapse">
+  <li><a href="#my-srcmain.rs" id="toc-my-srcmain.rs" class="nav-link" data-scroll-target="#my-srcmain.rs">My <code>src/main.rs</code></a></li>
+  </ul></li>
+  <li><a href="#tester.py" id="toc-tester.py" class="nav-link" data-scroll-target="#tester.py"><code>tester.py</code></a>
+  <ul class="collapse">
+  <li><a href="#my-tester.py" id="toc-my-tester.py" class="nav-link" data-scroll-target="#my-tester.py">My <code>tester.py</code></a></li>
+  <li><a href="#example-output" id="toc-example-output" class="nav-link" data-scroll-target="#example-output">Example output</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Numerical I/O</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li>Scaffolding assignment for <code>ix</code>
+<ul>
+<li>Big numbers are hard to type, think of, reason about, etc.</li>
+<li>Hard to check your work.</li>
+</ul></li>
+</ul>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li><code>ix</code> beckons</li>
+<li>Due Friday, 24 Oct.&nbsp;at 1440 ET.
+<ul>
+<li>You will probably need to finish this to do that.</li>
+</ul></li>
+<li><code>ix</code> vs.&nbsp;eg. <code>i32</code>, <code>i64</code>, can store infinite values, and your job is to make it.</li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Struct</label></li>
+<li><label><input type="checkbox">Input/Output</label></li>
+<li><label><input type="checkbox">Addition/Subtraction</label></li>
+<li><label><input type="checkbox">Multiplication/Division</label></li>
+<li><label><input type="checkbox">Optional: Special cases</label></li>
+</ul>
+</section>
+<section id="struct" class="level1">
+<h1>Struct</h1>
+<ul>
+<li>Before anything else, have to find a way to make an <code>ix</code>.
+<ul>
+<li>I am granting you full freedom to implement <code>ix</code> as you see fit with one exception:</li>
+<li>You must implement it yourself, not use an existing “BigNum” or “BigInt” crate, like [this])(https://docs.rs/num-bigint/latest/num_bigint/struct.BigInt.html)</li>
+</ul></li>
+<li>Personally, I just used a sign boolean and a vector of unsigned values. You are welcome to take this approach:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/lib.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">#![</span>allow<span class="at">(</span>non_camel_case_types<span class="at">)]</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">pub</span> <span class="kw">struct</span> ix <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    sign<span class="op">:</span> <span class="dt">bool</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    vals<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The real merits of showing this are:
+<ul>
+<li>You can use <code>#![allow(non_camel_case_types)]</code> to avoid the annoying warning for a lower case name.
+<ul>
+<li>Naming a data structure in lower case is poor form (consider <code>String</code> vs.&nbsp;<code>&amp;str</code>) but…</li>
+<li>I was out of ideas.</li>
+</ul></li>
+</ul></li>
+<li>The structure is public, so can be used from a testing <code>src/main.rs</code>.</li>
+<li>The internal fields are not public, so you can make any changes you like within <code>src/lib.rs</code>.</li>
+</ul>
+<section id="test-it" class="level2">
+<h2 class="anchored" data-anchor-id="test-it">Test it</h2>
+<ul>
+<li>You can test the same way we tested <code>f16</code>:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">let</span> x <span class="op">:</span> <span class="pp">f16::</span>f16<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The first <code>f16</code> is the crate name, the second is the type name.</li>
+</ul>
+</section>
+<section id="aside" class="level2">
+<h2 class="anchored" data-anchor-id="aside">Aside</h2>
+<ul>
+<li>For my money, <code>f16::f16</code> looks terrible.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="pp">f16::</span><span class="op">*;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="kw">let</span> x <span class="op">:</span> f16<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="aside-1" class="level2">
+<h2 class="anchored" data-anchor-id="aside-1">Aside</h2>
+<ul>
+<li>Rust admonished you for using <code>f16</code> instead of <code>F16</code>.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">warning:</span> type <span class="kw">`</span><span class="ex">f16</span><span class="kw">`</span> should have an upper camel case name</span>
+<span id="cb4-2"><a href="#cb4-2"></a> <span class="ex">--</span><span class="op">&gt;</span> src/lib.rs:1:12</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">|</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">1</span> <span class="kw">|</span> <span class="ex">pub</span> struct f16 {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">|</span>            <span class="ex">^^^</span> help: convert the identifier to upper camel case <span class="er">(</span><span class="ex">notice</span> the capitalization<span class="kw">)</span><span class="bu">:</span> <span class="kw">`</span><span class="ex">F16</span><span class="kw">`</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">|</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[warn(non_camel_case_types)]</span><span class="kw">`</span> on by default</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Everyone is a critic!</li>
+<li><code>#![allow(non_camel_case_types)]</code></li>
+</ul>
+</section>
+<section id="aside-2" class="level2">
+<h2 class="anchored" data-anchor-id="aside-2">Aside</h2>
+<ul>
+<li>You can read more on <code>struct</code> here: <a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html">Rust Book 05.01</a></li>
+</ul>
+</section>
+</section>
+<section id="inputoutput" class="level1">
+<h1>Input/Output</h1>
+<ul>
+<li>Versus built-in types, we’ll just provide a ways to get values in and out.</li>
+<li>Vs. <code>f16</code>, this won’t be easy in the sense that we are explicitly trying to work with values that do not fit into any existing numerical type.</li>
+<li>For example, I will provide the following function, but it isn’t particularly helpful.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">pub</span> <span class="kw">fn</span> u64_to_ix(val<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> ix <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">return</span> ix <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>        sign<span class="op">:</span> <span class="cn">false</span><span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        vals<span class="op">:</span> <span class="pp">vec!</span>[val]<span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="op">};</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The real motivation for todays lab is to use a testing framework.</li>
+<li>I am providing mine, which you are not required to use but that I quite like.
+<ul>
+<li>Values are input as command line arguments as hex strings, with a <code>0x</code> prefix.
+<ul>
+<li>I didn’t check if I can input negative values, content to create negatives via subtraction rather than define a standard.</li>
+</ul></li>
+<li>Values are output to <code>stdout</code> as hex values with no <code>0x</code> prefix but with a sign.
+<ul>
+<li>This was so I could read them directly with Python <code>int()</code> for testing.</li>
+</ul></li>
+<li>Operations are specified using a capitalized, 3 letter abbreviation describing one of the four supported operations:
+<ul>
+<li><code>ADD, SUB, MUL, DIV, REM</code> - which I want to reiterate is four operations.</li>
+<li>This should say “pattern matching” to you.</li>
+</ul></li>
+</ul></li>
+<li>I’ll present the components of the testing framework, and your task is to convince yourself you understand them.</li>
+</ul>
+<section id="srcmain.rs" class="level2">
+<h2 class="anchored" data-anchor-id="srcmain.rs"><code>src/main.rs</code></h2>
+<ul>
+<li>Main:
+<ul>
+<li>Uses the <code>ix</code> implementation from <code>src/lib.rs</code></li>
+<li>Reads command line arguments generated by <code>tester.py</code></li>
+<li>Converts two command line strings representing numerical hex vlaues into <code>ix</code> instances.</li>
+<li>Captures the final command line argument to determine which operation to perform.</li>
+<li>Calls the appropriate <code>ix</code> arithmetic function and captures its return value.
+<ul>
+<li>I call these <code>&lt;op&gt;_ix</code> for <code>op</code> in <code>add, sub, mul, div, rem</code></li>
+</ul></li>
+<li>Prints to <code>stdout</code> the returned <code>ix</code> as a hex string.</li>
+</ul></li>
+<li>While intended to be used by <code>tester.py</code>, it can also be used manually!</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">$</span> cargo run 0x10 0x20 ADD</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bignum</span> 0x10 0x20 ADD<span class="kw">`</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">0000000000000030</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I do not add a newline after this value.</li>
+<li>You can, and probably should want to, make your own <code>src/main.rs</code> that does these things, but you are not required to do so.</li>
+<li>I am providing mine as a “spoiler marked” HTML <code>&lt;details&gt;</code> block.</li>
+</ul>
+<section id="my-srcmain.rs" class="level3">
+<h3 class="anchored" data-anchor-id="my-srcmain.rs">My <code>src/main.rs</code></h3>
+<details>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">use</span> <span class="pp">bignum::</span><span class="op">*;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="kw">let</span> a <span class="op">=</span> h2i_ix(<span class="op">&amp;</span>args[<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">let</span> b <span class="op">=</span> h2i_ix(<span class="op">&amp;</span>args[<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="cf">match</span> args[<span class="dv">3</span>]<span class="op">.</span>as_str() <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="st">"ADD"</span> <span class="op">=&gt;</span> see_ix(<span class="op">&amp;</span>add_ix(<span class="op">&amp;</span>a<span class="op">,</span> <span class="op">&amp;</span>b))<span class="op">,</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>        <span class="st">"SUB"</span> <span class="op">=&gt;</span> see_ix(<span class="op">&amp;</span>sub_ix(<span class="op">&amp;</span>a<span class="op">,</span> <span class="op">&amp;</span>b))<span class="op">,</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="st">"MUL"</span> <span class="op">=&gt;</span> <span class="pp">todo!</span>()<span class="op">,</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>        <span class="st">"DIV"</span> <span class="op">=&gt;</span> <span class="pp">todo!</span>()<span class="op">,</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>        <span class="st">"REM"</span> <span class="op">=&gt;</span> <span class="pp">todo!</span>()<span class="op">,</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>        <span class="op">&amp;</span>_    <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Operator not recognized: choose from ADD, SUB, MUL, DIV, REM"</span>)<span class="op">,</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="op">}</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</section>
+</section>
+<section id="tester.py" class="level2">
+<h2 class="anchored" data-anchor-id="tester.py"><code>tester.py</code></h2>
+<ul>
+<li>Tester:
+<ul>
+<li>Using Python’s built-in integers, generates two large random numbers, I generated mine to be between 500 and 512 bits.</li>
+<li>Convert them to hex strings.</li>
+<li>For each of the debatebly four or five operations, the tester:
+<ul>
+<li>Uses <code>subprocess</code> to dispatch cargo to run with three command line arguments: the two hex strings and the operation (in all caps).</li>
+<li>Captures the output of the process.</li>
+<li>Computes the same operation using Python arithmetic operations.</li>
+<li>Uses naive string comparison to compare the two values.
+<ul>
+<li>Optionally raises a debug message in the event of a difference.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>To support tester usage, I will provide:
+<ul>
+<li>The <code>tester.py</code> code</li>
+<li>An example run on a partial <code>ix</code> implementation, with only addition and subtraction completed.</li>
+</ul></li>
+<li>I am spoiler marking both, in case you want to make your own.</li>
+</ul>
+<section id="my-tester.py" class="level3">
+<h3 class="anchored" data-anchor-id="my-tester.py">My <code>tester.py</code></h3>
+<details>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tester.py</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="tester.py"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>DEBUG <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>CMD <span class="op">=</span> <span class="st">"cargo run --"</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="im">import</span> subprocess, os, random</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>bigone, bigtwo <span class="op">=</span> random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>), random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>hexone, hextwo <span class="op">=</span> <span class="bu">hex</span>(bigone), <span class="bu">hex</span>(bigtwo)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">hexone =</span><span class="ch">\n</span><span class="st">"</span>, hexone, <span class="st">"</span><span class="ch">\n</span><span class="st">hextwo = </span><span class="ch">\n</span><span class="st">"</span>, hextwo)</span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb8-12"><a href="#cb8-12"></a>ops <span class="op">=</span> {<span class="st">'ADD'</span>:add,<span class="st">'SUB'</span>:sub,<span class="st">'MUL'</span>:mul,<span class="st">'QUO'</span>:quo,<span class="st">'REM'</span>:rem}</span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="cf">for</span> op <span class="kw">in</span> ops:</span>
+<span id="cb8-14"><a href="#cb8-14"></a>    result <span class="op">=</span> <span class="bu">int</span>(subprocess.check_output([<span class="st">"cargo"</span>, <span class="st">"run"</span>, hexone, hextwo, op]),<span class="dv">16</span>)</span>
+<span id="cb8-15"><a href="#cb8-15"></a>    answer <span class="op">=</span> ops[op](bigone,bigtwo)</span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="cf">if</span> result <span class="op">!=</span> answer:</span>
+<span id="cb8-17"><a href="#cb8-17"></a>        <span class="bu">print</span>(<span class="st">"Operator"</span>, op, <span class="st">"failed."</span>)</span>
+<span id="cb8-18"><a href="#cb8-18"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Expected:"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(answer))</span>
+<span id="cb8-20"><a href="#cb8-20"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Received:"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(result))</span>
+<span id="cb8-22"><a href="#cb8-22"></a>        exit()</span>
+<span id="cb8-23"><a href="#cb8-23"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-24"><a href="#cb8-24"></a>        <span class="bu">print</span>(op, <span class="st">"passes."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</section>
+<section id="example-output" class="level3">
+<h3 class="anchored" data-anchor-id="example-output">Example output</h3>
+<details>
+<ul>
+<li>Note the panic caused by Rust <code>todo!()</code> and the separate, Python <code>subprocess.CalledProcessError</code> after the failure propagates back to the calling script.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">$</span> python3 tester.py</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bignum</span> 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 ADD<span class="kw">`</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="ex">ADD</span> passes.</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bignum</span> 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 SUB<span class="kw">`</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="ex">SUB</span> passes.</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bignum</span> 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 MUL<span class="kw">`</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="ex">thread</span> <span class="st">'main'</span> panicked at src/main.rs:10:18:</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="ex">not</span> yet implemented</span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="ex">note:</span> run with <span class="kw">`</span><span class="va">RUST_BACKTRACE</span><span class="op">=</span>1<span class="kw">`</span> <span class="ex">environment</span> variable to display a backtrace</span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="ex">Traceback</span> <span class="er">(</span><span class="ex">most</span> recent call last<span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="ex">File</span> <span class="st">"/home/user/tmp/ix/tester.py"</span>, line 19, in <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="ex">result</span> = int<span class="er">(</span><span class="ex">subprocess.check_output</span><span class="er">(</span><span class="ex">[</span><span class="st">"cargo"</span><span class="ex">,</span> <span class="st">"run"</span>, hexone, hextwo, op]<span class="kw">)</span><span class="ex">,16</span><span class="kw">)</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>  <span class="ex">File</span> <span class="st">"/usr/lib/python3.10/subprocess.py"</span>, line 421, in check_output</span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="cf">return</span> <span class="ex">run</span><span class="er">(</span><span class="ex">*popenargs,</span> stdout=PIPE, timeout=timeout, check=True,</span>
+<span id="cb9-19"><a href="#cb9-19"></a>  <span class="ex">File</span> <span class="st">"/usr/lib/python3.10/subprocess.py"</span>, line 526, in run</span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="ex">raise</span> CalledProcessError<span class="er">(</span><span class="ex">retcode,</span> process.args,</span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="ex">subprocess.CalledProcessError:</span> Command <span class="st">'['</span>cargo<span class="st">', '</span>run<span class="st">', '</span>0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8<span class="st">', '</span>0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0<span class="st">', '</span>MUL<span class="st">']'</span> returned non-zero exit status 101.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+</section>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next Steps</h1>
+<ul>
+<li>Implement addition and subtraction (you will likely want to do both at the same time) and test them.</li>
+<li>For a hint, I wrote the following helper functions:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">// Helpers: Add/sub magnitudes (absolute values) of two numbers.</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">// "aug" and "add" are short for "augend" and "addend"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">fn</span> add_mag(aug_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> add_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">// "min" and "sub" are short for "minuend" and "subtrahend"</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">fn</span> sub_mag(min_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> sub_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">// Compute the "greater than or equal" between two values.</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">fn</span> gte_mag(a_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> b_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>I am also providing my entire <code>sub_ix</code>, again spoiler marked.</li>
+</ul>
+<details>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">pub</span> <span class="kw">fn</span> sub_ix(a<span class="op">:</span> <span class="op">&amp;</span>ix<span class="op">,</span> b<span class="op">:</span> <span class="op">&amp;</span>ix) <span class="op">-&gt;</span> ix <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">let</span> b <span class="op">=</span> ix <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>        sign<span class="op">:</span> <span class="op">!</span>b<span class="op">.</span>sign<span class="op">,</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>        vals<span class="op">:</span> b<span class="op">.</span>vals<span class="op">.</span>clone()<span class="op">,</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="op">};</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="cf">return</span> add_ix(<span class="op">&amp;</span>a<span class="op">,</span> <span class="op">&amp;</span>b)<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./70_numbers.html" class="pagination-link" aria-label="Numbers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Numbers</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./72_ix.md.html" class="pagination-link" aria-label="ix">
+        <span class="nav-page-text">ix</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Numerical I/O"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## Announcements</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="ss">- </span>Scaffolding assignment for <span class="in">`ix`</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="ss">    - </span>Big numbers are hard to type, think of, reason about, etc.</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="ss">    - </span>Hard to check your work.</span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="fu">## Homework</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="ss">- </span><span class="in">`ix`</span> beckons</span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="ss">- </span>Due Friday, 24 Oct. at 1440 ET.</span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="ss">    - </span>You will probably need to finish this to do that.</span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="ss">- </span><span class="in">`ix`</span> vs. eg. <span class="in">`i32`</span>, <span class="in">`i64`</span>, can store infinite values, and your job is to make it.</span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="fu">## Today</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="ss">- </span><span class="va">[ ]</span> Struct</span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="ss">- </span><span class="va">[ ]</span> Input/Output</span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="ss">- </span><span class="va">[ ]</span> Addition/Subtraction</span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="ss">- </span><span class="va">[ ]</span> Multiplication/Division</span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="ss">- </span><span class="va">[ ]</span> Optional: Special cases</span>
+<span id="cb12-26"><a href="#cb12-26"></a></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="fu"># Struct</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="ss">- </span>Before anything else, have to find a way to make an <span class="in">`ix`</span>.</span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="ss">    - </span>I am granting you full freedom to implement <span class="in">`ix`</span> as you see fit with one exception:</span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="ss">    - </span>You must implement it yourself, not use an existing "BigNum" or "BigInt" crate, like <span class="co">[</span><span class="ot">this</span><span class="co">]</span>)(https://docs.rs/num-bigint/latest/num_bigint/struct.BigInt.html) </span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="ss">- </span>Personally, I just used a sign boolean and a vector of unsigned values. You are welcome to take this approach:</span>
+<span id="cb12-33"><a href="#cb12-33"></a></span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="in">#![allow(non_camel_case_types)]</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="in">pub struct ix {</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="in">    sign: bool,</span></span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="in">    vals: Vec&lt;u64&gt;,</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="in">}</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="in">```</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="ss">- </span>The real merits of showing this are:</span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="ss">    - </span>You can use <span class="in">`#![allow(non_camel_case_types)]`</span> to avoid the annoying warning for a lower case name.</span>
+<span id="cb12-43"><a href="#cb12-43"></a><span class="ss">        - </span>Naming a data structure in lower case is poor form (consider <span class="in">`String`</span> vs. <span class="in">`&amp;str`</span>) but...</span>
+<span id="cb12-44"><a href="#cb12-44"></a><span class="ss">        - </span>I was out of ideas.</span>
+<span id="cb12-45"><a href="#cb12-45"></a><span class="ss">- </span>The structure is public, so can be used from a testing <span class="in">`src/main.rs`</span>.</span>
+<span id="cb12-46"><a href="#cb12-46"></a><span class="ss">- </span>The internal fields are not public, so you can make any changes you like within <span class="in">`src/lib.rs`</span>.</span>
+<span id="cb12-47"><a href="#cb12-47"></a></span>
+<span id="cb12-48"><a href="#cb12-48"></a><span class="fu">## Test it</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a>    </span>
+<span id="cb12-50"><a href="#cb12-50"></a><span class="ss">- </span>You can test the same way we tested <span class="in">`f16`</span>:</span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a><span class="in">fn main() {</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a><span class="in">    let x : f16::f16;</span></span>
+<span id="cb12-54"><a href="#cb12-54"></a><span class="in">}</span></span>
+<span id="cb12-55"><a href="#cb12-55"></a><span class="in">```</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a><span class="ss">- </span>The first <span class="in">`f16`</span> is the crate name, the second is the type name.</span>
+<span id="cb12-57"><a href="#cb12-57"></a></span>
+<span id="cb12-58"><a href="#cb12-58"></a><span class="fu">## Aside</span></span>
+<span id="cb12-59"><a href="#cb12-59"></a></span>
+<span id="cb12-60"><a href="#cb12-60"></a><span class="ss">- </span>For my money, <span class="in">`f16::f16`</span> looks terrible.</span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a><span class="in">use f16::*;</span></span>
+<span id="cb12-63"><a href="#cb12-63"></a></span>
+<span id="cb12-64"><a href="#cb12-64"></a><span class="in">fn main() {</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a><span class="in">    let x : f16;</span></span>
+<span id="cb12-66"><a href="#cb12-66"></a><span class="in">}</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a><span class="in">```</span></span>
+<span id="cb12-68"><a href="#cb12-68"></a></span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="fu">## Aside</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a></span>
+<span id="cb12-71"><a href="#cb12-71"></a><span class="ss">- </span>Rust admonished you for using <span class="in">`f16`</span> instead of <span class="in">`F16`</span>. </span>
+<span id="cb12-72"><a href="#cb12-72"></a><span class="in">```sh</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a><span class="ex">warning:</span> type <span class="kw">`</span><span class="ex">f16</span><span class="kw">`</span> should have an upper camel case name</span>
+<span id="cb12-74"><a href="#cb12-74"></a> <span class="ex">--</span><span class="op">&gt;</span> src/lib.rs:1:12</span>
+<span id="cb12-75"><a href="#cb12-75"></a>  <span class="kw">|</span></span>
+<span id="cb12-76"><a href="#cb12-76"></a><span class="ex">1</span> <span class="kw">|</span> <span class="ex">pub</span> struct f16 {</span>
+<span id="cb12-77"><a href="#cb12-77"></a>  <span class="kw">|</span>            <span class="ex">^^^</span> help: convert the identifier to upper camel case <span class="er">(</span><span class="ex">notice</span> the capitalization<span class="kw">)</span><span class="bu">:</span> <span class="kw">`</span><span class="ex">F16</span><span class="kw">`</span></span>
+<span id="cb12-78"><a href="#cb12-78"></a>  <span class="kw">|</span></span>
+<span id="cb12-79"><a href="#cb12-79"></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[warn(non_camel_case_types)]</span><span class="kw">`</span> on by default</span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="in">```</span></span>
+<span id="cb12-81"><a href="#cb12-81"></a><span class="ss">- </span>Everyone is a critic!</span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="ss">- </span><span class="in">`#![allow(non_camel_case_types)]`</span></span>
+<span id="cb12-83"><a href="#cb12-83"></a></span>
+<span id="cb12-84"><a href="#cb12-84"></a><span class="fu">## Aside</span></span>
+<span id="cb12-85"><a href="#cb12-85"></a></span>
+<span id="cb12-86"><a href="#cb12-86"></a><span class="ss">- </span>You can read more on <span class="in">`struct`</span> here:  <span class="co">[</span><span class="ot">Rust Book 05.01</span><span class="co">](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)</span></span>
+<span id="cb12-87"><a href="#cb12-87"></a></span>
+<span id="cb12-88"><a href="#cb12-88"></a><span class="fu"># Input/Output</span></span>
+<span id="cb12-89"><a href="#cb12-89"></a></span>
+<span id="cb12-90"><a href="#cb12-90"></a><span class="ss">- </span>Versus built-in types, we'll just provide a ways to get values in and out.</span>
+<span id="cb12-91"><a href="#cb12-91"></a><span class="ss">- </span>Vs. <span class="in">`f16`</span>, this won't be easy in the sense that we are explicitly trying to work with values that do not fit into any existing numerical type.</span>
+<span id="cb12-92"><a href="#cb12-92"></a><span class="ss">- </span>For example, I will provide the following function, but it isn't particularly helpful.</span>
+<span id="cb12-93"><a href="#cb12-93"></a></span>
+<span id="cb12-94"><a href="#cb12-94"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-95"><a href="#cb12-95"></a><span class="in">pub fn u64_to_ix(val: u64) -&gt; ix {</span></span>
+<span id="cb12-96"><a href="#cb12-96"></a><span class="in">    return ix {</span></span>
+<span id="cb12-97"><a href="#cb12-97"></a><span class="in">        sign: false,</span></span>
+<span id="cb12-98"><a href="#cb12-98"></a><span class="in">        vals: vec![val],</span></span>
+<span id="cb12-99"><a href="#cb12-99"></a><span class="in">    };</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a><span class="in">}</span></span>
+<span id="cb12-101"><a href="#cb12-101"></a><span class="in">```</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a></span>
+<span id="cb12-103"><a href="#cb12-103"></a><span class="ss">- </span>The real motivation for todays lab is to use a testing framework. </span>
+<span id="cb12-104"><a href="#cb12-104"></a><span class="ss">- </span>I am providing mine, which you are not required to use but that I quite like.</span>
+<span id="cb12-105"><a href="#cb12-105"></a><span class="ss">    - </span>Values are input as command line arguments as hex strings, with a <span class="in">`0x`</span> prefix.</span>
+<span id="cb12-106"><a href="#cb12-106"></a><span class="ss">        - </span>I didn't check if I can input negative values, content to create negatives via subtraction rather than define a standard.</span>
+<span id="cb12-107"><a href="#cb12-107"></a><span class="ss">    - </span>Values are output to <span class="in">`stdout`</span> as hex values with no <span class="in">`0x`</span> prefix but with a sign.</span>
+<span id="cb12-108"><a href="#cb12-108"></a><span class="ss">        - </span>This was so I could read them directly with Python <span class="in">`int()`</span> for testing.</span>
+<span id="cb12-109"><a href="#cb12-109"></a><span class="ss">    - </span>Operations are specified using a capitalized, 3 letter abbreviation describing one of the four supported operations:</span>
+<span id="cb12-110"><a href="#cb12-110"></a><span class="ss">        - </span><span class="in">`ADD, SUB, MUL, DIV, REM`</span> - which I want to reiterate is four operations.</span>
+<span id="cb12-111"><a href="#cb12-111"></a><span class="ss">        - </span>This should say "pattern matching" to you.</span>
+<span id="cb12-112"><a href="#cb12-112"></a><span class="ss">- </span>I'll present the components of the testing framework, and your task is to convince yourself you understand them.</span>
+<span id="cb12-113"><a href="#cb12-113"></a></span>
+<span id="cb12-114"><a href="#cb12-114"></a><span class="fu">## `src/main.rs`</span></span>
+<span id="cb12-115"><a href="#cb12-115"></a></span>
+<span id="cb12-116"><a href="#cb12-116"></a><span class="ss">- </span>Main:</span>
+<span id="cb12-117"><a href="#cb12-117"></a><span class="ss">    - </span>Uses the <span class="in">`ix`</span> implementation from <span class="in">`src/lib.rs`</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a><span class="ss">    - </span>Reads command line arguments generated by <span class="in">`tester.py`</span></span>
+<span id="cb12-119"><a href="#cb12-119"></a><span class="ss">    - </span>Converts two  command line strings representing numerical hex vlaues into <span class="in">`ix`</span> instances.</span>
+<span id="cb12-120"><a href="#cb12-120"></a><span class="ss">    - </span>Captures the final command line argument to determine which operation to perform.</span>
+<span id="cb12-121"><a href="#cb12-121"></a><span class="ss">    - </span>Calls the appropriate <span class="in">`ix`</span> arithmetic function and captures its return value.</span>
+<span id="cb12-122"><a href="#cb12-122"></a><span class="ss">        - </span>I call these <span class="in">`&lt;op&gt;_ix`</span> for <span class="in">`op`</span> in <span class="in">`add, sub, mul, div, rem`</span></span>
+<span id="cb12-123"><a href="#cb12-123"></a><span class="ss">    - </span>Prints to <span class="in">`stdout`</span> the returned <span class="in">`ix`</span> as a hex string.</span>
+<span id="cb12-124"><a href="#cb12-124"></a><span class="ss">- </span>While intended to be used by <span class="in">`tester.py`</span>, it can also be used manually!</span>
+<span id="cb12-125"><a href="#cb12-125"></a><span class="in">```sh</span></span>
+<span id="cb12-126"><a href="#cb12-126"></a><span class="ex">$</span> cargo run 0x10 0x20 ADD</span>
+<span id="cb12-127"><a href="#cb12-127"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb12-128"><a href="#cb12-128"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bignum</span> 0x10 0x20 ADD<span class="kw">`</span></span>
+<span id="cb12-129"><a href="#cb12-129"></a><span class="ex">0000000000000030</span></span>
+<span id="cb12-130"><a href="#cb12-130"></a><span class="in">```</span></span>
+<span id="cb12-131"><a href="#cb12-131"></a><span class="ss">- </span>I do not add a newline after this value.</span>
+<span id="cb12-132"><a href="#cb12-132"></a><span class="ss">- </span>You can, and probably should want to, make your own <span class="in">`src/main.rs`</span> that does these things, but you are not required to do so.</span>
+<span id="cb12-133"><a href="#cb12-133"></a><span class="ss">- </span>I am providing mine as a "spoiler marked" HTML <span class="in">`&lt;details&gt;`</span> block.</span>
+<span id="cb12-134"><a href="#cb12-134"></a></span>
+<span id="cb12-135"><a href="#cb12-135"></a><span class="fu">### My `src/main.rs`</span></span>
+<span id="cb12-136"><a href="#cb12-136"></a></span>
+<span id="cb12-137"><a href="#cb12-137"></a>&lt;details&gt;</span>
+<span id="cb12-138"><a href="#cb12-138"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb12-139"><a href="#cb12-139"></a><span class="in">use bignum::*;</span></span>
+<span id="cb12-140"><a href="#cb12-140"></a></span>
+<span id="cb12-141"><a href="#cb12-141"></a><span class="in">fn main() {</span></span>
+<span id="cb12-142"><a href="#cb12-142"></a><span class="in">    let args: Vec&lt;String&gt; = std::env::args().collect();</span></span>
+<span id="cb12-143"><a href="#cb12-143"></a><span class="in">    let a = h2i_ix(&amp;args[1]);</span></span>
+<span id="cb12-144"><a href="#cb12-144"></a><span class="in">    let b = h2i_ix(&amp;args[2]);</span></span>
+<span id="cb12-145"><a href="#cb12-145"></a><span class="in">    match args[3].as_str() {</span></span>
+<span id="cb12-146"><a href="#cb12-146"></a><span class="in">        "ADD" =&gt; see_ix(&amp;add_ix(&amp;a, &amp;b)),</span></span>
+<span id="cb12-147"><a href="#cb12-147"></a><span class="in">        "SUB" =&gt; see_ix(&amp;sub_ix(&amp;a, &amp;b)),</span></span>
+<span id="cb12-148"><a href="#cb12-148"></a><span class="in">        "MUL" =&gt; todo!(),</span></span>
+<span id="cb12-149"><a href="#cb12-149"></a><span class="in">        "DIV" =&gt; todo!(),</span></span>
+<span id="cb12-150"><a href="#cb12-150"></a><span class="in">        "REM" =&gt; todo!(),</span></span>
+<span id="cb12-151"><a href="#cb12-151"></a><span class="in">        &amp;_    =&gt; println!("Operator not recognized: choose from ADD, SUB, MUL, DIV, REM"),</span></span>
+<span id="cb12-152"><a href="#cb12-152"></a><span class="in">    }</span></span>
+<span id="cb12-153"><a href="#cb12-153"></a><span class="in">}</span></span>
+<span id="cb12-154"><a href="#cb12-154"></a><span class="in">```</span></span>
+<span id="cb12-155"><a href="#cb12-155"></a>&lt;/details&gt;</span>
+<span id="cb12-156"><a href="#cb12-156"></a></span>
+<span id="cb12-157"><a href="#cb12-157"></a><span class="fu">## `tester.py`</span></span>
+<span id="cb12-158"><a href="#cb12-158"></a></span>
+<span id="cb12-159"><a href="#cb12-159"></a><span class="ss">- </span>Tester:</span>
+<span id="cb12-160"><a href="#cb12-160"></a><span class="ss">    - </span>Using Python's built-in integers, generates two large random numbers, I generated mine to be between 500 and 512 bits.</span>
+<span id="cb12-161"><a href="#cb12-161"></a><span class="ss">    - </span>Convert them to hex strings.</span>
+<span id="cb12-162"><a href="#cb12-162"></a><span class="ss">    - </span>For each of the debatebly four or five operations, the tester:</span>
+<span id="cb12-163"><a href="#cb12-163"></a><span class="ss">        - </span>Uses <span class="in">`subprocess`</span> to dispatch cargo to run with three command line arguments: the two hex strings and the operation (in all caps).</span>
+<span id="cb12-164"><a href="#cb12-164"></a><span class="ss">        - </span>Captures the output of the process.</span>
+<span id="cb12-165"><a href="#cb12-165"></a><span class="ss">        - </span>Computes the same operation using Python arithmetic operations.</span>
+<span id="cb12-166"><a href="#cb12-166"></a><span class="ss">        - </span>Uses naive string comparison to compare the two values.</span>
+<span id="cb12-167"><a href="#cb12-167"></a><span class="ss">            - </span>Optionally raises a debug message in the event of a difference.</span>
+<span id="cb12-168"><a href="#cb12-168"></a><span class="ss">- </span>To support tester usage, I will provide:</span>
+<span id="cb12-169"><a href="#cb12-169"></a><span class="ss">    - </span>The <span class="in">`tester.py`</span> code</span>
+<span id="cb12-170"><a href="#cb12-170"></a><span class="ss">    - </span>An example run on a partial <span class="in">`ix`</span> implementation, with only addition and subtraction completed.</span>
+<span id="cb12-171"><a href="#cb12-171"></a><span class="ss">- </span>I am spoiler marking both, in case you want to make your own.</span>
+<span id="cb12-172"><a href="#cb12-172"></a></span>
+<span id="cb12-173"><a href="#cb12-173"></a><span class="fu">### My `tester.py`</span></span>
+<span id="cb12-174"><a href="#cb12-174"></a></span>
+<span id="cb12-175"><a href="#cb12-175"></a>&lt;details&gt;</span>
+<span id="cb12-176"><a href="#cb12-176"></a><span class="in">```{.py filename="tester.py"}</span></span>
+<span id="cb12-177"><a href="#cb12-177"></a><span class="in">DEBUG = 0</span></span>
+<span id="cb12-178"><a href="#cb12-178"></a><span class="in">CMD = "cargo run --"</span></span>
+<span id="cb12-179"><a href="#cb12-179"></a></span>
+<span id="cb12-180"><a href="#cb12-180"></a><span class="in">import subprocess, os, random</span></span>
+<span id="cb12-181"><a href="#cb12-181"></a><span class="in">from operator import add, sub, mul, floordiv as quo, mod as rem</span></span>
+<span id="cb12-182"><a href="#cb12-182"></a></span>
+<span id="cb12-183"><a href="#cb12-183"></a><span class="in">bigone, bigtwo = random.randint(2 ** 500, 2 ** 512), random.randint(2 ** 500, 2 ** 512)</span></span>
+<span id="cb12-184"><a href="#cb12-184"></a><span class="in">hexone, hextwo = hex(bigone), hex(bigtwo)</span></span>
+<span id="cb12-185"><a href="#cb12-185"></a><span class="in">DEBUG and print("\nhexone =\n", hexone, "\nhextwo = \n", hextwo)</span></span>
+<span id="cb12-186"><a href="#cb12-186"></a></span>
+<span id="cb12-187"><a href="#cb12-187"></a><span class="in">from operator import add, sub, mul, floordiv as quo, mod as rem</span></span>
+<span id="cb12-188"><a href="#cb12-188"></a><span class="in">ops = {'ADD':add,'SUB':sub,'MUL':mul,'QUO':quo,'REM':rem}</span></span>
+<span id="cb12-189"><a href="#cb12-189"></a><span class="in">for op in ops:</span></span>
+<span id="cb12-190"><a href="#cb12-190"></a><span class="in">    result = int(subprocess.check_output(["cargo", "run", hexone, hextwo, op]),16)</span></span>
+<span id="cb12-191"><a href="#cb12-191"></a><span class="in">    answer = ops[op](bigone,bigtwo)</span></span>
+<span id="cb12-192"><a href="#cb12-192"></a><span class="in">    if result != answer:</span></span>
+<span id="cb12-193"><a href="#cb12-193"></a><span class="in">        print("Operator", op, "failed.")</span></span>
+<span id="cb12-194"><a href="#cb12-194"></a><span class="in">        DEBUG and print("Expected:")</span></span>
+<span id="cb12-195"><a href="#cb12-195"></a><span class="in">        DEBUG and print(hex(answer))</span></span>
+<span id="cb12-196"><a href="#cb12-196"></a><span class="in">        DEBUG and print("Received:")</span></span>
+<span id="cb12-197"><a href="#cb12-197"></a><span class="in">        DEBUG and print(hex(result))</span></span>
+<span id="cb12-198"><a href="#cb12-198"></a><span class="in">        exit()</span></span>
+<span id="cb12-199"><a href="#cb12-199"></a><span class="in">    else:</span></span>
+<span id="cb12-200"><a href="#cb12-200"></a><span class="in">        print(op, "passes.")</span></span>
+<span id="cb12-201"><a href="#cb12-201"></a><span class="in">```</span></span>
+<span id="cb12-202"><a href="#cb12-202"></a>&lt;/details&gt;</span>
+<span id="cb12-203"><a href="#cb12-203"></a></span>
+<span id="cb12-204"><a href="#cb12-204"></a></span>
+<span id="cb12-205"><a href="#cb12-205"></a><span class="fu">### Example output</span></span>
+<span id="cb12-206"><a href="#cb12-206"></a></span>
+<span id="cb12-207"><a href="#cb12-207"></a>&lt;details&gt;</span>
+<span id="cb12-208"><a href="#cb12-208"></a></span>
+<span id="cb12-209"><a href="#cb12-209"></a><span class="ss">- </span>Note the panic caused by Rust <span class="in">`todo!()`</span> and the separate, Python <span class="in">`subprocess.CalledProcessError`</span> after the failure propagates back to the calling script.</span>
+<span id="cb12-210"><a href="#cb12-210"></a></span>
+<span id="cb12-211"><a href="#cb12-211"></a><span class="in">```{.sh}</span></span>
+<span id="cb12-212"><a href="#cb12-212"></a><span class="in">$ python3 tester.py</span></span>
+<span id="cb12-213"><a href="#cb12-213"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb12-214"><a href="#cb12-214"></a><span class="in">     Running `target/debug/bignum 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 ADD`</span></span>
+<span id="cb12-215"><a href="#cb12-215"></a><span class="in">ADD passes.</span></span>
+<span id="cb12-216"><a href="#cb12-216"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb12-217"><a href="#cb12-217"></a><span class="in">     Running `target/debug/bignum 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 SUB`</span></span>
+<span id="cb12-218"><a href="#cb12-218"></a><span class="in">SUB passes.</span></span>
+<span id="cb12-219"><a href="#cb12-219"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb12-220"><a href="#cb12-220"></a><span class="in">     Running `target/debug/bignum 0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8 0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0 MUL`</span></span>
+<span id="cb12-221"><a href="#cb12-221"></a></span>
+<span id="cb12-222"><a href="#cb12-222"></a><span class="in">thread 'main' panicked at src/main.rs:10:18:</span></span>
+<span id="cb12-223"><a href="#cb12-223"></a><span class="in">not yet implemented</span></span>
+<span id="cb12-224"><a href="#cb12-224"></a><span class="in">note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace</span></span>
+<span id="cb12-225"><a href="#cb12-225"></a><span class="in">Traceback (most recent call last):</span></span>
+<span id="cb12-226"><a href="#cb12-226"></a><span class="in">  File "/home/user/tmp/ix/tester.py", line 19, in &lt;module&gt;</span></span>
+<span id="cb12-227"><a href="#cb12-227"></a><span class="in">    result = int(subprocess.check_output(["cargo", "run", hexone, hextwo, op]),16)</span></span>
+<span id="cb12-228"><a href="#cb12-228"></a><span class="in">  File "/usr/lib/python3.10/subprocess.py", line 421, in check_output</span></span>
+<span id="cb12-229"><a href="#cb12-229"></a><span class="in">    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,</span></span>
+<span id="cb12-230"><a href="#cb12-230"></a><span class="in">  File "/usr/lib/python3.10/subprocess.py", line 526, in run</span></span>
+<span id="cb12-231"><a href="#cb12-231"></a><span class="in">    raise CalledProcessError(retcode, process.args,</span></span>
+<span id="cb12-232"><a href="#cb12-232"></a><span class="in">subprocess.CalledProcessError: Command '['cargo', 'run', '0x2c2e4c34f428560aedbee82a9a7ca5a7071ef9d9b3b23834ef1ce63be90e052e94d1411de3c1191fdb1ebfd39fde41bbfc8b95e3faeae64a0fe21d50b9ce53d8', '0x58010ed08d2415a81a17e369a3e00443d922d0219dd66c1b74473511140e1f4f24450840e9e1a7c4bd4cac368d30a4ba5aa075fb65ec92a714c7f73b42122bb0', 'MUL']' returned non-zero exit status 101.</span></span>
+<span id="cb12-233"><a href="#cb12-233"></a><span class="in">```</span></span>
+<span id="cb12-234"><a href="#cb12-234"></a>&lt;/details&gt;</span>
+<span id="cb12-235"><a href="#cb12-235"></a></span>
+<span id="cb12-236"><a href="#cb12-236"></a><span class="fu"># Next Steps</span></span>
+<span id="cb12-237"><a href="#cb12-237"></a></span>
+<span id="cb12-238"><a href="#cb12-238"></a><span class="ss">- </span>Implement addition and subtraction (you will likely want to do both at the same time) and test them.</span>
+<span id="cb12-239"><a href="#cb12-239"></a><span class="ss">- </span>For a hint, I wrote the following helper functions:</span>
+<span id="cb12-240"><a href="#cb12-240"></a><span class="in">```rs</span></span>
+<span id="cb12-241"><a href="#cb12-241"></a><span class="co">// Helpers: Add/sub magnitudes (absolute values) of two numbers.</span></span>
+<span id="cb12-242"><a href="#cb12-242"></a><span class="co">// "aug" and "add" are short for "augend" and "addend"</span></span>
+<span id="cb12-243"><a href="#cb12-243"></a><span class="kw">fn</span> add_mag(aug_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> add_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span> </span>
+<span id="cb12-244"><a href="#cb12-244"></a><span class="co">// "min" and "sub" are short for "minuend" and "subtrahend"</span></span>
+<span id="cb12-245"><a href="#cb12-245"></a><span class="kw">fn</span> sub_mag(min_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> sub_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span> </span>
+<span id="cb12-246"><a href="#cb12-246"></a><span class="co">// Compute the "greater than or equal" between two values.</span></span>
+<span id="cb12-247"><a href="#cb12-247"></a><span class="kw">fn</span> gte_mag(a_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;,</span> b_vals<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u64</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> </span>
+<span id="cb12-248"><a href="#cb12-248"></a><span class="in">```</span></span>
+<span id="cb12-249"><a href="#cb12-249"></a><span class="ss">- </span>I am also providing my entire <span class="in">`sub_ix`</span>, again spoiler marked.</span>
+<span id="cb12-250"><a href="#cb12-250"></a></span>
+<span id="cb12-251"><a href="#cb12-251"></a>&lt;details&gt;</span>
+<span id="cb12-252"><a href="#cb12-252"></a><span class="in">```{.rs}</span></span>
+<span id="cb12-253"><a href="#cb12-253"></a><span class="in">pub fn sub_ix(a: &amp;ix, b: &amp;ix) -&gt; ix {</span></span>
+<span id="cb12-254"><a href="#cb12-254"></a><span class="in">    let b = ix {</span></span>
+<span id="cb12-255"><a href="#cb12-255"></a><span class="in">        sign: !b.sign,</span></span>
+<span id="cb12-256"><a href="#cb12-256"></a><span class="in">        vals: b.vals.clone(),</span></span>
+<span id="cb12-257"><a href="#cb12-257"></a><span class="in">    };</span></span>
+<span id="cb12-258"><a href="#cb12-258"></a><span class="in">    return add_ix(&amp;a, &amp;b);</span></span>
+<span id="cb12-259"><a href="#cb12-259"></a><span class="in">}</span></span>
+<span id="cb12-260"><a href="#cb12-260"></a><span class="in">```</span></span>
+<span id="cb12-261"><a href="#cb12-261"></a>&lt;/details&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -38,14 +38,14 @@ format: html
 |0x4|09/22|[SHA2](40_sha2.md)|[Constants](41_constants.md)|[SHA512](42_sha512.md)|
 |0x5|09/29|[IEEE754](50_754.md)|[`f16`](51_f16.md)|[SHA512](42_sha512.md)|
 |0x6|10/06|[Practice](https://classroom.github.com/a/opvHddb-)|**Midterm**|`None`|
-|0x7|10/13|BigInt|BigAdd|ix|
+|0x7|10/13|[Numbers](70_numbers.md)|[I/O](71_ix_io.md)|[`ix`](72_ix.md)|
 |0x8|10/20|ECDSA|Python|Ed25519|
 |0x9|10/27|Stacks|List|Tree|
 |0xA|11/03|Graphs|BFS|Djikstra|
 |0xB|11/10|Merkle|||
 |0xC|11/17|VCS||
-|0xD|11/24|Spectre|`None`|
-|0xE|11/24|Meltdown|Hypers|VCS.rs|
+|0xD|11/24|Spectre|`None`|`None`|
+|0xE|12/01|Meltdown|Hypers|VCS.rs|
 
 <!--
 Think I need string edit distance or patches somewhere. 

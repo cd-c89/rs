@@ -1,0 +1,2899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>Numbers – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./71_ix_io.html" rel="next">
+<link href="./51_f16.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./70_numbers.html">Numbers</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hamming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_sha2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50_754.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IEEE 754</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51_f16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">f16</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70_numbers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Numbers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71_ix_io.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical I/O</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./72_ix.md.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a>
+  <ul class="collapse">
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  </ul></li>
+  <li><a href="#finite-sets-rings" id="toc-finite-sets-rings" class="nav-link" data-scroll-target="#finite-sets-rings">Finite sets, rings</a>
+  <ul class="collapse">
+  <li><a href="#apocryphal-quote" id="toc-apocryphal-quote" class="nav-link" data-scroll-target="#apocryphal-quote">Apocryphal Quote</a></li>
+  <li><a href="#what-are-integers" id="toc-what-are-integers" class="nav-link" data-scroll-target="#what-are-integers">What are integers?</a></li>
+  <li><a href="#in-python" id="toc-in-python" class="nav-link" data-scroll-target="#in-python">In Python</a></li>
+  <li><a href="#aside" id="toc-aside" class="nav-link" data-scroll-target="#aside">Aside</a></li>
+  <li><a href="#mathbbn-is-akin-to-un" id="toc-mathbbn-is-akin-to-un" class="nav-link" data-scroll-target="#mathbbn-is-akin-to-un"><span class="math inline">\(\mathbb{N}\)</span> is akin to <code>u</code><span class="math inline">\(n\)</span></a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The Problem</a></li>
+  <li><a href="#test-with--c" id="toc-test-with--c" class="nav-link" data-scroll-target="#test-with--c">Test with <code>-c</code></a></li>
+  <li><a href="#time-it" id="toc-time-it" class="nav-link" data-scroll-target="#time-it">Time it</a></li>
+  <li><a href="#bigger-numbers" id="toc-bigger-numbers" class="nav-link" data-scroll-target="#bigger-numbers">Bigger Numbers</a></li>
+  <li><a href="#test-it" id="toc-test-it" class="nav-link" data-scroll-target="#test-it">Test it</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#rust" id="toc-rust" class="nav-link" data-scroll-target="#rust">Rust</a></li>
+  <li><a href="#quoth-rust-book" id="toc-quoth-rust-book" class="nav-link" data-scroll-target="#quoth-rust-book">Quoth Rust Book</a></li>
+  <li><a href="#quoth-rust-book-1" id="toc-quoth-rust-book-1" class="nav-link" data-scroll-target="#quoth-rust-book-1">Quoth Rust Book</a></li>
+  <li><a href="#quoth-rust-book-2" id="toc-quoth-rust-book-2" class="nav-link" data-scroll-target="#quoth-rust-book-2">Quoth Rust Book</a></li>
+  <li><a href="#methods-in-rust" id="toc-methods-in-rust" class="nav-link" data-scroll-target="#methods-in-rust">Methods in Rust</a></li>
+  <li><a href="#editorializing" id="toc-editorializing" class="nav-link" data-scroll-target="#editorializing">Editorializing</a></li>
+  <li><a href="#demo-in-rust" id="toc-demo-in-rust" class="nav-link" data-scroll-target="#demo-in-rust">Demo in Rust</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing…</a></li>
+  <li><a href="#discuss" id="toc-discuss" class="nav-link" data-scroll-target="#discuss">Discuss</a></li>
+  <li><a href="#testing-1" id="toc-testing-1" class="nav-link" data-scroll-target="#testing-1">Testing…</a></li>
+  <li><a href="#rings" id="toc-rings" class="nav-link" data-scroll-target="#rings">Rings</a></li>
+  <li><a href="#rings-vs-integers" id="toc-rings-vs-integers" class="nav-link" data-scroll-target="#rings-vs-integers">Rings vs Integers</a></li>
+  <li><a href="#checkers" id="toc-checkers" class="nav-link" data-scroll-target="#checkers">Checkers</a></li>
+  <li><a href="#do-some-additions" id="toc-do-some-additions" class="nav-link" data-scroll-target="#do-some-additions">Do some additions</a></li>
+  <li><a href="#do-some-additions-1" id="toc-do-some-additions-1" class="nav-link" data-scroll-target="#do-some-additions-1">Do some additions</a></li>
+  <li><a href="#do-some-additions-2" id="toc-do-some-additions-2" class="nav-link" data-scroll-target="#do-some-additions-2">Do some additions</a></li>
+  <li><a href="#rust-integers-are-finite" id="toc-rust-integers-are-finite" class="nav-link" data-scroll-target="#rust-integers-are-finite">Rust integers are <em>finite</em></a></li>
+  <li><a href="#in-practice" id="toc-in-practice" class="nav-link" data-scroll-target="#in-practice">In practice</a></li>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#n-128-bits" id="toc-n-128-bits" class="nav-link" data-scroll-target="#n-128-bits"><span class="math inline">\(n &gt; 128\)</span> bits</a></li>
+  </ul></li>
+  <li><a href="#today-1" id="toc-today-1" class="nav-link" data-scroll-target="#today-1">Today</a>
+  <ul class="collapse">
+  <li><a href="#big-values" id="toc-big-values" class="nav-link" data-scroll-target="#big-values">Big Values</a></li>
+  <li><a href="#simple-example" id="toc-simple-example" class="nav-link" data-scroll-target="#simple-example">Simple Example</a></li>
+  <li><a href="#addition-is-easy" id="toc-addition-is-easy" class="nav-link" data-scroll-target="#addition-is-easy">Addition is easy</a></li>
+  <li><a href="#difference" id="toc-difference" class="nav-link" data-scroll-target="#difference">Difference</a></li>
+  <li><a href="#difference-1" id="toc-difference-1" class="nav-link" data-scroll-target="#difference-1">Difference</a></li>
+  <li><a href="#difference-2" id="toc-difference-2" class="nav-link" data-scroll-target="#difference-2">Difference</a></li>
+  <li><a href="#difference-3" id="toc-difference-3" class="nav-link" data-scroll-target="#difference-3">Difference</a></li>
+  <li><a href="#difference-4" id="toc-difference-4" class="nav-link" data-scroll-target="#difference-4">Difference</a></li>
+  <li><a href="#difference-5" id="toc-difference-5" class="nav-link" data-scroll-target="#difference-5">Difference</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#usefulness" id="toc-usefulness" class="nav-link" data-scroll-target="#usefulness">Usefulness</a></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  </ul></li>
+  <li><a href="#today-2" id="toc-today-2" class="nav-link" data-scroll-target="#today-2">Today</a>
+  <ul class="collapse">
+  <li><a href="#easy-mode" id="toc-easy-mode" class="nav-link" data-scroll-target="#easy-mode">Easy Mode</a></li>
+  <li><a href="#hard-mode" id="toc-hard-mode" class="nav-link" data-scroll-target="#hard-mode">Hard Mode</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#napkin-math" id="toc-napkin-math" class="nav-link" data-scroll-target="#napkin-math">Napkin Math</a></li>
+  <li><a href="#times-139.5" id="toc-times-139.5" class="nav-link" data-scroll-target="#times-139.5"><span class="math inline">\(34 \times 139.5\)</span></a></li>
+  <li><a href="#times-139.5-1" id="toc-times-139.5-1" class="nav-link" data-scroll-target="#times-139.5-1"><span class="math inline">\(34 \times 139.5\)</span></a></li>
+  <li><a href="#times-139.5-2" id="toc-times-139.5-2" class="nav-link" data-scroll-target="#times-139.5-2"><span class="math inline">\(34 \times 139.5\)</span></a></li>
+  <li><a href="#dear-watson" id="toc-dear-watson" class="nav-link" data-scroll-target="#dear-watson">Dear Watson</a></li>
+  <li><a href="#express-as" id="toc-express-as" class="nav-link" data-scroll-target="#express-as">Express as</a></li>
+  <li><a href="#polynomial" id="toc-polynomial" class="nav-link" data-scroll-target="#polynomial">Polynomial</a></li>
+  <li><a href="#aside-1" id="toc-aside-1" class="nav-link" data-scroll-target="#aside-1">Aside</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations">Considerations</a></li>
+  <li><a href="#overflow" id="toc-overflow" class="nav-link" data-scroll-target="#overflow">Overflow</a></li>
+  <li><a href="#size-of-ints" id="toc-size-of-ints" class="nav-link" data-scroll-target="#size-of-ints">Size of ints</a></li>
+  </ul></li>
+  <li><a href="#carrys-for-mults" id="toc-carrys-for-mults" class="nav-link" data-scroll-target="#carrys-for-mults">Carrys for mults</a>
+  <ul class="collapse">
+  <li><a href="#division" id="toc-division" class="nav-link" data-scroll-target="#division">Division</a></li>
+  <li><a href="#today-3" id="toc-today-3" class="nav-link" data-scroll-target="#today-3">Today</a></li>
+  <li><a href="#an-arbitrary-precision-type." id="toc-an-arbitrary-precision-type." class="nav-link" data-scroll-target="#an-arbitrary-precision-type.">An arbitrary precision type.</a></li>
+  <li><a href="#borrowing" id="toc-borrowing" class="nav-link" data-scroll-target="#borrowing">Borrowing</a></li>
+  <li><a href="#faq-1" id="toc-faq-1" class="nav-link" data-scroll-target="#faq-1">FAQ</a></li>
+  </ul></li>
+  <li><a href="#today-4" id="toc-today-4" class="nav-link" data-scroll-target="#today-4">Today</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="70_numbers.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Numbers</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="announcements" class="level1">
+<h1>Announcements</h1>
+<ul>
+<li><strong>Welcome</strong> to Systems in Rust</li>
+<li><strong>Action Items</strong>:
+<ul>
+<li>Midterms verbal update.</li>
+<li>Next assignment goes out Friday, start whenever.</li>
+<li>This lecture supports that homework.</li>
+</ul></li>
+</ul>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul>
+<li>Finite sets, rings</li>
+<li>Arbitrary/high precision integers</li>
+<li>Arithmetic operations</li>
+<li>Function types</li>
+</ul>
+</section>
+</section>
+<section id="finite-sets-rings" class="level1">
+<h1>Finite sets, rings</h1>
+<section id="apocryphal-quote" class="level2">
+<h2 class="anchored" data-anchor-id="apocryphal-quote">Apocryphal Quote</h2>
+<ul>
+<li>I cannot find it, but I believe a philosopher one jested:</li>
+</ul>
+<blockquote class="blockquote">
+<p>I am a weapons-grade finitist. I don’t believe in numbers larger than two.</p>
+</blockquote>
+<ul>
+<li>Arrays of such numbers are sufficient for computation of arbitrary precision.</li>
+<li>We can not capture the infinite, but we may model it.</li>
+</ul>
+</section>
+<section id="what-are-integers" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-integers">What are integers?</h2>
+<ul>
+<li>Denote integers as the mathematical symbol <span class="math inline">\(\mathbb{Z}\)</span>
+<ul>
+<li>Something to do with the German/Deutsch</li>
+</ul></li>
+<li>Not particular useful in cryptography, actually
+<ul>
+<li>We tend to want the naturals, denoted <span class="math inline">\(\mathbb{N}\)</span></li>
+<li>Counting numbers, <span class="math inline">\(0\)</span> and up.</li>
+</ul></li>
+</ul>
+</section>
+<section id="in-python" class="level2">
+<h2 class="anchored" data-anchor-id="in-python">In Python</h2>
+<ul>
+<li>We can write them in Python with <code>itertools</code></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>fields.py</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="fields.py"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
+<span id="cb1-2"><a href="#cb1-2"></a>N <span class="op">=</span> count()</span>
+<span id="cb1-3"><a href="#cb1-3"></a>make_z <span class="op">=</span> <span class="kw">lambda</span> n : n <span class="op">//</span> <span class="dv">2</span> <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="cf">else</span> <span class="op">-</span>n <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>Z <span class="op">=</span> (make_z(n) <span class="cf">for</span> n <span class="kw">in</span> count(<span class="dv">1</span>))</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># We can see elements of these infinite collections with</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>[<span class="bu">next</span>(N) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)], [<span class="bu">next</span>(Z) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>What do you see?</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aside" class="level2">
+<h2 class="anchored" data-anchor-id="aside">Aside</h2>
+<ul>
+<li>It is moderately controversial to assert: <span class="math display">\[
+0 \in \mathbb{N}
+\]</span>
+<ul>
+<li>Enderton, Herbert B. (1977). Elements of set theory. New York: Academic Press. p.&nbsp;66. ISBN 0122384407.</li>
+</ul></li>
+<li>Fortunately this is a CS class.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">assert</span>(<span class="dv">0</span> <span class="kw">in</span> count())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mathbbn-is-akin-to-un" class="level2">
+<h2 class="anchored" data-anchor-id="mathbbn-is-akin-to-un"><span class="math inline">\(\mathbb{N}\)</span> is akin to <code>u</code><span class="math inline">\(n\)</span></h2>
+<ul>
+<li>The natural numbers <span class="math inline">\(\mathbb{N}\)</span> probably look a lot like the unsigned integers.</li>
+<li>There’s only one real problem.
+<ul>
+<li>Get it, <span class="math inline">\(\mathbb{R}\)</span>EAL problem.<br>
+</li>
+</ul></li>
+<li>We don’t have the unsigned integers in Rust.
+<ul>
+<li>We don’t have them in Python either, but for a different reason.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
+<ul>
+<li>Python has been lying to us for years that its set of integers has no upper bound.
+<ul>
+<li>We say <span class="math inline">\(\nexists n : n \notin\)</span> <code>count()</code></li>
+<li>Let’s just try a reasonably sized number, say googolplex <span class="math inline">\(= 10^{10^{100}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="test-with--c" class="level2">
+<h2 class="anchored" data-anchor-id="test-with--c">Test with <code>-c</code></h2>
+<ul>
+<li>We use the <code>-c</code> flag to Python to run a script directly at command line.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>python3 <span class="op">-</span>c <span class="st">"print('hello world')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Perform multi-line calculuations using <code>;</code>
+<ul>
+<li>Oh - like Rust. 🤔</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>python3 <span class="op">-</span>c <span class="st">"from itertools import count; print(0 in count())"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="time-it" class="level2">
+<h2 class="anchored" data-anchor-id="time-it">Time it</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">$</span> time python3 <span class="at">-c</span> <span class="st">"from itertools import count; print(0 in count())"</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">True</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">real</span>    0m0.013s</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">user</span>    0m0.014s</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">sys</span>     0m0.000s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We could argue it takes .013 seconds to check</li>
+<li>Or .013 seconds to find itertools on a SDD</li>
+</ul>
+</section>
+<section id="bigger-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="bigger-numbers">Bigger Numbers</h2>
+<ul>
+<li>Check e.g.&nbsp;1000</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">$</span> time python3 <span class="at">-c</span> <span class="st">"from itertools import count; print(1000 in count())"</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">True</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">real</span>    0m0.012s</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">user</span>    0m0.012s</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">sys</span>     0m0.000s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Trivial.</li>
+</ul>
+</section>
+<section id="test-it" class="level2">
+<h2 class="anchored" data-anchor-id="test-it">Test it</h2>
+<ul>
+<li>Try a few powers yourself. What do you find?</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource email number-lines code-with-copy"><code class="sourceCode email"><span id="cb8-1"><a href="#cb8-1"></a>time python3 -c "from itertools import count; n=1; print(10**n in count())"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div class="columns">
+<div class="column" style="width:%50;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>10^<span class="math inline">\(n\)</span></th>
+<th><code>real</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>00.012</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>00.012</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>00.012</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>00.013</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>00.013</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>00.027</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>00.164</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>01.498</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>16.810</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:%50;">
+<ul>
+<li>Expect: <span class="math display">\[
+t(10^{10}) \in [140,170]
+\]</span></li>
+<li>Expect for <span class="math inline">\(n \gt 9\)</span> <span class="math display">\[
+t(10^n) \in [14,17] \times 10^{n-9}
+\]</span></li>
+<li>Expect <span class="math inline">\(10^{10^{100}}\)</span> in
+<ul>
+<li><span class="math inline">\(10^{10^{91}}\)</span> seconds</li>
+<li>316 novemvigintilion years</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="rust" class="level2">
+<h2 class="anchored" data-anchor-id="rust">Rust</h2>
+<ul>
+<li>Rust is a little more forthright about how big its numbers get.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">pub</span> <span class="kw">const</span> <span class="cn">MAX</span><span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> <span class="dt">i32</span><span class="pp">::</span><span class="cn">MAX</span><span class="op">;</span> <span class="co">// 2_147_483_647i32</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/i32/constant.MAX.html">Read more, or don’t. I’m a hyperlink; not an imperative.</a></li>
+</ul>
+</section>
+<section id="quoth-rust-book" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-rust-book">Quoth Rust Book</h2>
+<blockquote class="blockquote">
+<p>Let’s say you have a variable of type u8 that can hold values between 0 and 255. If you try to change the variable to a value outside that range, such as 256, integer overflow will occur, which can result in one of two behaviors. When you’re compiling in debug mode, Rust includes checks for integer overflow that cause your program to panic at runtime if this behavior occurs. Rust uses the term panicking when a program exits with an error…</p>
+</blockquote>
+</section>
+<section id="quoth-rust-book-1" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-rust-book-1">Quoth Rust Book</h2>
+<blockquote class="blockquote">
+<p>When you’re compiling in release mode with the –release flag, Rust does not include checks for integer overflow that cause panics. Instead, if overflow occurs, Rust performs two’s complement wrapping. In short, values greater than the maximum value the type can hold “wrap around” to the minimum of the values the type can hold. In the case of a u8, the value 256 becomes 0, the value 257 becomes 1, and so on. The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.</p>
+</blockquote>
+</section>
+<section id="quoth-rust-book-2" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-rust-book-2">Quoth Rust Book</h2>
+<blockquote class="blockquote">
+<p>The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>To explicitly handle the possibility of overflow, you can use these families of methods provided by the standard library for primitive numeric types:</p>
+</blockquote>
+</section>
+<section id="methods-in-rust" class="level2">
+<h2 class="anchored" data-anchor-id="methods-in-rust">Methods in Rust</h2>
+<ul>
+<li>Wrap in all modes with the <code>wrapping_*</code> methods, such as <code>wrapping_add</code>.</li>
+<li>Return the None value if there is overflow with the <code>checked_*</code> methods.</li>
+<li>Return the value and a Boolean indicating whether there was overflow with the <code>overflowing_*</code> methods.</li>
+<li>Saturate at the value’s minimum or maximum values with the <code>saturating_*</code> methods.</li>
+</ul>
+</section>
+<section id="editorializing" class="level2">
+<h2 class="anchored" data-anchor-id="editorializing">Editorializing</h2>
+<ul>
+<li>I find having different numerical behavior in debug and release versions <em>extremely</em> questionable.</li>
+<li>I was willing to bite my tongue but in fact:
+<ul>
+<li>This is impacts SHA-2, upcoming ECDSA, <code>f16</code> and <code>ix</code></li>
+<li>Using stable numerical behavior facilitated debatably easier implementations in C last term.</li>
+</ul></li>
+</ul>
+</section>
+<section id="demo-in-rust" class="level2">
+<h2 class="anchored" data-anchor-id="demo-in-rust">Demo in Rust</h2>
+<ul>
+<li>We don’t have to just trust in the given <code>i32</code> upper bound, we can test it.</li>
+<li>Well, kinda…</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> n<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="cf">while</span> (n <span class="op">+</span> <span class="dv">1</span>) <span class="op">&gt;</span> n <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>        n <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="op">}</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="pp">dbg!</span>(n)<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="pp">dbg!</span>(<span class="dt">i32</span><span class="pp">::</span><span class="cn">MAX</span>)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing…</h2>
+<ul>
+<li>Let’s time how long this takes!
+<ul>
+<li>We timed Python.</li>
+</ul></li>
+<li>Go ahead and <code>time cargo run</code></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.25s</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span><span class="kw">`</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="ex">thread</span> <span class="st">'main'</span> panicked at src/main.rs:3:11:</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="ex">attempt</span> to add with overflow</span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="ex">note:</span> run with <span class="kw">`</span><span class="va">RUST_BACKTRACE</span><span class="op">=</span>1<span class="kw">`</span> <span class="ex">environment</span> variable to display a backtrace</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="ex">real</span>    0m4.943s</span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="ex">user</span>    0m4.914s</span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="ex">sys</span>     0m0.079s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="discuss" class="level2">
+<h2 class="anchored" data-anchor-id="discuss">Discuss</h2>
+<ul>
+<li>For me, this took 4.66s on <code>i32</code>
+<ul>
+<li>Same value in Python was 1m9.32s
+<ul>
+<li>This is about half the speed I got with C.</li>
+</ul></li>
+</ul></li>
+<li>How long for <code>u64</code>?
+<ul>
+<li>In Python?</li>
+</ul></li>
+<li>How would speed up the code?
+<ul>
+<li>What assumptions did you make?</li>
+</ul></li>
+<li>How many base 10 digits does the largest number we can store in 32 bytes have?</li>
+</ul>
+</section>
+<section id="testing-1" class="level2">
+<h2 class="anchored" data-anchor-id="testing-1">Testing…</h2>
+<ul>
+<li>Rust behaves differently with the <code>--release</code> flag.
+<ul>
+<li>Just me: I hate this!</li>
+</ul></li>
+<li><code>time cargo run --release</code></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a>   Compiling num v0.1.0 (/home/user/tmp/num)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    Finished `release` profile [optimized] target(s) in 0.54s</span>
+<span id="cb12-3"><a href="#cb12-3"></a>     Running `target/release/num`</span>
+<span id="cb12-4"><a href="#cb12-4"></a>[src/main.rs:6:5] n = 2147483647</span>
+<span id="cb12-5"><a href="#cb12-5"></a>[src/main.rs:7:5] i32::MAX = 2147483647</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>real    0m0.578s</span>
+<span id="cb12-8"><a href="#cb12-8"></a>user    0m0.086s</span>
+<span id="cb12-9"><a href="#cb12-9"></a>sys     0m0.116s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rings" class="level2">
+<h2 class="anchored" data-anchor-id="rings">Rings</h2>
+<ul>
+<li>As far as I know (not a mathematician) the <code>uint</code>s and <code>int</code>s in C are <em>rings</em>
+<ul>
+<li>They have addition and multiplication</li>
+</ul></li>
+<li>They aren’t fields - zero is divisible
+<ul>
+<li>Spoiler alert, but <span class="math inline">\(2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="rings-vs-integers" class="level2">
+<h2 class="anchored" data-anchor-id="rings-vs-integers">Rings vs Integers</h2>
+<ul>
+<li>Rings have some “goofy” features
+<ul>
+<li><span class="math inline">\(a, b \in\)</span> <code>u</code><span class="math inline">\(n\)</span>` <span class="math inline">\(\nRightarrow a + b &gt; a\)</span></li>
+<li>Same with multiplication.</li>
+</ul></li>
+<li>Let’s look at an example.</li>
+</ul>
+</section>
+<section id="checkers" class="level2">
+<h2 class="anchored" data-anchor-id="checkers">Checkers</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs"</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="src/main.rs&quot;"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="kw">let</span> a<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">1</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">let</span> b<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">2</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="pp">dbg!</span>(a <span class="op">+</span> b)<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="do-some-additions" class="level2">
+<h2 class="anchored" data-anchor-id="do-some-additions">Do some additions</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">$</span> cargo run <span class="at">--</span> 10 20</span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.23s</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span> 10 20<span class="kw">`</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="ex">[src/main.rs:5:5]</span> a + b = 30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>30</code> - that makes sense!</li>
+</ul>
+</section>
+<section id="do-some-additions-1" class="level2">
+<h2 class="anchored" data-anchor-id="do-some-additions-1">Do some additions</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">$</span> cargo run <span class="at">--</span> 100 200</span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span> 100 200<span class="kw">`</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ex">thread</span> <span class="st">'main'</span> panicked at src/main.rs:5:10:</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ex">attempt</span> to add with overflow</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="ex">note:</span> run with <span class="kw">`</span><span class="va">RUST_BACKTRACE</span><span class="op">=</span>1<span class="kw">`</span> <span class="ex">environment</span> variable to display a backtrace</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Overflow - sure, <span class="math inline">\(100 + 200 = 300 &gt; 2^8 = 256\)</span></li>
+</ul>
+</section>
+<section id="do-some-additions-2" class="level2">
+<h2 class="anchored" data-anchor-id="do-some-additions-2">Do some additions</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">$</span> cargo run <span class="at">--release</span> <span class="at">--</span> 100 200</span>
+<span id="cb16-2"><a href="#cb16-2"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">release</span><span class="kw">`</span> profile <span class="pp">[</span><span class="ss">optimized</span><span class="pp">]</span> target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.25s</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/release/num</span> 100 200<span class="kw">`</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ex">[src/main.rs:5:5]</span> a + b = 44</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>44</code>? From Whence?</li>
+</ul>
+<p><span class="math display">\[
+100 + 200 \equiv 44 \pmod{2^8}
+\]</span> - Or perhaps</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">python3</span> <span class="at">-c</span> <span class="st">"print((100 + 200) % (2 ** 8) == 44)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rust-integers-are-finite" class="level2">
+<h2 class="anchored" data-anchor-id="rust-integers-are-finite">Rust integers are <em>finite</em></h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource email number-lines code-with-copy"><code class="sourceCode email"><span id="cb18-1"><a href="#cb18-1"></a>&gt;&gt;&gt; 200 + 100</span>
+<span id="cb18-2"><a href="#cb18-2"></a>300</span>
+<span id="cb18-3"><a href="#cb18-3"></a>&gt;&gt;&gt; 2 ** 8</span>
+<span id="cb18-4"><a href="#cb18-4"></a>256</span>
+<span id="cb18-5"><a href="#cb18-5"></a>&gt;&gt;&gt; 300 - 256</span>
+<span id="cb18-6"><a href="#cb18-6"></a>44</span>
+<span id="cb18-7"><a href="#cb18-7"></a>&gt;&gt;&gt; 300 % 256</span>
+<span id="cb18-8"><a href="#cb18-8"></a>44</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Equivalent to operations on the naturals modulo <span class="math inline">\(2^8\)</span></li>
+<li>Usually denoted as: <span class="math display">\[
+\mathbb{Z}/2^8\mathbb{Z}
+\]</span></li>
+<li>We say <span class="math inline">\(\mathbb{Z}\)</span> not <span class="math inline">\(\mathbb{N}\)</span> as <span class="math inline">\(-1 \in \mathbb{Z}/n\mathbb{Z}\)</span></li>
+</ul>
+</section>
+<section id="in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="in-practice">In practice</h2>
+<ul>
+<li><span class="math inline">\(\exists\)</span> <code>i32::MAX</code>, <code>u64::MAX</code>, etc.</li>
+<li>Sums and products less than these values are unaffected.</li>
+<li>Sums and products greater than these values are unstable.</li>
+<li>Use methods or compile for release.</li>
+</ul>
+</section>
+<section id="problem-statement" class="level2">
+<h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
+<ul>
+<li>Quoth GitHub</li>
+</ul>
+<blockquote class="blockquote">
+<p><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent"><code>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></a></p>
+</blockquote>
+<ul>
+<li>Wait a minute.</li>
+<li>What does that 4096 stand for?
+<ul>
+<li>For what does that 4096 stand?</li>
+</ul></li>
+</ul>
+</section>
+<section id="n-128-bits" class="level2">
+<h2 class="anchored" data-anchor-id="n-128-bits"><span class="math inline">\(n &gt; 128\)</span> bits</h2>
+<ul>
+<li>Modern security recommendations are for 4096 bit cryptographic keys.
+<ul>
+<li>2048 is generally considered “okay” or “acceptable”</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource email number-lines code-with-copy"><code class="sourceCode email"><span id="cb19-1"><a href="#cb19-1"></a>NAME</span>
+<span id="cb19-2"><a href="#cb19-2"></a>     ssh-keygen — OpenSSH authentication key utility</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a>SYNOPSIS</span>
+<span id="cb19-5"><a href="#cb19-5"></a>     ssh-keygen [-q] [-a rounds] [-b bits] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="today-1" class="level1">
+<h1>Today</h1>
+<ul>
+<li>✓ Finite sets, rings</li>
+<li>Arbitrary/high precision integers</li>
+<li>Arithmetic operations</li>
+<li>Function types</li>
+</ul>
+<section id="big-values" class="level2">
+<h2 class="anchored" data-anchor-id="big-values">Big Values</h2>
+<ul>
+<li>Soon, we will implement key generation.
+<ul>
+<li>We’ll talk about what it is then.</li>
+</ul></li>
+<li>First, we need a way to deal with integers that big.</li>
+<li>We will use <em>modular arithmetic</em>.
+<ul>
+<li>Finite <code>u64</code> models infinite <span class="math inline">\(\mathbb{Z}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="simple-example" class="level2">
+<h2 class="anchored" data-anchor-id="simple-example">Simple Example</h2>
+<ul>
+<li>Yoink a data science example.</li>
+<li>We had a data set for which we determined a mean height in inches.</li>
+<li>We converted it to inches and feet.</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">69.3</span> <span class="op">//</span> <span class="dv">12</span>, <span class="fl">69.3</span> <span class="op">%</span> <span class="dv">12</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>(<span class="fl">5.0</span>, <span class="fl">9.299999999999997</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Floats: they’re bad.</li>
+</ul>
+</section>
+<section id="addition-is-easy" class="level2">
+<h2 class="anchored" data-anchor-id="addition-is-easy">Addition is easy</h2>
+<ul>
+<li>WNBA MVP and Olympic Gold Medalist A’ja Wilson is <a href="https://en.wikipedia.org/wiki/A%27ja_Wilson">6 ft 4 in</a></li>
+<li>How much taller is that than 5 ft 9.3 in
+<ul>
+<li>Can convert to non-integer inches, but…</li>
+<li>We already had the .299… problem</li>
+</ul></li>
+</ul>
+</section>
+<section id="difference" class="level2">
+<h2 class="anchored" data-anchor-id="difference">Difference</h2>
+<ul>
+<li>We perform “long subtraction”</li>
+<li>It’s fun!</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="difference-1" class="level2">
+<h2 class="anchored" data-anchor-id="difference-1">Difference</h2>
+<ul>
+<li><span class="math inline">\(0 - 3 \equiv 7 \pmod{10}\)</span></li>
+<li>Tenths of inches</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Diff</td>
+<td></td>
+<td></td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="difference-2" class="level2">
+<h2 class="anchored" data-anchor-id="difference-2">Difference</h2>
+<ul>
+<li>But wait - <code>3</code> is more than <code>0</code></li>
+<li>Track via a “carry”</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Carry</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Diff</td>
+<td></td>
+<td></td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="difference-3" class="level2">
+<h2 class="anchored" data-anchor-id="difference-3">Difference</h2>
+<ul>
+<li><span class="math inline">\(4 - 9 - 1 \equiv 6 \pmod{12}\)</span></li>
+<li>12 in = 1 ft</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Carry</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Diff</td>
+<td></td>
+<td>6</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="difference-4" class="level2">
+<h2 class="anchored" data-anchor-id="difference-4">Difference</h2>
+<ul>
+<li>Another carry.</li>
+<li>12 in = 1 ft</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Carry</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Diff</td>
+<td></td>
+<td>6</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="difference-5" class="level2">
+<h2 class="anchored" data-anchor-id="difference-5">Difference</h2>
+<ul>
+<li><span class="math inline">\(6 - 5 - 1 = 0\)</span></li>
+<li>Nonmodular - feet has no max.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ft</th>
+<th>in.</th>
+<th>.in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A’ja</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td>5</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Carry</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Diff</td>
+<td>0</td>
+<td>6</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li>Iconic living legend A’ja Wilson is tall af.</li>
+<li>We can do addition and substraction on larger values than <code>u64::MAX</code> by:
+<ul>
+<li>Breaking numbers in smaller ranges
+<ul>
+<li>A tenths digit</li>
+<li>A ones digit</li>
+<li>A twelves digit</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="usefulness" class="level2">
+<h2 class="anchored" data-anchor-id="usefulness">Usefulness</h2>
+<ul>
+<li>We can now do arithmetic correctly
+<ul>
+<li><span class="citation" data-cites="Python">@Python</span></li>
+</ul></li>
+<li>What else can we do?
+<ul>
+<li>Arbitrary (not infinite) precision.</li>
+</ul></li>
+</ul>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<ul>
+<li>Can we use this to add numbers bigger than <span class="math inline">\(2^n\)</span> using adds over at most <span class="math inline">\(n\)</span> bits at a time?
+<ul>
+<li>Sure! Change the modulos and you’re set.
+<ul>
+<li>Get it? Because the numbers form a set?</li>
+</ul></li>
+</ul></li>
+<li>Can we do this for more than 3 units?
+<ul>
+<li>Sure! Just put the middle (both consumes and produces a carry bit) in a loop!</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="today-2" class="level1">
+<h1>Today</h1>
+<ul>
+<li>✓ Finite sets, rings</li>
+<li>✓ Arbitrary/high precision integers</li>
+<li>Arithmetic operations</li>
+<li>Function types</li>
+</ul>
+<section id="easy-mode" class="level2">
+<h2 class="anchored" data-anchor-id="easy-mode">Easy Mode</h2>
+<ul>
+<li>Addition and subtraction are easy.</li>
+<li>For some value of easy.
+<ul>
+<li>Cut a too-big number into chunks.</li>
+<li>Add or subtract within chunks of the same index/offset/significance.</li>
+<li>Only wrinkle is a carry bit.</li>
+</ul></li>
+<li>Identical to digit-based addition.
+<ul>
+<li><code>u8</code>s as digits in base 256 arithmetic</li>
+</ul></li>
+</ul>
+</section>
+<section id="hard-mode" class="level2">
+<h2 class="anchored" data-anchor-id="hard-mode">Hard Mode</h2>
+<ul>
+<li>Some cryptographical algorithms, however, use two extremely advanced arithmetic operations:
+<ul>
+<li>Multiplication, and</li>
+<li>Division, and</li>
+<li>Modulo</li>
+</ul></li>
+<li>Fortunately this only two operations (need a combined <code>divmod</code>)</li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<ul>
+<li>Last term I taught:
+<ul>
+<li>14 MS-level Computer Scientists
+<ul>
+<li>9-12 hrs/wk</li>
+<li>14 week contract</li>
+</ul></li>
+<li>34 BS-level Computer Scientists
+<ul>
+<li>6-9 hrs/wk</li>
+<li>15.5 week contract</li>
+</ul></li>
+</ul></li>
+<li>How many person hours is this?</li>
+</ul>
+</section>
+<section id="napkin-math" class="level2">
+<h2 class="anchored" data-anchor-id="napkin-math">Napkin Math</h2>
+<ul>
+<li>I’d say
+<ul>
+<li><span class="math inline">\(14 \times 12 \times 14\)</span></li>
+<li><span class="math inline">\(34 \times 9 \times 15.5\)</span></li>
+</ul></li>
+<li>I… can’t quite do that in one fell swoop.
+<ul>
+<li><span class="math inline">\(14 \times 12\)</span> is trivially <span class="math inline">\(12^2 + 24 = 168\)</span></li>
+<li><span class="math inline">\(9 \times 15.5\)</span> is trivially <span class="math inline">\(155 - 15.5 = 139.5\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="times-139.5" class="level2">
+<h2 class="anchored" data-anchor-id="times-139.5"><span class="math inline">\(34 \times 139.5\)</span></h2>
+<ul>
+<li>That just isn’t easy</li>
+<li>(140 * 34 isn’t bad, but we need a motivating example).</li>
+<li>Express <em>digit-wise</em>:</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>1</th>
+<th>3</th>
+<th>9</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="times-139.5-1" class="level2">
+<h2 class="anchored" data-anchor-id="times-139.5-1"><span class="math inline">\(34 \times 139.5\)</span></h2>
+<ul>
+<li>Compute all products over single-digit factors</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>1</th>
+<th>3</th>
+<th>9</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>27</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4</td>
+<td>12</td>
+<td>36</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>These:
+<ul>
+<li>Aren’t single digit</li>
+<li>Aren’t of the same signficance</li>
+</ul></li>
+</ul>
+</section>
+<section id="times-139.5-2" class="level2">
+<h2 class="anchored" data-anchor-id="times-139.5-2"><span class="math inline">\(34 \times 139.5\)</span></h2>
+<ul>
+<li>Include sigificance</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>100</th>
+<th>30</th>
+<th>9</th>
+<th>.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>30</td>
+<td>3000</td>
+<td>900</td>
+<td>270</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>400</td>
+<td>120</td>
+<td>36</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dear-watson" class="level2">
+<h2 class="anchored" data-anchor-id="dear-watson">Dear Watson</h2>
+<div class="columns">
+<div class="column" style="width:%50;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>100</th>
+<th>30</th>
+<th>9</th>
+<th>.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>30</td>
+<td>3000</td>
+<td>900</td>
+<td>270</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>400</td>
+<td>120</td>
+<td>36</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:%50;">
+<p><span class="math display">\[
+\begin{align*}
+5&amp; \times 4  \times 10^{-1}  &amp;= 2&amp;\\
++5&amp; \times 3  \times 10^{0}  &amp;= 15&amp;\\
++9&amp; \times 4  \times 10^{0}  &amp;= 36&amp;\\
++9&amp; \times 3  \times 10^{1}  &amp;= 270&amp;\\
++3&amp; \times 4  \times 10^{1}  &amp;= 120&amp;\\
++3&amp; \times 3  \times 10^{2}  &amp;= 900&amp;\\
++1&amp; \times 4  \times 10^{2}  &amp;= 400&amp;\\
++1&amp; \times 3  \times 10^{3}  &amp;= 3000&amp;\\
+\end{align*}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="express-as" class="level2">
+<h2 class="anchored" data-anchor-id="express-as">Express as</h2>
+<p><span class="math display">\[
+\begin{align*}
+139.5&amp; = &amp;1 * 10^2 + &amp;3 * 10^1 + &amp;9 * 10^0&amp; + 5 * 10^{-1}\\
+34&amp; = &amp;&amp;3 * 10^1 + &amp;4 * 10^0&amp;\\
+\end{align*}
+\]</span></p>
+<ul>
+<li><p>Take <span class="math inline">\(x = 10\)</span> <span class="math display">\[
+\begin{align*}
+139.5&amp; = &amp;1 * x^2 + &amp;3 * x + &amp;9&amp; + 5 * x^{-1}\\
+34&amp; = &amp;&amp;3 * x + &amp;4&amp;\\
+\end{align*}
+\]</span></p></li>
+<li><p>That is polynomial; can work with those.</p></li>
+</ul>
+</section>
+<section id="polynomial" class="level2">
+<h2 class="anchored" data-anchor-id="polynomial">Polynomial</h2>
+<p><span class="math display">\[
+(x^2 + 3x + 9 + 5x^{-1})(3x + 4)
+\]</span></p>
+<p><span class="math display">\[
+(x^2 + 3x + 9 + 5x^{-1})(3x) + (x^2 + 3x + 9 + 5x^{-1})(4)
+\]</span></p>
+<p><span class="math display">\[
+(3x^3 + 9x^2 + 27x + 15) + (4x^2 + 12x + 36 + 20x^{-1})
+\]</span></p>
+<p><span class="math display">\[
+3x^3 + 13x^2 + 39x + 51 + 20x^{-1}
+\]</span></p>
+</section>
+<section id="aside-1" class="level2">
+<h2 class="anchored" data-anchor-id="aside-1">Aside</h2>
+<ul>
+<li>I think this is covered around ~8th grade</li>
+<li>I don’t want to assume the integrity to US public school system
+<ul>
+<li>Or anything school system</li>
+<li>Shout out school</li>
+</ul></li>
+<li>The point of this class isn’t middle/high school math
+<ul>
+<li>That’s the point of life itself /s</li>
+</ul></li>
+</ul>
+</section>
+<section id="considerations" class="level2">
+<h2 class="anchored" data-anchor-id="considerations">Considerations</h2>
+<ul>
+<li>It is natural to express multiplication of e.g.&nbsp;4096 bit integers as a polynomial over, say, 64 bit integers.</li>
+<li>One teeny problem:
+<ul>
+<li>Overflow.</li>
+</ul></li>
+</ul>
+</section>
+<section id="overflow" class="level2">
+<h2 class="anchored" data-anchor-id="overflow">Overflow</h2>
+<ul>
+<li>The point of calculating this was to get things down to single digit:</li>
+</ul>
+<p><span class="math display">\[
+3x^3 + 13x^2 + 39x + 51x^0 + 20x^{-1}
+\]</span></p>
+<ul>
+<li>13, 39, 51, and 20 are all not compliant (debatably 20 is okay)</li>
+<li>Essentially, 1-digit multiply may produce a 2-digit product.</li>
+</ul>
+</section>
+<section id="size-of-ints" class="level2">
+<h2 class="anchored" data-anchor-id="size-of-ints">Size of ints</h2>
+<ul>
+<li>Say we have two integers of 8 bits of precision.</li>
+<li>We multiple them together.</li>
+<li>What is the largest number we can get, and</li>
+<li>How many bits does it require?</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource email number-lines code-with-copy"><code class="sourceCode email"><span id="cb21-1"><a href="#cb21-1"></a>python3 -c "x = 2 ** 8 - 1 ; x = x * x ; print(x.bit_length())"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>16</li>
+</ul>
+</section>
+</section>
+<section id="carrys-for-mults" class="level1">
+<h1>Carrys for mults</h1>
+<ul>
+<li>When we are doing big multiplications:
+<ul>
+<li>We must multiply chunks of at most half the size of our biggest integer.</li>
+<li>We must keep track of significance - their position in an imagined larger integer</li>
+<li>We must perform adds over these terms, using big addition</li>
+</ul></li>
+</ul>
+<section id="division" class="level2">
+<h2 class="anchored" data-anchor-id="division">Division</h2>
+<ul>
+<li>Remember long division?
+<ul>
+<li>Align the highest digits (I took the log base 2)</li>
+<li>Divide.</li>
+<li>Keep track of significance (Difference between logs)</li>
+<li>Calculate remainder.</li>
+<li>Loop.</li>
+</ul></li>
+<li>The final remainder is the mod.</li>
+</ul>
+</section>
+<section id="today-3" class="level2">
+<h2 class="anchored" data-anchor-id="today-3">Today</h2>
+<ul>
+<li>✓ Finite sets, rings</li>
+<li>✓ Arbitrary/high precision integers</li>
+<li>✓ Arithmetic operations</li>
+<li>Function types</li>
+</ul>
+</section>
+<section id="an-arbitrary-precision-type." class="level2">
+<h2 class="anchored" data-anchor-id="an-arbitrary-precision-type.">An arbitrary precision type.</h2>
+<ul>
+<li>Just as with <code>f16</code>, we can create something to hold numbers.
+<ul>
+<li>I used a boolean for signs and a vector for digits.</li>
+</ul></li>
+<li>Here’s an example function declaration:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/lib.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb22" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">// At the top</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="at">#![</span>allow<span class="at">(</span>non_camel_case_types<span class="at">)]</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">pub</span> <span class="kw">struct</span> ix <span class="op">{</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co">// Latter</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">pub</span> <span class="kw">fn</span> add_ix(a<span class="op">:</span> <span class="op">&amp;</span>ix<span class="op">,</span> b<span class="op">:</span> <span class="op">&amp;</span>ix) <span class="op">-&gt;</span> ix <span class="op">{</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="borrowing" class="level2">
+<h2 class="anchored" data-anchor-id="borrowing">Borrowing</h2>
+<ul>
+<li>Why borrow?
+<ul>
+<li>These are <em>data structures</em>, not numerical literals.</li>
+</ul></li>
+<li>Much closer to vectorized operations than to integer addition.</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="op">&gt;&gt;&gt;</span> hours <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">30</span>, <span class="dv">9</span>, <span class="fl">.5</span>])</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="op">&gt;&gt;&gt;</span> hours <span class="op">*</span> <span class="dv">34</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>array([<span class="fl">3400.</span>, <span class="fl">1020.</span>,  <span class="fl">306.</span>,   <span class="fl">17.</span>])</span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">&gt;&gt;&gt;</span> np.<span class="bu">sum</span>(hours <span class="op">*</span> <span class="dv">34</span>)</span>
+<span id="cb23-6"><a href="#cb23-6"></a>np.float64(<span class="fl">4743.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="faq-1" class="level2">
+<h2 class="anchored" data-anchor-id="faq-1">FAQ</h2>
+<ul>
+<li>Isn’t there a way to use just <code>+</code> and <code>-</code>.
+<ul>
+<li>Yes.</li>
+<li>I didn’t find it interesting, you are welcome to do so.</li>
+<li>Provide wrappers of the needed type (<code>(&amp;ix, &amp;ix) -&gt; ix</code>) to use the autotester.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="today-4" class="level1">
+<h1>Today</h1>
+<ul>
+<li>✓ Finite sets, rings</li>
+<li>✓ Arbitrary/high precision integers</li>
+<li>✓ Arithmetic operations</li>
+<li>✓ Function types</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./51_f16.html" class="pagination-link" aria-label="f16">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">f16</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./71_ix_io.html" class="pagination-link" aria-label="Numerical I/O">
+        <span class="nav-page-text">Numerical I/O</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="an">title:</span><span class="co"> "Numbers"</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co">---</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="fu"># Announcements</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="ss">- </span>**Welcome** to Systems in Rust</span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="ss">- </span>**Action Items**:</span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="ss">  - </span>Midterms verbal update.</span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="ss">  - </span>Next assignment goes out Friday, start whenever.</span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="ss">  - </span>This lecture supports that homework.</span>
+<span id="cb24-12"><a href="#cb24-12"></a></span>
+<span id="cb24-13"><a href="#cb24-13"></a></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="fu">## Today</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="ss">- </span>Finite sets, rings</span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="ss">- </span>Arbitrary/high precision integers</span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="ss">- </span>Arithmetic operations</span>
+<span id="cb24-19"><a href="#cb24-19"></a><span class="ss">- </span>Function types</span>
+<span id="cb24-20"><a href="#cb24-20"></a>  </span>
+<span id="cb24-21"><a href="#cb24-21"></a><span class="fu"># Finite sets, rings</span></span>
+<span id="cb24-22"><a href="#cb24-22"></a>  </span>
+<span id="cb24-23"><a href="#cb24-23"></a><span class="fu">## Apocryphal Quote</span></span>
+<span id="cb24-24"><a href="#cb24-24"></a></span>
+<span id="cb24-25"><a href="#cb24-25"></a><span class="ss">- </span>I cannot find it, but I believe a philosopher one jested:</span>
+<span id="cb24-26"><a href="#cb24-26"></a></span>
+<span id="cb24-27"><a href="#cb24-27"></a><span class="at">&gt; I am a weapons-grade finitist. I don't believe in numbers larger than two.</span></span>
+<span id="cb24-28"><a href="#cb24-28"></a></span>
+<span id="cb24-29"><a href="#cb24-29"></a><span class="ss">- </span>Arrays of such numbers are sufficient for computation of arbitrary precision.</span>
+<span id="cb24-30"><a href="#cb24-30"></a><span class="ss">- </span>We can not capture the infinite, but we may model it.</span>
+<span id="cb24-31"><a href="#cb24-31"></a>  </span>
+<span id="cb24-32"><a href="#cb24-32"></a><span class="fu">## What are integers?</span></span>
+<span id="cb24-33"><a href="#cb24-33"></a></span>
+<span id="cb24-34"><a href="#cb24-34"></a><span class="ss">- </span>Denote integers as the mathematical symbol $\mathbb{Z}$</span>
+<span id="cb24-35"><a href="#cb24-35"></a><span class="ss">  - </span>Something to do with the German/Deutsch</span>
+<span id="cb24-36"><a href="#cb24-36"></a><span class="ss">- </span>Not particular useful in cryptography, actually</span>
+<span id="cb24-37"><a href="#cb24-37"></a><span class="ss">  - </span>We tend to want the naturals, denoted $\mathbb{N}$</span>
+<span id="cb24-38"><a href="#cb24-38"></a><span class="ss">  - </span>Counting numbers, $0$ and up.</span>
+<span id="cb24-39"><a href="#cb24-39"></a></span>
+<span id="cb24-40"><a href="#cb24-40"></a><span class="fu">## In Python</span></span>
+<span id="cb24-41"><a href="#cb24-41"></a></span>
+<span id="cb24-42"><a href="#cb24-42"></a><span class="ss">- </span>We can write them in Python with <span class="in">`itertools`</span></span>
+<span id="cb24-43"><a href="#cb24-43"></a></span>
+<span id="cb24-44"><a href="#cb24-44"></a><span class="in">```{.python filename="fields.py"}</span></span>
+<span id="cb24-45"><a href="#cb24-45"></a><span class="in">from itertools import count</span></span>
+<span id="cb24-46"><a href="#cb24-46"></a><span class="in">N = count()</span></span>
+<span id="cb24-47"><a href="#cb24-47"></a><span class="in">make_z = lambda n : n // 2 if n % 2 else -n // 2</span></span>
+<span id="cb24-48"><a href="#cb24-48"></a><span class="in">Z = (make_z(n) for n in count(1))</span></span>
+<span id="cb24-49"><a href="#cb24-49"></a><span class="in"># We can see elements of these infinite collections with</span></span>
+<span id="cb24-50"><a href="#cb24-50"></a><span class="in">[next(N) for _ in range(5)], [next(Z) for _ in range(5)]</span></span>
+<span id="cb24-51"><a href="#cb24-51"></a><span class="in">```</span></span>
+<span id="cb24-52"><a href="#cb24-52"></a></span>
+<span id="cb24-53"><a href="#cb24-53"></a><span class="ss">- </span>What do you see?</span>
+<span id="cb24-54"><a href="#cb24-54"></a><span class="in">```python</span></span>
+<span id="cb24-55"><a href="#cb24-55"></a>([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>])</span>
+<span id="cb24-56"><a href="#cb24-56"></a><span class="in">```</span></span>
+<span id="cb24-57"><a href="#cb24-57"></a></span>
+<span id="cb24-58"><a href="#cb24-58"></a><span class="fu">## Aside</span></span>
+<span id="cb24-59"><a href="#cb24-59"></a></span>
+<span id="cb24-60"><a href="#cb24-60"></a><span class="ss">- </span>It is moderately controversial to assert:</span>
+<span id="cb24-61"><a href="#cb24-61"></a>$$</span>
+<span id="cb24-62"><a href="#cb24-62"></a>0 \in \mathbb{N}</span>
+<span id="cb24-63"><a href="#cb24-63"></a>$$</span>
+<span id="cb24-64"><a href="#cb24-64"></a><span class="ss">  - </span>Enderton, Herbert B. (1977). Elements of set theory. New York: Academic Press. p. 66. ISBN 0122384407.</span>
+<span id="cb24-65"><a href="#cb24-65"></a><span class="ss">- </span>Fortunately this is a CS class.</span>
+<span id="cb24-66"><a href="#cb24-66"></a><span class="in">```python</span></span>
+<span id="cb24-67"><a href="#cb24-67"></a><span class="cf">assert</span>(<span class="dv">0</span> <span class="kw">in</span> count())</span>
+<span id="cb24-68"><a href="#cb24-68"></a><span class="in">```</span></span>
+<span id="cb24-69"><a href="#cb24-69"></a></span>
+<span id="cb24-70"><a href="#cb24-70"></a><span class="fu">## $\mathbb{N}$ is akin to `u`$n$</span></span>
+<span id="cb24-71"><a href="#cb24-71"></a></span>
+<span id="cb24-72"><a href="#cb24-72"></a><span class="ss">- </span>The natural numbers $\mathbb{N}$ probably look a lot like the unsigned integers.</span>
+<span id="cb24-73"><a href="#cb24-73"></a><span class="ss">- </span>There's only one real problem.</span>
+<span id="cb24-74"><a href="#cb24-74"></a><span class="ss">  - </span>Get it, $\mathbb{R}$EAL problem.  </span>
+<span id="cb24-75"><a href="#cb24-75"></a><span class="ss">- </span>We don't have the unsigned integers in Rust.</span>
+<span id="cb24-76"><a href="#cb24-76"></a><span class="ss">  - </span>We don't have them in Python either, but for a different reason.</span>
+<span id="cb24-77"><a href="#cb24-77"></a></span>
+<span id="cb24-78"><a href="#cb24-78"></a><span class="fu">## The Problem</span></span>
+<span id="cb24-79"><a href="#cb24-79"></a></span>
+<span id="cb24-80"><a href="#cb24-80"></a><span class="ss">- </span>Python has been lying to us for years that its set of integers has no upper bound.</span>
+<span id="cb24-81"><a href="#cb24-81"></a><span class="ss">  - </span>We say $\nexists n : n \notin$ <span class="in">`count()`</span></span>
+<span id="cb24-82"><a href="#cb24-82"></a><span class="ss">  - </span>Let's just try a reasonably sized number, say googolplex $= 10^{10^{100}}$</span>
+<span id="cb24-83"><a href="#cb24-83"></a></span>
+<span id="cb24-84"><a href="#cb24-84"></a><span class="fu">## Test with `-c`</span></span>
+<span id="cb24-85"><a href="#cb24-85"></a></span>
+<span id="cb24-86"><a href="#cb24-86"></a><span class="ss">- </span>We use the <span class="in">`-c`</span> flag to Python to run a script directly at command line.</span>
+<span id="cb24-87"><a href="#cb24-87"></a><span class="in">```python</span></span>
+<span id="cb24-88"><a href="#cb24-88"></a>python3 <span class="op">-</span>c <span class="st">"print('hello world')"</span></span>
+<span id="cb24-89"><a href="#cb24-89"></a><span class="in">```</span></span>
+<span id="cb24-90"><a href="#cb24-90"></a><span class="ss">- </span>Perform multi-line calculuations using <span class="in">`;`</span></span>
+<span id="cb24-91"><a href="#cb24-91"></a><span class="ss">  - </span>Oh - like Rust. 🤔</span>
+<span id="cb24-92"><a href="#cb24-92"></a></span>
+<span id="cb24-93"><a href="#cb24-93"></a><span class="in">```python</span></span>
+<span id="cb24-94"><a href="#cb24-94"></a>python3 <span class="op">-</span>c <span class="st">"from itertools import count; print(0 in count())"</span></span>
+<span id="cb24-95"><a href="#cb24-95"></a><span class="in">```</span></span>
+<span id="cb24-96"><a href="#cb24-96"></a></span>
+<span id="cb24-97"><a href="#cb24-97"></a><span class="fu">## Time it</span></span>
+<span id="cb24-98"><a href="#cb24-98"></a></span>
+<span id="cb24-99"><a href="#cb24-99"></a><span class="in">```sh</span></span>
+<span id="cb24-100"><a href="#cb24-100"></a><span class="ex">$</span> time python3 <span class="at">-c</span> <span class="st">"from itertools import count; print(0 in count())"</span></span>
+<span id="cb24-101"><a href="#cb24-101"></a><span class="ex">True</span></span>
+<span id="cb24-102"><a href="#cb24-102"></a></span>
+<span id="cb24-103"><a href="#cb24-103"></a><span class="ex">real</span>    0m0.013s</span>
+<span id="cb24-104"><a href="#cb24-104"></a><span class="ex">user</span>    0m0.014s</span>
+<span id="cb24-105"><a href="#cb24-105"></a><span class="ex">sys</span>     0m0.000s</span>
+<span id="cb24-106"><a href="#cb24-106"></a><span class="in">```</span></span>
+<span id="cb24-107"><a href="#cb24-107"></a></span>
+<span id="cb24-108"><a href="#cb24-108"></a><span class="ss">- </span>We could argue it takes .013 seconds to check</span>
+<span id="cb24-109"><a href="#cb24-109"></a><span class="ss">- </span>Or .013 seconds to find itertools on a SDD</span>
+<span id="cb24-110"><a href="#cb24-110"></a></span>
+<span id="cb24-111"><a href="#cb24-111"></a><span class="fu">## Bigger Numbers</span></span>
+<span id="cb24-112"><a href="#cb24-112"></a></span>
+<span id="cb24-113"><a href="#cb24-113"></a><span class="ss">- </span>Check e.g. 1000</span>
+<span id="cb24-114"><a href="#cb24-114"></a><span class="in">```sh</span></span>
+<span id="cb24-115"><a href="#cb24-115"></a><span class="ex">$</span> time python3 <span class="at">-c</span> <span class="st">"from itertools import count; print(1000 in count())"</span></span>
+<span id="cb24-116"><a href="#cb24-116"></a><span class="ex">True</span></span>
+<span id="cb24-117"><a href="#cb24-117"></a></span>
+<span id="cb24-118"><a href="#cb24-118"></a><span class="ex">real</span>    0m0.012s</span>
+<span id="cb24-119"><a href="#cb24-119"></a><span class="ex">user</span>    0m0.012s</span>
+<span id="cb24-120"><a href="#cb24-120"></a><span class="ex">sys</span>     0m0.000s</span>
+<span id="cb24-121"><a href="#cb24-121"></a><span class="in">```</span></span>
+<span id="cb24-122"><a href="#cb24-122"></a></span>
+<span id="cb24-123"><a href="#cb24-123"></a><span class="ss">- </span>Trivial.</span>
+<span id="cb24-124"><a href="#cb24-124"></a></span>
+<span id="cb24-125"><a href="#cb24-125"></a><span class="fu">## Test it</span></span>
+<span id="cb24-126"><a href="#cb24-126"></a></span>
+<span id="cb24-127"><a href="#cb24-127"></a><span class="ss">- </span>Try a few powers yourself. What do you find?</span>
+<span id="cb24-128"><a href="#cb24-128"></a></span>
+<span id="cb24-129"><a href="#cb24-129"></a><span class="in">```email</span></span>
+<span id="cb24-130"><a href="#cb24-130"></a>time python3 -c "from itertools import count; n=1; print(10**n in count())"</span>
+<span id="cb24-131"><a href="#cb24-131"></a><span class="in">```</span></span>
+<span id="cb24-132"><a href="#cb24-132"></a></span>
+<span id="cb24-133"><a href="#cb24-133"></a>##</span>
+<span id="cb24-134"><a href="#cb24-134"></a></span>
+<span id="cb24-135"><a href="#cb24-135"></a>::::{.columns}</span>
+<span id="cb24-136"><a href="#cb24-136"></a></span>
+<span id="cb24-137"><a href="#cb24-137"></a>:::{.column width="%50"}</span>
+<span id="cb24-138"><a href="#cb24-138"></a></span>
+<span id="cb24-139"><a href="#cb24-139"></a>|10^$n$|<span class="in">`real`</span>|</span>
+<span id="cb24-140"><a href="#cb24-140"></a>|-|-|</span>
+<span id="cb24-141"><a href="#cb24-141"></a>|1|00.012|</span>
+<span id="cb24-142"><a href="#cb24-142"></a>|2|00.012|</span>
+<span id="cb24-143"><a href="#cb24-143"></a>|3|00.012|</span>
+<span id="cb24-144"><a href="#cb24-144"></a>|4|00.013|</span>
+<span id="cb24-145"><a href="#cb24-145"></a>|5|00.013|</span>
+<span id="cb24-146"><a href="#cb24-146"></a>|6|00.027|</span>
+<span id="cb24-147"><a href="#cb24-147"></a>|7|00.164|</span>
+<span id="cb24-148"><a href="#cb24-148"></a>|8|01.498|</span>
+<span id="cb24-149"><a href="#cb24-149"></a>|9|16.810|</span>
+<span id="cb24-150"><a href="#cb24-150"></a></span>
+<span id="cb24-151"><a href="#cb24-151"></a>:::</span>
+<span id="cb24-152"><a href="#cb24-152"></a></span>
+<span id="cb24-153"><a href="#cb24-153"></a></span>
+<span id="cb24-154"><a href="#cb24-154"></a>:::{.column width="%50"}</span>
+<span id="cb24-155"><a href="#cb24-155"></a></span>
+<span id="cb24-156"><a href="#cb24-156"></a><span class="ss">- </span>Expect:</span>
+<span id="cb24-157"><a href="#cb24-157"></a>$$</span>
+<span id="cb24-158"><a href="#cb24-158"></a>t(10^{10}) \in <span class="co">[</span><span class="ot">140,170</span><span class="co">]</span></span>
+<span id="cb24-159"><a href="#cb24-159"></a>$$</span>
+<span id="cb24-160"><a href="#cb24-160"></a><span class="ss">- </span>Expect for $n \gt 9$</span>
+<span id="cb24-161"><a href="#cb24-161"></a>$$</span>
+<span id="cb24-162"><a href="#cb24-162"></a>t(10^n) \in <span class="co">[</span><span class="ot">14,17</span><span class="co">]</span> \times 10^{n-9}</span>
+<span id="cb24-163"><a href="#cb24-163"></a>$$</span>
+<span id="cb24-164"><a href="#cb24-164"></a><span class="ss">- </span>Expect $10^{10^{100}}$ in</span>
+<span id="cb24-165"><a href="#cb24-165"></a><span class="ss">  - </span>$10^{10^{91}}$ seconds</span>
+<span id="cb24-166"><a href="#cb24-166"></a><span class="ss">  - </span>316 novemvigintilion years</span>
+<span id="cb24-167"><a href="#cb24-167"></a></span>
+<span id="cb24-168"><a href="#cb24-168"></a>:::</span>
+<span id="cb24-169"><a href="#cb24-169"></a></span>
+<span id="cb24-170"><a href="#cb24-170"></a>::::</span>
+<span id="cb24-171"><a href="#cb24-171"></a></span>
+<span id="cb24-172"><a href="#cb24-172"></a><span class="fu">## Rust</span></span>
+<span id="cb24-173"><a href="#cb24-173"></a></span>
+<span id="cb24-174"><a href="#cb24-174"></a><span class="ss">- </span>Rust is a little more forthright about how big its numbers get.</span>
+<span id="cb24-175"><a href="#cb24-175"></a><span class="in">```{.rs}</span></span>
+<span id="cb24-176"><a href="#cb24-176"></a><span class="in">pub const MAX: i32 = i32::MAX; // 2_147_483_647i32</span></span>
+<span id="cb24-177"><a href="#cb24-177"></a><span class="in">```</span></span>
+<span id="cb24-178"><a href="#cb24-178"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more, or don't. I'm a hyperlink; not an imperative.</span><span class="co">](https://doc.rust-lang.org/std/i32/constant.MAX.html)</span></span>
+<span id="cb24-179"><a href="#cb24-179"></a></span>
+<span id="cb24-180"><a href="#cb24-180"></a><span class="fu">## Quoth Rust Book</span></span>
+<span id="cb24-181"><a href="#cb24-181"></a></span>
+<span id="cb24-182"><a href="#cb24-182"></a><span class="at">&gt; Let’s say you have a variable of type u8 that can hold values between 0 and 255. If you try to change the variable to a value outside that range, such as 256, integer overflow will occur, which can result in one of two behaviors. When you’re compiling in debug mode, Rust includes checks for integer overflow that cause your program to panic at runtime if this behavior occurs. Rust uses the term panicking when a program exits with an error...</span></span>
+<span id="cb24-183"><a href="#cb24-183"></a></span>
+<span id="cb24-184"><a href="#cb24-184"></a><span class="fu">## Quoth Rust Book</span></span>
+<span id="cb24-185"><a href="#cb24-185"></a></span>
+<span id="cb24-186"><a href="#cb24-186"></a><span class="at">&gt; When you’re compiling in release mode with the --release flag, Rust does not include checks for integer overflow that cause panics. Instead, if overflow occurs, Rust performs two’s complement wrapping. In short, values greater than the maximum value the type can hold “wrap around” to the minimum of the values the type can hold. In the case of a u8, the value 256 becomes 0, the value 257 becomes 1, and so on. The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.</span></span>
+<span id="cb24-187"><a href="#cb24-187"></a></span>
+<span id="cb24-188"><a href="#cb24-188"></a><span class="fu">## Quoth Rust Book</span></span>
+<span id="cb24-189"><a href="#cb24-189"></a></span>
+<span id="cb24-190"><a href="#cb24-190"></a><span class="at">&gt; The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.</span></span>
+<span id="cb24-191"><a href="#cb24-191"></a></span>
+<span id="cb24-192"><a href="#cb24-192"></a><span class="at">&gt; To explicitly handle the possibility of overflow, you can use these families of methods provided by the standard library for primitive numeric types:</span></span>
+<span id="cb24-193"><a href="#cb24-193"></a></span>
+<span id="cb24-194"><a href="#cb24-194"></a><span class="fu">## Methods in Rust</span></span>
+<span id="cb24-195"><a href="#cb24-195"></a></span>
+<span id="cb24-196"><a href="#cb24-196"></a><span class="ss">- </span>Wrap in all modes with the <span class="in">`wrapping_*`</span> methods, such as <span class="in">`wrapping_add`</span>.</span>
+<span id="cb24-197"><a href="#cb24-197"></a><span class="ss">- </span>Return the None value if there is overflow with the <span class="in">`checked_*`</span> methods.</span>
+<span id="cb24-198"><a href="#cb24-198"></a><span class="ss">- </span>Return the value and a Boolean indicating whether there was overflow with the <span class="in">`overflowing_*`</span> methods.</span>
+<span id="cb24-199"><a href="#cb24-199"></a><span class="ss">- </span>Saturate at the value’s minimum or maximum values with the <span class="in">`saturating_*`</span> methods.</span>
+<span id="cb24-200"><a href="#cb24-200"></a></span>
+<span id="cb24-201"><a href="#cb24-201"></a><span class="fu">## Editorializing</span></span>
+<span id="cb24-202"><a href="#cb24-202"></a></span>
+<span id="cb24-203"><a href="#cb24-203"></a><span class="ss">- </span>I find having different numerical behavior in debug and release versions *extremely* questionable.</span>
+<span id="cb24-204"><a href="#cb24-204"></a><span class="ss">- </span>I was willing to bite my tongue but in fact:</span>
+<span id="cb24-205"><a href="#cb24-205"></a><span class="ss">    - </span>This is impacts SHA-2, upcoming ECDSA, <span class="in">`f16`</span> and <span class="in">`ix`</span></span>
+<span id="cb24-206"><a href="#cb24-206"></a><span class="ss">    - </span>Using stable numerical behavior facilitated debatably easier implementations in C last term.</span>
+<span id="cb24-207"><a href="#cb24-207"></a>    </span>
+<span id="cb24-208"><a href="#cb24-208"></a><span class="fu">## Demo in Rust</span></span>
+<span id="cb24-209"><a href="#cb24-209"></a></span>
+<span id="cb24-210"><a href="#cb24-210"></a><span class="ss">- </span>We don't have to just trust in the given <span class="in">`i32`</span> upper bound, we can test it.</span>
+<span id="cb24-211"><a href="#cb24-211"></a><span class="ss">- </span>Well, kinda...</span>
+<span id="cb24-212"><a href="#cb24-212"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb24-213"><a href="#cb24-213"></a><span class="in">fn main() {</span></span>
+<span id="cb24-214"><a href="#cb24-214"></a><span class="in">    let mut n: i32 = 0;</span></span>
+<span id="cb24-215"><a href="#cb24-215"></a><span class="in">    while (n + 1) &gt; n {</span></span>
+<span id="cb24-216"><a href="#cb24-216"></a><span class="in">        n += 1;</span></span>
+<span id="cb24-217"><a href="#cb24-217"></a><span class="in">    }</span></span>
+<span id="cb24-218"><a href="#cb24-218"></a><span class="in">    dbg!(n);</span></span>
+<span id="cb24-219"><a href="#cb24-219"></a><span class="in">    dbg!(i32::MAX);</span></span>
+<span id="cb24-220"><a href="#cb24-220"></a><span class="in">}</span></span>
+<span id="cb24-221"><a href="#cb24-221"></a><span class="in">```</span></span>
+<span id="cb24-222"><a href="#cb24-222"></a></span>
+<span id="cb24-223"><a href="#cb24-223"></a><span class="fu">## Testing...</span></span>
+<span id="cb24-224"><a href="#cb24-224"></a></span>
+<span id="cb24-225"><a href="#cb24-225"></a><span class="ss">- </span>Let's time how long this takes!</span>
+<span id="cb24-226"><a href="#cb24-226"></a><span class="ss">    - </span>We timed Python.</span>
+<span id="cb24-227"><a href="#cb24-227"></a><span class="ss">- </span>Go ahead and <span class="in">`time cargo run`</span></span>
+<span id="cb24-228"><a href="#cb24-228"></a><span class="in">```sh</span></span>
+<span id="cb24-229"><a href="#cb24-229"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb24-230"><a href="#cb24-230"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.25s</span></span>
+<span id="cb24-231"><a href="#cb24-231"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span><span class="kw">`</span></span>
+<span id="cb24-232"><a href="#cb24-232"></a></span>
+<span id="cb24-233"><a href="#cb24-233"></a><span class="ex">thread</span> <span class="st">'main'</span> panicked at src/main.rs:3:11:</span>
+<span id="cb24-234"><a href="#cb24-234"></a><span class="ex">attempt</span> to add with overflow</span>
+<span id="cb24-235"><a href="#cb24-235"></a><span class="ex">note:</span> run with <span class="kw">`</span><span class="va">RUST_BACKTRACE</span><span class="op">=</span>1<span class="kw">`</span> <span class="ex">environment</span> variable to display a backtrace</span>
+<span id="cb24-236"><a href="#cb24-236"></a></span>
+<span id="cb24-237"><a href="#cb24-237"></a><span class="ex">real</span>    0m4.943s</span>
+<span id="cb24-238"><a href="#cb24-238"></a><span class="ex">user</span>    0m4.914s</span>
+<span id="cb24-239"><a href="#cb24-239"></a><span class="ex">sys</span>     0m0.079s</span>
+<span id="cb24-240"><a href="#cb24-240"></a><span class="kw">```</span></span>
+<span id="cb24-241"><a href="#cb24-241"></a></span>
+<span id="cb24-242"><a href="#cb24-242"></a><span class="co">## Discuss</span></span>
+<span id="cb24-243"><a href="#cb24-243"></a></span>
+<span id="cb24-244"><a href="#cb24-244"></a><span class="ex">-</span> For me, this took 4.66s on <span class="kw">`</span>i32<span class="kw">`</span></span>
+<span id="cb24-245"><a href="#cb24-245"></a>  <span class="ex">-</span> Same value in Python was 1m9.32s</span>
+<span id="cb24-246"><a href="#cb24-246"></a>    <span class="ex">-</span> This is about half the speed I got with C.</span>
+<span id="cb24-247"><a href="#cb24-247"></a><span class="ex">-</span> How long for  <span class="kw">`</span>u64<span class="kw">`</span><span class="ex">?</span></span>
+<span id="cb24-248"><a href="#cb24-248"></a>  <span class="ex">-</span> In Python<span class="pp">?</span></span>
+<span id="cb24-249"><a href="#cb24-249"></a><span class="ex">-</span> How would speed up the code<span class="pp">?</span></span>
+<span id="cb24-250"><a href="#cb24-250"></a>  <span class="ex">-</span> What assumptions did you make<span class="pp">?</span></span>
+<span id="cb24-251"><a href="#cb24-251"></a><span class="ex">-</span> How many base 10 digits does the largest number we can store in 32 bytes have<span class="pp">?</span></span>
+<span id="cb24-252"><a href="#cb24-252"></a></span>
+<span id="cb24-253"><a href="#cb24-253"></a><span class="co">## Testing...</span></span>
+<span id="cb24-254"><a href="#cb24-254"></a></span>
+<span id="cb24-255"><a href="#cb24-255"></a><span class="ex">-</span> Rust behaves differently with the <span class="kw">`</span><span class="at">--release</span><span class="kw">`</span> <span class="ex">flag.</span></span>
+<span id="cb24-256"><a href="#cb24-256"></a>    <span class="ex">-</span> Just me: I hate this!</span>
+<span id="cb24-257"><a href="#cb24-257"></a><span class="ex">-</span> <span class="kw">`</span>time cargo run <span class="at">--release</span><span class="kw">`</span></span>
+<span id="cb24-258"><a href="#cb24-258"></a><span class="kw">```</span>sh</span>
+<span id="cb24-259"><a href="#cb24-259"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb24-260"><a href="#cb24-260"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">release</span><span class="kw">`</span> profile <span class="pp">[</span><span class="ss">optimized</span><span class="pp">]</span> target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.54s</span></span>
+<span id="cb24-261"><a href="#cb24-261"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/release/num</span><span class="kw">`</span></span>
+<span id="cb24-262"><a href="#cb24-262"></a><span class="ex">[src/main.rs:6:5]</span> n = 2147483647</span>
+<span id="cb24-263"><a href="#cb24-263"></a><span class="ex">[src/main.rs:7:5]</span> i32::MAX = 2147483647</span>
+<span id="cb24-264"><a href="#cb24-264"></a></span>
+<span id="cb24-265"><a href="#cb24-265"></a><span class="ex">real</span>    0m0.578s</span>
+<span id="cb24-266"><a href="#cb24-266"></a><span class="ex">user</span>    0m0.086s</span>
+<span id="cb24-267"><a href="#cb24-267"></a><span class="ex">sys</span>     0m0.116s</span>
+<span id="cb24-268"><a href="#cb24-268"></a><span class="in">```</span></span>
+<span id="cb24-269"><a href="#cb24-269"></a></span>
+<span id="cb24-270"><a href="#cb24-270"></a></span>
+<span id="cb24-271"><a href="#cb24-271"></a><span class="fu">## Rings</span></span>
+<span id="cb24-272"><a href="#cb24-272"></a></span>
+<span id="cb24-273"><a href="#cb24-273"></a><span class="ss">- </span>As far as I know (not a mathematician) the <span class="in">`uint`</span>s and <span class="in">`int`</span>s in C are *rings*</span>
+<span id="cb24-274"><a href="#cb24-274"></a><span class="ss">  - </span>They have addition and multiplication</span>
+<span id="cb24-275"><a href="#cb24-275"></a><span class="ss">- </span>They aren't fields - zero is divisible</span>
+<span id="cb24-276"><a href="#cb24-276"></a><span class="ss">  - </span>Spoiler alert, but $2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}$</span>
+<span id="cb24-277"><a href="#cb24-277"></a></span>
+<span id="cb24-278"><a href="#cb24-278"></a><span class="fu">## Rings vs Integers</span></span>
+<span id="cb24-279"><a href="#cb24-279"></a></span>
+<span id="cb24-280"><a href="#cb24-280"></a><span class="ss">- </span>Rings have some "goofy" features</span>
+<span id="cb24-281"><a href="#cb24-281"></a><span class="ss">  - </span>$a, b \in$ <span class="in">`u`</span>$n$` $\nRightarrow a + b &gt; a$</span>
+<span id="cb24-282"><a href="#cb24-282"></a><span class="ss">  - </span>Same with multiplication.</span>
+<span id="cb24-283"><a href="#cb24-283"></a><span class="ss">- </span>Let's look at an example.</span>
+<span id="cb24-284"><a href="#cb24-284"></a></span>
+<span id="cb24-285"><a href="#cb24-285"></a><span class="fu">## Checkers</span></span>
+<span id="cb24-286"><a href="#cb24-286"></a></span>
+<span id="cb24-287"><a href="#cb24-287"></a><span class="in">```{.rs filename=src/main.rs"}</span></span>
+<span id="cb24-288"><a href="#cb24-288"></a><span class="in">fn main() {</span></span>
+<span id="cb24-289"><a href="#cb24-289"></a><span class="in">    let args: Vec&lt;String&gt; = std::env::args().collect();</span></span>
+<span id="cb24-290"><a href="#cb24-290"></a><span class="in">    let a:u8 = args[1].parse().unwrap();</span></span>
+<span id="cb24-291"><a href="#cb24-291"></a><span class="in">    let b:u8 = args[2].parse().unwrap();</span></span>
+<span id="cb24-292"><a href="#cb24-292"></a><span class="in">    dbg!(a + b);</span></span>
+<span id="cb24-293"><a href="#cb24-293"></a><span class="in">}</span></span>
+<span id="cb24-294"><a href="#cb24-294"></a><span class="in">```</span></span>
+<span id="cb24-295"><a href="#cb24-295"></a></span>
+<span id="cb24-296"><a href="#cb24-296"></a><span class="fu">## Do some additions</span></span>
+<span id="cb24-297"><a href="#cb24-297"></a></span>
+<span id="cb24-298"><a href="#cb24-298"></a><span class="in">```sh</span></span>
+<span id="cb24-299"><a href="#cb24-299"></a><span class="ex">$</span> cargo run <span class="at">--</span> 10 20</span>
+<span id="cb24-300"><a href="#cb24-300"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb24-301"><a href="#cb24-301"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.23s</span></span>
+<span id="cb24-302"><a href="#cb24-302"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span> 10 20<span class="kw">`</span></span>
+<span id="cb24-303"><a href="#cb24-303"></a><span class="ex">[src/main.rs:5:5]</span> a + b = 30</span>
+<span id="cb24-304"><a href="#cb24-304"></a><span class="in">```</span></span>
+<span id="cb24-305"><a href="#cb24-305"></a><span class="ss">- </span><span class="in">`30`</span> - that makes sense!</span>
+<span id="cb24-306"><a href="#cb24-306"></a></span>
+<span id="cb24-307"><a href="#cb24-307"></a></span>
+<span id="cb24-308"><a href="#cb24-308"></a><span class="fu">## Do some additions</span></span>
+<span id="cb24-309"><a href="#cb24-309"></a></span>
+<span id="cb24-310"><a href="#cb24-310"></a><span class="in">```sh</span></span>
+<span id="cb24-311"><a href="#cb24-311"></a><span class="ex">$</span> cargo run <span class="at">--</span> 100 200</span>
+<span id="cb24-312"><a href="#cb24-312"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb24-313"><a href="#cb24-313"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/num</span> 100 200<span class="kw">`</span></span>
+<span id="cb24-314"><a href="#cb24-314"></a></span>
+<span id="cb24-315"><a href="#cb24-315"></a><span class="ex">thread</span> <span class="st">'main'</span> panicked at src/main.rs:5:10:</span>
+<span id="cb24-316"><a href="#cb24-316"></a><span class="ex">attempt</span> to add with overflow</span>
+<span id="cb24-317"><a href="#cb24-317"></a><span class="ex">note:</span> run with <span class="kw">`</span><span class="va">RUST_BACKTRACE</span><span class="op">=</span>1<span class="kw">`</span> <span class="ex">environment</span> variable to display a backtrace</span>
+<span id="cb24-318"><a href="#cb24-318"></a><span class="kw">```</span></span>
+<span id="cb24-319"><a href="#cb24-319"></a><span class="ex">-</span> Overflow <span class="at">-</span> sure, <span class="va">$1</span>00 + 200 = 300 <span class="op">&gt;</span> 2^8 = 256$</span>
+<span id="cb24-320"><a href="#cb24-320"></a></span>
+<span id="cb24-321"><a href="#cb24-321"></a><span class="co">## Do some additions</span></span>
+<span id="cb24-322"><a href="#cb24-322"></a></span>
+<span id="cb24-323"><a href="#cb24-323"></a><span class="kw">```</span>sh</span>
+<span id="cb24-324"><a href="#cb24-324"></a><span class="ex">$</span> cargo run <span class="at">--release</span> <span class="at">--</span> 100 200</span>
+<span id="cb24-325"><a href="#cb24-325"></a>   <span class="ex">Compiling</span> num v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/num</span><span class="kw">)</span></span>
+<span id="cb24-326"><a href="#cb24-326"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">release</span><span class="kw">`</span> profile <span class="pp">[</span><span class="ss">optimized</span><span class="pp">]</span> target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.25s</span></span>
+<span id="cb24-327"><a href="#cb24-327"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/release/num</span> 100 200<span class="kw">`</span></span>
+<span id="cb24-328"><a href="#cb24-328"></a><span class="ex">[src/main.rs:5:5]</span> a + b = 44</span>
+<span id="cb24-329"><a href="#cb24-329"></a><span class="in">```</span></span>
+<span id="cb24-330"><a href="#cb24-330"></a><span class="ss">- </span><span class="in">`44`</span>? From Whence?</span>
+<span id="cb24-331"><a href="#cb24-331"></a></span>
+<span id="cb24-332"><a href="#cb24-332"></a>$$</span>
+<span id="cb24-333"><a href="#cb24-333"></a>100 + 200 \equiv 44 \pmod{2^8}</span>
+<span id="cb24-334"><a href="#cb24-334"></a>$$</span>
+<span id="cb24-335"><a href="#cb24-335"></a><span class="ss">- </span>Or perhaps</span>
+<span id="cb24-336"><a href="#cb24-336"></a><span class="in">```sh</span></span>
+<span id="cb24-337"><a href="#cb24-337"></a><span class="ex">python3</span> <span class="at">-c</span> <span class="st">"print((100 + 200) % (2 ** 8) == 44)"</span></span>
+<span id="cb24-338"><a href="#cb24-338"></a><span class="in">```</span></span>
+<span id="cb24-339"><a href="#cb24-339"></a></span>
+<span id="cb24-340"><a href="#cb24-340"></a><span class="fu">## Rust integers are *finite*</span></span>
+<span id="cb24-341"><a href="#cb24-341"></a></span>
+<span id="cb24-342"><a href="#cb24-342"></a><span class="in">```email</span></span>
+<span id="cb24-343"><a href="#cb24-343"></a>&gt;&gt;&gt; 200 + 100</span>
+<span id="cb24-344"><a href="#cb24-344"></a>300</span>
+<span id="cb24-345"><a href="#cb24-345"></a>&gt;&gt;&gt; 2 ** 8</span>
+<span id="cb24-346"><a href="#cb24-346"></a>256</span>
+<span id="cb24-347"><a href="#cb24-347"></a>&gt;&gt;&gt; 300 - 256</span>
+<span id="cb24-348"><a href="#cb24-348"></a>44</span>
+<span id="cb24-349"><a href="#cb24-349"></a>&gt;&gt;&gt; 300 % 256</span>
+<span id="cb24-350"><a href="#cb24-350"></a>44</span>
+<span id="cb24-351"><a href="#cb24-351"></a><span class="in">```</span></span>
+<span id="cb24-352"><a href="#cb24-352"></a></span>
+<span id="cb24-353"><a href="#cb24-353"></a><span class="ss">- </span>Equivalent to operations on the naturals modulo $2^8$</span>
+<span id="cb24-354"><a href="#cb24-354"></a><span class="ss">- </span>Usually denoted as:</span>
+<span id="cb24-355"><a href="#cb24-355"></a>$$</span>
+<span id="cb24-356"><a href="#cb24-356"></a>\mathbb{Z}/2^8\mathbb{Z}</span>
+<span id="cb24-357"><a href="#cb24-357"></a>$$</span>
+<span id="cb24-358"><a href="#cb24-358"></a><span class="ss">- </span>We say $\mathbb{Z}$ not $\mathbb{N}$ as $-1 \in \mathbb{Z}/n\mathbb{Z}$</span>
+<span id="cb24-359"><a href="#cb24-359"></a></span>
+<span id="cb24-360"><a href="#cb24-360"></a><span class="fu">## In practice</span></span>
+<span id="cb24-361"><a href="#cb24-361"></a></span>
+<span id="cb24-362"><a href="#cb24-362"></a><span class="ss">- </span>$\exists$ <span class="in">`i32::MAX`</span>, <span class="in">`u64::MAX`</span>, etc.</span>
+<span id="cb24-363"><a href="#cb24-363"></a><span class="ss">- </span>Sums and products less than these values are unaffected.</span>
+<span id="cb24-364"><a href="#cb24-364"></a><span class="ss">- </span>Sums and products greater than these values are unstable.</span>
+<span id="cb24-365"><a href="#cb24-365"></a><span class="ss">- </span>Use methods or compile for release.</span>
+<span id="cb24-366"><a href="#cb24-366"></a></span>
+<span id="cb24-367"><a href="#cb24-367"></a><span class="fu">## Problem Statement</span></span>
+<span id="cb24-368"><a href="#cb24-368"></a></span>
+<span id="cb24-369"><a href="#cb24-369"></a><span class="ss">- </span>Quoth GitHub</span>
+<span id="cb24-370"><a href="#cb24-370"></a></span>
+<span id="cb24-371"><a href="#cb24-371"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`</span><span class="co">](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)</span></span>
+<span id="cb24-372"><a href="#cb24-372"></a></span>
+<span id="cb24-373"><a href="#cb24-373"></a><span class="ss">- </span>Wait a minute. </span>
+<span id="cb24-374"><a href="#cb24-374"></a><span class="ss">- </span>What does that 4096 stand for?</span>
+<span id="cb24-375"><a href="#cb24-375"></a><span class="ss">  - </span>For what does that 4096 stand?</span>
+<span id="cb24-376"><a href="#cb24-376"></a></span>
+<span id="cb24-377"><a href="#cb24-377"></a><span class="fu">## $n &gt; 128$ bits</span></span>
+<span id="cb24-378"><a href="#cb24-378"></a></span>
+<span id="cb24-379"><a href="#cb24-379"></a><span class="ss">- </span>Modern security recommendations are for 4096 bit cryptographic keys.</span>
+<span id="cb24-380"><a href="#cb24-380"></a><span class="ss">  - </span>2048 is generally considered "okay" or "acceptable"</span>
+<span id="cb24-381"><a href="#cb24-381"></a></span>
+<span id="cb24-382"><a href="#cb24-382"></a><span class="in">```email</span></span>
+<span id="cb24-383"><a href="#cb24-383"></a>NAME</span>
+<span id="cb24-384"><a href="#cb24-384"></a>     ssh-keygen — OpenSSH authentication key utility</span>
+<span id="cb24-385"><a href="#cb24-385"></a></span>
+<span id="cb24-386"><a href="#cb24-386"></a>SYNOPSIS</span>
+<span id="cb24-387"><a href="#cb24-387"></a>     ssh-keygen [-q] [-a rounds] [-b bits] </span>
+<span id="cb24-388"><a href="#cb24-388"></a><span class="in">```</span></span>
+<span id="cb24-389"><a href="#cb24-389"></a></span>
+<span id="cb24-390"><a href="#cb24-390"></a><span class="fu"># Today</span></span>
+<span id="cb24-391"><a href="#cb24-391"></a></span>
+<span id="cb24-392"><a href="#cb24-392"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Finite sets, rings</span>
+<span id="cb24-393"><a href="#cb24-393"></a><span class="ss">- </span>Arbitrary/high precision integers</span>
+<span id="cb24-394"><a href="#cb24-394"></a><span class="ss">- </span>Arithmetic operations</span>
+<span id="cb24-395"><a href="#cb24-395"></a><span class="ss">- </span>Function types</span>
+<span id="cb24-396"><a href="#cb24-396"></a></span>
+<span id="cb24-397"><a href="#cb24-397"></a><span class="fu">## Big Values</span></span>
+<span id="cb24-398"><a href="#cb24-398"></a></span>
+<span id="cb24-399"><a href="#cb24-399"></a><span class="ss">- </span>Soon, we will implement key generation.</span>
+<span id="cb24-400"><a href="#cb24-400"></a><span class="ss">  - </span>We'll talk about what it is then.</span>
+<span id="cb24-401"><a href="#cb24-401"></a><span class="ss">- </span>First, we need a way to deal with integers that big.</span>
+<span id="cb24-402"><a href="#cb24-402"></a><span class="ss">- </span>We will use *modular arithmetic*.</span>
+<span id="cb24-403"><a href="#cb24-403"></a><span class="ss">  - </span>Finite <span class="in">`u64`</span> models infinite $\mathbb{Z}$</span>
+<span id="cb24-404"><a href="#cb24-404"></a></span>
+<span id="cb24-405"><a href="#cb24-405"></a><span class="fu">## Simple Example</span></span>
+<span id="cb24-406"><a href="#cb24-406"></a></span>
+<span id="cb24-407"><a href="#cb24-407"></a><span class="ss">- </span>Yoink a data science example.</span>
+<span id="cb24-408"><a href="#cb24-408"></a><span class="ss">- </span>We had a data set for which we determined a mean height in inches.</span>
+<span id="cb24-409"><a href="#cb24-409"></a><span class="ss">- </span>We converted it to inches and feet.</span>
+<span id="cb24-410"><a href="#cb24-410"></a><span class="in">```python</span></span>
+<span id="cb24-411"><a href="#cb24-411"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">69.3</span> <span class="op">//</span> <span class="dv">12</span>, <span class="fl">69.3</span> <span class="op">%</span> <span class="dv">12</span></span>
+<span id="cb24-412"><a href="#cb24-412"></a>(<span class="fl">5.0</span>, <span class="fl">9.299999999999997</span>)</span>
+<span id="cb24-413"><a href="#cb24-413"></a><span class="in">```</span></span>
+<span id="cb24-414"><a href="#cb24-414"></a><span class="ss">- </span>Floats: they're bad.</span>
+<span id="cb24-415"><a href="#cb24-415"></a></span>
+<span id="cb24-416"><a href="#cb24-416"></a><span class="fu">## Addition is easy</span></span>
+<span id="cb24-417"><a href="#cb24-417"></a></span>
+<span id="cb24-418"><a href="#cb24-418"></a><span class="ss">- </span>WNBA MVP and Olympic Gold Medalist A'ja Wilson is <span class="co">[</span><span class="ot">6 ft 4 in</span><span class="co">](https://en.wikipedia.org/wiki/A%27ja_Wilson)</span></span>
+<span id="cb24-419"><a href="#cb24-419"></a><span class="ss">- </span>How much taller is that than 5 ft 9.3 in</span>
+<span id="cb24-420"><a href="#cb24-420"></a><span class="ss">  - </span>Can convert to non-integer inches, but...</span>
+<span id="cb24-421"><a href="#cb24-421"></a><span class="ss">  - </span>We already had the .299... problem</span>
+<span id="cb24-422"><a href="#cb24-422"></a></span>
+<span id="cb24-423"><a href="#cb24-423"></a><span class="fu">## Difference</span></span>
+<span id="cb24-424"><a href="#cb24-424"></a></span>
+<span id="cb24-425"><a href="#cb24-425"></a><span class="ss">- </span>We perform "long subtraction"</span>
+<span id="cb24-426"><a href="#cb24-426"></a><span class="ss">- </span>It's fun!</span>
+<span id="cb24-427"><a href="#cb24-427"></a></span>
+<span id="cb24-428"><a href="#cb24-428"></a>| |ft|in.|.in|</span>
+<span id="cb24-429"><a href="#cb24-429"></a>|-|--|---|---|</span>
+<span id="cb24-430"><a href="#cb24-430"></a>|A'ja|6|4|0|</span>
+<span id="cb24-431"><a href="#cb24-431"></a>|Mean|5|9|3|</span>
+<span id="cb24-432"><a href="#cb24-432"></a></span>
+<span id="cb24-433"><a href="#cb24-433"></a><span class="fu">## Difference</span></span>
+<span id="cb24-434"><a href="#cb24-434"></a></span>
+<span id="cb24-435"><a href="#cb24-435"></a><span class="ss">- </span>$0 - 3 \equiv 7 \pmod{10}$</span>
+<span id="cb24-436"><a href="#cb24-436"></a><span class="ss">- </span>Tenths of inches</span>
+<span id="cb24-437"><a href="#cb24-437"></a></span>
+<span id="cb24-438"><a href="#cb24-438"></a>| |ft|in.|.in|</span>
+<span id="cb24-439"><a href="#cb24-439"></a>|-|--|---|---|</span>
+<span id="cb24-440"><a href="#cb24-440"></a>|A'ja|6|4|0|</span>
+<span id="cb24-441"><a href="#cb24-441"></a>|Mean|5|9|3|</span>
+<span id="cb24-442"><a href="#cb24-442"></a>|Diff| | |7|</span>
+<span id="cb24-443"><a href="#cb24-443"></a></span>
+<span id="cb24-444"><a href="#cb24-444"></a><span class="fu">## Difference</span></span>
+<span id="cb24-445"><a href="#cb24-445"></a></span>
+<span id="cb24-446"><a href="#cb24-446"></a><span class="ss">- </span>But wait - <span class="in">`3`</span> is more than <span class="in">`0`</span></span>
+<span id="cb24-447"><a href="#cb24-447"></a><span class="ss">- </span>Track via a "carry"</span>
+<span id="cb24-448"><a href="#cb24-448"></a></span>
+<span id="cb24-449"><a href="#cb24-449"></a>| |ft|in.|.in|</span>
+<span id="cb24-450"><a href="#cb24-450"></a>|-|--|---|---|</span>
+<span id="cb24-451"><a href="#cb24-451"></a>|A'ja|6|4|0|</span>
+<span id="cb24-452"><a href="#cb24-452"></a>|Mean|5|9|3|</span>
+<span id="cb24-453"><a href="#cb24-453"></a>|Carry|0|1|0|</span>
+<span id="cb24-454"><a href="#cb24-454"></a>|Diff| | |7|</span>
+<span id="cb24-455"><a href="#cb24-455"></a></span>
+<span id="cb24-456"><a href="#cb24-456"></a><span class="fu">## Difference</span></span>
+<span id="cb24-457"><a href="#cb24-457"></a></span>
+<span id="cb24-458"><a href="#cb24-458"></a><span class="ss">- </span>$4 - 9 - 1 \equiv 6 \pmod{12}$</span>
+<span id="cb24-459"><a href="#cb24-459"></a><span class="ss">- </span>12 in = 1 ft</span>
+<span id="cb24-460"><a href="#cb24-460"></a></span>
+<span id="cb24-461"><a href="#cb24-461"></a>| |ft|in.|.in|</span>
+<span id="cb24-462"><a href="#cb24-462"></a>|-|--|---|---|</span>
+<span id="cb24-463"><a href="#cb24-463"></a>|A'ja|6|4|0|</span>
+<span id="cb24-464"><a href="#cb24-464"></a>|Mean|5|9|3|</span>
+<span id="cb24-465"><a href="#cb24-465"></a>|Carry|0|1|0|</span>
+<span id="cb24-466"><a href="#cb24-466"></a>|Diff| |6|7|</span>
+<span id="cb24-467"><a href="#cb24-467"></a></span>
+<span id="cb24-468"><a href="#cb24-468"></a></span>
+<span id="cb24-469"><a href="#cb24-469"></a><span class="fu">## Difference</span></span>
+<span id="cb24-470"><a href="#cb24-470"></a></span>
+<span id="cb24-471"><a href="#cb24-471"></a><span class="ss">- </span>Another carry.</span>
+<span id="cb24-472"><a href="#cb24-472"></a><span class="ss">- </span>12 in = 1 ft</span>
+<span id="cb24-473"><a href="#cb24-473"></a></span>
+<span id="cb24-474"><a href="#cb24-474"></a>| |ft|in.|.in|</span>
+<span id="cb24-475"><a href="#cb24-475"></a>|-|--|---|---|</span>
+<span id="cb24-476"><a href="#cb24-476"></a>|A'ja|6|4|0|</span>
+<span id="cb24-477"><a href="#cb24-477"></a>|Mean|5|9|3|</span>
+<span id="cb24-478"><a href="#cb24-478"></a>|Carry|1|0|0|</span>
+<span id="cb24-479"><a href="#cb24-479"></a>|Diff| |6|7|</span>
+<span id="cb24-480"><a href="#cb24-480"></a></span>
+<span id="cb24-481"><a href="#cb24-481"></a></span>
+<span id="cb24-482"><a href="#cb24-482"></a><span class="fu">## Difference</span></span>
+<span id="cb24-483"><a href="#cb24-483"></a></span>
+<span id="cb24-484"><a href="#cb24-484"></a><span class="ss">- </span>$6 - 5 - 1 = 0$</span>
+<span id="cb24-485"><a href="#cb24-485"></a><span class="ss">- </span>Nonmodular - feet has no max.</span>
+<span id="cb24-486"><a href="#cb24-486"></a></span>
+<span id="cb24-487"><a href="#cb24-487"></a>| |ft|in.|.in|</span>
+<span id="cb24-488"><a href="#cb24-488"></a>|-|--|---|---|</span>
+<span id="cb24-489"><a href="#cb24-489"></a>|A'ja|6|4|0|</span>
+<span id="cb24-490"><a href="#cb24-490"></a>|Mean|5|9|3|</span>
+<span id="cb24-491"><a href="#cb24-491"></a>|Carry|1|0|0|</span>
+<span id="cb24-492"><a href="#cb24-492"></a>|Diff|0|6|7|</span>
+<span id="cb24-493"><a href="#cb24-493"></a></span>
+<span id="cb24-494"><a href="#cb24-494"></a><span class="fu">## Conclusion</span></span>
+<span id="cb24-495"><a href="#cb24-495"></a></span>
+<span id="cb24-496"><a href="#cb24-496"></a><span class="ss">- </span>Iconic living legend A'ja Wilson is tall af.</span>
+<span id="cb24-497"><a href="#cb24-497"></a><span class="ss">- </span>We can do addition and substraction on larger values than <span class="in">`u64::MAX`</span> by:</span>
+<span id="cb24-498"><a href="#cb24-498"></a><span class="ss">  - </span>Breaking numbers in smaller ranges</span>
+<span id="cb24-499"><a href="#cb24-499"></a><span class="ss">    - </span>A tenths digit</span>
+<span id="cb24-500"><a href="#cb24-500"></a><span class="ss">    - </span>A ones digit</span>
+<span id="cb24-501"><a href="#cb24-501"></a><span class="ss">    - </span>A twelves digit</span>
+<span id="cb24-502"><a href="#cb24-502"></a></span>
+<span id="cb24-503"><a href="#cb24-503"></a><span class="fu">## Usefulness</span></span>
+<span id="cb24-504"><a href="#cb24-504"></a></span>
+<span id="cb24-505"><a href="#cb24-505"></a><span class="ss">- </span>We can now do arithmetic correctly</span>
+<span id="cb24-506"><a href="#cb24-506"></a><span class="ss">  - </span>@Python</span>
+<span id="cb24-507"><a href="#cb24-507"></a><span class="ss">- </span>What else can we do?</span>
+<span id="cb24-508"><a href="#cb24-508"></a><span class="ss">  - </span>Arbitrary (not infinite) precision.</span>
+<span id="cb24-509"><a href="#cb24-509"></a></span>
+<span id="cb24-510"><a href="#cb24-510"></a><span class="fu">## FAQ</span></span>
+<span id="cb24-511"><a href="#cb24-511"></a></span>
+<span id="cb24-512"><a href="#cb24-512"></a><span class="ss">- </span>Can we use this to add numbers bigger than $2^n$ using adds over at most $n$ bits at a time?</span>
+<span id="cb24-513"><a href="#cb24-513"></a><span class="ss">  - </span>Sure! Change the modulos and you're set.</span>
+<span id="cb24-514"><a href="#cb24-514"></a><span class="ss">    - </span>Get it? Because the numbers form a set?</span>
+<span id="cb24-515"><a href="#cb24-515"></a><span class="ss">- </span>Can we do this for more than 3 units?</span>
+<span id="cb24-516"><a href="#cb24-516"></a><span class="ss">  - </span>Sure! Just put the middle (both consumes and produces a carry bit) in a loop!</span>
+<span id="cb24-517"><a href="#cb24-517"></a></span>
+<span id="cb24-518"><a href="#cb24-518"></a><span class="fu"># Today</span></span>
+<span id="cb24-519"><a href="#cb24-519"></a></span>
+<span id="cb24-520"><a href="#cb24-520"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Finite sets, rings</span>
+<span id="cb24-521"><a href="#cb24-521"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Arbitrary/high precision integers</span>
+<span id="cb24-522"><a href="#cb24-522"></a><span class="ss">- </span>Arithmetic operations</span>
+<span id="cb24-523"><a href="#cb24-523"></a><span class="ss">- </span>Function types</span>
+<span id="cb24-524"><a href="#cb24-524"></a></span>
+<span id="cb24-525"><a href="#cb24-525"></a><span class="fu">## Easy Mode</span></span>
+<span id="cb24-526"><a href="#cb24-526"></a></span>
+<span id="cb24-527"><a href="#cb24-527"></a><span class="ss">- </span>Addition and subtraction are easy.</span>
+<span id="cb24-528"><a href="#cb24-528"></a><span class="ss">- </span>For some value of easy.</span>
+<span id="cb24-529"><a href="#cb24-529"></a><span class="ss">  - </span>Cut a too-big number into chunks.</span>
+<span id="cb24-530"><a href="#cb24-530"></a><span class="ss">  - </span>Add or subtract within chunks of the same index/offset/significance.</span>
+<span id="cb24-531"><a href="#cb24-531"></a><span class="ss">  - </span>Only wrinkle is a carry bit.</span>
+<span id="cb24-532"><a href="#cb24-532"></a><span class="ss">- </span>Identical to digit-based addition.</span>
+<span id="cb24-533"><a href="#cb24-533"></a><span class="ss">  - </span><span class="in">`u8`</span>s as digits in base 256 arithmetic</span>
+<span id="cb24-534"><a href="#cb24-534"></a></span>
+<span id="cb24-535"><a href="#cb24-535"></a><span class="fu">## Hard Mode</span></span>
+<span id="cb24-536"><a href="#cb24-536"></a></span>
+<span id="cb24-537"><a href="#cb24-537"></a><span class="ss">- </span>Some cryptographical algorithms, however, use two extremely advanced arithmetic operations:</span>
+<span id="cb24-538"><a href="#cb24-538"></a><span class="ss">  - </span>Multiplication, and</span>
+<span id="cb24-539"><a href="#cb24-539"></a><span class="ss">  - </span>Division, and</span>
+<span id="cb24-540"><a href="#cb24-540"></a><span class="ss">  - </span>Modulo</span>
+<span id="cb24-541"><a href="#cb24-541"></a><span class="ss">- </span>Fortunately this only two operations (need a combined <span class="in">`divmod`</span>)</span>
+<span id="cb24-542"><a href="#cb24-542"></a></span>
+<span id="cb24-543"><a href="#cb24-543"></a><span class="fu">## Example</span></span>
+<span id="cb24-544"><a href="#cb24-544"></a></span>
+<span id="cb24-545"><a href="#cb24-545"></a><span class="ss">- </span>Last term I taught:</span>
+<span id="cb24-546"><a href="#cb24-546"></a><span class="ss">  - </span>14 MS-level Computer Scientists</span>
+<span id="cb24-547"><a href="#cb24-547"></a><span class="ss">    - </span>9-12 hrs/wk</span>
+<span id="cb24-548"><a href="#cb24-548"></a><span class="ss">    - </span>14 week contract</span>
+<span id="cb24-549"><a href="#cb24-549"></a><span class="ss">  - </span>34 BS-level Computer Scientists</span>
+<span id="cb24-550"><a href="#cb24-550"></a><span class="ss">    - </span>6-9 hrs/wk</span>
+<span id="cb24-551"><a href="#cb24-551"></a><span class="ss">    - </span>15.5 week contract</span>
+<span id="cb24-552"><a href="#cb24-552"></a><span class="ss">- </span>How many person hours is this?</span>
+<span id="cb24-553"><a href="#cb24-553"></a></span>
+<span id="cb24-554"><a href="#cb24-554"></a><span class="fu">## Napkin Math</span></span>
+<span id="cb24-555"><a href="#cb24-555"></a></span>
+<span id="cb24-556"><a href="#cb24-556"></a><span class="ss">- </span>I'd say</span>
+<span id="cb24-557"><a href="#cb24-557"></a><span class="ss">  - </span>$14 \times 12 \times 14$</span>
+<span id="cb24-558"><a href="#cb24-558"></a><span class="ss">  - </span>$34 \times 9 \times 15.5$</span>
+<span id="cb24-559"><a href="#cb24-559"></a><span class="ss">- </span>I... can't quite do that in one fell swoop.</span>
+<span id="cb24-560"><a href="#cb24-560"></a><span class="ss">  - </span>$14 \times 12$ is trivially $12^2 + 24 = 168$</span>
+<span id="cb24-561"><a href="#cb24-561"></a><span class="ss">  - </span>$9 \times 15.5$ is trivially $155 - 15.5 = 139.5$</span>
+<span id="cb24-562"><a href="#cb24-562"></a></span>
+<span id="cb24-563"><a href="#cb24-563"></a><span class="fu">## $34 \times 139.5$</span></span>
+<span id="cb24-564"><a href="#cb24-564"></a></span>
+<span id="cb24-565"><a href="#cb24-565"></a><span class="ss">- </span>That just isn't easy </span>
+<span id="cb24-566"><a href="#cb24-566"></a><span class="ss"> - </span>(140 * 34 isn't bad, but we need a motivating example). </span>
+<span id="cb24-567"><a href="#cb24-567"></a><span class="ss">- </span>Express *digit-wise*:</span>
+<span id="cb24-568"><a href="#cb24-568"></a></span>
+<span id="cb24-569"><a href="#cb24-569"></a>| |1|3|9|5|</span>
+<span id="cb24-570"><a href="#cb24-570"></a>|-|-|-|-|-|</span>
+<span id="cb24-571"><a href="#cb24-571"></a>|3|-|-|-|-|</span>
+<span id="cb24-572"><a href="#cb24-572"></a>|4|-|-|-|-|</span>
+<span id="cb24-573"><a href="#cb24-573"></a></span>
+<span id="cb24-574"><a href="#cb24-574"></a><span class="fu">## $34 \times 139.5$</span></span>
+<span id="cb24-575"><a href="#cb24-575"></a></span>
+<span id="cb24-576"><a href="#cb24-576"></a><span class="ss">- </span>Compute all products over single-digit factors</span>
+<span id="cb24-577"><a href="#cb24-577"></a></span>
+<span id="cb24-578"><a href="#cb24-578"></a>| |1|3|9|5|</span>
+<span id="cb24-579"><a href="#cb24-579"></a>|-|-|-|-|-|</span>
+<span id="cb24-580"><a href="#cb24-580"></a>|3|3|9|27|15|</span>
+<span id="cb24-581"><a href="#cb24-581"></a>|4|4|12|36|20|</span>
+<span id="cb24-582"><a href="#cb24-582"></a></span>
+<span id="cb24-583"><a href="#cb24-583"></a><span class="ss">- </span>These:</span>
+<span id="cb24-584"><a href="#cb24-584"></a><span class="ss">  - </span>Aren't single digit</span>
+<span id="cb24-585"><a href="#cb24-585"></a><span class="ss">  - </span>Aren't of the same signficance</span>
+<span id="cb24-586"><a href="#cb24-586"></a></span>
+<span id="cb24-587"><a href="#cb24-587"></a><span class="fu">## $34 \times 139.5$</span></span>
+<span id="cb24-588"><a href="#cb24-588"></a></span>
+<span id="cb24-589"><a href="#cb24-589"></a><span class="ss">- </span>Include sigificance</span>
+<span id="cb24-590"><a href="#cb24-590"></a></span>
+<span id="cb24-591"><a href="#cb24-591"></a>| |100|30|9|.5|</span>
+<span id="cb24-592"><a href="#cb24-592"></a>|-|-|-|-|-|</span>
+<span id="cb24-593"><a href="#cb24-593"></a>|30|3000|900|270|15|</span>
+<span id="cb24-594"><a href="#cb24-594"></a>|4|400|120|36|2|</span>
+<span id="cb24-595"><a href="#cb24-595"></a></span>
+<span id="cb24-596"><a href="#cb24-596"></a><span class="fu">## Dear Watson</span></span>
+<span id="cb24-597"><a href="#cb24-597"></a></span>
+<span id="cb24-598"><a href="#cb24-598"></a></span>
+<span id="cb24-599"><a href="#cb24-599"></a>::::{.columns}</span>
+<span id="cb24-600"><a href="#cb24-600"></a></span>
+<span id="cb24-601"><a href="#cb24-601"></a>:::{.column width="%50"}</span>
+<span id="cb24-602"><a href="#cb24-602"></a></span>
+<span id="cb24-603"><a href="#cb24-603"></a></span>
+<span id="cb24-604"><a href="#cb24-604"></a>| |100|30|9|.5|</span>
+<span id="cb24-605"><a href="#cb24-605"></a>|-|-|-|-|-|</span>
+<span id="cb24-606"><a href="#cb24-606"></a>|30|3000|900|270|15|</span>
+<span id="cb24-607"><a href="#cb24-607"></a>|4|400|120|36|2|</span>
+<span id="cb24-608"><a href="#cb24-608"></a></span>
+<span id="cb24-609"><a href="#cb24-609"></a></span>
+<span id="cb24-610"><a href="#cb24-610"></a>:::</span>
+<span id="cb24-611"><a href="#cb24-611"></a></span>
+<span id="cb24-612"><a href="#cb24-612"></a></span>
+<span id="cb24-613"><a href="#cb24-613"></a>:::{.column width="%50"}</span>
+<span id="cb24-614"><a href="#cb24-614"></a></span>
+<span id="cb24-615"><a href="#cb24-615"></a>$$</span>
+<span id="cb24-616"><a href="#cb24-616"></a>\begin{align*}</span>
+<span id="cb24-617"><a href="#cb24-617"></a>5&amp; \times 4  \times 10^{-1}  &amp;= 2&amp;<span class="sc">\\</span></span>
+<span id="cb24-618"><a href="#cb24-618"></a>+5&amp; \times 3  \times 10^{0}  &amp;= 15&amp;<span class="sc">\\</span></span>
+<span id="cb24-619"><a href="#cb24-619"></a>+9&amp; \times 4  \times 10^{0}  &amp;= 36&amp;<span class="sc">\\</span></span>
+<span id="cb24-620"><a href="#cb24-620"></a>+9&amp; \times 3  \times 10^{1}  &amp;= 270&amp;<span class="sc">\\</span></span>
+<span id="cb24-621"><a href="#cb24-621"></a>+3&amp; \times 4  \times 10^{1}  &amp;= 120&amp;<span class="sc">\\</span></span>
+<span id="cb24-622"><a href="#cb24-622"></a>+3&amp; \times 3  \times 10^{2}  &amp;= 900&amp;<span class="sc">\\</span></span>
+<span id="cb24-623"><a href="#cb24-623"></a>+1&amp; \times 4  \times 10^{2}  &amp;= 400&amp;<span class="sc">\\</span></span>
+<span id="cb24-624"><a href="#cb24-624"></a>+1&amp; \times 3  \times 10^{3}  &amp;= 3000&amp;<span class="sc">\\</span></span>
+<span id="cb24-625"><a href="#cb24-625"></a>\end{align*}</span>
+<span id="cb24-626"><a href="#cb24-626"></a>$$</span>
+<span id="cb24-627"><a href="#cb24-627"></a></span>
+<span id="cb24-628"><a href="#cb24-628"></a>:::</span>
+<span id="cb24-629"><a href="#cb24-629"></a></span>
+<span id="cb24-630"><a href="#cb24-630"></a>::::</span>
+<span id="cb24-631"><a href="#cb24-631"></a></span>
+<span id="cb24-632"><a href="#cb24-632"></a><span class="fu">## Express as</span></span>
+<span id="cb24-633"><a href="#cb24-633"></a></span>
+<span id="cb24-634"><a href="#cb24-634"></a>$$</span>
+<span id="cb24-635"><a href="#cb24-635"></a>\begin{align*}</span>
+<span id="cb24-636"><a href="#cb24-636"></a>139.5&amp; = &amp;1 * 10^2 + &amp;3 * 10^1 + &amp;9 * 10^0&amp; + 5 * 10^{-1}<span class="sc">\\</span></span>
+<span id="cb24-637"><a href="#cb24-637"></a>34&amp; = &amp;&amp;3 * 10^1 + &amp;4 * 10^0&amp;<span class="sc">\\</span></span>
+<span id="cb24-638"><a href="#cb24-638"></a>\end{align*}</span>
+<span id="cb24-639"><a href="#cb24-639"></a>$$</span>
+<span id="cb24-640"><a href="#cb24-640"></a></span>
+<span id="cb24-641"><a href="#cb24-641"></a><span class="ss">- </span>Take $x = 10$</span>
+<span id="cb24-642"><a href="#cb24-642"></a>$$</span>
+<span id="cb24-643"><a href="#cb24-643"></a>\begin{align*}</span>
+<span id="cb24-644"><a href="#cb24-644"></a>139.5&amp; = &amp;1 * x^2 + &amp;3 * x + &amp;9&amp; + 5 * x^{-1}<span class="sc">\\</span></span>
+<span id="cb24-645"><a href="#cb24-645"></a>34&amp; = &amp;&amp;3 * x + &amp;4&amp;<span class="sc">\\</span></span>
+<span id="cb24-646"><a href="#cb24-646"></a>\end{align*}</span>
+<span id="cb24-647"><a href="#cb24-647"></a>$$</span>
+<span id="cb24-648"><a href="#cb24-648"></a></span>
+<span id="cb24-649"><a href="#cb24-649"></a><span class="ss">- </span>That is polynomial; can work with those.</span>
+<span id="cb24-650"><a href="#cb24-650"></a></span>
+<span id="cb24-651"><a href="#cb24-651"></a><span class="fu">## Polynomial</span></span>
+<span id="cb24-652"><a href="#cb24-652"></a></span>
+<span id="cb24-653"><a href="#cb24-653"></a>$$</span>
+<span id="cb24-654"><a href="#cb24-654"></a>(x^2 + 3x + 9 + 5x^{-1})(3x + 4)</span>
+<span id="cb24-655"><a href="#cb24-655"></a>$$</span>
+<span id="cb24-656"><a href="#cb24-656"></a></span>
+<span id="cb24-657"><a href="#cb24-657"></a>$$</span>
+<span id="cb24-658"><a href="#cb24-658"></a>(x^2 + 3x + 9 + 5x^{-1})(3x) + (x^2 + 3x + 9 + 5x^{-1})(4)</span>
+<span id="cb24-659"><a href="#cb24-659"></a>$$</span>
+<span id="cb24-660"><a href="#cb24-660"></a></span>
+<span id="cb24-661"><a href="#cb24-661"></a></span>
+<span id="cb24-662"><a href="#cb24-662"></a>$$</span>
+<span id="cb24-663"><a href="#cb24-663"></a>(3x^3 + 9x^2 + 27x + 15) + (4x^2 + 12x + 36 + 20x^{-1})</span>
+<span id="cb24-664"><a href="#cb24-664"></a>$$</span>
+<span id="cb24-665"><a href="#cb24-665"></a></span>
+<span id="cb24-666"><a href="#cb24-666"></a>$$</span>
+<span id="cb24-667"><a href="#cb24-667"></a>3x^3 + 13x^2 + 39x + 51 + 20x^{-1}</span>
+<span id="cb24-668"><a href="#cb24-668"></a>$$</span>
+<span id="cb24-669"><a href="#cb24-669"></a></span>
+<span id="cb24-670"><a href="#cb24-670"></a><span class="fu">## Aside</span></span>
+<span id="cb24-671"><a href="#cb24-671"></a></span>
+<span id="cb24-672"><a href="#cb24-672"></a><span class="ss">- </span>I think this is covered around ~8th grade</span>
+<span id="cb24-673"><a href="#cb24-673"></a><span class="ss">- </span>I don't want to assume the integrity to US public school system</span>
+<span id="cb24-674"><a href="#cb24-674"></a><span class="ss">  - </span>Or anything school system</span>
+<span id="cb24-675"><a href="#cb24-675"></a><span class="ss">  - </span>Shout out school</span>
+<span id="cb24-676"><a href="#cb24-676"></a><span class="ss">- </span>The point of this class isn't middle/high school math</span>
+<span id="cb24-677"><a href="#cb24-677"></a><span class="ss">  - </span>That's the point of life itself /s</span>
+<span id="cb24-678"><a href="#cb24-678"></a></span>
+<span id="cb24-679"><a href="#cb24-679"></a><span class="fu">## Considerations</span></span>
+<span id="cb24-680"><a href="#cb24-680"></a></span>
+<span id="cb24-681"><a href="#cb24-681"></a><span class="ss">- </span>It is natural to express multiplication of e.g. 4096 bit integers as a polynomial over, say, 64 bit integers.</span>
+<span id="cb24-682"><a href="#cb24-682"></a><span class="ss">- </span>One teeny problem:</span>
+<span id="cb24-683"><a href="#cb24-683"></a><span class="ss">  - </span>Overflow.</span>
+<span id="cb24-684"><a href="#cb24-684"></a></span>
+<span id="cb24-685"><a href="#cb24-685"></a><span class="fu">## Overflow</span></span>
+<span id="cb24-686"><a href="#cb24-686"></a></span>
+<span id="cb24-687"><a href="#cb24-687"></a><span class="ss">- </span>The point of calculating this was to get things down to single digit:</span>
+<span id="cb24-688"><a href="#cb24-688"></a></span>
+<span id="cb24-689"><a href="#cb24-689"></a>$$</span>
+<span id="cb24-690"><a href="#cb24-690"></a>3x^3 + 13x^2 + 39x + 51x^0 + 20x^{-1}</span>
+<span id="cb24-691"><a href="#cb24-691"></a>$$</span>
+<span id="cb24-692"><a href="#cb24-692"></a></span>
+<span id="cb24-693"><a href="#cb24-693"></a><span class="ss">- </span>13, 39, 51, and 20 are all not compliant (debatably 20 is okay)</span>
+<span id="cb24-694"><a href="#cb24-694"></a><span class="ss">- </span>Essentially, 1-digit multiply may produce a 2-digit product.</span>
+<span id="cb24-695"><a href="#cb24-695"></a></span>
+<span id="cb24-696"><a href="#cb24-696"></a></span>
+<span id="cb24-697"><a href="#cb24-697"></a><span class="fu">## Size of ints</span></span>
+<span id="cb24-698"><a href="#cb24-698"></a></span>
+<span id="cb24-699"><a href="#cb24-699"></a><span class="ss">- </span>Say we have two integers of 8 bits of precision.</span>
+<span id="cb24-700"><a href="#cb24-700"></a><span class="ss">- </span>We multiple them together.</span>
+<span id="cb24-701"><a href="#cb24-701"></a><span class="ss">- </span>What is the largest number we can get, and</span>
+<span id="cb24-702"><a href="#cb24-702"></a><span class="ss">- </span>How many bits does it require?</span>
+<span id="cb24-703"><a href="#cb24-703"></a><span class="in">```{.email}</span></span>
+<span id="cb24-704"><a href="#cb24-704"></a><span class="in">python3 -c "x = 2 ** 8 - 1 ; x = x * x ; print(x.bit_length())"</span></span>
+<span id="cb24-705"><a href="#cb24-705"></a><span class="in">```</span></span>
+<span id="cb24-706"><a href="#cb24-706"></a><span class="ss">- </span>16</span>
+<span id="cb24-707"><a href="#cb24-707"></a></span>
+<span id="cb24-708"><a href="#cb24-708"></a><span class="fu"># Carrys for mults</span></span>
+<span id="cb24-709"><a href="#cb24-709"></a></span>
+<span id="cb24-710"><a href="#cb24-710"></a><span class="ss">- </span>When we are doing big multiplications:</span>
+<span id="cb24-711"><a href="#cb24-711"></a><span class="ss">  - </span>We must multiply chunks of at most half the size of our biggest integer.</span>
+<span id="cb24-712"><a href="#cb24-712"></a><span class="ss">  - </span>We must keep track of significance - their position in an imagined larger integer</span>
+<span id="cb24-713"><a href="#cb24-713"></a><span class="ss">  - </span>We must perform adds over these terms, using big addition</span>
+<span id="cb24-714"><a href="#cb24-714"></a></span>
+<span id="cb24-715"><a href="#cb24-715"></a><span class="fu">## Division</span></span>
+<span id="cb24-716"><a href="#cb24-716"></a></span>
+<span id="cb24-717"><a href="#cb24-717"></a><span class="ss">- </span>Remember long division?</span>
+<span id="cb24-718"><a href="#cb24-718"></a><span class="ss">  - </span>Align the highest digits (I took the log base 2)</span>
+<span id="cb24-719"><a href="#cb24-719"></a><span class="ss">  - </span>Divide.</span>
+<span id="cb24-720"><a href="#cb24-720"></a><span class="ss">  - </span>Keep track of significance (Difference between logs)</span>
+<span id="cb24-721"><a href="#cb24-721"></a><span class="ss">  - </span>Calculate remainder.</span>
+<span id="cb24-722"><a href="#cb24-722"></a><span class="ss">  - </span>Loop.</span>
+<span id="cb24-723"><a href="#cb24-723"></a><span class="ss">- </span>The final remainder is the mod.</span>
+<span id="cb24-724"><a href="#cb24-724"></a></span>
+<span id="cb24-725"><a href="#cb24-725"></a><span class="fu">## Today</span></span>
+<span id="cb24-726"><a href="#cb24-726"></a></span>
+<span id="cb24-727"><a href="#cb24-727"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Finite sets, rings</span>
+<span id="cb24-728"><a href="#cb24-728"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Arbitrary/high precision integers</span>
+<span id="cb24-729"><a href="#cb24-729"></a><span class="ss">- </span><span class="dv">&amp;check;</span> Arithmetic operations</span>
+<span id="cb24-730"><a href="#cb24-730"></a><span class="ss">- </span>Function types</span>
+<span id="cb24-731"><a href="#cb24-731"></a></span>
+<span id="cb24-732"><a href="#cb24-732"></a><span class="fu">## An arbitrary precision type.</span></span>
+<span id="cb24-733"><a href="#cb24-733"></a></span>
+<span id="cb24-734"><a href="#cb24-734"></a><span class="ss">- </span>Just as with <span class="in">`f16`</span>, we can create something to hold numbers.</span>
+<span id="cb24-735"><a href="#cb24-735"></a><span class="ss">  - </span>I used a boolean for signs and a vector for digits.</span>
+<span id="cb24-736"><a href="#cb24-736"></a><span class="ss">- </span>Here's an example function declaration:</span>
+<span id="cb24-737"><a href="#cb24-737"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb24-738"><a href="#cb24-738"></a><span class="in">// At the top</span></span>
+<span id="cb24-739"><a href="#cb24-739"></a><span class="in">#![allow(non_camel_case_types)]</span></span>
+<span id="cb24-740"><a href="#cb24-740"></a><span class="in">pub struct ix {</span></span>
+<span id="cb24-741"><a href="#cb24-741"></a></span>
+<span id="cb24-742"><a href="#cb24-742"></a><span class="in">// Latter</span></span>
+<span id="cb24-743"><a href="#cb24-743"></a><span class="in">pub fn add_ix(a: &amp;ix, b: &amp;ix) -&gt; ix {</span></span>
+<span id="cb24-744"><a href="#cb24-744"></a><span class="in">```</span></span>
+<span id="cb24-745"><a href="#cb24-745"></a></span>
+<span id="cb24-746"><a href="#cb24-746"></a><span class="fu">## Borrowing</span></span>
+<span id="cb24-747"><a href="#cb24-747"></a></span>
+<span id="cb24-748"><a href="#cb24-748"></a><span class="ss">- </span>Why borrow?</span>
+<span id="cb24-749"><a href="#cb24-749"></a><span class="ss">    - </span>These are *data structures*, not numerical literals.</span>
+<span id="cb24-750"><a href="#cb24-750"></a><span class="ss">- </span>Much closer to vectorized operations than to integer addition.</span>
+<span id="cb24-751"><a href="#cb24-751"></a><span class="in">```py</span></span>
+<span id="cb24-752"><a href="#cb24-752"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-753"><a href="#cb24-753"></a><span class="op">&gt;&gt;&gt;</span> hours <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">30</span>, <span class="dv">9</span>, <span class="fl">.5</span>])</span>
+<span id="cb24-754"><a href="#cb24-754"></a><span class="op">&gt;&gt;&gt;</span> hours <span class="op">*</span> <span class="dv">34</span></span>
+<span id="cb24-755"><a href="#cb24-755"></a>array([<span class="fl">3400.</span>, <span class="fl">1020.</span>,  <span class="fl">306.</span>,   <span class="fl">17.</span>])</span>
+<span id="cb24-756"><a href="#cb24-756"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">&gt;&gt;&gt;</span> np.<span class="bu">sum</span>(hours <span class="op">*</span> <span class="dv">34</span>)</span>
+<span id="cb24-757"><a href="#cb24-757"></a>np.float64(<span class="fl">4743.0</span>)</span>
+<span id="cb24-758"><a href="#cb24-758"></a><span class="in">```</span></span>
+<span id="cb24-759"><a href="#cb24-759"></a></span>
+<span id="cb24-760"><a href="#cb24-760"></a><span class="fu">## FAQ</span></span>
+<span id="cb24-761"><a href="#cb24-761"></a></span>
+<span id="cb24-762"><a href="#cb24-762"></a><span class="ss">- </span>Isn't there a way to use just <span class="in">`+`</span> and <span class="in">`-`</span>.</span>
+<span id="cb24-763"><a href="#cb24-763"></a><span class="ss">  - </span>Yes.</span>
+<span id="cb24-764"><a href="#cb24-764"></a><span class="ss">  - </span>I didn't find it interesting, you are welcome to do so.</span>
+<span id="cb24-765"><a href="#cb24-765"></a><span class="ss">  - </span>Provide wrappers of the needed type (<span class="in">`(&amp;ix, &amp;ix) -&gt; ix`</span>) to use the autotester.</span>
+<span id="cb24-766"><a href="#cb24-766"></a></span>
+<span id="cb24-767"><a href="#cb24-767"></a><span class="fu"># Today</span></span>
+<span id="cb24-768"><a href="#cb24-768"></a></span>
+<span id="cb24-769"><a href="#cb24-769"></a><span class="ss">  - </span><span class="dv">&amp;check;</span> Finite sets, rings</span>
+<span id="cb24-770"><a href="#cb24-770"></a><span class="ss">  - </span><span class="dv">&amp;check;</span> Arbitrary/high precision integers</span>
+<span id="cb24-771"><a href="#cb24-771"></a><span class="ss">  - </span><span class="dv">&amp;check;</span> Arithmetic operations</span>
+<span id="cb24-772"><a href="#cb24-772"></a><span class="ss">  - </span><span class="dv">&amp;check;</span> Function types</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>Systems in Rust</title>
+<title>ix – Systems in Rust</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./71_ix_io.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,9 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Systems in Rust
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./72_ix.md.html">ix</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -251,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./72_ix.md.html" class="sidebar-item-text sidebar-link">
+  <a href="./72_ix.md.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ix</span></a>
   </div>
 </li>
@@ -265,14 +264,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cs-271-systems-in-rust" id="toc-cs-271-systems-in-rust" class="nav-link active" data-scroll-target="#cs-271-systems-in-rust">CS 271 “Systems in Rust”</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
   <ul class="collapse">
-  <li><a href="#mw-1310-1440" id="toc-mw-1310-1440" class="nav-link" data-scroll-target="#mw-1310-1440">MW 1310-1440</a></li>
-  <li><a href="#prof.-calvin" id="toc-prof.-calvin" class="nav-link" data-scroll-target="#prof.-calvin">Prof.&nbsp;Calvin</a></li>
-  <li><a href="#syllabus" id="toc-syllabus" class="nav-link" data-scroll-target="#syllabus">Syllabus</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#my-responsibility" id="toc-my-responsibility" class="nav-link" data-scroll-target="#my-responsibility">My responsibility</a></li>
+  <li><a href="#your-responsibility" id="toc-your-responsibility" class="nav-link" data-scroll-target="#your-responsibility">Your responsibility</a></li>
+  <li><a href="#tester" id="toc-tester" class="nav-link" data-scroll-target="#tester">Tester</a></li>
   </ul></li>
-  <li><a href="#calendar" id="toc-calendar" class="nav-link" data-scroll-target="#calendar">Calendar</a></li>
-  <li><a href="#lecture-recordings" id="toc-lecture-recordings" class="nav-link" data-scroll-target="#lecture-recordings">Lecture Recordings</a></li>
   </ul>
 </nav>
     </div>
@@ -281,7 +279,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Systems in Rust</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">ix</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Due Friday, 24 Oct.&nbsp;at 1440 ET.</p>
 </div>
 
 
@@ -298,176 +297,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="cs-271-systems-in-rust" class="level1">
-<h1>CS 271 “Systems in Rust”</h1>
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
-<li>Called:
+<li>To complete this assignment, you must:
 <ul>
-<li>CS 271: Systems Programming</li>
-<li>CS 271: Sys Programming, Computer Arch</li>
-</ul></li>
-<li>The first semester class in a:
-<ul>
-<li>Compiled language, with</li>
-<li>No garbage collector.</li>
-</ul></li>
-<li>Term these “systems” languages.
-<ul>
-<li>Suitable to write an operating system.</li>
-</ul></li>
-<li>Taught this year in Rust.
-<ul>
-<li>So to me, “Systems in Rust”</li>
-</ul></li>
+<li>Create a <code>72</code> directory in your <code>271rs</code> repository.</li>
+<li>This folder must be a Cargo package.</li>
+<li>As a convenience, I named mine <code>bignum</code> just to call it something other than <code>ix</code>, which was confusing.</li>
 </ul>
-<section id="mw-1310-1440" class="level3">
-<h3 class="anchored" data-anchor-id="mw-1310-1440">MW 1310-1440</h3>
-</section>
-<section id="prof.-calvin" class="level3">
-<h3 class="anchored" data-anchor-id="prof.-calvin"><a href="mailto:ckdeutschbein@willamette.edu">Prof.&nbsp;Calvin</a></h3>
-</section>
-<section id="syllabus" class="level3">
-<h3 class="anchored" data-anchor-id="syllabus">Syllabus</h3>
-<ul>
-<li>Ungrade selected by a comfortable super majority.</li>
-<li><a href="syllabus/syllabus.pdf">Syllabus link</a></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">cargo</span> new 72 <span class="at">--name</span> bignum <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
+<section id="my-responsibility" class="level2">
+<h2 class="anchored" data-anchor-id="my-responsibility">My responsibility</h2>
+<ul>
+<li>I have provided a completing testing framework within the <a href="70_ix_io.md">I/O</a> lab.</li>
+</ul>
 </section>
-<section id="calendar" class="level1">
-<h1>Calendar</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Week</th>
-<th style="text-align: left;">Date (M)</th>
-<th style="text-align: left;">Lecture (M)</th>
-<th style="text-align: left;">Lab (W)</th>
-<th style="text-align: left;">HW (F)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0x0</td>
-<td style="text-align: left;">08/25</td>
-<td style="text-align: left;"><a href="./00_welcome.html">Welcome</a></td>
-<td style="text-align: left;"><a href="./01_rustup.html">Rustup</a></td>
-<td style="text-align: left;"><a href="./02_hiworld.html">Hi world</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x1</td>
-<td style="text-align: left;">09/01</td>
-<td style="text-align: left;"><code>None</code></td>
-<td style="text-align: left;"><a href="./11_packages.html">Packages</a></td>
-<td style="text-align: left;"><a href="./12_hicargo.html">Hi cargo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x2</td>
-<td style="text-align: left;">09/08</td>
-<td style="text-align: left;"><a href="./20_options.html">Options</a></td>
-<td style="text-align: left;"><a href="./21_guess.html">Guess</a></td>
-<td style="text-align: left;"><a href="./22_wordle.html">Wordle</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x3</td>
-<td style="text-align: left;">09/15</td>
-<td style="text-align: left;"><a href="./30_bits.html">Bits</a></td>
-<td style="text-align: left;"><a href="./31_hamming.html">Hamming</a></td>
-<td style="text-align: left;"><a href="./32_macros.html">Macros</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x4</td>
-<td style="text-align: left;">09/22</td>
-<td style="text-align: left;"><a href="./40_sha2.html">SHA2</a></td>
-<td style="text-align: left;"><a href="./41_constants.html">Constants</a></td>
-<td style="text-align: left;"><a href="./42_sha512.html">SHA512</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x5</td>
-<td style="text-align: left;">09/29</td>
-<td style="text-align: left;"><a href="./50_754.html">IEEE754</a></td>
-<td style="text-align: left;"><a href="./51_f16.html"><code>f16</code></a></td>
-<td style="text-align: left;"><a href="./42_sha512.html">SHA512</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x6</td>
-<td style="text-align: left;">10/06</td>
-<td style="text-align: left;"><a href="https://classroom.github.com/a/opvHddb-">Practice</a></td>
-<td style="text-align: left;"><strong>Midterm</strong></td>
-<td style="text-align: left;"><code>None</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x7</td>
-<td style="text-align: left;">10/13</td>
-<td style="text-align: left;"><a href="./70_numbers.html">Numbers</a></td>
-<td style="text-align: left;"><a href="./71_ix_io.html">I/O</a></td>
-<td style="text-align: left;"><a href="72_ix.md"><code>ix</code></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0x8</td>
-<td style="text-align: left;">10/20</td>
-<td style="text-align: left;">ECDSA</td>
-<td style="text-align: left;">Python</td>
-<td style="text-align: left;">Ed25519</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0x9</td>
-<td style="text-align: left;">10/27</td>
-<td style="text-align: left;">Stacks</td>
-<td style="text-align: left;">List</td>
-<td style="text-align: left;">Tree</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xA</td>
-<td style="text-align: left;">11/03</td>
-<td style="text-align: left;">Graphs</td>
-<td style="text-align: left;">BFS</td>
-<td style="text-align: left;">Djikstra</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0xB</td>
-<td style="text-align: left;">11/10</td>
-<td style="text-align: left;">Merkle</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xC</td>
-<td style="text-align: left;">11/17</td>
-<td style="text-align: left;">VCS</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0xD</td>
-<td style="text-align: left;">11/24</td>
-<td style="text-align: left;">Spectre</td>
-<td style="text-align: left;"><code>None</code></td>
-<td style="text-align: left;"><code>None</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0xE</td>
-<td style="text-align: left;">12/01</td>
-<td style="text-align: left;">Meltdown</td>
-<td style="text-align: left;">Hypers</td>
-<td style="text-align: left;">VCS.rs</td>
-</tr>
-</tbody>
-</table>
-<!--
-Think I need string edit distance or patches somewhere. 
-
-Hamming teases it at least.
--->
+<section id="your-responsibility" class="level2">
+<h2 class="anchored" data-anchor-id="your-responsibility">Your responsibility</h2>
+<ul>
+<li>You will implement:
+<ul>
+<li><code>add_ix</code></li>
+<li><code>sub_ix</code></li>
+<li><code>mul_ix</code></li>
+</ul></li>
+<li>You will attempt, but regard as a challenge problem:
+<ul>
+<li><code>div_ix</code> and <code>rem_ix</code>, which are likely wrappers on the same “divmod” helper function.</li>
+</ul></li>
+</ul>
 </section>
-<section id="lecture-recordings" class="level1">
-<h1>Lecture Recordings</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D&amp;list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
-</iframe>
+<section id="tester" class="level2">
+<h2 class="anchored" data-anchor-id="tester">Tester</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>DEBUG <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>CMD <span class="op">=</span> <span class="st">"cargo run --"</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="im">import</span> subprocess, os, random</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>bigone, bigtwo <span class="op">=</span> random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>), random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>hexone, hextwo <span class="op">=</span> <span class="bu">hex</span>(bigone), <span class="bu">hex</span>(bigtwo)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">hexone =</span><span class="ch">\n</span><span class="st">"</span>, hexone, <span class="st">"</span><span class="ch">\n</span><span class="st">hextwo = </span><span class="ch">\n</span><span class="st">"</span>, hextwo)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb2-12"><a href="#cb2-12"></a>ops <span class="op">=</span> {<span class="st">'ADD'</span>:add,<span class="st">'SUB'</span>:sub,<span class="st">'MUL'</span>:mul,<span class="st">'QUO'</span>:quo,<span class="st">'REM'</span>:rem}</span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="cf">for</span> op <span class="kw">in</span> ops:</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    result <span class="op">=</span> <span class="bu">int</span>(subprocess.check_output([<span class="st">"cargo"</span>, <span class="st">"run"</span>, hexone, hextwo, op]),<span class="dv">16</span>)</span>
+<span id="cb2-15"><a href="#cb2-15"></a>    answer <span class="op">=</span> ops[op](bigone,bigtwo)</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="cf">if</span> result <span class="op">!=</span> answer:</span>
+<span id="cb2-17"><a href="#cb2-17"></a>        <span class="bu">print</span>(<span class="st">"Operator"</span>, op, <span class="st">"failed."</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Expected:"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(answer))</span>
+<span id="cb2-20"><a href="#cb2-20"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Received:"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(result))</span>
+<span id="cb2-22"><a href="#cb2-22"></a>        exit()</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-24"><a href="#cb2-24"></a>        <span class="bu">print</span>(op, <span class="st">"passes."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -941,65 +836,77 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> Systems in Rust</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="an">subtitle:</span><span class="co"> ""</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">---</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu"># CS 271 "Systems in Rust"</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="ss">- </span>Called:</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="ss">    - </span>CS 271: Systems Programming</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="ss">    - </span>CS 271: Sys Programming, Computer Arch</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="ss">- </span>The first semester class in a:</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="ss">    - </span>Compiled language, with</span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="ss">    - </span>No garbage collector.</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="ss">- </span>Term these "systems" languages.</span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="ss">    - </span>Suitable to write an operating system.</span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="ss">- </span>Taught this year in Rust.</span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="ss">    - </span>So to me, "Systems in Rust"</span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">### MW 1310-1440</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">### [Prof. Calvin](mailto:ckdeutschbein@willamette.edu)</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="fu">### Syllabus</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="ss">- </span>Ungrade selected by a comfortable super majority.</span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Syllabus link</span><span class="co">](syllabus/syllabus.pdf)</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="fu"># Calendar</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32"></a>|Week|Date (M)|Lecture (M)|Lab (W)|HW (F)|</span>
-<span id="cb1-33"><a href="#cb1-33"></a>|:--:|:---|:----|:-------|:-------|</span>
-<span id="cb1-34"><a href="#cb1-34"></a>|0x0|08/25|<span class="co">[</span><span class="ot">Welcome</span><span class="co">](00_welcome.qmd)</span>|<span class="co">[</span><span class="ot">Rustup</span><span class="co">](01_rustup.md)</span>|<span class="co">[</span><span class="ot">Hi world</span><span class="co">](02_hiworld.md)</span>|</span>
-<span id="cb1-35"><a href="#cb1-35"></a>|0x1|09/01|<span class="in">`None`</span>|<span class="co">[</span><span class="ot">Packages</span><span class="co">](11_packages.qmd)</span>|<span class="co">[</span><span class="ot">Hi cargo</span><span class="co">](12_hicargo.md)</span>|</span>
-<span id="cb1-36"><a href="#cb1-36"></a>|0x2|09/08|<span class="co">[</span><span class="ot">Options</span><span class="co">](20_options.md)</span>|<span class="co">[</span><span class="ot">Guess</span><span class="co">](21_guess.md)</span>|<span class="co">[</span><span class="ot">Wordle</span><span class="co">](22_wordle.md)</span>|</span>
-<span id="cb1-37"><a href="#cb1-37"></a>|0x3|09/15|<span class="co">[</span><span class="ot">Bits</span><span class="co">](30_bits.qmd)</span>|<span class="co">[</span><span class="ot">Hamming</span><span class="co">](31_hamming.md)</span>|<span class="co">[</span><span class="ot">Macros</span><span class="co">](32_macros.md)</span>|</span>
-<span id="cb1-38"><a href="#cb1-38"></a>|0x4|09/22|<span class="co">[</span><span class="ot">SHA2</span><span class="co">](40_sha2.md)</span>|<span class="co">[</span><span class="ot">Constants</span><span class="co">](41_constants.md)</span>|<span class="co">[</span><span class="ot">SHA512</span><span class="co">](42_sha512.md)</span>|</span>
-<span id="cb1-39"><a href="#cb1-39"></a>|0x5|09/29|<span class="co">[</span><span class="ot">IEEE754</span><span class="co">](50_754.md)</span>|<span class="co">[</span><span class="ot">`f16`</span><span class="co">](51_f16.md)</span>|<span class="co">[</span><span class="ot">SHA512</span><span class="co">](42_sha512.md)</span>|</span>
-<span id="cb1-40"><a href="#cb1-40"></a>|0x6|10/06|<span class="co">[</span><span class="ot">Practice</span><span class="co">](https://classroom.github.com/a/opvHddb-)</span>|**Midterm**|<span class="in">`None`</span>|</span>
-<span id="cb1-41"><a href="#cb1-41"></a>|0x7|10/13|<span class="co">[</span><span class="ot">Numbers</span><span class="co">](70_numbers.md)</span>|<span class="co">[</span><span class="ot">I/O</span><span class="co">](71_ix_io.md)</span>|<span class="co">[</span><span class="ot">`ix`</span><span class="co">](72_ix.md)</span>|</span>
-<span id="cb1-42"><a href="#cb1-42"></a>|0x8|10/20|ECDSA|Python|Ed25519|</span>
-<span id="cb1-43"><a href="#cb1-43"></a>|0x9|10/27|Stacks|List|Tree|</span>
-<span id="cb1-44"><a href="#cb1-44"></a>|0xA|11/03|Graphs|BFS|Djikstra|</span>
-<span id="cb1-45"><a href="#cb1-45"></a>|0xB|11/10|Merkle|||</span>
-<span id="cb1-46"><a href="#cb1-46"></a>|0xC|11/17|VCS||</span>
-<span id="cb1-47"><a href="#cb1-47"></a>|0xD|11/24|Spectre|<span class="in">`None`</span>|<span class="in">`None`</span>|</span>
-<span id="cb1-48"><a href="#cb1-48"></a>|0xE|12/01|Meltdown|Hypers|VCS.rs|</span>
-<span id="cb1-49"><a href="#cb1-49"></a></span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="co">&lt;!--</span></span>
-<span id="cb1-51"><a href="#cb1-51"></a><span class="co">Think I need string edit distance or patches somewhere. </span></span>
-<span id="cb1-52"><a href="#cb1-52"></a></span>
-<span id="cb1-53"><a href="#cb1-53"></a><span class="co">Hamming teases it at least.</span></span>
-<span id="cb1-54"><a href="#cb1-54"></a><span class="co">--&gt;</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a></span>
-<span id="cb1-56"><a href="#cb1-56"></a><span class="fu"># Lecture Recordings</span></span>
-<span id="cb1-57"><a href="#cb1-57"></a></span>
-<span id="cb1-58"><a href="#cb1-58"></a>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D<span class="dv">&amp;amp;</span>list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./71_ix_io.html" class="pagination-link" aria-label="Numerical I/O">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Numerical I/O</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "ix"</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 24 Oct. at 1440 ET."</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">---</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="fu"># Setup</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="fu">## Requirements</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">- </span>To complete this assignment, you must:</span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="ss">    - </span>Create a <span class="in">`72`</span> directory in your <span class="in">`271rs`</span> repository.</span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="ss">    - </span>This folder must be a Cargo package.</span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="ss">    - </span>As a convenience, I named mine <span class="in">`bignum`</span> just to call it something other than <span class="in">`ix`</span>, which was confusing.</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="in">```bash</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="ex">cargo</span> new 72 <span class="at">--name</span> bignum <span class="at">--vcs</span> none</span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="in">```</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="fu">## My responsibility</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="ss">- </span>I have provided a completing testing framework within the <span class="co">[</span><span class="ot">I/O</span><span class="co">](70_ix_io.md)</span> lab.</span>
+<span id="cb3-23"><a href="#cb3-23"></a>    </span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="fu">## Your responsibility</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="ss">- </span>You will implement:</span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="ss">    - </span><span class="in">`add_ix`</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="ss">    - </span><span class="in">`sub_ix`</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="ss">    - </span><span class="in">`mul_ix`</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="ss">- </span>You will attempt, but regard as a challenge problem:</span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="ss">    - </span><span class="in">`div_ix`</span> and <span class="in">`rem_ix`</span>, which are likely wrappers on the same "divmod" helper function.</span>
+<span id="cb3-32"><a href="#cb3-32"></a></span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="fu">## Tester</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="in">```py</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>DEBUG <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>CMD <span class="op">=</span> <span class="st">"cargo run --"</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="im">import</span> subprocess, os, random</span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb3-42"><a href="#cb3-42"></a></span>
+<span id="cb3-43"><a href="#cb3-43"></a>bigone, bigtwo <span class="op">=</span> random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>), random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>)</span>
+<span id="cb3-44"><a href="#cb3-44"></a>hexone, hextwo <span class="op">=</span> <span class="bu">hex</span>(bigone), <span class="bu">hex</span>(bigtwo)</span>
+<span id="cb3-45"><a href="#cb3-45"></a>DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">hexone =</span><span class="ch">\n</span><span class="st">"</span>, hexone, <span class="st">"</span><span class="ch">\n</span><span class="st">hextwo = </span><span class="ch">\n</span><span class="st">"</span>, hextwo)</span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
+<span id="cb3-48"><a href="#cb3-48"></a>ops <span class="op">=</span> {<span class="st">'ADD'</span>:add,<span class="st">'SUB'</span>:sub,<span class="st">'MUL'</span>:mul,<span class="st">'QUO'</span>:quo,<span class="st">'REM'</span>:rem}</span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="cf">for</span> op <span class="kw">in</span> ops:</span>
+<span id="cb3-50"><a href="#cb3-50"></a>    result <span class="op">=</span> <span class="bu">int</span>(subprocess.check_output([<span class="st">"cargo"</span>, <span class="st">"run"</span>, hexone, hextwo, op]),<span class="dv">16</span>)</span>
+<span id="cb3-51"><a href="#cb3-51"></a>    answer <span class="op">=</span> ops[op](bigone,bigtwo)</span>
+<span id="cb3-52"><a href="#cb3-52"></a>    <span class="cf">if</span> result <span class="op">!=</span> answer:</span>
+<span id="cb3-53"><a href="#cb3-53"></a>        <span class="bu">print</span>(<span class="st">"Operator"</span>, op, <span class="st">"failed."</span>)</span>
+<span id="cb3-54"><a href="#cb3-54"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Expected:"</span>)</span>
+<span id="cb3-55"><a href="#cb3-55"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(answer))</span>
+<span id="cb3-56"><a href="#cb3-56"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Received:"</span>)</span>
+<span id="cb3-57"><a href="#cb3-57"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(result))</span>
+<span id="cb3-58"><a href="#cb3-58"></a>        exit()</span>
+<span id="cb3-59"><a href="#cb3-59"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-60"><a href="#cb3-60"></a>        <span class="bu">print</span>(op, <span class="st">"passes."</span>)</span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
