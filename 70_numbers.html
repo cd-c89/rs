@@ -284,6 +284,12 @@ window.Quarto = {
  <span class="menu-text">ix</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80_eddsa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EdDSA</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -765,7 +771,7 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <section id="rings" class="level2">
 <h2 class="anchored" data-anchor-id="rings">Rings</h2>
 <ul>
-<li>As far as I know (not a mathematician) the <code>uint</code>s and <code>int</code>s in C are <em>rings</em>
+<li>As far as I know (not a mathematician) the <code>u</code><span class="math inline">\(n\)</span>s and <code>i</code><span class="math inline">\(n\)</span>’s in Rust are <em>rings</em>
 <ul>
 <li>They have addition and multiplication</li>
 </ul></li>
@@ -780,7 +786,7 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <ul>
 <li>Rings have some “goofy” features
 <ul>
-<li><span class="math inline">\(a, b \in\)</span> <code>u</code><span class="math inline">\(n\)</span>` <span class="math inline">\(\nRightarrow a + b &gt; a\)</span></li>
+<li><span class="math inline">\(a, b \in\)</span> <code>u</code><span class="math inline">\(n\)</span> <span class="math inline">\(\nRightarrow a + b &gt; a\)</span></li>
 <li>Same with multiplication.</li>
 </ul></li>
 <li>Let’s look at an example.</li>
@@ -790,9 +796,9 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <h2 class="anchored" data-anchor-id="checkers">Checkers</h2>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>src/main.rs"</strong></pre>
+<pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="src/main.rs&quot;"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="sourceCode" id="cb13" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a>    <span class="kw">let</span> a<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">1</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">let</span> b<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">2</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
@@ -2390,7 +2396,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-270"><a href="#cb24-270"></a></span>
 <span id="cb24-271"><a href="#cb24-271"></a><span class="fu">## Rings</span></span>
 <span id="cb24-272"><a href="#cb24-272"></a></span>
-<span id="cb24-273"><a href="#cb24-273"></a><span class="ss">- </span>As far as I know (not a mathematician) the <span class="in">`uint`</span>s and <span class="in">`int`</span>s in C are *rings*</span>
+<span id="cb24-273"><a href="#cb24-273"></a><span class="ss">- </span>As far as I know (not a mathematician) the <span class="in">`u`</span>$n$s and <span class="in">`i`</span>$n$'s in Rust are *rings*</span>
 <span id="cb24-274"><a href="#cb24-274"></a><span class="ss">  - </span>They have addition and multiplication</span>
 <span id="cb24-275"><a href="#cb24-275"></a><span class="ss">- </span>They aren't fields - zero is divisible</span>
 <span id="cb24-276"><a href="#cb24-276"></a><span class="ss">  - </span>Spoiler alert, but $2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}$</span>
@@ -2398,13 +2404,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-278"><a href="#cb24-278"></a><span class="fu">## Rings vs Integers</span></span>
 <span id="cb24-279"><a href="#cb24-279"></a></span>
 <span id="cb24-280"><a href="#cb24-280"></a><span class="ss">- </span>Rings have some "goofy" features</span>
-<span id="cb24-281"><a href="#cb24-281"></a><span class="ss">  - </span>$a, b \in$ <span class="in">`u`</span>$n$` $\nRightarrow a + b &gt; a$</span>
+<span id="cb24-281"><a href="#cb24-281"></a><span class="ss">  - </span>$a, b \in$ <span class="in">`u`</span>$n$ $\nRightarrow a + b &gt; a$</span>
 <span id="cb24-282"><a href="#cb24-282"></a><span class="ss">  - </span>Same with multiplication.</span>
 <span id="cb24-283"><a href="#cb24-283"></a><span class="ss">- </span>Let's look at an example.</span>
 <span id="cb24-284"><a href="#cb24-284"></a></span>
 <span id="cb24-285"><a href="#cb24-285"></a><span class="fu">## Checkers</span></span>
 <span id="cb24-286"><a href="#cb24-286"></a></span>
-<span id="cb24-287"><a href="#cb24-287"></a><span class="in">```{.rs filename=src/main.rs"}</span></span>
+<span id="cb24-287"><a href="#cb24-287"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
 <span id="cb24-288"><a href="#cb24-288"></a><span class="in">fn main() {</span></span>
 <span id="cb24-289"><a href="#cb24-289"></a><span class="in">    let args: Vec&lt;String&gt; = std::env::args().collect();</span></span>
 <span id="cb24-290"><a href="#cb24-290"></a><span class="in">    let a:u8 = args[1].parse().unwrap();</span></span>

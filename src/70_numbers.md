@@ -270,7 +270,7 @@ sys     0m0.116s
 
 ## Rings
 
-- As far as I know (not a mathematician) the `uint`s and `int`s in C are *rings*
+- As far as I know (not a mathematician) the `u`$n$s and `i`$n$'s in Rust are *rings*
   - They have addition and multiplication
 - They aren't fields - zero is divisible
   - Spoiler alert, but $2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}$
@@ -278,13 +278,13 @@ sys     0m0.116s
 ## Rings vs Integers
 
 - Rings have some "goofy" features
-  - $a, b \in$ `u`$n$` $\nRightarrow a + b > a$
+  - $a, b \in$ `u`$n$ $\nRightarrow a + b > a$
   - Same with multiplication.
 - Let's look at an example.
 
 ## Checkers
 
-```{.rs filename=src/main.rs"}
+```{.rs filename="src/main.rs"}
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let a:u8 = args[1].parse().unwrap();

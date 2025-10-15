@@ -765,7 +765,7 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <section id="rings" class="slide level2">
 <h2>Rings</h2>
 <ul>
-<li>As far as I know (not a mathematician) the <code>uint</code>s and <code>int</code>s in C are <em>rings</em>
+<li>As far as I know (not a mathematician) the <code>u</code><span class="math inline">\(n\)</span>s and <code>i</code><span class="math inline">\(n\)</span>’s in Rust are <em>rings</em>
 <ul>
 <li>They have addition and multiplication</li>
 </ul></li>
@@ -780,7 +780,7 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <ul>
 <li>Rings have some “goofy” features
 <ul>
-<li><span class="math inline">\(a, b \in\)</span> <code>u</code><span class="math inline">\(n\)</span>` <span class="math inline">\(\nRightarrow a + b &gt; a\)</span></li>
+<li><span class="math inline">\(a, b \in\)</span> <code>u</code><span class="math inline">\(n\)</span> <span class="math inline">\(\nRightarrow a + b &gt; a\)</span></li>
 <li>Same with multiplication.</li>
 </ul></li>
 <li>Let’s look at an example.</li>
@@ -790,9 +790,9 @@ t(10^n) \in [14,17] \times 10^{n-9}
 <h2>Checkers</h2>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>src/main.rs"</strong></pre>
+<pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="src/main.rs&quot;"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="sourceCode" id="cb13" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb13-2"><a></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
 <span id="cb13-3"><a></a>    <span class="kw">let</span> a<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">1</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb13-4"><a></a>    <span class="kw">let</span> b<span class="op">:</span><span class="dt">u8</span> <span class="op">=</span> args[<span class="dv">2</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
