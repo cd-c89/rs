@@ -9098,7 +9098,7 @@
     "href": "80_eddsa.rjs.html#section",
     "title": "EdDSA",
     "section": "",
-    "text": "RSA_Encryption\n\n\ncluster_encryption\n\nEncryption\n\n\ncluster_decryption\n\nDecryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C)\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M)\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext"
+    "text": "RSA_Encryption\n\n\ncluster_decryption\n\nDecryption\n\n\ncluster_encryption\n\nEncryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C)\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M)\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext"
   },
   {
     "objectID": "80_eddsa.rjs.html#eddsa",
@@ -9266,28 +9266,28 @@
     "href": "80_eddsa.rjs.html#ed25519-1",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)"
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)"
   },
   {
     "objectID": "80_eddsa.rjs.html#ed25519-2",
     "href": "80_eddsa.rjs.html#ed25519-2",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)"
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)"
   },
   {
     "objectID": "80_eddsa.rjs.html#ed25519-3",
     "href": "80_eddsa.rjs.html#ed25519-3",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
   },
   {
     "objectID": "80_eddsa.rjs.html#ed25519-4",
     "href": "80_eddsa.rjs.html#ed25519-4",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
   },
   {
     "objectID": "80_eddsa.html",
@@ -9644,7 +9644,7 @@
     "href": "80_eddsa.html#visualize",
     "title": "EdDSA",
     "section": "Visualize",
-    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]\n\n\n\n&lt;lambdifygenerated-2&gt;:2: RuntimeWarning:\n\ninvalid value encountered in sqrt",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]\n\n\n\n&lt;lambdifygenerated-20&gt;:2: RuntimeWarning:\n\ninvalid value encountered in sqrt",
     "crumbs": [
       "EdDSA"
     ]
@@ -9704,7 +9704,7 @@
     "href": "80_eddsa.html#ed25519-1",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)",
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)",
     "crumbs": [
       "EdDSA"
     ]
@@ -9714,7 +9714,7 @@
     "href": "80_eddsa.html#ed25519-2",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)",
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)",
     "crumbs": [
       "EdDSA"
     ]
@@ -9724,7 +9724,7 @@
     "href": "80_eddsa.html#ed25519-3",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
     "crumbs": [
       "EdDSA"
     ]
@@ -9734,7 +9734,7 @@
     "href": "80_eddsa.html#ed25519-4",
     "title": "EdDSA",
     "section": "Ed25519",
-    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
+    "text": "Ed25519\n\n\\(p = 2^{255}-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
     "crumbs": [
       "EdDSA"
     ]
@@ -9808,5 +9808,39 @@
     "crumbs": [
       "Ed25519"
     ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519-definitions",
+    "href": "80_eddsa.html#ed25519-definitions",
+    "title": "EdDSA",
+    "section": "Ed25519, definitions",
+    "text": "Ed25519, definitions\n\nTake the “base point” \\(B\\) to be the unique point with \\(y = \\frac{4}{5}\\) and “positive” \\(x\\)\n\n\\(x\\) to be positive via its bit-encoding\n\n“positive” coordinates are even coordinates (least significant bit is cleared)\n“negative” coordinates are odd coordinates (least significant bit is set)\n\n\nThen let \\(H\\) be SHA-512, given a \\(b\\) (bit size) of 256.\n\nHashes are of size \\(2b\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#learn-more",
+    "href": "80_eddsa.html#learn-more",
+    "title": "EdDSA",
+    "section": "Learn More",
+    "text": "Learn More\n\nThe best way to understand Ed25519 is to implement it.\n\nIt was released as software in Python, though Python 2.\nYou will implement in Rust.",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519-definitions",
+    "href": "80_eddsa.rjs.html#ed25519-definitions",
+    "title": "EdDSA",
+    "section": "Ed25519, definitions",
+    "text": "Ed25519, definitions\n\nTake the “base point” \\(B\\) to be the unique point with \\(y = \\frac{4}{5}\\) and “positive” \\(x\\)\n\n\\(x\\) to be positive via its bit-encoding\n\n“positive” coordinates are even coordinates (least significant bit is cleared)\n“negative” coordinates are odd coordinates (least significant bit is set)\n\n\nThen let \\(H\\) be SHA-512, given a \\(b\\) (bit size) of 256.\n\nHashes are of size \\(2b\\)"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#learn-more",
+    "href": "80_eddsa.rjs.html#learn-more",
+    "title": "EdDSA",
+    "section": "Learn More",
+    "text": "Learn More\n\nThe best way to understand Ed25519 is to implement it.\n\nIt was released as software in Python, though Python 2.\nYou will implement in Rust."
   }
 ]

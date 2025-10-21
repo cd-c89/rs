@@ -505,31 +505,55 @@ _ = [plt.plot(x, y) for y in f(x)]
 
 ## Ed25519
 
-- $p = 2^255-19$ so 
+- $p = 2^{255}-19$ so 
 - $F_p = \mathbb{F}_{2^{255}-19}$
 - $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
 
-
 ## Ed25519
 
-- $p = 2^255-19$ so 
+- $p = 2^{255}-19$ so 
 - $F_p = \mathbb{F}_{2^{255}-19}$
 - $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
 - $\ell = 2^{252} + 27742317777372353535851937790883648493$
 
 ## Ed25519
 
-- $p = 2^255-19$ so 
+- $p = 2^{255}-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
+- $\ell = 2^{252} + 27742317777372353535851937790883648493$
+- $c = 3$
+
+
+## Ed25519
+
+- $p = 2^{255}-19$ so 
 - $F_p = \mathbb{F}_{2^{255}-19}$
 - $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
 - $\ell = 2^{252} + 27742317777372353535851937790883648493$
 - $c = 3$
 
 
-## Ed25519
+## Ed25519, definitions
 
-- $p = 2^255-19$ so 
-- $F_p = \mathbb{F}_{2^{255}-19}$
-- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
-- $\ell = 2^{252} + 27742317777372353535851937790883648493$
-- $c = 3$
+- Take the "base point" $B$ to be the unique point with $y = \frac{4}{5}$ and "positive" $x$
+    - $x$ to be positive via its *bit-encoding*
+        - "positive" coordinates are even coordinates (least significant bit is cleared)
+        - "negative" coordinates are odd coordinates (least significant bit is set)
+- Then let $H$ be SHA-512, given a $b$ (bit size) of 256.
+    - Hashes are of size $2b$
+
+# Ed25519, Takeaways
+
+- EdDSA a combination of equations that require a choice of constants.
+- Ed25519 is a uniquely good set of constants.
+- Together, they are basically a function that makes public and private keys.
+    - A public key tells someone how to encrypt something so that only someone with...
+    - The corresponding private key can decrypt it
+- Used to sign bitcoin, git commits, e-commerce...
+
+## Learn More
+
+- The best way to understand Ed25519 is to implement it.
+    - It was released as software in Python, though Python 2.
+    - You will implement in Rust.

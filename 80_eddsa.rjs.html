@@ -596,15 +596,15 @@ Prof.&nbsp;Calvin
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 481.6)">
 <title>RSA_Encryption</title>
 <polygon fill="#191919" stroke="transparent" points="-4,4 -4,-481.6 398.91,-481.6 398.91,4 -4,4"></polygon>
-<g id="clust1" class="cluster">
-<title>cluster_encryption</title>
-<polygon fill="#191919" stroke="#ffffff" points="78,-284.8 78,-433.6 356,-433.6 356,-284.8 78,-284.8"></polygon>
-<text text-anchor="middle" x="217" y="-417" font-family="Times,serif" font-size="14.00" fill="#ffffff">Encryption</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_decryption</title>
 <polygon fill="#191919" stroke="#ffffff" points="8,-64 8,-212.8 292,-212.8 292,-64 8,-64"></polygon>
 <text text-anchor="middle" x="150" y="-196.2" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decryption</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_encryption</title>
+<polygon fill="#191919" stroke="#ffffff" points="78,-284.8 78,-433.6 356,-433.6 356,-284.8 78,-284.8"></polygon>
+<text text-anchor="middle" x="217" y="-417" font-family="Times,serif" font-size="14.00" fill="#ffffff">Encryption</text>
 </g>
 <!-- message -->
 <g id="node1" class="node">
@@ -815,7 +815,7 @@ Prof.&nbsp;Calvin
 <span id="cb1-13"><a></a></span>
 <span id="cb1-14"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="a34b628e" class="cell" data-execution_count="1">
+<div id="3340339b" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -988,7 +988,7 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <span id="cb2-11"><a></a></span>
 <span id="cb2-12"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="0e790ee8" class="cell" data-execution_count="2">
+<div id="251a2618" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1052,7 +1052,7 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <span id="cb3-11"><a></a></span>
 <span id="cb3-12"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="ee58ab89" class="cell" data-execution_count="3">
+<div id="378ca29e" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1066,7 +1066,7 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <section id="ed25519-1" class="slide level2">
 <h2>Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 </ul>
@@ -1074,7 +1074,7 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <section id="ed25519-2" class="slide level2">
 <h2>Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
@@ -1083,7 +1083,7 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <section id="ed25519-3" class="slide level2">
 <h2>Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
@@ -1093,11 +1093,52 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <section id="ed25519-4" class="slide level2">
 <h2>Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
 <li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+</section>
+<section id="ed25519-definitions" class="slide level2">
+<h2>Ed25519, definitions</h2>
+<ul>
+<li>Take the “base point” <span class="math inline">\(B\)</span> to be the unique point with <span class="math inline">\(y = \frac{4}{5}\)</span> and “positive” <span class="math inline">\(x\)</span>
+<ul>
+<li><span class="math inline">\(x\)</span> to be positive via its <em>bit-encoding</em>
+<ul>
+<li>“positive” coordinates are even coordinates (least significant bit is cleared)</li>
+<li>“negative” coordinates are odd coordinates (least significant bit is set)</li>
+</ul></li>
+</ul></li>
+<li>Then let <span class="math inline">\(H\)</span> be SHA-512, given a <span class="math inline">\(b\)</span> (bit size) of 256.
+<ul>
+<li>Hashes are of size <span class="math inline">\(2b\)</span></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="ed25519-takeaways" class="title-slide slide level1 center">
+<h1>Ed25519, Takeaways</h1>
+<ul>
+<li>EdDSA a combination of equations that require a choice of constants.</li>
+<li>Ed25519 is a uniquely good set of constants.</li>
+<li>Together, they are basically a function that makes public and private keys.
+<ul>
+<li>A public key tells someone how to encrypt something so that only someone with…</li>
+<li>The corresponding private key can decrypt it</li>
+</ul></li>
+<li>Used to sign bitcoin, git commits, e-commerce…</li>
+</ul>
+</section>
+<section id="learn-more" class="slide level2">
+<h2>Learn More</h2>
+<ul>
+<li>The best way to understand Ed25519 is to implement it.
+<ul>
+<li>It was released as software in Python, though Python 2.</li>
+<li>You will implement in Rust.</li>
+</ul></li>
 </ul>
 
 

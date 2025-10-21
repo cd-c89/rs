@@ -373,6 +373,11 @@ window.Quarto = {
   <li><a href="#ed25519-2" id="toc-ed25519-2" class="nav-link" data-scroll-target="#ed25519-2">Ed25519</a></li>
   <li><a href="#ed25519-3" id="toc-ed25519-3" class="nav-link" data-scroll-target="#ed25519-3">Ed25519</a></li>
   <li><a href="#ed25519-4" id="toc-ed25519-4" class="nav-link" data-scroll-target="#ed25519-4">Ed25519</a></li>
+  <li><a href="#ed25519-definitions" id="toc-ed25519-definitions" class="nav-link" data-scroll-target="#ed25519-definitions">Ed25519, definitions</a></li>
+  </ul></li>
+  <li><a href="#ed25519-takeaways" id="toc-ed25519-takeaways" class="nav-link" data-scroll-target="#ed25519-takeaways">Ed25519, Takeaways</a>
+  <ul class="collapse">
+  <li><a href="#learn-more" id="toc-learn-more" class="nav-link" data-scroll-target="#learn-more">Learn More</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="80_eddsa.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -811,7 +816,7 @@ window.Quarto = {
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="854c859e" class="cell" data-execution_count="1">
+<div id="c4358eb1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -981,9 +986,9 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 <span id="cb2-11"><a href="#cb2-11"></a></span>
 <span id="cb2-12"><a href="#cb2-12"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="b15da573" class="cell" data-execution_count="2">
+<div id="e87331eb" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stderr">
-<pre><code>&lt;lambdifygenerated-2&gt;:2: RuntimeWarning:
+<pre><code>&lt;lambdifygenerated-20&gt;:2: RuntimeWarning:
 
 invalid value encountered in sqrt
 </code></pre>
@@ -1052,7 +1057,7 @@ invalid value encountered in sqrt
 <span id="cb4-11"><a href="#cb4-11"></a></span>
 <span id="cb4-12"><a href="#cb4-12"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="a75c7596" class="cell" data-execution_count="3">
+<div id="9b2ff945" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1067,7 +1072,7 @@ invalid value encountered in sqrt
 <section id="ed25519-1" class="level2">
 <h2 class="anchored" data-anchor-id="ed25519-1">Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 </ul>
@@ -1075,7 +1080,7 @@ invalid value encountered in sqrt
 <section id="ed25519-2" class="level2">
 <h2 class="anchored" data-anchor-id="ed25519-2">Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
@@ -1084,7 +1089,7 @@ invalid value encountered in sqrt
 <section id="ed25519-3" class="level2">
 <h2 class="anchored" data-anchor-id="ed25519-3">Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
@@ -1094,11 +1099,51 @@ invalid value encountered in sqrt
 <section id="ed25519-4" class="level2">
 <h2 class="anchored" data-anchor-id="ed25519-4">Ed25519</h2>
 <ul>
-<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(p = 2^{255}-19\)</span> so</li>
 <li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
 <li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
 <li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
 <li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+</section>
+<section id="ed25519-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519-definitions">Ed25519, definitions</h2>
+<ul>
+<li>Take the “base point” <span class="math inline">\(B\)</span> to be the unique point with <span class="math inline">\(y = \frac{4}{5}\)</span> and “positive” <span class="math inline">\(x\)</span>
+<ul>
+<li><span class="math inline">\(x\)</span> to be positive via its <em>bit-encoding</em>
+<ul>
+<li>“positive” coordinates are even coordinates (least significant bit is cleared)</li>
+<li>“negative” coordinates are odd coordinates (least significant bit is set)</li>
+</ul></li>
+</ul></li>
+<li>Then let <span class="math inline">\(H\)</span> be SHA-512, given a <span class="math inline">\(b\)</span> (bit size) of 256.
+<ul>
+<li>Hashes are of size <span class="math inline">\(2b\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="ed25519-takeaways" class="level1">
+<h1>Ed25519, Takeaways</h1>
+<ul>
+<li>EdDSA a combination of equations that require a choice of constants.</li>
+<li>Ed25519 is a uniquely good set of constants.</li>
+<li>Together, they are basically a function that makes public and private keys.
+<ul>
+<li>A public key tells someone how to encrypt something so that only someone with…</li>
+<li>The corresponding private key can decrypt it</li>
+</ul></li>
+<li>Used to sign bitcoin, git commits, e-commerce…</li>
+</ul>
+<section id="learn-more" class="level2">
+<h2 class="anchored" data-anchor-id="learn-more">Learn More</h2>
+<ul>
+<li>The best way to understand Ed25519 is to implement it.
+<ul>
+<li>It was released as software in Python, though Python 2.</li>
+<li>You will implement in Rust.</li>
+</ul></li>
 </ul>
 
 
@@ -2098,34 +2143,58 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-513"><a href="#cb5-513"></a></span>
 <span id="cb5-514"><a href="#cb5-514"></a><span class="fu">## Ed25519</span></span>
 <span id="cb5-515"><a href="#cb5-515"></a></span>
-<span id="cb5-516"><a href="#cb5-516"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-516"><a href="#cb5-516"></a><span class="ss">- </span>$p = 2^{255}-19$ so </span>
 <span id="cb5-517"><a href="#cb5-517"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
 <span id="cb5-518"><a href="#cb5-518"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
 <span id="cb5-519"><a href="#cb5-519"></a></span>
-<span id="cb5-520"><a href="#cb5-520"></a></span>
-<span id="cb5-521"><a href="#cb5-521"></a><span class="fu">## Ed25519</span></span>
-<span id="cb5-522"><a href="#cb5-522"></a></span>
-<span id="cb5-523"><a href="#cb5-523"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
-<span id="cb5-524"><a href="#cb5-524"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
-<span id="cb5-525"><a href="#cb5-525"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
-<span id="cb5-526"><a href="#cb5-526"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
-<span id="cb5-527"><a href="#cb5-527"></a></span>
-<span id="cb5-528"><a href="#cb5-528"></a><span class="fu">## Ed25519</span></span>
-<span id="cb5-529"><a href="#cb5-529"></a></span>
-<span id="cb5-530"><a href="#cb5-530"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
-<span id="cb5-531"><a href="#cb5-531"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
-<span id="cb5-532"><a href="#cb5-532"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
-<span id="cb5-533"><a href="#cb5-533"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
-<span id="cb5-534"><a href="#cb5-534"></a><span class="ss">- </span>$c = 3$</span>
+<span id="cb5-520"><a href="#cb5-520"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-521"><a href="#cb5-521"></a></span>
+<span id="cb5-522"><a href="#cb5-522"></a><span class="ss">- </span>$p = 2^{255}-19$ so </span>
+<span id="cb5-523"><a href="#cb5-523"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-524"><a href="#cb5-524"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-525"><a href="#cb5-525"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-526"><a href="#cb5-526"></a></span>
+<span id="cb5-527"><a href="#cb5-527"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-528"><a href="#cb5-528"></a></span>
+<span id="cb5-529"><a href="#cb5-529"></a><span class="ss">- </span>$p = 2^{255}-19$ so </span>
+<span id="cb5-530"><a href="#cb5-530"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-531"><a href="#cb5-531"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-532"><a href="#cb5-532"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-533"><a href="#cb5-533"></a><span class="ss">- </span>$c = 3$</span>
+<span id="cb5-534"><a href="#cb5-534"></a></span>
 <span id="cb5-535"><a href="#cb5-535"></a></span>
-<span id="cb5-536"><a href="#cb5-536"></a></span>
-<span id="cb5-537"><a href="#cb5-537"></a><span class="fu">## Ed25519</span></span>
-<span id="cb5-538"><a href="#cb5-538"></a></span>
-<span id="cb5-539"><a href="#cb5-539"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
-<span id="cb5-540"><a href="#cb5-540"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
-<span id="cb5-541"><a href="#cb5-541"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
-<span id="cb5-542"><a href="#cb5-542"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
-<span id="cb5-543"><a href="#cb5-543"></a><span class="ss">- </span>$c = 3$</span>
+<span id="cb5-536"><a href="#cb5-536"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-537"><a href="#cb5-537"></a></span>
+<span id="cb5-538"><a href="#cb5-538"></a><span class="ss">- </span>$p = 2^{255}-19$ so </span>
+<span id="cb5-539"><a href="#cb5-539"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-540"><a href="#cb5-540"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-541"><a href="#cb5-541"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-542"><a href="#cb5-542"></a><span class="ss">- </span>$c = 3$</span>
+<span id="cb5-543"><a href="#cb5-543"></a></span>
+<span id="cb5-544"><a href="#cb5-544"></a></span>
+<span id="cb5-545"><a href="#cb5-545"></a><span class="fu">## Ed25519, definitions</span></span>
+<span id="cb5-546"><a href="#cb5-546"></a></span>
+<span id="cb5-547"><a href="#cb5-547"></a><span class="ss">- </span>Take the "base point" $B$ to be the unique point with $y = \frac{4}{5}$ and "positive" $x$</span>
+<span id="cb5-548"><a href="#cb5-548"></a><span class="ss">    - </span>$x$ to be positive via its *bit-encoding*</span>
+<span id="cb5-549"><a href="#cb5-549"></a><span class="ss">        - </span>"positive" coordinates are even coordinates (least significant bit is cleared)</span>
+<span id="cb5-550"><a href="#cb5-550"></a><span class="ss">        - </span>"negative" coordinates are odd coordinates (least significant bit is set)</span>
+<span id="cb5-551"><a href="#cb5-551"></a><span class="ss">- </span>Then let $H$ be SHA-512, given a $b$ (bit size) of 256.</span>
+<span id="cb5-552"><a href="#cb5-552"></a><span class="ss">    - </span>Hashes are of size $2b$</span>
+<span id="cb5-553"><a href="#cb5-553"></a></span>
+<span id="cb5-554"><a href="#cb5-554"></a><span class="fu"># Ed25519, Takeaways</span></span>
+<span id="cb5-555"><a href="#cb5-555"></a></span>
+<span id="cb5-556"><a href="#cb5-556"></a><span class="ss">- </span>EdDSA a combination of equations that require a choice of constants.</span>
+<span id="cb5-557"><a href="#cb5-557"></a><span class="ss">- </span>Ed25519 is a uniquely good set of constants.</span>
+<span id="cb5-558"><a href="#cb5-558"></a><span class="ss">- </span>Together, they are basically a function that makes public and private keys.</span>
+<span id="cb5-559"><a href="#cb5-559"></a><span class="ss">    - </span>A public key tells someone how to encrypt something so that only someone with...</span>
+<span id="cb5-560"><a href="#cb5-560"></a><span class="ss">    - </span>The corresponding private key can decrypt it</span>
+<span id="cb5-561"><a href="#cb5-561"></a><span class="ss">- </span>Used to sign bitcoin, git commits, e-commerce...</span>
+<span id="cb5-562"><a href="#cb5-562"></a></span>
+<span id="cb5-563"><a href="#cb5-563"></a><span class="fu">## Learn More</span></span>
+<span id="cb5-564"><a href="#cb5-564"></a></span>
+<span id="cb5-565"><a href="#cb5-565"></a><span class="ss">- </span>The best way to understand Ed25519 is to implement it.</span>
+<span id="cb5-566"><a href="#cb5-566"></a><span class="ss">    - </span>It was released as software in Python, though Python 2.</span>
+<span id="cb5-567"><a href="#cb5-567"></a><span class="ss">    - </span>You will implement in Rust.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
