@@ -596,15 +596,15 @@ Prof.&nbsp;Calvin
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 481.6)">
 <title>RSA_Encryption</title>
 <polygon fill="#191919" stroke="transparent" points="-4,4 -4,-481.6 398.91,-481.6 398.91,4 -4,4"></polygon>
-<g id="clust2" class="cluster">
-<title>cluster_decryption</title>
-<polygon fill="#191919" stroke="#ffffff" points="8,-64 8,-212.8 292,-212.8 292,-64 8,-64"></polygon>
-<text text-anchor="middle" x="150" y="-196.2" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decryption</text>
-</g>
 <g id="clust1" class="cluster">
 <title>cluster_encryption</title>
 <polygon fill="#191919" stroke="#ffffff" points="78,-284.8 78,-433.6 356,-433.6 356,-284.8 78,-284.8"></polygon>
 <text text-anchor="middle" x="217" y="-417" font-family="Times,serif" font-size="14.00" fill="#ffffff">Encryption</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_decryption</title>
+<polygon fill="#191919" stroke="#ffffff" points="8,-64 8,-212.8 292,-212.8 292,-64 8,-64"></polygon>
+<text text-anchor="middle" x="150" y="-196.2" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decryption</text>
 </g>
 <!-- message -->
 <g id="node1" class="node">
@@ -615,14 +615,14 @@ Prof.&nbsp;Calvin
 <!-- encrypt -->
 <g id="node2" class="node">
 <title>encrypt</title>
-<ellipse fill="none" stroke="#ffffff" cx="217" cy="-310.8" rx="121.68" ry="18"></ellipse>
-<text text-anchor="middle" x="217" y="-306.6" font-family="Times,serif" font-size="14.00" fill="#ffffff">Ciphertext (C) = M^e mod n</text>
+<ellipse fill="none" stroke="#ffffff" cx="217" cy="-310.8" rx="67.17" ry="18"></ellipse>
+<text text-anchor="middle" x="217" y="-306.6" font-family="Times,serif" font-size="14.00" fill="#ffffff">Ciphertext (C)</text>
 </g>
 <!-- message&#45;&gt;encrypt -->
 <g id="edge1" class="edge">
 <title>message-&gt;encrypt</title>
-<path fill="none" stroke="#ffffff" d="M269.65,-365.21C261.09,-356.53 250.46,-345.75 240.99,-336.14"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="243.23,-333.42 233.71,-328.76 238.24,-338.34 243.23,-333.42"></polygon>
+<path fill="none" stroke="#ffffff" d="M269.65,-365.21C260.88,-356.32 249.93,-345.21 240.29,-335.43"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="242.75,-332.93 233.23,-328.27 237.76,-337.85 242.75,-332.93"></polygon>
 </g>
 <!-- inter -->
 <g id="node8" class="node">
@@ -647,8 +647,8 @@ Prof.&nbsp;Calvin
 <!-- public_key_ref&#45;&gt;encrypt -->
 <g id="edge2" class="edge">
 <title>public_key_ref-&gt;encrypt</title>
-<path fill="none" stroke="#ffffff" d="M163.55,-364.5C172.23,-355.94 182.86,-345.46 192.35,-336.1"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="194.99,-338.42 199.65,-328.9 190.07,-333.43 194.99,-338.42"></polygon>
+<path fill="none" stroke="#ffffff" d="M163.55,-364.5C172.36,-355.81 183.18,-345.14 192.77,-335.69"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="195.48,-337.94 200.14,-328.42 190.56,-332.95 195.48,-337.94"></polygon>
 </g>
 <!-- ciphertext -->
 <g id="node4" class="node">
@@ -659,26 +659,26 @@ Prof.&nbsp;Calvin
 <!-- decrypt -->
 <g id="node5" class="node">
 <title>decrypt</title>
-<ellipse fill="none" stroke="#ffffff" cx="150" cy="-90" rx="115.32" ry="18"></ellipse>
-<text text-anchor="middle" x="150" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Message (M) = C^d mod n</text>
+<ellipse fill="none" stroke="#ffffff" cx="147" cy="-90" rx="62.02" ry="18"></ellipse>
+<text text-anchor="middle" x="147" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Message (M)</text>
 </g>
 <!-- ciphertext&#45;&gt;decrypt -->
 <g id="edge3" class="edge">
 <title>ciphertext-&gt;decrypt</title>
-<path fill="none" stroke="#ffffff" d="M201.12,-144.41C192.82,-135.73 182.49,-124.95 173.3,-115.34"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="175.67,-112.76 166.23,-107.96 170.62,-117.6 175.67,-112.76"></polygon>
+<path fill="none" stroke="#ffffff" d="M200.41,-144.41C191.52,-135.52 180.41,-124.41 170.63,-114.63"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="173.02,-112.07 163.47,-107.47 168.07,-117.02 173.02,-112.07"></polygon>
 </g>
 <!-- output -->
 <g id="node9" class="node">
 <title>output</title>
-<ellipse fill="none" stroke="#ffffff" cx="150" cy="-18" rx="99" ry="18"></ellipse>
-<text text-anchor="middle" x="150" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decrypted Transaction</text>
+<ellipse fill="none" stroke="#ffffff" cx="147" cy="-18" rx="99" ry="18"></ellipse>
+<text text-anchor="middle" x="147" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decrypted Transaction</text>
 </g>
 <!-- decrypt&#45;&gt;output -->
 <g id="edge8" class="edge">
 <title>decrypt-&gt;output</title>
-<path fill="none" stroke="#ffffff" d="M150,-71.7C150,-63.98 150,-54.71 150,-46.11"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="153.5,-46.1 150,-36.1 146.5,-46.1 153.5,-46.1"></polygon>
+<path fill="none" stroke="#ffffff" d="M147,-71.7C147,-63.98 147,-54.71 147,-46.11"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="150.5,-46.1 147,-36.1 143.5,-46.1 150.5,-46.1"></polygon>
 </g>
 <!-- private_key_ref -->
 <g id="node6" class="node">
@@ -691,8 +691,8 @@ Prof.&nbsp;Calvin
 <!-- private_key_ref&#45;&gt;decrypt -->
 <g id="edge4" class="edge">
 <title>private_key_ref-&gt;decrypt</title>
-<path fill="none" stroke="#ffffff" d="M92.79,-143.7C102.24,-134.99 113.86,-124.29 124.14,-114.82"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="126.71,-117.21 131.69,-107.86 121.97,-112.06 126.71,-117.21"></polygon>
+<path fill="none" stroke="#ffffff" d="M92.04,-143.7C101.2,-134.92 112.45,-124.13 122.38,-114.61"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="124.87,-117.07 129.67,-107.62 120.03,-112.02 124.87,-117.07"></polygon>
 </g>
 <!-- input -->
 <g id="node7" class="node">
@@ -815,7 +815,7 @@ Prof.&nbsp;Calvin
 <span id="cb1-13"><a></a></span>
 <span id="cb1-14"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="36a0e300" class="cell" data-execution_count="1">
+<div id="bb4c818e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -833,7 +833,7 @@ Prof.&nbsp;Calvin
 <li>A finite field <span class="math inline">\(\mathbb{F}_p\)</span>.</li>
 <li>An elliptic curve <span class="math inline">\(E\)</span> over <span class="math inline">\(\mathbb{F}_p\)</span>
 <ul>
-<li>Whose group <span class="math inline">\(E(\mathbb{F}_p)\)</span> of <span class="math inline">\(\mathbb{F}_p\)</span>-rational points has order <span class="math inline">\(#E(\mathbb{F}_p) = 2^C \ell\)</span> where <span class="math inline">\(\ell\)</span> is a large primce and <span class="math inline">\(2^c\)</span> is the cofactor
+<li>Whose group <span class="math inline">\(E(\mathbb{F}_p)\)</span> of <span class="math inline">\(\mathbb{F}_p\)</span>-rational points has order <span class="math inline">\(|E(\mathbb{F}_p)| = 2^C \ell\)</span> where <span class="math inline">\(\ell\)</span> is a large primce and <span class="math inline">\(2^c\)</span> is the cofactor
 <ul>
 <li>Take a 400-level math class</li>
 <li>Basically this is a measure of the area within the ellipse.</li>
@@ -948,11 +948,160 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 </div>
 </div>
 </section></section>
+<section>
 <section id="eddsa-ed25519" class="title-slide slide level1 center">
 <h1>EdDSA, Ed25519</h1>
 
-
 </section>
+<section id="ed25519" class="slide level2">
+<h2>Ed25519</h2>
+<ul>
+<li>EdDSA with:
+<ul>
+<li>SHA-512</li>
+<li>Curve25519</li>
+</ul></li>
+</ul>
+</section>
+<section id="curve25519" class="slide level2">
+<h2>Curve25519</h2>
+<ul>
+<li>An unusually fast curve to calculate on modern CPUs</li>
+<li><em>Not</em> made me the NSA, and released after an NSA released curve was discovered to have a backdoor.</li>
+<li>Named for being over the prime field <span class="math inline">\(2^{255}-19\)</span> - hence 25519</li>
+</ul>
+</section>
+<section id="visualize" class="slide level2">
+<h2>Visualize</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a></a><span class="im">import</span> sympy</span>
+<span id="cb2-4"><a></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>curve <span class="op">=</span> sympy.Eq(y<span class="op">*</span>y, x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">486662</span><span class="op">*</span>x<span class="op">*</span>x <span class="op">+</span> x)</span>
+<span id="cb2-7"><a></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb2-8"><a></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.00001</span>, <span class="fl">.00001</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-11"><a></a></span>
+<span id="cb2-12"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div id="0493223b" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="80_eddsa_files/figure-revealjs/cell-3-output-1.png" width="822" height="428"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="bernstein" class="slide level2">
+<h2>Bernstein</h2>
+<ul>
+<li>Discovered by a team including Daniel J. Bernstein.</li>
+</ul>
+<blockquote>
+<p>The export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption.</p>
+</blockquote>
+</section>
+<section id="lange" class="slide level2">
+<h2>Lange</h2>
+<ul>
+<li>Discovered by a team including Tanja Lange.
+<ul>
+<li>Academic and anti-surveillance activist</li>
+<li>Easy to find website with public keys:</li>
+</ul></li>
+<li><a href="https://hyperelliptic.org/tanja/">Peep these keys!</a></li>
+</ul>
+</section>
+<section id="p" class="slide level2">
+<h2><span class="math inline">\(p\)</span></h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+</ul>
+</section>
+<section id="emathbbf_2255-19" class="slide level2">
+<h2><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span></h2>
+<ul>
+<li>Take the “twisted Edwards curve”</li>
+</ul>
+<p><span class="math display">\[
+-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2
+\]</span></p>
+</section>
+<section id="visualize-1" class="slide level2">
+<h2>Visualize</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a></a><span class="im">import</span> sympy</span>
+<span id="cb3-4"><a></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a>curve <span class="op">=</span> sympy.Eq(<span class="op">-</span>x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y, <span class="dv">1</span> <span class="op">-</span> (<span class="dv">121665</span><span class="op">/</span><span class="dv">121666</span>)<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>y<span class="op">*</span>y)</span>
+<span id="cb3-7"><a></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb3-8"><a></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb3-9"><a></a></span>
+<span id="cb3-10"><a></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb3-11"><a></a></span>
+<span id="cb3-12"><a></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div id="ce2df8c9" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="80_eddsa_files/figure-revealjs/cell-4-output-1.png" width="813" height="411"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ed25519-1" class="slide level2">
+<h2>Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+</ul>
+</section>
+<section id="ed25519-2" class="slide level2">
+<h2>Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+</ul>
+</section>
+<section id="ed25519-3" class="slide level2">
+<h2>Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+<li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+</section>
+<section id="ed25519-4" class="slide level2">
+<h2>Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+<li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

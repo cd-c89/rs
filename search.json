@@ -7,6 +7,16 @@
     "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStacks\nList\nTree\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\nNone\n\n\n0xE\n12/01\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
   },
   {
+    "objectID": "81_python.html",
+    "href": "81_python.html",
+    "title": "checkparams.py",
+    "section": "",
+    "text": "Preamble\nAll from https://ed25519.cr.yp.to/software.html.\n\ned25519.py is translated into Python 3, with the main changes being using &lt;bytes&gt; instead of strings and using integer division.\nThe assert block is from checkparams.py, with the same changes.\nThe tester is a line from the regression tests, lifted from signs.py and signs.input\n\nFormatted with Black and type hints added manually.\n\nLook over the code and understand the types and operations.\nRun the code locally and verify the outputs.\nDetermine how to test on a different line from signs.input.\nDevelop a plan to implement in Rust.\n\n\n\n\n\n\n\nThis code is unsafe.\n\n\n\nThis implementation is unsafe, missing the critical “side channel protections” that make ed25519 the emergent standard.\n\nThis implementation does not include protection against side-channel attacks.\n\nNever use this code!\n\n\n\n\ned25519.py\n\nimport hashlib\nfrom typing import List\n\nb: int = 256\nq: int = 2**255 - 19\nl: int = 2**252 + 27742317777372353535851937790883648493\n\n\ndef H(m: bytes) -&gt; bytes:\n    return hashlib.sha512(m).digest()\n\n\ndef expmod(b: int, e: int, m: int) -&gt; int:\n    if e == 0:\n        return 1\n    t = expmod(b, e // 2, m) ** 2 % m\n    _ = e & 1 and (t := (t * b) % m)\n    return t\n\n\ndef inv(x: int) -&gt; int:\n    return expmod(x, q - 2, q)\n\n\nd: int = -121665 * inv(121666)\nI: int = expmod(2, (q - 1) // 4, q)\n\n\ndef xrecover(y: int) -&gt; int:\n    xx = (y * y - 1) * inv(d * y * y + 1)\n    x = expmod(xx, (q + 3) // 8, q)\n    _ = (x * x - xx) % q != 0 and (x := (x * I) % q)\n    _ = x % 2 != 0 and (x := q - x)\n    return x\n\n\nBy: int = 4 * inv(5)\nBx: int = xrecover(By)\nB: List[int] = [Bx % q, By % q]\n\n\ndef edwards(P: List[int], Q: List[int]) -&gt; List[int]:\n    x1 = P[0]\n    y1 = P[1]\n    x2 = Q[0]\n    y2 = Q[1]\n    x3 = (x1 * y2 + x2 * y1) * inv(1 + d * x1 * x2 * y1 * y2)\n    y3 = (y1 * y2 + x1 * x2) * inv(1 - d * x1 * x2 * y1 * y2)\n    return [x3 % q, y3 % q]\n\n\ndef scalarmult(P: List[int], e: int) -&gt; List[int]:\n    if e == 0:\n        return [0, 1]\n    Q = scalarmult(P, e // 2)\n    Q = edwards(Q, Q)\n    _ = e & 1 and (Q := edwards(Q, P))\n    return Q\n\n\ndef encodeint(y: int) -&gt; bytes:\n    bits = [(y &gt;&gt; i) & 1 for i in range(b)]\n    return bytes([sum([bits[i * 8 + j] &lt;&lt; j for j in range(8)]) for i in range(b // 8)])\n\n\ndef encodepoint(P: List[int]) -&gt; bytes:\n    x = P[0]\n    y = P[1]\n    bits = [(y &gt;&gt; i) & 1 for i in range(b - 1)] + [x & 1]\n    return bytes([sum([bits[i * 8 + j] &lt;&lt; j for j in range(8)]) for i in range(b // 8)])\n\n\ndef bit(h: bytes, i: int) -&gt; int:\n    return (h[i // 8] &gt;&gt; (i % 8)) & 1\n\n\ndef publickey(sk: bytes) -&gt; bytes:\n    h = H(sk)  # h is bytes\n    a = 2 ** (b - 2) + sum(2**i * bit(h, i) for i in range(3, b - 2))\n    A = scalarmult(B, a)\n    return encodepoint(A)\n\n\ndef Hint(m: bytes) -&gt; int:\n    h = H(m)  # h is bytes\n    return sum(2**i * bit(h, i) for i in range(2 * b))\n\n\ndef signature(m: bytes, sk: bytes, pk: bytes) -&gt; bytes:\n    h = H(sk)  # h is bytes\n    a = 2 ** (b - 2) + sum(2**i * bit(h, i) for i in range(3, b - 2))\n    r = Hint(h[b // 8 : b // 4] + m)\n    R = scalarmult(B, r)\n    h_sig = Hint(encodepoint(R) + pk + m)\n    S = (r + h_sig * a) % l\n    return encodepoint(R) + encodeint(S)\n\n\ndef isoncurve(P: List[int]) -&gt; bool:\n    x = P[0]\n    y = P[1]\n    return (-x * x + y * y - 1 - d * x * x * y * y) % q == 0\n\n\ndef decodeint(s: bytes) -&gt; int:\n    return sum(2**i * bit(s, i) for i in range(0, b))\n\n\ndef decodepoint(s: bytes) -&gt; List[int]:\n    y = sum(2**i * bit(s, i) for i in range(0, b - 1))\n    x = xrecover(y)\n    x & 1 != bit(s, b - 1) and (x := q - x)\n    P = [x, y]\n    if not isoncurve(P):\n        raise Exception(\"decoding point that is not on curve\")\n    return P\n\n\ndef checkvalid(s: bytes, m: bytes, pk: bytes) -&gt; bool:\n    if len(s) != b // 4:\n        raise Exception(\"signature length is wrong\")\n    if len(pk) != b // 8:\n        raise Exception(\"public-key length is wrong\")\n\n    R = decodepoint(s[0 : b // 8])\n    A = decodepoint(pk)\n    S = decodeint(s[b // 8 : b // 4])\n    h = Hint(encodepoint(R) + pk + m)\n    return scalarmult(B, S) == edwards(R, scalarmult(A, h))\n\n\nassert b &gt;= 10\nassert 8 * len(H(b\"hash input\")) == 2 * b\nassert expmod(2, q - 1, q) == 1\nassert q % 4 == 1\nassert expmod(2, l - 1, l) == 1\nassert l &gt;= 2 ** (b - 4)\nassert l &lt;= 2 ** (b - 3)\nassert expmod(d, (q - 1) // 2, q) == q - 1\nassert expmod(I, 2, q) == q - 1\nassert isoncurve(B)\nassert scalarmult(B, l) == [0, 1]\n\n\n\nsign.input excerpt\n\nline = \"4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:\"\n\n\n\nsign.py except\n\nimport binascii\n\n# fields on each input line: sk, pk, m, sm\n# each field hex\n# each field colon-terminated\n# sk includes pk at end\n# sm includes m at end\nx = line.split(\":\")\nsk = binascii.unhexlify(x[0][0:64])\nm = binascii.unhexlify(x[2])\npk = publickey(sk)\ns = signature(m, sk, pk)\n\nassert checkvalid(s, m, pk)\nassert bytes(x[0].encode(\"latin-1\")) == binascii.hexlify(sk + pk)\nassert bytes(x[1].encode(\"latin-1\")) == binascii.hexlify(pk)\nassert bytes(x[3].encode(\"latin-1\")) == binascii.hexlify(s + m)",
+    "crumbs": [
+      "Preamble"
+    ]
+  },
+  {
     "objectID": "72_ix.md.html",
     "href": "72_ix.md.html",
     "title": "ix",
@@ -9038,7 +9048,7 @@
     "href": "80_eddsa.rjs.html#section",
     "title": "EdDSA",
     "section": "",
-    "text": "RSA_Encryption\n\n\ncluster_decryption\n\nDecryption\n\n\ncluster_encryption\n\nEncryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C) = M^e mod n\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M) = C^d mod n\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext"
+    "text": "RSA_Encryption\n\n\ncluster_encryption\n\nEncryption\n\n\ncluster_decryption\n\nDecryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C)\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M)\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext"
   },
   {
     "objectID": "80_eddsa.rjs.html#eddsa",
@@ -9101,7 +9111,7 @@
     "href": "80_eddsa.rjs.html#iterative-definition-3",
     "title": "EdDSA",
     "section": "Iterative Definition",
-    "text": "Iterative Definition\nAn EdDSA signature scheme is a choice over:\n\nA finite field \\(\\mathbb{F}_p\\).\nAn elliptic curve \\(E\\) over \\(\\mathbb{F}_p\\)\n\nWhose group \\(E(\\mathbb{F}_p)\\) of \\(\\mathbb{F}_p\\)-rational points has order \\(#E(\\mathbb{F}_p) = 2^C \\ell\\) where \\(\\ell\\) is a large primce and \\(2^c\\) is the cofactor\n\nTake a 400-level math class\nBasically this is a measure of the area within the ellipse."
+    "text": "Iterative Definition\nAn EdDSA signature scheme is a choice over:\n\nA finite field \\(\\mathbb{F}_p\\).\nAn elliptic curve \\(E\\) over \\(\\mathbb{F}_p\\)\n\nWhose group \\(E(\\mathbb{F}_p)\\) of \\(\\mathbb{F}_p\\)-rational points has order \\(|E(\\mathbb{F}_p)| = 2^C \\ell\\) where \\(\\ell\\) is a large primce and \\(2^c\\) is the cofactor\n\nTake a 400-level math class\nBasically this is a measure of the area within the ellipse."
   },
   {
     "objectID": "80_eddsa.rjs.html#iterative-definition-4",
@@ -9144,6 +9154,90 @@
     "title": "EdDSA",
     "section": "Signing",
     "text": "Signing\n\n\n\n\n\n\nSigning\n\n\nThe signature on a message \\(M\\) is deterministically computed as \\((R, S)\\) where \\(R = r B\\) for \\(r = H(H_{b,\\dots,2b - 1}(k) \\parallel M)\\), and \\[\nS \\equiv r + H(R \\parallel A \\parallel M) s \\pmod \\ell\n\\] This satisfies the verification equation \\[\n\\begin{align}\n2^c S B &= 2^c (r + H(R \\parallel A \\parallel M) s) B \\\\\n        &= 2^c r B + 2^c H(R \\parallel A \\parallel M) s B \\\\\n        &= 2^c R + 2^c H(R \\parallel A \\parallel M) A.\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519",
+    "href": "80_eddsa.rjs.html#ed25519",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\nEdDSA with:\n\nSHA-512\nCurve25519"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#curve25519",
+    "href": "80_eddsa.rjs.html#curve25519",
+    "title": "EdDSA",
+    "section": "Curve25519",
+    "text": "Curve25519\n\nAn unusually fast curve to calculate on modern CPUs\nNot made me the NSA, and released after an NSA released curve was discovered to have a backdoor.\nNamed for being over the prime field \\(2^{255}-19\\) - hence 25519"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#visualize",
+    "href": "80_eddsa.rjs.html#visualize",
+    "title": "EdDSA",
+    "section": "Visualize",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#bernstein",
+    "href": "80_eddsa.rjs.html#bernstein",
+    "title": "EdDSA",
+    "section": "Bernstein",
+    "text": "Bernstein\n\nDiscovered by a team including Daniel J. Bernstein.\n\n\nThe export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption."
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#lange",
+    "href": "80_eddsa.rjs.html#lange",
+    "title": "EdDSA",
+    "section": "Lange",
+    "text": "Lange\n\nDiscovered by a team including Tanja Lange.\n\nAcademic and anti-surveillance activist\nEasy to find website with public keys:\n\nPeep these keys!"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#p",
+    "href": "80_eddsa.rjs.html#p",
+    "title": "EdDSA",
+    "section": "\\(p\\)",
+    "text": "\\(p\\)\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#emathbbf_2255-19",
+    "href": "80_eddsa.rjs.html#emathbbf_2255-19",
+    "title": "EdDSA",
+    "section": "\\(E/\\mathbb{F}_{2^{255}-19}\\)",
+    "text": "\\(E/\\mathbb{F}_{2^{255}-19}\\)\n\nTake the “twisted Edwards curve”\n\n\\[\n-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\n\\]"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#visualize-1",
+    "href": "80_eddsa.rjs.html#visualize-1",
+    "title": "EdDSA",
+    "section": "Visualize",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(-x*x + y*y, 1 - (121665/121666)*x*x*y*y)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-4, 4, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519-1",
+    "href": "80_eddsa.rjs.html#ed25519-1",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519-2",
+    "href": "80_eddsa.rjs.html#ed25519-2",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519-3",
+    "href": "80_eddsa.rjs.html#ed25519-3",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
+  },
+  {
+    "objectID": "80_eddsa.rjs.html#ed25519-4",
+    "href": "80_eddsa.rjs.html#ed25519-4",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)"
   },
   {
     "objectID": "80_eddsa.html",
@@ -9320,7 +9414,7 @@
     "href": "80_eddsa.html#section",
     "title": "EdDSA",
     "section": "",
-    "text": "RSA_Encryption\n\n\ncluster_encryption\n\nEncryption\n\n\ncluster_decryption\n\nDecryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C) = M^e mod n\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M) = C^d mod n\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext",
+    "text": "RSA_Encryption\n\n\ncluster_encryption\n\nEncryption\n\n\ncluster_decryption\n\nDecryption\n\n\n\nmessage\n\nMessage (M)\n\n\n\nencrypt\n\nCiphertext (C)\n\n\n\nmessage-&gt;encrypt\n\n\n\n\n\ninter\n\nEncrypted Transaction\n\n\n\nencrypt-&gt;inter\n\n\n\n\n\npublic_key_ref\n\n\n\nPrivate Key: (n, d)\n\n\n\npublic_key_ref-&gt;encrypt\n\n\n\n\n\nciphertext\n\nCiphertext (C)\n\n\n\ndecrypt\n\nMessage (M)\n\n\n\nciphertext-&gt;decrypt\n\n\n\n\n\noutput\n\nDecrypted Transaction\n\n\n\ndecrypt-&gt;output\n\n\n\n\n\nprivate_key_ref\n\n\n\nPublic Key: (n, e)\n\n\n\nprivate_key_ref-&gt;decrypt\n\n\n\n\n\ninput\n\nUnencrypted Transaction\n\n\n\ninput-&gt;message\n\n\n\n\n\ninter-&gt;ciphertext",
     "crumbs": [
       "EdDSA"
     ]
@@ -9410,7 +9504,7 @@
     "href": "80_eddsa.html#iterative-definition-3",
     "title": "EdDSA",
     "section": "Iterative Definition",
-    "text": "Iterative Definition\nAn EdDSA signature scheme is a choice over:\n\nA finite field \\(\\mathbb{F}_p\\).\nAn elliptic curve \\(E\\) over \\(\\mathbb{F}_p\\)\n\nWhose group \\(E(\\mathbb{F}_p)\\) of \\(\\mathbb{F}_p\\)-rational points has order \\(#E(\\mathbb{F}_p) = 2^C \\ell\\) where \\(\\ell\\) is a large primce and \\(2^c\\) is the cofactor\n\nTake a 400-level math class\nBasically this is a measure of the area within the ellipse.",
+    "text": "Iterative Definition\nAn EdDSA signature scheme is a choice over:\n\nA finite field \\(\\mathbb{F}_p\\).\nAn elliptic curve \\(E\\) over \\(\\mathbb{F}_p\\)\n\nWhose group \\(E(\\mathbb{F}_p)\\) of \\(\\mathbb{F}_p\\)-rational points has order \\(|E(\\mathbb{F}_p)| = 2^C \\ell\\) where \\(\\ell\\) is a large primce and \\(2^c\\) is the cofactor\n\nTake a 400-level math class\nBasically this is a measure of the area within the ellipse.",
     "crumbs": [
       "EdDSA"
     ]
@@ -9473,6 +9567,196 @@
     "text": "Signing\n\n\n\n\n\n\nSigning\n\n\n\nThe signature on a message \\(M\\) is deterministically computed as \\((R, S)\\) where \\(R = r B\\) for \\(r = H(H_{b,\\dots,2b - 1}(k) \\parallel M)\\), and \\[\nS \\equiv r + H(R \\parallel A \\parallel M) s \\pmod \\ell\n\\] This satisfies the verification equation \\[\n\\begin{align}\n2^c S B &= 2^c (r + H(R \\parallel A \\parallel M) s) B \\\\\n        &= 2^c r B + 2^c H(R \\parallel A \\parallel M) s B \\\\\n        &= 2^c R + 2^c H(R \\parallel A \\parallel M) A.\n\\end{align}\n\\]",
     "crumbs": [
       "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519",
+    "href": "80_eddsa.html#ed25519",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\nEdDSA with:\n\nSHA-512\nCurve25519",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#curve25519",
+    "href": "80_eddsa.html#curve25519",
+    "title": "EdDSA",
+    "section": "Curve25519",
+    "text": "Curve25519\n\nAn unusually fast curve to calculate on modern CPUs\nNot made me the NSA, and released after an NSA released curve was discovered to have a backdoor.\nNamed for being over the prime field \\(2^{255}-19\\) - hence 25519",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#visualize",
+    "href": "80_eddsa.html#visualize",
+    "title": "EdDSA",
+    "section": "Visualize",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]\n\n\n\n&lt;lambdifygenerated-2&gt;:2: RuntimeWarning:\n\ninvalid value encountered in sqrt",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#bernstein",
+    "href": "80_eddsa.html#bernstein",
+    "title": "EdDSA",
+    "section": "Bernstein",
+    "text": "Bernstein\n\nDiscovered by a team including Daniel J. Bernstein.\n\n\nThe export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption.",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#lange",
+    "href": "80_eddsa.html#lange",
+    "title": "EdDSA",
+    "section": "Lange",
+    "text": "Lange\n\nDiscovered by a team including Tanja Lange.\n\nAcademic and anti-surveillance activist\nEasy to find website with public keys:\n\nPeep these keys!",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#p",
+    "href": "80_eddsa.html#p",
+    "title": "EdDSA",
+    "section": "\\(p\\)",
+    "text": "\\(p\\)\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#emathbbf_2255-19",
+    "href": "80_eddsa.html#emathbbf_2255-19",
+    "title": "EdDSA",
+    "section": "\\(E/\\mathbb{F}_{2^{255}-19}\\)",
+    "text": "\\(E/\\mathbb{F}_{2^{255}-19}\\)\n\nTake the “twisted Edwards curve”\n\n\\[\n-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\n\\]",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#visualize-1",
+    "href": "80_eddsa.html#visualize-1",
+    "title": "EdDSA",
+    "section": "Visualize",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(-x*x + y*y, 1 - (121665/121666)*x*x*y*y)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-4, 4, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519-1",
+    "href": "80_eddsa.html#ed25519-1",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519-2",
+    "href": "80_eddsa.html#ed25519-2",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519-3",
+    "href": "80_eddsa.html#ed25519-3",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "80_eddsa.html#ed25519-4",
+    "href": "80_eddsa.html#ed25519-4",
+    "title": "EdDSA",
+    "section": "Ed25519",
+    "text": "Ed25519\n\n\\(p = 2^255-19\\) so\n\\(F_p = \\mathbb{F}_{2^{255}-19}\\)\n\\(E/\\mathbb{F}_{2^{255}-19}\\) is \\(-x^2 + y^2 = 1 - \\frac{121665}{121666}x^2y^2\\)\n\\(\\ell = 2^{252} + 27742317777372353535851937790883648493\\)\n\\(c = 3\\)",
+    "crumbs": [
+      "EdDSA"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html",
+    "href": "82_ed25519.html",
+    "title": "Ed25519",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 82 directory in your 271rs repository.\nThis folder must be a Cargo package.\n\n\n\n\n\n\nI have adapted the official Python implementation to Python3 and added type hints.\nI provide, below, functions types for all functions used in my implementation.\nI provide a main.rs file which performance constant setup, shows an example of using a big number library, and checks validity using one of the test cases from the official Python implementation.\n\n\n\n\n\nYou will implement all functions of ed25519.py in Rust.\nYou will ensure your code meets validity checks.\n\nThis will be as simple as cargo run provided you use the provided main.rs.\n\n\n\n\n\nYou will need to use cargo add to use external packages.\n\nWhile you may use ix and your own SHA, this is not necessary or required.\n\nBesides using cargo add, you could also manually update the crates Cargo.toml file.\nI will also provide my Cargo.toml file.",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#requirements",
+    "href": "82_ed25519.html#requirements",
+    "title": "Ed25519",
+    "section": "",
+    "text": "To complete this assignment, you must:\n\nCreate a 82 directory in your 271rs repository.\nThis folder must be a Cargo package.",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#my-responsibility",
+    "href": "82_ed25519.html#my-responsibility",
+    "title": "Ed25519",
+    "section": "",
+    "text": "I have adapted the official Python implementation to Python3 and added type hints.\nI provide, below, functions types for all functions used in my implementation.\nI provide a main.rs file which performance constant setup, shows an example of using a big number library, and checks validity using one of the test cases from the official Python implementation.",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#your-responsibility",
+    "href": "82_ed25519.html#your-responsibility",
+    "title": "Ed25519",
+    "section": "",
+    "text": "You will implement all functions of ed25519.py in Rust.\nYou will ensure your code meets validity checks.\n\nThis will be as simple as cargo run provided you use the provided main.rs.\n\n\n\n\n\nYou will need to use cargo add to use external packages.\n\nWhile you may use ix and your own SHA, this is not necessary or required.\n\nBesides using cargo add, you could also manually update the crates Cargo.toml file.\nI will also provide my Cargo.toml file.",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#main",
+    "href": "82_ed25519.html#main",
+    "title": "Ed25519",
+    "section": "Main",
+    "text": "Main\n\n\nsrc/main.rs\n\nuse num::*;\nuse num_bigint::BigInt;\nuse num_traits::Euclid;\n\nfn main() {\n    // --- 1. Constant Setup  ---\n    const B: usize = 256;\n    \n    // q: int = 2**255 - 19\n    let q = BigInt::from(2).pow(255) - BigInt::from(19);\n\n    // l: int = 2**252 + 27742317777372353535851937790883648493\n    let l_suffix = BigInt::parse_bytes(b\"27742317777372353535851937790883648493\", 10).unwrap();\n    let l = BigInt::from(2).pow(252) + l_suffix;\n\n    // d: int = -121665 * inv(121666)\n    let n_d = BigInt::from(-121665);\n    let d_inv = inv(&BigInt::from(121666), &q);\n    let d = (n_d * d_inv).rem_euclid(&q);\n\n    // I: int = expmod(2,(q-1)//4,q)\n    let exponent_i = (&q - BigInt::from(1)) / BigInt::from(4);\n    let i_const = expmod(&BigInt::from(2), &exponent_i, &q);\n    \n    // By : int = 4 * inv(5)\n    let by = (BigInt::from(4) * inv(&BigInt::from(5), &q)).rem_euclid(&q);\n    \n    // Bx : int = xrecover(By)\n    let bx = xrecover(&by, &q, &d, &i_const);\n    \n    // B : List[int] = [Bx % q, By % q]\n    let b_point: Vec&lt;BigInt&gt; = vec![bx.rem_euclid(&q), by.rem_euclid(&q)];\n\n    // println!(\"Ed25519 Constant Initialization Complete.\");\n    \n    // --- 2. Test Case ---\n    // Line 2 of this file. https://ed25519.cr.yp.to/python/sign.input\n    \n    // Secret Key (32-bytes, all zeros)\n    // 4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\n    let sk = vec![0x4c, 0xcd, 0x08, 0x9b, 0x28, 0xff, 0x96, 0xda, 0x9d, 0xb6, 0xc3, 0x46, 0xec, 0x11, 0x4e, 0x0f, 0x5b, 0x8a, 0x31, 0x9f, 0x35, 0xab, 0xa6, 0x24, 0xda, 0x8c, 0xf6, 0xed, 0x4f, 0xb8, 0xa6, 0xfb, 0x3d, 0x40, 0x17, 0xc3, 0xe8, 0x43, 0x89, 0x5a, 0x92, 0xb7, 0x0a, 0xa7, 0x4d, 0x1b, 0x7e, 0xbc, 0x9c, 0x98, 0x2c, 0xcf, 0x2e, 0xc4, 0x96, 0x8c, 0xc0, 0xcd, 0x55, 0xf1, 0x2a, 0xf4, 0x66, 0x0c];\n\n    // Message (empty string)\n    // 72\n    let m = b\"72\";\n    \n    // 3. Generate Public Key\n    let pk = publickey(&sk, B, &q, &d, &b_point);\n\n    // 4. Create Signature\n    let sig = signature(m, &sk, &pk, B, &q, &l, &d, &b_point);\n    \n    // 5. Verify Signature\n    dbg!(checkvalid(&sig, m, &pk, B, &q, &d, &i_const, &b_point));\n}",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#cargo",
+    "href": "82_ed25519.html#cargo",
+    "title": "Ed25519",
+    "section": "Cargo",
+    "text": "Cargo\n\n\nCargo.toml\n\n[package]\nname = \"num\"\nversion = \"0.1.0\"\nedition = \"2024\"\n\n[dependencies]\nhex = \"0.4.3\"\nnum-bigint = \"0.4.6\"\nnum-integer = \"0.1.46\"\nnum-traits = \"0.2.19\"\nsha2 = \"0.10.9\"",
+    "crumbs": [
+      "Ed25519"
+    ]
+  },
+  {
+    "objectID": "82_ed25519.html#lib",
+    "href": "82_ed25519.html#lib",
+    "title": "Ed25519",
+    "section": "Lib",
+    "text": "Lib\n\nIn this case, I do not provide function bodies, but provide types, imports, and constants.\n\n\n\nsrc/lib.rs\n\nuse num_bigint::BigInt;\nuse num_traits::{Zero, One, ToPrimitive, Euclid};\nuse num_integer::Integer;\nuse sha2::{Digest, Sha512};\n\n// --- Global Helpers (No Dependencies) ---\n\n// H(m: bytes) -&gt; bytes\nfn h(m: &[u8]) -&gt; Vec&lt;u8&gt; {\n\n// bit(h: bytes, i: int) -&gt; int\nfn bit(h_val: &[u8], i: usize) -&gt; u8 {\n\n// expmod(b:int,e:int,m:int) -&gt; int\npub fn expmod(b_val: &BigInt, e: &BigInt, m: &BigInt) -&gt; BigInt {\n\n// inv(x:int, q: &BigInt) -&gt; int\npub fn inv(x: &BigInt, q: &BigInt) -&gt; BigInt {\n\n// xrecover helper (nested for local use in setup and decode)\npub fn xrecover(y: &BigInt, q: &BigInt, d: &BigInt, i_const: &BigInt) -&gt; BigInt {\n\n// --- Core Functions (Require Constants) ---\n\nfn edwards(p: &Vec&lt;BigInt&gt;, q_val: &Vec&lt;BigInt&gt;, q: &BigInt, d: &BigInt) -&gt; Vec&lt;BigInt&gt; {\n\nfn scalarmult(p: &Vec&lt;BigInt&gt;, e: &BigInt, q: &BigInt, d: &BigInt) -&gt; Vec&lt;BigInt&gt; {\n\nfn encodeint(y: &BigInt, b: usize) -&gt; Vec&lt;u8&gt; {\n\nfn encodepoint(p: &Vec&lt;BigInt&gt;, b: usize) -&gt; Vec&lt;u8&gt; {\n\npub fn publickey(sk: &[u8], b: usize, q: &BigInt, d: &BigInt, b_point: &Vec&lt;BigInt&gt;) -&gt; Vec&lt;u8&gt; {\n\nfn hint(m: &[u8], b: usize) -&gt; BigInt {\n\npub fn signature(m: &[u8], sk: &[u8], pk: &[u8], b: usize, q: &BigInt, l: &BigInt, d: &BigInt, b_point: &Vec&lt;BigInt&gt;) -&gt; Vec&lt;u8&gt; {\n\nfn isoncurve(p: &Vec&lt;BigInt&gt;, q: &BigInt, d: &BigInt) -&gt; bool {\n\nfn decodeint(s: &[u8], b: usize) -&gt; BigInt {\n\npub fn checkvalid(s: &[u8], m: &[u8], pk: &[u8], b: usize, q: &BigInt, d: &BigInt, i_const: &BigInt, b_point: &Vec&lt;BigInt&gt;) -&gt; bool {",
+    "crumbs": [
+      "Ed25519"
     ]
   }
 ]

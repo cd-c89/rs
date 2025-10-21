@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./81_python.html" rel="next">
 <link href="./72_ix.md.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -289,6 +290,18 @@ window.Quarto = {
  <span class="menu-text">EdDSA</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82_ed25519.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ed25519</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -346,7 +359,21 @@ window.Quarto = {
   <li><a href="#private-key" id="toc-private-key" class="nav-link" data-scroll-target="#private-key">Private key</a></li>
   <li><a href="#signing" id="toc-signing" class="nav-link" data-scroll-target="#signing">Signing</a></li>
   </ul></li>
-  <li><a href="#eddsa-ed25519" id="toc-eddsa-ed25519" class="nav-link" data-scroll-target="#eddsa-ed25519">EdDSA, Ed25519</a></li>
+  <li><a href="#eddsa-ed25519" id="toc-eddsa-ed25519" class="nav-link" data-scroll-target="#eddsa-ed25519">EdDSA, Ed25519</a>
+  <ul class="collapse">
+  <li><a href="#ed25519" id="toc-ed25519" class="nav-link" data-scroll-target="#ed25519">Ed25519</a></li>
+  <li><a href="#curve25519" id="toc-curve25519" class="nav-link" data-scroll-target="#curve25519">Curve25519</a></li>
+  <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
+  <li><a href="#bernstein" id="toc-bernstein" class="nav-link" data-scroll-target="#bernstein">Bernstein</a></li>
+  <li><a href="#lange" id="toc-lange" class="nav-link" data-scroll-target="#lange">Lange</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p"><span class="math inline">\(p\)</span></a></li>
+  <li><a href="#emathbbf_2255-19" id="toc-emathbbf_2255-19" class="nav-link" data-scroll-target="#emathbbf_2255-19"><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span></a></li>
+  <li><a href="#visualize-1" id="toc-visualize-1" class="nav-link" data-scroll-target="#visualize-1">Visualize</a></li>
+  <li><a href="#ed25519-1" id="toc-ed25519-1" class="nav-link" data-scroll-target="#ed25519-1">Ed25519</a></li>
+  <li><a href="#ed25519-2" id="toc-ed25519-2" class="nav-link" data-scroll-target="#ed25519-2">Ed25519</a></li>
+  <li><a href="#ed25519-3" id="toc-ed25519-3" class="nav-link" data-scroll-target="#ed25519-3">Ed25519</a></li>
+  <li><a href="#ed25519-4" id="toc-ed25519-4" class="nav-link" data-scroll-target="#ed25519-4">Ed25519</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="80_eddsa.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
@@ -586,14 +613,14 @@ window.Quarto = {
 <!-- encrypt -->
 <g id="node2" class="node">
 <title>encrypt</title>
-<ellipse fill="none" stroke="#ffffff" cx="217" cy="-310.8" rx="121.68" ry="18"></ellipse>
-<text text-anchor="middle" x="217" y="-306.6" font-family="Times,serif" font-size="14.00" fill="#ffffff">Ciphertext (C) = M^e mod n</text>
+<ellipse fill="none" stroke="#ffffff" cx="217" cy="-310.8" rx="67.17" ry="18"></ellipse>
+<text text-anchor="middle" x="217" y="-306.6" font-family="Times,serif" font-size="14.00" fill="#ffffff">Ciphertext (C)</text>
 </g>
 <!-- message&#45;&gt;encrypt -->
 <g id="edge1" class="edge">
 <title>message-&gt;encrypt</title>
-<path fill="none" stroke="#ffffff" d="M269.65,-365.21C261.09,-356.53 250.46,-345.75 240.99,-336.14"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="243.23,-333.42 233.71,-328.76 238.24,-338.34 243.23,-333.42"></polygon>
+<path fill="none" stroke="#ffffff" d="M269.65,-365.21C260.88,-356.32 249.93,-345.21 240.29,-335.43"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="242.75,-332.93 233.23,-328.27 237.76,-337.85 242.75,-332.93"></polygon>
 </g>
 <!-- inter -->
 <g id="node8" class="node">
@@ -618,8 +645,8 @@ window.Quarto = {
 <!-- public_key_ref&#45;&gt;encrypt -->
 <g id="edge2" class="edge">
 <title>public_key_ref-&gt;encrypt</title>
-<path fill="none" stroke="#ffffff" d="M163.55,-364.5C172.23,-355.94 182.86,-345.46 192.35,-336.1"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="194.99,-338.42 199.65,-328.9 190.07,-333.43 194.99,-338.42"></polygon>
+<path fill="none" stroke="#ffffff" d="M163.55,-364.5C172.36,-355.81 183.18,-345.14 192.77,-335.69"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="195.48,-337.94 200.14,-328.42 190.56,-332.95 195.48,-337.94"></polygon>
 </g>
 <!-- ciphertext -->
 <g id="node4" class="node">
@@ -630,26 +657,26 @@ window.Quarto = {
 <!-- decrypt -->
 <g id="node5" class="node">
 <title>decrypt</title>
-<ellipse fill="none" stroke="#ffffff" cx="150" cy="-90" rx="115.32" ry="18"></ellipse>
-<text text-anchor="middle" x="150" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Message (M) = C^d mod n</text>
+<ellipse fill="none" stroke="#ffffff" cx="147" cy="-90" rx="62.02" ry="18"></ellipse>
+<text text-anchor="middle" x="147" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Message (M)</text>
 </g>
 <!-- ciphertext&#45;&gt;decrypt -->
 <g id="edge3" class="edge">
 <title>ciphertext-&gt;decrypt</title>
-<path fill="none" stroke="#ffffff" d="M201.12,-144.41C192.82,-135.73 182.49,-124.95 173.3,-115.34"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="175.67,-112.76 166.23,-107.96 170.62,-117.6 175.67,-112.76"></polygon>
+<path fill="none" stroke="#ffffff" d="M200.41,-144.41C191.52,-135.52 180.41,-124.41 170.63,-114.63"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="173.02,-112.07 163.47,-107.47 168.07,-117.02 173.02,-112.07"></polygon>
 </g>
 <!-- output -->
 <g id="node9" class="node">
 <title>output</title>
-<ellipse fill="none" stroke="#ffffff" cx="150" cy="-18" rx="99" ry="18"></ellipse>
-<text text-anchor="middle" x="150" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decrypted Transaction</text>
+<ellipse fill="none" stroke="#ffffff" cx="147" cy="-18" rx="99" ry="18"></ellipse>
+<text text-anchor="middle" x="147" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#ffffff">Decrypted Transaction</text>
 </g>
 <!-- decrypt&#45;&gt;output -->
 <g id="edge8" class="edge">
 <title>decrypt-&gt;output</title>
-<path fill="none" stroke="#ffffff" d="M150,-71.7C150,-63.98 150,-54.71 150,-46.11"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="153.5,-46.1 150,-36.1 146.5,-46.1 153.5,-46.1"></polygon>
+<path fill="none" stroke="#ffffff" d="M147,-71.7C147,-63.98 147,-54.71 147,-46.11"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="150.5,-46.1 147,-36.1 143.5,-46.1 150.5,-46.1"></polygon>
 </g>
 <!-- private_key_ref -->
 <g id="node6" class="node">
@@ -662,8 +689,8 @@ window.Quarto = {
 <!-- private_key_ref&#45;&gt;decrypt -->
 <g id="edge4" class="edge">
 <title>private_key_ref-&gt;decrypt</title>
-<path fill="none" stroke="#ffffff" d="M92.79,-143.7C102.24,-134.99 113.86,-124.29 124.14,-114.82"></path>
-<polygon fill="#ffffff" stroke="#ffffff" points="126.71,-117.21 131.69,-107.86 121.97,-112.06 126.71,-117.21"></polygon>
+<path fill="none" stroke="#ffffff" d="M92.04,-143.7C101.2,-134.92 112.45,-124.13 122.38,-114.61"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="124.87,-117.07 129.67,-107.62 120.03,-112.02 124.87,-117.07"></polygon>
 </g>
 <!-- input -->
 <g id="node7" class="node">
@@ -784,7 +811,7 @@ window.Quarto = {
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="847f0eb1" class="cell" data-execution_count="1">
+<div id="e03318ea" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -803,7 +830,7 @@ window.Quarto = {
 <li>A finite field <span class="math inline">\(\mathbb{F}_p\)</span>.</li>
 <li>An elliptic curve <span class="math inline">\(E\)</span> over <span class="math inline">\(\mathbb{F}_p\)</span>
 <ul>
-<li>Whose group <span class="math inline">\(E(\mathbb{F}_p)\)</span> of <span class="math inline">\(\mathbb{F}_p\)</span>-rational points has order <span class="math inline">\(#E(\mathbb{F}_p) = 2^C \ell\)</span> where <span class="math inline">\(\ell\)</span> is a large primce and <span class="math inline">\(2^c\)</span> is the cofactor
+<li>Whose group <span class="math inline">\(E(\mathbb{F}_p)\)</span> of <span class="math inline">\(\mathbb{F}_p\)</span>-rational points has order <span class="math inline">\(|E(\mathbb{F}_p)| = 2^C \ell\)</span> where <span class="math inline">\(\ell\)</span> is a large primce and <span class="math inline">\(2^c\)</span> is the cofactor
 <ul>
 <li>Take a 400-level math class</li>
 <li>Basically this is a measure of the area within the ellipse.</li>
@@ -919,10 +946,165 @@ S \equiv r + H(R \parallel A \parallel M) s \pmod \ell
 </section>
 <section id="eddsa-ed25519" class="level1">
 <h1>EdDSA, Ed25519</h1>
+<section id="ed25519" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519">Ed25519</h2>
+<ul>
+<li>EdDSA with:
+<ul>
+<li>SHA-512</li>
+<li>Curve25519</li>
+</ul></li>
+</ul>
+</section>
+<section id="curve25519" class="level2">
+<h2 class="anchored" data-anchor-id="curve25519">Curve25519</h2>
+<ul>
+<li>An unusually fast curve to calculate on modern CPUs</li>
+<li><em>Not</em> made me the NSA, and released after an NSA released curve was discovered to have a backdoor.</li>
+<li>Named for being over the prime field <span class="math inline">\(2^{255}-19\)</span> - hence 25519</li>
+</ul>
+</section>
+<section id="visualize" class="level2">
+<h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> sympy</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>curve <span class="op">=</span> sympy.Eq(y<span class="op">*</span>y, x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">486662</span><span class="op">*</span>x<span class="op">*</span>x <span class="op">+</span> x)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.00001</span>, <span class="fl">.00001</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div id="4156e02a" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stderr">
+<pre><code>&lt;lambdifygenerated-2&gt;:2: RuntimeWarning:
+
+invalid value encountered in sqrt
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="80_eddsa_files/figure-html/cell-3-output-2.png" width="599" height="428" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="bernstein" class="level2">
+<h2 class="anchored" data-anchor-id="bernstein">Bernstein</h2>
+<ul>
+<li>Discovered by a team including Daniel J. Bernstein.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption.</p>
+</blockquote>
+</section>
+<section id="lange" class="level2">
+<h2 class="anchored" data-anchor-id="lange">Lange</h2>
+<ul>
+<li>Discovered by a team including Tanja Lange.
+<ul>
+<li>Academic and anti-surveillance activist</li>
+<li>Easy to find website with public keys:</li>
+</ul></li>
+<li><a href="https://hyperelliptic.org/tanja/">Peep these keys!</a></li>
+</ul>
+</section>
+<section id="p" class="level2">
+<h2 class="anchored" data-anchor-id="p"><span class="math inline">\(p\)</span></h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+</ul>
+</section>
+<section id="emathbbf_2255-19" class="level2">
+<h2 class="anchored" data-anchor-id="emathbbf_2255-19"><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span></h2>
+<ul>
+<li>Take the “twisted Edwards curve”</li>
+</ul>
+<p><span class="math display">\[
+-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2
+\]</span></p>
+</section>
+<section id="visualize-1" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-1">Visualize</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">import</span> sympy</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>curve <span class="op">=</span> sympy.Eq(<span class="op">-</span>x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y, <span class="dv">1</span> <span class="op">-</span> (<span class="dv">121665</span><span class="op">/</span><span class="dv">121666</span>)<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>y<span class="op">*</span>y)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb4-8"><a href="#cb4-8"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div id="82c8b7b5" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="80_eddsa_files/figure-html/cell-4-output-1.png" width="590" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ed25519-1" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519-1">Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+</ul>
+</section>
+<section id="ed25519-2" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519-2">Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+</ul>
+</section>
+<section id="ed25519-3" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519-3">Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+<li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+</section>
+<section id="ed25519-4" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519-4">Ed25519</h2>
+<ul>
+<li><span class="math inline">\(p = 2^255-19\)</span> so</li>
+<li><span class="math inline">\(F_p = \mathbb{F}_{2^{255}-19}\)</span></li>
+<li><span class="math inline">\(E/\mathbb{F}_{2^{255}-19}\)</span> is <span class="math inline">\(-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2\)</span></li>
+<li><span class="math inline">\(\ell = 2^{252} + 27742317777372353535851937790883648493\)</span></li>
+<li><span class="math inline">\(c = 3\)</span></li>
+</ul>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1404,377 +1586,546 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./81_python.html" class="pagination-link" aria-label="Preamble">
+        <span class="nav-page-text">Preamble</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> "EdDSA"</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">---</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="fu"># Announcements</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="ss">- </span>**Welcome** to Systems in Rust</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="ss">- </span>**Action Items**:</span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="ss">  - </span>Midterms verbal update.</span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="ss">  - </span>Keep at <span class="in">`ix`</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="ss">  - </span>This unlocks the last and greatest of the cryptographic homeworks so we can get to graph theory.</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="fu">## Today</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="ss">- </span>Private Key Cryptography</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="ss">- </span>Digital Signatures</span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="ss">- </span>Edwards-curve Digital Signature Algorithm (EdDSA) </span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="ss">    - </span>Some math where we need it</span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="ss">    - </span>An aside on side channels if we get bored</span>
-<span id="cb2-21"><a href="#cb2-21"></a>  </span>
-<span id="cb2-22"><a href="#cb2-22"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="fu"># Public Key Cryptography</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="fu">## Motivating Example</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="ss">- </span>Canonical Example is Snowden x Greenwald 2013</span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="ss">  - </span>Snowden wished to communicate a secret to Greenwald</span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="ss">  - </span>Snowden and Greenwald had never met</span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="ss">  - </span>Snowden could not transmit the secret in plain text</span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="ss">- </span>Vs enigma, no prior agreement on how to encrypt/decrypt</span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="fu">## Reads [Cryptobook](https://toc.cryptobook.us/book.pdf)</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="at">&gt; A key exchange protocol $P$ is a pair of probabilistic machines $(A, B)$ that take turns in sending messages to each other.</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="at">At the end of the protocol, when both machines terminate, they both obtain the same value $k$. A</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="at">protocol transcript $T_P$ is the sequence of messages exchanged between the parties in one exe-</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="at">cution of the protocol. </span></span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="fu">## Reads [Cryptobook](https://toc.cryptobook.us/book.pdf)</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="at">&gt; Since $A$ and $B$ are probabilistic machines, we obtain a different transcript</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="at">every time we run the protocol. Formally, the transcript $T_P$ of protocol $P$ is a random variable, which is a function of the random bits generated by $A$ and $B$. The eavesdropping adversary $E$ sees the entire transcript $T_P$ and its goal is to figure out the secret $k$.</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a></span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="fu">## Set the Stage</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="ss">- </span>Snowden has e.g. files on a harddrive</span>
-<span id="cb2-48"><a href="#cb2-48"></a><span class="ss">  - </span>The files contain keywords that cannot be safely transmitted over US-based internet connections.</span>
-<span id="cb2-49"><a href="#cb2-49"></a><span class="ss">  - </span>Snowden is based in Hawai'i with no access to non-US-based connections.</span>
-<span id="cb2-50"><a href="#cb2-50"></a><span class="ss">  - </span>Snowden needs to encrypt the files in such as a way that *only* a trusted destination may read them.</span>
-<span id="cb2-51"><a href="#cb2-51"></a></span>
-<span id="cb2-52"><a href="#cb2-52"></a><span class="fu">## First Contact</span></span>
-<span id="cb2-53"><a href="#cb2-53"></a></span>
-<span id="cb2-54"><a href="#cb2-54"></a><span class="ss">- </span>Snowden contacts Greenwald to agree to use a secure messaging protocol</span>
-<span id="cb2-55"><a href="#cb2-55"></a><span class="ss">  - </span>Use of such protocols is relatively non-suspicious, used for banking etc.</span>
-<span id="cb2-56"><a href="#cb2-56"></a><span class="ss">  - </span>It was enough to raise alarms for Snowden, but not quickly enough to stop him.</span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="ss">- </span>Greenwald agrees to a recommended protocol</span>
-<span id="cb2-58"><a href="#cb2-58"></a></span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="fu">## Initialization</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a></span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="ss">- </span>Greenwald generates a combination of numerical values on a local computing device.</span>
-<span id="cb2-62"><a href="#cb2-62"></a><span class="ss">  - </span>One of these is the public-key, which Greenwalk may circulate broadly.</span>
-<span id="cb2-63"><a href="#cb2-63"></a><span class="ss">- </span>We see an example of such a technology on the next slide.</span>
-<span id="cb2-64"><a href="#cb2-64"></a></span>
-<span id="cb2-65"><a href="#cb2-65"></a><span class="fu">## SecureDrop</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a></span>
-<span id="cb2-67"><a href="#cb2-67"></a><span class="ss">- </span>Embed doesn't work for what are likely obvious reasons:</span>
-<span id="cb2-68"><a href="#cb2-68"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Link</span><span class="co">](https://theintercept.com/source/)</span></span>
-<span id="cb2-69"><a href="#cb2-69"></a></span>
-<span id="cb2-70"><a href="#cb2-70"></a>&lt;iframe </span>
-<span id="cb2-71"><a href="#cb2-71"></a>  id="source"</span>
-<span id="cb2-72"><a href="#cb2-72"></a>  title="source"</span>
-<span id="cb2-73"><a href="#cb2-73"></a>  width="70%"</span>
-<span id="cb2-74"><a href="#cb2-74"></a>  height="70%"</span>
-<span id="cb2-75"><a href="#cb2-75"></a>  src="https://theintercept.com/source/"&gt;&lt;/iframe&gt;</span>
-<span id="cb2-76"><a href="#cb2-76"></a></span>
-<span id="cb2-77"><a href="#cb2-77"></a><span class="fu">## Safety Note</span></span>
-<span id="cb2-78"><a href="#cb2-78"></a></span>
-<span id="cb2-79"><a href="#cb2-79"></a><span class="ss">- </span>Probably dropping to *The Intercept* is not recommended.</span>
-<span id="cb2-80"><a href="#cb2-80"></a><span class="ss">- </span>Reality Winner is currently incarcerated due to a leak fumbled by *The Intercept*</span>
-<span id="cb2-81"><a href="#cb2-81"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://www.google.com/search?client=firefox-b-1-d&amp;q=reality+winner)</span></span>
-<span id="cb2-82"><a href="#cb2-82"></a></span>
-<span id="cb2-83"><a href="#cb2-83"></a><span class="fu">## Step 2</span></span>
-<span id="cb2-84"><a href="#cb2-84"></a></span>
-<span id="cb2-85"><a href="#cb2-85"></a><span class="ss">- </span>Greenwald &amp; co. hold in reserve a *private-key*</span>
-<span id="cb2-86"><a href="#cb2-86"></a><span class="ss">- </span>They defend it like lives depend on it, as they did for Winner and Snowden.</span>
-<span id="cb2-87"><a href="#cb2-87"></a><span class="ss">- </span>So: not stored in plaintext on a hard-drive</span>
-<span id="cb2-88"><a href="#cb2-88"></a><span class="ss">- </span>So: if on a hard-drive, hard-drive is in a secure site from e.g. federal law enforcement.</span>
-<span id="cb2-89"><a href="#cb2-89"></a></span>
-<span id="cb2-90"><a href="#cb2-90"></a><span class="fu">## Step 3</span></span>
-<span id="cb2-91"><a href="#cb2-91"></a></span>
-<span id="cb2-92"><a href="#cb2-92"></a><span class="ss">- </span>Snowden, and hopefully enough others to avoid suspicion, use the public key to encrypt their payload.</span>
-<span id="cb2-93"><a href="#cb2-93"></a><span class="ss">- </span>In addition to e.g. top secret documents, concerned community members could send in less-secret materials such as analysis of policing data with which they would rather not be affiliated.</span>
-<span id="cb2-94"><a href="#cb2-94"></a><span class="ss">- </span>Journalists sift through the inputs.</span>
-<span id="cb2-95"><a href="#cb2-95"></a></span>
-<span id="cb2-96"><a href="#cb2-96"></a><span class="fu">## It's that simple</span></span>
-<span id="cb2-97"><a href="#cb2-97"></a></span>
-<span id="cb2-98"><a href="#cb2-98"></a><span class="ss">- </span>Okay but like how do we do that:</span>
-<span id="cb2-99"><a href="#cb2-99"></a><span class="ss">  - </span>Any eaves-dropping adversary can see the public key.</span>
-<span id="cb2-100"><a href="#cb2-100"></a><span class="ss">  - </span>One-to-one communication of a key is already dangerous</span>
-<span id="cb2-101"><a href="#cb2-101"></a><span class="ss">  - </span>All this encryption/decryption needs to be managable by e.g. non-computing specialized journalists.</span>
-<span id="cb2-102"><a href="#cb2-102"></a>  </span>
-<span id="cb2-103"><a href="#cb2-103"></a><span class="fu"># Digital Signatures</span></span>
-<span id="cb2-104"><a href="#cb2-104"></a></span>
-<span id="cb2-105"><a href="#cb2-105"></a><span class="fu">## Motivating Example</span></span>
-<span id="cb2-106"><a href="#cb2-106"></a></span>
-<span id="cb2-107"><a href="#cb2-107"></a><span class="ss">- </span>I have a Bitcoin.</span>
-<span id="cb2-108"><a href="#cb2-108"></a><span class="ss">- </span>I can only spend it if other people can:</span>
-<span id="cb2-109"><a href="#cb2-109"></a><span class="ss">    - </span>See it, to tell I have it</span>
-<span id="cb2-110"><a href="#cb2-110"></a><span class="ss">    - </span>Not spend it, because it's mine</span>
-<span id="cb2-111"><a href="#cb2-111"></a><span class="ss">- </span>I use a digital signature.</span>
-<span id="cb2-112"><a href="#cb2-112"></a></span>
-<span id="cb2-113"><a href="#cb2-113"></a></span>
-<span id="cb2-114"><a href="#cb2-114"></a><span class="fu">## A transaction</span></span>
-<span id="cb2-115"><a href="#cb2-115"></a></span>
-<span id="cb2-116"><a href="#cb2-116"></a><span class="at">&gt; Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin</span></span>
-<span id="cb2-117"><a href="#cb2-117"></a></span>
-<span id="cb2-118"><a href="#cb2-118"></a><span class="ss">- </span>I own a coin.</span>
-<span id="cb2-119"><a href="#cb2-119"></a><span class="ss">- </span>I have a public keys.</span>
-<span id="cb2-120"><a href="#cb2-120"></a><span class="ss">- </span>I transfer that a coin to new owner to buy the *Grundrisse* translated to Quenya</span>
-<span id="cb2-121"><a href="#cb2-121"></a><span class="ss">- </span>This happens over the open internet.</span>
-<span id="cb2-122"><a href="#cb2-122"></a></span>
-<span id="cb2-123"><a href="#cb2-123"></a><span class="fu">## Signage</span></span>
-<span id="cb2-124"><a href="#cb2-124"></a></span>
-<span id="cb2-125"><a href="#cb2-125"></a><span class="ss">- </span>To verify it is (1) my coin and (2) me transferring it, I:</span>
-<span id="cb2-126"><a href="#cb2-126"></a><span class="ss">    - </span>Write down the transactions details.</span>
-<span id="cb2-127"><a href="#cb2-127"></a><span class="ss">    - </span>SHA256 hash the message</span>
-<span id="cb2-128"><a href="#cb2-128"></a><span class="ss">    - </span>Encrypt with my **private key**</span>
-<span id="cb2-129"><a href="#cb2-129"></a><span class="ss">    - </span>Release the hash and cipher (encrypted) text</span>
-<span id="cb2-130"><a href="#cb2-130"></a></span>
-<span id="cb2-131"><a href="#cb2-131"></a><span class="fu">## Verify</span></span>
-<span id="cb2-132"><a href="#cb2-132"></a></span>
-<span id="cb2-133"><a href="#cb2-133"></a><span class="ss">- </span>The general public:</span>
-<span id="cb2-134"><a href="#cb2-134"></a><span class="ss">    - </span>Decrypts the ciphertext with my **public key**</span>
-<span id="cb2-135"><a href="#cb2-135"></a><span class="ss">    - </span>SHA256 hashes the decrypted text</span>
-<span id="cb2-136"><a href="#cb2-136"></a><span class="ss">    - </span>If the hash matches our released hash, then it had to be us and the transaction is valid.</span>
-<span id="cb2-137"><a href="#cb2-137"></a></span>
-<span id="cb2-138"><a href="#cb2-138"></a><span class="fu">## </span></span>
-<span id="cb2-139"><a href="#cb2-139"></a></span>
-<span id="cb2-142"><a href="#cb2-142"></a><span class="in">```{dot}</span></span>
-<span id="cb2-143"><a href="#cb2-143"></a><span class="in">//| fig-width: 800px</span></span>
-<span id="cb2-144"><a href="#cb2-144"></a><span class="in">//| echo: false</span></span>
-<span id="cb2-145"><a href="#cb2-145"></a><span class="in">digraph RSA_Encryption {</span></span>
-<span id="cb2-146"><a href="#cb2-146"></a><span class="in">  bgcolor="#191919";</span></span>
-<span id="cb2-147"><a href="#cb2-147"></a><span class="in">  node [fontcolor = "#ffffff", color = "#ffffff"]</span></span>
-<span id="cb2-148"><a href="#cb2-148"></a><span class="in">  edge [color = "#ffffff", fontcolor = "#ffffff"]</span></span>
-<span id="cb2-149"><a href="#cb2-149"></a></span>
-<span id="cb2-150"><a href="#cb2-150"></a><span class="in">  // Encryption</span></span>
-<span id="cb2-151"><a href="#cb2-151"></a><span class="in">  subgraph cluster_encryption {</span></span>
-<span id="cb2-152"><a href="#cb2-152"></a><span class="in">    fontcolor = "#ffffff";</span></span>
-<span id="cb2-153"><a href="#cb2-153"></a><span class="in">    color = "#ffffff";</span></span>
-<span id="cb2-154"><a href="#cb2-154"></a><span class="in">    label = "Encryption";</span></span>
-<span id="cb2-155"><a href="#cb2-155"></a><span class="in">    message [label="Message (M)"];</span></span>
-<span id="cb2-156"><a href="#cb2-156"></a><span class="in">    encrypt [label="Ciphertext (C) = M^e mod n"];</span></span>
-<span id="cb2-157"><a href="#cb2-157"></a><span class="in">    public_key_ref [label="Private Key: (n, d)", shape=note];</span></span>
-<span id="cb2-158"><a href="#cb2-158"></a></span>
-<span id="cb2-159"><a href="#cb2-159"></a><span class="in">    message -&gt; encrypt;</span></span>
-<span id="cb2-160"><a href="#cb2-160"></a><span class="in">    public_key_ref -&gt; encrypt;</span></span>
-<span id="cb2-161"><a href="#cb2-161"></a><span class="in">  }</span></span>
-<span id="cb2-162"><a href="#cb2-162"></a></span>
-<span id="cb2-163"><a href="#cb2-163"></a><span class="in">  // Decryption</span></span>
-<span id="cb2-164"><a href="#cb2-164"></a><span class="in">  subgraph cluster_decryption {</span></span>
-<span id="cb2-165"><a href="#cb2-165"></a><span class="in">    fontcolor = "#ffffff";</span></span>
-<span id="cb2-166"><a href="#cb2-166"></a><span class="in">    color = "#ffffff";</span></span>
-<span id="cb2-167"><a href="#cb2-167"></a><span class="in">    label = "Decryption";</span></span>
-<span id="cb2-168"><a href="#cb2-168"></a><span class="in">    ciphertext [label="Ciphertext (C)"];</span></span>
-<span id="cb2-169"><a href="#cb2-169"></a><span class="in">    decrypt [label="Message (M) = C^d mod n"];</span></span>
-<span id="cb2-170"><a href="#cb2-170"></a><span class="in">    private_key_ref [label="Public Key: (n, e)", shape=note];</span></span>
-<span id="cb2-171"><a href="#cb2-171"></a></span>
-<span id="cb2-172"><a href="#cb2-172"></a><span class="in">    ciphertext -&gt; decrypt;</span></span>
-<span id="cb2-173"><a href="#cb2-173"></a><span class="in">    private_key_ref -&gt; decrypt;</span></span>
-<span id="cb2-174"><a href="#cb2-174"></a><span class="in">  }</span></span>
-<span id="cb2-175"><a href="#cb2-175"></a></span>
-<span id="cb2-176"><a href="#cb2-176"></a><span class="in">  input [label="Unencrypted Transaction"]</span></span>
-<span id="cb2-177"><a href="#cb2-177"></a><span class="in">  inter [label="Encrypted Transaction"]</span></span>
-<span id="cb2-178"><a href="#cb2-178"></a><span class="in">  output [label="Decrypted Transaction"]</span></span>
-<span id="cb2-179"><a href="#cb2-179"></a></span>
-<span id="cb2-180"><a href="#cb2-180"></a><span class="in">  // Connections between steps</span></span>
-<span id="cb2-181"><a href="#cb2-181"></a><span class="in">  input -&gt; message;</span></span>
-<span id="cb2-182"><a href="#cb2-182"></a><span class="in">  encrypt -&gt; inter;</span></span>
-<span id="cb2-183"><a href="#cb2-183"></a><span class="in">  inter -&gt; ciphertext;</span></span>
-<span id="cb2-184"><a href="#cb2-184"></a><span class="in">  decrypt -&gt; output;</span></span>
-<span id="cb2-185"><a href="#cb2-185"></a><span class="in">}</span></span>
-<span id="cb2-186"><a href="#cb2-186"></a><span class="in">```</span></span>
-<span id="cb2-187"><a href="#cb2-187"></a></span>
-<span id="cb2-188"><a href="#cb2-188"></a>  </span>
-<span id="cb2-189"><a href="#cb2-189"></a><span class="fu"># EdDSA, algorithm</span></span>
-<span id="cb2-190"><a href="#cb2-190"></a> </span>
-<span id="cb2-191"><a href="#cb2-191"></a><span class="fu">## EdDSA</span></span>
-<span id="cb2-192"><a href="#cb2-192"></a></span>
-<span id="cb2-193"><a href="#cb2-193"></a><span class="at">&gt; In public-key cryptography, Edwards-curve Digital Signature Algorithm (EdDSA) is a digital signature scheme using a variant of Schnorr signature based on twisted Edwards curves.</span></span>
-<span id="cb2-194"><a href="#cb2-194"></a></span>
-<span id="cb2-195"><a href="#cb2-195"></a><span class="ss">- </span>Ah, that really clarifies things.</span>
-<span id="cb2-196"><a href="#cb2-196"></a></span>
-<span id="cb2-197"><a href="#cb2-197"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-198"><a href="#cb2-198"></a></span>
-<span id="cb2-199"><a href="#cb2-199"></a>An EdDSA signature scheme is a choice.</span>
-<span id="cb2-200"><a href="#cb2-200"></a></span>
-<span id="cb2-201"><a href="#cb2-201"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-202"><a href="#cb2-202"></a></span>
-<span id="cb2-203"><a href="#cb2-203"></a>An EdDSA signature scheme is a choice over:</span>
-<span id="cb2-204"><a href="#cb2-204"></a></span>
-<span id="cb2-205"><a href="#cb2-205"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$ where we take $p$ to be an odd prime.</span>
-<span id="cb2-206"><a href="#cb2-206"></a></span>
-<span id="cb2-207"><a href="#cb2-207"></a><span class="fu">## Galois field</span></span>
-<span id="cb2-208"><a href="#cb2-208"></a></span>
-<span id="cb2-209"><a href="#cb2-209"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In mathematics, a finite field or Galois field (so-named in honor of Évariste Galois) is a field that has a finite number of elements. As with any field, a finite field is a set on which the operations of multiplication, addition, subtraction and division are defined and satisfy certain basic rules. The most common examples of finite fields are the integers mod p $p$ when $p$ is a prime number.</span><span class="co">](https://en.wikipedia.org/wiki/Finite_field)</span></span>
-<span id="cb2-210"><a href="#cb2-210"></a></span>
-<span id="cb2-211"><a href="#cb2-211"></a><span class="fu">## Recall</span></span>
-<span id="cb2-212"><a href="#cb2-212"></a></span>
-<span id="cb2-213"><a href="#cb2-213"></a><span class="ss">- </span>The<span class="in">`u`</span>$n$s and <span class="in">`i`</span>$n$'s in Rust are *rings*</span>
-<span id="cb2-214"><a href="#cb2-214"></a><span class="ss">  - </span>They have addition and multiplication</span>
-<span id="cb2-215"><a href="#cb2-215"></a><span class="ss">- </span>They aren't fields - zero is divisible</span>
-<span id="cb2-216"><a href="#cb2-216"></a><span class="ss">  - </span>Spoiler alert, but $2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}$</span>
-<span id="cb2-217"><a href="#cb2-217"></a><span class="ss">- </span>So: not $\mathbb{Z}/2^8\mathbb{Z}$</span>
-<span id="cb2-218"><a href="#cb2-218"></a><span class="ss">    - </span>What about $\mathbb{Z}/(2^8+1)\mathbb{Z}$? </span>
-<span id="cb2-219"><a href="#cb2-219"></a><span class="ss">        - </span>That's $\mathbb{F}_p$ where $p = 2^8+1$</span>
-<span id="cb2-220"><a href="#cb2-220"></a>        </span>
-<span id="cb2-221"><a href="#cb2-221"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-222"><a href="#cb2-222"></a></span>
-<span id="cb2-223"><a href="#cb2-223"></a>An EdDSA signature scheme is a choice over:</span>
-<span id="cb2-224"><a href="#cb2-224"></a></span>
-<span id="cb2-225"><a href="#cb2-225"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
-<span id="cb2-226"><a href="#cb2-226"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
-<span id="cb2-227"><a href="#cb2-227"></a><span class="ss">    - </span>We simply as:</span>
-<span id="cb2-228"><a href="#cb2-228"></a><span class="ss">        - </span>A plane curve over</span>
-<span id="cb2-229"><a href="#cb2-229"></a><span class="ss">        - </span>A finite field</span>
-<span id="cb2-230"><a href="#cb2-230"></a><span class="ss">        - </span>of form $a x^2+y^2= 1+dx^2y^2$</span>
-<span id="cb2-231"><a href="#cb2-231"></a></span>
-<span id="cb2-232"><a href="#cb2-232"></a><span class="fu">## Plane Curve</span></span>
-<span id="cb2-233"><a href="#cb2-233"></a></span>
-<span id="cb2-234"><a href="#cb2-234"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In mathematics, a plane curve is a curve in a plane that may be a Euclidean plane, an affine plane or a projective plane. The most frequently studied cases are smooth plane curves (including piecewise smooth plane curves), and algebraic plane curves. Plane curves also include the Jordan curves (curves that enclose a region of the plane but need not be smooth) and the graphs of continuous functions.</span><span class="co">](https://en.wikipedia.org/wiki/Plane_curve)</span></span>
-<span id="cb2-235"><a href="#cb2-235"></a></span>
-<span id="cb2-236"><a href="#cb2-236"></a><span class="fu">## Graphs of Continous Functions</span></span>
-<span id="cb2-237"><a href="#cb2-237"></a></span>
-<span id="cb2-238"><a href="#cb2-238"></a><span class="ss">- </span>Often express as $f(x,y) = 0$</span>
-<span id="cb2-239"><a href="#cb2-239"></a></span>
-<span id="cb2-240"><a href="#cb2-240"></a>::::{.columns}</span>
-<span id="cb2-241"><a href="#cb2-241"></a></span>
-<span id="cb2-242"><a href="#cb2-242"></a>:::{.column width="50%"}</span>
-<span id="cb2-243"><a href="#cb2-243"></a></span>
-<span id="cb2-244"><a href="#cb2-244"></a><span class="in">```py</span></span>
-<span id="cb2-245"><a href="#cb2-245"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-246"><a href="#cb2-246"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-247"><a href="#cb2-247"></a><span class="im">import</span> sympy</span>
-<span id="cb2-248"><a href="#cb2-248"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
-<span id="cb2-249"><a href="#cb2-249"></a></span>
-<span id="cb2-250"><a href="#cb2-250"></a>r <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb2-251"><a href="#cb2-251"></a></span>
-<span id="cb2-252"><a href="#cb2-252"></a>curve <span class="op">=</span> sympy.Eq(<span class="dv">0</span>,x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> r)</span>
-<span id="cb2-253"><a href="#cb2-253"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
-<span id="cb2-254"><a href="#cb2-254"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
-<span id="cb2-255"><a href="#cb2-255"></a></span>
-<span id="cb2-256"><a href="#cb2-256"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>r, r, <span class="dv">1000</span>)</span>
-<span id="cb2-257"><a href="#cb2-257"></a></span>
-<span id="cb2-258"><a href="#cb2-258"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
-<span id="cb2-259"><a href="#cb2-259"></a><span class="in">```</span></span>
-<span id="cb2-260"><a href="#cb2-260"></a></span>
-<span id="cb2-261"><a href="#cb2-261"></a>:::</span>
-<span id="cb2-262"><a href="#cb2-262"></a></span>
-<span id="cb2-263"><a href="#cb2-263"></a>:::{.column width="50%"}</span>
-<span id="cb2-264"><a href="#cb2-264"></a></span>
-<span id="cb2-267"><a href="#cb2-267"></a><span class="in">```{python}</span></span>
-<span id="cb2-268"><a href="#cb2-268"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-269"><a href="#cb2-269"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-270"><a href="#cb2-270"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-271"><a href="#cb2-271"></a><span class="im">import</span> sympy</span>
-<span id="cb2-272"><a href="#cb2-272"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
-<span id="cb2-273"><a href="#cb2-273"></a></span>
-<span id="cb2-274"><a href="#cb2-274"></a>r <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb2-275"><a href="#cb2-275"></a></span>
-<span id="cb2-276"><a href="#cb2-276"></a>curve <span class="op">=</span> sympy.Eq(<span class="dv">0</span>,x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> r)</span>
-<span id="cb2-277"><a href="#cb2-277"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
-<span id="cb2-278"><a href="#cb2-278"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
-<span id="cb2-279"><a href="#cb2-279"></a></span>
-<span id="cb2-280"><a href="#cb2-280"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>r, r, <span class="dv">1000</span>)</span>
-<span id="cb2-281"><a href="#cb2-281"></a></span>
-<span id="cb2-282"><a href="#cb2-282"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
-<span id="cb2-283"><a href="#cb2-283"></a><span class="in">```</span></span>
-<span id="cb2-284"><a href="#cb2-284"></a></span>
-<span id="cb2-285"><a href="#cb2-285"></a>:::</span>
-<span id="cb2-286"><a href="#cb2-286"></a></span>
-<span id="cb2-287"><a href="#cb2-287"></a>::::</span>
-<span id="cb2-288"><a href="#cb2-288"></a></span>
-<span id="cb2-289"><a href="#cb2-289"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-290"><a href="#cb2-290"></a></span>
-<span id="cb2-291"><a href="#cb2-291"></a>An EdDSA signature scheme is a choice over:</span>
-<span id="cb2-292"><a href="#cb2-292"></a></span>
-<span id="cb2-293"><a href="#cb2-293"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
-<span id="cb2-294"><a href="#cb2-294"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
-<span id="cb2-295"><a href="#cb2-295"></a><span class="ss">    - </span>Whose group $E(\mathbb{F}_p)$ of $\mathbb{F}_p$-rational points has order $#E(\mathbb{F}_p) = 2^C \ell$ where $\ell$ is a large primce and $2^c$ is the cofactor</span>
-<span id="cb2-296"><a href="#cb2-296"></a><span class="ss">        - </span>Take a 400-level math class</span>
-<span id="cb2-297"><a href="#cb2-297"></a><span class="ss">        - </span>Basically this is a measure of the area within the ellipse.</span>
-<span id="cb2-298"><a href="#cb2-298"></a></span>
-<span id="cb2-299"><a href="#cb2-299"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-300"><a href="#cb2-300"></a></span>
-<span id="cb2-301"><a href="#cb2-301"></a>An EdDSA signature scheme is a choice over:</span>
-<span id="cb2-302"><a href="#cb2-302"></a></span>
-<span id="cb2-303"><a href="#cb2-303"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
-<span id="cb2-304"><a href="#cb2-304"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
-<span id="cb2-305"><a href="#cb2-305"></a><span class="ss">- </span>A base point $B \in E(\mathbb{F}_p)$</span>
-<span id="cb2-306"><a href="#cb2-306"></a><span class="ss">    - </span>This is the only parameter set when generating your own keys.</span>
-<span id="cb2-307"><a href="#cb2-307"></a><span class="ss">    - </span>Everything else is pre-computed.</span>
-<span id="cb2-308"><a href="#cb2-308"></a><span class="ss">    - </span>Basically a point on the curve.</span>
-<span id="cb2-309"><a href="#cb2-309"></a></span>
-<span id="cb2-310"><a href="#cb2-310"></a><span class="fu">## Iterative Definition</span></span>
-<span id="cb2-311"><a href="#cb2-311"></a></span>
-<span id="cb2-312"><a href="#cb2-312"></a>An EdDSA signature scheme is a choice over:</span>
-<span id="cb2-313"><a href="#cb2-313"></a></span>
-<span id="cb2-314"><a href="#cb2-314"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
-<span id="cb2-315"><a href="#cb2-315"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
-<span id="cb2-316"><a href="#cb2-316"></a><span class="ss">- </span>A base point $B \in E(\mathbb{F}_p)$</span>
-<span id="cb2-317"><a href="#cb2-317"></a><span class="ss">- </span>A hash function $H$ with $2b$-bit outputs, where $2^{b-1} &gt; q$</span>
-<span id="cb2-318"><a href="#cb2-318"></a><span class="ss">    - </span>This just allows machine representation.</span>
-<span id="cb2-319"><a href="#cb2-319"></a>    </span>
-<span id="cb2-320"><a href="#cb2-320"></a><span class="fu"># EdDSA, terms</span></span>
-<span id="cb2-321"><a href="#cb2-321"></a></span>
-<span id="cb2-322"><a href="#cb2-322"></a></span>
-<span id="cb2-323"><a href="#cb2-323"></a><span class="fu">## Public key</span></span>
-<span id="cb2-324"><a href="#cb2-324"></a></span>
-<span id="cb2-325"><a href="#cb2-325"></a>::: {.callout-note}</span>
-<span id="cb2-326"><a href="#cb2-326"></a><span class="fu">## Public key</span></span>
-<span id="cb2-327"><a href="#cb2-327"></a></span>
-<span id="cb2-328"><a href="#cb2-328"></a>An EdDSA *public key* is a curve point $A \in E(\mathbb{F}_p)$ encoded in $b$ bits</span>
-<span id="cb2-329"><a href="#cb2-329"></a>:::</span>
-<span id="cb2-330"><a href="#cb2-330"></a></span>
-<span id="cb2-331"><a href="#cb2-331"></a><span class="fu">## Signature verification</span></span>
-<span id="cb2-332"><a href="#cb2-332"></a></span>
-<span id="cb2-333"><a href="#cb2-333"></a>::: {.callout-note}</span>
-<span id="cb2-334"><a href="#cb2-334"></a><span class="fu">## Signature verification</span></span>
-<span id="cb2-335"><a href="#cb2-335"></a></span>
-<span id="cb2-336"><a href="#cb2-336"></a>An EdDSA *signature* on a message $M$ by public $A$ is the (ordered) pair $(R,S)$ encoded in $2b$ bits, where $R$ is a curve point $R \in E(\mathbb{F}_p)$ and $S$ is non-negative integer less than the size of the large prime $\ell$.  $(R,S)$ must satisfy the following equation (where $\parallel$ is string concatenation).</span>
-<span id="cb2-337"><a href="#cb2-337"></a></span>
-<span id="cb2-338"><a href="#cb2-338"></a>$$</span>
-<span id="cb2-339"><a href="#cb2-339"></a>2^c S B = 2^c R + 2^c H(R \parallel A \parallel M) A</span>
-<span id="cb2-340"><a href="#cb2-340"></a>$$</span>
-<span id="cb2-341"><a href="#cb2-341"></a>:::</span>
-<span id="cb2-342"><a href="#cb2-342"></a></span>
-<span id="cb2-343"><a href="#cb2-343"></a><span class="fu">## Private key</span></span>
-<span id="cb2-344"><a href="#cb2-344"></a></span>
-<span id="cb2-345"><a href="#cb2-345"></a></span>
-<span id="cb2-346"><a href="#cb2-346"></a>::: {.callout-note}</span>
-<span id="cb2-347"><a href="#cb2-347"></a><span class="fu">## Private key</span></span>
-<span id="cb2-348"><a href="#cb2-348"></a></span>
-<span id="cb2-349"><a href="#cb2-349"></a>An EdDSA private key is a $b$-bit string $k$ which should be chosen uniformly at random.  The corresponding public key is $A = s B$, where $s = H_{0,\dots,b - 1}(k)$ is the least significant $b$ bits of $H(k)$ interpreted as an integer.</span>
-<span id="cb2-350"><a href="#cb2-350"></a>:::</span>
-<span id="cb2-351"><a href="#cb2-351"></a></span>
-<span id="cb2-352"><a href="#cb2-352"></a><span class="fu">## Signing</span></span>
-<span id="cb2-353"><a href="#cb2-353"></a></span>
-<span id="cb2-354"><a href="#cb2-354"></a></span>
-<span id="cb2-355"><a href="#cb2-355"></a>::: {.callout-note}</span>
-<span id="cb2-356"><a href="#cb2-356"></a><span class="fu">## Signing</span></span>
-<span id="cb2-357"><a href="#cb2-357"></a></span>
-<span id="cb2-358"><a href="#cb2-358"></a>The signature on a message $M$ is deterministically computed as $(R, S)$ where $R = r B$ for $r = H(H_{b,\dots,2b - 1}(k) \parallel M)$, and </span>
-<span id="cb2-359"><a href="#cb2-359"></a>$$</span>
-<span id="cb2-360"><a href="#cb2-360"></a>S \equiv r + H(R \parallel A \parallel M) s \pmod \ell</span>
-<span id="cb2-361"><a href="#cb2-361"></a>$$</span>
-<span id="cb2-362"><a href="#cb2-362"></a>This satisfies the verification equation</span>
-<span id="cb2-363"><a href="#cb2-363"></a>$$</span>
-<span id="cb2-364"><a href="#cb2-364"></a>\begin{align}</span>
-<span id="cb2-365"><a href="#cb2-365"></a>2^c S B &amp;= 2^c (r + H(R \parallel A \parallel M) s) B <span class="sc">\\</span></span>
-<span id="cb2-366"><a href="#cb2-366"></a>        &amp;= 2^c r B + 2^c H(R \parallel A \parallel M) s B <span class="sc">\\</span></span>
-<span id="cb2-367"><a href="#cb2-367"></a>        &amp;= 2^c R + 2^c H(R \parallel A \parallel M) A.</span>
-<span id="cb2-368"><a href="#cb2-368"></a>\end{align}</span>
-<span id="cb2-369"><a href="#cb2-369"></a>$$</span>
-<span id="cb2-370"><a href="#cb2-370"></a>:::</span>
-<span id="cb2-371"><a href="#cb2-371"></a></span>
-<span id="cb2-372"><a href="#cb2-372"></a></span>
-<span id="cb2-373"><a href="#cb2-373"></a><span class="fu"># EdDSA, Ed25519</span></span>
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "EdDSA"</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">---</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu"># Announcements</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ss">- </span>**Welcome** to Systems in Rust</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="ss">- </span>**Action Items**:</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="ss">  - </span>Midterms verbal update.</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">  - </span>Keep at <span class="in">`ix`</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">  - </span>This unlocks the last and greatest of the cryptographic homeworks so we can get to graph theory.</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Today</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="ss">- </span>Private Key Cryptography</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">- </span>Digital Signatures</span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">- </span>Edwards-curve Digital Signature Algorithm (EdDSA) </span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="ss">    - </span>Some math where we need it</span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="ss">    - </span>An aside on side channels if we get bored</span>
+<span id="cb5-21"><a href="#cb5-21"></a>  </span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="fu"># Public Key Cryptography</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="fu">## Motivating Example</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="ss">- </span>Canonical Example is Snowden x Greenwald 2013</span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="ss">  - </span>Snowden wished to communicate a secret to Greenwald</span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="ss">  - </span>Snowden and Greenwald had never met</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="ss">  - </span>Snowden could not transmit the secret in plain text</span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="ss">- </span>Vs enigma, no prior agreement on how to encrypt/decrypt</span>
+<span id="cb5-32"><a href="#cb5-32"></a></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="fu">## Reads [Cryptobook](https://toc.cryptobook.us/book.pdf)</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="at">&gt; A key exchange protocol $P$ is a pair of probabilistic machines $(A, B)$ that take turns in sending messages to each other.</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="at">At the end of the protocol, when both machines terminate, they both obtain the same value $k$. A</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="at">protocol transcript $T_P$ is the sequence of messages exchanged between the parties in one exe-</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="at">cution of the protocol. </span></span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="fu">## Reads [Cryptobook](https://toc.cryptobook.us/book.pdf)</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="at">&gt; Since $A$ and $B$ are probabilistic machines, we obtain a different transcript</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="at">every time we run the protocol. Formally, the transcript $T_P$ of protocol $P$ is a random variable, which is a function of the random bits generated by $A$ and $B$. The eavesdropping adversary $E$ sees the entire transcript $T_P$ and its goal is to figure out the secret $k$.</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="fu">## Set the Stage</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="ss">- </span>Snowden has e.g. files on a harddrive</span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="ss">  - </span>The files contain keywords that cannot be safely transmitted over US-based internet connections.</span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="ss">  - </span>Snowden is based in Hawai'i with no access to non-US-based connections.</span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="ss">  - </span>Snowden needs to encrypt the files in such as a way that *only* a trusted destination may read them.</span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">## First Contact</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="ss">- </span>Snowden contacts Greenwald to agree to use a secure messaging protocol</span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="ss">  - </span>Use of such protocols is relatively non-suspicious, used for banking etc.</span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="ss">  - </span>It was enough to raise alarms for Snowden, but not quickly enough to stop him.</span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="ss">- </span>Greenwald agrees to a recommended protocol</span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="fu">## Initialization</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="ss">- </span>Greenwald generates a combination of numerical values on a local computing device.</span>
+<span id="cb5-62"><a href="#cb5-62"></a><span class="ss">  - </span>One of these is the public-key, which Greenwalk may circulate broadly.</span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="ss">- </span>We see an example of such a technology on the next slide.</span>
+<span id="cb5-64"><a href="#cb5-64"></a></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="fu">## SecureDrop</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="ss">- </span>Embed doesn't work for what are likely obvious reasons:</span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Link</span><span class="co">](https://theintercept.com/source/)</span></span>
+<span id="cb5-69"><a href="#cb5-69"></a></span>
+<span id="cb5-70"><a href="#cb5-70"></a>&lt;iframe </span>
+<span id="cb5-71"><a href="#cb5-71"></a>  id="source"</span>
+<span id="cb5-72"><a href="#cb5-72"></a>  title="source"</span>
+<span id="cb5-73"><a href="#cb5-73"></a>  width="70%"</span>
+<span id="cb5-74"><a href="#cb5-74"></a>  height="70%"</span>
+<span id="cb5-75"><a href="#cb5-75"></a>  src="https://theintercept.com/source/"&gt;&lt;/iframe&gt;</span>
+<span id="cb5-76"><a href="#cb5-76"></a></span>
+<span id="cb5-77"><a href="#cb5-77"></a><span class="fu">## Safety Note</span></span>
+<span id="cb5-78"><a href="#cb5-78"></a></span>
+<span id="cb5-79"><a href="#cb5-79"></a><span class="ss">- </span>Probably dropping to *The Intercept* is not recommended.</span>
+<span id="cb5-80"><a href="#cb5-80"></a><span class="ss">- </span>Reality Winner is currently incarcerated due to a leak fumbled by *The Intercept*</span>
+<span id="cb5-81"><a href="#cb5-81"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Read more</span><span class="co">](https://www.google.com/search?client=firefox-b-1-d&amp;q=reality+winner)</span></span>
+<span id="cb5-82"><a href="#cb5-82"></a></span>
+<span id="cb5-83"><a href="#cb5-83"></a><span class="fu">## Step 2</span></span>
+<span id="cb5-84"><a href="#cb5-84"></a></span>
+<span id="cb5-85"><a href="#cb5-85"></a><span class="ss">- </span>Greenwald &amp; co. hold in reserve a *private-key*</span>
+<span id="cb5-86"><a href="#cb5-86"></a><span class="ss">- </span>They defend it like lives depend on it, as they did for Winner and Snowden.</span>
+<span id="cb5-87"><a href="#cb5-87"></a><span class="ss">- </span>So: not stored in plaintext on a hard-drive</span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="ss">- </span>So: if on a hard-drive, hard-drive is in a secure site from e.g. federal law enforcement.</span>
+<span id="cb5-89"><a href="#cb5-89"></a></span>
+<span id="cb5-90"><a href="#cb5-90"></a><span class="fu">## Step 3</span></span>
+<span id="cb5-91"><a href="#cb5-91"></a></span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="ss">- </span>Snowden, and hopefully enough others to avoid suspicion, use the public key to encrypt their payload.</span>
+<span id="cb5-93"><a href="#cb5-93"></a><span class="ss">- </span>In addition to e.g. top secret documents, concerned community members could send in less-secret materials such as analysis of policing data with which they would rather not be affiliated.</span>
+<span id="cb5-94"><a href="#cb5-94"></a><span class="ss">- </span>Journalists sift through the inputs.</span>
+<span id="cb5-95"><a href="#cb5-95"></a></span>
+<span id="cb5-96"><a href="#cb5-96"></a><span class="fu">## It's that simple</span></span>
+<span id="cb5-97"><a href="#cb5-97"></a></span>
+<span id="cb5-98"><a href="#cb5-98"></a><span class="ss">- </span>Okay but like how do we do that:</span>
+<span id="cb5-99"><a href="#cb5-99"></a><span class="ss">  - </span>Any eaves-dropping adversary can see the public key.</span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="ss">  - </span>One-to-one communication of a key is already dangerous</span>
+<span id="cb5-101"><a href="#cb5-101"></a><span class="ss">  - </span>All this encryption/decryption needs to be managable by e.g. non-computing specialized journalists.</span>
+<span id="cb5-102"><a href="#cb5-102"></a>  </span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="fu"># Digital Signatures</span></span>
+<span id="cb5-104"><a href="#cb5-104"></a></span>
+<span id="cb5-105"><a href="#cb5-105"></a><span class="fu">## Motivating Example</span></span>
+<span id="cb5-106"><a href="#cb5-106"></a></span>
+<span id="cb5-107"><a href="#cb5-107"></a><span class="ss">- </span>I have a Bitcoin.</span>
+<span id="cb5-108"><a href="#cb5-108"></a><span class="ss">- </span>I can only spend it if other people can:</span>
+<span id="cb5-109"><a href="#cb5-109"></a><span class="ss">    - </span>See it, to tell I have it</span>
+<span id="cb5-110"><a href="#cb5-110"></a><span class="ss">    - </span>Not spend it, because it's mine</span>
+<span id="cb5-111"><a href="#cb5-111"></a><span class="ss">- </span>I use a digital signature.</span>
+<span id="cb5-112"><a href="#cb5-112"></a></span>
+<span id="cb5-113"><a href="#cb5-113"></a></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="fu">## A transaction</span></span>
+<span id="cb5-115"><a href="#cb5-115"></a></span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="at">&gt; Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin</span></span>
+<span id="cb5-117"><a href="#cb5-117"></a></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="ss">- </span>I own a coin.</span>
+<span id="cb5-119"><a href="#cb5-119"></a><span class="ss">- </span>I have a public keys.</span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="ss">- </span>I transfer that a coin to new owner to buy the *Grundrisse* translated to Quenya</span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="ss">- </span>This happens over the open internet.</span>
+<span id="cb5-122"><a href="#cb5-122"></a></span>
+<span id="cb5-123"><a href="#cb5-123"></a><span class="fu">## Signage</span></span>
+<span id="cb5-124"><a href="#cb5-124"></a></span>
+<span id="cb5-125"><a href="#cb5-125"></a><span class="ss">- </span>To verify it is (1) my coin and (2) me transferring it, I:</span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="ss">    - </span>Write down the transactions details.</span>
+<span id="cb5-127"><a href="#cb5-127"></a><span class="ss">    - </span>SHA256 hash the message</span>
+<span id="cb5-128"><a href="#cb5-128"></a><span class="ss">    - </span>Encrypt with my **private key**</span>
+<span id="cb5-129"><a href="#cb5-129"></a><span class="ss">    - </span>Release the hash and cipher (encrypted) text</span>
+<span id="cb5-130"><a href="#cb5-130"></a></span>
+<span id="cb5-131"><a href="#cb5-131"></a><span class="fu">## Verify</span></span>
+<span id="cb5-132"><a href="#cb5-132"></a></span>
+<span id="cb5-133"><a href="#cb5-133"></a><span class="ss">- </span>The general public:</span>
+<span id="cb5-134"><a href="#cb5-134"></a><span class="ss">    - </span>Decrypts the ciphertext with my **public key**</span>
+<span id="cb5-135"><a href="#cb5-135"></a><span class="ss">    - </span>SHA256 hashes the decrypted text</span>
+<span id="cb5-136"><a href="#cb5-136"></a><span class="ss">    - </span>If the hash matches our released hash, then it had to be us and the transaction is valid.</span>
+<span id="cb5-137"><a href="#cb5-137"></a></span>
+<span id="cb5-138"><a href="#cb5-138"></a><span class="fu">## </span></span>
+<span id="cb5-139"><a href="#cb5-139"></a></span>
+<span id="cb5-142"><a href="#cb5-142"></a><span class="in">```{dot}</span></span>
+<span id="cb5-143"><a href="#cb5-143"></a><span class="in">//| fig-width: 800px</span></span>
+<span id="cb5-144"><a href="#cb5-144"></a><span class="in">//| echo: false</span></span>
+<span id="cb5-145"><a href="#cb5-145"></a><span class="in">digraph RSA_Encryption {</span></span>
+<span id="cb5-146"><a href="#cb5-146"></a><span class="in">  bgcolor="#191919";</span></span>
+<span id="cb5-147"><a href="#cb5-147"></a><span class="in">  node [fontcolor = "#ffffff", color = "#ffffff"]</span></span>
+<span id="cb5-148"><a href="#cb5-148"></a><span class="in">  edge [color = "#ffffff", fontcolor = "#ffffff"]</span></span>
+<span id="cb5-149"><a href="#cb5-149"></a></span>
+<span id="cb5-150"><a href="#cb5-150"></a><span class="in">  // Encryption</span></span>
+<span id="cb5-151"><a href="#cb5-151"></a><span class="in">  subgraph cluster_encryption {</span></span>
+<span id="cb5-152"><a href="#cb5-152"></a><span class="in">    fontcolor = "#ffffff";</span></span>
+<span id="cb5-153"><a href="#cb5-153"></a><span class="in">    color = "#ffffff";</span></span>
+<span id="cb5-154"><a href="#cb5-154"></a><span class="in">    label = "Encryption";</span></span>
+<span id="cb5-155"><a href="#cb5-155"></a><span class="in">    message [label="Message (M)"];</span></span>
+<span id="cb5-156"><a href="#cb5-156"></a><span class="in">    encrypt [label="Ciphertext (C)"];</span></span>
+<span id="cb5-157"><a href="#cb5-157"></a><span class="in">    public_key_ref [label="Private Key: (n, d)", shape=note];</span></span>
+<span id="cb5-158"><a href="#cb5-158"></a></span>
+<span id="cb5-159"><a href="#cb5-159"></a><span class="in">    message -&gt; encrypt;</span></span>
+<span id="cb5-160"><a href="#cb5-160"></a><span class="in">    public_key_ref -&gt; encrypt;</span></span>
+<span id="cb5-161"><a href="#cb5-161"></a><span class="in">  }</span></span>
+<span id="cb5-162"><a href="#cb5-162"></a></span>
+<span id="cb5-163"><a href="#cb5-163"></a><span class="in">  // Decryption</span></span>
+<span id="cb5-164"><a href="#cb5-164"></a><span class="in">  subgraph cluster_decryption {</span></span>
+<span id="cb5-165"><a href="#cb5-165"></a><span class="in">    fontcolor = "#ffffff";</span></span>
+<span id="cb5-166"><a href="#cb5-166"></a><span class="in">    color = "#ffffff";</span></span>
+<span id="cb5-167"><a href="#cb5-167"></a><span class="in">    label = "Decryption";</span></span>
+<span id="cb5-168"><a href="#cb5-168"></a><span class="in">    ciphertext [label="Ciphertext (C)"];</span></span>
+<span id="cb5-169"><a href="#cb5-169"></a><span class="in">    decrypt [label="Message (M)"];</span></span>
+<span id="cb5-170"><a href="#cb5-170"></a><span class="in">    private_key_ref [label="Public Key: (n, e)", shape=note];</span></span>
+<span id="cb5-171"><a href="#cb5-171"></a></span>
+<span id="cb5-172"><a href="#cb5-172"></a><span class="in">    ciphertext -&gt; decrypt;</span></span>
+<span id="cb5-173"><a href="#cb5-173"></a><span class="in">    private_key_ref -&gt; decrypt;</span></span>
+<span id="cb5-174"><a href="#cb5-174"></a><span class="in">  }</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a></span>
+<span id="cb5-176"><a href="#cb5-176"></a><span class="in">  input [label="Unencrypted Transaction"]</span></span>
+<span id="cb5-177"><a href="#cb5-177"></a><span class="in">  inter [label="Encrypted Transaction"]</span></span>
+<span id="cb5-178"><a href="#cb5-178"></a><span class="in">  output [label="Decrypted Transaction"]</span></span>
+<span id="cb5-179"><a href="#cb5-179"></a></span>
+<span id="cb5-180"><a href="#cb5-180"></a><span class="in">  // Connections between steps</span></span>
+<span id="cb5-181"><a href="#cb5-181"></a><span class="in">  input -&gt; message;</span></span>
+<span id="cb5-182"><a href="#cb5-182"></a><span class="in">  encrypt -&gt; inter;</span></span>
+<span id="cb5-183"><a href="#cb5-183"></a><span class="in">  inter -&gt; ciphertext;</span></span>
+<span id="cb5-184"><a href="#cb5-184"></a><span class="in">  decrypt -&gt; output;</span></span>
+<span id="cb5-185"><a href="#cb5-185"></a><span class="in">}</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a><span class="in">```</span></span>
+<span id="cb5-187"><a href="#cb5-187"></a></span>
+<span id="cb5-188"><a href="#cb5-188"></a>  </span>
+<span id="cb5-189"><a href="#cb5-189"></a><span class="fu"># EdDSA, algorithm</span></span>
+<span id="cb5-190"><a href="#cb5-190"></a> </span>
+<span id="cb5-191"><a href="#cb5-191"></a><span class="fu">## EdDSA</span></span>
+<span id="cb5-192"><a href="#cb5-192"></a></span>
+<span id="cb5-193"><a href="#cb5-193"></a><span class="at">&gt; In public-key cryptography, Edwards-curve Digital Signature Algorithm (EdDSA) is a digital signature scheme using a variant of Schnorr signature based on twisted Edwards curves.</span></span>
+<span id="cb5-194"><a href="#cb5-194"></a></span>
+<span id="cb5-195"><a href="#cb5-195"></a><span class="ss">- </span>Ah, that really clarifies things.</span>
+<span id="cb5-196"><a href="#cb5-196"></a></span>
+<span id="cb5-197"><a href="#cb5-197"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-198"><a href="#cb5-198"></a></span>
+<span id="cb5-199"><a href="#cb5-199"></a>An EdDSA signature scheme is a choice.</span>
+<span id="cb5-200"><a href="#cb5-200"></a></span>
+<span id="cb5-201"><a href="#cb5-201"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-202"><a href="#cb5-202"></a></span>
+<span id="cb5-203"><a href="#cb5-203"></a>An EdDSA signature scheme is a choice over:</span>
+<span id="cb5-204"><a href="#cb5-204"></a></span>
+<span id="cb5-205"><a href="#cb5-205"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$ where we take $p$ to be an odd prime.</span>
+<span id="cb5-206"><a href="#cb5-206"></a></span>
+<span id="cb5-207"><a href="#cb5-207"></a><span class="fu">## Galois field</span></span>
+<span id="cb5-208"><a href="#cb5-208"></a></span>
+<span id="cb5-209"><a href="#cb5-209"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In mathematics, a finite field or Galois field (so-named in honor of Évariste Galois) is a field that has a finite number of elements. As with any field, a finite field is a set on which the operations of multiplication, addition, subtraction and division are defined and satisfy certain basic rules. The most common examples of finite fields are the integers mod p $p$ when $p$ is a prime number.</span><span class="co">](https://en.wikipedia.org/wiki/Finite_field)</span></span>
+<span id="cb5-210"><a href="#cb5-210"></a></span>
+<span id="cb5-211"><a href="#cb5-211"></a><span class="fu">## Recall</span></span>
+<span id="cb5-212"><a href="#cb5-212"></a></span>
+<span id="cb5-213"><a href="#cb5-213"></a><span class="ss">- </span>The<span class="in">`u`</span>$n$s and <span class="in">`i`</span>$n$'s in Rust are *rings*</span>
+<span id="cb5-214"><a href="#cb5-214"></a><span class="ss">  - </span>They have addition and multiplication</span>
+<span id="cb5-215"><a href="#cb5-215"></a><span class="ss">- </span>They aren't fields - zero is divisible</span>
+<span id="cb5-216"><a href="#cb5-216"></a><span class="ss">  - </span>Spoiler alert, but $2^{\frac{n}{2}} \times 2^{\frac{n}{2}} \equiv 0 \pmod{2^n}$</span>
+<span id="cb5-217"><a href="#cb5-217"></a><span class="ss">- </span>So: not $\mathbb{Z}/2^8\mathbb{Z}$</span>
+<span id="cb5-218"><a href="#cb5-218"></a><span class="ss">    - </span>What about $\mathbb{Z}/(2^8+1)\mathbb{Z}$? </span>
+<span id="cb5-219"><a href="#cb5-219"></a><span class="ss">        - </span>That's $\mathbb{F}_p$ where $p = 2^8+1$</span>
+<span id="cb5-220"><a href="#cb5-220"></a>        </span>
+<span id="cb5-221"><a href="#cb5-221"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-222"><a href="#cb5-222"></a></span>
+<span id="cb5-223"><a href="#cb5-223"></a>An EdDSA signature scheme is a choice over:</span>
+<span id="cb5-224"><a href="#cb5-224"></a></span>
+<span id="cb5-225"><a href="#cb5-225"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
+<span id="cb5-226"><a href="#cb5-226"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
+<span id="cb5-227"><a href="#cb5-227"></a><span class="ss">    - </span>We simply as:</span>
+<span id="cb5-228"><a href="#cb5-228"></a><span class="ss">        - </span>A plane curve over</span>
+<span id="cb5-229"><a href="#cb5-229"></a><span class="ss">        - </span>A finite field</span>
+<span id="cb5-230"><a href="#cb5-230"></a><span class="ss">        - </span>of form $a x^2+y^2= 1+dx^2y^2$</span>
+<span id="cb5-231"><a href="#cb5-231"></a></span>
+<span id="cb5-232"><a href="#cb5-232"></a><span class="fu">## Plane Curve</span></span>
+<span id="cb5-233"><a href="#cb5-233"></a></span>
+<span id="cb5-234"><a href="#cb5-234"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In mathematics, a plane curve is a curve in a plane that may be a Euclidean plane, an affine plane or a projective plane. The most frequently studied cases are smooth plane curves (including piecewise smooth plane curves), and algebraic plane curves. Plane curves also include the Jordan curves (curves that enclose a region of the plane but need not be smooth) and the graphs of continuous functions.</span><span class="co">](https://en.wikipedia.org/wiki/Plane_curve)</span></span>
+<span id="cb5-235"><a href="#cb5-235"></a></span>
+<span id="cb5-236"><a href="#cb5-236"></a><span class="fu">## Graphs of Continous Functions</span></span>
+<span id="cb5-237"><a href="#cb5-237"></a></span>
+<span id="cb5-238"><a href="#cb5-238"></a><span class="ss">- </span>Often express as $f(x,y) = 0$</span>
+<span id="cb5-239"><a href="#cb5-239"></a></span>
+<span id="cb5-240"><a href="#cb5-240"></a>::::{.columns}</span>
+<span id="cb5-241"><a href="#cb5-241"></a></span>
+<span id="cb5-242"><a href="#cb5-242"></a>:::{.column width="50%"}</span>
+<span id="cb5-243"><a href="#cb5-243"></a></span>
+<span id="cb5-244"><a href="#cb5-244"></a><span class="in">```py</span></span>
+<span id="cb5-245"><a href="#cb5-245"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-246"><a href="#cb5-246"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-247"><a href="#cb5-247"></a><span class="im">import</span> sympy</span>
+<span id="cb5-248"><a href="#cb5-248"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-249"><a href="#cb5-249"></a></span>
+<span id="cb5-250"><a href="#cb5-250"></a>r <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-251"><a href="#cb5-251"></a></span>
+<span id="cb5-252"><a href="#cb5-252"></a>curve <span class="op">=</span> sympy.Eq(<span class="dv">0</span>,x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> r)</span>
+<span id="cb5-253"><a href="#cb5-253"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-254"><a href="#cb5-254"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-255"><a href="#cb5-255"></a></span>
+<span id="cb5-256"><a href="#cb5-256"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>r, r, <span class="dv">1000</span>)</span>
+<span id="cb5-257"><a href="#cb5-257"></a></span>
+<span id="cb5-258"><a href="#cb5-258"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-259"><a href="#cb5-259"></a><span class="in">```</span></span>
+<span id="cb5-260"><a href="#cb5-260"></a></span>
+<span id="cb5-261"><a href="#cb5-261"></a>:::</span>
+<span id="cb5-262"><a href="#cb5-262"></a></span>
+<span id="cb5-263"><a href="#cb5-263"></a>:::{.column width="50%"}</span>
+<span id="cb5-264"><a href="#cb5-264"></a></span>
+<span id="cb5-267"><a href="#cb5-267"></a><span class="in">```{python}</span></span>
+<span id="cb5-268"><a href="#cb5-268"></a><span class="co">#| echo: false</span></span>
+<span id="cb5-269"><a href="#cb5-269"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-270"><a href="#cb5-270"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-271"><a href="#cb5-271"></a><span class="im">import</span> sympy</span>
+<span id="cb5-272"><a href="#cb5-272"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-273"><a href="#cb5-273"></a></span>
+<span id="cb5-274"><a href="#cb5-274"></a>r <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-275"><a href="#cb5-275"></a></span>
+<span id="cb5-276"><a href="#cb5-276"></a>curve <span class="op">=</span> sympy.Eq(<span class="dv">0</span>,x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> r)</span>
+<span id="cb5-277"><a href="#cb5-277"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-278"><a href="#cb5-278"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-279"><a href="#cb5-279"></a></span>
+<span id="cb5-280"><a href="#cb5-280"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>r, r, <span class="dv">1000</span>)</span>
+<span id="cb5-281"><a href="#cb5-281"></a></span>
+<span id="cb5-282"><a href="#cb5-282"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-283"><a href="#cb5-283"></a><span class="in">```</span></span>
+<span id="cb5-284"><a href="#cb5-284"></a></span>
+<span id="cb5-285"><a href="#cb5-285"></a>:::</span>
+<span id="cb5-286"><a href="#cb5-286"></a></span>
+<span id="cb5-287"><a href="#cb5-287"></a>::::</span>
+<span id="cb5-288"><a href="#cb5-288"></a></span>
+<span id="cb5-289"><a href="#cb5-289"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-290"><a href="#cb5-290"></a></span>
+<span id="cb5-291"><a href="#cb5-291"></a>An EdDSA signature scheme is a choice over:</span>
+<span id="cb5-292"><a href="#cb5-292"></a></span>
+<span id="cb5-293"><a href="#cb5-293"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
+<span id="cb5-294"><a href="#cb5-294"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
+<span id="cb5-295"><a href="#cb5-295"></a><span class="ss">    - </span>Whose group $E(\mathbb{F}_p)$ of $\mathbb{F}_p$-rational points has order $|E(\mathbb{F}_p)| = 2^C \ell$ where $\ell$ is a large primce and $2^c$ is the cofactor</span>
+<span id="cb5-296"><a href="#cb5-296"></a><span class="ss">        - </span>Take a 400-level math class</span>
+<span id="cb5-297"><a href="#cb5-297"></a><span class="ss">        - </span>Basically this is a measure of the area within the ellipse.</span>
+<span id="cb5-298"><a href="#cb5-298"></a></span>
+<span id="cb5-299"><a href="#cb5-299"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-300"><a href="#cb5-300"></a></span>
+<span id="cb5-301"><a href="#cb5-301"></a>An EdDSA signature scheme is a choice over:</span>
+<span id="cb5-302"><a href="#cb5-302"></a></span>
+<span id="cb5-303"><a href="#cb5-303"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
+<span id="cb5-304"><a href="#cb5-304"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
+<span id="cb5-305"><a href="#cb5-305"></a><span class="ss">- </span>A base point $B \in E(\mathbb{F}_p)$</span>
+<span id="cb5-306"><a href="#cb5-306"></a><span class="ss">    - </span>This is the only parameter set when generating your own keys.</span>
+<span id="cb5-307"><a href="#cb5-307"></a><span class="ss">    - </span>Everything else is pre-computed.</span>
+<span id="cb5-308"><a href="#cb5-308"></a><span class="ss">    - </span>Basically a point on the curve.</span>
+<span id="cb5-309"><a href="#cb5-309"></a></span>
+<span id="cb5-310"><a href="#cb5-310"></a><span class="fu">## Iterative Definition</span></span>
+<span id="cb5-311"><a href="#cb5-311"></a></span>
+<span id="cb5-312"><a href="#cb5-312"></a>An EdDSA signature scheme is a choice over:</span>
+<span id="cb5-313"><a href="#cb5-313"></a></span>
+<span id="cb5-314"><a href="#cb5-314"></a><span class="ss">- </span>A finite field $\mathbb{F}_p$.</span>
+<span id="cb5-315"><a href="#cb5-315"></a><span class="ss">- </span>An elliptic curve $E$ over $\mathbb{F}_p$</span>
+<span id="cb5-316"><a href="#cb5-316"></a><span class="ss">- </span>A base point $B \in E(\mathbb{F}_p)$</span>
+<span id="cb5-317"><a href="#cb5-317"></a><span class="ss">- </span>A hash function $H$ with $2b$-bit outputs, where $2^{b-1} &gt; q$</span>
+<span id="cb5-318"><a href="#cb5-318"></a><span class="ss">    - </span>This just allows machine representation.</span>
+<span id="cb5-319"><a href="#cb5-319"></a>    </span>
+<span id="cb5-320"><a href="#cb5-320"></a><span class="fu"># EdDSA, terms</span></span>
+<span id="cb5-321"><a href="#cb5-321"></a></span>
+<span id="cb5-322"><a href="#cb5-322"></a></span>
+<span id="cb5-323"><a href="#cb5-323"></a><span class="fu">## Public key</span></span>
+<span id="cb5-324"><a href="#cb5-324"></a></span>
+<span id="cb5-325"><a href="#cb5-325"></a>::: {.callout-note}</span>
+<span id="cb5-326"><a href="#cb5-326"></a><span class="fu">## Public key</span></span>
+<span id="cb5-327"><a href="#cb5-327"></a></span>
+<span id="cb5-328"><a href="#cb5-328"></a>An EdDSA *public key* is a curve point $A \in E(\mathbb{F}_p)$ encoded in $b$ bits</span>
+<span id="cb5-329"><a href="#cb5-329"></a>:::</span>
+<span id="cb5-330"><a href="#cb5-330"></a></span>
+<span id="cb5-331"><a href="#cb5-331"></a><span class="fu">## Signature verification</span></span>
+<span id="cb5-332"><a href="#cb5-332"></a></span>
+<span id="cb5-333"><a href="#cb5-333"></a>::: {.callout-note}</span>
+<span id="cb5-334"><a href="#cb5-334"></a><span class="fu">## Signature verification</span></span>
+<span id="cb5-335"><a href="#cb5-335"></a></span>
+<span id="cb5-336"><a href="#cb5-336"></a>An EdDSA *signature* on a message $M$ by public $A$ is the (ordered) pair $(R,S)$ encoded in $2b$ bits, where $R$ is a curve point $R \in E(\mathbb{F}_p)$ and $S$ is non-negative integer less than the size of the large prime $\ell$.  $(R,S)$ must satisfy the following equation (where $\parallel$ is string concatenation).</span>
+<span id="cb5-337"><a href="#cb5-337"></a></span>
+<span id="cb5-338"><a href="#cb5-338"></a>$$</span>
+<span id="cb5-339"><a href="#cb5-339"></a>2^c S B = 2^c R + 2^c H(R \parallel A \parallel M) A</span>
+<span id="cb5-340"><a href="#cb5-340"></a>$$</span>
+<span id="cb5-341"><a href="#cb5-341"></a>:::</span>
+<span id="cb5-342"><a href="#cb5-342"></a></span>
+<span id="cb5-343"><a href="#cb5-343"></a><span class="fu">## Private key</span></span>
+<span id="cb5-344"><a href="#cb5-344"></a></span>
+<span id="cb5-345"><a href="#cb5-345"></a></span>
+<span id="cb5-346"><a href="#cb5-346"></a>::: {.callout-note}</span>
+<span id="cb5-347"><a href="#cb5-347"></a><span class="fu">## Private key</span></span>
+<span id="cb5-348"><a href="#cb5-348"></a></span>
+<span id="cb5-349"><a href="#cb5-349"></a>An EdDSA private key is a $b$-bit string $k$ which should be chosen uniformly at random.  The corresponding public key is $A = s B$, where $s = H_{0,\dots,b - 1}(k)$ is the least significant $b$ bits of $H(k)$ interpreted as an integer.</span>
+<span id="cb5-350"><a href="#cb5-350"></a>:::</span>
+<span id="cb5-351"><a href="#cb5-351"></a></span>
+<span id="cb5-352"><a href="#cb5-352"></a><span class="fu">## Signing</span></span>
+<span id="cb5-353"><a href="#cb5-353"></a></span>
+<span id="cb5-354"><a href="#cb5-354"></a></span>
+<span id="cb5-355"><a href="#cb5-355"></a>::: {.callout-note}</span>
+<span id="cb5-356"><a href="#cb5-356"></a><span class="fu">## Signing</span></span>
+<span id="cb5-357"><a href="#cb5-357"></a></span>
+<span id="cb5-358"><a href="#cb5-358"></a>The signature on a message $M$ is deterministically computed as $(R, S)$ where $R = r B$ for $r = H(H_{b,\dots,2b - 1}(k) \parallel M)$, and </span>
+<span id="cb5-359"><a href="#cb5-359"></a>$$</span>
+<span id="cb5-360"><a href="#cb5-360"></a>S \equiv r + H(R \parallel A \parallel M) s \pmod \ell</span>
+<span id="cb5-361"><a href="#cb5-361"></a>$$</span>
+<span id="cb5-362"><a href="#cb5-362"></a>This satisfies the verification equation</span>
+<span id="cb5-363"><a href="#cb5-363"></a>$$</span>
+<span id="cb5-364"><a href="#cb5-364"></a>\begin{align}</span>
+<span id="cb5-365"><a href="#cb5-365"></a>2^c S B &amp;= 2^c (r + H(R \parallel A \parallel M) s) B <span class="sc">\\</span></span>
+<span id="cb5-366"><a href="#cb5-366"></a>        &amp;= 2^c r B + 2^c H(R \parallel A \parallel M) s B <span class="sc">\\</span></span>
+<span id="cb5-367"><a href="#cb5-367"></a>        &amp;= 2^c R + 2^c H(R \parallel A \parallel M) A.</span>
+<span id="cb5-368"><a href="#cb5-368"></a>\end{align}</span>
+<span id="cb5-369"><a href="#cb5-369"></a>$$</span>
+<span id="cb5-370"><a href="#cb5-370"></a>:::</span>
+<span id="cb5-371"><a href="#cb5-371"></a></span>
+<span id="cb5-372"><a href="#cb5-372"></a></span>
+<span id="cb5-373"><a href="#cb5-373"></a><span class="fu"># EdDSA, Ed25519</span></span>
+<span id="cb5-374"><a href="#cb5-374"></a></span>
+<span id="cb5-375"><a href="#cb5-375"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-376"><a href="#cb5-376"></a></span>
+<span id="cb5-377"><a href="#cb5-377"></a><span class="ss">- </span>EdDSA with:</span>
+<span id="cb5-378"><a href="#cb5-378"></a><span class="ss">    - </span>SHA-512</span>
+<span id="cb5-379"><a href="#cb5-379"></a><span class="ss">    - </span>Curve25519</span>
+<span id="cb5-380"><a href="#cb5-380"></a>    </span>
+<span id="cb5-381"><a href="#cb5-381"></a><span class="fu">## Curve25519</span></span>
+<span id="cb5-382"><a href="#cb5-382"></a></span>
+<span id="cb5-383"><a href="#cb5-383"></a><span class="ss">- </span>An unusually fast curve to calculate on modern CPUs</span>
+<span id="cb5-384"><a href="#cb5-384"></a><span class="ss">- </span>*Not* made me the NSA, and released after an NSA released curve was discovered to have a backdoor.</span>
+<span id="cb5-385"><a href="#cb5-385"></a><span class="ss">- </span>Named for being over the prime field $2^{255}-19$ - hence 25519</span>
+<span id="cb5-386"><a href="#cb5-386"></a></span>
+<span id="cb5-387"><a href="#cb5-387"></a></span>
+<span id="cb5-388"><a href="#cb5-388"></a></span>
+<span id="cb5-389"><a href="#cb5-389"></a><span class="fu">## Visualize</span></span>
+<span id="cb5-390"><a href="#cb5-390"></a></span>
+<span id="cb5-391"><a href="#cb5-391"></a>::::{.columns}</span>
+<span id="cb5-392"><a href="#cb5-392"></a></span>
+<span id="cb5-393"><a href="#cb5-393"></a>:::{.column width="50%"}</span>
+<span id="cb5-394"><a href="#cb5-394"></a></span>
+<span id="cb5-395"><a href="#cb5-395"></a><span class="in">```py</span></span>
+<span id="cb5-396"><a href="#cb5-396"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-397"><a href="#cb5-397"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-398"><a href="#cb5-398"></a><span class="im">import</span> sympy</span>
+<span id="cb5-399"><a href="#cb5-399"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-400"><a href="#cb5-400"></a></span>
+<span id="cb5-401"><a href="#cb5-401"></a>curve <span class="op">=</span> sympy.Eq(y<span class="op">*</span>y, x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">486662</span><span class="op">*</span>x<span class="op">*</span>x <span class="op">+</span> x)</span>
+<span id="cb5-402"><a href="#cb5-402"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-403"><a href="#cb5-403"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-404"><a href="#cb5-404"></a></span>
+<span id="cb5-405"><a href="#cb5-405"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.00001</span>, <span class="fl">.00001</span>, <span class="dv">1000</span>)</span>
+<span id="cb5-406"><a href="#cb5-406"></a></span>
+<span id="cb5-407"><a href="#cb5-407"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-408"><a href="#cb5-408"></a><span class="in">```</span></span>
+<span id="cb5-409"><a href="#cb5-409"></a></span>
+<span id="cb5-410"><a href="#cb5-410"></a>:::</span>
+<span id="cb5-411"><a href="#cb5-411"></a></span>
+<span id="cb5-412"><a href="#cb5-412"></a>:::{.column width="50%"}</span>
+<span id="cb5-413"><a href="#cb5-413"></a></span>
+<span id="cb5-416"><a href="#cb5-416"></a><span class="in">```{python}</span></span>
+<span id="cb5-417"><a href="#cb5-417"></a><span class="co">#| echo: false</span></span>
+<span id="cb5-418"><a href="#cb5-418"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-419"><a href="#cb5-419"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-420"><a href="#cb5-420"></a><span class="im">import</span> sympy</span>
+<span id="cb5-421"><a href="#cb5-421"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-422"><a href="#cb5-422"></a></span>
+<span id="cb5-423"><a href="#cb5-423"></a>curve <span class="op">=</span> sympy.Eq(y<span class="op">*</span>y, x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">486662</span><span class="op">*</span>x<span class="op">*</span>x <span class="op">+</span> x)</span>
+<span id="cb5-424"><a href="#cb5-424"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-425"><a href="#cb5-425"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-426"><a href="#cb5-426"></a></span>
+<span id="cb5-427"><a href="#cb5-427"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.00001</span>, <span class="fl">.00001</span>, <span class="dv">1000</span>)</span>
+<span id="cb5-428"><a href="#cb5-428"></a></span>
+<span id="cb5-429"><a href="#cb5-429"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-430"><a href="#cb5-430"></a><span class="in">```</span></span>
+<span id="cb5-431"><a href="#cb5-431"></a></span>
+<span id="cb5-432"><a href="#cb5-432"></a>:::</span>
+<span id="cb5-433"><a href="#cb5-433"></a></span>
+<span id="cb5-434"><a href="#cb5-434"></a>::::</span>
+<span id="cb5-435"><a href="#cb5-435"></a></span>
+<span id="cb5-436"><a href="#cb5-436"></a><span class="fu">## Bernstein</span></span>
+<span id="cb5-437"><a href="#cb5-437"></a></span>
+<span id="cb5-438"><a href="#cb5-438"></a><span class="ss">- </span>Discovered by a team including Daniel J. Bernstein.</span>
+<span id="cb5-439"><a href="#cb5-439"></a></span>
+<span id="cb5-440"><a href="#cb5-440"></a><span class="at">&gt; The export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption.</span></span>
+<span id="cb5-441"><a href="#cb5-441"></a></span>
+<span id="cb5-442"><a href="#cb5-442"></a><span class="fu">## Lange</span></span>
+<span id="cb5-443"><a href="#cb5-443"></a></span>
+<span id="cb5-444"><a href="#cb5-444"></a><span class="ss">- </span>Discovered by a team including Tanja Lange.</span>
+<span id="cb5-445"><a href="#cb5-445"></a><span class="ss">    - </span>Academic and anti-surveillance activist</span>
+<span id="cb5-446"><a href="#cb5-446"></a><span class="ss">    - </span>Easy to find website with public keys:</span>
+<span id="cb5-447"><a href="#cb5-447"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Peep these keys!</span><span class="co">](https://hyperelliptic.org/tanja/)</span></span>
+<span id="cb5-448"><a href="#cb5-448"></a></span>
+<span id="cb5-449"><a href="#cb5-449"></a></span>
+<span id="cb5-450"><a href="#cb5-450"></a></span>
+<span id="cb5-451"><a href="#cb5-451"></a><span class="fu">## $p$</span></span>
+<span id="cb5-452"><a href="#cb5-452"></a></span>
+<span id="cb5-453"><a href="#cb5-453"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-454"><a href="#cb5-454"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-455"><a href="#cb5-455"></a></span>
+<span id="cb5-456"><a href="#cb5-456"></a></span>
+<span id="cb5-457"><a href="#cb5-457"></a><span class="fu">## $E/\mathbb{F}_{2^{255}-19}$</span></span>
+<span id="cb5-458"><a href="#cb5-458"></a></span>
+<span id="cb5-459"><a href="#cb5-459"></a><span class="ss">- </span>Take the "twisted Edwards curve"</span>
+<span id="cb5-460"><a href="#cb5-460"></a></span>
+<span id="cb5-461"><a href="#cb5-461"></a>$$</span>
+<span id="cb5-462"><a href="#cb5-462"></a>-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2</span>
+<span id="cb5-463"><a href="#cb5-463"></a>$$</span>
+<span id="cb5-464"><a href="#cb5-464"></a></span>
+<span id="cb5-465"><a href="#cb5-465"></a></span>
+<span id="cb5-466"><a href="#cb5-466"></a></span>
+<span id="cb5-467"><a href="#cb5-467"></a><span class="fu">## Visualize</span></span>
+<span id="cb5-468"><a href="#cb5-468"></a></span>
+<span id="cb5-469"><a href="#cb5-469"></a>::::{.columns}</span>
+<span id="cb5-470"><a href="#cb5-470"></a></span>
+<span id="cb5-471"><a href="#cb5-471"></a>:::{.column width="50%"}</span>
+<span id="cb5-472"><a href="#cb5-472"></a></span>
+<span id="cb5-473"><a href="#cb5-473"></a><span class="in">```py</span></span>
+<span id="cb5-474"><a href="#cb5-474"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-475"><a href="#cb5-475"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-476"><a href="#cb5-476"></a><span class="im">import</span> sympy</span>
+<span id="cb5-477"><a href="#cb5-477"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-478"><a href="#cb5-478"></a></span>
+<span id="cb5-479"><a href="#cb5-479"></a>curve <span class="op">=</span> sympy.Eq(<span class="op">-</span>x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y, <span class="dv">1</span> <span class="op">-</span> (<span class="dv">121665</span><span class="op">/</span><span class="dv">121666</span>)<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>y<span class="op">*</span>y)</span>
+<span id="cb5-480"><a href="#cb5-480"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-481"><a href="#cb5-481"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-482"><a href="#cb5-482"></a></span>
+<span id="cb5-483"><a href="#cb5-483"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb5-484"><a href="#cb5-484"></a></span>
+<span id="cb5-485"><a href="#cb5-485"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-486"><a href="#cb5-486"></a><span class="in">```</span></span>
+<span id="cb5-487"><a href="#cb5-487"></a></span>
+<span id="cb5-488"><a href="#cb5-488"></a>:::</span>
+<span id="cb5-489"><a href="#cb5-489"></a></span>
+<span id="cb5-490"><a href="#cb5-490"></a>:::{.column width="50%"}</span>
+<span id="cb5-491"><a href="#cb5-491"></a></span>
+<span id="cb5-494"><a href="#cb5-494"></a><span class="in">```{python}</span></span>
+<span id="cb5-495"><a href="#cb5-495"></a><span class="co">#| echo: false</span></span>
+<span id="cb5-496"><a href="#cb5-496"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-497"><a href="#cb5-497"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-498"><a href="#cb5-498"></a><span class="im">import</span> sympy</span>
+<span id="cb5-499"><a href="#cb5-499"></a><span class="im">from</span> sympy.abc <span class="im">import</span> x, y</span>
+<span id="cb5-500"><a href="#cb5-500"></a></span>
+<span id="cb5-501"><a href="#cb5-501"></a>curve <span class="op">=</span> sympy.Eq(<span class="op">-</span>x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y, <span class="dv">1</span> <span class="op">-</span> (<span class="dv">121665</span><span class="op">/</span><span class="dv">121666</span>)<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>y<span class="op">*</span>y)</span>
+<span id="cb5-502"><a href="#cb5-502"></a>for_y <span class="op">=</span> sympy.solve(curve, y)</span>
+<span id="cb5-503"><a href="#cb5-503"></a>f <span class="op">=</span> sympy.lambdify(x, for_y)</span>
+<span id="cb5-504"><a href="#cb5-504"></a></span>
+<span id="cb5-505"><a href="#cb5-505"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb5-506"><a href="#cb5-506"></a></span>
+<span id="cb5-507"><a href="#cb5-507"></a>_ <span class="op">=</span> [plt.plot(x, y) <span class="cf">for</span> y <span class="kw">in</span> f(x)]</span>
+<span id="cb5-508"><a href="#cb5-508"></a><span class="in">```</span></span>
+<span id="cb5-509"><a href="#cb5-509"></a></span>
+<span id="cb5-510"><a href="#cb5-510"></a>:::</span>
+<span id="cb5-511"><a href="#cb5-511"></a></span>
+<span id="cb5-512"><a href="#cb5-512"></a>::::</span>
+<span id="cb5-513"><a href="#cb5-513"></a></span>
+<span id="cb5-514"><a href="#cb5-514"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-515"><a href="#cb5-515"></a></span>
+<span id="cb5-516"><a href="#cb5-516"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-517"><a href="#cb5-517"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-518"><a href="#cb5-518"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-519"><a href="#cb5-519"></a></span>
+<span id="cb5-520"><a href="#cb5-520"></a></span>
+<span id="cb5-521"><a href="#cb5-521"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-522"><a href="#cb5-522"></a></span>
+<span id="cb5-523"><a href="#cb5-523"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-524"><a href="#cb5-524"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-525"><a href="#cb5-525"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-526"><a href="#cb5-526"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-527"><a href="#cb5-527"></a></span>
+<span id="cb5-528"><a href="#cb5-528"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-529"><a href="#cb5-529"></a></span>
+<span id="cb5-530"><a href="#cb5-530"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-531"><a href="#cb5-531"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-532"><a href="#cb5-532"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-533"><a href="#cb5-533"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-534"><a href="#cb5-534"></a><span class="ss">- </span>$c = 3$</span>
+<span id="cb5-535"><a href="#cb5-535"></a></span>
+<span id="cb5-536"><a href="#cb5-536"></a></span>
+<span id="cb5-537"><a href="#cb5-537"></a><span class="fu">## Ed25519</span></span>
+<span id="cb5-538"><a href="#cb5-538"></a></span>
+<span id="cb5-539"><a href="#cb5-539"></a><span class="ss">- </span>$p = 2^255-19$ so </span>
+<span id="cb5-540"><a href="#cb5-540"></a><span class="ss">- </span>$F_p = \mathbb{F}_{2^{255}-19}$</span>
+<span id="cb5-541"><a href="#cb5-541"></a><span class="ss">- </span>$E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$</span>
+<span id="cb5-542"><a href="#cb5-542"></a><span class="ss">- </span>$\ell = 2^{252} + 27742317777372353535851937790883648493$</span>
+<span id="cb5-543"><a href="#cb5-543"></a><span class="ss">- </span>$c = 3$</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

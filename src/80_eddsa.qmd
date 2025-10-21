@@ -151,7 +151,7 @@ digraph RSA_Encryption {
     color = "#ffffff";
     label = "Encryption";
     message [label="Message (M)"];
-    encrypt [label="Ciphertext (C) = M^e mod n"];
+    encrypt [label="Ciphertext (C)"];
     public_key_ref [label="Private Key: (n, d)", shape=note];
 
     message -> encrypt;
@@ -164,7 +164,7 @@ digraph RSA_Encryption {
     color = "#ffffff";
     label = "Decryption";
     ciphertext [label="Ciphertext (C)"];
-    decrypt [label="Message (M) = C^d mod n"];
+    decrypt [label="Message (M)"];
     private_key_ref [label="Public Key: (n, e)", shape=note];
 
     ciphertext -> decrypt;
@@ -288,7 +288,7 @@ An EdDSA signature scheme is a choice over:
 
 - A finite field $\mathbb{F}_p$.
 - An elliptic curve $E$ over $\mathbb{F}_p$
-    - Whose group $E(\mathbb{F}_p)$ of $\mathbb{F}_p$-rational points has order $#E(\mathbb{F}_p) = 2^C \ell$ where $\ell$ is a large primce and $2^c$ is the cofactor
+    - Whose group $E(\mathbb{F}_p)$ of $\mathbb{F}_p$-rational points has order $|E(\mathbb{F}_p)| = 2^C \ell$ where $\ell$ is a large primce and $2^c$ is the cofactor
         - Take a 400-level math class
         - Basically this is a measure of the area within the ellipse.
 
@@ -367,3 +367,169 @@ $$
 
 
 # EdDSA, Ed25519
+
+## Ed25519
+
+- EdDSA with:
+    - SHA-512
+    - Curve25519
+    
+## Curve25519
+
+- An unusually fast curve to calculate on modern CPUs
+- *Not* made me the NSA, and released after an NSA released curve was discovered to have a backdoor.
+- Named for being over the prime field $2^{255}-19$ - hence 25519
+
+
+
+## Visualize
+
+::::{.columns}
+
+:::{.column width="50%"}
+
+```py
+import matplotlib.pyplot as plt
+import numpy as np
+import sympy
+from sympy.abc import x, y
+
+curve = sympy.Eq(y*y, x**3 + 486662*x*x + x)
+for_y = sympy.solve(curve, y)
+f = sympy.lambdify(x, for_y)
+
+x = np.linspace(-.00001, .00001, 1000)
+
+_ = [plt.plot(x, y) for y in f(x)]
+```
+
+:::
+
+:::{.column width="50%"}
+
+```{python}
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+import sympy
+from sympy.abc import x, y
+
+curve = sympy.Eq(y*y, x**3 + 486662*x*x + x)
+for_y = sympy.solve(curve, y)
+f = sympy.lambdify(x, for_y)
+
+x = np.linspace(-.00001, .00001, 1000)
+
+_ = [plt.plot(x, y) for y in f(x)]
+```
+
+:::
+
+::::
+
+## Bernstein
+
+- Discovered by a team including Daniel J. Bernstein.
+
+> The export of cryptography from the United States was controlled as a munition starting from the Cold War until recategorization in 1996, with further relaxation in the late 1990s. In 1995, Bernstein brought the court case Bernstein v. United States. The ruling in the case declared that software was protected speech under the First Amendment, which contributed to regulatory changes reducing controls on encryption.
+
+## Lange
+
+- Discovered by a team including Tanja Lange.
+    - Academic and anti-surveillance activist
+    - Easy to find website with public keys:
+- [Peep these keys!](https://hyperelliptic.org/tanja/)
+
+
+
+## $p$
+
+- $p = 2^255-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+
+
+## $E/\mathbb{F}_{2^{255}-19}$
+
+- Take the "twisted Edwards curve"
+
+$$
+-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2
+$$
+
+
+
+## Visualize
+
+::::{.columns}
+
+:::{.column width="50%"}
+
+```py
+import matplotlib.pyplot as plt
+import numpy as np
+import sympy
+from sympy.abc import x, y
+
+curve = sympy.Eq(-x*x + y*y, 1 - (121665/121666)*x*x*y*y)
+for_y = sympy.solve(curve, y)
+f = sympy.lambdify(x, for_y)
+
+x = np.linspace(-4, 4, 1000)
+
+_ = [plt.plot(x, y) for y in f(x)]
+```
+
+:::
+
+:::{.column width="50%"}
+
+```{python}
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+import sympy
+from sympy.abc import x, y
+
+curve = sympy.Eq(-x*x + y*y, 1 - (121665/121666)*x*x*y*y)
+for_y = sympy.solve(curve, y)
+f = sympy.lambdify(x, for_y)
+
+x = np.linspace(-4, 4, 1000)
+
+_ = [plt.plot(x, y) for y in f(x)]
+```
+
+:::
+
+::::
+
+## Ed25519
+
+- $p = 2^255-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
+
+
+## Ed25519
+
+- $p = 2^255-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
+- $\ell = 2^{252} + 27742317777372353535851937790883648493$
+
+## Ed25519
+
+- $p = 2^255-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
+- $\ell = 2^{252} + 27742317777372353535851937790883648493$
+- $c = 3$
+
+
+## Ed25519
+
+- $p = 2^255-19$ so 
+- $F_p = \mathbb{F}_{2^{255}-19}$
+- $E/\mathbb{F}_{2^{255}-19}$ is $-x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2$
+- $\ell = 2^{252} + 27742317777372353535851937790883648493$
+- $c = 3$

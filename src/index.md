@@ -39,7 +39,7 @@ format: html
 |0x5|09/29|[IEEE754](50_754.md)|[`f16`](51_f16.md)|[SHA512](42_sha512.md)|
 |0x6|10/06|[Practice](https://classroom.github.com/a/opvHddb-)|**Midterm**|`None`|
 |0x7|10/13|[Numbers](70_numbers.md)|[I/O](71_ix_io.md)|[`ix`](72_ix.md)|
-|0x8|10/20|[EdDSA](80_eddsa.qmd)|Python|Ed25519|
+|0x8|10/20|[EdDSA](80_eddsa.qmd)|[Python](81_python.qmd)|[Ed25519](82_ed25519.qmd)|
 |0x9|10/27|Stacks|List|Tree|
 |0xA|11/03|Graphs|BFS|Djikstra|
 |0xB|11/10|Merkle|||
