@@ -1,10 +1,9 @@
 ---
-Title: Python
+title: "Python"
 format: html
-jupyter: python3
 ---
 
-# Preamble
+## Preamble
 
 All from [https://ed25519.cr.yp.to/software.html](https://ed25519.cr.yp.to/software.html).
 
@@ -20,15 +19,18 @@ Formatted with Black and type hints added manually.
 - [ ] Develop a plan to implement in Rust.
 
 ::: {.callout-caution}
+
 ## This code is unsafe.
+
 This implementation is unsafe, missing the critical "side channel protections" that make ed25519 the emergent standard. 
 
 > This implementation does not include protection against side-channel attacks. 
 
 Never use this code!
+
 :::
 
-# [`ed25519.py`](https://ed25519.cr.yp.to/python/ed25519.py)
+## [`ed25519.py`](https://ed25519.cr.yp.to/python/ed25519.py)
 
 ```{python}
 import hashlib
@@ -162,7 +164,7 @@ def checkvalid(s: bytes, m: bytes, pk: bytes) -> bool:
     return scalarmult(B, S) == edwards(R, scalarmult(A, h))
 ```
 
-# [`checkparams.py`](https://ed25519.cr.yp.to/python/checkparams.py)
+## [`checkparams.py`](https://ed25519.cr.yp.to/python/checkparams.py)
 
 ```{python}
 assert b >= 10
@@ -178,13 +180,13 @@ assert isoncurve(B)
 assert scalarmult(B, l) == [0, 1]
 ```
 
-# [`sign.input`](https://ed25519.cr.yp.to/python/sign.input) excerpt
+## [`sign.input`](https://ed25519.cr.yp.to/python/sign.input) excerpt
 
 ```{python}
 line = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:"
 ```
 
-# [`sign.py`](https://ed25519.cr.yp.to/python/sign.py) except
+## [`sign.py`](https://ed25519.cr.yp.to/python/sign.py) except
 
 ```{python}
 import binascii

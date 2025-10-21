@@ -8,7 +8,7 @@
 
 <meta name="author" content="Prof.&nbsp;Calvin">
 
-<title>python – Systems in Rust</title>
+<title>Python – Systems in Rust</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./81_python.html">Preamble</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./81_python.html">Python</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./81_python.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preamble</span></a>
+ <span class="menu-text">Python</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -285,6 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
   <li><a href="#ed25519.py" id="toc-ed25519.py" class="nav-link" data-scroll-target="#ed25519.py"><code>ed25519.py</code></a></li>
+  <li><a href="#checkparams.py" id="toc-checkparams.py" class="nav-link" data-scroll-target="#checkparams.py"><code>checkparams.py</code></a></li>
   <li><a href="#sign.input-excerpt" id="toc-sign.input-excerpt" class="nav-link" data-scroll-target="#sign.input-excerpt"><code>sign.input</code> excerpt</a></li>
   <li><a href="#sign.py-except" id="toc-sign.py-except" class="nav-link" data-scroll-target="#sign.py-except"><code>sign.py</code> except</a></li>
   </ul>
@@ -295,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><a href="https://ed25519.cr.yp.to/python/checkparams.py"><code>checkparams.py</code></a></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Python</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 <p class="subtitle lead">Systems in Rust</p>
 </div>
 
@@ -319,8 +320,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="preamble" class="level1">
-<h1>Preamble</h1>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
 <p>All from <a href="https://ed25519.cr.yp.to/software.html">https://ed25519.cr.yp.to/software.html</a>.</p>
 <ul>
 <li><code>ed25519.py</code> is translated into Python 3, with the main changes being using <code>&lt;bytes&gt;</code> instead of strings and using integer division.</li>
@@ -352,9 +353,9 @@ This code is unsafe.
 </div>
 </div>
 </section>
-<section id="ed25519.py" class="level1">
-<h1><a href="https://ed25519.cr.yp.to/python/ed25519.py"><code>ed25519.py</code></a></h1>
-<div id="25c31f2f" class="cell" data-execution_count="1">
+<section id="ed25519.py" class="level2">
+<h2 class="anchored" data-anchor-id="ed25519.py"><a href="https://ed25519.cr.yp.to/python/ed25519.py"><code>ed25519.py</code></a></h2>
+<div id="4c744d31" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> hashlib</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -485,7 +486,10 @@ This code is unsafe.
 <span id="cb1-128"><a href="#cb1-128"></a>    h <span class="op">=</span> Hint(encodepoint(R) <span class="op">+</span> pk <span class="op">+</span> m)</span>
 <span id="cb1-129"><a href="#cb1-129"></a>    <span class="cf">return</span> scalarmult(B, S) <span class="op">==</span> edwards(R, scalarmult(A, h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9ab93b90" class="cell" data-execution_count="2">
+</section>
+<section id="checkparams.py" class="level2">
+<h2 class="anchored" data-anchor-id="checkparams.py"><a href="https://ed25519.cr.yp.to/python/checkparams.py"><code>checkparams.py</code></a></h2>
+<div id="793c604d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">assert</span> b <span class="op">&gt;=</span> <span class="dv">10</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="cf">assert</span> <span class="dv">8</span> <span class="op">*</span> <span class="bu">len</span>(H(<span class="st">b"hash input"</span>)) <span class="op">==</span> <span class="dv">2</span> <span class="op">*</span> b</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, q <span class="op">-</span> <span class="dv">1</span>, q) <span class="op">==</span> <span class="dv">1</span></span>
@@ -499,15 +503,15 @@ This code is unsafe.
 <span id="cb2-11"><a href="#cb2-11"></a><span class="cf">assert</span> scalarmult(B, l) <span class="op">==</span> [<span class="dv">0</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sign.input-excerpt" class="level1">
-<h1><a href="https://ed25519.cr.yp.to/python/sign.input"><code>sign.input</code></a> excerpt</h1>
-<div id="c6c3b814" class="cell" data-execution_count="3">
+<section id="sign.input-excerpt" class="level2">
+<h2 class="anchored" data-anchor-id="sign.input-excerpt"><a href="https://ed25519.cr.yp.to/python/sign.input"><code>sign.input</code></a> excerpt</h2>
+<div id="fdaa4b47" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>line <span class="op">=</span> <span class="st">"4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sign.py-except" class="level1">
-<h1><a href="https://ed25519.cr.yp.to/python/sign.py"><code>sign.py</code></a> except</h1>
-<div id="0c186821" class="cell" data-execution_count="4">
+<section id="sign.py-except" class="level2">
+<h2 class="anchored" data-anchor-id="sign.py-except"><a href="https://ed25519.cr.yp.to/python/sign.py"><code>sign.py</code></a> except</h2>
+<div id="dc82ec93" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> binascii</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co"># fields on each input line: sk, pk, m, sm</span></span>
@@ -1017,212 +1021,214 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="an">Title:</span><span class="co"> Python</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "Python"</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="fu"># Preamble</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a>All from <span class="co">[</span><span class="ot">https://ed25519.cr.yp.to/software.html</span><span class="co">](https://ed25519.cr.yp.to/software.html)</span>.</span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">*   </span><span class="in">`ed25519.py`</span> is translated into Python 3, with the main changes being using <span class="in">`&lt;bytes&gt;`</span> instead of strings and using integer division.</span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">*   </span>The assert block is from <span class="in">`checkparams.py`</span>, with the same changes.</span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="ss">*   </span>The tester is a line from the regression tests, lifted from <span class="in">`signs.py`</span> and <span class="in">`signs.input`</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a>Formatted with Black and type hints added manually.</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">- </span><span class="va">[ ]</span> Look over the code and understand the types and operations.</span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">- </span><span class="va">[ ]</span> Run the code locally and verify the outputs.</span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="ss">- </span><span class="va">[ ]</span> Determine how to test on a different line from <span class="in">`signs.input`</span>.</span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="ss">- </span><span class="va">[ ]</span> Develop a plan to implement in Rust.</span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a>::: {.callout-caution}</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">---</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">## Preamble</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>All from <span class="co">[</span><span class="ot">https://ed25519.cr.yp.to/software.html</span><span class="co">](https://ed25519.cr.yp.to/software.html)</span>.</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">*   </span><span class="in">`ed25519.py`</span> is translated into Python 3, with the main changes being using <span class="in">`&lt;bytes&gt;`</span> instead of strings and using integer division.</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">*   </span>The assert block is from <span class="in">`checkparams.py`</span>, with the same changes.</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">*   </span>The tester is a line from the regression tests, lifted from <span class="in">`signs.py`</span> and <span class="in">`signs.input`</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a>Formatted with Black and type hints added manually.</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="ss">- </span><span class="va">[ ]</span> Look over the code and understand the types and operations.</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">- </span><span class="va">[ ]</span> Run the code locally and verify the outputs.</span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">- </span><span class="va">[ ]</span> Determine how to test on a different line from <span class="in">`signs.input`</span>.</span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="ss">- </span><span class="va">[ ]</span> Develop a plan to implement in Rust.</span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>::: {.callout-caution}</span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
 <span id="cb5-23"><a href="#cb5-23"></a><span class="fu">## This code is unsafe.</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>This implementation is unsafe, missing the critical "side channel protections" that make ed25519 the emergent standard. </span>
-<span id="cb5-25"><a href="#cb5-25"></a></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="at">&gt; This implementation does not include protection against side-channel attacks. </span></span>
-<span id="cb5-27"><a href="#cb5-27"></a></span>
-<span id="cb5-28"><a href="#cb5-28"></a>Never use this code!</span>
-<span id="cb5-29"><a href="#cb5-29"></a>:::</span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a>This implementation is unsafe, missing the critical "side channel protections" that make ed25519 the emergent standard. </span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="at">&gt; This implementation does not include protection against side-channel attacks. </span></span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a>Never use this code!</span>
 <span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="fu"># [`ed25519.py`](https://ed25519.cr.yp.to/python/ed25519.py)</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>:::</span>
 <span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">```{python}</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="im">import</span> hashlib</span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a>b: <span class="bu">int</span> <span class="op">=</span> <span class="dv">256</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a>q: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">255</span> <span class="op">-</span> <span class="dv">19</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a>l: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">252</span> <span class="op">+</span> <span class="dv">27742317777372353535851937790883648493</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a></span>
-<span id="cb5-43"><a href="#cb5-43"></a></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="kw">def</span> H(m: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
-<span id="cb5-45"><a href="#cb5-45"></a>    <span class="cf">return</span> hashlib.sha512(m).digest()</span>
-<span id="cb5-46"><a href="#cb5-46"></a></span>
-<span id="cb5-47"><a href="#cb5-47"></a></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="kw">def</span> expmod(b: <span class="bu">int</span>, e: <span class="bu">int</span>, m: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-49"><a href="#cb5-49"></a>    <span class="cf">if</span> e <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb5-50"><a href="#cb5-50"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a>    t <span class="op">=</span> expmod(b, e <span class="op">//</span> <span class="dv">2</span>, m) <span class="op">**</span> <span class="dv">2</span> <span class="op">%</span> m</span>
-<span id="cb5-52"><a href="#cb5-52"></a>    _ <span class="op">=</span> e <span class="op">&amp;</span> <span class="dv">1</span> <span class="kw">and</span> (t <span class="op">:=</span> (t <span class="op">*</span> b) <span class="op">%</span> m)</span>
-<span id="cb5-53"><a href="#cb5-53"></a>    <span class="cf">return</span> t</span>
-<span id="cb5-54"><a href="#cb5-54"></a></span>
-<span id="cb5-55"><a href="#cb5-55"></a></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="kw">def</span> inv(x: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-57"><a href="#cb5-57"></a>    <span class="cf">return</span> expmod(x, q <span class="op">-</span> <span class="dv">2</span>, q)</span>
-<span id="cb5-58"><a href="#cb5-58"></a></span>
-<span id="cb5-59"><a href="#cb5-59"></a></span>
-<span id="cb5-60"><a href="#cb5-60"></a>d: <span class="bu">int</span> <span class="op">=</span> <span class="op">-</span><span class="dv">121665</span> <span class="op">*</span> inv(<span class="dv">121666</span>)</span>
-<span id="cb5-61"><a href="#cb5-61"></a>I: <span class="bu">int</span> <span class="op">=</span> expmod(<span class="dv">2</span>, (q <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">4</span>, q)</span>
-<span id="cb5-62"><a href="#cb5-62"></a></span>
-<span id="cb5-63"><a href="#cb5-63"></a></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="kw">def</span> xrecover(y: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-65"><a href="#cb5-65"></a>    xx <span class="op">=</span> (y <span class="op">*</span> y <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> inv(d <span class="op">*</span> y <span class="op">*</span> y <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-66"><a href="#cb5-66"></a>    x <span class="op">=</span> expmod(xx, (q <span class="op">+</span> <span class="dv">3</span>) <span class="op">//</span> <span class="dv">8</span>, q)</span>
-<span id="cb5-67"><a href="#cb5-67"></a>    _ <span class="op">=</span> (x <span class="op">*</span> x <span class="op">-</span> xx) <span class="op">%</span> q <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> (x <span class="op">:=</span> (x <span class="op">*</span> I) <span class="op">%</span> q)</span>
-<span id="cb5-68"><a href="#cb5-68"></a>    _ <span class="op">=</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> (x <span class="op">:=</span> q <span class="op">-</span> x)</span>
-<span id="cb5-69"><a href="#cb5-69"></a>    <span class="cf">return</span> x</span>
-<span id="cb5-70"><a href="#cb5-70"></a></span>
-<span id="cb5-71"><a href="#cb5-71"></a></span>
-<span id="cb5-72"><a href="#cb5-72"></a>By: <span class="bu">int</span> <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> inv(<span class="dv">5</span>)</span>
-<span id="cb5-73"><a href="#cb5-73"></a>Bx: <span class="bu">int</span> <span class="op">=</span> xrecover(By)</span>
-<span id="cb5-74"><a href="#cb5-74"></a>B: List[<span class="bu">int</span>] <span class="op">=</span> [Bx <span class="op">%</span> q, By <span class="op">%</span> q]</span>
-<span id="cb5-75"><a href="#cb5-75"></a></span>
-<span id="cb5-76"><a href="#cb5-76"></a></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="kw">def</span> edwards(P: List[<span class="bu">int</span>], Q: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
-<span id="cb5-78"><a href="#cb5-78"></a>    x1 <span class="op">=</span> P[<span class="dv">0</span>]</span>
-<span id="cb5-79"><a href="#cb5-79"></a>    y1 <span class="op">=</span> P[<span class="dv">1</span>]</span>
-<span id="cb5-80"><a href="#cb5-80"></a>    x2 <span class="op">=</span> Q[<span class="dv">0</span>]</span>
-<span id="cb5-81"><a href="#cb5-81"></a>    y2 <span class="op">=</span> Q[<span class="dv">1</span>]</span>
-<span id="cb5-82"><a href="#cb5-82"></a>    x3 <span class="op">=</span> (x1 <span class="op">*</span> y2 <span class="op">+</span> x2 <span class="op">*</span> y1) <span class="op">*</span> inv(<span class="dv">1</span> <span class="op">+</span> d <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">*</span> y1 <span class="op">*</span> y2)</span>
-<span id="cb5-83"><a href="#cb5-83"></a>    y3 <span class="op">=</span> (y1 <span class="op">*</span> y2 <span class="op">+</span> x1 <span class="op">*</span> x2) <span class="op">*</span> inv(<span class="dv">1</span> <span class="op">-</span> d <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">*</span> y1 <span class="op">*</span> y2)</span>
-<span id="cb5-84"><a href="#cb5-84"></a>    <span class="cf">return</span> [x3 <span class="op">%</span> q, y3 <span class="op">%</span> q]</span>
-<span id="cb5-85"><a href="#cb5-85"></a></span>
-<span id="cb5-86"><a href="#cb5-86"></a></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="kw">def</span> scalarmult(P: List[<span class="bu">int</span>], e: <span class="bu">int</span>) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
-<span id="cb5-88"><a href="#cb5-88"></a>    <span class="cf">if</span> e <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb5-89"><a href="#cb5-89"></a>        <span class="cf">return</span> [<span class="dv">0</span>, <span class="dv">1</span>]</span>
-<span id="cb5-90"><a href="#cb5-90"></a>    Q <span class="op">=</span> scalarmult(P, e <span class="op">//</span> <span class="dv">2</span>)</span>
-<span id="cb5-91"><a href="#cb5-91"></a>    Q <span class="op">=</span> edwards(Q, Q)</span>
-<span id="cb5-92"><a href="#cb5-92"></a>    _ <span class="op">=</span> e <span class="op">&amp;</span> <span class="dv">1</span> <span class="kw">and</span> (Q <span class="op">:=</span> edwards(Q, P))</span>
-<span id="cb5-93"><a href="#cb5-93"></a>    <span class="cf">return</span> Q</span>
-<span id="cb5-94"><a href="#cb5-94"></a></span>
-<span id="cb5-95"><a href="#cb5-95"></a></span>
-<span id="cb5-96"><a href="#cb5-96"></a><span class="kw">def</span> encodeint(y: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
-<span id="cb5-97"><a href="#cb5-97"></a>    bits <span class="op">=</span> [(y <span class="op">&gt;&gt;</span> i) <span class="op">&amp;</span> <span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b)]</span>
-<span id="cb5-98"><a href="#cb5-98"></a>    <span class="cf">return</span> <span class="bu">bytes</span>([<span class="bu">sum</span>([bits[i <span class="op">*</span> <span class="dv">8</span> <span class="op">+</span> j] <span class="op">&lt;&lt;</span> j <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>)]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">//</span> <span class="dv">8</span>)])</span>
-<span id="cb5-99"><a href="#cb5-99"></a></span>
-<span id="cb5-100"><a href="#cb5-100"></a></span>
-<span id="cb5-101"><a href="#cb5-101"></a><span class="kw">def</span> encodepoint(P: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
-<span id="cb5-102"><a href="#cb5-102"></a>    x <span class="op">=</span> P[<span class="dv">0</span>]</span>
-<span id="cb5-103"><a href="#cb5-103"></a>    y <span class="op">=</span> P[<span class="dv">1</span>]</span>
-<span id="cb5-104"><a href="#cb5-104"></a>    bits <span class="op">=</span> [(y <span class="op">&gt;&gt;</span> i) <span class="op">&amp;</span> <span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">-</span> <span class="dv">1</span>)] <span class="op">+</span> [x <span class="op">&amp;</span> <span class="dv">1</span>]</span>
-<span id="cb5-105"><a href="#cb5-105"></a>    <span class="cf">return</span> <span class="bu">bytes</span>([<span class="bu">sum</span>([bits[i <span class="op">*</span> <span class="dv">8</span> <span class="op">+</span> j] <span class="op">&lt;&lt;</span> j <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>)]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">//</span> <span class="dv">8</span>)])</span>
-<span id="cb5-106"><a href="#cb5-106"></a></span>
-<span id="cb5-107"><a href="#cb5-107"></a></span>
-<span id="cb5-108"><a href="#cb5-108"></a><span class="kw">def</span> bit(h: <span class="bu">bytes</span>, i: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-109"><a href="#cb5-109"></a>    <span class="cf">return</span> (h[i <span class="op">//</span> <span class="dv">8</span>] <span class="op">&gt;&gt;</span> (i <span class="op">%</span> <span class="dv">8</span>)) <span class="op">&amp;</span> <span class="dv">1</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a></span>
-<span id="cb5-111"><a href="#cb5-111"></a></span>
-<span id="cb5-112"><a href="#cb5-112"></a><span class="kw">def</span> publickey(sk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
-<span id="cb5-113"><a href="#cb5-113"></a>    h <span class="op">=</span> H(sk)  <span class="co"># h is bytes</span></span>
-<span id="cb5-114"><a href="#cb5-114"></a>    a <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, b <span class="op">-</span> <span class="dv">2</span>))</span>
-<span id="cb5-115"><a href="#cb5-115"></a>    A <span class="op">=</span> scalarmult(B, a)</span>
-<span id="cb5-116"><a href="#cb5-116"></a>    <span class="cf">return</span> encodepoint(A)</span>
-<span id="cb5-117"><a href="#cb5-117"></a></span>
-<span id="cb5-118"><a href="#cb5-118"></a></span>
-<span id="cb5-119"><a href="#cb5-119"></a><span class="kw">def</span> Hint(m: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-120"><a href="#cb5-120"></a>    h <span class="op">=</span> H(m)  <span class="co"># h is bytes</span></span>
-<span id="cb5-121"><a href="#cb5-121"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span> <span class="op">*</span> b))</span>
-<span id="cb5-122"><a href="#cb5-122"></a></span>
-<span id="cb5-123"><a href="#cb5-123"></a></span>
-<span id="cb5-124"><a href="#cb5-124"></a><span class="kw">def</span> signature(m: <span class="bu">bytes</span>, sk: <span class="bu">bytes</span>, pk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
-<span id="cb5-125"><a href="#cb5-125"></a>    h <span class="op">=</span> H(sk)  <span class="co"># h is bytes</span></span>
-<span id="cb5-126"><a href="#cb5-126"></a>    a <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, b <span class="op">-</span> <span class="dv">2</span>))</span>
-<span id="cb5-127"><a href="#cb5-127"></a>    r <span class="op">=</span> Hint(h[b <span class="op">//</span> <span class="dv">8</span> : b <span class="op">//</span> <span class="dv">4</span>] <span class="op">+</span> m)</span>
-<span id="cb5-128"><a href="#cb5-128"></a>    R <span class="op">=</span> scalarmult(B, r)</span>
-<span id="cb5-129"><a href="#cb5-129"></a>    h_sig <span class="op">=</span> Hint(encodepoint(R) <span class="op">+</span> pk <span class="op">+</span> m)</span>
-<span id="cb5-130"><a href="#cb5-130"></a>    S <span class="op">=</span> (r <span class="op">+</span> h_sig <span class="op">*</span> a) <span class="op">%</span> l</span>
-<span id="cb5-131"><a href="#cb5-131"></a>    <span class="cf">return</span> encodepoint(R) <span class="op">+</span> encodeint(S)</span>
-<span id="cb5-132"><a href="#cb5-132"></a></span>
-<span id="cb5-133"><a href="#cb5-133"></a></span>
-<span id="cb5-134"><a href="#cb5-134"></a><span class="kw">def</span> isoncurve(P: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
-<span id="cb5-135"><a href="#cb5-135"></a>    x <span class="op">=</span> P[<span class="dv">0</span>]</span>
-<span id="cb5-136"><a href="#cb5-136"></a>    y <span class="op">=</span> P[<span class="dv">1</span>]</span>
-<span id="cb5-137"><a href="#cb5-137"></a>    <span class="cf">return</span> (<span class="op">-</span>x <span class="op">*</span> x <span class="op">+</span> y <span class="op">*</span> y <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> d <span class="op">*</span> x <span class="op">*</span> x <span class="op">*</span> y <span class="op">*</span> y) <span class="op">%</span> q <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb5-138"><a href="#cb5-138"></a></span>
-<span id="cb5-139"><a href="#cb5-139"></a></span>
-<span id="cb5-140"><a href="#cb5-140"></a><span class="kw">def</span> decodeint(s: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-141"><a href="#cb5-141"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(s, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, b))</span>
-<span id="cb5-142"><a href="#cb5-142"></a></span>
-<span id="cb5-143"><a href="#cb5-143"></a></span>
-<span id="cb5-144"><a href="#cb5-144"></a><span class="kw">def</span> decodepoint(s: <span class="bu">bytes</span>) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
-<span id="cb5-145"><a href="#cb5-145"></a>    y <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(s, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, b <span class="op">-</span> <span class="dv">1</span>))</span>
-<span id="cb5-146"><a href="#cb5-146"></a>    x <span class="op">=</span> xrecover(y)</span>
-<span id="cb5-147"><a href="#cb5-147"></a>    x <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">!=</span> bit(s, b <span class="op">-</span> <span class="dv">1</span>) <span class="kw">and</span> (x <span class="op">:=</span> q <span class="op">-</span> x)</span>
-<span id="cb5-148"><a href="#cb5-148"></a>    P <span class="op">=</span> [x, y]</span>
-<span id="cb5-149"><a href="#cb5-149"></a>    <span class="cf">if</span> <span class="kw">not</span> isoncurve(P):</span>
-<span id="cb5-150"><a href="#cb5-150"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"decoding point that is not on curve"</span>)</span>
-<span id="cb5-151"><a href="#cb5-151"></a>    <span class="cf">return</span> P</span>
-<span id="cb5-152"><a href="#cb5-152"></a></span>
-<span id="cb5-153"><a href="#cb5-153"></a></span>
-<span id="cb5-154"><a href="#cb5-154"></a><span class="kw">def</span> checkvalid(s: <span class="bu">bytes</span>, m: <span class="bu">bytes</span>, pk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
-<span id="cb5-155"><a href="#cb5-155"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">!=</span> b <span class="op">//</span> <span class="dv">4</span>:</span>
-<span id="cb5-156"><a href="#cb5-156"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"signature length is wrong"</span>)</span>
-<span id="cb5-157"><a href="#cb5-157"></a>    <span class="cf">if</span> <span class="bu">len</span>(pk) <span class="op">!=</span> b <span class="op">//</span> <span class="dv">8</span>:</span>
-<span id="cb5-158"><a href="#cb5-158"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"public-key length is wrong"</span>)</span>
-<span id="cb5-159"><a href="#cb5-159"></a></span>
-<span id="cb5-160"><a href="#cb5-160"></a>    R <span class="op">=</span> decodepoint(s[<span class="dv">0</span> : b <span class="op">//</span> <span class="dv">8</span>])</span>
-<span id="cb5-161"><a href="#cb5-161"></a>    A <span class="op">=</span> decodepoint(pk)</span>
-<span id="cb5-162"><a href="#cb5-162"></a>    S <span class="op">=</span> decodeint(s[b <span class="op">//</span> <span class="dv">8</span> : b <span class="op">//</span> <span class="dv">4</span>])</span>
-<span id="cb5-163"><a href="#cb5-163"></a>    h <span class="op">=</span> Hint(encodepoint(R) <span class="op">+</span> pk <span class="op">+</span> m)</span>
-<span id="cb5-164"><a href="#cb5-164"></a>    <span class="cf">return</span> scalarmult(B, S) <span class="op">==</span> edwards(R, scalarmult(A, h))</span>
-<span id="cb5-165"><a href="#cb5-165"></a><span class="in">```</span></span>
-<span id="cb5-166"><a href="#cb5-166"></a></span>
-<span id="cb5-167"><a href="#cb5-167"></a><span class="fu"># [`checkparams.py`](https://ed25519.cr.yp.to/python/checkparams.py)</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="fu">## [`ed25519.py`](https://ed25519.cr.yp.to/python/ed25519.py)</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="in">```{python}</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="im">import</span> hashlib</span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb5-40"><a href="#cb5-40"></a></span>
+<span id="cb5-41"><a href="#cb5-41"></a>b: <span class="bu">int</span> <span class="op">=</span> <span class="dv">256</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>q: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">255</span> <span class="op">-</span> <span class="dv">19</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a>l: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">252</span> <span class="op">+</span> <span class="dv">27742317777372353535851937790883648493</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="kw">def</span> H(m: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb5-47"><a href="#cb5-47"></a>    <span class="cf">return</span> hashlib.sha512(m).digest()</span>
+<span id="cb5-48"><a href="#cb5-48"></a></span>
+<span id="cb5-49"><a href="#cb5-49"></a></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="kw">def</span> expmod(b: <span class="bu">int</span>, e: <span class="bu">int</span>, m: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-51"><a href="#cb5-51"></a>    <span class="cf">if</span> e <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-52"><a href="#cb5-52"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a>    t <span class="op">=</span> expmod(b, e <span class="op">//</span> <span class="dv">2</span>, m) <span class="op">**</span> <span class="dv">2</span> <span class="op">%</span> m</span>
+<span id="cb5-54"><a href="#cb5-54"></a>    _ <span class="op">=</span> e <span class="op">&amp;</span> <span class="dv">1</span> <span class="kw">and</span> (t <span class="op">:=</span> (t <span class="op">*</span> b) <span class="op">%</span> m)</span>
+<span id="cb5-55"><a href="#cb5-55"></a>    <span class="cf">return</span> t</span>
+<span id="cb5-56"><a href="#cb5-56"></a></span>
+<span id="cb5-57"><a href="#cb5-57"></a></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="kw">def</span> inv(x: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-59"><a href="#cb5-59"></a>    <span class="cf">return</span> expmod(x, q <span class="op">-</span> <span class="dv">2</span>, q)</span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a></span>
+<span id="cb5-62"><a href="#cb5-62"></a>d: <span class="bu">int</span> <span class="op">=</span> <span class="op">-</span><span class="dv">121665</span> <span class="op">*</span> inv(<span class="dv">121666</span>)</span>
+<span id="cb5-63"><a href="#cb5-63"></a>I: <span class="bu">int</span> <span class="op">=</span> expmod(<span class="dv">2</span>, (q <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">4</span>, q)</span>
+<span id="cb5-64"><a href="#cb5-64"></a></span>
+<span id="cb5-65"><a href="#cb5-65"></a></span>
+<span id="cb5-66"><a href="#cb5-66"></a><span class="kw">def</span> xrecover(y: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-67"><a href="#cb5-67"></a>    xx <span class="op">=</span> (y <span class="op">*</span> y <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> inv(d <span class="op">*</span> y <span class="op">*</span> y <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-68"><a href="#cb5-68"></a>    x <span class="op">=</span> expmod(xx, (q <span class="op">+</span> <span class="dv">3</span>) <span class="op">//</span> <span class="dv">8</span>, q)</span>
+<span id="cb5-69"><a href="#cb5-69"></a>    _ <span class="op">=</span> (x <span class="op">*</span> x <span class="op">-</span> xx) <span class="op">%</span> q <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> (x <span class="op">:=</span> (x <span class="op">*</span> I) <span class="op">%</span> q)</span>
+<span id="cb5-70"><a href="#cb5-70"></a>    _ <span class="op">=</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> (x <span class="op">:=</span> q <span class="op">-</span> x)</span>
+<span id="cb5-71"><a href="#cb5-71"></a>    <span class="cf">return</span> x</span>
+<span id="cb5-72"><a href="#cb5-72"></a></span>
+<span id="cb5-73"><a href="#cb5-73"></a></span>
+<span id="cb5-74"><a href="#cb5-74"></a>By: <span class="bu">int</span> <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> inv(<span class="dv">5</span>)</span>
+<span id="cb5-75"><a href="#cb5-75"></a>Bx: <span class="bu">int</span> <span class="op">=</span> xrecover(By)</span>
+<span id="cb5-76"><a href="#cb5-76"></a>B: List[<span class="bu">int</span>] <span class="op">=</span> [Bx <span class="op">%</span> q, By <span class="op">%</span> q]</span>
+<span id="cb5-77"><a href="#cb5-77"></a></span>
+<span id="cb5-78"><a href="#cb5-78"></a></span>
+<span id="cb5-79"><a href="#cb5-79"></a><span class="kw">def</span> edwards(P: List[<span class="bu">int</span>], Q: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
+<span id="cb5-80"><a href="#cb5-80"></a>    x1 <span class="op">=</span> P[<span class="dv">0</span>]</span>
+<span id="cb5-81"><a href="#cb5-81"></a>    y1 <span class="op">=</span> P[<span class="dv">1</span>]</span>
+<span id="cb5-82"><a href="#cb5-82"></a>    x2 <span class="op">=</span> Q[<span class="dv">0</span>]</span>
+<span id="cb5-83"><a href="#cb5-83"></a>    y2 <span class="op">=</span> Q[<span class="dv">1</span>]</span>
+<span id="cb5-84"><a href="#cb5-84"></a>    x3 <span class="op">=</span> (x1 <span class="op">*</span> y2 <span class="op">+</span> x2 <span class="op">*</span> y1) <span class="op">*</span> inv(<span class="dv">1</span> <span class="op">+</span> d <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">*</span> y1 <span class="op">*</span> y2)</span>
+<span id="cb5-85"><a href="#cb5-85"></a>    y3 <span class="op">=</span> (y1 <span class="op">*</span> y2 <span class="op">+</span> x1 <span class="op">*</span> x2) <span class="op">*</span> inv(<span class="dv">1</span> <span class="op">-</span> d <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">*</span> y1 <span class="op">*</span> y2)</span>
+<span id="cb5-86"><a href="#cb5-86"></a>    <span class="cf">return</span> [x3 <span class="op">%</span> q, y3 <span class="op">%</span> q]</span>
+<span id="cb5-87"><a href="#cb5-87"></a></span>
+<span id="cb5-88"><a href="#cb5-88"></a></span>
+<span id="cb5-89"><a href="#cb5-89"></a><span class="kw">def</span> scalarmult(P: List[<span class="bu">int</span>], e: <span class="bu">int</span>) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
+<span id="cb5-90"><a href="#cb5-90"></a>    <span class="cf">if</span> e <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-91"><a href="#cb5-91"></a>        <span class="cf">return</span> [<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb5-92"><a href="#cb5-92"></a>    Q <span class="op">=</span> scalarmult(P, e <span class="op">//</span> <span class="dv">2</span>)</span>
+<span id="cb5-93"><a href="#cb5-93"></a>    Q <span class="op">=</span> edwards(Q, Q)</span>
+<span id="cb5-94"><a href="#cb5-94"></a>    _ <span class="op">=</span> e <span class="op">&amp;</span> <span class="dv">1</span> <span class="kw">and</span> (Q <span class="op">:=</span> edwards(Q, P))</span>
+<span id="cb5-95"><a href="#cb5-95"></a>    <span class="cf">return</span> Q</span>
+<span id="cb5-96"><a href="#cb5-96"></a></span>
+<span id="cb5-97"><a href="#cb5-97"></a></span>
+<span id="cb5-98"><a href="#cb5-98"></a><span class="kw">def</span> encodeint(y: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb5-99"><a href="#cb5-99"></a>    bits <span class="op">=</span> [(y <span class="op">&gt;&gt;</span> i) <span class="op">&amp;</span> <span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b)]</span>
+<span id="cb5-100"><a href="#cb5-100"></a>    <span class="cf">return</span> <span class="bu">bytes</span>([<span class="bu">sum</span>([bits[i <span class="op">*</span> <span class="dv">8</span> <span class="op">+</span> j] <span class="op">&lt;&lt;</span> j <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>)]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">//</span> <span class="dv">8</span>)])</span>
+<span id="cb5-101"><a href="#cb5-101"></a></span>
+<span id="cb5-102"><a href="#cb5-102"></a></span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="kw">def</span> encodepoint(P: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb5-104"><a href="#cb5-104"></a>    x <span class="op">=</span> P[<span class="dv">0</span>]</span>
+<span id="cb5-105"><a href="#cb5-105"></a>    y <span class="op">=</span> P[<span class="dv">1</span>]</span>
+<span id="cb5-106"><a href="#cb5-106"></a>    bits <span class="op">=</span> [(y <span class="op">&gt;&gt;</span> i) <span class="op">&amp;</span> <span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">-</span> <span class="dv">1</span>)] <span class="op">+</span> [x <span class="op">&amp;</span> <span class="dv">1</span>]</span>
+<span id="cb5-107"><a href="#cb5-107"></a>    <span class="cf">return</span> <span class="bu">bytes</span>([<span class="bu">sum</span>([bits[i <span class="op">*</span> <span class="dv">8</span> <span class="op">+</span> j] <span class="op">&lt;&lt;</span> j <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">8</span>)]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(b <span class="op">//</span> <span class="dv">8</span>)])</span>
+<span id="cb5-108"><a href="#cb5-108"></a></span>
+<span id="cb5-109"><a href="#cb5-109"></a></span>
+<span id="cb5-110"><a href="#cb5-110"></a><span class="kw">def</span> bit(h: <span class="bu">bytes</span>, i: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-111"><a href="#cb5-111"></a>    <span class="cf">return</span> (h[i <span class="op">//</span> <span class="dv">8</span>] <span class="op">&gt;&gt;</span> (i <span class="op">%</span> <span class="dv">8</span>)) <span class="op">&amp;</span> <span class="dv">1</span></span>
+<span id="cb5-112"><a href="#cb5-112"></a></span>
+<span id="cb5-113"><a href="#cb5-113"></a></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="kw">def</span> publickey(sk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb5-115"><a href="#cb5-115"></a>    h <span class="op">=</span> H(sk)  <span class="co"># h is bytes</span></span>
+<span id="cb5-116"><a href="#cb5-116"></a>    a <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, b <span class="op">-</span> <span class="dv">2</span>))</span>
+<span id="cb5-117"><a href="#cb5-117"></a>    A <span class="op">=</span> scalarmult(B, a)</span>
+<span id="cb5-118"><a href="#cb5-118"></a>    <span class="cf">return</span> encodepoint(A)</span>
+<span id="cb5-119"><a href="#cb5-119"></a></span>
+<span id="cb5-120"><a href="#cb5-120"></a></span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="kw">def</span> Hint(m: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-122"><a href="#cb5-122"></a>    h <span class="op">=</span> H(m)  <span class="co"># h is bytes</span></span>
+<span id="cb5-123"><a href="#cb5-123"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span> <span class="op">*</span> b))</span>
+<span id="cb5-124"><a href="#cb5-124"></a></span>
+<span id="cb5-125"><a href="#cb5-125"></a></span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="kw">def</span> signature(m: <span class="bu">bytes</span>, sk: <span class="bu">bytes</span>, pk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb5-127"><a href="#cb5-127"></a>    h <span class="op">=</span> H(sk)  <span class="co"># h is bytes</span></span>
+<span id="cb5-128"><a href="#cb5-128"></a>    a <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(h, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, b <span class="op">-</span> <span class="dv">2</span>))</span>
+<span id="cb5-129"><a href="#cb5-129"></a>    r <span class="op">=</span> Hint(h[b <span class="op">//</span> <span class="dv">8</span> : b <span class="op">//</span> <span class="dv">4</span>] <span class="op">+</span> m)</span>
+<span id="cb5-130"><a href="#cb5-130"></a>    R <span class="op">=</span> scalarmult(B, r)</span>
+<span id="cb5-131"><a href="#cb5-131"></a>    h_sig <span class="op">=</span> Hint(encodepoint(R) <span class="op">+</span> pk <span class="op">+</span> m)</span>
+<span id="cb5-132"><a href="#cb5-132"></a>    S <span class="op">=</span> (r <span class="op">+</span> h_sig <span class="op">*</span> a) <span class="op">%</span> l</span>
+<span id="cb5-133"><a href="#cb5-133"></a>    <span class="cf">return</span> encodepoint(R) <span class="op">+</span> encodeint(S)</span>
+<span id="cb5-134"><a href="#cb5-134"></a></span>
+<span id="cb5-135"><a href="#cb5-135"></a></span>
+<span id="cb5-136"><a href="#cb5-136"></a><span class="kw">def</span> isoncurve(P: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb5-137"><a href="#cb5-137"></a>    x <span class="op">=</span> P[<span class="dv">0</span>]</span>
+<span id="cb5-138"><a href="#cb5-138"></a>    y <span class="op">=</span> P[<span class="dv">1</span>]</span>
+<span id="cb5-139"><a href="#cb5-139"></a>    <span class="cf">return</span> (<span class="op">-</span>x <span class="op">*</span> x <span class="op">+</span> y <span class="op">*</span> y <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> d <span class="op">*</span> x <span class="op">*</span> x <span class="op">*</span> y <span class="op">*</span> y) <span class="op">%</span> q <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb5-140"><a href="#cb5-140"></a></span>
+<span id="cb5-141"><a href="#cb5-141"></a></span>
+<span id="cb5-142"><a href="#cb5-142"></a><span class="kw">def</span> decodeint(s: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb5-143"><a href="#cb5-143"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(s, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, b))</span>
+<span id="cb5-144"><a href="#cb5-144"></a></span>
+<span id="cb5-145"><a href="#cb5-145"></a></span>
+<span id="cb5-146"><a href="#cb5-146"></a><span class="kw">def</span> decodepoint(s: <span class="bu">bytes</span>) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span>
+<span id="cb5-147"><a href="#cb5-147"></a>    y <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">2</span><span class="op">**</span>i <span class="op">*</span> bit(s, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, b <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb5-148"><a href="#cb5-148"></a>    x <span class="op">=</span> xrecover(y)</span>
+<span id="cb5-149"><a href="#cb5-149"></a>    x <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">!=</span> bit(s, b <span class="op">-</span> <span class="dv">1</span>) <span class="kw">and</span> (x <span class="op">:=</span> q <span class="op">-</span> x)</span>
+<span id="cb5-150"><a href="#cb5-150"></a>    P <span class="op">=</span> [x, y]</span>
+<span id="cb5-151"><a href="#cb5-151"></a>    <span class="cf">if</span> <span class="kw">not</span> isoncurve(P):</span>
+<span id="cb5-152"><a href="#cb5-152"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"decoding point that is not on curve"</span>)</span>
+<span id="cb5-153"><a href="#cb5-153"></a>    <span class="cf">return</span> P</span>
+<span id="cb5-154"><a href="#cb5-154"></a></span>
+<span id="cb5-155"><a href="#cb5-155"></a></span>
+<span id="cb5-156"><a href="#cb5-156"></a><span class="kw">def</span> checkvalid(s: <span class="bu">bytes</span>, m: <span class="bu">bytes</span>, pk: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb5-157"><a href="#cb5-157"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">!=</span> b <span class="op">//</span> <span class="dv">4</span>:</span>
+<span id="cb5-158"><a href="#cb5-158"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"signature length is wrong"</span>)</span>
+<span id="cb5-159"><a href="#cb5-159"></a>    <span class="cf">if</span> <span class="bu">len</span>(pk) <span class="op">!=</span> b <span class="op">//</span> <span class="dv">8</span>:</span>
+<span id="cb5-160"><a href="#cb5-160"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"public-key length is wrong"</span>)</span>
+<span id="cb5-161"><a href="#cb5-161"></a></span>
+<span id="cb5-162"><a href="#cb5-162"></a>    R <span class="op">=</span> decodepoint(s[<span class="dv">0</span> : b <span class="op">//</span> <span class="dv">8</span>])</span>
+<span id="cb5-163"><a href="#cb5-163"></a>    A <span class="op">=</span> decodepoint(pk)</span>
+<span id="cb5-164"><a href="#cb5-164"></a>    S <span class="op">=</span> decodeint(s[b <span class="op">//</span> <span class="dv">8</span> : b <span class="op">//</span> <span class="dv">4</span>])</span>
+<span id="cb5-165"><a href="#cb5-165"></a>    h <span class="op">=</span> Hint(encodepoint(R) <span class="op">+</span> pk <span class="op">+</span> m)</span>
+<span id="cb5-166"><a href="#cb5-166"></a>    <span class="cf">return</span> scalarmult(B, S) <span class="op">==</span> edwards(R, scalarmult(A, h))</span>
+<span id="cb5-167"><a href="#cb5-167"></a><span class="in">```</span></span>
 <span id="cb5-168"><a href="#cb5-168"></a></span>
-<span id="cb5-171"><a href="#cb5-171"></a><span class="in">```{python}</span></span>
-<span id="cb5-172"><a href="#cb5-172"></a><span class="cf">assert</span> b <span class="op">&gt;=</span> <span class="dv">10</span></span>
-<span id="cb5-173"><a href="#cb5-173"></a><span class="cf">assert</span> <span class="dv">8</span> <span class="op">*</span> <span class="bu">len</span>(H(<span class="st">b"hash input"</span>)) <span class="op">==</span> <span class="dv">2</span> <span class="op">*</span> b</span>
-<span id="cb5-174"><a href="#cb5-174"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, q <span class="op">-</span> <span class="dv">1</span>, q) <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb5-175"><a href="#cb5-175"></a><span class="cf">assert</span> q <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb5-176"><a href="#cb5-176"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, l <span class="op">-</span> <span class="dv">1</span>, l) <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb5-177"><a href="#cb5-177"></a><span class="cf">assert</span> l <span class="op">&gt;=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">4</span>)</span>
-<span id="cb5-178"><a href="#cb5-178"></a><span class="cf">assert</span> l <span class="op">&lt;=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">3</span>)</span>
-<span id="cb5-179"><a href="#cb5-179"></a><span class="cf">assert</span> expmod(d, (q <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">2</span>, q) <span class="op">==</span> q <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb5-180"><a href="#cb5-180"></a><span class="cf">assert</span> expmod(I, <span class="dv">2</span>, q) <span class="op">==</span> q <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb5-181"><a href="#cb5-181"></a><span class="cf">assert</span> isoncurve(B)</span>
-<span id="cb5-182"><a href="#cb5-182"></a><span class="cf">assert</span> scalarmult(B, l) <span class="op">==</span> [<span class="dv">0</span>, <span class="dv">1</span>]</span>
-<span id="cb5-183"><a href="#cb5-183"></a><span class="in">```</span></span>
-<span id="cb5-184"><a href="#cb5-184"></a></span>
-<span id="cb5-185"><a href="#cb5-185"></a><span class="fu"># [`sign.input`](https://ed25519.cr.yp.to/python/sign.input) excerpt</span></span>
+<span id="cb5-169"><a href="#cb5-169"></a><span class="fu">## [`checkparams.py`](https://ed25519.cr.yp.to/python/checkparams.py)</span></span>
+<span id="cb5-170"><a href="#cb5-170"></a></span>
+<span id="cb5-173"><a href="#cb5-173"></a><span class="in">```{python}</span></span>
+<span id="cb5-174"><a href="#cb5-174"></a><span class="cf">assert</span> b <span class="op">&gt;=</span> <span class="dv">10</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a><span class="cf">assert</span> <span class="dv">8</span> <span class="op">*</span> <span class="bu">len</span>(H(<span class="st">b"hash input"</span>)) <span class="op">==</span> <span class="dv">2</span> <span class="op">*</span> b</span>
+<span id="cb5-176"><a href="#cb5-176"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, q <span class="op">-</span> <span class="dv">1</span>, q) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb5-177"><a href="#cb5-177"></a><span class="cf">assert</span> q <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb5-178"><a href="#cb5-178"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, l <span class="op">-</span> <span class="dv">1</span>, l) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb5-179"><a href="#cb5-179"></a><span class="cf">assert</span> l <span class="op">&gt;=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">4</span>)</span>
+<span id="cb5-180"><a href="#cb5-180"></a><span class="cf">assert</span> l <span class="op">&lt;=</span> <span class="dv">2</span> <span class="op">**</span> (b <span class="op">-</span> <span class="dv">3</span>)</span>
+<span id="cb5-181"><a href="#cb5-181"></a><span class="cf">assert</span> expmod(d, (q <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">2</span>, q) <span class="op">==</span> q <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-182"><a href="#cb5-182"></a><span class="cf">assert</span> expmod(I, <span class="dv">2</span>, q) <span class="op">==</span> q <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-183"><a href="#cb5-183"></a><span class="cf">assert</span> isoncurve(B)</span>
+<span id="cb5-184"><a href="#cb5-184"></a><span class="cf">assert</span> scalarmult(B, l) <span class="op">==</span> [<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb5-185"><a href="#cb5-185"></a><span class="in">```</span></span>
 <span id="cb5-186"><a href="#cb5-186"></a></span>
-<span id="cb5-189"><a href="#cb5-189"></a><span class="in">```{python}</span></span>
-<span id="cb5-190"><a href="#cb5-190"></a>line <span class="op">=</span> <span class="st">"4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:"</span></span>
-<span id="cb5-191"><a href="#cb5-191"></a><span class="in">```</span></span>
-<span id="cb5-192"><a href="#cb5-192"></a></span>
-<span id="cb5-193"><a href="#cb5-193"></a><span class="fu"># [`sign.py`](https://ed25519.cr.yp.to/python/sign.py) except</span></span>
+<span id="cb5-187"><a href="#cb5-187"></a><span class="fu">## [`sign.input`](https://ed25519.cr.yp.to/python/sign.input) excerpt</span></span>
+<span id="cb5-188"><a href="#cb5-188"></a></span>
+<span id="cb5-191"><a href="#cb5-191"></a><span class="in">```{python}</span></span>
+<span id="cb5-192"><a href="#cb5-192"></a>line <span class="op">=</span> <span class="st">"4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:"</span></span>
+<span id="cb5-193"><a href="#cb5-193"></a><span class="in">```</span></span>
 <span id="cb5-194"><a href="#cb5-194"></a></span>
-<span id="cb5-197"><a href="#cb5-197"></a><span class="in">```{python}</span></span>
-<span id="cb5-198"><a href="#cb5-198"></a><span class="im">import</span> binascii</span>
-<span id="cb5-199"><a href="#cb5-199"></a></span>
-<span id="cb5-200"><a href="#cb5-200"></a><span class="co"># fields on each input line: sk, pk, m, sm</span></span>
-<span id="cb5-201"><a href="#cb5-201"></a><span class="co"># each field hex</span></span>
-<span id="cb5-202"><a href="#cb5-202"></a><span class="co"># each field colon-terminated</span></span>
-<span id="cb5-203"><a href="#cb5-203"></a><span class="co"># sk includes pk at end</span></span>
-<span id="cb5-204"><a href="#cb5-204"></a><span class="co"># sm includes m at end</span></span>
-<span id="cb5-205"><a href="#cb5-205"></a>x <span class="op">=</span> line.split(<span class="st">":"</span>)</span>
-<span id="cb5-206"><a href="#cb5-206"></a>sk <span class="op">=</span> binascii.unhexlify(x[<span class="dv">0</span>][<span class="dv">0</span>:<span class="dv">64</span>])</span>
-<span id="cb5-207"><a href="#cb5-207"></a>m <span class="op">=</span> binascii.unhexlify(x[<span class="dv">2</span>])</span>
-<span id="cb5-208"><a href="#cb5-208"></a>pk <span class="op">=</span> publickey(sk)</span>
-<span id="cb5-209"><a href="#cb5-209"></a>s <span class="op">=</span> signature(m, sk, pk)</span>
-<span id="cb5-210"><a href="#cb5-210"></a></span>
-<span id="cb5-211"><a href="#cb5-211"></a><span class="cf">assert</span> checkvalid(s, m, pk)</span>
-<span id="cb5-212"><a href="#cb5-212"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">0</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(sk <span class="op">+</span> pk)</span>
-<span id="cb5-213"><a href="#cb5-213"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">1</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(pk)</span>
-<span id="cb5-214"><a href="#cb5-214"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">3</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(s <span class="op">+</span> m)</span>
-<span id="cb5-215"><a href="#cb5-215"></a><span class="in">```</span></span>
+<span id="cb5-195"><a href="#cb5-195"></a><span class="fu">## [`sign.py`](https://ed25519.cr.yp.to/python/sign.py) except</span></span>
+<span id="cb5-196"><a href="#cb5-196"></a></span>
+<span id="cb5-199"><a href="#cb5-199"></a><span class="in">```{python}</span></span>
+<span id="cb5-200"><a href="#cb5-200"></a><span class="im">import</span> binascii</span>
+<span id="cb5-201"><a href="#cb5-201"></a></span>
+<span id="cb5-202"><a href="#cb5-202"></a><span class="co"># fields on each input line: sk, pk, m, sm</span></span>
+<span id="cb5-203"><a href="#cb5-203"></a><span class="co"># each field hex</span></span>
+<span id="cb5-204"><a href="#cb5-204"></a><span class="co"># each field colon-terminated</span></span>
+<span id="cb5-205"><a href="#cb5-205"></a><span class="co"># sk includes pk at end</span></span>
+<span id="cb5-206"><a href="#cb5-206"></a><span class="co"># sm includes m at end</span></span>
+<span id="cb5-207"><a href="#cb5-207"></a>x <span class="op">=</span> line.split(<span class="st">":"</span>)</span>
+<span id="cb5-208"><a href="#cb5-208"></a>sk <span class="op">=</span> binascii.unhexlify(x[<span class="dv">0</span>][<span class="dv">0</span>:<span class="dv">64</span>])</span>
+<span id="cb5-209"><a href="#cb5-209"></a>m <span class="op">=</span> binascii.unhexlify(x[<span class="dv">2</span>])</span>
+<span id="cb5-210"><a href="#cb5-210"></a>pk <span class="op">=</span> publickey(sk)</span>
+<span id="cb5-211"><a href="#cb5-211"></a>s <span class="op">=</span> signature(m, sk, pk)</span>
+<span id="cb5-212"><a href="#cb5-212"></a></span>
+<span id="cb5-213"><a href="#cb5-213"></a><span class="cf">assert</span> checkvalid(s, m, pk)</span>
+<span id="cb5-214"><a href="#cb5-214"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">0</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(sk <span class="op">+</span> pk)</span>
+<span id="cb5-215"><a href="#cb5-215"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">1</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(pk)</span>
+<span id="cb5-216"><a href="#cb5-216"></a><span class="cf">assert</span> <span class="bu">bytes</span>(x[<span class="dv">3</span>].encode(<span class="st">"latin-1"</span>)) <span class="op">==</span> binascii.hexlify(s <span class="op">+</span> m)</span>
+<span id="cb5-217"><a href="#cb5-217"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
