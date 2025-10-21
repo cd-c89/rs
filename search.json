@@ -17,8 +17,8 @@
     ]
   },
   {
-    "objectID": "72_ix.md.html",
-    "href": "72_ix.md.html",
+    "objectID": "72_ix.html",
+    "href": "72_ix.html",
     "title": "ix",
     "section": "",
     "text": "To complete this assignment, you must:\n\nCreate a 72 directory in your 271rs repository.\nThis folder must be a Cargo package.\nAs a convenience, I named mine bignum just to call it something other than ix, which was confusing.\n\ncargo new 72 --name bignum --vcs none\n\n\n\n\n\nI have provided a completing testing framework within the I/O lab.\n\n\n\n\n\nYou will implement:\n\nadd_ix\nsub_ix\nmul_ix\n\nYou will attempt, but regard as a challenge problem:\n\ndiv_ix and rem_ix, which are likely wrappers on the same “divmod” helper function.\n\n\n\n\n\nDEBUG = 0\nCMD = \"cargo run --\"\n\nimport subprocess, os, random\nfrom operator import add, sub, mul, floordiv as quo, mod as rem\n\nbigone, bigtwo = random.randint(2 ** 500, 2 ** 512), random.randint(2 ** 500, 2 ** 512)\nhexone, hextwo = hex(bigone), hex(bigtwo)\nDEBUG and print(\"\\nhexone =\\n\", hexone, \"\\nhextwo = \\n\", hextwo)\n\nfrom operator import add, sub, mul, floordiv as quo, mod as rem\nops = {'ADD':add,'SUB':sub,'MUL':mul,'QUO':quo,'REM':rem}\nfor op in ops:\n    result = int(subprocess.check_output([\"cargo\", \"run\", hexone, hextwo, op]),16)\n    answer = ops[op](bigone,bigtwo)\n    if result != answer:\n        print(\"Operator\", op, \"failed.\")\n        DEBUG and print(\"Expected:\")\n        DEBUG and print(hex(answer))\n        DEBUG and print(\"Received:\")\n        DEBUG and print(hex(result))\n        exit()\n    else:\n        print(op, \"passes.\")",
@@ -27,8 +27,8 @@
     ]
   },
   {
-    "objectID": "72_ix.md.html#requirements",
-    "href": "72_ix.md.html#requirements",
+    "objectID": "72_ix.html#requirements",
+    "href": "72_ix.html#requirements",
     "title": "ix",
     "section": "",
     "text": "To complete this assignment, you must:\n\nCreate a 72 directory in your 271rs repository.\nThis folder must be a Cargo package.\nAs a convenience, I named mine bignum just to call it something other than ix, which was confusing.\n\ncargo new 72 --name bignum --vcs none",
@@ -37,8 +37,8 @@
     ]
   },
   {
-    "objectID": "72_ix.md.html#my-responsibility",
-    "href": "72_ix.md.html#my-responsibility",
+    "objectID": "72_ix.html#my-responsibility",
+    "href": "72_ix.html#my-responsibility",
     "title": "ix",
     "section": "",
     "text": "I have provided a completing testing framework within the I/O lab.",
@@ -47,8 +47,8 @@
     ]
   },
   {
-    "objectID": "72_ix.md.html#your-responsibility",
-    "href": "72_ix.md.html#your-responsibility",
+    "objectID": "72_ix.html#your-responsibility",
+    "href": "72_ix.html#your-responsibility",
     "title": "ix",
     "section": "",
     "text": "You will implement:\n\nadd_ix\nsub_ix\nmul_ix\n\nYou will attempt, but regard as a challenge problem:\n\ndiv_ix and rem_ix, which are likely wrappers on the same “divmod” helper function.",
@@ -57,8 +57,8 @@
     ]
   },
   {
-    "objectID": "72_ix.md.html#tester",
-    "href": "72_ix.md.html#tester",
+    "objectID": "72_ix.html#tester",
+    "href": "72_ix.html#tester",
     "title": "ix",
     "section": "",
     "text": "DEBUG = 0\nCMD = \"cargo run --\"\n\nimport subprocess, os, random\nfrom operator import add, sub, mul, floordiv as quo, mod as rem\n\nbigone, bigtwo = random.randint(2 ** 500, 2 ** 512), random.randint(2 ** 500, 2 ** 512)\nhexone, hextwo = hex(bigone), hex(bigtwo)\nDEBUG and print(\"\\nhexone =\\n\", hexone, \"\\nhextwo = \\n\", hextwo)\n\nfrom operator import add, sub, mul, floordiv as quo, mod as rem\nops = {'ADD':add,'SUB':sub,'MUL':mul,'QUO':quo,'REM':rem}\nfor op in ops:\n    result = int(subprocess.check_output([\"cargo\", \"run\", hexone, hextwo, op]),16)\n    answer = ops[op](bigone,bigtwo)\n    if result != answer:\n        print(\"Operator\", op, \"failed.\")\n        DEBUG and print(\"Expected:\")\n        DEBUG and print(hex(answer))\n        DEBUG and print(\"Received:\")\n        DEBUG and print(hex(result))\n        exit()\n    else:\n        print(op, \"passes.\")",
