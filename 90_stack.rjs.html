@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.30">
+
+  <meta name="author" content="Prof.&nbsp;Calvin">
+  <title>Systems in Rust – Stack</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-83ff8eaca933b935d6975c751fe501e4.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Stack</h1>
+  <p class="subtitle">Systems in Rust</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Prof.&nbsp;Calvin 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="announcements" class="title-slide slide level1 center">
+<h1>Announcements</h1>
+<ul>
+<li><strong>Welcome</strong> to Systems in Rust</li>
+<li><strong>Action Items</strong>:
+<ul>
+<li>Midterms verbal update.</li>
+<li>Keep at <code>ix</code></li>
+<li>This unlocks the last and greatest of the cryptographic homeworks so we can get to graph theory.</li>
+</ul></li>
+</ul>
+</section>
+<section id="today" class="slide level2">
+<h2>Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Ownership</label>
+<ul class="task-list">
+<li><label><input type="checkbox">The Stack</label></li>
+<li><label><input type="checkbox">The Heap</label></li>
+</ul></li>
+<li><label><input type="checkbox"><code>struct</code></label>
+<ul class="task-list">
+<li><label><input type="checkbox">Anti-patterns and Design Patterns.</label></li>
+</ul></li>
+</ul>
+</section>
+<section id="ownership" class="slide level2">
+<h2>Ownership</h2>
+<blockquote>
+<p><em>Ownership</em> is a set of rules that govern how a Rust program manages memory.</p>
+</blockquote>
+<ul>
+<li>Some languages (Python) have garbage collection that regularly looks for no-longer-used memory as the program runs</li>
+<li>Other languages (C) the programmer must explicitly allocate and free the memory</li>
+</ul>
+</section>
+<section id="a-move" class="slide level2">
+<h2>A “Move”</h2>
+<ul>
+<li>A <strong>String</strong> <em>data structure</em> is <strong>moved</strong> when passed to a function,
+<ul>
+<li>This invalidates the original variable.</li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-2"><a></a>    <span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a></a>    <span class="co">// s1's ownership is moved to the 'take' function's 's' parameter.</span></span>
+<span id="cb1-4"><a></a>    take_ownership(s1)<span class="op">;</span></span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>    <span class="co">// This line would error</span></span>
+<span id="cb1-7"><a></a>    <span class="co">// println!("s1 is: {}", s1);</span></span>
+<span id="cb1-8"><a></a><span class="op">}</span></span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="kw">fn</span> take_ownership(s<span class="op">:</span> <span class="dt">String</span>) <span class="op">{</span></span>
+<span id="cb1-11"><a></a>    <span class="pp">println!</span>(<span class="st">"Received: {}"</span><span class="op">,</span> s)<span class="op">;</span></span>
+<span id="cb1-12"><a></a>    <span class="co">// 's' "goes out of scope".</span></span>
+<span id="cb1-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentary" class="slide level2">
+<h2>Commentary</h2>
+<ul>
+<li>The <code>String</code> type is not a value, but a data structure.
+<ul>
+<li>It requires some amount of memory.</li>
+</ul></li>
+<li>When <code>take_ownership(s1)</code> is called, the <code>main</code> ceases to be the “owner” of <code>s1</code>
+<ul>
+<li><code>s1</code> is “moved” to <code>take_ownership</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="commentary-1" class="slide level2">
+<h2>Commentary</h2>
+<ul>
+<li>After the move, <code>s1</code> is considered <strong>invalid</strong> by the compiler.
+<ul>
+<li>If you try to use it (as shown in the commented-out line), the Rust compiler blocks.</li>
+</ul></li>
+<li>When <code>take_ownership</code> finishes, the memory owned by <code>s</code> is automatically cleaned up (dropped).
+<ul>
+<li>The “some amount of memory” is now available for used by other programs, functions, or variables.</li>
+<li>Otherwise we would gradually run out of memory.</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-copy" class="slide level2">
+<h2>A “Copy”</h2>
+<ul>
+<li><code>x</code>, an <code>i32</code>, is a value, not a data structure.
+<ul>
+<li>There are two <strong>copies</strong> of the value.</li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="co">// src/main.rs (Snippet 2)</span></span>
+<span id="cb2-2"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb2-3"><a></a>    <span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-4"><a></a>    <span class="co">// x's value is copied. The original x remains valid.</span></span>
+<span id="cb2-5"><a></a>    make_copy(x)<span class="op">;</span></span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a>    <span class="pp">println!</span>(<span class="st">"x is still: {}"</span><span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb2-8"><a></a><span class="op">}</span></span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="kw">fn</span> make_copy(i<span class="op">:</span> <span class="dt">i32</span>) <span class="op">{</span></span>
+<span id="cb2-11"><a></a>    <span class="pp">println!</span>(<span class="st">"Received: {}"</span><span class="op">,</span> i)<span class="op">;</span></span>
+<span id="cb2-12"><a></a>    <span class="co">// 'i' goes out of scope.</span></span>
+<span id="cb2-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentary-2" class="slide level2">
+<h2>Commentary</h2>
+<ul>
+<li>When <code>make_copy(x)</code> is called, a bit-for-bit <strong>copy</strong> of the value <span class="math inline">\(5\)</span> is created and assigned to the parameter <code>i</code>.
+<ul>
+<li>We can do this because to copy <code>x</code> requires a (1) known and (2) finite number of bits.</li>
+</ul></li>
+<li>The original variable <code>x</code> remains <strong>valid</strong> and can be used after the function call.
+<ul>
+<li>Each function has its own copy of the data.</li>
+<li>The data is small and cheap to duplicate.</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-borrow-references" class="slide level2">
+<h2>A “Borrow” (References)</h2>
+<ul>
+<li>Access data w/o <strong>ownership</strong> by <strong>borrowing</strong> a <strong>reference</strong>.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a></a><span class="co">// src/main.rs (Snippet 3)</span></span>
+<span id="cb3-2"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb3-3"><a></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello world"</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a></a>    <span class="co">// Pass a reference (&amp;s), which is borrowing.</span></span>
+<span id="cb3-5"><a></a>    <span class="kw">let</span> len <span class="op">=</span> calculate_length(<span class="op">&amp;</span>s)<span class="op">;</span></span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a>    <span class="co">// 's' is still valid because ownership was not moved.</span></span>
+<span id="cb3-8"><a></a>    <span class="pp">println!</span>(<span class="st">"'{}' has length {}"</span><span class="op">,</span> s<span class="op">,</span> len)<span class="op">;</span></span>
+<span id="cb3-9"><a></a><span class="op">}</span></span>
+<span id="cb3-10"><a></a></span>
+<span id="cb3-11"><a></a><span class="kw">fn</span> calculate_length(s<span class="op">:</span> <span class="op">&amp;</span><span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">usize</span> <span class="op">{</span></span>
+<span id="cb3-12"><a></a>    s<span class="op">.</span>len()</span>
+<span id="cb3-13"><a></a>    <span class="co">// 's' (the reference) goes out of scope, but the String</span></span>
+<span id="cb3-14"><a></a>    <span class="co">// it points to is NOT dropped.</span></span>
+<span id="cb3-15"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentary-3" class="slide level2">
+<h2>Commentary</h2>
+<ul>
+<li>The <code>&amp;String</code> type represents a <strong>reference</strong> to a <code>String</code>. This is an act of <strong>borrowing</strong>.
+<ul>
+<li>The data structure is not copied, rather it’s location is shared.</li>
+</ul></li>
+<li>The function <code>calculate_length</code> can read the data via the reference <code>s</code> but <strong>does not take ownership</strong>.
+<ul>
+<li>It can look up what is in the data structure, but not manipulate it.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-rust-thing" class="slide level2">
+<h2>The Rust “Thing”</h2>
+<ul>
+<li>Because ownership is retained by the <code>s</code> variable in <code>main</code>, it remains <strong>valid</strong> and can be used after the function call
+<ul>
+<li><strong>Borrowing</strong> allows temporary access without transferring ownership.</li>
+</ul></li>
+<li>This separates Rust from all other major languages.
+<ul>
+<li>It is why Rust is winning.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="the-stack" class="title-slide slide level1 center">
+<h1>The Stack</h1>
+
+</section>
+<section id="citation" class="slide level2">
+<h2>Citation</h2>
+<ul>
+<li>The stack is easy to understand once you understand it.</li>
+<li>I’m not great at explaining it.</li>
+<li><a href="https://www.geeksforgeeks.org/computer-organization-architecture/memory-stack-organization-in-computer-architecture/">Memory Stack Organization in Computer Architecture</a></li>
+</ul>
+</section>
+<section id="the-memory-stack" class="slide level2">
+<h2>The Memory Stack</h2>
+<ul>
+<li>The <strong>Memory Stack</strong> is a <strong>LIFO</strong> (Last-In, First-Out) storage device.
+<ul>
+<li>It organizes a portion of the computer’s system memory.</li>
+</ul></li>
+<li>It is named for the <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Stack (abstract data type)</a></li>
+</ul>
+</section>
+<section id="a-leaky-abstraction" class="slide level2">
+<h2>A Leaky Abstraction</h2>
+<ul>
+<li>A stack is reality of <em>hardware design</em>.</li>
+<li>Knowing about the stack is ~required to write Rust.
+<ul>
+<li>Nominally the stack is “abstracted” from programmers - it exists but we don’t think of it.</li>
+<li>Rust “violates” that abstraction by exposing it through the borrow model.</li>
+<li>We term this a “leaky abstraction”.
+<ul>
+<li>We can ignore it a little bit, but not all the way.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="hardware-implementation" class="slide level2">
+<h2>Hardware Implementation</h2>
+<ul>
+<li>Physical CPUs implements a stack using memory address.
+<ul>
+<li>This process utilizes several key processor <em>registers</em>:
+<ul>
+<li><strong>Stack Pointer (SP):</strong> Points at the top of the stack.</li>
+<li><strong>Data Registers (DR):</strong> Store values within the compute core (e.g.&nbsp;not in memory).</li>
+</ul></li>
+<li>A register is a physical collection of semiconductors that are the hardware equivalent of a register.</li>
+</ul></li>
+</ul>
+</section>
+<section id="stack-growth-rusts-copy-trait" class="slide level2">
+<h2>Stack Growth &amp; Rust’s Copy Trait</h2>
+<ul>
+<li>Stack growth: The SP usually starts high (e.g., <span class="math inline">\(3000\)</span>) and <strong>grows towards decreasing addresses</strong> (e.g., <span class="math inline">\(2000\)</span>).
+<ul>
+<li>The first item is stored at the highest initial address.</li>
+<li>Historical design decision.</li>
+</ul></li>
+<li>Rust’s <strong>Copy</strong> allows fixed-size data stored on the stack.
+<ul>
+<li>Values like <code>i32</code> are copied when assigned/passed..</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb4-2"><a></a><span class="kw">let</span> y <span class="op">=</span> x<span class="op">;</span> <span class="co">// A simple copy is made on the stack.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="rust-push-diagram" class="slide level2">
+<h2>Rust PUSH Diagram</h2>
+<ul>
+<li>Values around <code>0x3000</code> are hex memory locations.</li>
+<li>The stack pointer SP starts at <code>0x3004</code> and ends at <code>0x299C</code></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 470.05 83.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 79.4)">
+<title>g</title>
+<polygon fill="#191919" stroke="transparent" points="-4,4 -4,-79.4 466.05,-79.4 466.05,4 -4,4"></polygon>
+<!-- stack0 -->
+<g id="node1" class="node">
+<title>stack0</title>
+<polygon fill="none" stroke="#ffffff" points="0,-19.7 0,-55.7 74.01,-55.7 74.01,-19.7 0,-19.7"></polygon>
+<text text-anchor="middle" x="24.8" y="-33.6" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="49.61,-19.9 49.61,-55.7 "></polyline>
+<text text-anchor="middle" x="61.81" y="-33.6" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+</g>
+<!-- stack1 -->
+<g id="node2" class="node">
+<title>stack1</title>
+<polygon fill="none" stroke="#ffffff" points="194.02,-12.9 194.02,-62.5 268.03,-62.5 268.03,-12.9 194.02,-12.9"></polygon>
+<text text-anchor="middle" x="218.82" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="243.63,-37.7 243.63,-62.5 "></polyline>
+<text text-anchor="middle" x="255.83" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="194.02,-37.7 268.03,-37.7 "></polyline>
+<text text-anchor="middle" x="218.82" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="243.63,-12.9 243.63,-37.7 "></polyline>
+<text text-anchor="middle" x="255.83" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+</g>
+<!-- stack0&#45;&gt;stack1 -->
+<g id="edge1" class="edge">
+<title>stack0-&gt;stack1</title>
+<path fill="none" stroke="#ffffff" d="M74.12,-37.7C105.13,-37.7 150.03,-37.7 183.69,-37.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="183.74,-41.2 193.74,-37.7 183.74,-34.2 183.74,-41.2"></polygon>
+<text text-anchor="middle" x="134.01" y="-41.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let x = 5;</text>
+</g>
+<!-- stack2 -->
+<g id="node3" class="node">
+<title>stack2</title>
+<polygon fill="none" stroke="#ffffff" points="388.04,-0.5 388.04,-74.9 462.05,-74.9 462.05,-0.5 388.04,-0.5"></polygon>
+<text text-anchor="middle" x="412.84" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">2998</text>
+<polyline fill="none" stroke="#ffffff" points="437.65,-50.1 437.65,-74.9 "></polyline>
+<text text-anchor="middle" x="449.85" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="388.04,-50.1 462.05,-50.1 "></polyline>
+<text text-anchor="middle" x="412.84" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="437.65,-25.3 437.65,-50.1 "></polyline>
+<text text-anchor="middle" x="449.85" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+<polyline fill="none" stroke="#ffffff" points="388.04,-25.3 462.05,-25.3 "></polyline>
+<text text-anchor="middle" x="412.84" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="437.65,-0.5 437.65,-25.3 "></polyline>
+<text text-anchor="middle" x="449.85" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+</g>
+<!-- stack1&#45;&gt;stack2 -->
+<g id="edge2" class="edge">
+<title>stack1-&gt;stack2</title>
+<path fill="none" stroke="#ffffff" d="M268.14,-37.7C299.15,-37.7 344.05,-37.7 377.71,-37.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="377.76,-41.2 387.76,-37.7 377.76,-34.2 377.76,-41.2"></polygon>
+<text text-anchor="middle" x="328.03" y="-41.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let y = x;</text>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="push-operation" class="slide level2">
+<h2>PUSH Operation</h2>
+<ul>
+<li><strong>PUSH</strong> inserts a new data item at top of stack.
+<ul>
+<li>“Same” as the abstract data type.</li>
+<li><strong>Step 1: Decrement SP</strong>: <span class="math inline">\(SP \leftarrow SP-1\)</span>
+<ul>
+<li>SP “stack pointer” holds the current “top” of the stack.</li>
+<li>It is updated by the finite size of the pushed value.</li>
+</ul></li>
+<li><strong>Step 2: Write to Memory</strong>: <span class="math inline">\(M[SP] \leftarrow DR\)</span>
+<ul>
+<li>The value in some “data register” is written to the memory location in the the SP.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="pop-operation" class="slide level2">
+<h2>POP Operation</h2>
+<ul>
+<li>The <strong>POP</strong> operation retrieves (and effectively deletes) a data item from the top of the stack.
+<ul>
+<li><strong>Step 1: Read from Memory</strong> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(DR \leftarrow M[SP]\)</span> (The top data item is read into the Data Register).</li>
+<li><strong>Step 2: Increment SP</strong> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(SP \leftarrow SP+1\)</span> (The SP moves away, “deleting” the item).</li>
+</ul></li>
+</ul>
+</section>
+<section id="when-does-this-happen" class="slide level2">
+<h2>When does this happen?</h2>
+<ul>
+<li>We don’t really encode POP in Rust</li>
+<li>Rather it happens when a variable exits a name space, for example:
+<ul>
+<li>(This is cringe to be minimal)</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-2"><a></a><span class="op">{</span></span>
+<span id="cb5-3"><a></a>  <span class="kw">let</span> y <span class="op">=</span> x<span class="op">;</span> <span class="co">// A simple copy is made on the stack.  </span></span>
+<span id="cb5-4"><a></a><span class="op">}</span> <span class="co">// y POP</span></span>
+<span id="cb5-5"><a></a><span class="kw">let</span> z <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="rust-pop-diagram" class="slide level2">
+<h2>Rust POP Diagram</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 664.07 83.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 79.4)">
+<title>g</title>
+<polygon fill="#191919" stroke="transparent" points="-4,4 -4,-79.4 660.07,-79.4 660.07,4 -4,4"></polygon>
+<!-- stack1 -->
+<g id="node1" class="node">
+<title>stack1</title>
+<polygon fill="none" stroke="#ffffff" points="0,-12.9 0,-62.5 74.01,-62.5 74.01,-12.9 0,-12.9"></polygon>
+<text text-anchor="middle" x="24.8" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="49.61,-37.7 49.61,-62.5 "></polyline>
+<text text-anchor="middle" x="61.81" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+<polyline fill="none" stroke="#ffffff" points="0,-37.7 74.01,-37.7 "></polyline>
+<text text-anchor="middle" x="24.8" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="49.61,-12.9 49.61,-37.7 "></polyline>
+<text text-anchor="middle" x="61.81" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+</g>
+<!-- stack2 -->
+<g id="node2" class="node">
+<title>stack2</title>
+<polygon fill="none" stroke="#ffffff" points="194.02,-0.5 194.02,-74.9 268.03,-74.9 268.03,-0.5 194.02,-0.5"></polygon>
+<text text-anchor="middle" x="218.82" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">2998</text>
+<polyline fill="none" stroke="#ffffff" points="243.63,-50.1 243.63,-74.9 "></polyline>
+<text text-anchor="middle" x="255.83" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="194.02,-50.1 268.03,-50.1 "></polyline>
+<text text-anchor="middle" x="218.82" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="243.63,-25.3 243.63,-50.1 "></polyline>
+<text text-anchor="middle" x="255.83" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+<polyline fill="none" stroke="#ffffff" points="194.02,-25.3 268.03,-25.3 "></polyline>
+<text text-anchor="middle" x="218.82" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="243.63,-0.5 243.63,-25.3 "></polyline>
+<text text-anchor="middle" x="255.83" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+</g>
+<!-- stack1&#45;&gt;stack2 -->
+<g id="edge1" class="edge">
+<title>stack1-&gt;stack2</title>
+<path fill="none" stroke="#ffffff" d="M74.12,-37.7C105.13,-37.7 150.03,-37.7 183.69,-37.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="183.74,-41.2 193.74,-37.7 183.74,-34.2 183.74,-41.2"></polygon>
+<text text-anchor="middle" x="134.01" y="-41.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let y = x;</text>
+</g>
+<!-- stack3 -->
+<g id="node3" class="node">
+<title>stack3</title>
+<polygon fill="none" stroke="#ffffff" points="388.04,-12.9 388.04,-62.5 462.05,-62.5 462.05,-12.9 388.04,-12.9"></polygon>
+<text text-anchor="middle" x="412.84" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="437.65,-37.7 437.65,-62.5 "></polyline>
+<text text-anchor="middle" x="449.85" y="-45.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="388.04,-37.7 462.05,-37.7 "></polyline>
+<text text-anchor="middle" x="412.84" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="437.65,-12.9 437.65,-37.7 "></polyline>
+<text text-anchor="middle" x="449.85" y="-21.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+</g>
+<!-- stack2&#45;&gt;stack3 -->
+<g id="edge2" class="edge">
+<title>stack2-&gt;stack3</title>
+<path fill="none" stroke="#ffffff" d="M268.14,-37.7C299.15,-37.7 344.05,-37.7 377.71,-37.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="377.76,-41.2 387.76,-37.7 377.76,-34.2 377.76,-41.2"></polygon>
+<text text-anchor="middle" x="328.03" y="-41.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">} // y POP</text>
+</g>
+<!-- stack4 -->
+<g id="node4" class="node">
+<title>stack4</title>
+<polygon fill="none" stroke="#ffffff" points="582.06,-0.5 582.06,-74.9 656.07,-74.9 656.07,-0.5 582.06,-0.5"></polygon>
+<text text-anchor="middle" x="606.86" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">2998</text>
+<polyline fill="none" stroke="#ffffff" points="631.67,-50.1 631.67,-74.9 "></polyline>
+<text text-anchor="middle" x="643.87" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="582.06,-50.1 656.07,-50.1 "></polyline>
+<text text-anchor="middle" x="606.86" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="631.67,-25.3 631.67,-50.1 "></polyline>
+<text text-anchor="middle" x="643.87" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">7</text>
+<polyline fill="none" stroke="#ffffff" points="582.06,-25.3 656.07,-25.3 "></polyline>
+<text text-anchor="middle" x="606.86" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="631.67,-0.5 631.67,-25.3 "></polyline>
+<text text-anchor="middle" x="643.87" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">5</text>
+</g>
+<!-- stack3&#45;&gt;stack4 -->
+<g id="edge3" class="edge">
+<title>stack3-&gt;stack4</title>
+<path fill="none" stroke="#ffffff" d="M462.16,-37.7C493.18,-37.7 538.07,-37.7 571.73,-37.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="571.78,-41.2 581.78,-37.7 571.78,-34.2 571.78,-41.2"></polygon>
+<text text-anchor="middle" x="522.05" y="-41.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let z = 7;</text>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="unrelated-track" class="slide level2">
+<h2>Unrelated Track</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pay Attention</strong></p>
+</div>
+<div class="callout-content">
+<p>Do not click this while streaming.</p>
+</div>
+</div>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E4vUxVwb_G8?si=5QP0_2b7zP0kZj8G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+</section>
+<section id="rust-ownership" class="slide level2">
+<h2>Rust Ownership</h2>
+<ul>
+<li>Rust’s ownership system manages heap-allocated data (like <code>String</code>), which are too large for simple stack copying.
+<ul>
+<li>These types use <strong>Move</strong> semantics to ensure memory safety.
+<ul>
+<li>Ownership is transferred to prevent multiple variables from trying to free the same memory.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"POPPY"</span>)<span class="op">;</span></span>
+<span id="cb6-2"><a></a><span class="kw">let</span> t <span class="op">=</span> s<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+</ul>
+</section>
+<section id="thinking-about-ownership" class="slide level2">
+<h2>Thinking about ownership</h2>
+<ul>
+<li>We can imagine this operation as follows:
+<ul>
+<li>The value of <code>s</code> is not the String data structure, but rather a description of where to find the data structure.</li>
+<li>When we take <code>t = s</code>:
+<ul>
+<li><strong>Nothing</strong> changes about the stack.</li>
+<li>The value on the stack may now be referred to as <code>t</code></li>
+<li>Attempting to refer to <code>s</code> will trigger a compiler error.</li>
+<li>This makes sense (trust me).</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="rust-ownership-diagram" class="slide level2">
+<h2>Rust Ownership Diagram</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 624.67 143.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 139.8)">
+<title>g</title>
+<polygon fill="#191919" stroke="transparent" points="-4,4 -4,-139.8 620.67,-139.8 620.67,4 -4,4"></polygon>
+<!-- stack0 -->
+<g id="node1" class="node">
+<title>stack0</title>
+<polygon fill="none" stroke="#ffffff" points="0,-61.5 0,-97.5 74.01,-97.5 74.01,-61.5 0,-61.5"></polygon>
+<text text-anchor="middle" x="24.8" y="-75.4" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="49.61,-61.7 49.61,-97.5 "></polyline>
+<text text-anchor="middle" x="61.81" y="-75.4" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+</g>
+<!-- stack1 -->
+<g id="node2" class="node">
+<title>stack1</title>
+<polygon fill="none" stroke="#ffffff" points="177.22,-54.7 177.22,-104.3 251.22,-104.3 251.22,-54.7 177.22,-54.7"></polygon>
+<text text-anchor="middle" x="202.02" y="-87.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="226.82,-79.5 226.82,-104.3 "></polyline>
+<text text-anchor="middle" x="239.02" y="-87.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="177.22,-79.5 251.22,-79.5 "></polyline>
+<text text-anchor="middle" x="202.02" y="-62.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="226.82,-54.7 226.82,-79.5 "></polyline>
+<text text-anchor="middle" x="239.02" y="-62.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">s</text>
+</g>
+<!-- stack0&#45;&gt;stack1 -->
+<g id="edge1" class="edge">
+<title>stack0-&gt;stack1</title>
+<path fill="none" stroke="#ffffff" d="M74.31,-79.5C101.09,-79.5 137.75,-79.5 166.68,-79.5"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="166.96,-83 176.96,-79.5 166.96,-76 166.96,-83"></polygon>
+<text text-anchor="middle" x="125.61" y="-83.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let s = </text>
+</g>
+<!-- stack2 -->
+<g id="node3" class="node">
+<title>stack2</title>
+<polygon fill="none" stroke="#ffffff" points="393.04,-85.7 393.04,-135.3 467.05,-135.3 467.05,-85.7 393.04,-85.7"></polygon>
+<text text-anchor="middle" x="417.85" y="-118.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">299C</text>
+<polyline fill="none" stroke="#ffffff" points="442.65,-110.5 442.65,-135.3 "></polyline>
+<text text-anchor="middle" x="454.85" y="-118.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff"> </text>
+<polyline fill="none" stroke="#ffffff" points="393.04,-110.5 467.05,-110.5 "></polyline>
+<text text-anchor="middle" x="417.85" y="-93.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">3000</text>
+<polyline fill="none" stroke="#ffffff" points="442.65,-85.7 442.65,-110.5 "></polyline>
+<text text-anchor="middle" x="454.85" y="-93.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">t</text>
+</g>
+<!-- stack1&#45;&gt;stack2 -->
+<g id="edge2" class="edge">
+<title>stack1-&gt;stack2</title>
+<path fill="none" stroke="#ffffff" d="M251.49,-84.76C287.7,-90.01 343.46,-98.09 382.82,-103.8"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="382.56,-107.3 392.95,-105.27 383.56,-100.37 382.56,-107.3"></polygon>
+<text text-anchor="middle" x="311.23" y="-102.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">let t = s;</text>
+</g>
+<!-- heap0 -->
+<g id="node4" class="node">
+<title>heap0</title>
+<polygon fill="none" stroke="#ffffff" points="525.86,-0.5 525.86,-124.5 616.67,-124.5 616.67,-0.5 525.86,-0.5"></polygon>
+<text text-anchor="middle" x="550.66" y="-107.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">??00</text>
+<polyline fill="none" stroke="#ffffff" points="575.46,-99.7 575.46,-124.5 "></polyline>
+<text text-anchor="middle" x="596.06" y="-107.9" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">`P`</text>
+<polyline fill="none" stroke="#ffffff" points="525.86,-99.7 616.67,-99.7 "></polyline>
+<text text-anchor="middle" x="550.66" y="-83.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">??04</text>
+<polyline fill="none" stroke="#ffffff" points="575.46,-74.9 575.46,-99.7 "></polyline>
+<text text-anchor="middle" x="596.06" y="-83.1" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">`O`</text>
+<polyline fill="none" stroke="#ffffff" points="525.86,-74.9 616.67,-74.9 "></polyline>
+<text text-anchor="middle" x="550.66" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">??08</text>
+<polyline fill="none" stroke="#ffffff" points="575.46,-50.1 575.46,-74.9 "></polyline>
+<text text-anchor="middle" x="596.06" y="-58.3" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">`P`</text>
+<polyline fill="none" stroke="#ffffff" points="525.86,-50.1 616.67,-50.1 "></polyline>
+<text text-anchor="middle" x="550.66" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">??0A</text>
+<polyline fill="none" stroke="#ffffff" points="575.46,-25.3 575.46,-50.1 "></polyline>
+<text text-anchor="middle" x="596.06" y="-33.5" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">`P`</text>
+<polyline fill="none" stroke="#ffffff" points="525.86,-25.3 616.67,-25.3 "></polyline>
+<text text-anchor="middle" x="550.66" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">??10</text>
+<polyline fill="none" stroke="#ffffff" points="575.46,-0.5 575.46,-25.3 "></polyline>
+<text text-anchor="middle" x="596.06" y="-8.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">`Y`</text>
+</g>
+<!-- stack1&#45;&gt;heap0 -->
+<g id="edge3" class="edge">
+<title>stack1:f0-&gt;heap0</title>
+<path fill="none" stroke="#ffffff" d="M251.22,-67.5C304.68,-67.5 317.81,-61.43 371.24,-59.7 423.49,-58 436.59,-58.8 488.86,-59.7 497.39,-59.85 506.43,-60.08 515.26,-60.35"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="515.37,-63.86 525.48,-60.68 515.6,-56.86 515.37,-63.86"></polygon>
+<text text-anchor="middle" x="430.05" y="-64.7" font-family="Courier,monospace" font-size="14.00" fill="#ffffff">String::from()</text>
+</g>
+<!-- stack2&#45;&gt;heap0 -->
+<g id="edge4" class="edge">
+<title>stack2:f0-&gt;heap0</title>
+<path fill="none" stroke="#ffffff" d="M468.05,-98.5C484.1,-98.5 500.8,-94.5 515.94,-89.17"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="517.53,-92.31 525.64,-85.5 515.05,-85.77 517.53,-92.31"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="but-wait" class="slide level2">
+<h2>But wait!</h2>
+<ul>
+<li>Uh where does <code>"POPPY"</code> live.
+<ul>
+<li>Los Angeles, where else?</li>
+<li>Wait no I get it.</li>
+</ul></li>
+<li>On the heap.
+<ul>
+<li>On no, another abstract data type.</li>
+<li>In this case though, no really.</li>
+<li>Basically it just means “not to the stack.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="the-heap" class="title-slide slide level1 center">
+<h1>The Heap</h1>
+
+</section>
+<section id="citation-1" class="slide level2">
+<h2>Citation</h2>
+<ul>
+<li>Look, its a morass of memory.</li>
+<li>It’s the OS’s problem.
+<ul>
+<li>And therefore our problem next term.</li>
+</ul></li>
+<li>It’s mass chaos out there.
+<ul>
+<li>As much a hash table as a heap, really.</li>
+</ul></li>
+<li><a href="https://www.lenovo.com/us/en/glossary/heap/">Heap Memory Explained</a></li>
+</ul>
+</section>
+<section id="heap-memory-fundamentals" class="slide level2">
+<h2>Heap Memory Fundamentals</h2>
+<ul>
+<li>A region for <strong>dynamic memory allocation</strong>.
+<ul>
+<li>Used for flexible allocation/deallocation at <strong>runtime</strong>.
+<ul>
+<li>Arbitrary sizes!</li>
+</ul></li>
+</ul></li>
+<li>Vs. the Stack:
+<ul>
+<li><strong>Stack:</strong> Fixed size, “LIFO” order, language (<code>rustc</code>) managed, suitable for small, short-lived data.</li>
+<li><strong>Heap:</strong> Any size, Any access pattern, <strong>manually</strong> managed with ownership.</li>
+</ul></li>
+</ul>
+</section>
+<section id="abstraction" class="slide level2">
+<h2>Abstraction</h2>
+<ul>
+<li>We can think of variables in programs as keys using key-value storage, like a hash table or map or dictionary.</li>
+<li>We can think of numerical memory addresses <em>in the same way</em>, but OS managed.</li>
+<li>So - imagine the OS has a hash table of vectors
+<ul>
+<li>We use “vector” as “array of arbitrary length</li>
+</ul></li>
+<li>You can store any data structure in some combination of vectors.</li>
+</ul>
+</section>
+<section id="common-uses" class="slide level2">
+<h2>Common Uses</h2>
+<ul>
+<li>Allocating memory for data structures, arrays, or file-like objects.</li>
+<li>Mandatory (mostly) when size is <strong>unknown</strong> or may <strong>change</strong> during execution
+<ul>
+<li>Files</li>
+<li>Linked lists</li>
+<li>Vectors</li>
+<li>Strings</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-danger-memory-leaks" class="slide level2">
+<h2>The Danger: Memory Leaks</h2>
+<ul>
+<li><strong>Memory Leak Definition:</strong> Occurs when a program allocates heap memory but <strong>fails to deallocate it</strong> after use.
+<ul>
+<li>The memory remains reserved, reducing <strong>available memory</strong>.</li>
+</ul></li>
+<li>Not possible in Rust.
+<ul>
+<li><strong>HUGE</strong> Rust W</li>
+<li>C++ is, as the kids say, Ohio</li>
+</ul></li>
+<li>In older languages, you could ask for a lot of heap then loss the ability to find what you put there.</li>
+</ul>
+</section>
+<section id="binary-heaps-data-structure" class="slide level2">
+<h2>Binary Heaps (Data Structure)</h2>
+<ul>
+<li><strong>Binary Heap:</strong> A specialized tree-based data structure.
+<ul>
+<li>Satisfies the “heap property”
+<ul>
+<li>(parent <span class="math inline">\(\ge\)</span> children for max-heap).</li>
+</ul></li>
+<li>The tree is <strong>balanced</strong> (contiguous in memory)</li>
+<li>Efficent insertion/deletion (log <span class="math inline">\(n\)</span>) and root access (<span class="math inline">\(O(1)\)</span>).</li>
+</ul></li>
+<li>No relation to the langauge/OS heap.
+<ul>
+<li>Will definitely not be a future homework assignment <sup>1</sup></li>
+</ul></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Unless?</p></li></ol></aside></section>
+<section id="in-hardware" class="slide level2">
+<h2>In Hardware</h2>
+<ul>
+<li>The MMU</li>
+<li>A hardware “memory management unit”
+<ul>
+<li>Actually physical exists.</li>
+<li>Often on the same physical chip as the CPU.</li>
+<li>Manages all memory operations related to the <strong>CPU</strong>.</li>
+<li>The CPU must consult the MMU for every memory access.</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-hardware-data-structure" class="slide level2">
+<h2>A Hardware Data Structure</h2>
+<ul>
+<li>The MMU converts a <strong>Virtual Address</strong> (the numerical address used by the OS) into a <strong>Physical Address</strong> (the physical electrons on chip).</li>
+<li>Numbers aren’t real<sup>1</sup>, but transistors are.</li>
+<li>Big deal in computer architecture.</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Well.</p></li></ol></aside></section>
+<section id="distribution-of-labor" class="slide level2">
+<h2>Distribution of Labor</h2>
+<ul>
+<li>The MMU manages circuitry</li>
+<li>The OS manages numerical (<code>0x3000</code>) memory addresses</li>
+<li>The programmer/language manages symbolic (<code>x</code>) variable names.
+<ul>
+<li>Each of these is a <em>leaky abstraction</em>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="vocab" class="slide level2">
+<h2>Vocab</h2>
+<ul>
+<li>This would be on a written, in-class assessment if we used those.</li>
+<li>You are still responsible for this material.</li>
+<li>Assessed at low probability in job interviews in these languages.
+<ul>
+<li>Like Oracle or Micron or something.</li>
+</ul></li>
+</ul>
+</section>
+<section id="vocab-1" class="slide level2">
+<h2>Vocab</h2>
+<ul>
+<li><strong>Paging: The Mechanism</strong>
+<ul>
+<li><strong>Virtual address space</strong> divided in fixed-size chunks called <strong>pages</strong> (~4KB).</li>
+<li>The <strong>physical memory</strong> divided into same-sized chunks called <strong>frames</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="vocab-2" class="slide level2">
+<h2>Vocab</h2>
+<ul>
+<li><strong>Translation Lookaside Buffer (TLB)</strong>
+<ul>
+<li>The MMU uses the TLB, a small, fast <strong>cache</strong>, to store <strong>recent</strong> translations.
+<ul>
+<li>A cache is like an array of registers.</li>
+<li>Fast as heck.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-tlb" class="slide level2">
+<h2>The TLB</h2>
+<ul>
+<li>The translation lookaside buffer is my “most encountered term when I didn’t think it would matter”.</li>
+</ul>
+<blockquote>
+<p>Oh yeah, the part of hardware that makes numerical (OS) to hardware (physical location) resolution fast.</p>
+</blockquote>
+</section>
+<section id="vocab-3" class="slide level2">
+<h2>Vocab</h2>
+<ul>
+<li><strong>Page Table</strong>
+<ul>
+<li>If a translation is not in the TLB (a “TLB miss”), the MMU must consult the <strong>Page Table</strong>.
+<ul>
+<li>Big data structure, slow but complete.</li>
+</ul></li>
+<li>Managed by the OS.</li>
+</ul></li>
+</ul>
+</section>
+<section id="today-1" class="slide level2">
+<h2>Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Ownership</label>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">The Stack</label></li>
+<li><label><input type="checkbox" checked="">The Heap</label></li>
+</ul></li>
+<li><label><input type="checkbox"><code>struct</code></label>
+<ul class="task-list">
+<li><label><input type="checkbox">Anti-patterns and Design Patterns.</label></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="struct" class="title-slide slide level1 center">
+<h1><code>struct</code></h1>
+
+</section>
+<section id="citation-2" class="slide level2">
+<h2>Citation</h2>
+<ul>
+<li>We’ll just use the example struct from Rustbook.</li>
+<li><a href="https://doc.rust-lang.org/book/ch05-02-example-structs.html">5.2 Example Program Using Structs</a></li>
+</ul>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li>Write a program that calculates the area of a rectangle.</li>
+<li>Start by using single variables</li>
+<li>Refactor the program until we’re using structs instead.</li>
+</ul>
+</section>
+<section id="start" class="slide level2">
+<h2>Start</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb7-2"><a></a>    <span class="kw">let</span> width1 <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb7-3"><a></a>    <span class="kw">let</span> height1 <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb7-4"><a></a></span>
+<span id="cb7-5"><a></a>    <span class="pp">println!</span>(</span>
+<span id="cb7-6"><a></a>        <span class="st">"The area of the rectangle is {} square pixels."</span><span class="op">,</span></span>
+<span id="cb7-7"><a></a>        area(width1<span class="op">,</span> height1)</span>
+<span id="cb7-8"><a></a>    )<span class="op">;</span></span>
+<span id="cb7-9"><a></a><span class="op">}</span></span>
+<span id="cb7-10"><a></a></span>
+<span id="cb7-11"><a></a><span class="kw">fn</span> area(width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span> height<span class="op">:</span> <span class="dt">u32</span>) <span class="op">-&gt;</span> <span class="dt">u32</span> <span class="op">{</span></span>
+<span id="cb7-12"><a></a>    width <span class="op">*</span> height</span>
+<span id="cb7-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check" class="slide level2">
+<h2>Check</h2>
+<p>Now, run this program using <code>cargo run</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="ex">$</span> cargo run</span>
+<span id="cb8-2"><a></a>   <span class="ex">Compiling</span> rect v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/rect</span><span class="kw">)</span></span>
+<span id="cb8-3"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.57s</span></span>
+<span id="cb8-4"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/rect</span><span class="kw">`</span></span>
+<span id="cb8-5"><a></a><span class="ex">The</span> area of the rectangle is 1500 square pixels.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This code succeeds in figuring out the area of the rectangle by calling the <code>area</code> function with each dimension, but we can do more to make this code clear and readable.</p>
+</section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<ul>
+<li>This is bad:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust,ignore number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a></a>fn area(width: u32, height: u32) -&gt; u32 {</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>area</code> function is supposed to calculate the area of one rectangle, but
+<ul>
+<li>The function we wrote has two parameters</li>
+<li>It’s not clear anywhere in our program that the parameters are related.</li>
+</ul></li>
+<li>We term this an <em>anti-pattern</em></li>
+</ul>
+</section>
+<section id="anti-patterns" class="slide level2">
+<h2>Anti-patterns</h2>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Anti-pattern">An anti-pattern is a solution to a class of problem which may be commonly used but is likely to be ineffective or counterproductive.</a></p>
+</blockquote>
+<ul>
+<li>Common examples
+<ul>
+<li>God object (all code in 1 class</li>
+<li>Magic number (use constants)</li>
+</ul></li>
+</ul>
+</section>
+<section id="patterns" class="slide level2">
+<h2>Patterns</h2>
+<ul>
+<li><code>struct</code> is a <em>design pattern</em>, the negation of an anti-pattern.
+<ul>
+<li>Generally most like the <a href="https://en.wikipedia.org/wiki/Module_pattern">“Module” pattern</a> in practice.</li>
+</ul></li>
+<li>It would be more readable and more manageable to group width and height together.</li>
+</ul>
+</section>
+<section id="the-humble-tuple" class="slide level2">
+<h2>The humble <code>tuple</code></h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-2"><a></a>    <span class="kw">let</span> rect1 <span class="op">=</span> (<span class="dv">30</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a>    <span class="pp">println!</span>(</span>
+<span id="cb10-5"><a></a>        <span class="st">"The area of the rectangle is {} square pixels."</span><span class="op">,</span></span>
+<span id="cb10-6"><a></a>        area(rect1)</span>
+<span id="cb10-7"><a></a>    )<span class="op">;</span></span>
+<span id="cb10-8"><a></a><span class="op">}</span></span>
+<span id="cb10-9"><a></a></span>
+<span id="cb10-10"><a></a><span class="kw">fn</span> area(dimensions<span class="op">:</span> (<span class="dt">u32</span><span class="op">,</span> <span class="dt">u32</span>)) <span class="op">-&gt;</span> <span class="dt">u32</span> <span class="op">{</span></span>
+<span id="cb10-11"><a></a>    dimensions<span class="op">.</span><span class="dv">0</span> <span class="op">*</span> dimensions<span class="op">.</span><span class="dv">1</span></span>
+<span id="cb10-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comments" class="slide level2">
+<h2>Comments</h2>
+<ul>
+<li>This program is better.
+<ul>
+<li>Tuples add a bit of structure</li>
+</ul></li>
+<li>This program is worse.
+<ul>
+<li>Tuples don’t name their elements,
+<ul>
+<li>We use non-obvious indices.</li>
+<li>That is, magic numbers (anti-pattern).</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-immortal-struct" class="slide level2">
+<h2>The immortal <code>struct</code></h2>
+<ul>
+<li>Structs to add meaning by labeling the data.
+<ul>
+<li>The CS151 “record” abstraction</li>
+</ul></li>
+<li>We exchange our tuple for a
+<ol type="1">
+<li><code>struct</code> with a</li>
+<li>Structure name for the whole as well as</li>
+<li>Field names for the parts</li>
+</ol></li>
+</ul>
+</section>
+<section id="the-pattern" class="slide level2">
+<h2>The Pattern</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb11-2"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb11-3"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb11-4"><a></a><span class="op">}</span></span>
+<span id="cb11-5"><a></a></span>
+<span id="cb11-6"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-7"><a></a>    <span class="kw">let</span> rect1 <span class="op">=</span> Rectangle <span class="op">{</span></span>
+<span id="cb11-8"><a></a>        width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb11-9"><a></a>        height<span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb11-10"><a></a>    <span class="op">};</span></span>
+<span id="cb11-11"><a></a></span>
+<span id="cb11-12"><a></a>    <span class="pp">println!</span>(</span>
+<span id="cb11-13"><a></a>        <span class="st">"The area of the rectangle is {} square pixels."</span><span class="op">,</span></span>
+<span id="cb11-14"><a></a>        area(<span class="op">&amp;</span>rect1)</span>
+<span id="cb11-15"><a></a>    )<span class="op">;</span></span>
+<span id="cb11-16"><a></a><span class="op">}</span></span>
+<span id="cb11-17"><a></a></span>
+<span id="cb11-18"><a></a><span class="kw">fn</span> area(rectangle<span class="op">:</span> <span class="op">&amp;</span>Rectangle) <span class="op">-&gt;</span> <span class="dt">u32</span> <span class="op">{</span></span>
+<span id="cb11-19"><a></a>    rectangle<span class="op">.</span>width <span class="op">*</span> rectangle<span class="op">.</span>height</span>
+<span id="cb11-20"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="derived-traits" class="slide level2">
+<h2>Derived Traits</h2>
+<ul>
+<li>Surely the <code>struct</code> is better in every way.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb12-2"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb12-3"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb12-4"><a></a><span class="op">}</span></span>
+<span id="cb12-5"><a></a></span>
+<span id="cb12-6"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb12-7"><a></a>    <span class="kw">let</span> rect1 <span class="op">=</span> Rectangle <span class="op">{</span></span>
+<span id="cb12-8"><a></a>        width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb12-9"><a></a>        height<span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb12-10"><a></a>    <span class="op">};</span></span>
+<span id="cb12-11"><a></a></span>
+<span id="cb12-12"><a></a>    <span class="pp">println!</span>(<span class="st">"rect1 is {rect1}"</span>)<span class="op">;</span></span>
+<span id="cb12-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lets-check" class="slide level2">
+<h2>Let’s check:</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a></a><span class="ex">$</span> cargo run</span>
+<span id="cb13-2"><a></a>   <span class="ex">Compiling</span> rect v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/rect</span><span class="kw">)</span></span>
+<span id="cb13-3"><a></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">Rectangle</span><span class="kw">`</span> doesn<span class="st">'t implement `std::fmt::Display`</span></span>
+<span id="cb13-4"><a></a><span class="st">  --&gt; src/main.rs:12:24</span></span>
+<span id="cb13-5"><a></a><span class="st">   |</span></span>
+<span id="cb13-6"><a></a><span class="st">12 |     println!("rect1 is {rect1}");</span></span>
+<span id="cb13-7"><a></a><span class="st">   |                        ^^^^^^^ `Rectangle` cannot be formatted with the default formatter</span></span>
+<span id="cb13-8"><a></a><span class="st">   |</span></span>
+<span id="cb13-9"><a></a><span class="st">   = help: the trait `std::fmt::Display` is not implemented for `Rectangle`</span></span>
+<span id="cb13-10"><a></a><span class="st">   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead</span></span>
+<span id="cb13-11"><a></a><span class="st">   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)</span></span>
+<span id="cb13-12"><a></a></span>
+<span id="cb13-13"><a></a><span class="st">For more information about this error, try `rustc --explain E0277`.</span></span>
+<span id="cb13-14"><a></a><span class="st">error: could not compile `rect` (bin "rect") due to 1 previous error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="an-aside" class="slide level2">
+<h2>An Aside</h2>
+<ul>
+<li>I love Rust but that is <em>a lot</em> of text.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a></a><span class="ex">$</span> cargo run <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">wc</span></span>
+<span id="cb14-2"><a></a>     <span class="ex">13</span>     105     776</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>2&gt;&amp;1</code> takes <em>errors</em> (‘2’, for short), moves them (<code>&gt;</code>) to <em>output</em> (<code>1</code> for short).
+<ul>
+<li>It adds (<code>&gt;&amp;</code>) rather than overwrites.</li>
+</ul></li>
+<li><code>|</code> takes the output of a command (<code>cargo run 2&gt;&amp;1</code>) and makes it the input of the next command.</li>
+<li><code>wc</code> is wordcount - it counts lines, words, characters.</li>
+</ul>
+</section>
+<section id="length" class="slide level2">
+<h2>Length</h2>
+<ul>
+<li><em>That is 5-6 tweets of text</em></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a></a><span class="ex">$</span> echo <span class="va">$((</span><span class="dv">776</span> <span class="op">/</span> <span class="dv">140</span><span class="va">))</span></span>
+<span id="cb15-2"><a></a><span class="ex">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>$(())</code> is “arithmetic expansion”</li>
+<li>Rust Book only lays claim to this solitary line of output.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">Rectangle</span><span class="kw">`</span> doesn<span class="st">'t implement `std::fmt::Display`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Sure buddy. Okay bud.</li>
+</ul>
+</section>
+<section id="shorter" class="slide level2">
+<h2>Shorter</h2>
+<ul>
+<li>In Rust book there’s a lengthy philosophical discussion here.</li>
+<li>Anyways, they decided the solution is as follows.
+<ul>
+<li>Use either <code>dbg!()</code> or `println!(“{:?}”), and</li>
+<li>Prefix structures with <code>#[derive(Debug)]</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="fixed" class="slide level2">
+<h2>Fixed</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb17" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb17-2"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb17-3"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb17-4"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb17-5"><a></a><span class="op">}</span></span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb17-8"><a></a>    <span class="pp">dbg!</span>(Rectangle <span class="op">{</span></span>
+<span id="cb17-9"><a></a>        width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb17-10"><a></a>        height<span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb17-11"><a></a>    <span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb17-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="more-tweets" class="slide level2">
+<h2>5 more tweets</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="ex">$</span> cargo run</span>
+<span id="cb18-2"><a></a>   <span class="ex">Compiling</span> rect v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/rect</span><span class="kw">)</span></span>
+<span id="cb18-3"><a></a><span class="ex">warning:</span> fields <span class="kw">`</span><span class="ex">width</span><span class="kw">`</span> and <span class="kw">`</span><span class="ex">height</span><span class="kw">`</span> are never read</span>
+<span id="cb18-4"><a></a> <span class="ex">--</span><span class="op">&gt;</span> src/main.rs:3:5</span>
+<span id="cb18-5"><a></a>  <span class="kw">|</span></span>
+<span id="cb18-6"><a></a><span class="ex">2</span> <span class="kw">|</span> <span class="ex">struct</span> Rectangle {</span>
+<span id="cb18-7"><a></a>  <span class="kw">|</span>        <span class="ex">---------</span> fields in this struct</span>
+<span id="cb18-8"><a></a><span class="ex">3</span> <span class="kw">|</span>     <span class="ex">width:</span> u32,</span>
+<span id="cb18-9"><a></a>  <span class="kw">|</span>     <span class="ex">^^^^^</span></span>
+<span id="cb18-10"><a></a><span class="ex">4</span> <span class="kw">|</span>     <span class="ex">height:</span> u32,</span>
+<span id="cb18-11"><a></a>  <span class="kw">|</span>     <span class="ex">^^^^^^</span></span>
+<span id="cb18-12"><a></a>  <span class="kw">|</span></span>
+<span id="cb18-13"><a></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="ex">Rectangle</span><span class="kw">`</span> has a derived impl for the trait <span class="kw">`</span><span class="ex">Debug</span><span class="kw">`</span>, but this is intentionally ignored during dead code analysis</span>
+<span id="cb18-14"><a></a>  <span class="ex">=</span> note: <span class="kw">`</span><span class="co">#[warn(dead_code)]</span><span class="kw">`</span> on by default</span>
+<span id="cb18-15"><a></a></span>
+<span id="cb18-16"><a></a><span class="ex">warning:</span> <span class="kw">`</span><span class="ex">rect</span><span class="kw">`</span> <span class="er">(</span><span class="ex">bin</span> <span class="st">"rect"</span><span class="kw">)</span> <span class="ex">generated</span> 1 warning</span>
+<span id="cb18-17"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.37s</span></span>
+<span id="cb18-18"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/rect</span><span class="kw">`</span></span>
+<span id="cb18-19"><a></a><span class="ex">[src/main.rs:8:5]</span> Rectangle { width: 30, height: 50, } = Rectangle {</span>
+<span id="cb18-20"><a></a>    <span class="ex">width:</span> 30,</span>
+<span id="cb18-21"><a></a>    <span class="ex">height:</span> 50,</span>
+<span id="cb18-22"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ownership-redux" class="slide level2">
+<h2>Ownership redux</h2>
+<ul>
+<li>By the way, this doesn’t work.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb19" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb19-2"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb19-3"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb19-4"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb19-5"><a></a><span class="op">}</span></span>
+<span id="cb19-6"><a></a></span>
+<span id="cb19-7"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb19-8"><a></a>    <span class="kw">let</span> r <span class="op">=</span> Rectangle <span class="op">{</span></span>
+<span id="cb19-9"><a></a>        width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb19-10"><a></a>        height<span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb19-11"><a></a>    <span class="op">};</span></span>
+<span id="cb19-12"><a></a>    <span class="pp">dbg!</span>(r)<span class="op">;</span></span>
+<span id="cb19-13"><a></a>    <span class="pp">dbg!</span>(r)<span class="op">;</span></span>
+<span id="cb19-14"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>dbg!</code> yoinks ownership (cringe).</li>
+</ul>
+</section>
+<section id="this-works" class="slide level2">
+<h2>This works</h2>
+<ul>
+<li>Borrow, don’t own.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb20" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb20-2"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb20-3"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb20-4"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb20-5"><a></a><span class="op">}</span></span>
+<span id="cb20-6"><a></a></span>
+<span id="cb20-7"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb20-8"><a></a>    <span class="kw">let</span> r <span class="op">=</span> Rectangle <span class="op">{</span></span>
+<span id="cb20-9"><a></a>        width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb20-10"><a></a>        height<span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb20-11"><a></a>    <span class="op">};</span></span>
+<span id="cb20-12"><a></a>    <span class="pp">dbg!</span>(<span class="op">&amp;</span>r)<span class="op">;</span> <span class="co">// Borrow!</span></span>
+<span id="cb20-13"><a></a>    <span class="pp">dbg!</span>(r)<span class="op">;</span>  <span class="co">// Yoink'd</span></span>
+<span id="cb20-14"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="today-2" class="slide level2">
+<h2>Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Ownership</label>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">The Stack</label></li>
+<li><label><input type="checkbox" checked="">The Heap</label></li>
+</ul></li>
+<li><label><input type="checkbox" checked=""><code>struct</code></label>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Anti-patterns and Design Patterns</label></li>
+</ul></li>
+</ul>
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="index.html">Home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

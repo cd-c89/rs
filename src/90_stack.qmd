@@ -1,0 +1,809 @@
+---
+title: "Stack"
+---
+
+# Announcements
+
+- **Welcome** to Systems in Rust
+- **Action Items**:
+  - Midterms verbal update.
+  - Keep at `ix`
+  - This unlocks the last and greatest of the cryptographic homeworks so we can get to graph theory.
+
+
+## Today
+
+- [ ] Ownership  
+    - [ ] The Stack
+    - [ ] The Heap
+- [ ] `struct`
+    - [ ] Anti-patterns and Design Patterns.
+
+## Ownership
+
+> *Ownership* is a set of rules that govern how a Rust program manages memory.
+
+- Some languages (Python) have garbage collection that regularly looks for no-longer-used memory as the program runs
+- Other languages (C) the programmer must explicitly allocate and free the memory
+
+## A "Move"
+
+- A **String** *data structure* is **moved** when passed to a function, 
+    - This invalidates the original variable.
+
+```{.rs filename="src/main.rs"}     
+fn main() {
+    let s1 = String::from("hello");
+    // s1's ownership is moved to the 'take' function's 's' parameter.
+    take_ownership(s1);
+
+    // This line would error
+    // println!("s1 is: {}", s1);
+}
+
+fn take_ownership(s: String) {
+    println!("Received: {}", s);
+    // 's' "goes out of scope".
+}
+```
+
+## Commentary
+
+* The `String` type is not a value, but a data structure.
+    - It requires some amount of memory.
+* When `take_ownership(s1)` is called, the `main` ceases to be the "owner" of `s1`
+    - `s1` is "moved" to `take_ownership`
+  
+## Commentary  
+    
+* After the move, `s1` is considered **invalid** by the compiler. 
+    - If you try to use it (as shown in the commented-out line), the Rust compiler blocks.
+* When `take_ownership` finishes, the memory owned by `s` is automatically cleaned up (dropped).
+    - The "some amount of memory" is now available for used by other programs, functions, or variables.
+    - Otherwise we would gradually run out of memory.
+
+---
+
+## A "Copy"
+
+- `x`, an `i32`, is a value, not a data structure.
+    - There are two **copies** of the value.
+
+```{.rs filename="src/main.rs"}
+// src/main.rs (Snippet 2)
+fn main() {
+    let x = 5;
+    // x's value is copied. The original x remains valid.
+    make_copy(x);
+
+    println!("x is still: {}", x);
+}
+
+fn make_copy(i: i32) {
+    println!("Received: {}", i);
+    // 'i' goes out of scope.
+}
+```
+
+## Commentary
+
+* When `make_copy(x)` is called, a bit-for-bit **copy** of the value $5$ is created and assigned to the parameter `i`.
+    - We can do this because to copy `x` requires a (1) known and (2) finite number of bits.
+* The original variable `x` remains **valid** and can be used after the function call.
+    - Each function has its own copy of the data.
+    - The data is small and cheap to duplicate.
+
+---
+
+## A "Borrow" (References)
+
+- Access data w/o **ownership** by **borrowing** a **reference**.
+
+```{.rs filename="src/main.rs"}
+// src/main.rs (Snippet 3)
+fn main() {
+    let s = String::from("hello world");
+    // Pass a reference (&s), which is borrowing.
+    let len = calculate_length(&s);
+
+    // 's' is still valid because ownership was not moved.
+    println!("'{}' has length {}", s, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+    // 's' (the reference) goes out of scope, but the String
+    // it points to is NOT dropped.
+}
+```
+
+## Commentary
+
+* The `&String` type represents a **reference** to a `String`. This is an act of **borrowing**.
+    - The data structure is not copied, rather it's location is shared.
+* The function `calculate_length` can read the data via the reference `s` but **does not take ownership**.
+    - It can look up what is in the data structure, but not manipulate it.
+    
+## The Rust "Thing"
+    
+* Because ownership is retained by the `s` variable in `main`, it remains **valid** and can be used after the function call
+    - **Borrowing** allows temporary access without transferring ownership.
+* This separates Rust from all other major languages.
+    - It is why Rust is winning.
+
+# The Stack
+
+## Citation
+
+- The stack is easy to understand once you understand it.
+- I'm not great at explaining it.
+- [Memory Stack Organization in Computer Architecture](https://www.geeksforgeeks.org/computer-organization-architecture/memory-stack-organization-in-computer-architecture/)
+
+## The Memory Stack
+
+* The **Memory Stack** is a **LIFO** (Last-In, First-Out) storage device.
+    * It organizes a portion of the computer's system memory.
+* It is named for the [Stack (abstract data type)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+
+---
+
+## A Leaky Abstraction
+
+* A stack is reality of *hardware design*.
+* Knowing about the stack is ~required to write Rust.
+    * Nominally the stack is "abstracted" from programmers - it exists but we don't think of it.
+    * Rust "violates" that abstraction by exposing it through the borrow model.
+    * We term this a "leaky abstraction".
+        * We can ignore it a little bit, but not all the way.
+        
+## Hardware Implementation
+    
+* Physical CPUs implements a stack using memory address.
+    * This process utilizes several key processor *registers*:
+        * **Stack Pointer (SP):** Points at the top of the stack.
+        * **Data Registers (DR):** Store values within the compute core (e.g. not in memory).
+    * A register is a physical collection of semiconductors that are the hardware equivalent of a register.
+
+---
+
+## Stack Growth & Rust's Copy Trait
+
+* Stack growth: The SP usually starts high (e.g., $3000$) and **grows towards decreasing addresses** (e.g., $2000$).
+    * The first item is stored at the highest initial address.
+    * Historical design decision.
+* Rust's **Copy** allows fixed-size data stored on the stack.
+    * Values like `i32` are copied when assigned/passed..
+```rs
+let x = 5;
+let y = x; // A simple copy is made on the stack.
+```
+
+## Rust PUSH Diagram
+
+- Values around `0x3000` are hex memory locations.
+- The stack pointer SP starts at `0x3004` and ends at `0x299C`
+
+```{dot}
+digraph g {
+
+    rankdir=LR;
+    bgcolor="#191919";
+    
+    node [
+        fontcolor = "#ffffff",
+        color = "#ffffff",
+        shape = "record",
+        fontname="Courier"
+    ]
+    
+    edge [
+        color = "#ffffff",
+        fontcolor = "#ffffff",
+        fontname="Courier"
+    ]
+    
+    "stack0" [
+        label = "{3000|<f0>}"
+    ];
+    "stack1" [
+        label = "{299C|<f1>} | {3000 | <f0> 5} "
+    ];
+    "stack2" [
+        label = "{2998|<f2>} | {299C|<f1> 5} | {3000 | <f0> 5}"
+    ];
+    
+    stack0 -> stack1 [label = "let x = 5;"]
+    stack1 -> stack2 [label = "let y = x;"]
+    
+}
+```
+
+
+## PUSH Operation
+
+* **PUSH** inserts a new data item at top of stack.
+    * "Same" as the abstract data type.
+    * **Step 1: Decrement SP**: $SP \leftarrow SP-1$
+        * SP "stack pointer" holds the current "top" of the stack.
+        * It is updated by the finite size of the pushed value.
+    * **Step 2: Write to Memory**: $M[SP] \leftarrow DR$
+        * The value in some "data register" is written to the memory location in the the SP.
+
+---
+
+## POP Operation
+
+* The **POP** operation retrieves (and effectively deletes) a data item from the top of the stack.
+    * **Step 1: Read from Memory** $\rightarrow$ $DR \leftarrow M[SP]$ (The top data item is read into the Data Register).
+    * **Step 2: Increment SP** $\rightarrow$ $SP \leftarrow SP+1$ (The SP moves away, "deleting" the item).
+
+---
+
+## When does this happen?
+
+- We don't really encode POP in Rust
+- Rather it happens when a variable exits a name space, for example:
+    - (This is cringe to be minimal)
+```rs
+let x = 5;
+{
+    let y = x; // A simple copy is made on the stack.  
+} // y POP
+let z = 7;
+```
+
+## Rust POP Diagram
+
+```{dot}
+digraph g {
+
+    rankdir=LR;
+    bgcolor="#191919";
+    
+    node [
+        fontcolor = "#ffffff",
+        color = "#ffffff",
+        shape = "record",
+        fontname="Courier"
+    ]
+    
+    edge [
+        color = "#ffffff",
+        fontcolor = "#ffffff",
+        fontname="Courier"
+    ]
+    
+    "stack1" [
+        label = "{3000 | <f0> 5}| {299C|<f1>}"
+    ];
+    "stack2" [
+        label = "{2998|<f2>} | {299C|<f1> 5} | {3000 | <f0> 5}"
+    ];
+    "stack3" [
+        label = "{299C|<f1>} | {3000 | <f0> 5}"
+    ];
+    "stack4" [
+        label = "{2998|<f2>} | {299C|<f1> 7} | {3000 | <f0> 5}"
+    ];
+    
+    stack1 -> stack2 [label = "let y = x;"]
+    stack2 -> stack3 [label = "} // y POP"]
+    stack3 -> stack4 [label = "let z = 7;"]
+    
+}
+```
+
+## Unrelated Track
+
+::: {.callout-note }
+
+## Pay Attention
+
+Do not click this while streaming.
+
+:::
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E4vUxVwb_G8?si=5QP0_2b7zP0kZj8G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+
+## Rust Ownership
+
+* Rust's ownership system manages heap-allocated data (like `String`), which are too large for simple stack copying.
+    * These types use **Move** semantics to ensure memory safety.
+        * Ownership is transferred to prevent multiple variables from trying to free the same memory.
+```rs
+let s = String::from("POPPY");
+let t = s;
+```
+
+## Thinking about ownership
+
+- We can imagine this operation as follows:
+    - The value of `s` is not the String data structure, but rather a description of where to find the data structure.
+    - When we take `t = s`:
+        - **Nothing** changes about the stack.
+        - The value on the stack may now be referred to as `t`
+        - Attempting to refer to `s` will trigger a compiler error.
+        - This makes sense (trust me).
+    
+## Rust Ownership Diagram
+    
+```{dot}
+digraph g {
+
+    rankdir=LR;
+    bgcolor="#191919";
+    
+    node [
+        fontcolor = "#ffffff",
+        color = "#ffffff",
+        shape = "record",
+        fontname="Courier"
+    ]
+    
+    edge [
+        color = "#ffffff",
+        fontcolor = "#ffffff",
+        fontname="Courier"
+    ]
+    
+    "stack0" [
+        label = "{3000|<f0>}"
+    ];
+    "stack1" [
+        label = "{299C|<f1>} | {3000 | <f0> s}"
+    ];
+    "stack2" [
+        label = "{299C|<f1>} | {3000 | <f0> t}"
+    ];
+    
+    "heap0" [
+        label = "{??00 | <f0> `P`} | {??04 | <f0> `O`} | {??08 | <f0> `P`} | {??0A | <f0> `P`} | {??10 | <f0> `Y`}"
+    ];
+    
+    stack0 -> stack1 [label = "let s = "]
+    stack1 -> stack2 [label = "let t = s;"]
+    stack1:f0 -> heap0 [label = "String::from()"]
+    stack2:f0 -> heap0
+}
+```
+
+## But wait!
+
+- Uh where does `"POPPY"` live.
+    - Los Angeles, where else?
+    - Wait no I get it.
+- On the heap.
+    - On no, another abstract data type.
+    - In this case though, no really.
+    - Basically it just means "not to the stack.
+    
+# The Heap
+
+## Citation
+
+- Look, its a morass of memory.
+- It's the OS's problem.
+    - And therefore our problem next term.
+- It's mass chaos out there.
+    - As much a hash table as a heap, really.
+- [Heap Memory Explained](https://www.lenovo.com/us/en/glossary/heap/)
+
+## Heap Memory Fundamentals
+
+* A region for **dynamic memory allocation**.
+    * Used for flexible allocation/deallocation at **runtime**.
+        * Arbitrary sizes!
+* Vs. the Stack:
+    * **Stack:** Fixed size, "LIFO" order, language (`rustc`) managed, suitable for small, short-lived data.
+    * **Heap:** Any size, Any access pattern, **manually** managed with ownership.
+    
+## Abstraction
+
+- We can think of variables in programs as keys using key-value storage, like a hash table or map or dictionary.
+- We can think of numerical memory addresses *in the same way*, but OS managed.
+- So - imagine the OS has a hash table of vectors
+    - We use "vector" as "array of arbitrary length
+- You can store any data structure in some combination of vectors.
+
+---
+
+## Common Uses
+
+* Allocating memory for data structures, arrays, or file-like objects.
+* Mandatory (mostly) when size is **unknown** or may **change** during execution 
+    - Files
+    - Linked lists
+    - Vectors
+    - Strings
+
+---
+
+## The Danger: Memory Leaks
+
+* **Memory Leak Definition:** Occurs when a program allocates heap memory but **fails to deallocate it** after use.
+    * The memory remains reserved, reducing **available memory**.
+* Not possible in Rust.
+    * **HUGE** Rust W
+    * C++ is, as the kids say, Ohio
+* In older languages, you could ask for a lot of heap then loss the ability to find what you put there.
+
+---
+
+## Binary Heaps (Data Structure)
+
+* **Binary Heap:** A specialized tree-based data structure.
+    * Satisfies the "heap property" 
+        * (parent $\ge$ children for max-heap).
+    * The tree is **balanced** (contiguous in memory)
+    * Efficent insertion/deletion (log $n$) and root access ($O(1)$).
+* No relation to the langauge/OS heap.
+    * Will definitely not be a future homework assignment [^1]
+    
+[^1]: Unless?
+    
+## In Hardware
+
+* The MMU
+* A hardware "memory management unit"
+    * Actually physical exists.
+    * Often on the same physical chip as the CPU.
+    * Manages all memory operations related to the **CPU**.
+    * The CPU must consult the MMU for every memory access.
+
+## A Hardware Data Structure
+    
+* The MMU converts a **Virtual Address** (the numerical address used by the OS) into a **Physical Address** (the physical electrons on chip).
+* Numbers aren't real[^2], but transistors are.
+* Big deal in computer architecture.
+
+[^2]: Well.
+
+## Distribution of Labor
+
+* The MMU manages circuitry
+* The OS manages numerical (`0x3000`) memory addresses
+* The programmer/language manages symbolic (`x`) variable names.
+    * Each of these is a *leaky abstraction*.
+
+## Vocab
+
+- This would be on a written, in-class assessment if we used those.
+- You are still responsible for this material.
+- Assessed at low probability in job interviews in these languages.
+    - Like Oracle or Micron or something.
+
+## Vocab
+
+* **Paging: The Mechanism**
+    * **Virtual address space** divided in fixed-size chunks called **pages** (~4KB).
+    * The **physical memory** divided into same-sized chunks called **frames**.
+    
+## Vocab
+    
+* **Translation Lookaside Buffer (TLB)**
+    * The MMU uses the TLB, a small, fast **cache**, to store **recent** translations.
+        * A cache is like an array of registers.
+        * Fast as heck.
+        
+## The TLB
+
+- The translation lookaside buffer is my "most encountered term when I didn't think it would matter".
+
+> Oh yeah, the part of hardware that makes numerical (OS) to hardware (physical location) resolution fast.
+        
+## Vocab
+        
+* **Page Table**
+    * If a translation is not in the TLB (a "TLB miss"), the MMU must consult the **Page Table**.
+        * Big data structure, slow but complete.
+    * Managed by the OS.
+
+## Today
+
+- [x] Ownership  
+    - [x] The Stack
+    - [x] The Heap
+- [ ] `struct`
+    - [ ] Anti-patterns and Design Patterns.
+
+# `struct`
+
+## Citation
+
+- We'll just use the example struct from Rustbook.
+- [5.2 Example Program Using Structs](https://doc.rust-lang.org/book/ch05-02-example-structs.html)
+
+## Motivation
+
+- Write a program that calculates the area of a rectangle. 
+- Start by using single variables
+- Refactor the program until we’re using structs instead.
+
+## Start
+
+```{.rs filename="src/main.rs"}
+fn main() {
+    let width1 = 30;
+    let height1 = 50;
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(width1, height1)
+    );
+}
+
+fn area(width: u32, height: u32) -> u32 {
+    width * height
+}
+```
+
+## Check
+
+Now, run this program using `cargo run`:
+
+```sh
+$ cargo run
+   Compiling rect v0.1.0 (/home/user/tmp/rect)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.57s
+     Running `target/debug/rect`
+The area of the rectangle is 1500 square pixels.
+```
+
+This code succeeds in figuring out the area of the rectangle by calling the
+`area` function with each dimension, but we can do more to make this code clear
+and readable.
+
+## Problem
+
+- This is bad:
+
+```rust,ignore
+fn area(width: u32, height: u32) -> u32 {
+```
+
+- `area` function is supposed to calculate the area of one rectangle, but 
+    - The function we wrote has two parameters
+    - It’s not clear anywhere in our program that the parameters are related. 
+- We term this an *anti-pattern*
+
+## Anti-patterns
+
+> [An anti-pattern is a solution to a class of problem which may be commonly used but is likely to be ineffective or counterproductive.](https://en.wikipedia.org/wiki/Anti-pattern)
+
+- Common examples
+    - God object (all code in 1 class
+    - Magic number (use constants)
+
+## Patterns
+
+- `struct` is a *design pattern*, the negation of an anti-pattern.
+    - Generally most like the ["Module" pattern](https://en.wikipedia.org/wiki/Module_pattern) in practice.
+- It would be more readable and more manageable to group width and height together.
+
+## The humble `tuple`
+
+```{.rs filename="src/main.rs"}
+fn main() {
+    let rect1 = (30, 50);
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(rect1)
+    );
+}
+
+fn area(dimensions: (u32, u32)) -> u32 {
+    dimensions.0 * dimensions.1
+}
+```
+
+## Comments
+
+- This program is better. 
+    - Tuples add a bit of structure
+- This program is worse.
+    - Tuples don’t name their elements, 
+        - We use non-obvious indices.
+        - That is, magic numbers (anti-pattern).
+
+## The immortal `struct`
+
+- Structs to add meaning by labeling the data.
+    - The CS151 "record" abstraction
+- We exchange our tuple for a
+    1. `struct` with a 
+    2. Structure name for the whole as well as 
+    3. Field names for the parts
+
+## The Pattern
+
+
+```{.rs filename="src/main.rs"}
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(&rect1)
+    );
+}
+
+fn area(rectangle: &Rectangle) -> u32 {
+    rectangle.width * rectangle.height
+}
+```
+
+## Derived Traits
+
+- Surely the `struct` is better in every way.
+
+```{.rs filename="src/main.rs"}
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!("rect1 is {rect1}");
+}
+```
+
+## Let's check:
+
+```sh
+$ cargo run
+   Compiling rect v0.1.0 (/home/user/tmp/rect)
+error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+  --> src/main.rs:12:24
+   |
+12 |     println!("rect1 is {rect1}");
+   |                        ^^^^^^^ `Rectangle` cannot be formatted with the default formatter
+   |
+   = help: the trait `std::fmt::Display` is not implemented for `Rectangle`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `rect` (bin "rect") due to 1 previous error
+```
+
+## An Aside
+
+- I love Rust but that is *a lot* of text.
+```sh
+$ cargo run 2>&1 | wc
+     13     105     776
+```
+- `2>&1` takes *errors* ('2', for short), moves them (`>`) to *output* (`1` for short).
+    - It adds (`>&`) rather than overwrites.
+- `|` takes the output of a command (`cargo run 2>&1`) and makes it the input of the next command.
+- `wc` is wordcount - it counts lines, words, characters.
+
+## Length
+
+- *That is 5-6 tweets of text*
+```sh
+$ echo $((776 / 140))
+5
+```
+- `$(())` is "arithmetic expansion"
+- Rust Book only lays claim to this solitary line of output.
+```sh
+error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+```
+- Sure buddy. Okay bud.
+
+## Shorter
+
+- In Rust book there's a lengthy philosophical discussion here.
+- Anyways, they decided the solution is as follows.
+    - Use either `dbg!()` or `println!("{:?}"), and
+    - Prefix structures with `#[derive(Debug)]`
+    
+## Fixed
+
+```{.rs filename="src/main.rs"}
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    dbg!(Rectangle {
+        width: 30,
+        height: 50,
+    });
+}
+```
+
+## 5 more tweets
+
+```sh
+$ cargo run
+   Compiling rect v0.1.0 (/home/user/tmp/rect)
+warning: fields `width` and `height` are never read
+ --> src/main.rs:3:5
+  |
+2 | struct Rectangle {
+  |        --------- fields in this struct
+3 |     width: u32,
+  |     ^^^^^
+4 |     height: u32,
+  |     ^^^^^^
+  |
+  = note: `Rectangle` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+  = note: `#[warn(dead_code)]` on by default
+
+warning: `rect` (bin "rect") generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running `target/debug/rect`
+[src/main.rs:8:5] Rectangle { width: 30, height: 50, } = Rectangle {
+    width: 30,
+    height: 50,
+}
+```
+
+## Ownership redux
+
+- By the way, this doesn't work.
+```{.rs filename="src/main.rs"}
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let r = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    dbg!(r);
+    dbg!(r);
+}
+```
+- `dbg!` yoinks ownership (cringe).
+
+## This works
+
+- Borrow, don't own.
+```{.rs filename="src/main.rs"}
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let r = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    dbg!(&r); // Borrow!
+    dbg!(r);  // Yoink'd
+}
+```
+
+## Today
+
+- [x] Ownership  
+    - [x] The Stack
+    - [x] The Heap
+- [x] `struct`
+    - [x] Anti-patterns and Design Patterns
