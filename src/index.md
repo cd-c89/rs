@@ -40,7 +40,7 @@ format: html
 |0x6|10/06|[Practice](https://classroom.github.com/a/opvHddb-)|**Midterm**|`None`|
 |0x7|10/13|[Numbers](70_numbers.md)|[I/O](71_ix_io.md)|[`ix`](72_ix.md)|
 |0x8|10/20|[EdDSA](80_eddsa.qmd)|[Python](81_python.qmd)|[Ed25519](82_ed25519.md)|
-|0x9|10/27|Stacks|List|Tree|
+|0x9|10/27|[Stack](90_stack.qmd)|[Box](91_box.md)|Tree|
 |0xA|11/03|Graphs|BFS|Djikstra|
 |0xB|11/10|Merkle|||
 |0xC|11/17|VCS||
