@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Calvin">
+
+<title>Traits – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./91_box.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./92_traits.html">Traits</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hamming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_sha2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50_754.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IEEE 754</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51_f16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">f16</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numbers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71_ix_io.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical I/O</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./72_ix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80_eddsa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EdDSA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82_ed25519.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ed25519</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90_stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91_box.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Box</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./92_traits.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Traits</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#review-box" id="toc-review-box" class="nav-link" data-scroll-target="#review-box">Review: Box</a></li>
+  <li><a href="#novel-generics" id="toc-novel-generics" class="nav-link" data-scroll-target="#novel-generics">Novel: Generics</a></li>
+  <li><a href="#novel-traits" id="toc-novel-traits" class="nav-link" data-scroll-target="#novel-traits">Novel: Traits</a></li>
+  <li><a href="#starter-code" id="toc-starter-code" class="nav-link" data-scroll-target="#starter-code">Starter Code</a>
+  <ul class="collapse">
+  <li><a href="#srcmain.rs" id="toc-srcmain.rs" class="nav-link" data-scroll-target="#srcmain.rs"><code>src/main.rs</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Traits</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Calvin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>You know what a queue is. Now make one in Rust.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Use generics to create a stack and heap that can store any type.</label></li>
+<li><label><input type="checkbox">Use traits to implement push and pop operations for both data types.</label></li>
+<li><label><input type="checkbox">Review pattern matching.</label></li>
+<li><label><input type="checkbox">Review the humble <code>tuple</code></label></li>
+<li><label><input type="checkbox">Review ownership.</label></li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Design Decision
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>With the addition of a queue, you get to decide:
+<ul>
+<li>Whether to head push and tail pop, or…</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Tail push, head pop</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.append(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb1-4"><a href="#cb1-4"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="dv">0</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Whether to tail push and head pop.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Head push, tail pop</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">&gt;&gt;&gt;</span> q <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.insert(<span class="dv">0</span>,i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb2-5"><a href="#cb2-5"></a>[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>This is the added difficulty incurred by adding a queue.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="review-box" class="level2">
+<h2 class="anchored" data-anchor-id="review-box">Review: Box</h2>
+<ul>
+<li>To put some <code>x</code> in a <code>Box</code>, simply:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To remove <code>x</code> from the `Box, simply use the special “unary asterisk” operator, also called “dereference”.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="novel-generics" class="level2">
+<h2 class="anchored" data-anchor-id="novel-generics">Novel: Generics</h2>
+<ul>
+<li>You are welcome to read Rustbook on <a href="https://doc.rust-lang.org/book/ch10-01-syntax.html">Generics</a></li>
+<li>We previously “hard-coded” the <code>Stack</code> to accept strings.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    data<span class="op">:</span> <span class="dt">String</span><span class="op">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We instead append a type annotation to the end of stack, like so:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>By convention, Rust uses <code>T</code> to refer to a type variable.</li>
+<li>Then, within the declaration we may refer to <code>T</code>:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    data<span class="op">:</span> T<span class="op">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Upon making this change, you will get a series of <code>rustc</code> complaints about not specifying types in a variety of locations.</li>
+<li>You will have relatively little difficulty working through these, and should learn something valuable in the process.</li>
+</ul>
+</section>
+<section id="novel-traits" class="level2">
+<h2 class="anchored" data-anchor-id="novel-traits">Novel: Traits</h2>
+<ul>
+<li>It is customary for programmers with a background in object-oriented langauges, such as Python, JavaScript, or Java, to have an affinity for methods.</li>
+<li>In the lab, we used functional style:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a>s <span class="op">=</span> push(val<span class="op">,</span> s)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Now we will use traits to implement methods to get the following style:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a>s <span class="op">=</span> s<span class="op">.</span>push(val)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It is not required to use traits to achieve this, and possible to write methods directly, I simply found this uninteresting.</li>
+<li>Have two parts:</li>
+</ul>
+<ol type="1">
+<li>A declaration:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">pub</span> <span class="kw">trait</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">fn</span> push(<span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>An implementation:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="cf">for</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">fn</span> push(<span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>        <span class="pp">todo!</span>()<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="op">}</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>An astute observer will notice that <code>T</code> occurs <strong>seven (7)</strong> times just within the declarations.
+<ul>
+<li>Form your own opinion about that.</li>
+</ul></li>
+</ul>
+</section>
+<section id="starter-code" class="level2">
+<h2 class="anchored" data-anchor-id="starter-code">Starter Code</h2>
+<section id="srcmain.rs" class="level3">
+<h3 class="anchored" data-anchor-id="srcmain.rs"><code>src/main.rs</code></h3>
+<ul>
+<li>I am providing a fairly enormous testing script via <a href="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0">Gist</a>.</li>
+</ul>
+<style>
+/* https://github.com/lonekorean/gist-syntax-themes */
+@import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+  font: 16px 'Open Sans', sans-serif;
+}
+body .gist .gist-file {
+  border-color: #555 #555 #444
+}
+body .gist .gist-data {
+  border-color: #555
+}
+body .gist .gist-meta {
+  color: #ffffff;
+  background: #373737; 
+}
+body .gist .gist-meta a {
+  color: #ffffff
+}
+body .gist .gist-data .pl-s .pl-s1 {
+  color: #a5c261
+}
+</style>
+<script src="your-gist-embed"></script>
+
+<script src="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0.js"></script>
+<ul>
+<li>I have removed <code>dbg!()</code> calls and simply check popped values.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./91_box.html" class="pagination-link" aria-label="Box">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Box</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Traits"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## Preamble</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a>You know what a queue is. Now make one in Rust.</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="ss">- </span><span class="va">[ ]</span> Use generics to create a stack and heap that can store any type.</span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="ss">- </span><span class="va">[ ]</span> Use traits to implement push and pop operations for both data types.</span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="ss">- </span><span class="va">[ ]</span> Review pattern matching.</span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="ss">- </span><span class="va">[ ]</span> Review the humble <span class="in">`tuple`</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="ss">- </span><span class="va">[ ]</span> Review ownership.</span>
+<span id="cb12-15"><a href="#cb12-15"></a></span>
+<span id="cb12-16"><a href="#cb12-16"></a>::: {.callout-caution}</span>
+<span id="cb12-17"><a href="#cb12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="fu">## Design Decision</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="ss">- </span>With the addition of a queue, you get to decide:</span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="ss">    - </span>Whether to head push and tail pop, or...</span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="in">```py</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Tail push, head pop</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.append(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb12-26"><a href="#cb12-26"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="dv">0</span>)</span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="dv">0</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="in">```</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="ss">    - </span>Whether to tail push and head pop.</span>
+<span id="cb12-31"><a href="#cb12-31"></a>    <span class="in">```py</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Head push, tail pop</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="op">&gt;&gt;&gt;</span> q <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.insert(<span class="dv">0</span>,i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb12-36"><a href="#cb12-36"></a>[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="dv">0</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="in">```</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="ss">- </span>This is the added difficulty incurred by adding a queue.</span>
+<span id="cb12-42"><a href="#cb12-42"></a></span>
+<span id="cb12-43"><a href="#cb12-43"></a>:::</span>
+<span id="cb12-44"><a href="#cb12-44"></a></span>
+<span id="cb12-45"><a href="#cb12-45"></a><span class="fu">## Review: Box</span></span>
+<span id="cb12-46"><a href="#cb12-46"></a></span>
+<span id="cb12-47"><a href="#cb12-47"></a><span class="ss">- </span>To put some <span class="in">`x`</span> in a <span class="in">`Box`</span>, simply:</span>
+<span id="cb12-48"><a href="#cb12-48"></a><span class="in">```rs</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
+<span id="cb12-50"><a href="#cb12-50"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="in">```</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a><span class="ss">- </span>To remove <span class="in">`x`</span> from the `Box, simply use the special "unary asterisk" operator, also called "dereference".</span>
+<span id="cb12-53"><a href="#cb12-53"></a><span class="in">```rs</span></span>
+<span id="cb12-54"><a href="#cb12-54"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb12-55"><a href="#cb12-55"></a><span class="in">```</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a></span>
+<span id="cb12-57"><a href="#cb12-57"></a><span class="fu">## Novel: Generics</span></span>
+<span id="cb12-58"><a href="#cb12-58"></a></span>
+<span id="cb12-59"><a href="#cb12-59"></a><span class="ss">- </span>You are welcome to read Rustbook on <span class="co">[</span><span class="ot">Generics</span><span class="co">](https://doc.rust-lang.org/book/ch10-01-syntax.html)</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a><span class="ss">- </span>We previously "hard-coded" the <span class="in">`Stack`</span> to accept strings.</span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="in">```rs</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack <span class="op">{</span></span>
+<span id="cb12-63"><a href="#cb12-63"></a>    data<span class="op">:</span> <span class="dt">String</span><span class="op">...</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a><span class="in">```</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a><span class="ss">- </span>We instead append a type annotation to the end of stack, like so:</span>
+<span id="cb12-66"><a href="#cb12-66"></a><span class="in">```rs</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">...</span></span>
+<span id="cb12-68"><a href="#cb12-68"></a><span class="in">```</span></span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="ss">- </span>By convention, Rust uses <span class="in">`T`</span> to refer to a type variable.</span>
+<span id="cb12-70"><a href="#cb12-70"></a><span class="ss">- </span>Then, within the declaration we may refer to <span class="in">`T`</span>:</span>
+<span id="cb12-71"><a href="#cb12-71"></a><span class="in">```rs</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a>    data<span class="op">:</span> T<span class="op">...</span></span>
+<span id="cb12-74"><a href="#cb12-74"></a><span class="in">```</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a><span class="ss">- </span>Upon making this change, you will get a series of <span class="in">`rustc`</span> complaints about not specifying types in a variety of locations.</span>
+<span id="cb12-76"><a href="#cb12-76"></a><span class="ss">- </span>You will have relatively little difficulty working through these, and should learn something valuable in the process.</span>
+<span id="cb12-77"><a href="#cb12-77"></a></span>
+<span id="cb12-78"><a href="#cb12-78"></a><span class="fu">## Novel: Traits</span></span>
+<span id="cb12-79"><a href="#cb12-79"></a></span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="ss">- </span>It is customary for programmers with a background in object-oriented langauges, such as Python, JavaScript, or Java, to have an affinity for methods.</span>
+<span id="cb12-81"><a href="#cb12-81"></a><span class="ss">- </span>In the lab, we used functional style:</span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="in">```rs</span></span>
+<span id="cb12-83"><a href="#cb12-83"></a>s <span class="op">=</span> push(val<span class="op">,</span> s)<span class="op">;</span></span>
+<span id="cb12-84"><a href="#cb12-84"></a><span class="in">```</span></span>
+<span id="cb12-85"><a href="#cb12-85"></a><span class="ss">- </span>Now we will use traits to implement methods to get the following style:</span>
+<span id="cb12-86"><a href="#cb12-86"></a><span class="in">```rs</span></span>
+<span id="cb12-87"><a href="#cb12-87"></a>s <span class="op">=</span> s<span class="op">.</span>push(val)<span class="op">;</span></span>
+<span id="cb12-88"><a href="#cb12-88"></a><span class="in">```</span></span>
+<span id="cb12-89"><a href="#cb12-89"></a><span class="ss">- </span>It is not required to use traits to achieve this, and possible to write methods directly, I simply found this uninteresting.</span>
+<span id="cb12-90"><a href="#cb12-90"></a><span class="ss">- </span>Have two parts:</span>
+<span id="cb12-91"><a href="#cb12-91"></a><span class="ss">1. </span>A declaration:</span>
+<span id="cb12-92"><a href="#cb12-92"></a><span class="in">```rs</span></span>
+<span id="cb12-93"><a href="#cb12-93"></a><span class="kw">pub</span> <span class="kw">trait</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb12-94"><a href="#cb12-94"></a>    <span class="kw">fn</span> push(<span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
+<span id="cb12-95"><a href="#cb12-95"></a><span class="op">}</span></span>
+<span id="cb12-96"><a href="#cb12-96"></a><span class="in">```</span></span>
+<span id="cb12-97"><a href="#cb12-97"></a><span class="ss">2. </span>An implementation:</span>
+<span id="cb12-98"><a href="#cb12-98"></a><span class="in">```rs</span></span>
+<span id="cb12-99"><a href="#cb12-99"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="cf">for</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a>    <span class="kw">fn</span> push(<span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb12-101"><a href="#cb12-101"></a>        <span class="pp">todo!</span>()<span class="op">;</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a>    <span class="op">}</span></span>
+<span id="cb12-103"><a href="#cb12-103"></a><span class="op">}</span></span>
+<span id="cb12-104"><a href="#cb12-104"></a><span class="in">```</span></span>
+<span id="cb12-105"><a href="#cb12-105"></a><span class="ss">- </span>An astute observer will notice that <span class="in">`T`</span> occurs **seven (7)** times just within the declarations.</span>
+<span id="cb12-106"><a href="#cb12-106"></a><span class="ss">    - </span>Form your own opinion about that.</span>
+<span id="cb12-107"><a href="#cb12-107"></a>    </span>
+<span id="cb12-108"><a href="#cb12-108"></a></span>
+<span id="cb12-109"><a href="#cb12-109"></a></span>
+<span id="cb12-110"><a href="#cb12-110"></a><span class="fu">## Starter Code</span></span>
+<span id="cb12-111"><a href="#cb12-111"></a></span>
+<span id="cb12-112"><a href="#cb12-112"></a><span class="fu">### `src/main.rs`</span></span>
+<span id="cb12-113"><a href="#cb12-113"></a></span>
+<span id="cb12-114"><a href="#cb12-114"></a><span class="ss">- </span>I am providing a fairly enormous testing script via <span class="co">[</span><span class="ot">Gist</span><span class="co">](https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0)</span>.</span>
+<span id="cb12-115"><a href="#cb12-115"></a></span>
+<span id="cb12-116"><a href="#cb12-116"></a>&lt;style&gt;</span>
+<span id="cb12-117"><a href="#cb12-117"></a><span class="co">/* https://github.com/lonekorean/gist-syntax-themes */</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb12-119"><a href="#cb12-119"></a></span>
+<span id="cb12-120"><a href="#cb12-120"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://fonts.googleapis.com/css?family=Open+Sans'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb12-121"><a href="#cb12-121"></a>body {</span>
+<span id="cb12-122"><a href="#cb12-122"></a>  <span class="kw">font</span><span class="ch">:</span> <span class="dv">16</span><span class="dt">px</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb12-123"><a href="#cb12-123"></a>}</span>
+<span id="cb12-124"><a href="#cb12-124"></a>body <span class="fu">.gist</span> <span class="fu">.gist-file</span> {</span>
+<span id="cb12-125"><a href="#cb12-125"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span> <span class="cn">#555</span> <span class="cn">#444</span></span>
+<span id="cb12-126"><a href="#cb12-126"></a>}</span>
+<span id="cb12-127"><a href="#cb12-127"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> {</span>
+<span id="cb12-128"><a href="#cb12-128"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span></span>
+<span id="cb12-129"><a href="#cb12-129"></a>}</span>
+<span id="cb12-130"><a href="#cb12-130"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> {</span>
+<span id="cb12-131"><a href="#cb12-131"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb12-132"><a href="#cb12-132"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#373737</span><span class="op">;</span> </span>
+<span id="cb12-133"><a href="#cb12-133"></a>}</span>
+<span id="cb12-134"><a href="#cb12-134"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> a {</span>
+<span id="cb12-135"><a href="#cb12-135"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span></span>
+<span id="cb12-136"><a href="#cb12-136"></a>}</span>
+<span id="cb12-137"><a href="#cb12-137"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> <span class="fu">.pl-s</span> <span class="fu">.pl-s1</span> {</span>
+<span id="cb12-138"><a href="#cb12-138"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#a5c261</span></span>
+<span id="cb12-139"><a href="#cb12-139"></a>}</span>
+<span id="cb12-140"><a href="#cb12-140"></a>&lt;/style&gt;</span>
+<span id="cb12-141"><a href="#cb12-141"></a>&lt;script src="your-gist-embed"&gt;&lt;/script&gt;</span>
+<span id="cb12-142"><a href="#cb12-142"></a></span>
+<span id="cb12-143"><a href="#cb12-143"></a>&lt;script src="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0.js"&gt;&lt;/script&gt;</span>
+<span id="cb12-144"><a href="#cb12-144"></a></span>
+<span id="cb12-145"><a href="#cb12-145"></a><span class="ss">- </span>I have removed <span class="in">`dbg!()`</span> calls and simply check popped values.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

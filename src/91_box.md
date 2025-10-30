@@ -210,7 +210,6 @@ pub fn pop(mut s: Stack) -> (Option<String>, Stack) {
 
 ```py
 >>> s = []
->>> s.push('0')
 >>> s.append('0')
 >>> s
 ['0']

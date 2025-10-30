@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./92_traits.html" rel="next">
 <link href="./90_stack.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -284,6 +285,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Box</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./92_traits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Traits</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -434,9 +441,9 @@ This is about the stack, the heap, and references.
 </ul>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>"src/main.rs</strong></pre>
+<pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="&quot;src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">use</span> <span class="pp">stack::</span><span class="op">*;</span></span>
+<div class="sourceCode" id="cb5" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">use</span> <span class="pp">stack::</span><span class="op">*;</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> init()<span class="op">;</span></span>
@@ -569,20 +576,19 @@ This is about the stack, the heap, and references.
 <li>This is object-oriented rather than functional.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> []</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="op">&gt;&gt;&gt;</span> s.push(<span class="st">'0'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'0'</span>)</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb8-5"><a href="#cb8-5"></a>[<span class="st">'0'</span>]</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'1'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb8-8"><a href="#cb8-8"></a>[<span class="st">'0'</span>, <span class="st">'1'</span>]</span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="op">&gt;&gt;&gt;</span> s.pop()</span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">'1'</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb8-12"><a href="#cb8-12"></a>[<span class="st">'0'</span>]</span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'n'</span>)</span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb8-15"><a href="#cb8-15"></a>[<span class="st">'0'</span>, <span class="st">'n'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'0'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb8-4"><a href="#cb8-4"></a>[<span class="st">'0'</span>]</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'1'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb8-7"><a href="#cb8-7"></a>[<span class="st">'0'</span>, <span class="st">'1'</span>]</span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="op">&gt;&gt;&gt;</span> s.pop()</span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">'1'</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb8-11"><a href="#cb8-11"></a>[<span class="st">'0'</span>]</span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'n'</span>)</span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb8-14"><a href="#cb8-14"></a>[<span class="st">'0'</span>, <span class="st">'n'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The functional implementation is left as an exercise to the interested student, beyond this snippet:</li>
 </ul>
@@ -1079,6 +1085,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./92_traits.html" class="pagination-link" aria-label="Traits">
+        <span class="nav-page-text">Traits</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
@@ -1293,27 +1302,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-210"><a href="#cb10-210"></a></span>
 <span id="cb10-211"><a href="#cb10-211"></a><span class="in">```py</span></span>
 <span id="cb10-212"><a href="#cb10-212"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> []</span>
-<span id="cb10-213"><a href="#cb10-213"></a><span class="op">&gt;&gt;&gt;</span> s.push(<span class="st">'0'</span>)</span>
-<span id="cb10-214"><a href="#cb10-214"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'0'</span>)</span>
-<span id="cb10-215"><a href="#cb10-215"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb10-216"><a href="#cb10-216"></a>[<span class="st">'0'</span>]</span>
-<span id="cb10-217"><a href="#cb10-217"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'1'</span>)</span>
-<span id="cb10-218"><a href="#cb10-218"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb10-219"><a href="#cb10-219"></a>[<span class="st">'0'</span>, <span class="st">'1'</span>]</span>
-<span id="cb10-220"><a href="#cb10-220"></a><span class="op">&gt;&gt;&gt;</span> s.pop()</span>
-<span id="cb10-221"><a href="#cb10-221"></a><span class="co">'1'</span></span>
-<span id="cb10-222"><a href="#cb10-222"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb10-223"><a href="#cb10-223"></a>[<span class="st">'0'</span>]</span>
-<span id="cb10-224"><a href="#cb10-224"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'n'</span>)</span>
-<span id="cb10-225"><a href="#cb10-225"></a><span class="op">&gt;&gt;&gt;</span> s</span>
-<span id="cb10-226"><a href="#cb10-226"></a>[<span class="st">'0'</span>, <span class="st">'n'</span>]</span>
-<span id="cb10-227"><a href="#cb10-227"></a><span class="in">```</span></span>
-<span id="cb10-228"><a href="#cb10-228"></a></span>
-<span id="cb10-229"><a href="#cb10-229"></a><span class="ss">- </span>The functional implementation is left as an exercise to the interested student, beyond this snippet:</span>
-<span id="cb10-230"><a href="#cb10-230"></a></span>
-<span id="cb10-231"><a href="#cb10-231"></a><span class="in">```py</span></span>
-<span id="cb10-232"><a href="#cb10-232"></a>push <span class="op">=</span> <span class="kw">lambda</span> val, s : <span class="kw">lambda</span> a : val <span class="cf">if</span> a <span class="cf">else</span> s</span>
-<span id="cb10-233"><a href="#cb10-233"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb10-213"><a href="#cb10-213"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'0'</span>)</span>
+<span id="cb10-214"><a href="#cb10-214"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb10-215"><a href="#cb10-215"></a>[<span class="st">'0'</span>]</span>
+<span id="cb10-216"><a href="#cb10-216"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'1'</span>)</span>
+<span id="cb10-217"><a href="#cb10-217"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb10-218"><a href="#cb10-218"></a>[<span class="st">'0'</span>, <span class="st">'1'</span>]</span>
+<span id="cb10-219"><a href="#cb10-219"></a><span class="op">&gt;&gt;&gt;</span> s.pop()</span>
+<span id="cb10-220"><a href="#cb10-220"></a><span class="co">'1'</span></span>
+<span id="cb10-221"><a href="#cb10-221"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb10-222"><a href="#cb10-222"></a>[<span class="st">'0'</span>]</span>
+<span id="cb10-223"><a href="#cb10-223"></a><span class="op">&gt;&gt;&gt;</span> s.append(<span class="st">'n'</span>)</span>
+<span id="cb10-224"><a href="#cb10-224"></a><span class="op">&gt;&gt;&gt;</span> s</span>
+<span id="cb10-225"><a href="#cb10-225"></a>[<span class="st">'0'</span>, <span class="st">'n'</span>]</span>
+<span id="cb10-226"><a href="#cb10-226"></a><span class="in">```</span></span>
+<span id="cb10-227"><a href="#cb10-227"></a></span>
+<span id="cb10-228"><a href="#cb10-228"></a><span class="ss">- </span>The functional implementation is left as an exercise to the interested student, beyond this snippet:</span>
+<span id="cb10-229"><a href="#cb10-229"></a></span>
+<span id="cb10-230"><a href="#cb10-230"></a><span class="in">```py</span></span>
+<span id="cb10-231"><a href="#cb10-231"></a>push <span class="op">=</span> <span class="kw">lambda</span> val, s : <span class="kw">lambda</span> a : val <span class="cf">if</span> a <span class="cf">else</span> s</span>
+<span id="cb10-232"><a href="#cb10-232"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
