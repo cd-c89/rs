@@ -5,13 +5,14 @@ format: html
 
 ## Preamble
 
-You know what a queue is. Now make one in Rust.
+You know what a [queue](https://www.geeksforgeeks.org/dsa/queue-data-structure/) is. Now make one in Rust.
 
-- [ ] Use generics to create a stack and heap that can store any type.
-- [ ] Use traits to implement push and pop operations for both data types.
 - [ ] Review pattern matching.
 - [ ] Review the humble `tuple`
+- [ ] Review the immortal `struct`
 - [ ] Review ownership.
+- [ ] Use generics to create a stack and queue that can store any type.
+- [ ] Use traits to implement push and pop operations for both data types.
 
 ::: {.callout-caution}
 
@@ -143,3 +144,10 @@ body .gist .gist-data .pl-s .pl-s1 {
 <script src="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0.js"></script>
 
 - I have removed `dbg!()` calls and simply check popped values.
+
+### Fin
+
+```sh
+$ wc src/lib.rs
+ 104  296 2484 src/lib.rs
+```

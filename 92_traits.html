@@ -307,6 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#starter-code" id="toc-starter-code" class="nav-link" data-scroll-target="#starter-code">Starter Code</a>
   <ul class="collapse">
   <li><a href="#srcmain.rs" id="toc-srcmain.rs" class="nav-link" data-scroll-target="#srcmain.rs"><code>src/main.rs</code></a></li>
+  <li><a href="#fin" id="toc-fin" class="nav-link" data-scroll-target="#fin">Fin</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -342,13 +343,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="preamble" class="level2">
 <h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
-<p>You know what a queue is. Now make one in Rust.</p>
+<p>You know what a <a href="https://www.geeksforgeeks.org/dsa/queue-data-structure/">queue</a> is. Now make one in Rust.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Use generics to create a stack and heap that can store any type.</label></li>
-<li><label><input type="checkbox">Use traits to implement push and pop operations for both data types.</label></li>
 <li><label><input type="checkbox">Review pattern matching.</label></li>
 <li><label><input type="checkbox">Review the humble <code>tuple</code></label></li>
+<li><label><input type="checkbox">Review the immortal <code>struct</code></label></li>
 <li><label><input type="checkbox">Review ownership.</label></li>
+<li><label><input type="checkbox">Use generics to create a stack and queue that can store any type.</label></li>
+<li><label><input type="checkbox">Use traits to implement push and pop operations for both data types.</label></li>
 </ul>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -495,6 +497,11 @@ body .gist .gist-data .pl-s .pl-s1 {
 <ul>
 <li>I have removed <code>dbg!()</code> calls and simply check popped values.</li>
 </ul>
+</section>
+<section id="fin" class="level3">
+<h3 class="anchored" data-anchor-id="fin">Fin</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> wc src/lib.rs</span>
+<span id="cb12-2"><a href="#cb12-2"></a> <span class="ex">104</span>  296 2484 src/lib.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 <!-- -->
@@ -983,151 +990,159 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Traits"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## Preamble</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a>You know what a queue is. Now make one in Rust.</span>
-<span id="cb12-9"><a href="#cb12-9"></a></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="ss">- </span><span class="va">[ ]</span> Use generics to create a stack and heap that can store any type.</span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="ss">- </span><span class="va">[ ]</span> Use traits to implement push and pop operations for both data types.</span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="ss">- </span><span class="va">[ ]</span> Review pattern matching.</span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="ss">- </span><span class="va">[ ]</span> Review the humble <span class="in">`tuple`</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="ss">- </span><span class="va">[ ]</span> Review ownership.</span>
-<span id="cb12-15"><a href="#cb12-15"></a></span>
-<span id="cb12-16"><a href="#cb12-16"></a>::: {.callout-caution}</span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="fu">## Design Decision</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="ss">- </span>With the addition of a queue, you get to decide:</span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="ss">    - </span>Whether to head push and tail pop, or...</span>
-<span id="cb12-22"><a href="#cb12-22"></a>    <span class="in">```py</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Tail push, head pop</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.append(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="op">&gt;&gt;&gt;</span> q</span>
-<span id="cb12-26"><a href="#cb12-26"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb12-27"><a href="#cb12-27"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="dv">0</span>)</span>
-<span id="cb12-28"><a href="#cb12-28"></a><span class="dv">0</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="in">```</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="ss">    - </span>Whether to tail push and head pop.</span>
-<span id="cb12-31"><a href="#cb12-31"></a>    <span class="in">```py</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Head push, tail pop</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a><span class="op">&gt;&gt;&gt;</span> q <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb12-34"><a href="#cb12-34"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.insert(<span class="dv">0</span>,i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
-<span id="cb12-35"><a href="#cb12-35"></a><span class="op">&gt;&gt;&gt;</span> q</span>
-<span id="cb12-36"><a href="#cb12-36"></a>[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb12-38"><a href="#cb12-38"></a><span class="dv">0</span></span>
-<span id="cb12-39"><a href="#cb12-39"></a><span class="in">```</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a></span>
-<span id="cb12-41"><a href="#cb12-41"></a><span class="ss">- </span>This is the added difficulty incurred by adding a queue.</span>
-<span id="cb12-42"><a href="#cb12-42"></a></span>
-<span id="cb12-43"><a href="#cb12-43"></a>:::</span>
-<span id="cb12-44"><a href="#cb12-44"></a></span>
-<span id="cb12-45"><a href="#cb12-45"></a><span class="fu">## Review: Box</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a></span>
-<span id="cb12-47"><a href="#cb12-47"></a><span class="ss">- </span>To put some <span class="in">`x`</span> in a <span class="in">`Box`</span>, simply:</span>
-<span id="cb12-48"><a href="#cb12-48"></a><span class="in">```rs</span></span>
-<span id="cb12-49"><a href="#cb12-49"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
-<span id="cb12-50"><a href="#cb12-50"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span>
-<span id="cb12-51"><a href="#cb12-51"></a><span class="in">```</span></span>
-<span id="cb12-52"><a href="#cb12-52"></a><span class="ss">- </span>To remove <span class="in">`x`</span> from the `Box, simply use the special "unary asterisk" operator, also called "dereference".</span>
-<span id="cb12-53"><a href="#cb12-53"></a><span class="in">```rs</span></span>
-<span id="cb12-54"><a href="#cb12-54"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
-<span id="cb12-55"><a href="#cb12-55"></a><span class="in">```</span></span>
-<span id="cb12-56"><a href="#cb12-56"></a></span>
-<span id="cb12-57"><a href="#cb12-57"></a><span class="fu">## Novel: Generics</span></span>
-<span id="cb12-58"><a href="#cb12-58"></a></span>
-<span id="cb12-59"><a href="#cb12-59"></a><span class="ss">- </span>You are welcome to read Rustbook on <span class="co">[</span><span class="ot">Generics</span><span class="co">](https://doc.rust-lang.org/book/ch10-01-syntax.html)</span></span>
-<span id="cb12-60"><a href="#cb12-60"></a><span class="ss">- </span>We previously "hard-coded" the <span class="in">`Stack`</span> to accept strings.</span>
-<span id="cb12-61"><a href="#cb12-61"></a><span class="in">```rs</span></span>
-<span id="cb12-62"><a href="#cb12-62"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack <span class="op">{</span></span>
-<span id="cb12-63"><a href="#cb12-63"></a>    data<span class="op">:</span> <span class="dt">String</span><span class="op">...</span></span>
-<span id="cb12-64"><a href="#cb12-64"></a><span class="in">```</span></span>
-<span id="cb12-65"><a href="#cb12-65"></a><span class="ss">- </span>We instead append a type annotation to the end of stack, like so:</span>
-<span id="cb12-66"><a href="#cb12-66"></a><span class="in">```rs</span></span>
-<span id="cb12-67"><a href="#cb12-67"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">...</span></span>
-<span id="cb12-68"><a href="#cb12-68"></a><span class="in">```</span></span>
-<span id="cb12-69"><a href="#cb12-69"></a><span class="ss">- </span>By convention, Rust uses <span class="in">`T`</span> to refer to a type variable.</span>
-<span id="cb12-70"><a href="#cb12-70"></a><span class="ss">- </span>Then, within the declaration we may refer to <span class="in">`T`</span>:</span>
-<span id="cb12-71"><a href="#cb12-71"></a><span class="in">```rs</span></span>
-<span id="cb12-72"><a href="#cb12-72"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-73"><a href="#cb12-73"></a>    data<span class="op">:</span> T<span class="op">...</span></span>
-<span id="cb12-74"><a href="#cb12-74"></a><span class="in">```</span></span>
-<span id="cb12-75"><a href="#cb12-75"></a><span class="ss">- </span>Upon making this change, you will get a series of <span class="in">`rustc`</span> complaints about not specifying types in a variety of locations.</span>
-<span id="cb12-76"><a href="#cb12-76"></a><span class="ss">- </span>You will have relatively little difficulty working through these, and should learn something valuable in the process.</span>
-<span id="cb12-77"><a href="#cb12-77"></a></span>
-<span id="cb12-78"><a href="#cb12-78"></a><span class="fu">## Novel: Traits</span></span>
-<span id="cb12-79"><a href="#cb12-79"></a></span>
-<span id="cb12-80"><a href="#cb12-80"></a><span class="ss">- </span>It is customary for programmers with a background in object-oriented langauges, such as Python, JavaScript, or Java, to have an affinity for methods.</span>
-<span id="cb12-81"><a href="#cb12-81"></a><span class="ss">- </span>In the lab, we used functional style:</span>
-<span id="cb12-82"><a href="#cb12-82"></a><span class="in">```rs</span></span>
-<span id="cb12-83"><a href="#cb12-83"></a>s <span class="op">=</span> push(val<span class="op">,</span> s)<span class="op">;</span></span>
-<span id="cb12-84"><a href="#cb12-84"></a><span class="in">```</span></span>
-<span id="cb12-85"><a href="#cb12-85"></a><span class="ss">- </span>Now we will use traits to implement methods to get the following style:</span>
-<span id="cb12-86"><a href="#cb12-86"></a><span class="in">```rs</span></span>
-<span id="cb12-87"><a href="#cb12-87"></a>s <span class="op">=</span> s<span class="op">.</span>push(val)<span class="op">;</span></span>
-<span id="cb12-88"><a href="#cb12-88"></a><span class="in">```</span></span>
-<span id="cb12-89"><a href="#cb12-89"></a><span class="ss">- </span>It is not required to use traits to achieve this, and possible to write methods directly, I simply found this uninteresting.</span>
-<span id="cb12-90"><a href="#cb12-90"></a><span class="ss">- </span>Have two parts:</span>
-<span id="cb12-91"><a href="#cb12-91"></a><span class="ss">1. </span>A declaration:</span>
-<span id="cb12-92"><a href="#cb12-92"></a><span class="in">```rs</span></span>
-<span id="cb12-93"><a href="#cb12-93"></a><span class="kw">pub</span> <span class="kw">trait</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-94"><a href="#cb12-94"></a>    <span class="kw">fn</span> push(<span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
-<span id="cb12-95"><a href="#cb12-95"></a><span class="op">}</span></span>
-<span id="cb12-96"><a href="#cb12-96"></a><span class="in">```</span></span>
-<span id="cb12-97"><a href="#cb12-97"></a><span class="ss">2. </span>An implementation:</span>
-<span id="cb12-98"><a href="#cb12-98"></a><span class="in">```rs</span></span>
-<span id="cb12-99"><a href="#cb12-99"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="cf">for</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-100"><a href="#cb12-100"></a>    <span class="kw">fn</span> push(<span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-101"><a href="#cb12-101"></a>        <span class="pp">todo!</span>()<span class="op">;</span></span>
-<span id="cb12-102"><a href="#cb12-102"></a>    <span class="op">}</span></span>
-<span id="cb12-103"><a href="#cb12-103"></a><span class="op">}</span></span>
-<span id="cb12-104"><a href="#cb12-104"></a><span class="in">```</span></span>
-<span id="cb12-105"><a href="#cb12-105"></a><span class="ss">- </span>An astute observer will notice that <span class="in">`T`</span> occurs **seven (7)** times just within the declarations.</span>
-<span id="cb12-106"><a href="#cb12-106"></a><span class="ss">    - </span>Form your own opinion about that.</span>
-<span id="cb12-107"><a href="#cb12-107"></a>    </span>
-<span id="cb12-108"><a href="#cb12-108"></a></span>
-<span id="cb12-109"><a href="#cb12-109"></a></span>
-<span id="cb12-110"><a href="#cb12-110"></a><span class="fu">## Starter Code</span></span>
-<span id="cb12-111"><a href="#cb12-111"></a></span>
-<span id="cb12-112"><a href="#cb12-112"></a><span class="fu">### `src/main.rs`</span></span>
-<span id="cb12-113"><a href="#cb12-113"></a></span>
-<span id="cb12-114"><a href="#cb12-114"></a><span class="ss">- </span>I am providing a fairly enormous testing script via <span class="co">[</span><span class="ot">Gist</span><span class="co">](https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0)</span>.</span>
-<span id="cb12-115"><a href="#cb12-115"></a></span>
-<span id="cb12-116"><a href="#cb12-116"></a>&lt;style&gt;</span>
-<span id="cb12-117"><a href="#cb12-117"></a><span class="co">/* https://github.com/lonekorean/gist-syntax-themes */</span></span>
-<span id="cb12-118"><a href="#cb12-118"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css'</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb12-119"><a href="#cb12-119"></a></span>
-<span id="cb12-120"><a href="#cb12-120"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://fonts.googleapis.com/css?family=Open+Sans'</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb12-121"><a href="#cb12-121"></a>body {</span>
-<span id="cb12-122"><a href="#cb12-122"></a>  <span class="kw">font</span><span class="ch">:</span> <span class="dv">16</span><span class="dt">px</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb12-123"><a href="#cb12-123"></a>}</span>
-<span id="cb12-124"><a href="#cb12-124"></a>body <span class="fu">.gist</span> <span class="fu">.gist-file</span> {</span>
-<span id="cb12-125"><a href="#cb12-125"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span> <span class="cn">#555</span> <span class="cn">#444</span></span>
-<span id="cb12-126"><a href="#cb12-126"></a>}</span>
-<span id="cb12-127"><a href="#cb12-127"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> {</span>
-<span id="cb12-128"><a href="#cb12-128"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span></span>
-<span id="cb12-129"><a href="#cb12-129"></a>}</span>
-<span id="cb12-130"><a href="#cb12-130"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> {</span>
-<span id="cb12-131"><a href="#cb12-131"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
-<span id="cb12-132"><a href="#cb12-132"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#373737</span><span class="op">;</span> </span>
-<span id="cb12-133"><a href="#cb12-133"></a>}</span>
-<span id="cb12-134"><a href="#cb12-134"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> a {</span>
-<span id="cb12-135"><a href="#cb12-135"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span></span>
-<span id="cb12-136"><a href="#cb12-136"></a>}</span>
-<span id="cb12-137"><a href="#cb12-137"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> <span class="fu">.pl-s</span> <span class="fu">.pl-s1</span> {</span>
-<span id="cb12-138"><a href="#cb12-138"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#a5c261</span></span>
-<span id="cb12-139"><a href="#cb12-139"></a>}</span>
-<span id="cb12-140"><a href="#cb12-140"></a>&lt;/style&gt;</span>
-<span id="cb12-141"><a href="#cb12-141"></a>&lt;script src="your-gist-embed"&gt;&lt;/script&gt;</span>
-<span id="cb12-142"><a href="#cb12-142"></a></span>
-<span id="cb12-143"><a href="#cb12-143"></a>&lt;script src="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0.js"&gt;&lt;/script&gt;</span>
-<span id="cb12-144"><a href="#cb12-144"></a></span>
-<span id="cb12-145"><a href="#cb12-145"></a><span class="ss">- </span>I have removed <span class="in">`dbg!()`</span> calls and simply check popped values.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="an">title:</span><span class="co"> "Traits"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">---</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">## Preamble</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>You know what a <span class="co">[</span><span class="ot">queue</span><span class="co">](https://www.geeksforgeeks.org/dsa/queue-data-structure/)</span> is. Now make one in Rust.</span>
+<span id="cb13-9"><a href="#cb13-9"></a></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="ss">- </span><span class="va">[ ]</span> Review pattern matching.</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="ss">- </span><span class="va">[ ]</span> Review the humble <span class="in">`tuple`</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="ss">- </span><span class="va">[ ]</span> Review the immortal <span class="in">`struct`</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="ss">- </span><span class="va">[ ]</span> Review ownership.</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="ss">- </span><span class="va">[ ]</span> Use generics to create a stack and queue that can store any type.</span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="ss">- </span><span class="va">[ ]</span> Use traits to implement push and pop operations for both data types.</span>
+<span id="cb13-16"><a href="#cb13-16"></a></span>
+<span id="cb13-17"><a href="#cb13-17"></a>::: {.callout-caution}</span>
+<span id="cb13-18"><a href="#cb13-18"></a></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="fu">## Design Decision</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="ss">- </span>With the addition of a queue, you get to decide:</span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="ss">    - </span>Whether to head push and tail pop, or...</span>
+<span id="cb13-23"><a href="#cb13-23"></a>    <span class="in">```py</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Tail push, head pop</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.append(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb13-27"><a href="#cb13-27"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="dv">0</span>)</span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="dv">0</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="in">```</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a><span class="ss">    - </span>Whether to tail push and head pop.</span>
+<span id="cb13-32"><a href="#cb13-32"></a>    <span class="in">```py</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># Head push, tail pop</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a><span class="op">&gt;&gt;&gt;</span> q <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [q.insert(<span class="dv">0</span>,i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb13-36"><a href="#cb13-36"></a><span class="op">&gt;&gt;&gt;</span> q</span>
+<span id="cb13-37"><a href="#cb13-37"></a>[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="op">&gt;&gt;&gt;</span> q.pop(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb13-39"><a href="#cb13-39"></a><span class="dv">0</span></span>
+<span id="cb13-40"><a href="#cb13-40"></a><span class="in">```</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a></span>
+<span id="cb13-42"><a href="#cb13-42"></a><span class="ss">- </span>This is the added difficulty incurred by adding a queue.</span>
+<span id="cb13-43"><a href="#cb13-43"></a></span>
+<span id="cb13-44"><a href="#cb13-44"></a>:::</span>
+<span id="cb13-45"><a href="#cb13-45"></a></span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="fu">## Review: Box</span></span>
+<span id="cb13-47"><a href="#cb13-47"></a></span>
+<span id="cb13-48"><a href="#cb13-48"></a><span class="ss">- </span>To put some <span class="in">`x`</span> in a <span class="in">`Box`</span>, simply:</span>
+<span id="cb13-49"><a href="#cb13-49"></a><span class="in">```rs</span></span>
+<span id="cb13-50"><a href="#cb13-50"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
+<span id="cb13-51"><a href="#cb13-51"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span>
+<span id="cb13-52"><a href="#cb13-52"></a><span class="in">```</span></span>
+<span id="cb13-53"><a href="#cb13-53"></a><span class="ss">- </span>To remove <span class="in">`x`</span> from the `Box, simply use the special "unary asterisk" operator, also called "dereference".</span>
+<span id="cb13-54"><a href="#cb13-54"></a><span class="in">```rs</span></span>
+<span id="cb13-55"><a href="#cb13-55"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb13-56"><a href="#cb13-56"></a><span class="in">```</span></span>
+<span id="cb13-57"><a href="#cb13-57"></a></span>
+<span id="cb13-58"><a href="#cb13-58"></a><span class="fu">## Novel: Generics</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a></span>
+<span id="cb13-60"><a href="#cb13-60"></a><span class="ss">- </span>You are welcome to read Rustbook on <span class="co">[</span><span class="ot">Generics</span><span class="co">](https://doc.rust-lang.org/book/ch10-01-syntax.html)</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a><span class="ss">- </span>We previously "hard-coded" the <span class="in">`Stack`</span> to accept strings.</span>
+<span id="cb13-62"><a href="#cb13-62"></a><span class="in">```rs</span></span>
+<span id="cb13-63"><a href="#cb13-63"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack <span class="op">{</span></span>
+<span id="cb13-64"><a href="#cb13-64"></a>    data<span class="op">:</span> <span class="dt">String</span><span class="op">...</span></span>
+<span id="cb13-65"><a href="#cb13-65"></a><span class="in">```</span></span>
+<span id="cb13-66"><a href="#cb13-66"></a><span class="ss">- </span>We instead append a type annotation to the end of stack, like so:</span>
+<span id="cb13-67"><a href="#cb13-67"></a><span class="in">```rs</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">...</span></span>
+<span id="cb13-69"><a href="#cb13-69"></a><span class="in">```</span></span>
+<span id="cb13-70"><a href="#cb13-70"></a><span class="ss">- </span>By convention, Rust uses <span class="in">`T`</span> to refer to a type variable.</span>
+<span id="cb13-71"><a href="#cb13-71"></a><span class="ss">- </span>Then, within the declaration we may refer to <span class="in">`T`</span>:</span>
+<span id="cb13-72"><a href="#cb13-72"></a><span class="in">```rs</span></span>
+<span id="cb13-73"><a href="#cb13-73"></a><span class="kw">pub</span> <span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a>    data<span class="op">:</span> T<span class="op">...</span></span>
+<span id="cb13-75"><a href="#cb13-75"></a><span class="in">```</span></span>
+<span id="cb13-76"><a href="#cb13-76"></a><span class="ss">- </span>Upon making this change, you will get a series of <span class="in">`rustc`</span> complaints about not specifying types in a variety of locations.</span>
+<span id="cb13-77"><a href="#cb13-77"></a><span class="ss">- </span>You will have relatively little difficulty working through these, and should learn something valuable in the process.</span>
+<span id="cb13-78"><a href="#cb13-78"></a></span>
+<span id="cb13-79"><a href="#cb13-79"></a><span class="fu">## Novel: Traits</span></span>
+<span id="cb13-80"><a href="#cb13-80"></a></span>
+<span id="cb13-81"><a href="#cb13-81"></a><span class="ss">- </span>It is customary for programmers with a background in object-oriented langauges, such as Python, JavaScript, or Java, to have an affinity for methods.</span>
+<span id="cb13-82"><a href="#cb13-82"></a><span class="ss">- </span>In the lab, we used functional style:</span>
+<span id="cb13-83"><a href="#cb13-83"></a><span class="in">```rs</span></span>
+<span id="cb13-84"><a href="#cb13-84"></a>s <span class="op">=</span> push(val<span class="op">,</span> s)<span class="op">;</span></span>
+<span id="cb13-85"><a href="#cb13-85"></a><span class="in">```</span></span>
+<span id="cb13-86"><a href="#cb13-86"></a><span class="ss">- </span>Now we will use traits to implement methods to get the following style:</span>
+<span id="cb13-87"><a href="#cb13-87"></a><span class="in">```rs</span></span>
+<span id="cb13-88"><a href="#cb13-88"></a>s <span class="op">=</span> s<span class="op">.</span>push(val)<span class="op">;</span></span>
+<span id="cb13-89"><a href="#cb13-89"></a><span class="in">```</span></span>
+<span id="cb13-90"><a href="#cb13-90"></a><span class="ss">- </span>It is not required to use traits to achieve this, and possible to write methods directly, I simply found this uninteresting.</span>
+<span id="cb13-91"><a href="#cb13-91"></a><span class="ss">- </span>Have two parts:</span>
+<span id="cb13-92"><a href="#cb13-92"></a><span class="ss">1. </span>A declaration:</span>
+<span id="cb13-93"><a href="#cb13-93"></a><span class="in">```rs</span></span>
+<span id="cb13-94"><a href="#cb13-94"></a><span class="kw">pub</span> <span class="kw">trait</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb13-95"><a href="#cb13-95"></a>    <span class="kw">fn</span> push(<span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
+<span id="cb13-96"><a href="#cb13-96"></a><span class="op">}</span></span>
+<span id="cb13-97"><a href="#cb13-97"></a><span class="in">```</span></span>
+<span id="cb13-98"><a href="#cb13-98"></a><span class="ss">2. </span>An implementation:</span>
+<span id="cb13-99"><a href="#cb13-99"></a><span class="in">```rs</span></span>
+<span id="cb13-100"><a href="#cb13-100"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Push<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="cf">for</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb13-101"><a href="#cb13-101"></a>    <span class="kw">fn</span> push(<span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> val<span class="op">:</span> T) <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb13-102"><a href="#cb13-102"></a>        <span class="pp">todo!</span>()<span class="op">;</span></span>
+<span id="cb13-103"><a href="#cb13-103"></a>    <span class="op">}</span></span>
+<span id="cb13-104"><a href="#cb13-104"></a><span class="op">}</span></span>
+<span id="cb13-105"><a href="#cb13-105"></a><span class="in">```</span></span>
+<span id="cb13-106"><a href="#cb13-106"></a><span class="ss">- </span>An astute observer will notice that <span class="in">`T`</span> occurs **seven (7)** times just within the declarations.</span>
+<span id="cb13-107"><a href="#cb13-107"></a><span class="ss">    - </span>Form your own opinion about that.</span>
+<span id="cb13-108"><a href="#cb13-108"></a>    </span>
+<span id="cb13-109"><a href="#cb13-109"></a></span>
+<span id="cb13-110"><a href="#cb13-110"></a></span>
+<span id="cb13-111"><a href="#cb13-111"></a><span class="fu">## Starter Code</span></span>
+<span id="cb13-112"><a href="#cb13-112"></a></span>
+<span id="cb13-113"><a href="#cb13-113"></a><span class="fu">### `src/main.rs`</span></span>
+<span id="cb13-114"><a href="#cb13-114"></a></span>
+<span id="cb13-115"><a href="#cb13-115"></a><span class="ss">- </span>I am providing a fairly enormous testing script via <span class="co">[</span><span class="ot">Gist</span><span class="co">](https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0)</span>.</span>
+<span id="cb13-116"><a href="#cb13-116"></a></span>
+<span id="cb13-117"><a href="#cb13-117"></a>&lt;style&gt;</span>
+<span id="cb13-118"><a href="#cb13-118"></a><span class="co">/* https://github.com/lonekorean/gist-syntax-themes */</span></span>
+<span id="cb13-119"><a href="#cb13-119"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb13-120"><a href="#cb13-120"></a></span>
+<span id="cb13-121"><a href="#cb13-121"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://fonts.googleapis.com/css?family=Open+Sans'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb13-122"><a href="#cb13-122"></a>body {</span>
+<span id="cb13-123"><a href="#cb13-123"></a>  <span class="kw">font</span><span class="ch">:</span> <span class="dv">16</span><span class="dt">px</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb13-124"><a href="#cb13-124"></a>}</span>
+<span id="cb13-125"><a href="#cb13-125"></a>body <span class="fu">.gist</span> <span class="fu">.gist-file</span> {</span>
+<span id="cb13-126"><a href="#cb13-126"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span> <span class="cn">#555</span> <span class="cn">#444</span></span>
+<span id="cb13-127"><a href="#cb13-127"></a>}</span>
+<span id="cb13-128"><a href="#cb13-128"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> {</span>
+<span id="cb13-129"><a href="#cb13-129"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span></span>
+<span id="cb13-130"><a href="#cb13-130"></a>}</span>
+<span id="cb13-131"><a href="#cb13-131"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> {</span>
+<span id="cb13-132"><a href="#cb13-132"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb13-133"><a href="#cb13-133"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#373737</span><span class="op">;</span> </span>
+<span id="cb13-134"><a href="#cb13-134"></a>}</span>
+<span id="cb13-135"><a href="#cb13-135"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> a {</span>
+<span id="cb13-136"><a href="#cb13-136"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span></span>
+<span id="cb13-137"><a href="#cb13-137"></a>}</span>
+<span id="cb13-138"><a href="#cb13-138"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> <span class="fu">.pl-s</span> <span class="fu">.pl-s1</span> {</span>
+<span id="cb13-139"><a href="#cb13-139"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#a5c261</span></span>
+<span id="cb13-140"><a href="#cb13-140"></a>}</span>
+<span id="cb13-141"><a href="#cb13-141"></a>&lt;/style&gt;</span>
+<span id="cb13-142"><a href="#cb13-142"></a>&lt;script src="your-gist-embed"&gt;&lt;/script&gt;</span>
+<span id="cb13-143"><a href="#cb13-143"></a></span>
+<span id="cb13-144"><a href="#cb13-144"></a>&lt;script src="https://gist.github.com/cd-public/729970751c03c57a9a15ad0c7ef566c0.js"&gt;&lt;/script&gt;</span>
+<span id="cb13-145"><a href="#cb13-145"></a></span>
+<span id="cb13-146"><a href="#cb13-146"></a><span class="ss">- </span>I have removed <span class="in">`dbg!()`</span> calls and simply check popped values.</span>
+<span id="cb13-147"><a href="#cb13-147"></a></span>
+<span id="cb13-148"><a href="#cb13-148"></a><span class="fu">### Fin</span></span>
+<span id="cb13-149"><a href="#cb13-149"></a></span>
+<span id="cb13-150"><a href="#cb13-150"></a><span class="in">```sh</span></span>
+<span id="cb13-151"><a href="#cb13-151"></a><span class="ex">$</span> wc src/lib.rs</span>
+<span id="cb13-152"><a href="#cb13-152"></a> <span class="ex">104</span>  296 2484 src/lib.rs</span>
+<span id="cb13-153"><a href="#cb13-153"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

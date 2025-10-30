@@ -10955,7 +10955,7 @@
     "href": "92_traits.html",
     "title": "Traits",
     "section": "",
-    "text": "You know what a queue is. Now make one in Rust.\n\nUse generics to create a stack and heap that can store any type.\nUse traits to implement push and pop operations for both data types.\nReview pattern matching.\nReview the humble tuple\nReview ownership.\n\n\n\n\n\n\n\nDesign Decision\n\n\n\n\nWith the addition of a queue, you get to decide:\n\nWhether to head push and tail pop, or…\n\n&gt;&gt;&gt; # Tail push, head pop\n&gt;&gt;&gt; _ = [q.append(i) for i in range(3)]\n&gt;&gt;&gt; q\n[0, 1, 2]\n&gt;&gt;&gt; q.pop(0)\n0\n\nWhether to tail push and head pop.\n\n&gt;&gt;&gt; # Head push, tail pop\n&gt;&gt;&gt; q = list()\n&gt;&gt;&gt; _ = [q.insert(0,i) for i in range(3)]\n&gt;&gt;&gt; q\n[2, 1, 0]\n&gt;&gt;&gt; q.pop(-1)\n0\nThis is the added difficulty incurred by adding a queue.",
+    "text": "You know what a queue is. Now make one in Rust.\n\nReview pattern matching.\nReview the humble tuple\nReview the immortal struct\nReview ownership.\nUse generics to create a stack and queue that can store any type.\nUse traits to implement push and pop operations for both data types.\n\n\n\n\n\n\n\nDesign Decision\n\n\n\n\nWith the addition of a queue, you get to decide:\n\nWhether to head push and tail pop, or…\n\n&gt;&gt;&gt; # Tail push, head pop\n&gt;&gt;&gt; _ = [q.append(i) for i in range(3)]\n&gt;&gt;&gt; q\n[0, 1, 2]\n&gt;&gt;&gt; q.pop(0)\n0\n\nWhether to tail push and head pop.\n\n&gt;&gt;&gt; # Head push, tail pop\n&gt;&gt;&gt; q = list()\n&gt;&gt;&gt; _ = [q.insert(0,i) for i in range(3)]\n&gt;&gt;&gt; q\n[2, 1, 0]\n&gt;&gt;&gt; q.pop(-1)\n0\nThis is the added difficulty incurred by adding a queue.",
     "crumbs": [
       "Traits"
     ]
@@ -10965,7 +10965,7 @@
     "href": "92_traits.html#preamble",
     "title": "Traits",
     "section": "",
-    "text": "You know what a queue is. Now make one in Rust.\n\nUse generics to create a stack and heap that can store any type.\nUse traits to implement push and pop operations for both data types.\nReview pattern matching.\nReview the humble tuple\nReview ownership.\n\n\n\n\n\n\n\nDesign Decision\n\n\n\n\nWith the addition of a queue, you get to decide:\n\nWhether to head push and tail pop, or…\n\n&gt;&gt;&gt; # Tail push, head pop\n&gt;&gt;&gt; _ = [q.append(i) for i in range(3)]\n&gt;&gt;&gt; q\n[0, 1, 2]\n&gt;&gt;&gt; q.pop(0)\n0\n\nWhether to tail push and head pop.\n\n&gt;&gt;&gt; # Head push, tail pop\n&gt;&gt;&gt; q = list()\n&gt;&gt;&gt; _ = [q.insert(0,i) for i in range(3)]\n&gt;&gt;&gt; q\n[2, 1, 0]\n&gt;&gt;&gt; q.pop(-1)\n0\nThis is the added difficulty incurred by adding a queue.",
+    "text": "You know what a queue is. Now make one in Rust.\n\nReview pattern matching.\nReview the humble tuple\nReview the immortal struct\nReview ownership.\nUse generics to create a stack and queue that can store any type.\nUse traits to implement push and pop operations for both data types.\n\n\n\n\n\n\n\nDesign Decision\n\n\n\n\nWith the addition of a queue, you get to decide:\n\nWhether to head push and tail pop, or…\n\n&gt;&gt;&gt; # Tail push, head pop\n&gt;&gt;&gt; _ = [q.append(i) for i in range(3)]\n&gt;&gt;&gt; q\n[0, 1, 2]\n&gt;&gt;&gt; q.pop(0)\n0\n\nWhether to tail push and head pop.\n\n&gt;&gt;&gt; # Head push, tail pop\n&gt;&gt;&gt; q = list()\n&gt;&gt;&gt; _ = [q.insert(0,i) for i in range(3)]\n&gt;&gt;&gt; q\n[2, 1, 0]\n&gt;&gt;&gt; q.pop(-1)\n0\nThis is the added difficulty incurred by adding a queue.",
     "crumbs": [
       "Traits"
     ]
@@ -11005,7 +11005,7 @@
     "href": "92_traits.html#starter-code",
     "title": "Traits",
     "section": "Starter Code",
-    "text": "Starter Code\n\nsrc/main.rs\n\nI am providing a fairly enormous testing script via Gist.\n\n\n\n\u0016\n\n\nI have removed dbg!() calls and simply check popped values.",
+    "text": "Starter Code\n\nsrc/main.rs\n\nI am providing a fairly enormous testing script via Gist.\n\n\n\n\u0016\n\n\nI have removed dbg!() calls and simply check popped values.\n\n\n\nFin\n$ wc src/lib.rs\n 104  296 2484 src/lib.rs",
     "crumbs": [
       "Traits"
     ]
