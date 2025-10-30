@@ -10,7 +10,6 @@ website:
     page-navigation: true
 
 subtitle: "Systems in Rust"
-author: "Prof. Calvin"
 
 format:
     html:
