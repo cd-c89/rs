@@ -1,0 +1,1056 @@
+---
+title: Graphs
+---
+
+## Announcements
+
+- **Welcome** to Systems in Rust
+- **Action Items**:
+  - Keep at `traits`
+  - Graph theory.
+
+## Today
+
+- Graphs
+    - DAGs
+    - Trees
+
+# Graphs
+
+## $n$-ary Trees
+
+- A tree is a type of graph.
+- A graph is a pair of
+    - A set of "nodes" or "vertices" (or "vertexes")
+    - A set of "edges" which are pairs of nodes
+        - They may be ordered pairs or not.
+
+
+## Graphs
+
+- There are many ways to understand graphs, but I actually think graph theory is quite accessible.
+- I think it's also easier when using a running example.
+- I will also use a running example, Amtrak 🚄
+    - Or perhaps... a training example?
+    - I am running... a train??????
+    - I am training... to run?????
+    
+## Amtrak 🚄
+
+<center>
+<img style="border-radius: 50%;height:100%" src="https://www.amtrak.com/content/dam/projects/dotcom/english/public/images/Carousel/Landing_Feature_03.gif">
+</center>
+
+## Graph: Definition
+
+- A graph is an **ordered pair**.
+    - That is: two things, in a fixed order.
+    - Can be thought of as a sequence of length 2
+        
+        ```{.python}
+        a = "one thing"
+        b = "another thing"
+        ordered_pair = [a,b]
+        ```
+
+## Not Sets
+        
+- A graph is not a set:
+        
+```{.python}
+>>> [a,b][0]
+'one thing'
+>>> {a,b}[0]
+<stdin>:1: SyntaxWarning: 'set' object is not subscriptable; perhaps you missed a comma?
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'set' object is not subscriptable
+```
+- [I just set them up just to knock them down.](https://www.youtube.com/watch?v=dvf--10EYXw)
+
+## Aside: Pairs
+
+-  Take a number plane (click):
+
+<p><span style="position:relative;left:275px">y=2</span></p>
+<p><span style="position:relative;top:-190px">x=-2</span>
+<span style="vertical-align:middle;" onclick="draw1();">
+  <canvas id="plot1"  width="400" height="400" style="background-color:white"></canvas>
+</span>
+<span style="position:relative;top:-190px">x=2</span>
+<p><span style="position:relative;left:275px">y=2</span></p>
+<script>
+function draw1()
+{
+	const plot1 = document.getElementById("plot1") ;
+	const ctx1 = plot1.getContext("2d");
+	ctx1.fillStyle = "black";	
+	ctx1.fillRect(200, 0, 5, 400) ;
+	ctx1.fillRect(0, 200, 400, 5) ;
+	
+	ctx1.fillRect(195, 100, 15, 5) ;
+	ctx1.fillRect(195, 300, 15, 5) ;
+	ctx1.fillRect(100, 195, 5, 15) ;
+	ctx1.fillRect(300, 195, 5, 15) ;
+}</script>
+
+
+## Aside: Pairs
+
+- Denote ordered pair (.5,1.5) in <span style="color:red">red</span>. 
+
+<p><span style="position:relative;left:275px">y=2</span></p>
+<p><span style="position:relative;top:-190px">x=-2</span>
+<span style="vertical-align:middle;" onclick="draw2();">
+  <canvas id="plot2"  width="400" height="400" style="background-color:white"></canvas>
+</span>
+<span style="position:relative;top:-190px">x=2</span>
+<p><span style="position:relative;left:275px">y=2</span></p>
+<script>
+function draw2()
+{
+	const plot1 = document.getElementById("plot2") ;
+	const ctx1 = plot1.getContext("2d");
+	ctx1.fillStyle = "black";	
+	ctx1.fillRect(200, 0, 5, 400) ;
+	ctx1.fillRect(0, 200, 400, 5) ;
+	
+	ctx1.fillRect(195, 100, 15, 5) ;
+	ctx1.fillRect(195, 300, 15, 5) ;
+	ctx1.fillRect(100, 195, 5, 15) ;
+	ctx1.fillRect(300, 195, 5, 15) ;
+	ctx1.fillStyle = "red";	
+	ctx1.fillRect(245, 45, 10, 10) ;
+	ctx1.fillRect(245, 45, 10, 10) ;
+}</script>
+
+## Pair: Definition
+
+- We construct pairs from sets.
+    - An ordered pair is a set of cardinality two. (2 elements)
+    - One element of the set is a set of cardinality one. (1 element)
+    - The other element of the set is a set of cardinality two (2 elements)
+    - The element of the set of cardinality one is one of the two elements of the set of cardinality two.
+
+## Pair: Definition
+
+- The element of both sets is regarded as the first element.
+- Python fails - Python sets aren't formal sets:
+        
+```{.python}
+>>> [a,b] ## ordered pair
+['one thing', 'another thing']
+>>> {{a},{a,b}} ## ordered pair with sets
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'set'
+>>>
+```
+- But this is an implementation hurdle, and not a logical one.
+
+## Pair: Definition
+
+::: {.callout-note appearance="simple"}
+
+## Ordered Pair
+
+An ordered pair is a set of two elements, a set containing the head element of the pair, and a set containing both elements of the pair.
+
+:::
+
+```{.lisp}
+(a, b) := p : { {a} , {a, b} }
+```
+
+## "Head"
+
+- Extract the head item by taking the intersection of all of the elements of p
+    - I denote this 'Head(p)'
+
+$$
+\begin{align*}
+\text{Head}(p) &:= x : x \in \bigcap p \\
+\text{Head}(p) &:= x : \forall Y \in p : x \in Y
+\end{align*}
+$$
+
+## "Tail"
+
+- The tail is the sole element of the union that is not an element of the intersection, with the caveat that we do not consider the case in which the head and tail differ
+    - I denote this 'Tail(p)'
+
+$$
+\begin{align*}
+\text{Tail}(p) &:= x : x \in \bigcup p \setminus \bigcap p \\
+\text{Tail}(p) &:= x : \exists Y_1, Y_2 \in p : x \in Y_1 \land x \notin Y_2
+\end{align*}
+$$
+
+
+## Graph: Definition
+
+- A graph is an **ordered pair** $G$
+- We denote the two elements of the pair as:
+    - $V$ for vertices
+    - $E$ for edges
+$$
+G = (V, E) := \{ \{V\}, \{V,E\}\}
+$$
+
+## In Amtrak
+
+- $V$, the vertices or nodes, stations or stops or cities,
+    - like Portland and Seattle, or
+    - like Kings St Station and Central Station
+- $E$, the edges, are the connections to adjacent stations
+    - like Portland and Oregon City, or Portland and Vancouver, WA.
+
+## Graph: Definition
+
+- An `Amtrak` is an **ordered pair**
+- We denote the two elements of the pair as:
+    - Stations for train stations used by Amtrak passengers, and
+    - Trains which Amtrak passengers ride between stations.
+
+Amtrak = (Stations, Trains)
+
+## Nodes, Vertices, or $V$
+
+- Let us consider the "Amtrak Cascades"
+- The set of vertices is the set of stations:
+
+||||||
+| --------------- | --------------- | --------------- | ------------ | ---|
+| ALBANY        | EVERETT         | PORTLAND        | TUKWILA      | EUGENE          |
+| BELLINGHAM      | KELSO/LONGVIEW  | SALEM           | VANCOUVER BC | OREGON CITY     |
+| CENTRALIA       | MOUNT VERNON    | SEATTLE         | VANCOUVER WA | TACOMA          |  
+| EDMONDS         | OLYMPIA/LACEY   | STANWOOD        |
+
+## Nodes, Vertices, or $V$
+
+- Restrict our example to the PDX<->SEA 6x daily trains:
+
+|||||
+| -------------- | ------------- | --------- | ---------- |
+| CENTRALIA      | OLYMPIA/LACEY | SEATTLE   | TUKWILA    |
+| KELSO/LONGVIEW | PORTLAND      | TACOMA    | VANCOUVER WA |
+
+## Edges or $E$
+
+- $E$ is a set of elements termed 'edges', 'links', or 'lines'
+    - The edges are pairs of vertices
+    - In an *undirected graph*, edges are unordered pairs (sets of cardinality two)
+    - In an *directed graph*, edges are ordered pairs (not subsets then)
+    - Amtrak is undirected, trains are directed.
+
+## Directionality
+
+- The internet is directed.
+    - We may use 'curl' to download files from a url, but going the other way (creating files at a url) is highly nontrivial.
+- `Box` is directed.
+    - Recall, `*b` refers to the value in `b = Box::new(x)`.
+    - `**b` does not refer to to `b`, rather, we would use `Box::new()` to go in the reverse direction.
+
+
+## Route
+
+- Order north-to-south:
+    
+    ```email
+    SEATTLE
+    TUKWILA
+    TACOMA
+    OLYMPIA/LACEY
+    CENTRALIA
+    KELSO/LONGVIEW
+    VANCOUVER WA
+    PORTLAND
+    ```
+    
+- Centralia and Keslo/Longview is an edge.
+- The others, like Seattle and Tacoma, are not edges.
+
+## Edges or $E$
+
+- Our edges are pairs of *adjacent- stations
+- There are 8 stations so there are 7 edges
+
+|||
+| ----------------- | ------------------- |
+| (SEATTLE,         TUKWILA)       | (CENTRALIA,       KELSO) |
+| (TUKWILA,         TACOMA)        | (KELSO, VANCOUVER) |
+| (TACOMA,          OLYMPIA) | (VANCOUVER,   PORTLAND)      |
+| (OLYMPIA,   CENTRALIA)   |                     |
+
+
+## Notation
+
+
+- I use tuple notion here, with parens, but it would be equally proper to use set notatation for an undirected graph.
+- Also I maintained geographic ordering (as a convenience) but it would be more proper to have no particular order since E is a set.
+
+
+## Graph: Definition
+
+- We can express G using only sets over elements of stations (this is basically JSON):
+    
+```json
+{
+  "G": {
+    "V": [
+      "SEATTLE",
+      "TUKWILA",
+      "TACOMA",
+      "OLYMPIA/LACEY",
+      "CENTRALIA",
+      "KELSO/LONGVIEW",
+      "VANCOUVER WA",
+      "PORTLAND"
+    ],
+    "E": [
+      [
+        "TUKWILA",
+        "TACOMA"
+      ],
+      [
+        "TACOMA",
+        "OLYMPIA/LACEY"
+      ],
+      [
+        "OLYMPIA/LACEY",
+        "CENTRALIA"
+      ],
+      [
+        "CENTRALIA",
+        "KELSO/LONGVIEW"
+      ],
+      [
+        "KELSO/LONGVIEW",
+        "VANCOUVER WA"
+      ],
+      [
+        "VANCOUVER WA",
+        "PORTLAND"
+      ]
+    ]
+  }
+}
+```
+
+## Graph: Exercise
+
+- Amtrak recently added lines, including the Hiawatha, with service from Milwaukee to the world's greatest city, Chicago.
+    
+    > From the grandeur of Grant Park’s Buckingham Fountain to iconic museums and skyscrapers, see for yourself why Chicago was once dubbed “Paris on the Prairie.” Engage in retail therapy on the Magnificent Mile or root for the home team within the friendly confines of famed Wrigley Field.
+    
+## Graph: Exercise
+
+- As an exercise, construct the graph of the Hiawatha.
+- The route is described [here](https://www.amtrak.com/routes/hiawatha-train.html) and contains five stations.
+- You may use the three letter codes like "MKE" and "CHI".
+- As a bonus: Write valid json. 
+    - Web [tester](https://jsonformatter.curiousconcept.com/#).
+    - [Or](https://askubuntu.com/a/1473153)
+```sh
+sudo apt install jq
+jq <name-of-file>.json >/dev/null # should show nothing
+```
+
+## Today
+
+- &check; Graphs
+    - DAGs
+    - Trees
+    
+# DAGs
+
+## Definition
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- A DAG is a "directed acyclic graph".
+- We will define rigorously.
+
+:::
+
+:::{.column width=50%}
+
+
+<a style="filter: invert(.9);" title="Vector version of Image:Tred-G.png, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Tred-G.svg"><img height="100%" alt="Tred-G" src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Tred-G.svg"></a>
+
+:::
+
+::::
+
+
+
+## Cycles
+
+
+- *E- is a set of pairs of elements of *V*.
+- We can think of edges in a graph as a homogenous binary relation.
+    - Homogenous: From a set (the set of vertices) to itself.
+    - Binary: Over two elements (just like edges)
+    - Relation: A set (of pairs)
+
+## Closures
+
+- "Transitive closures" are defined over homogenous binary relations, so we can take a "transitive closure" over edges.
+
+## Cartesian product
+
+- A relation $R$ over a set $S$ is a set of pairs of elements of $S$
+    - Or: a subset of the set of all pairs of elements
+
+## Use $\times$
+
+- We denote all pairs using a "Cartesian product":
+
+- $S \times S$ in LaTeX 
+
+```{.tex}
+S \times S
+```
+
+- <em>S</em> &times; <em>S</em> in HTML
+```{.html}
+<em>S</em> &times; <em>S</em>
+```
+
+## Colors
+
+- For example, over the set of traffic light colors $C$:
+$$
+C = \{ G, Y, R \}
+$$
+- The Cartesian product is all pairs:
+
+$$
+C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
+$$ 
+
+- Order matters.
+
+## Relation
+
+- A relation *R- over a set *S- is a set of pairs of elements of *S*
+    - Or: a subset of the set of all pairs of elements in is transitive
+- We begin with the Cartesian product:
+
+$$
+C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
+$$ 
+
+- Define traffic light $L \subset C \times C$
+
+## Properties
+
+- Construct $L$, the traffic light relation
+    - No red without prior yellow
+        $$
+        (Y,X) \in L \implies X = R
+        $$ 
+    - All colors must appear in both positions
+        $$
+        \forall X \in C, \exists Y, Z \in C : \{ (X,Y), (Z,X) \} \subset L
+        $$ 
+
+## This gives
+
+- The relation then is
+$$
+L = \{ (G, Y), (Y, R), (R, G)\}
+$$
+- We not this is a subset of $C \times C$
+
+## Notation
+
+- Variety of ways to express this.
+    - Function application
+        - `L(G) = Y`
+    - Infix notation
+        - `gLy`
+
+## Matrix      
+
+- Starting state on top, ending state on side
+
+||$G$|$Y$|$R$|
+|-|-|-|-|
+$G$||x||
+|$Y$|||x|
+|$R$|x|||
+
+- Astute blah blah its 9 bits
+
+## Rainbow
+
+- Vs. traffic light, we can take "wavelength" where colors are sorted by something physics something optics help I don't know this stuff.
+
+<a title="Eric Rolph at English Wikipedia, CC BY-SA 2.5 &lt;https://creativecommons.org/licenses/by-sa/2.5&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Double-alaskan-rainbow.jpg"><img width="100%" alt="Double-alaskan-rainbow" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Double-alaskan-rainbow.jpg/512px-Double-alaskan-rainbow.jpg?20070714083004"></a>
+
+## Rainbow
+
+- We note red is higher than yellow which is higher than green.
+    - Green is higher than *nothing- or $\varnothing$
+
+||$G$|$Y$|$R$|
+|-|-|-|-|
+$G$||x||
+|$Y$|||x|
+|$R$||||
+
+## Rainbow
+
+- We note that Rainbow $B$ ($R$ is taken) is also a binary relation.
+- We will explore its properties.
+$$
+B \subset C \times C = \{ (R,Y), (Y,G) \}
+$$
+
+- We additionally note that while $R$ is immediately above $Y$, it is *also- above $G$
+
+## Transitivitity
+
+- Transitivity is over relation $R$  as follows.
+
+$$ 
+((a, b) \in R \land (b, c) \in R) \implies (a, c) \in R
+$$
+
+- For us, that would be,
+$$
+((R, Y) \in B \land (Y,G) \in B) \implies (R, G) \in B
+$$
+- In the rainbow case, this is true, $R$ appears above $G$ in the rainbow because $R$ is above $Y$ and $Y$ is above $G$.
+
+## Closure
+
+- Our initial relation was not transitive.
+
+||$G$|$Y$|$R$|
+|-|-|-|-|
+$G$||x||
+|$Y$|||x|
+|$R$||||
+
+- As in the Amtrak case, we considered only adjacent elements as a convenience, but that doesn't tell us if e.g. we can get from Seattle to Eugene.
+
+## Closure
+
+- To do that, we need to to preserve transitivity - and we do so using the notion of **transitive closure**
+- A closure is an operation over sets, and in the case of binary relations, which are sets of pairs, is an operation over the relation itself, or the sets of pairs themselves (which are equivalent).
+
+## Closure
+
+- We denote the transitive closure of some relation $R$ as $R^+$
+- First, the transitive closure *R⁺- of some relation *R- must contain all elements of *R*.
+
+$$
+R^+ \supseteq R
+$$
+
+- We recall we can use set operations like superset on $R$ as it is a set of pairs, in this case ordered.
+
+*R⁺- ⊃ *R*
+
+## Superset review
+
+- That means that for all pairs (of colors, for example) in the binary relation $R$, each one of them is also in $R^+$
+
+$$
+\forall p \in R, p \in R^+
+$$
+
+$$
+\forall x,y \in S, (x,y) \in R \subset S \times S \implies (x,y) \in R^+
+$$
+
+
+## Closure
+
+- The transitive closure $R^+$ of some relation $R$ must be transitive.
+- Recall:
+
+$$ 
+((a, b) \in R \land (b, c) \in R) \implies (a, c) \in R
+$$
+
+
+## Discussion
+
+- Note: since this is a "for all", it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.
+- So, if we add *SeattleAmtrakTacoma- because we have *SeattleAmtrakTukwila- and *TukwilaAmtrakTacoma*...
+- We will then have to add *SeattleAmtrakOlympia- because *Amtrak- also contains *TukwilaAmtrakOlympia*
+
+## Color Example
+
+- If in rainbow relation $B$ we find <span style="color:red">$R$</span> is higher in the rainbow than <span style="color:yellow">$Y$</span> and <span style="color:yellow">$Y$</span> is higher in the rainbow than <span style="color:green">$G$</span> then 
+$$
+\{ (R,Y), (Y,G) \} \subseteq B
+$$
+- The transitive closure adds at least one additional element.
+$$
+\{ (R,Y), (Y,G), (R,G) \} \subseteq B^+
+$$
+
+## Closure
+
+- *R⁺- must be the smallest possible relation for that is a transitive superset of *R*.
+    - Cartesian Product is always transitive and a superset, but not always the smallest satisfying set.
+
+## A note on graphs
+
+- By the way those binary relations are graph edges between graph nodes (the elements of the original set).
+- And by the way those edges are pointers.
+- Okay keep going.
+
+## Cycles
+
+- We use transitive closure to define cycles
+    - We consider a graph $G$
+
+$$
+G = (V, E) := \{ \{V\}, \{V,E\}\}
+$$
+
+- We note that $E$ is a homogenous binary relation over $V$
+- Take $E^+$ the transitive closure of $E$
+
+## Cycles
+
+- $G$ contains a cycle (has the property of being cyclic) if $E^+$ contains an edge from a node to itself.
+
+$\text{Cyclic}(G = (V, E)) := \exists v \in V: \{v, v\} \in E^+$
+
+## Note
+
+- Cycles are defined to be non-trivial, which means they don't contain "loops", so  an edge from a node to itself.
+    - We don't think about this with Amtrak because we don't take a train from Portland to Portland
+
+## Other Terms
+
+- Circuits, walks, paths, and trails are also defined in graph theory and are related.
+- Direct paths and undirected paths are, of course, distinct but intuitively so.
+    - Cascades 503, a train which runs Seattle to Portland, has a Seattle to Tukwila edge but not a Tukwila to Seattle edge.
+    - The Cascades route, which runs service between Vancouver, BC and Eugene, has both edges.
+
+
+## DAGs
+
+::::{columns}
+
+:::{.column width=70%}
+  
+
+- A graph $G = (V,E)$ is a directed, acyclic graph if:
+    - It's edges are directed, that is, $E$ is a set of ordered pairs, and
+    - The transitive closure of it's edges $E^+$ contains no identity pairs.
+:::
+
+:::{.column width=30%}
+
+
+<a style="filter: invert(.9);" title="Vector version of Image:Tred-G.png, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Tred-G.svg"><img height="100%" alt="Tred-G" src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Tred-G.svg"></a>
+
+:::
+
+::::
+
+
+## DAGs
+
+- Cascades 503 is a directed acyclic graph.
+    - It has edges from all relative northern stations to all relative southern stations for all stations between Seattle and Portland inclusive.
+- Amtrak Cascades is not a DAG
+    - It is not directed - SLM->PDX or PDX->SLM
+    - It contains cycles - PDX->SLM->PDX
+
+## DAGs
+
+- Color wavelength is a directed acyclic graph.
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=LR; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  R -> Y
+  R -> G
+  Y -> G
+
+}
+```
+
+## DAGs
+
+- A traffic light is not a directed graph but not an acyclic graph.
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=LR; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  Y -> R
+  R -> G
+  G -> Y
+}
+```
+
+## DAGs
+
+- Friendship, via mutual enthusiastic consent, is a neither directed nor, necessarily, acyclic.
+- Facebook is not a DAG.
+
+```{dot}
+//| echo: false
+graph G {
+  graph [rankdir="LR"];
+  bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff", shape=circle];
+  edge [color = "#ffffff",fontcolor = "#ffffff"];
+  n [label="Thelma"];
+  m [label="Louise"];
+  n -- m;
+}
+```
+
+## BS CS DAG
+
+<a style="filter: invert(1);" title="Vector version of Image:Tred-G.png, Public domain, via Wikimedia Commons" href="https://cd-public.github.io/advising/cse.html"><img height="80%" alt="Tred-G" src="https://cd-public.github.io/advising/photos/cse.png"></a>
+
+## Today
+
+- &check; Graphs
+    - &check; DAGs
+    - Trees
+
+# Trees
+
+## Definition
+
+- A tree is DAG where every node has at most one incoming edge.
+    - $\exists$ undirected trees but we do not consider them.
+- A graph $G = (V, E)$ is a tree if
+$$
+\forall v \in V : |\{(v',v) \in E\}| \leq 1
+$$
+- For all vertexes, the cardinality of the set of incoming edges is less than or equal to one.
+
+## Decision Trees
+
+<a title="User:Gokul Jadhav, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Manual_decision_tree.jpg"><img width="256" alt="Manual decision tree" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Manual_decision_tree.jpg?20080718223209"></a>
+
+
+## Decision Trees
+
+<a style="filter: invert(.9);" title="IPWAI, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:DecisionCalcs.jpg"><img width="512" alt="DecisionCalcs" src="https://upload.wikimedia.org/wikipedia/commons/4/48/DecisionCalcs.jpg?20120618060749"></a>
+
+## River Systems
+
+<a title="Kmusser, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Columbiarivermap.png"><img width="512" alt="Columbiarivermap" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Columbiarivermap.png/512px-Columbiarivermap.png?20220901045624"></a>
+
+## Data Structure
+
+<a style="filter: invert(.9);" title="Paddy3118, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Tree_(computer_science).svg"><img width="256" alt="A rooted, non-binary, tree" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Tree_%28computer_science%29.svg/256px-Tree_%28computer_science%29.svg.png?20191020090628"></a>
+
+## Why trees?
+
+- If trying to store data, really only need one unique path to the data.
+- If trying to assure integrity of data with hashing, really only need to hash once.
+
+## Sample Tree
+
+- By convention, given a directed edge $(v,v')$, vertex $v$ is denoted the parent and vertex $v'$ is denoted the child.
+
+```{.c}
+struct tree_struct {
+    void *data;
+    size_t num_children;
+    struct tree_struct *children;
+}
+```
+
+## Binary Tree
+
+- In computing, we often use binary trees, which are equivalently expressive and have other nice properties.
+- Commonly, the two children are referred to as "right" and "left"
+
+```{.c}
+struct binary_tree_struct {
+    void *data;
+    struct binary_tree_struct *left;
+    struct binary_tree_struct *rite;
+}
+```
+
+## By The Way
+
+- It would have been fairly straightforward to implement stacks and queues using trees.
+- Just why bother...
+    - Minimally, can use just the right or left side and you have a linked list.
+
+## BST
+
+- In 100-level CS classes, students often implement a binary search tree.
+- These trees store lower values on lesser/left side.
+- It basically implements quicksort via structures.
+
+## Merkle
+
+- In this class, we will do instead a Merkle tree or hash tree.
+- Merkle trees are unsorted but they are verified.
+    - Building toward a verified version control system.
+- In a block, we then store the root, the ultimate ancestor of all nodes, and store the changes elsewhere.
+- This verifies the entire change tree.
+
+## Merkle
+
+<a style="filter: invert(1);" title="Azaghal, CC0, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Hash_Tree.svg"><img width="80%" alt="Graphical representation of the Merkle Tree. Illustration by David Göthberg" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Hash_Tree.svg"></a>
+
+## Tree Terms
+
+- Connected
+- Root
+- Leaf
+- Parent
+- Child
+- Height/depth
+- Size
+
+## Connected
+
+- Trees are *connected- 
+    - That is, if we take the transitive closure of edges
+    - There is an edge from one node to every other node.
+    - The transitive closure of the edges is the set of paths.
+- Connectedness is usually defined over undirected graphs.
+
+## Root
+
+- The root is the node which has a path to every other edge.
+- It is the "ancestor" of all nodes.
+- Often in computing, we treat a descriptor or pointer to the root as a descriptor or pointer to the graph.
+- A Bitcoin block contains a "Merkle root" of a transaction tree.
+
+## Leaf
+
+- Not every node has outgoing edges.
+- We refer to nodes without such edges as leafs (leaves?)
+
+## Diagram
+
+::::{columns}
+
+:::{.column width=50%}
+  
+
+- `2` is the root
+- `{2, 10, 5, 11, 4}` are lea[fs/ves]
+
+:::
+
+:::{.column width=50%}
+
+
+<a style="filter: invert(.9);" title="Paddy3118, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Tree_(computer_science).svg"><img width="256" alt="A rooted, non-binary, tree" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Tree_%28computer_science%29.svg/256px-Tree_%28computer_science%29.svg.png?20191020090628"></a>
+
+:::
+
+::::
+
+## Parent/Child
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=LR; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  Parent -> Child
+}
+```
+
+## Height/Depth
+
+::::{columns}
+
+:::{.column width=50%}
+
+- The height or depth of a tree is the maximum number of edges from some root to a leaf.
+- For this tree it is 3 
+```{.py}
+len(((5,3),(3,2),(2,1)))
+```
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  5 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  3 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  2 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  1 [color = "#ffa07a",fontcolor = "#ffa07a"]
+
+  5 -> 3 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  5 -> 7
+  3 -> 2 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  3 -> 4
+  7 -> 6
+  7 -> 8
+  2 -> 1 [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+:::
+
+::::
+
+## Height
+
+::::{columns}
+
+:::{.column width=50%}
+
+- The height of a *node- is what the height of the subtree of which it is a root would be.
+- The node labelled `3` is of height 2.
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  3 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  2 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  1 [color = "#ffa07a",fontcolor = "#ffa07a"]
+
+  5 -> 3 
+  5 -> 7
+  3 -> 2 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  3 -> 4
+  7 -> 6
+  7 -> 8
+  2 -> 1 [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+
+:::
+
+::::
+
+## Depth
+
+::::{columns}
+
+:::{.column width=50%}
+
+- The depth of a *node- is what the height of the subtree of which it is the lowest leaf would be.
+- The node labelled `4` is of depth 2.
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [fontcolor = "#ffffff", color = "#ffffff"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+  5 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  3 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  2
+  4 [color = "#ffa07a",fontcolor = "#ffa07a"]
+
+  5 -> 3 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  5 -> 7
+  3 -> 2 
+  3 -> 4 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  7 -> 6
+  7 -> 8
+  2 -> 1
+}
+```
+
+:::
+
+::::
+
+
+## Size
+
+::::{columns}
+
+:::{.column width=50%}
+
+- The size is generally taken to be the number of nodes.
+    - It is separately, useful, sometimes, to count only lea[fs/ves].
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD; bgcolor="#191919";
+  node [color = "#ffa07a",fontcolor = "#ffa07a"]
+  edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+  node [shape=circle];
+
+
+  5 -> 3 
+  5 -> 7
+  3 -> 2
+  3 -> 4 
+  7 -> 6
+  7 -> 8
+  2 -> 1
+}
+```
+
+:::
+
+::::
+
+## Today
+
+- &check; Graphs
+    - &check; DAGs
+    - &check; Trees

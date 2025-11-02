@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="">
 
-<title>ix – Systems in Rust</title>
+<title>DAG – Systems in Rust</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./80_eddsa.html" rel="next">
-<link href="./71_ix_io.html" rel="prev">
+<link href="./A0_graph.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -116,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./72_ix.html">ix</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./A1_dag.html">DAG</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -251,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./72_ix.html" class="sidebar-item-text sidebar-link active">
+  <a href="./72_ix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ix</span></a>
   </div>
 </li>
@@ -299,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./A1_dag.html" class="sidebar-item-text sidebar-link">
+  <a href="./A1_dag.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">DAG</span></a>
   </div>
 </li>
@@ -313,13 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
-  <ul class="collapse">
-  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
-  <li><a href="#my-responsibility" id="toc-my-responsibility" class="nav-link" data-scroll-target="#my-responsibility">My responsibility</a></li>
-  <li><a href="#your-responsibility" id="toc-your-responsibility" class="nav-link" data-scroll-target="#your-responsibility">Your responsibility</a></li>
-  <li><a href="#tester" id="toc-tester" class="nav-link" data-scroll-target="#tester">Tester</a></li>
-  </ul></li>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
   </ul>
 </nav>
     </div>
@@ -328,8 +320,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">ix</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Due Friday, 24 Oct.&nbsp;at 1440 ET.</p>
+<div class="quarto-title-block"><div><h1 class="title">DAG</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
 </div>
 
 
@@ -346,72 +338,194 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="setup" class="level1">
-<h1>Setup</h1>
-<section id="requirements" class="level2">
-<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
-<ul>
-<li>To complete this assignment, you must:
-<ul>
-<li>Create a <code>72</code> directory in your <code>271rs</code> repository.</li>
-<li>This folder must be a Cargo package.</li>
-<li>As a convenience, I named mine <code>bignum</code> just to call it something other than <code>ix</code>, which was confusing.</li>
+<section id="preamble" class="level1">
+<h1>Preamble</h1>
+<p>You know what a DAG is. Now make one in Rust.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Implement a relatively non-trivial graph.</label></li>
+<li><label><input type="checkbox">Review Rust <code>Box</code> to create a recursive data structure.</label></li>
+<li><label><input type="checkbox">Review how to maintain references.</label></li>
+<li><label><input type="checkbox">Review the CS major requirements.</label></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">cargo</span> new 72 <span class="at">--name</span> bignum <span class="at">--vcs</span> none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Review: Box
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>To put some <code>x</code> in a <code>Box</code>, simply:</li>
 </ul>
-</section>
-<section id="my-responsibility" class="level2">
-<h2 class="anchored" data-anchor-id="my-responsibility">My responsibility</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>I have provided a completing testing framework within the <a href="70_ix_io.md">I/O</a> lab.</li>
+<li>To remove <code>x</code> from the `Box, simply use the special “unary asterisk” operator, also called “dereference”.</li>
 </ul>
-</section>
-<section id="your-responsibility" class="level2">
-<h2 class="anchored" data-anchor-id="your-responsibility">Your responsibility</h2>
-<ul>
-<li>You will implement:
-<ul>
-<li><code>add_ix</code></li>
-<li><code>sub_ix</code></li>
-<li><code>mul_ix</code></li>
-</ul></li>
-<li>You will attempt, but regard as a challenge problem:
-<ul>
-<li><code>div_ix</code> and <code>rem_ix</code>, which are likely wrappers on the same “divmod” helper function.</li>
-</ul></li>
-</ul>
-</section>
-<section id="tester" class="level2">
-<h2 class="anchored" data-anchor-id="tester">Tester</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>DEBUG <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>CMD <span class="op">=</span> <span class="st">"cargo run --"</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="im">import</span> subprocess, os, random</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>bigone, bigtwo <span class="op">=</span> random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>), random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>hexone, hextwo <span class="op">=</span> <span class="bu">hex</span>(bigone), <span class="bu">hex</span>(bigtwo)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">hexone =</span><span class="ch">\n</span><span class="st">"</span>, hexone, <span class="st">"</span><span class="ch">\n</span><span class="st">hextwo = </span><span class="ch">\n</span><span class="st">"</span>, hextwo)</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
-<span id="cb2-12"><a href="#cb2-12"></a>ops <span class="op">=</span> {<span class="st">'ADD'</span>:add,<span class="st">'SUB'</span>:sub,<span class="st">'MUL'</span>:mul,<span class="st">'QUO'</span>:quo,<span class="st">'REM'</span>:rem}</span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="cf">for</span> op <span class="kw">in</span> ops:</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    result <span class="op">=</span> <span class="bu">int</span>(subprocess.check_output([<span class="st">"cargo"</span>, <span class="st">"run"</span>, hexone, hextwo, op]),<span class="dv">16</span>)</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    answer <span class="op">=</span> ops[op](bigone,bigtwo)</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="cf">if</span> result <span class="op">!=</span> answer:</span>
-<span id="cb2-17"><a href="#cb2-17"></a>        <span class="bu">print</span>(<span class="st">"Operator"</span>, op, <span class="st">"failed."</span>)</span>
-<span id="cb2-18"><a href="#cb2-18"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Expected:"</span>)</span>
-<span id="cb2-19"><a href="#cb2-19"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(answer))</span>
-<span id="cb2-20"><a href="#cb2-20"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Received:"</span>)</span>
-<span id="cb2-21"><a href="#cb2-21"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(result))</span>
-<span id="cb2-22"><a href="#cb2-22"></a>        exit()</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-24"><a href="#cb2-24"></a>        <span class="bu">print</span>(op, <span class="st">"passes."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!--
+
+# The BS CS
+
+- New for 2025,
+
+## Starter Code
+
+### `src/main.rs`
+
+- A testing script:
+
+```{.rs filename="src/main.rs"}
+use stack::*;
+
+fn main() {
+    let mut s = init();
+    dbg!(&s);
+    s = push(String::from("0"), s);
+    dbg!(&s);
+    s = push(String::from("1"), s);
+    dbg!(&s);
+    let (popped, mut s) = pop(s);
+    dbg!(popped);
+    dbg!(&s);
+    s = push(String::from("n"), s);
+    dbg!(&s);
+}
+```
+
+- We note:
+    - Every stack operation returns the stack.
+    - `pop` returns a tuple to return the popped value and the stack.
+    - No references are used in computation.
+        - They are used for debug.
+
+### A `src/lib.rs` excerpt
+
+- You don't have to use this if the tester still works; it is simply what I used.
+
+```{.rs filename="src/lib.rs"}
+#[derive(Debug)]
+struct Node {
+    data: String,
+    next: Option<Box<Node>>,
+}
+
+#[derive(Debug)]
+pub struct Stack {
+    vals: Option<Node>,
+}
+
+pub fn init() -> Stack {
+    return Stack {
+        vals: None,
+    };
+}
+
+pub fn push(val: String, mut s: Stack) -> Stack {
+    todo!();
+}
+
+pub fn pop(mut s: Stack) -> (Option<String>, Stack) {
+    todo!();
+}
+```
+
+- We note:
+    - Every function returns its stack.
+
+### Sample output
+
+- It's not pretty because I didn't write a print formatter.
+    - I do not love doing that in Rust.
+    - You may.
+```sh
+[src/main.rs:5:5] &s = Stack {
+    vals: None,
+}
+[src/main.rs:7:5] &s = Stack {
+    vals: Some(
+        Node {
+            data: "0",
+            next: None,
+        },
+    ),
+}
+[src/main.rs:9:5] &s = Stack {
+    vals: Some(
+        Node {
+            data: "1",
+            next: Some(
+                Node {
+                    data: "0",
+                    next: None,
+                },
+            ),
+        },
+    ),
+}
+[src/main.rs:11:5] popped = Some(
+    "1",
+)
+[src/main.rs:12:5] &s = Stack {
+    vals: Some(
+        Node {
+            data: "0",
+            next: None,
+        },
+    ),
+}
+[src/main.rs:14:5] &s = Stack {
+    vals: Some(
+        Node {
+            data: "n",
+            next: Some(
+                Node {
+                    data: "0",
+                    next: None,
+                },
+            ),
+        },
+    ),
+}
+```
+
+### Python equivalent
+
+- This is object-oriented rather than functional.
+
+```py
+>>> s = []
+>>> s.append('0')
+>>> s
+['0']
+>>> s.append('1')
+>>> s
+['0', '1']
+>>> s.pop()
+'1'
+>>> s
+['0']
+>>> s.append('n')
+>>> s
+['0', 'n']
+```
+
+- The functional implementation is left as an exercise to the interested student, beyond this snippet:
+
+```py
+push = lambda val, s : lambda a : val if a else s
+```
+
+-->
 
 
 <!-- -->
 
-</section>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -888,77 +1002,195 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./71_ix_io.html" class="pagination-link" aria-label="Numerical I/O">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Numerical I/O</span>
+      <a href="./A0_graph.html" class="pagination-link" aria-label="Graphs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Graphs</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./80_eddsa.html" class="pagination-link" aria-label="EdDSA">
-        <span class="nav-page-text">EdDSA</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "ix"</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 24 Oct. at 1440 ET."</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "DAG"</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">---</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu"># Preamble</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="fu"># Setup</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>You know what a DAG is. Now make one in Rust.</span>
 <span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="fu">## Requirements</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">- </span>To complete this assignment, you must:</span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="ss">    - </span>Create a <span class="in">`72`</span> directory in your <span class="in">`271rs`</span> repository.</span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="ss">    - </span>This folder must be a Cargo package.</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="ss">    - </span>As a convenience, I named mine <span class="in">`bignum`</span> just to call it something other than <span class="in">`ix`</span>, which was confusing.</span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="in">```bash</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="ex">cargo</span> new 72 <span class="at">--name</span> bignum <span class="at">--vcs</span> none</span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="in">```</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="fu">## My responsibility</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="ss">- </span>I have provided a completing testing framework within the <span class="co">[</span><span class="ot">I/O</span><span class="co">](70_ix_io.md)</span> lab.</span>
-<span id="cb3-23"><a href="#cb3-23"></a>    </span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="fu">## Your responsibility</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="ss">- </span>You will implement:</span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="ss">    - </span><span class="in">`add_ix`</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="ss">    - </span><span class="in">`sub_ix`</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="ss">    - </span><span class="in">`mul_ix`</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a><span class="ss">- </span>You will attempt, but regard as a challenge problem:</span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="ss">    - </span><span class="in">`div_ix`</span> and <span class="in">`rem_ix`</span>, which are likely wrappers on the same "divmod" helper function.</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="ss">- </span><span class="va">[ ]</span> Implement a relatively non-trivial graph.</span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="ss">- </span><span class="va">[ ]</span> Review Rust <span class="in">`Box`</span> to create a recursive data structure.</span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">- </span><span class="va">[ ]</span> Review how to maintain references.</span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="ss">- </span><span class="va">[ ]</span> Review the CS major requirements.</span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a>::: {.callout-caution}</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="fu">## Review: Box</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="ss">- </span>To put some <span class="in">`x`</span> in a <span class="in">`Box`</span>, simply:</span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="in">```rs</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="in">```</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="ss">- </span>To remove <span class="in">`x`</span> from the `Box, simply use the special "unary asterisk" operator, also called "dereference".</span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="in">```rs</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="in">```</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">&lt;!--</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co"># The BS CS</span></span>
 <span id="cb3-32"><a href="#cb3-32"></a></span>
-<span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="fu">## Tester</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a></span>
-<span id="cb3-36"><a href="#cb3-36"></a><span class="in">```py</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>DEBUG <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a>CMD <span class="op">=</span> <span class="st">"cargo run --"</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a></span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="im">import</span> subprocess, os, random</span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
-<span id="cb3-42"><a href="#cb3-42"></a></span>
-<span id="cb3-43"><a href="#cb3-43"></a>bigone, bigtwo <span class="op">=</span> random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>), random.randint(<span class="dv">2</span> <span class="op">**</span> <span class="dv">500</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">512</span>)</span>
-<span id="cb3-44"><a href="#cb3-44"></a>hexone, hextwo <span class="op">=</span> <span class="bu">hex</span>(bigone), <span class="bu">hex</span>(bigtwo)</span>
-<span id="cb3-45"><a href="#cb3-45"></a>DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">hexone =</span><span class="ch">\n</span><span class="st">"</span>, hexone, <span class="st">"</span><span class="ch">\n</span><span class="st">hextwo = </span><span class="ch">\n</span><span class="st">"</span>, hextwo)</span>
-<span id="cb3-46"><a href="#cb3-46"></a></span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="im">from</span> operator <span class="im">import</span> add, sub, mul, floordiv <span class="im">as</span> quo, mod <span class="im">as</span> rem</span>
-<span id="cb3-48"><a href="#cb3-48"></a>ops <span class="op">=</span> {<span class="st">'ADD'</span>:add,<span class="st">'SUB'</span>:sub,<span class="st">'MUL'</span>:mul,<span class="st">'QUO'</span>:quo,<span class="st">'REM'</span>:rem}</span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="cf">for</span> op <span class="kw">in</span> ops:</span>
-<span id="cb3-50"><a href="#cb3-50"></a>    result <span class="op">=</span> <span class="bu">int</span>(subprocess.check_output([<span class="st">"cargo"</span>, <span class="st">"run"</span>, hexone, hextwo, op]),<span class="dv">16</span>)</span>
-<span id="cb3-51"><a href="#cb3-51"></a>    answer <span class="op">=</span> ops[op](bigone,bigtwo)</span>
-<span id="cb3-52"><a href="#cb3-52"></a>    <span class="cf">if</span> result <span class="op">!=</span> answer:</span>
-<span id="cb3-53"><a href="#cb3-53"></a>        <span class="bu">print</span>(<span class="st">"Operator"</span>, op, <span class="st">"failed."</span>)</span>
-<span id="cb3-54"><a href="#cb3-54"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Expected:"</span>)</span>
-<span id="cb3-55"><a href="#cb3-55"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(answer))</span>
-<span id="cb3-56"><a href="#cb3-56"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="st">"Received:"</span>)</span>
-<span id="cb3-57"><a href="#cb3-57"></a>        DEBUG <span class="kw">and</span> <span class="bu">print</span>(<span class="bu">hex</span>(result))</span>
-<span id="cb3-58"><a href="#cb3-58"></a>        exit()</span>
-<span id="cb3-59"><a href="#cb3-59"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-60"><a href="#cb3-60"></a>        <span class="bu">print</span>(op, <span class="st">"passes."</span>)</span>
-<span id="cb3-61"><a href="#cb3-61"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">- New for 2025,</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">## Starter Code</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="al">###</span><span class="co"> `src/main.rs`</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">- A testing script:</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="co">use stack::*;</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="co">fn main() {</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="co">    let mut s = init();</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a><span class="co">    dbg!(&amp;s);</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="co">    s = push(String::from("0"), s);</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="co">    dbg!(&amp;s);</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="co">    s = push(String::from("1"), s);</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="co">    dbg!(&amp;s);</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="co">    let (popped, mut s) = pop(s);</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="co">    dbg!(popped);</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="co">    dbg!(&amp;s);</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="co">    s = push(String::from("n"), s);</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a><span class="co">    dbg!(&amp;s);</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="co">}</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a><span class="co">```</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="co">- We note:</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="co">    - Every stack operation returns the stack.</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="co">    - `pop` returns a tuple to return the popped value and the stack.</span></span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="co">    - No references are used in computation.</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="co">        - They are used for debug.</span></span>
+<span id="cb3-64"><a href="#cb3-64"></a></span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="al">###</span><span class="co"> A `src/lib.rs` excerpt</span></span>
+<span id="cb3-66"><a href="#cb3-66"></a></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="co">- You don't have to use this if the tester still works; it is simply what I used.</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a></span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="co">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a><span class="co">#[derive(Debug)]</span></span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="co">struct Node {</span></span>
+<span id="cb3-72"><a href="#cb3-72"></a><span class="co">    data: String,</span></span>
+<span id="cb3-73"><a href="#cb3-73"></a><span class="co">    next: Option&lt;Box&lt;Node&gt;&gt;,</span></span>
+<span id="cb3-74"><a href="#cb3-74"></a><span class="co">}</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a></span>
+<span id="cb3-76"><a href="#cb3-76"></a><span class="co">#[derive(Debug)]</span></span>
+<span id="cb3-77"><a href="#cb3-77"></a><span class="co">pub struct Stack {</span></span>
+<span id="cb3-78"><a href="#cb3-78"></a><span class="co">    vals: Option&lt;Node&gt;,</span></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="co">}</span></span>
+<span id="cb3-80"><a href="#cb3-80"></a></span>
+<span id="cb3-81"><a href="#cb3-81"></a><span class="co">pub fn init() -&gt; Stack {</span></span>
+<span id="cb3-82"><a href="#cb3-82"></a><span class="co">    return Stack {</span></span>
+<span id="cb3-83"><a href="#cb3-83"></a><span class="co">        vals: None,</span></span>
+<span id="cb3-84"><a href="#cb3-84"></a><span class="co">    };</span></span>
+<span id="cb3-85"><a href="#cb3-85"></a><span class="co">}</span></span>
+<span id="cb3-86"><a href="#cb3-86"></a></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="co">pub fn push(val: String, mut s: Stack) -&gt; Stack {</span></span>
+<span id="cb3-88"><a href="#cb3-88"></a><span class="co">    todo!();</span></span>
+<span id="cb3-89"><a href="#cb3-89"></a><span class="co">}</span></span>
+<span id="cb3-90"><a href="#cb3-90"></a></span>
+<span id="cb3-91"><a href="#cb3-91"></a><span class="co">pub fn pop(mut s: Stack) -&gt; (Option&lt;String&gt;, Stack) {</span></span>
+<span id="cb3-92"><a href="#cb3-92"></a><span class="co">    todo!();</span></span>
+<span id="cb3-93"><a href="#cb3-93"></a><span class="co">}</span></span>
+<span id="cb3-94"><a href="#cb3-94"></a><span class="co">```</span></span>
+<span id="cb3-95"><a href="#cb3-95"></a></span>
+<span id="cb3-96"><a href="#cb3-96"></a><span class="co">- We note:</span></span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="co">    - Every function returns its stack.</span></span>
+<span id="cb3-98"><a href="#cb3-98"></a></span>
+<span id="cb3-99"><a href="#cb3-99"></a><span class="al">###</span><span class="co"> Sample output</span></span>
+<span id="cb3-100"><a href="#cb3-100"></a></span>
+<span id="cb3-101"><a href="#cb3-101"></a><span class="co">- It's not pretty because I didn't write a print formatter.</span></span>
+<span id="cb3-102"><a href="#cb3-102"></a><span class="co">    - I do not love doing that in Rust.</span></span>
+<span id="cb3-103"><a href="#cb3-103"></a><span class="co">    - You may.</span></span>
+<span id="cb3-104"><a href="#cb3-104"></a><span class="co">```sh</span></span>
+<span id="cb3-105"><a href="#cb3-105"></a><span class="co">[src/main.rs:5:5] &amp;s = Stack {</span></span>
+<span id="cb3-106"><a href="#cb3-106"></a><span class="co">    vals: None,</span></span>
+<span id="cb3-107"><a href="#cb3-107"></a><span class="co">}</span></span>
+<span id="cb3-108"><a href="#cb3-108"></a><span class="co">[src/main.rs:7:5] &amp;s = Stack {</span></span>
+<span id="cb3-109"><a href="#cb3-109"></a><span class="co">    vals: Some(</span></span>
+<span id="cb3-110"><a href="#cb3-110"></a><span class="co">        Node {</span></span>
+<span id="cb3-111"><a href="#cb3-111"></a><span class="co">            data: "0",</span></span>
+<span id="cb3-112"><a href="#cb3-112"></a><span class="co">            next: None,</span></span>
+<span id="cb3-113"><a href="#cb3-113"></a><span class="co">        },</span></span>
+<span id="cb3-114"><a href="#cb3-114"></a><span class="co">    ),</span></span>
+<span id="cb3-115"><a href="#cb3-115"></a><span class="co">}</span></span>
+<span id="cb3-116"><a href="#cb3-116"></a><span class="co">[src/main.rs:9:5] &amp;s = Stack {</span></span>
+<span id="cb3-117"><a href="#cb3-117"></a><span class="co">    vals: Some(</span></span>
+<span id="cb3-118"><a href="#cb3-118"></a><span class="co">        Node {</span></span>
+<span id="cb3-119"><a href="#cb3-119"></a><span class="co">            data: "1",</span></span>
+<span id="cb3-120"><a href="#cb3-120"></a><span class="co">            next: Some(</span></span>
+<span id="cb3-121"><a href="#cb3-121"></a><span class="co">                Node {</span></span>
+<span id="cb3-122"><a href="#cb3-122"></a><span class="co">                    data: "0",</span></span>
+<span id="cb3-123"><a href="#cb3-123"></a><span class="co">                    next: None,</span></span>
+<span id="cb3-124"><a href="#cb3-124"></a><span class="co">                },</span></span>
+<span id="cb3-125"><a href="#cb3-125"></a><span class="co">            ),</span></span>
+<span id="cb3-126"><a href="#cb3-126"></a><span class="co">        },</span></span>
+<span id="cb3-127"><a href="#cb3-127"></a><span class="co">    ),</span></span>
+<span id="cb3-128"><a href="#cb3-128"></a><span class="co">}</span></span>
+<span id="cb3-129"><a href="#cb3-129"></a><span class="co">[src/main.rs:11:5] popped = Some(</span></span>
+<span id="cb3-130"><a href="#cb3-130"></a><span class="co">    "1",</span></span>
+<span id="cb3-131"><a href="#cb3-131"></a><span class="co">)</span></span>
+<span id="cb3-132"><a href="#cb3-132"></a><span class="co">[src/main.rs:12:5] &amp;s = Stack {</span></span>
+<span id="cb3-133"><a href="#cb3-133"></a><span class="co">    vals: Some(</span></span>
+<span id="cb3-134"><a href="#cb3-134"></a><span class="co">        Node {</span></span>
+<span id="cb3-135"><a href="#cb3-135"></a><span class="co">            data: "0",</span></span>
+<span id="cb3-136"><a href="#cb3-136"></a><span class="co">            next: None,</span></span>
+<span id="cb3-137"><a href="#cb3-137"></a><span class="co">        },</span></span>
+<span id="cb3-138"><a href="#cb3-138"></a><span class="co">    ),</span></span>
+<span id="cb3-139"><a href="#cb3-139"></a><span class="co">}</span></span>
+<span id="cb3-140"><a href="#cb3-140"></a><span class="co">[src/main.rs:14:5] &amp;s = Stack {</span></span>
+<span id="cb3-141"><a href="#cb3-141"></a><span class="co">    vals: Some(</span></span>
+<span id="cb3-142"><a href="#cb3-142"></a><span class="co">        Node {</span></span>
+<span id="cb3-143"><a href="#cb3-143"></a><span class="co">            data: "n",</span></span>
+<span id="cb3-144"><a href="#cb3-144"></a><span class="co">            next: Some(</span></span>
+<span id="cb3-145"><a href="#cb3-145"></a><span class="co">                Node {</span></span>
+<span id="cb3-146"><a href="#cb3-146"></a><span class="co">                    data: "0",</span></span>
+<span id="cb3-147"><a href="#cb3-147"></a><span class="co">                    next: None,</span></span>
+<span id="cb3-148"><a href="#cb3-148"></a><span class="co">                },</span></span>
+<span id="cb3-149"><a href="#cb3-149"></a><span class="co">            ),</span></span>
+<span id="cb3-150"><a href="#cb3-150"></a><span class="co">        },</span></span>
+<span id="cb3-151"><a href="#cb3-151"></a><span class="co">    ),</span></span>
+<span id="cb3-152"><a href="#cb3-152"></a><span class="co">}</span></span>
+<span id="cb3-153"><a href="#cb3-153"></a><span class="co">```</span></span>
+<span id="cb3-154"><a href="#cb3-154"></a></span>
+<span id="cb3-155"><a href="#cb3-155"></a><span class="al">###</span><span class="co"> Python equivalent</span></span>
+<span id="cb3-156"><a href="#cb3-156"></a></span>
+<span id="cb3-157"><a href="#cb3-157"></a><span class="co">- This is object-oriented rather than functional.</span></span>
+<span id="cb3-158"><a href="#cb3-158"></a></span>
+<span id="cb3-159"><a href="#cb3-159"></a><span class="co">```py</span></span>
+<span id="cb3-160"><a href="#cb3-160"></a><span class="co">&gt;&gt;&gt; s = []</span></span>
+<span id="cb3-161"><a href="#cb3-161"></a><span class="co">&gt;&gt;&gt; s.append('0')</span></span>
+<span id="cb3-162"><a href="#cb3-162"></a><span class="co">&gt;&gt;&gt; s</span></span>
+<span id="cb3-163"><a href="#cb3-163"></a><span class="co">['0']</span></span>
+<span id="cb3-164"><a href="#cb3-164"></a><span class="co">&gt;&gt;&gt; s.append('1')</span></span>
+<span id="cb3-165"><a href="#cb3-165"></a><span class="co">&gt;&gt;&gt; s</span></span>
+<span id="cb3-166"><a href="#cb3-166"></a><span class="co">['0', '1']</span></span>
+<span id="cb3-167"><a href="#cb3-167"></a><span class="co">&gt;&gt;&gt; s.pop()</span></span>
+<span id="cb3-168"><a href="#cb3-168"></a><span class="co">'1'</span></span>
+<span id="cb3-169"><a href="#cb3-169"></a><span class="co">&gt;&gt;&gt; s</span></span>
+<span id="cb3-170"><a href="#cb3-170"></a><span class="co">['0']</span></span>
+<span id="cb3-171"><a href="#cb3-171"></a><span class="co">&gt;&gt;&gt; s.append('n')</span></span>
+<span id="cb3-172"><a href="#cb3-172"></a><span class="co">&gt;&gt;&gt; s</span></span>
+<span id="cb3-173"><a href="#cb3-173"></a><span class="co">['0', 'n']</span></span>
+<span id="cb3-174"><a href="#cb3-174"></a><span class="co">```</span></span>
+<span id="cb3-175"><a href="#cb3-175"></a></span>
+<span id="cb3-176"><a href="#cb3-176"></a><span class="co">- The functional implementation is left as an exercise to the interested student, beyond this snippet:</span></span>
+<span id="cb3-177"><a href="#cb3-177"></a></span>
+<span id="cb3-178"><a href="#cb3-178"></a><span class="co">```py</span></span>
+<span id="cb3-179"><a href="#cb3-179"></a><span class="co">push = lambda val, s : lambda a : val if a else s</span></span>
+<span id="cb3-180"><a href="#cb3-180"></a><span class="co">```</span></span>
+<span id="cb3-181"><a href="#cb3-181"></a></span>
+<span id="cb3-182"><a href="#cb3-182"></a><span class="co">--&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

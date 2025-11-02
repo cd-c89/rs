@@ -4,7 +4,1479 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStack\nBox\nTraits\n\n\n0xA\n11/03\nGraphs\nBFS\nDjikstra\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\nNone\n\n\n0xE\n12/01\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStack\nBox\nTraits\n\n\n0xA\n11/03\n(Graphs](A0_graph.qmd)\nDAG\nSuffix Tree\n\n\n0xB\n11/10\nMerkle\n\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\nNone\n\n\n0xE\n12/01\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+  },
+  {
+    "objectID": "A0_graph.html",
+    "href": "A0_graph.html",
+    "title": "Graphs",
+    "section": "",
+    "text": "Welcome to Systems in Rust\nAction Items:\n\nKeep at traits\nGraph theory.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#announcements",
+    "href": "A0_graph.html#announcements",
+    "title": "Graphs",
+    "section": "",
+    "text": "Welcome to Systems in Rust\nAction Items:\n\nKeep at traits\nGraph theory.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#today",
+    "href": "A0_graph.html#today",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\nGraphs\n\nDAGs\nTrees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#n-ary-trees",
+    "href": "A0_graph.html#n-ary-trees",
+    "title": "Graphs",
+    "section": "\\(n\\)-ary Trees",
+    "text": "\\(n\\)-ary Trees\n\nA tree is a type of graph.\nA graph is a pair of\n\nA set of “nodes” or “vertices” (or “vertexes”)\nA set of “edges” which are pairs of nodes\n\nThey may be ordered pairs or not.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graphs-1",
+    "href": "A0_graph.html#graphs-1",
+    "title": "Graphs",
+    "section": "Graphs",
+    "text": "Graphs\n\nThere are many ways to understand graphs, but I actually think graph theory is quite accessible.\nI think it’s also easier when using a running example.\nI will also use a running example, Amtrak 🚄\n\nOr perhaps… a training example?\nI am running… a train??????\nI am training… to run?????",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#amtrak",
+    "href": "A0_graph.html#amtrak",
+    "title": "Graphs",
+    "section": "Amtrak 🚄",
+    "text": "Amtrak 🚄",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-definition",
+    "href": "A0_graph.html#graph-definition",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nA graph is an ordered pair.\n\nThat is: two things, in a fixed order.\nCan be thought of as a sequence of length 2\na = \"one thing\"\nb = \"another thing\"\nordered_pair = [a,b]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#not-sets",
+    "href": "A0_graph.html#not-sets",
+    "title": "Graphs",
+    "section": "Not Sets",
+    "text": "Not Sets\n\nA graph is not a set:\n\n&gt;&gt;&gt; [a,b][0]\n'one thing'\n&gt;&gt;&gt; {a,b}[0]\n&lt;stdin&gt;:1: SyntaxWarning: 'set' object is not subscriptable; perhaps you missed a comma?\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nTypeError: 'set' object is not subscriptable\n\nI just set them up just to knock them down.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#aside-pairs",
+    "href": "A0_graph.html#aside-pairs",
+    "title": "Graphs",
+    "section": "Aside: Pairs",
+    "text": "Aside: Pairs\n\nTake a number plane (click):\n\n\ny=2\n\n\nx=-2 \n\n\n x=2\n\ny=2",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#aside-pairs-1",
+    "href": "A0_graph.html#aside-pairs-1",
+    "title": "Graphs",
+    "section": "Aside: Pairs",
+    "text": "Aside: Pairs\n\nDenote ordered pair (.5,1.5) in red.\n\n\ny=2\n\n\nx=-2 \n\n\n x=2\n\ny=2",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#pair-definition",
+    "href": "A0_graph.html#pair-definition",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\nWe construct pairs from sets.\n\nAn ordered pair is a set of cardinality two. (2 elements)\nOne element of the set is a set of cardinality one. (1 element)\nThe other element of the set is a set of cardinality two (2 elements)\nThe element of the set of cardinality one is one of the two elements of the set of cardinality two.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#pair-definition-1",
+    "href": "A0_graph.html#pair-definition-1",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\nThe element of both sets is regarded as the first element.\nPython fails - Python sets aren’t formal sets:\n\n&gt;&gt;&gt; [a,b] ## ordered pair\n['one thing', 'another thing']\n&gt;&gt;&gt; {{a},{a,b}} ## ordered pair with sets\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nTypeError: unhashable type: 'set'\n&gt;&gt;&gt;\n\nBut this is an implementation hurdle, and not a logical one.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#pair-definition-2",
+    "href": "A0_graph.html#pair-definition-2",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\n\n\n\n\n\nOrdered Pair\n\n\n\nAn ordered pair is a set of two elements, a set containing the head element of the pair, and a set containing both elements of the pair.\n\n\n(a, b) := p : { {a} , {a, b} }",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#head",
+    "href": "A0_graph.html#head",
+    "title": "Graphs",
+    "section": "“Head”",
+    "text": "“Head”\n\nExtract the head item by taking the intersection of all of the elements of p\n\nI denote this ‘Head(p)’\n\n\n\\[\n\\begin{align*}\n\\text{Head}(p) &:= x : x \\in \\bigcap p \\\\\n\\text{Head}(p) &:= x : \\forall Y \\in p : x \\in Y\n\\end{align*}\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#tail",
+    "href": "A0_graph.html#tail",
+    "title": "Graphs",
+    "section": "“Tail”",
+    "text": "“Tail”\n\nThe tail is the sole element of the union that is not an element of the intersection, with the caveat that we do not consider the case in which the head and tail differ\n\nI denote this ‘Tail(p)’\n\n\n\\[\n\\begin{align*}\n\\text{Tail}(p) &:= x : x \\in \\bigcup p \\setminus \\bigcap p \\\\\n\\text{Tail}(p) &:= x : \\exists Y_1, Y_2 \\in p : x \\in Y_1 \\land x \\notin Y_2\n\\end{align*}\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-definition-1",
+    "href": "A0_graph.html#graph-definition-1",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nA graph is an ordered pair \\(G\\)\nWe denote the two elements of the pair as:\n\n\\(V\\) for vertices\n\\(E\\) for edges \\[\nG = (V, E) := \\{ \\{V\\}, \\{V,E\\}\\}\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#in-amtrak",
+    "href": "A0_graph.html#in-amtrak",
+    "title": "Graphs",
+    "section": "In Amtrak",
+    "text": "In Amtrak\n\n\\(V\\), the vertices or nodes, stations or stops or cities,\n\nlike Portland and Seattle, or\nlike Kings St Station and Central Station\n\n\\(E\\), the edges, are the connections to adjacent stations\n\nlike Portland and Oregon City, or Portland and Vancouver, WA.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-definition-2",
+    "href": "A0_graph.html#graph-definition-2",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nAn Amtrak is an ordered pair\nWe denote the two elements of the pair as:\n\nStations for train stations used by Amtrak passengers, and\nTrains which Amtrak passengers ride between stations.\n\n\nAmtrak = (Stations, Trains)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#nodes-vertices-or-v",
+    "href": "A0_graph.html#nodes-vertices-or-v",
+    "title": "Graphs",
+    "section": "Nodes, Vertices, or \\(V\\)",
+    "text": "Nodes, Vertices, or \\(V\\)\n\nLet us consider the “Amtrak Cascades”\nThe set of vertices is the set of stations:\n\n\n\n\n\n\n\n\n\n\n\nALBANY\nEVERETT\nPORTLAND\nTUKWILA\nEUGENE\n\n\nBELLINGHAM\nKELSO/LONGVIEW\nSALEM\nVANCOUVER BC\nOREGON CITY\n\n\nCENTRALIA\nMOUNT VERNON\nSEATTLE\nVANCOUVER WA\nTACOMA\n\n\nEDMONDS\nOLYMPIA/LACEY\nSTANWOOD",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#nodes-vertices-or-v-1",
+    "href": "A0_graph.html#nodes-vertices-or-v-1",
+    "title": "Graphs",
+    "section": "Nodes, Vertices, or \\(V\\)",
+    "text": "Nodes, Vertices, or \\(V\\)\n\nRestrict our example to the PDX&lt;-&gt;SEA 6x daily trains:\n\n\n\n\nCENTRALIA\nOLYMPIA/LACEY\nSEATTLE\nTUKWILA\n\n\nKELSO/LONGVIEW\nPORTLAND\nTACOMA\nVANCOUVER WA",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#edges-or-e",
+    "href": "A0_graph.html#edges-or-e",
+    "title": "Graphs",
+    "section": "Edges or \\(E\\)",
+    "text": "Edges or \\(E\\)\n\n\\(E\\) is a set of elements termed ‘edges’, ‘links’, or ‘lines’\n\nThe edges are pairs of vertices\nIn an undirected graph, edges are unordered pairs (sets of cardinality two)\nIn an directed graph, edges are ordered pairs (not subsets then)\nAmtrak is undirected, trains are directed.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#directionality",
+    "href": "A0_graph.html#directionality",
+    "title": "Graphs",
+    "section": "Directionality",
+    "text": "Directionality\n\nThe internet is directed.\n\nWe may use ‘curl’ to download files from a url, but going the other way (creating files at a url) is highly nontrivial.\n\nBox is directed.\n\nRecall, *b refers to the value in b = Box::new(x).\n**b does not refer to to b, rather, we would use Box::new() to go in the reverse direction.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#route",
+    "href": "A0_graph.html#route",
+    "title": "Graphs",
+    "section": "Route",
+    "text": "Route\n\nOrder north-to-south:\nSEATTLE\nTUKWILA\nTACOMA\nOLYMPIA/LACEY\nCENTRALIA\nKELSO/LONGVIEW\nVANCOUVER WA\nPORTLAND\nCentralia and Keslo/Longview is an edge.\nThe others, like Seattle and Tacoma, are not edges.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#edges-or-e-1",
+    "href": "A0_graph.html#edges-or-e-1",
+    "title": "Graphs",
+    "section": "Edges or \\(E\\)",
+    "text": "Edges or \\(E\\)\n\nOur edges are pairs of *adjacent- stations\nThere are 8 stations so there are 7 edges\n\n\n\n\n(SEATTLE, TUKWILA)\n(CENTRALIA, KELSO)\n\n\n(TUKWILA, TACOMA)\n(KELSO, VANCOUVER)\n\n\n(TACOMA, OLYMPIA)\n(VANCOUVER, PORTLAND)\n\n\n(OLYMPIA, CENTRALIA)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#notation",
+    "href": "A0_graph.html#notation",
+    "title": "Graphs",
+    "section": "Notation",
+    "text": "Notation\n\nI use tuple notion here, with parens, but it would be equally proper to use set notatation for an undirected graph.\nAlso I maintained geographic ordering (as a convenience) but it would be more proper to have no particular order since E is a set.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-definition-3",
+    "href": "A0_graph.html#graph-definition-3",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-exercise",
+    "href": "A0_graph.html#graph-exercise",
+    "title": "Graphs",
+    "section": "Graph: Exercise",
+    "text": "Graph: Exercise\n\nAmtrak recently added lines, including the Hiawatha, with service from Milwaukee to the world’s greatest city, Chicago.\n\nFrom the grandeur of Grant Park’s Buckingham Fountain to iconic museums and skyscrapers, see for yourself why Chicago was once dubbed “Paris on the Prairie.” Engage in retail therapy on the Magnificent Mile or root for the home team within the friendly confines of famed Wrigley Field.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#graph-exercise-1",
+    "href": "A0_graph.html#graph-exercise-1",
+    "title": "Graphs",
+    "section": "Graph: Exercise",
+    "text": "Graph: Exercise\n\nAs an exercise, construct the graph of the Hiawatha.\nThe route is described here and contains five stations.\nYou may use the three letter codes like “MKE” and “CHI”.\nAs a bonus: Write valid json.\n\nWeb tester.\nOr\n\nsudo apt install jq\njq &lt;name-of-file&gt;.json &gt;/dev/null # should show nothing",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#today-1",
+    "href": "A0_graph.html#today-1",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\nDAGs\nTrees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#definition",
+    "href": "A0_graph.html#definition",
+    "title": "Graphs",
+    "section": "Definition",
+    "text": "Definition\n\n\n\nA DAG is a “directed acyclic graph”.\nWe will define rigorously.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#cycles",
+    "href": "A0_graph.html#cycles",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\nE- is a set of pairs of elements of V*.\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closures",
+    "href": "A0_graph.html#closures",
+    "title": "Graphs",
+    "section": "Closures",
+    "text": "Closures\n\n“Transitive closures” are defined over homogenous binary relations, so we can take a “transitive closure” over edges.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#cartesian-product",
+    "href": "A0_graph.html#cartesian-product",
+    "title": "Graphs",
+    "section": "Cartesian product",
+    "text": "Cartesian product\n\nA relation \\(R\\) over a set \\(S\\) is a set of pairs of elements of \\(S\\)\n\nOr: a subset of the set of all pairs of elements",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#use-times",
+    "href": "A0_graph.html#use-times",
+    "title": "Graphs",
+    "section": "Use \\(\\times\\)",
+    "text": "Use \\(\\times\\)\n\nWe denote all pairs using a “Cartesian product”:\n\\(S \\times S\\) in LaTeX\n\nS \\times S\n\nS × S in HTML\n\n&lt;em&gt;S&lt;/em&gt; &times; &lt;em&gt;S&lt;/em&gt;",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#colors",
+    "href": "A0_graph.html#colors",
+    "title": "Graphs",
+    "section": "Colors",
+    "text": "Colors\n\nFor example, over the set of traffic light colors \\(C\\): \\[\nC = \\{ G, Y, R \\}\n\\]\nThe Cartesian product is all pairs:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nOrder matters.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#relation",
+    "href": "A0_graph.html#relation",
+    "title": "Graphs",
+    "section": "Relation",
+    "text": "Relation\n\nA relation R- over a set S- is a set of pairs of elements of S\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#properties",
+    "href": "A0_graph.html#properties",
+    "title": "Graphs",
+    "section": "Properties",
+    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,X) \\in L \\implies X = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall X \\in C, \\exists Y, Z \\in C : \\{ (X,Y), (Z,X) \\} \\subset L\n  \\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#this-gives",
+    "href": "A0_graph.html#this-gives",
+    "title": "Graphs",
+    "section": "This gives",
+    "text": "This gives\n\nThe relation then is \\[\nL = \\{ (G, Y), (Y, R), (R, G)\\}\n\\]\nWe not this is a subset of \\(C \\times C\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#notation-1",
+    "href": "A0_graph.html#notation-1",
+    "title": "Graphs",
+    "section": "Notation",
+    "text": "Notation\n\nVariety of ways to express this.\n\nFunction application\n\nL(G) = Y\n\nInfix notation\n\ngLy",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#matrix",
+    "href": "A0_graph.html#matrix",
+    "title": "Graphs",
+    "section": "Matrix",
+    "text": "Matrix\n\nStarting state on top, ending state on side\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)\nx\n\n\n\n\n\n\nAstute blah blah its 9 bits",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#rainbow",
+    "href": "A0_graph.html#rainbow",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nVs. traffic light, we can take “wavelength” where colors are sorted by something physics something optics help I don’t know this stuff.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#rainbow-1",
+    "href": "A0_graph.html#rainbow-1",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than *nothing- or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#rainbow-2",
+    "href": "A0_graph.html#rainbow-2",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nWe note that Rainbow \\(B\\) (\\(R\\) is taken) is also a binary relation.\nWe will explore its properties. \\[\nB \\subset C \\times C = \\{ (R,Y), (Y,G) \\}\n\\]\nWe additionally note that while \\(R\\) is immediately above \\(Y\\), it is *also- above \\(G\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#transitivitity",
+    "href": "A0_graph.html#transitivitity",
+    "title": "Graphs",
+    "section": "Transitivitity",
+    "text": "Transitivitity\n\nTransitivity is over relation \\(R\\) as follows.\n\n\\[\n((a, b) \\in R \\land (b, c) \\in R) \\implies (a, c) \\in R\n\\]\n\nFor us, that would be, \\[\n((R, Y) \\in B \\land (Y,G) \\in B) \\implies (R, G) \\in B\n\\]\nIn the rainbow case, this is true, \\(R\\) appears above \\(G\\) in the rainbow because \\(R\\) is above \\(Y\\) and \\(Y\\) is above \\(G\\).",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closure",
+    "href": "A0_graph.html#closure",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nOur initial relation was not transitive.\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)\n\n\n\n\n\n\n\nAs in the Amtrak case, we considered only adjacent elements as a convenience, but that doesn’t tell us if e.g. we can get from Seattle to Eugene.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closure-1",
+    "href": "A0_graph.html#closure-1",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nTo do that, we need to to preserve transitivity - and we do so using the notion of transitive closure\nA closure is an operation over sets, and in the case of binary relations, which are sets of pairs, is an operation over the relation itself, or the sets of pairs themselves (which are equivalent).",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closure-2",
+    "href": "A0_graph.html#closure-2",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure R⁺- of some relation R- must contain all elements of R.\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#superset-review",
+    "href": "A0_graph.html#superset-review",
+    "title": "Graphs",
+    "section": "Superset review",
+    "text": "Superset review\n\nThat means that for all pairs (of colors, for example) in the binary relation \\(R\\), each one of them is also in \\(R^+\\)\n\n\\[\n\\forall p \\in R, p \\in R^+\n\\]\n\\[\n\\forall x,y \\in S, (x,y) \\in R \\subset S \\times S \\implies (x,y) \\in R^+\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closure-3",
+    "href": "A0_graph.html#closure-3",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nThe transitive closure \\(R^+\\) of some relation \\(R\\) must be transitive.\nRecall:\n\n\\[\n((a, b) \\in R \\land (b, c) \\in R) \\implies (a, c) \\in R\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#discussion",
+    "href": "A0_graph.html#discussion",
+    "title": "Graphs",
+    "section": "Discussion",
+    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma- because we have SeattleAmtrakTukwila- and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia- because Amtrak- also contains TukwilaAmtrakOlympia",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#color-example",
+    "href": "A0_graph.html#color-example",
+    "title": "Graphs",
+    "section": "Color Example",
+    "text": "Color Example\n\nIf in rainbow relation \\(B\\) we find \\(R\\) is higher in the rainbow than \\(Y\\) and \\(Y\\) is higher in the rainbow than \\(G\\) then \\[\n\\{ (R,Y), (Y,G) \\} \\subseteq B\n\\]\nThe transitive closure adds at least one additional element. \\[\n\\{ (R,Y), (Y,G), (R,G) \\} \\subseteq B^+\n\\]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#closure-4",
+    "href": "A0_graph.html#closure-4",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nR⁺- must be the smallest possible relation for that is a transitive superset of R*.\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#a-note-on-graphs",
+    "href": "A0_graph.html#a-note-on-graphs",
+    "title": "Graphs",
+    "section": "A note on graphs",
+    "text": "A note on graphs\n\nBy the way those binary relations are graph edges between graph nodes (the elements of the original set).\nAnd by the way those edges are pointers.\nOkay keep going.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#cycles-1",
+    "href": "A0_graph.html#cycles-1",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\nWe use transitive closure to define cycles\n\nWe consider a graph \\(G\\)\n\n\n\\[\nG = (V, E) := \\{ \\{V\\}, \\{V,E\\}\\}\n\\]\n\nWe note that \\(E\\) is a homogenous binary relation over \\(V\\)\nTake \\(E^+\\) the transitive closure of \\(E\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#cycles-2",
+    "href": "A0_graph.html#cycles-2",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\n\\(G\\) contains a cycle (has the property of being cyclic) if \\(E^+\\) contains an edge from a node to itself.\n\n\\(\\text{Cyclic}(G = (V, E)) := \\exists v \\in V: \\{v, v\\} \\in E^+\\)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#note",
+    "href": "A0_graph.html#note",
+    "title": "Graphs",
+    "section": "Note",
+    "text": "Note\n\nCycles are defined to be non-trivial, which means they don’t contain “loops”, so an edge from a node to itself.\n\nWe don’t think about this with Amtrak because we don’t take a train from Portland to Portland",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#other-terms",
+    "href": "A0_graph.html#other-terms",
+    "title": "Graphs",
+    "section": "Other Terms",
+    "text": "Other Terms\n\nCircuits, walks, paths, and trails are also defined in graph theory and are related.\nDirect paths and undirected paths are, of course, distinct but intuitively so.\n\nCascades 503, a train which runs Seattle to Portland, has a Seattle to Tukwila edge but not a Tukwila to Seattle edge.\nThe Cascades route, which runs service between Vancouver, BC and Eugene, has both edges.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#dags-1",
+    "href": "A0_graph.html#dags-1",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\n\n\nA graph \\(G = (V,E)\\) is a directed, acyclic graph if:\n\nIt’s edges are directed, that is, \\(E\\) is a set of ordered pairs, and\nThe transitive closure of it’s edges \\(E^+\\) contains no identity pairs.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#dags-2",
+    "href": "A0_graph.html#dags-2",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nCascades 503 is a directed acyclic graph.\n\nIt has edges from all relative northern stations to all relative southern stations for all stations between Seattle and Portland inclusive.\n\nAmtrak Cascades is not a DAG\n\nIt is not directed - SLM-&gt;PDX or PDX-&gt;SLM\nIt contains cycles - PDX-&gt;SLM-&gt;PDX",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#dags-3",
+    "href": "A0_graph.html#dags-3",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nColor wavelength is a directed acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nR\n\nR\n\n\n\nY\n\nY\n\n\n\nR-&gt;Y\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nY-&gt;G",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#dags-4",
+    "href": "A0_graph.html#dags-4",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nA traffic light is not a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#dags-5",
+    "href": "A0_graph.html#dags-5",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nFriendship, via mutual enthusiastic consent, is a neither directed nor, necessarily, acyclic.\nFacebook is not a DAG.\n\n\n\n\n\n\n\n\nG\n\n\n\nn\n\nThelma\n\n\n\nm\n\nLouise\n\n\n\nn--m",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#bs-cs-dag",
+    "href": "A0_graph.html#bs-cs-dag",
+    "title": "Graphs",
+    "section": "BS CS DAG",
+    "text": "BS CS DAG",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#today-2",
+    "href": "A0_graph.html#today-2",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\n✓ DAGs\nTrees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#definition-1",
+    "href": "A0_graph.html#definition-1",
+    "title": "Graphs",
+    "section": "Definition",
+    "text": "Definition\n\nA tree is DAG where every node has at most one incoming edge.\n\n\\(\\exists\\) undirected trees but we do not consider them.\n\nA graph \\(G = (V, E)\\) is a tree if \\[\n\\forall v \\in V : |\\{(v',v) \\in E\\}| \\leq 1\n\\]\nFor all vertexes, the cardinality of the set of incoming edges is less than or equal to one.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#decision-trees",
+    "href": "A0_graph.html#decision-trees",
+    "title": "Graphs",
+    "section": "Decision Trees",
+    "text": "Decision Trees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#decision-trees-1",
+    "href": "A0_graph.html#decision-trees-1",
+    "title": "Graphs",
+    "section": "Decision Trees",
+    "text": "Decision Trees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#river-systems",
+    "href": "A0_graph.html#river-systems",
+    "title": "Graphs",
+    "section": "River Systems",
+    "text": "River Systems",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#data-structure",
+    "href": "A0_graph.html#data-structure",
+    "title": "Graphs",
+    "section": "Data Structure",
+    "text": "Data Structure",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#why-trees",
+    "href": "A0_graph.html#why-trees",
+    "title": "Graphs",
+    "section": "Why trees?",
+    "text": "Why trees?\n\nIf trying to store data, really only need one unique path to the data.\nIf trying to assure integrity of data with hashing, really only need to hash once.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#sample-tree",
+    "href": "A0_graph.html#sample-tree",
+    "title": "Graphs",
+    "section": "Sample Tree",
+    "text": "Sample Tree\n\nBy convention, given a directed edge \\((v,v')\\), vertex \\(v\\) is denoted the parent and vertex \\(v'\\) is denoted the child.\n\nstruct tree_struct {\n    void *data;\n    size_t num_children;\n    struct tree_struct *children;\n}",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#binary-tree",
+    "href": "A0_graph.html#binary-tree",
+    "title": "Graphs",
+    "section": "Binary Tree",
+    "text": "Binary Tree\n\nIn computing, we often use binary trees, which are equivalently expressive and have other nice properties.\nCommonly, the two children are referred to as “right” and “left”\n\nstruct binary_tree_struct {\n    void *data;\n    struct binary_tree_struct *left;\n    struct binary_tree_struct *rite;\n}",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#by-the-way",
+    "href": "A0_graph.html#by-the-way",
+    "title": "Graphs",
+    "section": "By The Way",
+    "text": "By The Way\n\nIt would have been fairly straightforward to implement stacks and queues using trees.\nJust why bother…\n\nMinimally, can use just the right or left side and you have a linked list.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#bst",
+    "href": "A0_graph.html#bst",
+    "title": "Graphs",
+    "section": "BST",
+    "text": "BST\n\nIn 100-level CS classes, students often implement a binary search tree.\nThese trees store lower values on lesser/left side.\nIt basically implements quicksort via structures.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#merkle",
+    "href": "A0_graph.html#merkle",
+    "title": "Graphs",
+    "section": "Merkle",
+    "text": "Merkle\n\nIn this class, we will do instead a Merkle tree or hash tree.\nMerkle trees are unsorted but they are verified.\n\nBuilding toward a verified version control system.\n\nIn a block, we then store the root, the ultimate ancestor of all nodes, and store the changes elsewhere.\nThis verifies the entire change tree.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#merkle-1",
+    "href": "A0_graph.html#merkle-1",
+    "title": "Graphs",
+    "section": "Merkle",
+    "text": "Merkle",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#tree-terms",
+    "href": "A0_graph.html#tree-terms",
+    "title": "Graphs",
+    "section": "Tree Terms",
+    "text": "Tree Terms\n\nConnected\nRoot\nLeaf\nParent\nChild\nHeight/depth\nSize",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#connected",
+    "href": "A0_graph.html#connected",
+    "title": "Graphs",
+    "section": "Connected",
+    "text": "Connected\n\nTrees are *connected-\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#root",
+    "href": "A0_graph.html#root",
+    "title": "Graphs",
+    "section": "Root",
+    "text": "Root\n\nThe root is the node which has a path to every other edge.\nIt is the “ancestor” of all nodes.\nOften in computing, we treat a descriptor or pointer to the root as a descriptor or pointer to the graph.\nA Bitcoin block contains a “Merkle root” of a transaction tree.",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#leaf",
+    "href": "A0_graph.html#leaf",
+    "title": "Graphs",
+    "section": "Leaf",
+    "text": "Leaf\n\nNot every node has outgoing edges.\nWe refer to nodes without such edges as leafs (leaves?)",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#diagram",
+    "href": "A0_graph.html#diagram",
+    "title": "Graphs",
+    "section": "Diagram",
+    "text": "Diagram\n\n\n\n2 is the root\n{2, 10, 5, 11, 4} are lea[fs/ves]",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#parentchild",
+    "href": "A0_graph.html#parentchild",
+    "title": "Graphs",
+    "section": "Parent/Child",
+    "text": "Parent/Child\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nParent\n\nParent\n\n\n\nChild\n\nChild\n\n\n\nParent-&gt;Child",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#heightdepth",
+    "href": "A0_graph.html#heightdepth",
+    "title": "Graphs",
+    "section": "Height/Depth",
+    "text": "Height/Depth\n\n\n\nThe height or depth of a tree is the maximum number of edges from some root to a leaf.\nFor this tree it is 3\n\nlen(((5,3),(3,2),(2,1)))\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#height",
+    "href": "A0_graph.html#height",
+    "title": "Graphs",
+    "section": "Height",
+    "text": "Height\n\n\n\nThe height of a *node- is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#depth",
+    "href": "A0_graph.html#depth",
+    "title": "Graphs",
+    "section": "Depth",
+    "text": "Depth\n\n\n\nThe depth of a *node- is what the height of the subtree of which it is the lowest leaf would be.\nThe node labelled 4 is of depth 2.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#size",
+    "href": "A0_graph.html#size",
+    "title": "Graphs",
+    "section": "Size",
+    "text": "Size\n\n\n\nThe size is generally taken to be the number of nodes.\n\nIt is separately, useful, sometimes, to count only lea[fs/ves].\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.html#today-3",
+    "href": "A0_graph.html#today-3",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\n✓ DAGs\n✓ Trees",
+    "crumbs": [
+      "Graphs"
+    ]
+  },
+  {
+    "objectID": "A0_graph.rjs.html#announcements",
+    "href": "A0_graph.rjs.html#announcements",
+    "title": "Graphs",
+    "section": "Announcements",
+    "text": "Announcements\n\nWelcome to Systems in Rust\nAction Items:\n\nKeep at traits\nGraph theory."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#today",
+    "href": "A0_graph.rjs.html#today",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\nGraphs\n\nDAGs\nTrees"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#n-ary-trees",
+    "href": "A0_graph.rjs.html#n-ary-trees",
+    "title": "Graphs",
+    "section": "\\(n\\)-ary Trees",
+    "text": "\\(n\\)-ary Trees\n\nA tree is a type of graph.\nA graph is a pair of\n\nA set of “nodes” or “vertices” (or “vertexes”)\nA set of “edges” which are pairs of nodes\n\nThey may be ordered pairs or not."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graphs-1",
+    "href": "A0_graph.rjs.html#graphs-1",
+    "title": "Graphs",
+    "section": "Graphs",
+    "text": "Graphs\n\nThere are many ways to understand graphs, but I actually think graph theory is quite accessible.\nI think it’s also easier when using a running example.\nI will also use a running example, Amtrak 🚄\n\nOr perhaps… a training example?\nI am running… a train??????\nI am training… to run?????"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#amtrak",
+    "href": "A0_graph.rjs.html#amtrak",
+    "title": "Graphs",
+    "section": "Amtrak 🚄",
+    "text": "Amtrak 🚄"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-definition",
+    "href": "A0_graph.rjs.html#graph-definition",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nA graph is an ordered pair.\n\nThat is: two things, in a fixed order.\nCan be thought of as a sequence of length 2\na = \"one thing\"\nb = \"another thing\"\nordered_pair = [a,b]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#not-sets",
+    "href": "A0_graph.rjs.html#not-sets",
+    "title": "Graphs",
+    "section": "Not Sets",
+    "text": "Not Sets\n\nA graph is not a set:\n\n&gt;&gt;&gt; [a,b][0]\n'one thing'\n&gt;&gt;&gt; {a,b}[0]\n&lt;stdin&gt;:1: SyntaxWarning: 'set' object is not subscriptable; perhaps you missed a comma?\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nTypeError: 'set' object is not subscriptable\n\nI just set them up just to knock them down."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#aside-pairs",
+    "href": "A0_graph.rjs.html#aside-pairs",
+    "title": "Graphs",
+    "section": "Aside: Pairs",
+    "text": "Aside: Pairs\n\nTake a number plane (click):\n\n\ny=2\n\n\nx=-2 \n\n\n x=2\n\ny=2"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#aside-pairs-1",
+    "href": "A0_graph.rjs.html#aside-pairs-1",
+    "title": "Graphs",
+    "section": "Aside: Pairs",
+    "text": "Aside: Pairs\n\nDenote ordered pair (.5,1.5) in red.\n\n\ny=2\n\n\nx=-2 \n\n\n x=2\n\ny=2"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#pair-definition",
+    "href": "A0_graph.rjs.html#pair-definition",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\nWe construct pairs from sets.\n\nAn ordered pair is a set of cardinality two. (2 elements)\nOne element of the set is a set of cardinality one. (1 element)\nThe other element of the set is a set of cardinality two (2 elements)\nThe element of the set of cardinality one is one of the two elements of the set of cardinality two."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#pair-definition-1",
+    "href": "A0_graph.rjs.html#pair-definition-1",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\nThe element of both sets is regarded as the first element.\nPython fails - Python sets aren’t formal sets:\n\n&gt;&gt;&gt; [a,b] ## ordered pair\n['one thing', 'another thing']\n&gt;&gt;&gt; {{a},{a,b}} ## ordered pair with sets\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nTypeError: unhashable type: 'set'\n&gt;&gt;&gt;\n\nBut this is an implementation hurdle, and not a logical one."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#pair-definition-2",
+    "href": "A0_graph.rjs.html#pair-definition-2",
+    "title": "Graphs",
+    "section": "Pair: Definition",
+    "text": "Pair: Definition\n\n\n\n\n\n\nOrdered Pair\n\n\nAn ordered pair is a set of two elements, a set containing the head element of the pair, and a set containing both elements of the pair.\n\n\n\n(a, b) := p : { {a} , {a, b} }"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#head",
+    "href": "A0_graph.rjs.html#head",
+    "title": "Graphs",
+    "section": "“Head”",
+    "text": "“Head”\n\nExtract the head item by taking the intersection of all of the elements of p\n\nI denote this ‘Head(p)’\n\n\n\\[\n\\begin{align*}\n\\text{Head}(p) &:= x : x \\in \\bigcap p \\\\\n\\text{Head}(p) &:= x : \\forall Y \\in p : x \\in Y\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#tail",
+    "href": "A0_graph.rjs.html#tail",
+    "title": "Graphs",
+    "section": "“Tail”",
+    "text": "“Tail”\n\nThe tail is the sole element of the union that is not an element of the intersection, with the caveat that we do not consider the case in which the head and tail differ\n\nI denote this ‘Tail(p)’\n\n\n\\[\n\\begin{align*}\n\\text{Tail}(p) &:= x : x \\in \\bigcup p \\setminus \\bigcap p \\\\\n\\text{Tail}(p) &:= x : \\exists Y_1, Y_2 \\in p : x \\in Y_1 \\land x \\notin Y_2\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-definition-1",
+    "href": "A0_graph.rjs.html#graph-definition-1",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nA graph is an ordered pair \\(G\\)\nWe denote the two elements of the pair as:\n\n\\(V\\) for vertices\n\\(E\\) for edges \\[\nG = (V, E) := \\{ \\{V\\}, \\{V,E\\}\\}\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#in-amtrak",
+    "href": "A0_graph.rjs.html#in-amtrak",
+    "title": "Graphs",
+    "section": "In Amtrak",
+    "text": "In Amtrak\n\n\\(V\\), the vertices or nodes, stations or stops or cities,\n\nlike Portland and Seattle, or\nlike Kings St Station and Central Station\n\n\\(E\\), the edges, are the connections to adjacent stations\n\nlike Portland and Oregon City, or Portland and Vancouver, WA."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-definition-2",
+    "href": "A0_graph.rjs.html#graph-definition-2",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nAn Amtrak is an ordered pair\nWe denote the two elements of the pair as:\n\nStations for train stations used by Amtrak passengers, and\nTrains which Amtrak passengers ride between stations.\n\n\nAmtrak = (Stations, Trains)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#nodes-vertices-or-v",
+    "href": "A0_graph.rjs.html#nodes-vertices-or-v",
+    "title": "Graphs",
+    "section": "Nodes, Vertices, or \\(V\\)",
+    "text": "Nodes, Vertices, or \\(V\\)\n\nLet us consider the “Amtrak Cascades”\nThe set of vertices is the set of stations:\n\n\n\n\n\n\n\n\n\n\n\nALBANY\nEVERETT\nPORTLAND\nTUKWILA\nEUGENE\n\n\nBELLINGHAM\nKELSO/LONGVIEW\nSALEM\nVANCOUVER BC\nOREGON CITY\n\n\nCENTRALIA\nMOUNT VERNON\nSEATTLE\nVANCOUVER WA\nTACOMA\n\n\nEDMONDS\nOLYMPIA/LACEY\nSTANWOOD"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#nodes-vertices-or-v-1",
+    "href": "A0_graph.rjs.html#nodes-vertices-or-v-1",
+    "title": "Graphs",
+    "section": "Nodes, Vertices, or \\(V\\)",
+    "text": "Nodes, Vertices, or \\(V\\)\n\nRestrict our example to the PDX&lt;-&gt;SEA 6x daily trains:\n\n\n\n\nCENTRALIA\nOLYMPIA/LACEY\nSEATTLE\nTUKWILA\n\n\nKELSO/LONGVIEW\nPORTLAND\nTACOMA\nVANCOUVER WA"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#edges-or-e",
+    "href": "A0_graph.rjs.html#edges-or-e",
+    "title": "Graphs",
+    "section": "Edges or \\(E\\)",
+    "text": "Edges or \\(E\\)\n\n\\(E\\) is a set of elements termed ‘edges’, ‘links’, or ‘lines’\n\nThe edges are pairs of vertices\nIn an undirected graph, edges are unordered pairs (sets of cardinality two)\nIn an directed graph, edges are ordered pairs (not subsets then)\nAmtrak is undirected, trains are directed."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#directionality",
+    "href": "A0_graph.rjs.html#directionality",
+    "title": "Graphs",
+    "section": "Directionality",
+    "text": "Directionality\n\nThe internet is directed.\n\nWe may use ‘curl’ to download files from a url, but going the other way (creating files at a url) is highly nontrivial.\n\nBox is directed.\n\nRecall, *b refers to the value in b = Box::new(x).\n**b does not refer to to b, rather, we would use Box::new() to go in the reverse direction."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#route",
+    "href": "A0_graph.rjs.html#route",
+    "title": "Graphs",
+    "section": "Route",
+    "text": "Route\n\nOrder north-to-south:\nSEATTLE\nTUKWILA\nTACOMA\nOLYMPIA/LACEY\nCENTRALIA\nKELSO/LONGVIEW\nVANCOUVER WA\nPORTLAND\nCentralia and Keslo/Longview is an edge.\nThe others, like Seattle and Tacoma, are not edges."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#edges-or-e-1",
+    "href": "A0_graph.rjs.html#edges-or-e-1",
+    "title": "Graphs",
+    "section": "Edges or \\(E\\)",
+    "text": "Edges or \\(E\\)\n\nOur edges are pairs of *adjacent- stations\nThere are 8 stations so there are 7 edges\n\n\n\n\n(SEATTLE, TUKWILA)\n(CENTRALIA, KELSO)\n\n\n(TUKWILA, TACOMA)\n(KELSO, VANCOUVER)\n\n\n(TACOMA, OLYMPIA)\n(VANCOUVER, PORTLAND)\n\n\n(OLYMPIA, CENTRALIA)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#notation",
+    "href": "A0_graph.rjs.html#notation",
+    "title": "Graphs",
+    "section": "Notation",
+    "text": "Notation\n\nI use tuple notion here, with parens, but it would be equally proper to use set notatation for an undirected graph.\nAlso I maintained geographic ordering (as a convenience) but it would be more proper to have no particular order since E is a set."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-definition-3",
+    "href": "A0_graph.rjs.html#graph-definition-3",
+    "title": "Graphs",
+    "section": "Graph: Definition",
+    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-exercise",
+    "href": "A0_graph.rjs.html#graph-exercise",
+    "title": "Graphs",
+    "section": "Graph: Exercise",
+    "text": "Graph: Exercise\n\nAmtrak recently added lines, including the Hiawatha, with service from Milwaukee to the world’s greatest city, Chicago.\n\nFrom the grandeur of Grant Park’s Buckingham Fountain to iconic museums and skyscrapers, see for yourself why Chicago was once dubbed “Paris on the Prairie.” Engage in retail therapy on the Magnificent Mile or root for the home team within the friendly confines of famed Wrigley Field."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#graph-exercise-1",
+    "href": "A0_graph.rjs.html#graph-exercise-1",
+    "title": "Graphs",
+    "section": "Graph: Exercise",
+    "text": "Graph: Exercise\n\nAs an exercise, construct the graph of the Hiawatha.\nThe route is described here and contains five stations.\nYou may use the three letter codes like “MKE” and “CHI”.\nAs a bonus: Write valid json.\n\nWeb tester.\nOr\n\nsudo apt install jq\njq &lt;name-of-file&gt;.json &gt;/dev/null # should show nothing"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#today-1",
+    "href": "A0_graph.rjs.html#today-1",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\nDAGs\nTrees"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#definition",
+    "href": "A0_graph.rjs.html#definition",
+    "title": "Graphs",
+    "section": "Definition",
+    "text": "Definition\n\n\n\nA DAG is a “directed acyclic graph”.\nWe will define rigorously."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#cycles",
+    "href": "A0_graph.rjs.html#cycles",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\nE- is a set of pairs of elements of V*.\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closures",
+    "href": "A0_graph.rjs.html#closures",
+    "title": "Graphs",
+    "section": "Closures",
+    "text": "Closures\n\n“Transitive closures” are defined over homogenous binary relations, so we can take a “transitive closure” over edges."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#cartesian-product",
+    "href": "A0_graph.rjs.html#cartesian-product",
+    "title": "Graphs",
+    "section": "Cartesian product",
+    "text": "Cartesian product\n\nA relation \\(R\\) over a set \\(S\\) is a set of pairs of elements of \\(S\\)\n\nOr: a subset of the set of all pairs of elements"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#use-times",
+    "href": "A0_graph.rjs.html#use-times",
+    "title": "Graphs",
+    "section": "Use \\(\\times\\)",
+    "text": "Use \\(\\times\\)\n\nWe denote all pairs using a “Cartesian product”:\n\\(S \\times S\\) in LaTeX\n\nS \\times S\n\nS × S in HTML\n\n&lt;em&gt;S&lt;/em&gt; &times; &lt;em&gt;S&lt;/em&gt;"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#colors",
+    "href": "A0_graph.rjs.html#colors",
+    "title": "Graphs",
+    "section": "Colors",
+    "text": "Colors\n\nFor example, over the set of traffic light colors \\(C\\): \\[\nC = \\{ G, Y, R \\}\n\\]\nThe Cartesian product is all pairs:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nOrder matters."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#relation",
+    "href": "A0_graph.rjs.html#relation",
+    "title": "Graphs",
+    "section": "Relation",
+    "text": "Relation\n\nA relation R- over a set S- is a set of pairs of elements of S\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#properties",
+    "href": "A0_graph.rjs.html#properties",
+    "title": "Graphs",
+    "section": "Properties",
+    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,X) \\in L \\implies X = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall X \\in C, \\exists Y, Z \\in C : \\{ (X,Y), (Z,X) \\} \\subset L\n  \\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#this-gives",
+    "href": "A0_graph.rjs.html#this-gives",
+    "title": "Graphs",
+    "section": "This gives",
+    "text": "This gives\n\nThe relation then is \\[\nL = \\{ (G, Y), (Y, R), (R, G)\\}\n\\]\nWe not this is a subset of \\(C \\times C\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#notation-1",
+    "href": "A0_graph.rjs.html#notation-1",
+    "title": "Graphs",
+    "section": "Notation",
+    "text": "Notation\n\nVariety of ways to express this.\n\nFunction application\n\nL(G) = Y\n\nInfix notation\n\ngLy"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#matrix",
+    "href": "A0_graph.rjs.html#matrix",
+    "title": "Graphs",
+    "section": "Matrix",
+    "text": "Matrix\n\nStarting state on top, ending state on side\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)\nx\n\n\n\n\n\n\nAstute blah blah its 9 bits"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#rainbow",
+    "href": "A0_graph.rjs.html#rainbow",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nVs. traffic light, we can take “wavelength” where colors are sorted by something physics something optics help I don’t know this stuff."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#rainbow-1",
+    "href": "A0_graph.rjs.html#rainbow-1",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than *nothing- or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#rainbow-2",
+    "href": "A0_graph.rjs.html#rainbow-2",
+    "title": "Graphs",
+    "section": "Rainbow",
+    "text": "Rainbow\n\nWe note that Rainbow \\(B\\) (\\(R\\) is taken) is also a binary relation.\nWe will explore its properties. \\[\nB \\subset C \\times C = \\{ (R,Y), (Y,G) \\}\n\\]\nWe additionally note that while \\(R\\) is immediately above \\(Y\\), it is *also- above \\(G\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#transitivitity",
+    "href": "A0_graph.rjs.html#transitivitity",
+    "title": "Graphs",
+    "section": "Transitivitity",
+    "text": "Transitivitity\n\nTransitivity is over relation \\(R\\) as follows.\n\n\\[\n((a, b) \\in R \\land (b, c) \\in R) \\implies (a, c) \\in R\n\\]\n\nFor us, that would be, \\[\n((R, Y) \\in B \\land (Y,G) \\in B) \\implies (R, G) \\in B\n\\]\nIn the rainbow case, this is true, \\(R\\) appears above \\(G\\) in the rainbow because \\(R\\) is above \\(Y\\) and \\(Y\\) is above \\(G\\)."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closure",
+    "href": "A0_graph.rjs.html#closure",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nOur initial relation was not transitive.\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)\n\n\n\n\n\n\n\nAs in the Amtrak case, we considered only adjacent elements as a convenience, but that doesn’t tell us if e.g. we can get from Seattle to Eugene."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closure-1",
+    "href": "A0_graph.rjs.html#closure-1",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nTo do that, we need to to preserve transitivity - and we do so using the notion of transitive closure\nA closure is an operation over sets, and in the case of binary relations, which are sets of pairs, is an operation over the relation itself, or the sets of pairs themselves (which are equivalent)."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closure-2",
+    "href": "A0_graph.rjs.html#closure-2",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure R⁺- of some relation R- must contain all elements of R.\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#superset-review",
+    "href": "A0_graph.rjs.html#superset-review",
+    "title": "Graphs",
+    "section": "Superset review",
+    "text": "Superset review\n\nThat means that for all pairs (of colors, for example) in the binary relation \\(R\\), each one of them is also in \\(R^+\\)\n\n\\[\n\\forall p \\in R, p \\in R^+\n\\]\n\\[\n\\forall x,y \\in S, (x,y) \\in R \\subset S \\times S \\implies (x,y) \\in R^+\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closure-3",
+    "href": "A0_graph.rjs.html#closure-3",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nThe transitive closure \\(R^+\\) of some relation \\(R\\) must be transitive.\nRecall:\n\n\\[\n((a, b) \\in R \\land (b, c) \\in R) \\implies (a, c) \\in R\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#discussion",
+    "href": "A0_graph.rjs.html#discussion",
+    "title": "Graphs",
+    "section": "Discussion",
+    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma- because we have SeattleAmtrakTukwila- and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia- because Amtrak- also contains TukwilaAmtrakOlympia"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#color-example",
+    "href": "A0_graph.rjs.html#color-example",
+    "title": "Graphs",
+    "section": "Color Example",
+    "text": "Color Example\n\nIf in rainbow relation \\(B\\) we find \\(R\\) is higher in the rainbow than \\(Y\\) and \\(Y\\) is higher in the rainbow than \\(G\\) then \\[\n\\{ (R,Y), (Y,G) \\} \\subseteq B\n\\]\nThe transitive closure adds at least one additional element. \\[\n\\{ (R,Y), (Y,G), (R,G) \\} \\subseteq B^+\n\\]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#closure-4",
+    "href": "A0_graph.rjs.html#closure-4",
+    "title": "Graphs",
+    "section": "Closure",
+    "text": "Closure\n\nR⁺- must be the smallest possible relation for that is a transitive superset of R*.\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#a-note-on-graphs",
+    "href": "A0_graph.rjs.html#a-note-on-graphs",
+    "title": "Graphs",
+    "section": "A note on graphs",
+    "text": "A note on graphs\n\nBy the way those binary relations are graph edges between graph nodes (the elements of the original set).\nAnd by the way those edges are pointers.\nOkay keep going."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#cycles-1",
+    "href": "A0_graph.rjs.html#cycles-1",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\nWe use transitive closure to define cycles\n\nWe consider a graph \\(G\\)\n\n\n\\[\nG = (V, E) := \\{ \\{V\\}, \\{V,E\\}\\}\n\\]\n\nWe note that \\(E\\) is a homogenous binary relation over \\(V\\)\nTake \\(E^+\\) the transitive closure of \\(E\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#cycles-2",
+    "href": "A0_graph.rjs.html#cycles-2",
+    "title": "Graphs",
+    "section": "Cycles",
+    "text": "Cycles\n\n\\(G\\) contains a cycle (has the property of being cyclic) if \\(E^+\\) contains an edge from a node to itself.\n\n\\(\\text{Cyclic}(G = (V, E)) := \\exists v \\in V: \\{v, v\\} \\in E^+\\)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#note",
+    "href": "A0_graph.rjs.html#note",
+    "title": "Graphs",
+    "section": "Note",
+    "text": "Note\n\nCycles are defined to be non-trivial, which means they don’t contain “loops”, so an edge from a node to itself.\n\nWe don’t think about this with Amtrak because we don’t take a train from Portland to Portland"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#other-terms",
+    "href": "A0_graph.rjs.html#other-terms",
+    "title": "Graphs",
+    "section": "Other Terms",
+    "text": "Other Terms\n\nCircuits, walks, paths, and trails are also defined in graph theory and are related.\nDirect paths and undirected paths are, of course, distinct but intuitively so.\n\nCascades 503, a train which runs Seattle to Portland, has a Seattle to Tukwila edge but not a Tukwila to Seattle edge.\nThe Cascades route, which runs service between Vancouver, BC and Eugene, has both edges."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#dags-1",
+    "href": "A0_graph.rjs.html#dags-1",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\n\n\nA graph \\(G = (V,E)\\) is a directed, acyclic graph if:\n\nIt’s edges are directed, that is, \\(E\\) is a set of ordered pairs, and\nThe transitive closure of it’s edges \\(E^+\\) contains no identity pairs."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#dags-2",
+    "href": "A0_graph.rjs.html#dags-2",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nCascades 503 is a directed acyclic graph.\n\nIt has edges from all relative northern stations to all relative southern stations for all stations between Seattle and Portland inclusive.\n\nAmtrak Cascades is not a DAG\n\nIt is not directed - SLM-&gt;PDX or PDX-&gt;SLM\nIt contains cycles - PDX-&gt;SLM-&gt;PDX"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#dags-3",
+    "href": "A0_graph.rjs.html#dags-3",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nColor wavelength is a directed acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nR\n\nR\n\n\n\nY\n\nY\n\n\n\nR-&gt;Y\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nY-&gt;G"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#dags-4",
+    "href": "A0_graph.rjs.html#dags-4",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nA traffic light is not a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#dags-5",
+    "href": "A0_graph.rjs.html#dags-5",
+    "title": "Graphs",
+    "section": "DAGs",
+    "text": "DAGs\n\nFriendship, via mutual enthusiastic consent, is a neither directed nor, necessarily, acyclic.\nFacebook is not a DAG.\n\n\n\n\n\n\n\n\nG\n\n\n\nn\n\nThelma\n\n\n\nm\n\nLouise\n\n\n\nn--m"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#bs-cs-dag",
+    "href": "A0_graph.rjs.html#bs-cs-dag",
+    "title": "Graphs",
+    "section": "BS CS DAG",
+    "text": "BS CS DAG"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#today-2",
+    "href": "A0_graph.rjs.html#today-2",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\n✓ DAGs\nTrees"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#definition-1",
+    "href": "A0_graph.rjs.html#definition-1",
+    "title": "Graphs",
+    "section": "Definition",
+    "text": "Definition\n\nA tree is DAG where every node has at most one incoming edge.\n\n\\(\\exists\\) undirected trees but we do not consider them.\n\nA graph \\(G = (V, E)\\) is a tree if \\[\n\\forall v \\in V : |\\{(v',v) \\in E\\}| \\leq 1\n\\]\nFor all vertexes, the cardinality of the set of incoming edges is less than or equal to one."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#decision-trees",
+    "href": "A0_graph.rjs.html#decision-trees",
+    "title": "Graphs",
+    "section": "Decision Trees",
+    "text": "Decision Trees"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#decision-trees-1",
+    "href": "A0_graph.rjs.html#decision-trees-1",
+    "title": "Graphs",
+    "section": "Decision Trees",
+    "text": "Decision Trees"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#river-systems",
+    "href": "A0_graph.rjs.html#river-systems",
+    "title": "Graphs",
+    "section": "River Systems",
+    "text": "River Systems"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#data-structure",
+    "href": "A0_graph.rjs.html#data-structure",
+    "title": "Graphs",
+    "section": "Data Structure",
+    "text": "Data Structure"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#why-trees",
+    "href": "A0_graph.rjs.html#why-trees",
+    "title": "Graphs",
+    "section": "Why trees?",
+    "text": "Why trees?\n\nIf trying to store data, really only need one unique path to the data.\nIf trying to assure integrity of data with hashing, really only need to hash once."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#sample-tree",
+    "href": "A0_graph.rjs.html#sample-tree",
+    "title": "Graphs",
+    "section": "Sample Tree",
+    "text": "Sample Tree\n\nBy convention, given a directed edge \\((v,v')\\), vertex \\(v\\) is denoted the parent and vertex \\(v'\\) is denoted the child.\n\nstruct tree_struct {\n    void *data;\n    size_t num_children;\n    struct tree_struct *children;\n}"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#binary-tree",
+    "href": "A0_graph.rjs.html#binary-tree",
+    "title": "Graphs",
+    "section": "Binary Tree",
+    "text": "Binary Tree\n\nIn computing, we often use binary trees, which are equivalently expressive and have other nice properties.\nCommonly, the two children are referred to as “right” and “left”\n\nstruct binary_tree_struct {\n    void *data;\n    struct binary_tree_struct *left;\n    struct binary_tree_struct *rite;\n}"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#by-the-way",
+    "href": "A0_graph.rjs.html#by-the-way",
+    "title": "Graphs",
+    "section": "By The Way",
+    "text": "By The Way\n\nIt would have been fairly straightforward to implement stacks and queues using trees.\nJust why bother…\n\nMinimally, can use just the right or left side and you have a linked list."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#bst",
+    "href": "A0_graph.rjs.html#bst",
+    "title": "Graphs",
+    "section": "BST",
+    "text": "BST\n\nIn 100-level CS classes, students often implement a binary search tree.\nThese trees store lower values on lesser/left side.\nIt basically implements quicksort via structures."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#merkle",
+    "href": "A0_graph.rjs.html#merkle",
+    "title": "Graphs",
+    "section": "Merkle",
+    "text": "Merkle\n\nIn this class, we will do instead a Merkle tree or hash tree.\nMerkle trees are unsorted but they are verified.\n\nBuilding toward a verified version control system.\n\nIn a block, we then store the root, the ultimate ancestor of all nodes, and store the changes elsewhere.\nThis verifies the entire change tree."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#merkle-1",
+    "href": "A0_graph.rjs.html#merkle-1",
+    "title": "Graphs",
+    "section": "Merkle",
+    "text": "Merkle"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#tree-terms",
+    "href": "A0_graph.rjs.html#tree-terms",
+    "title": "Graphs",
+    "section": "Tree Terms",
+    "text": "Tree Terms\n\nConnected\nRoot\nLeaf\nParent\nChild\nHeight/depth\nSize"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#connected",
+    "href": "A0_graph.rjs.html#connected",
+    "title": "Graphs",
+    "section": "Connected",
+    "text": "Connected\n\nTrees are *connected-\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#root",
+    "href": "A0_graph.rjs.html#root",
+    "title": "Graphs",
+    "section": "Root",
+    "text": "Root\n\nThe root is the node which has a path to every other edge.\nIt is the “ancestor” of all nodes.\nOften in computing, we treat a descriptor or pointer to the root as a descriptor or pointer to the graph.\nA Bitcoin block contains a “Merkle root” of a transaction tree."
+  },
+  {
+    "objectID": "A0_graph.rjs.html#leaf",
+    "href": "A0_graph.rjs.html#leaf",
+    "title": "Graphs",
+    "section": "Leaf",
+    "text": "Leaf\n\nNot every node has outgoing edges.\nWe refer to nodes without such edges as leafs (leaves?)"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#diagram",
+    "href": "A0_graph.rjs.html#diagram",
+    "title": "Graphs",
+    "section": "Diagram",
+    "text": "Diagram\n\n\n\n2 is the root\n{2, 10, 5, 11, 4} are lea[fs/ves]"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#parentchild",
+    "href": "A0_graph.rjs.html#parentchild",
+    "title": "Graphs",
+    "section": "Parent/Child",
+    "text": "Parent/Child\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nParent\n\nParent\n\n\n\nChild\n\nChild\n\n\n\nParent-&gt;Child"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#heightdepth",
+    "href": "A0_graph.rjs.html#heightdepth",
+    "title": "Graphs",
+    "section": "Height/Depth",
+    "text": "Height/Depth\n\n\n\nThe height or depth of a tree is the maximum number of edges from some root to a leaf.\nFor this tree it is 3\n\nlen(((5,3),(3,2),(2,1)))\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#height",
+    "href": "A0_graph.rjs.html#height",
+    "title": "Graphs",
+    "section": "Height",
+    "text": "Height\n\n\n\nThe height of a *node- is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#depth",
+    "href": "A0_graph.rjs.html#depth",
+    "title": "Graphs",
+    "section": "Depth",
+    "text": "Depth\n\n\n\nThe depth of a *node- is what the height of the subtree of which it is the lowest leaf would be.\nThe node labelled 4 is of depth 2.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#size",
+    "href": "A0_graph.rjs.html#size",
+    "title": "Graphs",
+    "section": "Size",
+    "text": "Size\n\n\n\nThe size is generally taken to be the number of nodes.\n\nIt is separately, useful, sometimes, to count only lea[fs/ves].\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n5\n\n5\n\n\n\n3\n\n3\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1"
+  },
+  {
+    "objectID": "A0_graph.rjs.html#today-3",
+    "href": "A0_graph.rjs.html#today-3",
+    "title": "Graphs",
+    "section": "Today",
+    "text": "Today\n\n✓ Graphs\n\n✓ DAGs\n✓ Trees"
   },
   {
     "objectID": "91_box.html",
@@ -11008,6 +12480,16 @@
     "text": "Starter Code\n\nsrc/main.rs\n\nI am providing a fairly enormous testing script via Gist.\n\n\n\n\u0016\n\n\nI have removed dbg!() calls and simply check popped values.\n\n\n\nFin\n$ wc src/lib.rs\n 104  296 2484 src/lib.rs",
     "crumbs": [
       "Traits"
+    ]
+  },
+  {
+    "objectID": "A1_dag.html",
+    "href": "A1_dag.html",
+    "title": "DAG",
+    "section": "",
+    "text": "Preamble\nYou know what a DAG is. Now make one in Rust.\n\nImplement a relatively non-trivial graph.\nReview Rust Box to create a recursive data structure.\nReview how to maintain references.\nReview the CS major requirements.\n\n\n\n\n\n\n\nReview: Box\n\n\n\n\nTo put some x in a Box, simply:\n\nlet x = String::from(\"I'm a capital-S String.\");\nlet b = Box::new(x);\n\nTo remove x from the `Box, simply use the special “unary asterisk” operator, also called “dereference”.\n\nlet s : String = *b;",
+    "crumbs": [
+      "DAG"
     ]
   }
 ]
