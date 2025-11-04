@@ -852,7 +852,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <span id="cb6-37"><a></a>      <span class="ot">]</span></span>
 <span id="cb6-38"><a></a>    <span class="ot">]</span></span>
 <span id="cb6-39"><a></a>  <span class="fu">}</span></span>
-<span id="cb6-40"><a></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-40"><a></a><span class="fu">}</span><span class="er">https://askubuntu.com/a/1473153</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="graph-exercise" class="slide level2">
 <h2>Graph: Exercise</h2>
@@ -908,7 +908,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="cycles" class="slide level2">
 <h2>Cycles</h2>
 <ul>
-<li><em>E- is a set of pairs of elements of </em>V*.</li>
+<li><span class="math inline">\(E\)</span> is a set of pairs of elements of <span class="math inline">\(V\)</span>.</li>
 <li>We can think of edges in a graph as a homogenous binary relation.
 <ul>
 <li>Homogenous: From a set (the set of vertices) to itself.</li>
@@ -962,7 +962,7 @@ C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
 <section id="relation" class="slide level2">
 <h2>Relation</h2>
 <ul>
-<li>A relation <em>R- over a set </em>S- is a set of pairs of elements of <em>S</em>
+<li>A relation <span class="math inline">\(R\)</span> over a set <span class="math inline">\(S\)</span> is a set of pairs of elements of <span class="math inline">\(S\)</span>
 <ul>
 <li>Or: a subset of the set of all pairs of elements in is transitive</li>
 </ul></li>
@@ -981,10 +981,10 @@ C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
 <li>Construct <span class="math inline">\(L\)</span>, the traffic light relation
 <ul>
 <li>No red without prior yellow <span class="math display">\[
-  (Y,X) \in L \implies X = R
+  (Y,x) \in L \implies x = R
   \]</span></li>
 <li>All colors must appear in both positions <span class="math display">\[
-  \forall X \in C, \exists Y, Z \in C : \{ (X,Y), (Z,X) \} \subset L
+  \forall x \in C, \exists y, z \in C : \{ (x,y), (z,x) \} \subset L
   \]</span></li>
 </ul></li>
 </ul>
@@ -1065,7 +1065,7 @@ L = \{ (G, Y), (Y, R), (R, G)\}
 <ul>
 <li>We note red is higher than yellow which is higher than green.
 <ul>
-<li>Green is higher than *nothing- or <span class="math inline">\(\varnothing\)</span></li>
+<li>Green is higher than <em>nothing</em> or <span class="math inline">\(\varnothing\)</span></li>
 </ul></li>
 </ul>
 <table class="caption-top">
@@ -1174,7 +1174,7 @@ B \subset C \times C = \{ (R,Y), (Y,G) \}
 <h2>Closure</h2>
 <ul>
 <li>We denote the transitive closure of some relation <span class="math inline">\(R\)</span> as <span class="math inline">\(R^+\)</span></li>
-<li>First, the transitive closure <em>R⁺- of some relation </em>R- must contain all elements of <em>R</em>.</li>
+<li>First, the transitive closure <span class="math inline">\(R^+\)</span> of some relation <span class="math inline">\(R\)</span> must contain all elements of <span class="math inline">\(R\)</span>.</li>
 </ul>
 <p><span class="math display">\[
 R^+ \supseteq R
@@ -1210,8 +1210,8 @@ R^+ \supseteq R
 <h2>Discussion</h2>
 <ul>
 <li>Note: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.</li>
-<li>So, if we add <em>SeattleAmtrakTacoma- because we have </em>SeattleAmtrakTukwila- and <em>TukwilaAmtrakTacoma</em>…</li>
-<li>We will then have to add <em>SeattleAmtrakOlympia- because </em>Amtrak- also contains <em>TukwilaAmtrakOlympia</em></li>
+<li>So, if we add <em>SeattleAmtrakTacoma</em> because we have <em>SeattleAmtrakTukwila</em> and <em>TukwilaAmtrakTacoma</em>…</li>
+<li>We will then have to add <em>SeattleAmtrakOlympia</em> because <em>Amtrak</em> also contains <em>TukwilaAmtrakOlympia</em></li>
 </ul>
 </section>
 <section id="color-example" class="slide level2">
@@ -1228,7 +1228,7 @@ R^+ \supseteq R
 <section id="closure-4" class="slide level2">
 <h2>Closure</h2>
 <ul>
-<li><em>R⁺- must be the smallest possible relation for that is a transitive superset of </em>R*.
+<li><span class="math inline">\(R^+\)</span> must be the smallest possible relation for that is a transitive superset of <span class="math inline">\(R\)</span>.
 <ul>
 <li>Cartesian Product is always transitive and a superset, but not always the smallest satisfying set.</li>
 </ul></li>
@@ -1375,7 +1375,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="dags-4" class="slide level2">
 <h2>DAGs</h2>
 <ul>
-<li>A traffic light is not a directed graph but not an acyclic graph.</li>
+<li>A traffic light is a directed graph but not an acyclic graph.</li>
 </ul>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1597,7 +1597,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="connected" class="slide level2">
 <h2>Connected</h2>
 <ul>
-<li>Trees are *connected-
+<li>Trees are <em>connected</em>
 <ul>
 <li>That is, if we take the transitive closure of edges</li>
 <li>There is an edge from one node to every other node.</li>
@@ -1794,7 +1794,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <div class="{columns}">
 <div class="column" style="width:50%;">
 <ul>
-<li>The height of a *node- is what the height of the subtree of which it is a root would be.</li>
+<li>The height of a <em>node</em> is what the height of the subtree of which it is a root would be.</li>
 <li>The node labelled <code>3</code> is of height 2.</li>
 </ul>
 </div><div class="column" style="width:50%;">

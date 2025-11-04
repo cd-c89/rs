@@ -261,7 +261,7 @@
     "href": "A0_graph.html#graph-definition-3",
     "title": "Graphs",
     "section": "Graph: Definition",
-    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}",
+    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}https://askubuntu.com/a/1473153",
     "crumbs": [
       "Graphs"
     ]
@@ -311,7 +311,7 @@
     "href": "A0_graph.html#cycles",
     "title": "Graphs",
     "section": "Cycles",
-    "text": "Cycles\n\nE- is a set of pairs of elements of V*.\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)",
+    "text": "Cycles\n\n\\(E\\) is a set of pairs of elements of \\(V\\).\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)",
     "crumbs": [
       "Graphs"
     ]
@@ -361,7 +361,7 @@
     "href": "A0_graph.html#relation",
     "title": "Graphs",
     "section": "Relation",
-    "text": "Relation\n\nA relation R- over a set S- is a set of pairs of elements of S\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)",
+    "text": "Relation\n\nA relation \\(R\\) over a set \\(S\\) is a set of pairs of elements of \\(S\\)\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)",
     "crumbs": [
       "Graphs"
     ]
@@ -371,7 +371,7 @@
     "href": "A0_graph.html#properties",
     "title": "Graphs",
     "section": "Properties",
-    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,X) \\in L \\implies X = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall X \\in C, \\exists Y, Z \\in C : \\{ (X,Y), (Z,X) \\} \\subset L\n  \\]",
+    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,x) \\in L \\implies x = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall x \\in C, \\exists y, z \\in C : \\{ (x,y), (z,x) \\} \\subset L\n  \\]",
     "crumbs": [
       "Graphs"
     ]
@@ -421,7 +421,7 @@
     "href": "A0_graph.html#rainbow-1",
     "title": "Graphs",
     "section": "Rainbow",
-    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than *nothing- or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)",
+    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than nothing or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)",
     "crumbs": [
       "Graphs"
     ]
@@ -471,7 +471,7 @@
     "href": "A0_graph.html#closure-2",
     "title": "Graphs",
     "section": "Closure",
-    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure R⁺- of some relation R- must contain all elements of R.\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*",
+    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure \\(R^+\\) of some relation \\(R\\) must contain all elements of \\(R\\).\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*",
     "crumbs": [
       "Graphs"
     ]
@@ -501,7 +501,7 @@
     "href": "A0_graph.html#discussion",
     "title": "Graphs",
     "section": "Discussion",
-    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma- because we have SeattleAmtrakTukwila- and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia- because Amtrak- also contains TukwilaAmtrakOlympia",
+    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma because we have SeattleAmtrakTukwila and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia because Amtrak also contains TukwilaAmtrakOlympia",
     "crumbs": [
       "Graphs"
     ]
@@ -521,7 +521,7 @@
     "href": "A0_graph.html#closure-4",
     "title": "Graphs",
     "section": "Closure",
-    "text": "Closure\n\nR⁺- must be the smallest possible relation for that is a transitive superset of R*.\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set.",
+    "text": "Closure\n\n\\(R^+\\) must be the smallest possible relation for that is a transitive superset of \\(R\\).\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set.",
     "crumbs": [
       "Graphs"
     ]
@@ -611,7 +611,7 @@
     "href": "A0_graph.html#dags-4",
     "title": "Graphs",
     "section": "DAGs",
-    "text": "DAGs\n\nA traffic light is not a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y",
+    "text": "DAGs\n\nA traffic light is a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y",
     "crumbs": [
       "Graphs"
     ]
@@ -781,7 +781,7 @@
     "href": "A0_graph.html#connected",
     "title": "Graphs",
     "section": "Connected",
-    "text": "Connected\n\nTrees are *connected-\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs.",
+    "text": "Connected\n\nTrees are connected\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs.",
     "crumbs": [
       "Graphs"
     ]
@@ -841,7 +841,7 @@
     "href": "A0_graph.html#height",
     "title": "Graphs",
     "section": "Height",
-    "text": "Height\n\n\n\nThe height of a *node- is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8",
+    "text": "Height\n\n\n\nThe height of a node is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8",
     "crumbs": [
       "Graphs"
     ]
@@ -1049,7 +1049,7 @@
     "href": "A0_graph.rjs.html#graph-definition-3",
     "title": "Graphs",
     "section": "Graph: Definition",
-    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}"
+    "text": "Graph: Definition\n\nWe can express G using only sets over elements of stations (this is basically JSON):\n\n{\n  \"G\": {\n    \"V\": [\n      \"SEATTLE\",\n      \"TUKWILA\",\n      \"TACOMA\",\n      \"OLYMPIA/LACEY\",\n      \"CENTRALIA\",\n      \"KELSO/LONGVIEW\",\n      \"VANCOUVER WA\",\n      \"PORTLAND\"\n    ],\n    \"E\": [\n      [\n        \"TUKWILA\",\n        \"TACOMA\"\n      ],\n      [\n        \"TACOMA\",\n        \"OLYMPIA/LACEY\"\n      ],\n      [\n        \"OLYMPIA/LACEY\",\n        \"CENTRALIA\"\n      ],\n      [\n        \"CENTRALIA\",\n        \"KELSO/LONGVIEW\"\n      ],\n      [\n        \"KELSO/LONGVIEW\",\n        \"VANCOUVER WA\"\n      ],\n      [\n        \"VANCOUVER WA\",\n        \"PORTLAND\"\n      ]\n    ]\n  }\n}https://askubuntu.com/a/1473153"
   },
   {
     "objectID": "A0_graph.rjs.html#graph-exercise",
@@ -1084,7 +1084,7 @@
     "href": "A0_graph.rjs.html#cycles",
     "title": "Graphs",
     "section": "Cycles",
-    "text": "Cycles\n\nE- is a set of pairs of elements of V*.\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)"
+    "text": "Cycles\n\n\\(E\\) is a set of pairs of elements of \\(V\\).\nWe can think of edges in a graph as a homogenous binary relation.\n\nHomogenous: From a set (the set of vertices) to itself.\nBinary: Over two elements (just like edges)\nRelation: A set (of pairs)"
   },
   {
     "objectID": "A0_graph.rjs.html#closures",
@@ -1119,14 +1119,14 @@
     "href": "A0_graph.rjs.html#relation",
     "title": "Graphs",
     "section": "Relation",
-    "text": "Relation\n\nA relation R- over a set S- is a set of pairs of elements of S\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)"
+    "text": "Relation\n\nA relation \\(R\\) over a set \\(S\\) is a set of pairs of elements of \\(S\\)\n\nOr: a subset of the set of all pairs of elements in is transitive\n\nWe begin with the Cartesian product:\n\n\\[\nC \\times C = \\{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \\}\n\\]\n\nDefine traffic light \\(L \\subset C \\times C\\)"
   },
   {
     "objectID": "A0_graph.rjs.html#properties",
     "href": "A0_graph.rjs.html#properties",
     "title": "Graphs",
     "section": "Properties",
-    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,X) \\in L \\implies X = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall X \\in C, \\exists Y, Z \\in C : \\{ (X,Y), (Z,X) \\} \\subset L\n  \\]"
+    "text": "Properties\n\nConstruct \\(L\\), the traffic light relation\n\nNo red without prior yellow \\[\n  (Y,x) \\in L \\implies x = R\n  \\]\nAll colors must appear in both positions \\[\n  \\forall x \\in C, \\exists y, z \\in C : \\{ (x,y), (z,x) \\} \\subset L\n  \\]"
   },
   {
     "objectID": "A0_graph.rjs.html#this-gives",
@@ -1161,7 +1161,7 @@
     "href": "A0_graph.rjs.html#rainbow-1",
     "title": "Graphs",
     "section": "Rainbow",
-    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than *nothing- or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)"
+    "text": "Rainbow\n\nWe note red is higher than yellow which is higher than green.\n\nGreen is higher than nothing or \\(\\varnothing\\)\n\n\n\n\n\n\n\\(G\\)\n\\(Y\\)\n\\(R\\)\n\n\n\n\n\\(G\\)\n\nx\n\n\n\n\\(Y\\)\n\n\nx\n\n\n\\(R\\)"
   },
   {
     "objectID": "A0_graph.rjs.html#rainbow-2",
@@ -1196,7 +1196,7 @@
     "href": "A0_graph.rjs.html#closure-2",
     "title": "Graphs",
     "section": "Closure",
-    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure R⁺- of some relation R- must contain all elements of R.\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*"
+    "text": "Closure\n\nWe denote the transitive closure of some relation \\(R\\) as \\(R^+\\)\nFirst, the transitive closure \\(R^+\\) of some relation \\(R\\) must contain all elements of \\(R\\).\n\n\\[\nR^+ \\supseteq R\n\\]\n\nWe recall we can use set operations like superset on \\(R\\) as it is a set of pairs, in this case ordered.\n\nR⁺- ⊃ R*"
   },
   {
     "objectID": "A0_graph.rjs.html#superset-review",
@@ -1217,7 +1217,7 @@
     "href": "A0_graph.rjs.html#discussion",
     "title": "Graphs",
     "section": "Discussion",
-    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma- because we have SeattleAmtrakTukwila- and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia- because Amtrak- also contains TukwilaAmtrakOlympia"
+    "text": "Discussion\n\nNote: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.\nSo, if we add SeattleAmtrakTacoma because we have SeattleAmtrakTukwila and TukwilaAmtrakTacoma…\nWe will then have to add SeattleAmtrakOlympia because Amtrak also contains TukwilaAmtrakOlympia"
   },
   {
     "objectID": "A0_graph.rjs.html#color-example",
@@ -1231,7 +1231,7 @@
     "href": "A0_graph.rjs.html#closure-4",
     "title": "Graphs",
     "section": "Closure",
-    "text": "Closure\n\nR⁺- must be the smallest possible relation for that is a transitive superset of R*.\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set."
+    "text": "Closure\n\n\\(R^+\\) must be the smallest possible relation for that is a transitive superset of \\(R\\).\n\nCartesian Product is always transitive and a superset, but not always the smallest satisfying set."
   },
   {
     "objectID": "A0_graph.rjs.html#a-note-on-graphs",
@@ -1294,7 +1294,7 @@
     "href": "A0_graph.rjs.html#dags-4",
     "title": "Graphs",
     "section": "DAGs",
-    "text": "DAGs\n\nA traffic light is not a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y"
+    "text": "DAGs\n\nA traffic light is a directed graph but not an acyclic graph.\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\nY\n\nY\n\n\n\nR\n\nR\n\n\n\nY-&gt;R\n\n\n\n\n\nG\n\nG\n\n\n\nR-&gt;G\n\n\n\n\n\nG-&gt;Y"
   },
   {
     "objectID": "A0_graph.rjs.html#dags-5",
@@ -1413,7 +1413,7 @@
     "href": "A0_graph.rjs.html#connected",
     "title": "Graphs",
     "section": "Connected",
-    "text": "Connected\n\nTrees are *connected-\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs."
+    "text": "Connected\n\nTrees are connected\n\nThat is, if we take the transitive closure of edges\nThere is an edge from one node to every other node.\nThe transitive closure of the edges is the set of paths.\n\nConnectedness is usually defined over undirected graphs."
   },
   {
     "objectID": "A0_graph.rjs.html#root",
@@ -1455,7 +1455,7 @@
     "href": "A0_graph.rjs.html#height",
     "title": "Graphs",
     "section": "Height",
-    "text": "Height\n\n\n\nThe height of a *node- is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8"
+    "text": "Height\n\n\n\nThe height of a node is what the height of the subtree of which it is a root would be.\nThe node labelled 3 is of height 2.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n\n3\n\n3\n\n\n\n2\n\n2\n\n\n\n3-&gt;2\n\n\n\n\n\n4\n\n4\n\n\n\n3-&gt;4\n\n\n\n\n\n1\n\n1\n\n\n\n2-&gt;1\n\n\n\n\n\n5\n\n5\n\n\n\n5-&gt;3\n\n\n\n\n\n7\n\n7\n\n\n\n5-&gt;7\n\n\n\n\n\n6\n\n6\n\n\n\n7-&gt;6\n\n\n\n\n\n8\n\n8\n\n\n\n7-&gt;8"
   },
   {
     "objectID": "A0_graph.rjs.html#depth",

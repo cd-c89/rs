@@ -334,7 +334,7 @@ Amtrak = (Stations, Trains)
       ]
     ]
   }
-}
+}https://askubuntu.com/a/1473153
 ```
 
 ## Graph: Exercise
@@ -389,7 +389,7 @@ jq <name-of-file>.json >/dev/null # should show nothing
 ## Cycles
 
 
-- *E- is a set of pairs of elements of *V*.
+- $E$ is a set of pairs of elements of $V$.
 - We can think of edges in a graph as a homogenous binary relation.
     - Homogenous: From a set (the set of vertices) to itself.
     - Binary: Over two elements (just like edges)
@@ -435,7 +435,7 @@ $$
 
 ## Relation
 
-- A relation *R- over a set *S- is a set of pairs of elements of *S*
+- A relation $R$ over a set $S$ is a set of pairs of elements of $S$
     - Or: a subset of the set of all pairs of elements in is transitive
 - We begin with the Cartesian product:
 
@@ -450,11 +450,11 @@ $$
 - Construct $L$, the traffic light relation
     - No red without prior yellow
         $$
-        (Y,X) \in L \implies X = R
+        (Y,x) \in L \implies x = R
         $$ 
     - All colors must appear in both positions
         $$
-        \forall X \in C, \exists Y, Z \in C : \{ (X,Y), (Z,X) \} \subset L
+        \forall x \in C, \exists y, z \in C : \{ (x,y), (z,x) \} \subset L
         $$ 
 
 ## This gives
@@ -494,7 +494,7 @@ $G$||x||
 ## Rainbow
 
 - We note red is higher than yellow which is higher than green.
-    - Green is higher than *nothing- or $\varnothing$
+    - Green is higher than *nothing* or $\varnothing$
 
 ||$G$|$Y$|$R$|
 |-|-|-|-|
@@ -546,7 +546,7 @@ $G$||x||
 ## Closure
 
 - We denote the transitive closure of some relation $R$ as $R^+$
-- First, the transitive closure *R⁺- of some relation *R- must contain all elements of *R*.
+- First, the transitive closure $R^+$ of some relation $R$ must contain all elements of $R$.
 
 $$
 R^+ \supseteq R
@@ -582,8 +582,8 @@ $$
 ## Discussion
 
 - Note: since this is a "for all", it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.
-- So, if we add *SeattleAmtrakTacoma- because we have *SeattleAmtrakTukwila- and *TukwilaAmtrakTacoma*...
-- We will then have to add *SeattleAmtrakOlympia- because *Amtrak- also contains *TukwilaAmtrakOlympia*
+- So, if we add *SeattleAmtrakTacoma* because we have *SeattleAmtrakTukwila* and *TukwilaAmtrakTacoma*...
+- We will then have to add *SeattleAmtrakOlympia* because *Amtrak* also contains *TukwilaAmtrakOlympia*
 
 ## Color Example
 
@@ -598,7 +598,7 @@ $$
 
 ## Closure
 
-- *R⁺- must be the smallest possible relation for that is a transitive superset of *R*.
+- $R^+$ must be the smallest possible relation for that is a transitive superset of $R$.
     - Cartesian Product is always transitive and a superset, but not always the smallest satisfying set.
 
 ## A note on graphs
@@ -689,7 +689,7 @@ digraph finite_automata {
 
 ## DAGs
 
-- A traffic light is not a directed graph but not an acyclic graph.
+- A traffic light is a directed graph but not an acyclic graph.
 
 ```{dot}
 //| echo: false
@@ -829,7 +829,7 @@ struct binary_tree_struct {
 
 ## Connected
 
-- Trees are *connected- 
+- Trees are *connected*
     - That is, if we take the transitive closure of edges
     - There is an edge from one node to every other node.
     - The transitive closure of the edges is the set of paths.
@@ -933,7 +933,7 @@ digraph finite_automata {
 
 :::{.column width=50%}
 
-- The height of a *node- is what the height of the subtree of which it is a root would be.
+- The height of a *node* is what the height of the subtree of which it is a root would be.
 - The node labelled `3` is of height 2.
 
 :::

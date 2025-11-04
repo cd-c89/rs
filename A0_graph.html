@@ -915,7 +915,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <span id="cb6-37"><a href="#cb6-37"></a>      <span class="ot">]</span></span>
 <span id="cb6-38"><a href="#cb6-38"></a>    <span class="ot">]</span></span>
 <span id="cb6-39"><a href="#cb6-39"></a>  <span class="fu">}</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="fu">}</span><span class="er">https://askubuntu.com/a/1473153</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="graph-exercise" class="level2">
 <h2 class="anchored" data-anchor-id="graph-exercise">Graph: Exercise</h2>
@@ -971,7 +971,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="cycles" class="level2">
 <h2 class="anchored" data-anchor-id="cycles">Cycles</h2>
 <ul>
-<li><em>E- is a set of pairs of elements of </em>V*.</li>
+<li><span class="math inline">\(E\)</span> is a set of pairs of elements of <span class="math inline">\(V\)</span>.</li>
 <li>We can think of edges in a graph as a homogenous binary relation.
 <ul>
 <li>Homogenous: From a set (the set of vertices) to itself.</li>
@@ -1025,7 +1025,7 @@ C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
 <section id="relation" class="level2">
 <h2 class="anchored" data-anchor-id="relation">Relation</h2>
 <ul>
-<li>A relation <em>R- over a set </em>S- is a set of pairs of elements of <em>S</em>
+<li>A relation <span class="math inline">\(R\)</span> over a set <span class="math inline">\(S\)</span> is a set of pairs of elements of <span class="math inline">\(S\)</span>
 <ul>
 <li>Or: a subset of the set of all pairs of elements in is transitive</li>
 </ul></li>
@@ -1044,10 +1044,10 @@ C \times C = \{ (G, Y), (G, R), (Y, R), (Y, G),(R, G), (R, Y) \}
 <li>Construct <span class="math inline">\(L\)</span>, the traffic light relation
 <ul>
 <li>No red without prior yellow <span class="math display">\[
-  (Y,X) \in L \implies X = R
+  (Y,x) \in L \implies x = R
   \]</span></li>
 <li>All colors must appear in both positions <span class="math display">\[
-  \forall X \in C, \exists Y, Z \in C : \{ (X,Y), (Z,X) \} \subset L
+  \forall x \in C, \exists y, z \in C : \{ (x,y), (z,x) \} \subset L
   \]</span></li>
 </ul></li>
 </ul>
@@ -1128,7 +1128,7 @@ L = \{ (G, Y), (Y, R), (R, G)\}
 <ul>
 <li>We note red is higher than yellow which is higher than green.
 <ul>
-<li>Green is higher than *nothing- or <span class="math inline">\(\varnothing\)</span></li>
+<li>Green is higher than <em>nothing</em> or <span class="math inline">\(\varnothing\)</span></li>
 </ul></li>
 </ul>
 <table class="caption-top table">
@@ -1237,7 +1237,7 @@ B \subset C \times C = \{ (R,Y), (Y,G) \}
 <h2 class="anchored" data-anchor-id="closure-2">Closure</h2>
 <ul>
 <li>We denote the transitive closure of some relation <span class="math inline">\(R\)</span> as <span class="math inline">\(R^+\)</span></li>
-<li>First, the transitive closure <em>R⁺- of some relation </em>R- must contain all elements of <em>R</em>.</li>
+<li>First, the transitive closure <span class="math inline">\(R^+\)</span> of some relation <span class="math inline">\(R\)</span> must contain all elements of <span class="math inline">\(R\)</span>.</li>
 </ul>
 <p><span class="math display">\[
 R^+ \supseteq R
@@ -1273,8 +1273,8 @@ R^+ \supseteq R
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
 <ul>
 <li>Note: since this is a “for all”, it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.</li>
-<li>So, if we add <em>SeattleAmtrakTacoma- because we have </em>SeattleAmtrakTukwila- and <em>TukwilaAmtrakTacoma</em>…</li>
-<li>We will then have to add <em>SeattleAmtrakOlympia- because </em>Amtrak- also contains <em>TukwilaAmtrakOlympia</em></li>
+<li>So, if we add <em>SeattleAmtrakTacoma</em> because we have <em>SeattleAmtrakTukwila</em> and <em>TukwilaAmtrakTacoma</em>…</li>
+<li>We will then have to add <em>SeattleAmtrakOlympia</em> because <em>Amtrak</em> also contains <em>TukwilaAmtrakOlympia</em></li>
 </ul>
 </section>
 <section id="color-example" class="level2">
@@ -1291,7 +1291,7 @@ R^+ \supseteq R
 <section id="closure-4" class="level2">
 <h2 class="anchored" data-anchor-id="closure-4">Closure</h2>
 <ul>
-<li><em>R⁺- must be the smallest possible relation for that is a transitive superset of </em>R*.
+<li><span class="math inline">\(R^+\)</span> must be the smallest possible relation for that is a transitive superset of <span class="math inline">\(R\)</span>.
 <ul>
 <li>Cartesian Product is always transitive and a superset, but not always the smallest satisfying set.</li>
 </ul></li>
@@ -1440,7 +1440,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="dags-4" class="level2">
 <h2 class="anchored" data-anchor-id="dags-4">DAGs</h2>
 <ul>
-<li>A traffic light is not a directed graph but not an acyclic graph.</li>
+<li>A traffic light is a directed graph but not an acyclic graph.</li>
 </ul>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1660,7 +1660,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <section id="connected" class="level2">
 <h2 class="anchored" data-anchor-id="connected">Connected</h2>
 <ul>
-<li>Trees are *connected-
+<li>Trees are <em>connected</em>
 <ul>
 <li>That is, if we take the transitive closure of edges</li>
 <li>There is an edge from one node to every other node.</li>
@@ -1861,7 +1861,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <div class="{columns}">
 <div class="column" style="width:50%;">
 <ul>
-<li>The height of a *node- is what the height of the subtree of which it is a root would be.</li>
+<li>The height of a <em>node</em> is what the height of the subtree of which it is a root would be.</li>
 <li>The node labelled <code>3</code> is of height 2.</li>
 </ul>
 </div>
@@ -3051,7 +3051,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-334"><a href="#cb13-334"></a>      <span class="ot">]</span></span>
 <span id="cb13-335"><a href="#cb13-335"></a>    <span class="ot">]</span></span>
 <span id="cb13-336"><a href="#cb13-336"></a>  <span class="fu">}</span></span>
-<span id="cb13-337"><a href="#cb13-337"></a><span class="fu">}</span></span>
+<span id="cb13-337"><a href="#cb13-337"></a><span class="fu">}</span>https://askubuntu.com/a/1473153</span>
 <span id="cb13-338"><a href="#cb13-338"></a><span class="in">```</span></span>
 <span id="cb13-339"><a href="#cb13-339"></a></span>
 <span id="cb13-340"><a href="#cb13-340"></a><span class="fu">## Graph: Exercise</span></span>
@@ -3106,7 +3106,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-389"><a href="#cb13-389"></a><span class="fu">## Cycles</span></span>
 <span id="cb13-390"><a href="#cb13-390"></a></span>
 <span id="cb13-391"><a href="#cb13-391"></a></span>
-<span id="cb13-392"><a href="#cb13-392"></a><span class="ss">- </span>*E- is a set of pairs of elements of *V*.</span>
+<span id="cb13-392"><a href="#cb13-392"></a><span class="ss">- </span>$E$ is a set of pairs of elements of $V$.</span>
 <span id="cb13-393"><a href="#cb13-393"></a><span class="ss">- </span>We can think of edges in a graph as a homogenous binary relation.</span>
 <span id="cb13-394"><a href="#cb13-394"></a><span class="ss">    - </span>Homogenous: From a set (the set of vertices) to itself.</span>
 <span id="cb13-395"><a href="#cb13-395"></a><span class="ss">    - </span>Binary: Over two elements (just like edges)</span>
@@ -3152,7 +3152,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-435"><a href="#cb13-435"></a></span>
 <span id="cb13-436"><a href="#cb13-436"></a><span class="fu">## Relation</span></span>
 <span id="cb13-437"><a href="#cb13-437"></a></span>
-<span id="cb13-438"><a href="#cb13-438"></a><span class="ss">- </span>A relation *R- over a set *S- is a set of pairs of elements of *S*</span>
+<span id="cb13-438"><a href="#cb13-438"></a><span class="ss">- </span>A relation $R$ over a set $S$ is a set of pairs of elements of $S$</span>
 <span id="cb13-439"><a href="#cb13-439"></a><span class="ss">    - </span>Or: a subset of the set of all pairs of elements in is transitive</span>
 <span id="cb13-440"><a href="#cb13-440"></a><span class="ss">- </span>We begin with the Cartesian product:</span>
 <span id="cb13-441"><a href="#cb13-441"></a></span>
@@ -3167,11 +3167,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-450"><a href="#cb13-450"></a><span class="ss">- </span>Construct $L$, the traffic light relation</span>
 <span id="cb13-451"><a href="#cb13-451"></a><span class="ss">    - </span>No red without prior yellow</span>
 <span id="cb13-452"><a href="#cb13-452"></a>        $$</span>
-<span id="cb13-453"><a href="#cb13-453"></a>        (Y,X) \in L \implies X = R</span>
+<span id="cb13-453"><a href="#cb13-453"></a>        (Y,x) \in L \implies x = R</span>
 <span id="cb13-454"><a href="#cb13-454"></a>        $$ </span>
 <span id="cb13-455"><a href="#cb13-455"></a><span class="ss">    - </span>All colors must appear in both positions</span>
 <span id="cb13-456"><a href="#cb13-456"></a>        $$</span>
-<span id="cb13-457"><a href="#cb13-457"></a>        \forall X \in C, \exists Y, Z \in C : <span class="sc">\{</span> (X,Y), (Z,X) <span class="sc">\}</span> \subset L</span>
+<span id="cb13-457"><a href="#cb13-457"></a>        \forall x \in C, \exists y, z \in C : <span class="sc">\{</span> (x,y), (z,x) <span class="sc">\}</span> \subset L</span>
 <span id="cb13-458"><a href="#cb13-458"></a>        $$ </span>
 <span id="cb13-459"><a href="#cb13-459"></a></span>
 <span id="cb13-460"><a href="#cb13-460"></a><span class="fu">## This gives</span></span>
@@ -3211,7 +3211,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-494"><a href="#cb13-494"></a><span class="fu">## Rainbow</span></span>
 <span id="cb13-495"><a href="#cb13-495"></a></span>
 <span id="cb13-496"><a href="#cb13-496"></a><span class="ss">- </span>We note red is higher than yellow which is higher than green.</span>
-<span id="cb13-497"><a href="#cb13-497"></a><span class="ss">    - </span>Green is higher than *nothing- or $\varnothing$</span>
+<span id="cb13-497"><a href="#cb13-497"></a><span class="ss">    - </span>Green is higher than *nothing* or $\varnothing$</span>
 <span id="cb13-498"><a href="#cb13-498"></a></span>
 <span id="cb13-499"><a href="#cb13-499"></a>||$G$|$Y$|$R$|</span>
 <span id="cb13-500"><a href="#cb13-500"></a>|-|-|-|-|</span>
@@ -3263,7 +3263,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-546"><a href="#cb13-546"></a><span class="fu">## Closure</span></span>
 <span id="cb13-547"><a href="#cb13-547"></a></span>
 <span id="cb13-548"><a href="#cb13-548"></a><span class="ss">- </span>We denote the transitive closure of some relation $R$ as $R^+$</span>
-<span id="cb13-549"><a href="#cb13-549"></a><span class="ss">- </span>First, the transitive closure *R⁺- of some relation *R- must contain all elements of *R*.</span>
+<span id="cb13-549"><a href="#cb13-549"></a><span class="ss">- </span>First, the transitive closure $R^+$ of some relation $R$ must contain all elements of $R$.</span>
 <span id="cb13-550"><a href="#cb13-550"></a></span>
 <span id="cb13-551"><a href="#cb13-551"></a>$$</span>
 <span id="cb13-552"><a href="#cb13-552"></a>R^+ \supseteq R</span>
@@ -3299,8 +3299,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-582"><a href="#cb13-582"></a><span class="fu">## Discussion</span></span>
 <span id="cb13-583"><a href="#cb13-583"></a></span>
 <span id="cb13-584"><a href="#cb13-584"></a><span class="ss">- </span>Note: since this is a "for all", it means as we are required to add new elements to maintain transitivity, transitivity must apply to those new elements.</span>
-<span id="cb13-585"><a href="#cb13-585"></a><span class="ss">- </span>So, if we add *SeattleAmtrakTacoma- because we have *SeattleAmtrakTukwila- and *TukwilaAmtrakTacoma*...</span>
-<span id="cb13-586"><a href="#cb13-586"></a><span class="ss">- </span>We will then have to add *SeattleAmtrakOlympia- because *Amtrak- also contains *TukwilaAmtrakOlympia*</span>
+<span id="cb13-585"><a href="#cb13-585"></a><span class="ss">- </span>So, if we add *SeattleAmtrakTacoma* because we have *SeattleAmtrakTukwila* and *TukwilaAmtrakTacoma*...</span>
+<span id="cb13-586"><a href="#cb13-586"></a><span class="ss">- </span>We will then have to add *SeattleAmtrakOlympia* because *Amtrak* also contains *TukwilaAmtrakOlympia*</span>
 <span id="cb13-587"><a href="#cb13-587"></a></span>
 <span id="cb13-588"><a href="#cb13-588"></a><span class="fu">## Color Example</span></span>
 <span id="cb13-589"><a href="#cb13-589"></a></span>
@@ -3315,7 +3315,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-598"><a href="#cb13-598"></a></span>
 <span id="cb13-599"><a href="#cb13-599"></a><span class="fu">## Closure</span></span>
 <span id="cb13-600"><a href="#cb13-600"></a></span>
-<span id="cb13-601"><a href="#cb13-601"></a><span class="ss">- </span>*R⁺- must be the smallest possible relation for that is a transitive superset of *R*.</span>
+<span id="cb13-601"><a href="#cb13-601"></a><span class="ss">- </span>$R^+$ must be the smallest possible relation for that is a transitive superset of $R$.</span>
 <span id="cb13-602"><a href="#cb13-602"></a><span class="ss">    - </span>Cartesian Product is always transitive and a superset, but not always the smallest satisfying set.</span>
 <span id="cb13-603"><a href="#cb13-603"></a></span>
 <span id="cb13-604"><a href="#cb13-604"></a><span class="fu">## A note on graphs</span></span>
@@ -3406,7 +3406,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-691"><a href="#cb13-691"></a></span>
 <span id="cb13-692"><a href="#cb13-692"></a><span class="fu">## DAGs</span></span>
 <span id="cb13-693"><a href="#cb13-693"></a></span>
-<span id="cb13-694"><a href="#cb13-694"></a><span class="ss">- </span>A traffic light is not a directed graph but not an acyclic graph.</span>
+<span id="cb13-694"><a href="#cb13-694"></a><span class="ss">- </span>A traffic light is a directed graph but not an acyclic graph.</span>
 <span id="cb13-695"><a href="#cb13-695"></a></span>
 <span id="cb13-698"><a href="#cb13-698"></a><span class="in">```{dot}</span></span>
 <span id="cb13-699"><a href="#cb13-699"></a><span class="in">//| echo: false</span></span>
@@ -3546,7 +3546,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-835"><a href="#cb13-835"></a></span>
 <span id="cb13-836"><a href="#cb13-836"></a><span class="fu">## Connected</span></span>
 <span id="cb13-837"><a href="#cb13-837"></a></span>
-<span id="cb13-838"><a href="#cb13-838"></a><span class="ss">- </span>Trees are *connected- </span>
+<span id="cb13-838"><a href="#cb13-838"></a><span class="ss">- </span>Trees are *connected*</span>
 <span id="cb13-839"><a href="#cb13-839"></a><span class="ss">    - </span>That is, if we take the transitive closure of edges</span>
 <span id="cb13-840"><a href="#cb13-840"></a><span class="ss">    - </span>There is an edge from one node to every other node.</span>
 <span id="cb13-841"><a href="#cb13-841"></a><span class="ss">    - </span>The transitive closure of the edges is the set of paths.</span>
@@ -3650,7 +3650,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-943"><a href="#cb13-943"></a></span>
 <span id="cb13-944"><a href="#cb13-944"></a>:::{.column width=50%}</span>
 <span id="cb13-945"><a href="#cb13-945"></a></span>
-<span id="cb13-946"><a href="#cb13-946"></a><span class="ss">- </span>The height of a *node- is what the height of the subtree of which it is a root would be.</span>
+<span id="cb13-946"><a href="#cb13-946"></a><span class="ss">- </span>The height of a *node* is what the height of the subtree of which it is a root would be.</span>
 <span id="cb13-947"><a href="#cb13-947"></a><span class="ss">- </span>The node labelled <span class="in">`3`</span> is of height 2.</span>
 <span id="cb13-948"><a href="#cb13-948"></a></span>
 <span id="cb13-949"><a href="#cb13-949"></a>:::</span>
