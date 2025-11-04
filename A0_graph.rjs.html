@@ -1525,29 +1525,6 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <li>If trying to assure integrity of data with hashing, really only need to hash once.</li>
 </ul>
 </section>
-<section id="sample-tree" class="slide level2">
-<h2>Sample Tree</h2>
-<ul>
-<li>By convention, given a directed edge <span class="math inline">\((v,v')\)</span>, vertex <span class="math inline">\(v\)</span> is denoted the parent and vertex <span class="math inline">\(v'\)</span> is denoted the child.</li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a></a><span class="kw">struct</span> tree_struct <span class="op">{</span></span>
-<span id="cb10-2"><a></a>    <span class="dt">void</span> <span class="op">*</span>data<span class="op">;</span></span>
-<span id="cb10-3"><a></a>    <span class="dt">size_t</span> num_children<span class="op">;</span></span>
-<span id="cb10-4"><a></a>    <span class="kw">struct</span> tree_struct <span class="op">*</span>children<span class="op">;</span></span>
-<span id="cb10-5"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="binary-tree" class="slide level2">
-<h2>Binary Tree</h2>
-<ul>
-<li>In computing, we often use binary trees, which are equivalently expressive and have other nice properties.</li>
-<li>Commonly, the two children are referred to as “right” and “left”</li>
-</ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a></a><span class="kw">struct</span> binary_tree_struct <span class="op">{</span></span>
-<span id="cb11-2"><a></a>    <span class="dt">void</span> <span class="op">*</span>data<span class="op">;</span></span>
-<span id="cb11-3"><a></a>    <span class="kw">struct</span> binary_tree_struct <span class="op">*</span>left<span class="op">;</span></span>
-<span id="cb11-4"><a></a>    <span class="kw">struct</span> binary_tree_struct <span class="op">*</span>rite<span class="op">;</span></span>
-<span id="cb11-5"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="by-the-way" class="slide level2">
 <h2>By The Way</h2>
 <ul>
@@ -1679,7 +1656,7 @@ G = (V, E) := \{ \{V\}, \{V,E\}\}
 <li>The height or depth of a tree is the maximum number of edges from some root to a leaf.</li>
 <li>For this tree it is 3</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="bu">len</span>(((<span class="dv">5</span>,<span class="dv">3</span>),(<span class="dv">3</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="bu">len</span>(((<span class="dv">5</span>,<span class="dv">3</span>),(<span class="dv">3</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">

@@ -41,7 +41,7 @@ format: html
 |0x7|10/13|[Numbers](70_numbers.md)|[I/O](71_ix_io.md)|[`ix`](72_ix.md)|
 |0x8|10/20|[EdDSA](80_eddsa.qmd)|[Python](81_python.qmd)|[Ed25519](82_ed25519.md)|
 |0x9|10/27|[Stack](90_stack.qmd)|[Box](91_box.md)|[Traits](92_traits.md)|
-|0xA|11/03|(Graphs](A0_graph.qmd)|[DAG](A1_dag.md)|Suffix Tree|
+|0xA|11/03|[Graphs](A0_graph.qmd)|[DAG](A1_dag.md)|Suffix Tree|
 |0xB|11/10|Merkle|||
 |0xC|11/17|VCS||
 |0xD|11/24|Spectre|`None`|`None`|

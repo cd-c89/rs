@@ -378,7 +378,7 @@ This code is unsafe.
 </section>
 <section id="ed25519.py" class="level2">
 <h2 class="anchored" data-anchor-id="ed25519.py"><a href="https://ed25519.cr.yp.to/python/ed25519.py"><code>ed25519.py</code></a></h2>
-<div id="7f1b6bb8" class="cell" data-execution_count="1">
+<div id="cbac462e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> hashlib</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -512,7 +512,7 @@ This code is unsafe.
 </section>
 <section id="checkparams.py" class="level2">
 <h2 class="anchored" data-anchor-id="checkparams.py"><a href="https://ed25519.cr.yp.to/python/checkparams.py"><code>checkparams.py</code></a></h2>
-<div id="9f1ad9dc" class="cell" data-execution_count="2">
+<div id="617b746a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">assert</span> b <span class="op">&gt;=</span> <span class="dv">10</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="cf">assert</span> <span class="dv">8</span> <span class="op">*</span> <span class="bu">len</span>(H(<span class="st">b"hash input"</span>)) <span class="op">==</span> <span class="dv">2</span> <span class="op">*</span> b</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="cf">assert</span> expmod(<span class="dv">2</span>, q <span class="op">-</span> <span class="dv">1</span>, q) <span class="op">==</span> <span class="dv">1</span></span>
@@ -528,13 +528,13 @@ This code is unsafe.
 </section>
 <section id="sign.input-excerpt" class="level2">
 <h2 class="anchored" data-anchor-id="sign.input-excerpt"><a href="https://ed25519.cr.yp.to/python/sign.input"><code>sign.input</code></a> excerpt</h2>
-<div id="28938325" class="cell" data-execution_count="3">
+<div id="c766160c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>line <span class="op">=</span> <span class="st">"4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c:72:92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sign.py-except" class="level2">
 <h2 class="anchored" data-anchor-id="sign.py-except"><a href="https://ed25519.cr.yp.to/python/sign.py"><code>sign.py</code></a> except</h2>
-<div id="63c70689" class="cell" data-execution_count="4">
+<div id="45da9d1a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> binascii</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co"># fields on each input line: sk, pk, m, sm</span></span>

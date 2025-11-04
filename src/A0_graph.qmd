@@ -768,31 +768,6 @@ $$
 - If trying to store data, really only need one unique path to the data.
 - If trying to assure integrity of data with hashing, really only need to hash once.
 
-## Sample Tree
-
-- By convention, given a directed edge $(v,v')$, vertex $v$ is denoted the parent and vertex $v'$ is denoted the child.
-
-```{.c}
-struct tree_struct {
-    void *data;
-    size_t num_children;
-    struct tree_struct *children;
-}
-```
-
-## Binary Tree
-
-- In computing, we often use binary trees, which are equivalently expressive and have other nice properties.
-- Commonly, the two children are referred to as "right" and "left"
-
-```{.c}
-struct binary_tree_struct {
-    void *data;
-    struct binary_tree_struct *left;
-    struct binary_tree_struct *rite;
-}
-```
-
 ## By The Way
 
 - It would have been fairly straightforward to implement stacks and queues using trees.
