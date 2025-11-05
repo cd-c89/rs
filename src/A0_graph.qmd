@@ -949,7 +949,7 @@ digraph finite_automata {
 
 :::{.column width=50%}
 
-- The depth of a *node- is what the height of the subtree of which it is the lowest leaf would be.
+- The depth of a *node* is what the height of the subtree of which it is the lowest leaf would be.
 - The node labelled `4` is of depth 2.
 
 :::

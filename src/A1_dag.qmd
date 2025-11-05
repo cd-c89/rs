@@ -10,9 +10,8 @@ format:
 You know what a DAG is. Now make one in Rust.
 
 - [ ] Implement a relatively non-trivial graph.
-- [ ] Review Rust `Box` to create a recursive data structure.
-- [ ] Review how to maintain references.
 - [ ] Review the CS major requirements.
+- [ ] Review I/O, strings, and (maybe) maps
 
 # The BS CS
 

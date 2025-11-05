@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./22_wordle.html" rel="next">
 <link href="./20_options.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b86297dc19107d1c9b1952b0f8e15fd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -129,9 +132,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Systems in Rust</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -459,12 +461,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> RED <span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"</span><span class="sc">\u{001b}</span><span class="st">[31m"</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> RED <span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"</span><span class="sc">\u{001b}</span><span class="st">[31m"</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">const</span> WHT <span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"</span><span class="sc">\u{001b}</span><span class="st">[0m"</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a>    <span class="pp">println!</span>(<span class="st">"White text. {RED}Red text. {WHT}White text."</span>)<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><em>This section transparently added in response to a question in class. I do not use <code>const</code> in my own code rather than <code>let</code>, though perhaps I should.</em></p>
 </section>
@@ -477,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">fn</span> letter(a<span class="op">:</span><span class="dt">char</span><span class="op">,</span> c<span class="op">:</span><span class="dt">i32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">fn</span> letter(a<span class="op">:</span><span class="dt">char</span><span class="op">,</span> c<span class="op">:</span><span class="dt">i32</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="character-iteration" class="level1">
@@ -487,11 +489,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>In Python, we have some packing and unpacking to do to edit strings by character index.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> <span class="bu">list</span>(<span class="st">"hello, world"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> <span class="bu">list</span>(<span class="st">"hello, world"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">10</span>] <span class="op">=</span> <span class="st">'d'</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">11</span>] <span class="op">=</span> <span class="st">'l'</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">""</span>.join(s)</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">'hello, wordl'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">'hello, wordl'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="rust-uses-.chars" class="level2">
 <h2 class="anchored" data-anchor-id="rust-uses-.chars">Rust uses <code>.chars()</code></h2>
@@ -506,10 +508,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars())<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>What do you see?
@@ -524,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>What <code>.chars()</code> returns is called an iterator, it is much like a Python generator.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> gen <span class="op">=</span> (i <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> gen <span class="op">=</span> (i <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>))</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="dv">1</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
@@ -534,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="dv">27</span></span>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="dv">256</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Basically, it is a collection type of unknown size where next elements may be queried.</li>
 </ul>
@@ -548,10 +550,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">10</span>))<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>What do you see?
@@ -569,10 +571,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>An option is simple:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>    <span class="cn">None</span><span class="op">,</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="options-for-options" class="level2">
 <h2 class="anchored" data-anchor-id="options-for-options">Options for options</h2>
@@ -591,13 +593,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>    <span class="cf">match</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">11</span>) <span class="op">{</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>        <span class="cn">Some</span>(c) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"The 11th character is {:?}"</span><span class="op">,</span> c)<span class="op">,</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a>        <span class="cn">None</span> <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"String `s` is fewer than 11 characters in length"</span>)<span class="op">,</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a>    <span class="op">}</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>I very rarely see code that looks like this, including in official Rust documentation.</li>
@@ -621,10 +623,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">13</span>)<span class="op">.</span>expect(<span class="st">"The string literal is known to be of length 11"</span>))<span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Try checking for existing and non-existant characters. What do you find?</li>
@@ -641,10 +643,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"Hello, world"</span><span class="op">;</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> s<span class="op">.</span>chars()<span class="op">.</span>nth(<span class="dv">13</span>)<span class="op">.</span>unwrap())<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Try <code>.unwrap()</code> on both successful and failed <code>.nth()</code> calls.</li>
@@ -661,7 +663,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Help Yourself
+<span class="screen-reader-only">Note</span>Help Yourself
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -696,15 +698,15 @@ Help Yourself
 <ul>
 <li>Verify you are on a system implementing <code>/dev/random</code> with the following, at command line:</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span> <span class="at">-1</span> /dev/random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span> <span class="at">-1</span> /dev/random</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>For me, I see:</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> head <span class="at">-1</span> /dev/random</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> head <span class="at">-1</span> /dev/random</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="ex">6��c�W�Y</span><span class="kw">|</span><span class="ex">S�t��</span><span class="kw">|</span><span class="ex">��=���U�</span><span class="op">&gt;</span>�$��8�����E���<span class="pp">*</span>�<span class="kw">&amp;;</span><span class="ex">�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{</span> ��^<span class="st">"/%!7���vv@�w{p��q�y"</span>� AD�/Ahb��fb��Ed�</span>
 <span id="cb12-3"><a href="#cb12-3"></a>                                                                                                                      <span class="ex">­�k�:���F�</span><span class="op">&gt;</span>����09h��Ʊl#�<span class="op">&gt;</span>�J����:J����5<span class="kw">|</span><span class="ex">I�E���04�������NH��-�X����l�,k�</span><span class="op">&lt;</span>�������=.4^qav�}Y��</span>
 <span id="cb12-4"><a href="#cb12-4"></a>        <span class="ex">��</span><span class="er">(</span><span class="ex">�</span><span class="kw">)</span><span class="ex">1���B���c</span><span class="er">)</span><span class="ex">�</span><span class="kw">&amp;</span><span class="ex">*�#r��</span><span class="st">"H�(�:�e���֩A</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="st">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">$</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>You can test what <code>head</code> does on a file with which you are familiar, or consult <code>man head</code></li>
 </ul>
@@ -722,7 +724,7 @@ Help Yourself
 <li>Think about why we need to <code>.unwrap()</code> when opening a file.</li>
 <li>What is the Python equivalent?</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <code>File</code> object.</li>
 </ul>
 <blockquote class="blockquote">
@@ -740,11 +742,11 @@ Help Yourself
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb14-4"><a href="#cb14-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=12dBCgAo-RA">The Used - The Bird And The Worm (Video)</a></li>
@@ -761,7 +763,7 @@ Help Yourself
 </ul></li>
 <li>I use it as follows:</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>An astute reader will notice a few idiosyncracies.</li>
 </ul>
@@ -826,7 +828,7 @@ Help Yourself
 <ul>
 <li>The following is a mutable - so we can read file data <em>into</em> it - array of 8 bytes.</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Breakdown.
 <ul>
@@ -882,12 +884,12 @@ Help Yourself
 </ul></li>
 <li>We can determine how many <code>u8</code>s are required to make up a <code>usize</code> by checking how many bits are in a <code>usize</code>. and dividing by 8.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Only one problem - for some reason <code>usize</code> stores <em>its</em> size as a <code>u32</code>.</li>
 <li>So to get enough bits to fill I <code>usize</code>, I ended up doing… this?</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif" class="img-fluid"></p>
 <p><em>Presumably I’m doing this wrong.</em></p>
 </section>
@@ -896,16 +898,16 @@ Help Yourself
 <ul>
 <li>I have this so far:</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="candidate-answers" class="level2">
 <h2 class="anchored" data-anchor-id="candidate-answers">Candidate Answers</h2>
 <ul>
 <li>You can imagine testing with a smaller word list, like the words of the <a href="https://en.wikipedia.org/wiki/Sator_Square">Sator Square</a></li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Here <code>&amp;str</code> is used to refer to string literals, that is, <em>not</em> the <code>String</code> quasi-data structure of arbitrary size.
 <ul>
@@ -916,12 +918,12 @@ Help Yourself
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb21" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a>    <span class="kw">let</span> i <span class="op">:</span> <span class="dt">u8</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb21-5"><a href="#cb21-5"></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> WORDS[i])<span class="op">;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>This doesn’t work.</li>
@@ -934,11 +936,11 @@ Help Yourself
 <li>So it’s index can be as large as memory.</li>
 <li>The thing as large memory is <code>usize</code>.</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="st">  |</span></span>
 <span id="cb22-4"><a href="#cb22-4"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="byte-array-to-usize" class="level2">
 <h2 class="anchored" data-anchor-id="byte-array-to-usize">Byte array to <code>usize</code></h2>
@@ -949,7 +951,7 @@ Help Yourself
 </ul></li>
 <li>I use little endianness because it doesn’t matter - <code>le</code></li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">let</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_le_bytes(buffer)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">let</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_le_bytes(buffer)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>This can be used as an index, but it’s probably too large.</li>
 </ul>
@@ -959,18 +961,18 @@ Help Yourself
 <ul>
 <li>Rust furnishes the <code>.len()</code> method of arrays to detect their type.</li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="altogether" class="level2">
 <h2 class="anchored" data-anchor-id="altogether">Altogether</h2>
 <ul>
 <li>We use <code>String::from()</code> to get a <code>String</code> from a <code>&amp;str</code>, as the array contains fixed length strings and I use the <code>String</code> type for consistency with lecture recommendations.</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
 <span id="cb25-3"><a href="#cb25-3"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="today-1" class="level2">
 <h2 class="anchored" data-anchor-id="today-1">Today</h2>
@@ -996,12 +998,12 @@ Help Yourself
 </ul></li>
 <li>Essentially, <code>stdin()</code> is a function that returns a <code>File</code> the refers to the terminal.</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="#cb26-1"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="#cb26-1"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>What happens if you don’t unwrap?</li>
 <li>What type is <code>guess</code>? Array? <code>&amp;str</code>? <code>String</code>?</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="trim" class="level2">
 <h2 class="anchored" data-anchor-id="trim"><code>.trim()</code></h2>
@@ -1046,11 +1048,11 @@ Help Yourself
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb28" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span><span class="op">..</span><span class="dv">5</span> <span class="op">{</span></span>
 <span id="cb28-3"><a href="#cb28-3"></a>        <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> i)<span class="op">;</span></span>
 <span id="cb28-4"><a href="#cb28-4"></a>    <span class="op">}</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="vectors" class="level2">
@@ -1080,290 +1082,294 @@ Help Yourself
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
         }
-        return container.innerHTML
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1371,185 +1377,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./20_options.html" class="pagination-link" aria-label="Options">
@@ -1562,7 +1544,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">---</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="an">title:</span><span class="co"> "Guess"</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb29-4"><a href="#cb29-4"></a><span class="co">---</span></span>
@@ -1605,12 +1587,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-41"><a href="#cb29-41"></a><span class="ss">- </span>I refer to the first as "compile time constants" and declare them outside of any function.</span>
 <span id="cb29-42"><a href="#cb29-42"></a></span>
 <span id="cb29-43"><a href="#cb29-43"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-44"><a href="#cb29-44"></a><span class="in">const RED : &amp;str = "\u{001b}[31m";</span></span>
-<span id="cb29-45"><a href="#cb29-45"></a><span class="in">const WHT : &amp;str = "\u{001b}[0m";</span></span>
+<span id="cb29-44"><a href="#cb29-44"></a>const RED <span class="sc">:</span> <span class="er">&amp;</span>str <span class="ot">=</span> <span class="st">"\u{001b}[31m"</span>;</span>
+<span id="cb29-45"><a href="#cb29-45"></a>const WHT <span class="sc">:</span> <span class="er">&amp;</span>str <span class="ot">=</span> <span class="st">"\u{001b}[0m"</span>;</span>
 <span id="cb29-46"><a href="#cb29-46"></a></span>
-<span id="cb29-47"><a href="#cb29-47"></a><span class="in">fn main() {</span></span>
-<span id="cb29-48"><a href="#cb29-48"></a><span class="in">    println!("White text. {RED}Red text. {WHT}White text.");</span></span>
-<span id="cb29-49"><a href="#cb29-49"></a><span class="in">}</span></span>
+<span id="cb29-47"><a href="#cb29-47"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-48"><a href="#cb29-48"></a>    println<span class="sc">!</span>(<span class="st">"White text. {RED}Red text. {WHT}White text."</span>);</span>
+<span id="cb29-49"><a href="#cb29-49"></a>}</span>
 <span id="cb29-50"><a href="#cb29-50"></a><span class="in">```</span></span>
 <span id="cb29-51"><a href="#cb29-51"></a></span>
 <span id="cb29-52"><a href="#cb29-52"></a>*This section transparently added in response to a question in class. I do not use `const` in my own code rather than `let`, though perhaps I should.*</span>
@@ -1621,7 +1603,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-57"><a href="#cb29-57"></a><span class="ss">    - </span>You may want to write a loop to try different colors, or consult documentation.</span>
 <span id="cb29-58"><a href="#cb29-58"></a><span class="ss">- </span>For Wordle, I used a function with the following type, which you may wish to take as inspiration, to print a single character in a given color.</span>
 <span id="cb29-59"><a href="#cb29-59"></a><span class="in">```{.rs}</span></span>
-<span id="cb29-60"><a href="#cb29-60"></a><span class="in">fn letter(a:char, c:i32)</span></span>
+<span id="cb29-60"><a href="#cb29-60"></a>fn <span class="fu">letter</span>(a<span class="sc">:</span>char, c<span class="sc">:</span>i32)</span>
 <span id="cb29-61"><a href="#cb29-61"></a><span class="in">```</span></span>
 <span id="cb29-62"><a href="#cb29-62"></a></span>
 <span id="cb29-63"><a href="#cb29-63"></a><span class="fu"># Character iteration</span></span>
@@ -1630,11 +1612,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-66"><a href="#cb29-66"></a></span>
 <span id="cb29-67"><a href="#cb29-67"></a><span class="ss">- </span>In Python, we have some packing and unpacking to do to edit strings by character index.</span>
 <span id="cb29-68"><a href="#cb29-68"></a><span class="in">```{.py}</span></span>
-<span id="cb29-69"><a href="#cb29-69"></a><span class="in">&gt;&gt;&gt; s = list("hello, world")</span></span>
-<span id="cb29-70"><a href="#cb29-70"></a><span class="in">&gt;&gt;&gt; s[10] = 'd'</span></span>
-<span id="cb29-71"><a href="#cb29-71"></a><span class="in">&gt;&gt;&gt; s[11] = 'l'</span></span>
-<span id="cb29-72"><a href="#cb29-72"></a><span class="in">&gt;&gt;&gt; "".join(s)</span></span>
-<span id="cb29-73"><a href="#cb29-73"></a><span class="in">'hello, wordl'</span></span>
+<span id="cb29-69"><a href="#cb29-69"></a><span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> <span class="bu">list</span>(<span class="st">"hello, world"</span>)</span>
+<span id="cb29-70"><a href="#cb29-70"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">10</span>] <span class="op">=</span> <span class="st">'d'</span></span>
+<span id="cb29-71"><a href="#cb29-71"></a><span class="op">&gt;&gt;&gt;</span> s[<span class="dv">11</span>] <span class="op">=</span> <span class="st">'l'</span></span>
+<span id="cb29-72"><a href="#cb29-72"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">""</span>.join(s)</span>
+<span id="cb29-73"><a href="#cb29-73"></a><span class="co">'hello, wordl'</span></span>
 <span id="cb29-74"><a href="#cb29-74"></a><span class="in">```</span></span>
 <span id="cb29-75"><a href="#cb29-75"></a></span>
 <span id="cb29-76"><a href="#cb29-76"></a><span class="fu">## Rust uses `.chars()`</span></span>
@@ -1644,10 +1626,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-80"><a href="#cb29-80"></a><span class="ss">- </span>To unpack Rust strings into characters, you may use <span class="in">`.chars()`</span></span>
 <span id="cb29-81"><a href="#cb29-81"></a></span>
 <span id="cb29-82"><a href="#cb29-82"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-83"><a href="#cb29-83"></a><span class="in">fn main() {</span></span>
-<span id="cb29-84"><a href="#cb29-84"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb29-85"><a href="#cb29-85"></a><span class="in">    println!("{:?}", s.chars());</span></span>
-<span id="cb29-86"><a href="#cb29-86"></a><span class="in">}</span></span>
+<span id="cb29-83"><a href="#cb29-83"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-84"><a href="#cb29-84"></a>    let s <span class="ot">=</span> <span class="st">"Hello, world"</span>;</span>
+<span id="cb29-85"><a href="#cb29-85"></a>    println<span class="sc">!</span>(<span class="st">"{:?}"</span>, <span class="fu">s.chars</span>());</span>
+<span id="cb29-86"><a href="#cb29-86"></a>}</span>
 <span id="cb29-87"><a href="#cb29-87"></a><span class="in">```</span></span>
 <span id="cb29-88"><a href="#cb29-88"></a></span>
 <span id="cb29-89"><a href="#cb29-89"></a><span class="ss">- </span>What do you see?</span>
@@ -1658,17 +1640,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-94"><a href="#cb29-94"></a></span>
 <span id="cb29-95"><a href="#cb29-95"></a><span class="ss">- </span>What <span class="in">`.chars()`</span> returns is called an iterator, it is much like a Python generator.</span>
 <span id="cb29-96"><a href="#cb29-96"></a><span class="in">```{.py}</span></span>
-<span id="cb29-97"><a href="#cb29-97"></a><span class="in">&gt;&gt;&gt; gen = (i ** i for i in range(100))</span></span>
-<span id="cb29-98"><a href="#cb29-98"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb29-99"><a href="#cb29-99"></a><span class="in">1</span></span>
-<span id="cb29-100"><a href="#cb29-100"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb29-101"><a href="#cb29-101"></a><span class="in">1</span></span>
-<span id="cb29-102"><a href="#cb29-102"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb29-103"><a href="#cb29-103"></a><span class="in">4</span></span>
-<span id="cb29-104"><a href="#cb29-104"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb29-105"><a href="#cb29-105"></a><span class="in">27</span></span>
-<span id="cb29-106"><a href="#cb29-106"></a><span class="in">&gt;&gt;&gt; next(gen)</span></span>
-<span id="cb29-107"><a href="#cb29-107"></a><span class="in">256</span></span>
+<span id="cb29-97"><a href="#cb29-97"></a><span class="op">&gt;&gt;&gt;</span> gen <span class="op">=</span> (i <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>))</span>
+<span id="cb29-98"><a href="#cb29-98"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb29-99"><a href="#cb29-99"></a><span class="dv">1</span></span>
+<span id="cb29-100"><a href="#cb29-100"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb29-101"><a href="#cb29-101"></a><span class="dv">1</span></span>
+<span id="cb29-102"><a href="#cb29-102"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb29-103"><a href="#cb29-103"></a><span class="dv">4</span></span>
+<span id="cb29-104"><a href="#cb29-104"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb29-105"><a href="#cb29-105"></a><span class="dv">27</span></span>
+<span id="cb29-106"><a href="#cb29-106"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">next</span>(gen)</span>
+<span id="cb29-107"><a href="#cb29-107"></a><span class="dv">256</span></span>
 <span id="cb29-108"><a href="#cb29-108"></a><span class="in">```</span></span>
 <span id="cb29-109"><a href="#cb29-109"></a><span class="ss">- </span>Basically, it is a collection type of unknown size where next elements may be queried.</span>
 <span id="cb29-110"><a href="#cb29-110"></a></span>
@@ -1677,10 +1659,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-113"><a href="#cb29-113"></a><span class="ss">- </span>You can see the <span class="in">`n`</span>th element of an iterator with <span class="in">`.nth()`</span>, more or less:</span>
 <span id="cb29-114"><a href="#cb29-114"></a></span>
 <span id="cb29-115"><a href="#cb29-115"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-116"><a href="#cb29-116"></a><span class="in">fn main() {</span></span>
-<span id="cb29-117"><a href="#cb29-117"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb29-118"><a href="#cb29-118"></a><span class="in">    println!("{:?}", s.chars().nth(10));</span></span>
-<span id="cb29-119"><a href="#cb29-119"></a><span class="in">}</span></span>
+<span id="cb29-116"><a href="#cb29-116"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-117"><a href="#cb29-117"></a>    let s <span class="ot">=</span> <span class="st">"Hello, world"</span>;</span>
+<span id="cb29-118"><a href="#cb29-118"></a>    println<span class="sc">!</span>(<span class="st">"{:?}"</span>, <span class="fu">s.chars</span>()<span class="fu">.nth</span>(<span class="dv">10</span>));</span>
+<span id="cb29-119"><a href="#cb29-119"></a>}</span>
 <span id="cb29-120"><a href="#cb29-120"></a><span class="in">```</span></span>
 <span id="cb29-121"><a href="#cb29-121"></a><span class="ss">- </span>What do you see?</span>
 <span id="cb29-122"><a href="#cb29-122"></a><span class="ss">    - </span>What happens if you ask for the 256th letter?</span>
@@ -1691,10 +1673,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-127"><a href="#cb29-127"></a><span class="ss">    - </span>This is just good practice, it beats returning e.g. Python <span class="in">`None`</span> sometimes, or crashing.</span>
 <span id="cb29-128"><a href="#cb29-128"></a><span class="ss">- </span>An option is simple:</span>
 <span id="cb29-129"><a href="#cb29-129"></a><span class="in">```rs</span></span>
-<span id="cb29-130"><a href="#cb29-130"></a><span class="kw">pub</span> <span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb29-131"><a href="#cb29-131"></a>    <span class="cn">None</span><span class="op">,</span></span>
-<span id="cb29-132"><a href="#cb29-132"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
-<span id="cb29-133"><a href="#cb29-133"></a><span class="op">}</span></span>
+<span id="cb29-130"><a href="#cb29-130"></a>pub enum Option<span class="sc">&lt;</span>T<span class="sc">&gt;</span> {</span>
+<span id="cb29-131"><a href="#cb29-131"></a>    None,</span>
+<span id="cb29-132"><a href="#cb29-132"></a>    <span class="fu">Some</span>(T),</span>
+<span id="cb29-133"><a href="#cb29-133"></a>}</span>
 <span id="cb29-134"><a href="#cb29-134"></a><span class="in">```</span></span>
 <span id="cb29-135"><a href="#cb29-135"></a></span>
 <span id="cb29-136"><a href="#cb29-136"></a><span class="fu">## Options for options</span></span>
@@ -1708,13 +1690,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-144"><a href="#cb29-144"></a><span class="ss">- </span>The language designers intend options to be handled as follows:</span>
 <span id="cb29-145"><a href="#cb29-145"></a></span>
 <span id="cb29-146"><a href="#cb29-146"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-147"><a href="#cb29-147"></a><span class="in">fn main() {</span></span>
-<span id="cb29-148"><a href="#cb29-148"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb29-149"><a href="#cb29-149"></a><span class="in">    match s.chars().nth(11) {</span></span>
-<span id="cb29-150"><a href="#cb29-150"></a><span class="in">        Some(c) =&gt; println!("The 11th character is {:?}", c),</span></span>
-<span id="cb29-151"><a href="#cb29-151"></a><span class="in">        None =&gt; println!("String `s` is fewer than 11 characters in length"),</span></span>
-<span id="cb29-152"><a href="#cb29-152"></a><span class="in">    }</span></span>
-<span id="cb29-153"><a href="#cb29-153"></a><span class="in">}</span></span>
+<span id="cb29-147"><a href="#cb29-147"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-148"><a href="#cb29-148"></a>    let s <span class="ot">=</span> <span class="st">"Hello, world"</span>;</span>
+<span id="cb29-149"><a href="#cb29-149"></a>    match <span class="fu">s.chars</span>()<span class="fu">.nth</span>(<span class="dv">11</span>) {</span>
+<span id="cb29-150"><a href="#cb29-150"></a>        <span class="fu">Some</span>(c) <span class="sc">=&gt;</span> println<span class="sc">!</span>(<span class="st">"The 11th character is {:?}"</span>, c),</span>
+<span id="cb29-151"><a href="#cb29-151"></a>        None <span class="sc">=&gt;</span> println<span class="sc">!</span>(<span class="st">"String `s` is fewer than 11 characters in length"</span>),</span>
+<span id="cb29-152"><a href="#cb29-152"></a>    }</span>
+<span id="cb29-153"><a href="#cb29-153"></a>}</span>
 <span id="cb29-154"><a href="#cb29-154"></a><span class="in">```</span></span>
 <span id="cb29-155"><a href="#cb29-155"></a></span>
 <span id="cb29-156"><a href="#cb29-156"></a><span class="ss">- </span>I very rarely see code that looks like this, including in official Rust documentation.</span>
@@ -1729,10 +1711,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-165"><a href="#cb29-165"></a><span class="ss">        - </span>This panic prints the message you furnished to expect.</span>
 <span id="cb29-166"><a href="#cb29-166"></a>        </span>
 <span id="cb29-167"><a href="#cb29-167"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-168"><a href="#cb29-168"></a><span class="in">fn main() {</span></span>
-<span id="cb29-169"><a href="#cb29-169"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb29-170"><a href="#cb29-170"></a><span class="in">    println!("{:?}", s.chars().nth(13).expect("The string literal is known to be of length 11"));</span></span>
-<span id="cb29-171"><a href="#cb29-171"></a><span class="in">}</span></span>
+<span id="cb29-168"><a href="#cb29-168"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-169"><a href="#cb29-169"></a>    let s <span class="ot">=</span> <span class="st">"Hello, world"</span>;</span>
+<span id="cb29-170"><a href="#cb29-170"></a>    println<span class="sc">!</span>(<span class="st">"{:?}"</span>, <span class="fu">s.chars</span>()<span class="fu">.nth</span>(<span class="dv">13</span>)<span class="fu">.expect</span>(<span class="st">"The string literal is known to be of length 11"</span>));</span>
+<span id="cb29-171"><a href="#cb29-171"></a>}</span>
 <span id="cb29-172"><a href="#cb29-172"></a><span class="in">```</span></span>
 <span id="cb29-173"><a href="#cb29-173"></a></span>
 <span id="cb29-174"><a href="#cb29-174"></a><span class="ss">- </span>Try checking for existing and non-existant characters. What do you find?</span>
@@ -1744,10 +1726,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-180"><a href="#cb29-180"></a><span class="ss">- </span>Unwrap is used by e.g. the Polars documentation.</span>
 <span id="cb29-181"><a href="#cb29-181"></a></span>
 <span id="cb29-182"><a href="#cb29-182"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-183"><a href="#cb29-183"></a><span class="in">fn main() {</span></span>
-<span id="cb29-184"><a href="#cb29-184"></a><span class="in">    let s = "Hello, world";</span></span>
-<span id="cb29-185"><a href="#cb29-185"></a><span class="in">    println!("{:?}", s.chars().nth(13).unwrap());</span></span>
-<span id="cb29-186"><a href="#cb29-186"></a><span class="in">}</span></span>
+<span id="cb29-183"><a href="#cb29-183"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb29-184"><a href="#cb29-184"></a>    let s <span class="ot">=</span> <span class="st">"Hello, world"</span>;</span>
+<span id="cb29-185"><a href="#cb29-185"></a>    println<span class="sc">!</span>(<span class="st">"{:?}"</span>, <span class="fu">s.chars</span>()<span class="fu">.nth</span>(<span class="dv">13</span>)<span class="fu">.unwrap</span>());</span>
+<span id="cb29-186"><a href="#cb29-186"></a>}</span>
 <span id="cb29-187"><a href="#cb29-187"></a><span class="in">```</span></span>
 <span id="cb29-188"><a href="#cb29-188"></a></span>
 <span id="cb29-189"><a href="#cb29-189"></a><span class="ss">- </span>Try <span class="in">`.unwrap()`</span> on both successful and failed <span class="in">`.nth()`</span> calls.</span>
@@ -1785,302 +1767,302 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-221"><a href="#cb29-221"></a></span>
 <span id="cb29-222"><a href="#cb29-222"></a><span class="ss">- </span>Verify you are on a system implementing <span class="in">`/dev/random`</span> with the following, at command line:</span>
 <span id="cb29-223"><a href="#cb29-223"></a><span class="in">```{.bash}</span></span>
-<span id="cb29-224"><a href="#cb29-224"></a><span class="in">head -1 /dev/random</span></span>
+<span id="cb29-224"><a href="#cb29-224"></a><span class="fu">head</span> <span class="at">-1</span> /dev/random</span>
 <span id="cb29-225"><a href="#cb29-225"></a><span class="in">```</span></span>
 <span id="cb29-226"><a href="#cb29-226"></a><span class="ss">- </span>For me, I see:</span>
 <span id="cb29-227"><a href="#cb29-227"></a><span class="in">```{.sh}</span></span>
-<span id="cb29-228"><a href="#cb29-228"></a><span class="in">$ head -1 /dev/random</span></span>
-<span id="cb29-229"><a href="#cb29-229"></a><span class="in">6��c�W�Y|S�t��|��=���U�&gt;�$��8�����E���*�&amp;;�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{ ��^"/%!7���vv@�w{p��q�y"� AD�/Ahb��fb��Ed�</span></span>
-<span id="cb29-230"><a href="#cb29-230"></a><span class="in">                                                                                                                      ­�k�:���F�&gt;����09h��Ʊl#�&gt;�J����:J����5|I�E���04�������NH��-�X����l�,k�&lt;�������=.4^qav�}Y��</span></span>
-<span id="cb29-231"><a href="#cb29-231"></a><span class="in">        ��(�)1���B���c)�&amp;*�#r��"H�(�:�e���֩A</span></span>
-<span id="cb29-232"><a href="#cb29-232"></a><span class="in">$</span></span>
-<span id="cb29-233"><a href="#cb29-233"></a><span class="in">```</span></span>
-<span id="cb29-234"><a href="#cb29-234"></a><span class="ss">- </span>You can test what <span class="in">`head`</span> does on a file with which you are familiar, or consult <span class="in">`man head`</span></span>
+<span id="cb29-228"><a href="#cb29-228"></a><span class="ex">$</span> head <span class="at">-1</span> /dev/random</span>
+<span id="cb29-229"><a href="#cb29-229"></a><span class="ex">6��c�W�Y</span><span class="kw">|</span><span class="ex">S�t��</span><span class="kw">|</span><span class="ex">��=���U�</span><span class="op">&gt;</span>�$��8�����E���<span class="pp">*</span>�<span class="kw">&amp;;</span><span class="ex">�F�§�6␦8�{X�~�1U�J␦�Y���Eyg��Z��{</span> ��^<span class="st">"/%!7���vv@�w{p��q�y"</span>� AD�/Ahb��fb��Ed�</span>
+<span id="cb29-230"><a href="#cb29-230"></a>                                                                                                                      <span class="ex">­�k�:���F�</span><span class="op">&gt;</span>����09h��Ʊl#�<span class="op">&gt;</span>�J����:J����5<span class="kw">|</span><span class="ex">I�E���04�������NH��-�X����l�,k�</span><span class="op">&lt;</span>�������=.4^qav�}Y��</span>
+<span id="cb29-231"><a href="#cb29-231"></a>        <span class="ex">��</span><span class="er">(</span><span class="ex">�</span><span class="kw">)</span><span class="ex">1���B���c</span><span class="er">)</span><span class="ex">�</span><span class="kw">&amp;</span><span class="ex">*�#r��</span><span class="st">"H�(�:�e���֩A</span></span>
+<span id="cb29-232"><a href="#cb29-232"></a><span class="st">$</span></span>
+<span id="cb29-233"><a href="#cb29-233"></a><span class="kw">```</span></span>
+<span id="cb29-234"><a href="#cb29-234"></a><span class="ex">-</span> You can test what <span class="kw">`</span><span class="st">head</span><span class="kw">`</span> <span class="ex">does</span> on a file with which you are familiar, or consult <span class="kw">`</span><span class="st">man head</span><span class="kw">`</span></span>
 <span id="cb29-235"><a href="#cb29-235"></a></span>
-<span id="cb29-236"><a href="#cb29-236"></a><span class="fu"># File I/O</span></span>
+<span id="cb29-236"><a href="#cb29-236"></a><span class="co"># File I/O</span></span>
 <span id="cb29-237"><a href="#cb29-237"></a></span>
-<span id="cb29-238"><a href="#cb29-238"></a><span class="fu">## `open`</span></span>
+<span id="cb29-238"><a href="#cb29-238"></a><span class="co">## </span><span class="kw">`</span><span class="st">open</span><span class="kw">`</span></span>
 <span id="cb29-239"><a href="#cb29-239"></a></span>
-<span id="cb29-240"><a href="#cb29-240"></a><span class="ss">- </span>A la Python, Rust utilizes <span class="in">`open`</span> to read files.</span>
-<span id="cb29-241"><a href="#cb29-241"></a><span class="ss">- </span>Unlike Python, Rust has a great love for gobs of a text and <span class="in">`Option`</span>s.</span>
-<span id="cb29-242"><a href="#cb29-242"></a><span class="ss">- </span>The following opens <span class="in">`/dev/random`</span> to be read.</span>
-<span id="cb29-243"><a href="#cb29-243"></a><span class="ss">    - </span>Think about why we need to <span class="in">`.unwrap()`</span> when opening a file.</span>
-<span id="cb29-244"><a href="#cb29-244"></a><span class="ss">    - </span>What is the Python equivalent?</span>
-<span id="cb29-245"><a href="#cb29-245"></a><span class="in">```rs</span></span>
-<span id="cb29-246"><a href="#cb29-246"></a><span class="pp">std::fs::File::</span>open(<span class="st">"/dev/random"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-247"><a href="#cb29-247"></a><span class="in">```</span></span>
-<span id="cb29-248"><a href="#cb29-248"></a><span class="ss">- </span>We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <span class="in">`File`</span> object.</span>
+<span id="cb29-240"><a href="#cb29-240"></a><span class="ex">-</span> A la Python, Rust utilizes <span class="kw">`</span><span class="st">open</span><span class="kw">`</span> <span class="ex">to</span> read files.</span>
+<span id="cb29-241"><a href="#cb29-241"></a><span class="ex">-</span> Unlike Python, Rust has a great love for gobs of a text and <span class="kw">`</span><span class="st">Option</span><span class="kw">`</span><span class="ex">s.</span></span>
+<span id="cb29-242"><a href="#cb29-242"></a><span class="ex">-</span> The following opens <span class="kw">`</span><span class="st">/dev/random</span><span class="kw">`</span> <span class="ex">to</span> be read.</span>
+<span id="cb29-243"><a href="#cb29-243"></a>    <span class="ex">-</span> Think about why we need to <span class="kw">`</span><span class="st">.unwrap()</span><span class="kw">`</span> <span class="ex">when</span> opening a file.</span>
+<span id="cb29-244"><a href="#cb29-244"></a>    <span class="ex">-</span> What is the Python equivalent<span class="pp">?</span></span>
+<span id="cb29-245"><a href="#cb29-245"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-246"><a href="#cb29-246"></a><span class="st">std::fs::File::open("</span><span class="ex">/dev/random</span><span class="st">").unwrap();</span></span>
+<span id="cb29-247"><a href="#cb29-247"></a><span class="kw">```</span></span>
+<span id="cb29-248"><a href="#cb29-248"></a><span class="ex">-</span> We require mutability to be able to read successive bits from the file, as our location in the file is tracked within the Rust <span class="kw">`</span><span class="st">File</span><span class="kw">`</span> <span class="ex">object.</span></span>
 <span id="cb29-249"><a href="#cb29-249"></a></span>
-<span id="cb29-250"><a href="#cb29-250"></a><span class="at">&gt; An object providing access to an open file on the filesystem.</span></span>
+<span id="cb29-250"><a href="#cb29-250"></a><span class="op">&gt;</span> An <span class="ex">object</span> providing access to an open file on the filesystem.</span>
 <span id="cb29-251"><a href="#cb29-251"></a></span>
-<span id="cb29-252"><a href="#cb29-252"></a><span class="fu">## `use`</span></span>
+<span id="cb29-252"><a href="#cb29-252"></a><span class="co">## </span><span class="kw">`</span><span class="st">use</span><span class="kw">`</span></span>
 <span id="cb29-253"><a href="#cb29-253"></a></span>
-<span id="cb29-254"><a href="#cb29-254"></a><span class="ss">- </span>A lot of people who aren't me prefer to use <span class="in">`use`</span> to have shorter names.</span>
-<span id="cb29-255"><a href="#cb29-255"></a><span class="ss">- </span>I don't personally understand this, but I do use <span class="in">`from pgl import *`</span> in Python.</span>
-<span id="cb29-256"><a href="#cb29-256"></a><span class="ss">- </span>Here's an example from <span class="co">[</span><span class="ot">Rust documentation</span><span class="co">](https://doc.rust-lang.org/std/fs/struct.File.html)</span> of a <span class="in">`use`</span>:</span>
-<span id="cb29-257"><a href="#cb29-257"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-258"><a href="#cb29-258"></a><span class="in">use std::fs::File;</span></span>
+<span id="cb29-254"><a href="#cb29-254"></a><span class="ex">-</span> A lot of people who aren<span class="st">'t me prefer to use `use` to have shorter names.</span></span>
+<span id="cb29-255"><a href="#cb29-255"></a><span class="st">- I don'</span>t personally understand this, but I do use <span class="kw">`</span><span class="st">from pgl import *</span><span class="kw">`</span> <span class="er">in</span> <span class="ex">Python.</span></span>
+<span id="cb29-256"><a href="#cb29-256"></a><span class="ex">-</span> Here<span class="st">'s an example from [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) of a `use`:</span></span>
+<span id="cb29-257"><a href="#cb29-257"></a><span class="st">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-258"><a href="#cb29-258"></a><span class="st">use std::fs::File;</span></span>
 <span id="cb29-259"><a href="#cb29-259"></a></span>
-<span id="cb29-260"><a href="#cb29-260"></a><span class="in">fn main() {</span></span>
-<span id="cb29-261"><a href="#cb29-261"></a><span class="in">    let mut devrnd = File::open("/dev/random").unwrap();</span></span>
-<span id="cb29-262"><a href="#cb29-262"></a><span class="in">}</span></span>
-<span id="cb29-263"><a href="#cb29-263"></a><span class="in">```</span></span>
+<span id="cb29-260"><a href="#cb29-260"></a><span class="st">fn main() {</span></span>
+<span id="cb29-261"><a href="#cb29-261"></a><span class="st">    let mut devrnd = File::open("/dev/random").unwrap();</span></span>
+<span id="cb29-262"><a href="#cb29-262"></a><span class="st">}</span></span>
+<span id="cb29-263"><a href="#cb29-263"></a><span class="st">```</span></span>
 <span id="cb29-264"><a href="#cb29-264"></a></span>
-<span id="cb29-265"><a href="#cb29-265"></a><span class="ss">- </span><span class="co">[</span><span class="ot">The Used - The Bird And The Worm (Video)</span><span class="co">](https://www.youtube.com/watch?v=12dBCgAo-RA)</span></span>
+<span id="cb29-265"><a href="#cb29-265"></a><span class="st">- [The Used - The Bird And The Worm (Video)](https://www.youtube.com/watch?v=12dBCgAo-RA)</span></span>
 <span id="cb29-266"><a href="#cb29-266"></a></span>
-<span id="cb29-267"><a href="#cb29-267"></a><span class="fu">## `read`</span></span>
+<span id="cb29-267"><a href="#cb29-267"></a><span class="st">## `read`</span></span>
 <span id="cb29-268"><a href="#cb29-268"></a></span>
-<span id="cb29-269"><a href="#cb29-269"></a><span class="ss">- </span>True to form, <span class="in">`read`</span> has a variety of complexities introduced by:</span>
-<span id="cb29-270"><a href="#cb29-270"></a><span class="ss">    - </span>Not assuming anything about the Rust <span class="in">`File`</span> object</span>
-<span id="cb29-271"><a href="#cb29-271"></a><span class="ss">    - </span>Not assuming anything about how to read or save data.</span>
-<span id="cb29-272"><a href="#cb29-272"></a><span class="ss">    - </span>Not assuming anything about the underlying file within the computer's file system.</span>
-<span id="cb29-273"><a href="#cb29-273"></a><span class="ss">- </span>I use it as follows:</span>
-<span id="cb29-274"><a href="#cb29-274"></a><span class="in">```rs</span></span>
-<span id="cb29-275"><a href="#cb29-275"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-276"><a href="#cb29-276"></a><span class="in">```</span></span>
-<span id="cb29-277"><a href="#cb29-277"></a><span class="ss">- </span>An astute reader will notice a few idiosyncracies.</span>
+<span id="cb29-269"><a href="#cb29-269"></a><span class="st">- True to form, `read` has a variety of complexities introduced by:</span></span>
+<span id="cb29-270"><a href="#cb29-270"></a><span class="st">    - Not assuming anything about the Rust `File` object</span></span>
+<span id="cb29-271"><a href="#cb29-271"></a><span class="st">    - Not assuming anything about how to read or save data.</span></span>
+<span id="cb29-272"><a href="#cb29-272"></a><span class="st">    - Not assuming anything about the underlying file within the computer'</span>s file system.</span>
+<span id="cb29-273"><a href="#cb29-273"></a><span class="ex">-</span> I use it as follows:</span>
+<span id="cb29-274"><a href="#cb29-274"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-275"><a href="#cb29-275"></a><span class="st">std::io::Read::read_exact(&amp;mut devrnd, &amp;mut buffer).unwrap();</span></span>
+<span id="cb29-276"><a href="#cb29-276"></a><span class="kw">```</span></span>
+<span id="cb29-277"><a href="#cb29-277"></a><span class="ex">-</span> An astute reader will notice a few idiosyncracies.</span>
 <span id="cb29-278"><a href="#cb29-278"></a></span>
-<span id="cb29-279"><a href="#cb29-279"></a><span class="fu">## `&amp;mut`</span></span>
+<span id="cb29-279"><a href="#cb29-279"></a><span class="co">## </span><span class="kw">`</span><span class="st">&amp;mut</span><span class="kw">`</span></span>
 <span id="cb29-280"><a href="#cb29-280"></a></span>
-<span id="cb29-281"><a href="#cb29-281"></a><span class="ss">- </span>When we:</span>
-<span id="cb29-282"><a href="#cb29-282"></a><span class="ss">    - </span>Have a variable in Rust</span>
-<span id="cb29-283"><a href="#cb29-283"></a><span class="ss">    - </span>For which the ownership model applies, such as a file of arbitrary size</span>
-<span id="cb29-284"><a href="#cb29-284"></a><span class="ss">    - </span>For which mutability is necessary, such as a <span class="in">`File`</span> object from which <span class="in">`n`</span> bytes have been read.</span>
-<span id="cb29-285"><a href="#cb29-285"></a><span class="ss">- </span>We can use this variable:</span>
-<span id="cb29-286"><a href="#cb29-286"></a><span class="ss">    - </span>Within some other function, while</span>
-<span id="cb29-287"><a href="#cb29-287"></a><span class="ss">    - </span>Retaining the ability to use it again in some future function.</span>
-<span id="cb29-288"><a href="#cb29-288"></a><span class="ss">- </span>We do so by passing a "mutable reference", generated by prefixing the variable name with <span class="in">`&amp;mut`</span> and a space.</span>
+<span id="cb29-281"><a href="#cb29-281"></a><span class="ex">-</span> When we:</span>
+<span id="cb29-282"><a href="#cb29-282"></a>    <span class="ex">-</span> Have a variable in Rust</span>
+<span id="cb29-283"><a href="#cb29-283"></a>    <span class="ex">-</span> For which the ownership model applies, such as a file of arbitrary size</span>
+<span id="cb29-284"><a href="#cb29-284"></a>    <span class="ex">-</span> For which mutability is necessary, such as a <span class="kw">`</span><span class="st">File</span><span class="kw">`</span> <span class="ex">object</span> from which <span class="kw">`</span><span class="st">n</span><span class="kw">`</span> <span class="ex">bytes</span> have been read.</span>
+<span id="cb29-285"><a href="#cb29-285"></a><span class="ex">-</span> We can use this variable:</span>
+<span id="cb29-286"><a href="#cb29-286"></a>    <span class="ex">-</span> Within some other function, while</span>
+<span id="cb29-287"><a href="#cb29-287"></a>    <span class="ex">-</span> Retaining the ability to use it again in some future function.</span>
+<span id="cb29-288"><a href="#cb29-288"></a><span class="ex">-</span> We do so by passing a <span class="st">"mutable reference"</span>, generated by prefixing the variable name with <span class="kw">`</span><span class="st">&amp;mut</span><span class="kw">`</span> <span class="ex">and</span> a space.</span>
 <span id="cb29-289"><a href="#cb29-289"></a></span>
-<span id="cb29-290"><a href="#cb29-290"></a><span class="fu">## Buffers</span></span>
+<span id="cb29-290"><a href="#cb29-290"></a><span class="co">## Buffers</span></span>
 <span id="cb29-291"><a href="#cb29-291"></a></span>
-<span id="cb29-292"><a href="#cb29-292"></a><span class="ss">- </span>It is common in lower level languages to read from a file into a "buffer", a temporary storage space within the executing program.</span>
-<span id="cb29-293"><a href="#cb29-293"></a><span class="ss">- </span>These are commonly implemented as multiple of bytes of some fixed size in that language's array type.</span>
-<span id="cb29-294"><a href="#cb29-294"></a><span class="ss">- </span>These bits are commonly initialized to zero.</span>
-<span id="cb29-295"><a href="#cb29-295"></a><span class="ss">- </span>I am aware of no graceful way to do this in Rust, so I'll tell you what I'm doing now and why.</span>
+<span id="cb29-292"><a href="#cb29-292"></a><span class="ex">-</span> It is common in lower level languages to read from a file into a <span class="st">"buffer"</span>, a temporary storage space within the executing program.</span>
+<span id="cb29-293"><a href="#cb29-293"></a><span class="ex">-</span> These are commonly implemented as multiple of bytes of some fixed size in that language<span class="st">'s array type.</span></span>
+<span id="cb29-294"><a href="#cb29-294"></a><span class="st">- These bits are commonly initialized to zero.</span></span>
+<span id="cb29-295"><a href="#cb29-295"></a><span class="st">- I am aware of no graceful way to do this in Rust, so I'</span>ll tell you what I<span class="st">'m doing now and why.</span></span>
 <span id="cb29-296"><a href="#cb29-296"></a></span>
-<span id="cb29-297"><a href="#cb29-297"></a><span class="fu">## Arrays</span></span>
+<span id="cb29-297"><a href="#cb29-297"></a><span class="st">## Arrays</span></span>
 <span id="cb29-298"><a href="#cb29-298"></a></span>
-<span id="cb29-299"><a href="#cb29-299"></a><span class="ss">- </span>Arrays in Rust are fixed size and typed, not unlike NumPy array.</span>
-<span id="cb29-300"><a href="#cb29-300"></a><span class="ss">- </span>They see little use versus the more common vector type, but I preferred arrays for Wordle.</span>
-<span id="cb29-301"><a href="#cb29-301"></a><span class="ss">    - </span>And in fact expect to prefer arrays this term.</span>
+<span id="cb29-299"><a href="#cb29-299"></a><span class="st">- Arrays in Rust are fixed size and typed, not unlike NumPy array.</span></span>
+<span id="cb29-300"><a href="#cb29-300"></a><span class="st">- They see little use versus the more common vector type, but I preferred arrays for Wordle.</span></span>
+<span id="cb29-301"><a href="#cb29-301"></a><span class="st">    - And in fact expect to prefer arrays this term.</span></span>
 <span id="cb29-302"><a href="#cb29-302"></a></span>
-<span id="cb29-303"><a href="#cb29-303"></a><span class="fu">## Quoth the [Docs](https://doc.rust-lang.org/std/primitive.array.html)</span></span>
+<span id="cb29-303"><a href="#cb29-303"></a><span class="st">## Quoth the [Docs](https://doc.rust-lang.org/std/primitive.array.html)</span></span>
 <span id="cb29-304"><a href="#cb29-304"></a></span>
-<span id="cb29-305"><a href="#cb29-305"></a><span class="ss">- </span>A fixed-size array, denoted <span class="in">`[T; N]`</span>, for the element type, <span class="in">`T`</span>, and the non-negative compile-time constant size, <span class="in">`N`</span>.</span>
-<span id="cb29-306"><a href="#cb29-306"></a><span class="ss">- </span>There are two syntactic forms for creating an array:</span>
+<span id="cb29-305"><a href="#cb29-305"></a><span class="st">- A fixed-size array, denoted `[T; N]`, for the element type, `T`, and the non-negative compile-time constant size, `N`.</span></span>
+<span id="cb29-306"><a href="#cb29-306"></a><span class="st">- There are two syntactic forms for creating an array:</span></span>
 <span id="cb29-307"><a href="#cb29-307"></a></span>
-<span id="cb29-308"><a href="#cb29-308"></a><span class="ss">    - </span>A list with each element, i.e., <span class="in">`[x, y, z]`</span>.</span>
+<span id="cb29-308"><a href="#cb29-308"></a><span class="st">    - A list with each element, i.e., `[x, y, z]`.</span></span>
 <span id="cb29-309"><a href="#cb29-309"></a></span>
-<span id="cb29-310"><a href="#cb29-310"></a><span class="ss">    - </span>A repeat expression <span class="in">`[expr; N]`</span> where <span class="in">`N`</span> is how many times to repeat expr in the array. expr must either be:</span>
-<span id="cb29-311"><a href="#cb29-311"></a><span class="ss">        - </span>A value of a type implementing the Copy trait</span>
-<span id="cb29-312"><a href="#cb29-312"></a><span class="ss">        - </span>A const value</span>
-<span id="cb29-313"><a href="#cb29-313"></a><span class="ss">- </span>I never read this, I found <span class="co">[</span><span class="ot">this page</span><span class="co">](https://blog.orhun.dev/zero-deps-random-in-rust/)</span> through a search engine and ripped it.</span>
-<span id="cb29-314"><a href="#cb29-314"></a><span class="ss">    - </span>Search for <span class="in">`dev/urandom`</span> on that page.</span>
-<span id="cb29-315"><a href="#cb29-315"></a>    </span>
-<span id="cb29-316"><a href="#cb29-316"></a><span class="fu">## Create an array</span></span>
+<span id="cb29-310"><a href="#cb29-310"></a><span class="st">    - A repeat expression `[expr; N]` where `N` is how many times to repeat expr in the array. expr must either be:</span></span>
+<span id="cb29-311"><a href="#cb29-311"></a><span class="st">        - A value of a type implementing the Copy trait</span></span>
+<span id="cb29-312"><a href="#cb29-312"></a><span class="st">        - A const value</span></span>
+<span id="cb29-313"><a href="#cb29-313"></a><span class="st">- I never read this, I found [this page](https://blog.orhun.dev/zero-deps-random-in-rust/) through a search engine and ripped it.</span></span>
+<span id="cb29-314"><a href="#cb29-314"></a><span class="st">    - Search for `dev/urandom` on that page.</span></span>
+<span id="cb29-315"><a href="#cb29-315"></a><span class="st">    </span></span>
+<span id="cb29-316"><a href="#cb29-316"></a><span class="st">## Create an array</span></span>
 <span id="cb29-317"><a href="#cb29-317"></a></span>
-<span id="cb29-318"><a href="#cb29-318"></a><span class="ss">- </span>The following is a mutable - so we can read file data *into* it - array of 8 bytes.</span>
-<span id="cb29-319"><a href="#cb29-319"></a><span class="in">```rs</span></span>
-<span id="cb29-320"><a href="#cb29-320"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> <span class="dv">8</span>]<span class="op">;</span></span>
-<span id="cb29-321"><a href="#cb29-321"></a><span class="in">```</span></span>
-<span id="cb29-322"><a href="#cb29-322"></a><span class="ss">- </span>Breakdown.</span>
-<span id="cb29-323"><a href="#cb29-323"></a><span class="ss">    - </span>The <span class="in">`0`</span> in <span class="in">`0u8`</span> is the initialization value.</span>
-<span id="cb29-324"><a href="#cb29-324"></a><span class="ss">    - </span>The <span class="in">`u8`</span> is the type, unsigned 8 bit value.</span>
-<span id="cb29-325"><a href="#cb29-325"></a><span class="ss">    - </span>The post comma <span class="in">`8`</span> is the number of 8 bit values to store.</span>
-<span id="cb29-326"><a href="#cb29-326"></a><span class="ss">- </span>There's only one problem here.</span>
-<span id="cb29-327"><a href="#cb29-327"></a><span class="ss">    - </span>That second <span class="in">`8`</span> is a magic number, which to me represents poor style.</span>
-<span id="cb29-328"><a href="#cb29-328"></a><span class="ss">        - </span>Believe me, I wanted to just type 8, but we shouldn't.</span>
-<span id="cb29-329"><a href="#cb29-329"></a>        </span>
-<span id="cb29-330"><a href="#cb29-330"></a><span class="fu">## On Magic Numbers</span></span>
+<span id="cb29-318"><a href="#cb29-318"></a><span class="st">- The following is a mutable - so we can read file data *into* it - array of 8 bytes.</span></span>
+<span id="cb29-319"><a href="#cb29-319"></a><span class="st">```rs</span></span>
+<span id="cb29-320"><a href="#cb29-320"></a><span class="st">let mut buffer = [0u8; 8];</span></span>
+<span id="cb29-321"><a href="#cb29-321"></a><span class="st">```</span></span>
+<span id="cb29-322"><a href="#cb29-322"></a><span class="st">- Breakdown.</span></span>
+<span id="cb29-323"><a href="#cb29-323"></a><span class="st">    - The `0` in `0u8` is the initialization value.</span></span>
+<span id="cb29-324"><a href="#cb29-324"></a><span class="st">    - The `u8` is the type, unsigned 8 bit value.</span></span>
+<span id="cb29-325"><a href="#cb29-325"></a><span class="st">    - The post comma `8` is the number of 8 bit values to store.</span></span>
+<span id="cb29-326"><a href="#cb29-326"></a><span class="st">- There'</span>s only one problem here.</span>
+<span id="cb29-327"><a href="#cb29-327"></a>    <span class="ex">-</span> That second <span class="kw">`</span><span class="st">8</span><span class="kw">`</span> <span class="ex">is</span> a magic number, which to me represents poor style.</span>
+<span id="cb29-328"><a href="#cb29-328"></a>        <span class="ex">-</span> Believe me, I wanted to just type 8, but we shouldn<span class="st">'t.</span></span>
+<span id="cb29-329"><a href="#cb29-329"></a><span class="st">        </span></span>
+<span id="cb29-330"><a href="#cb29-330"></a><span class="st">## On Magic Numbers</span></span>
 <span id="cb29-331"><a href="#cb29-331"></a></span>
-<span id="cb29-332"><a href="#cb29-332"></a><span class="ss">- </span>To select a random word, eventually you will probably have:</span>
-<span id="cb29-333"><a href="#cb29-333"></a><span class="ss">    - </span>An array of 5 letter words.</span>
-<span id="cb29-334"><a href="#cb29-334"></a><span class="ss">    - </span>That array will have some length.</span>
-<span id="cb29-335"><a href="#cb29-335"></a><span class="ss">    - </span>That length will be whatever Rust uses to store the size of memory objects.</span>
-<span id="cb29-336"><a href="#cb29-336"></a><span class="ss">    - </span>Different computers have different ways of address memory...</span>
-<span id="cb29-337"><a href="#cb29-337"></a><span class="ss">    - </span>So we cannot make assumptions about the size of values which themselves store the size of memory.</span>
-<span id="cb29-338"><a href="#cb29-338"></a><span class="ss">        - </span>I wish I was kidding! I'm not!</span>
+<span id="cb29-332"><a href="#cb29-332"></a><span class="st">- To select a random word, eventually you will probably have:</span></span>
+<span id="cb29-333"><a href="#cb29-333"></a><span class="st">    - An array of 5 letter words.</span></span>
+<span id="cb29-334"><a href="#cb29-334"></a><span class="st">    - That array will have some length.</span></span>
+<span id="cb29-335"><a href="#cb29-335"></a><span class="st">    - That length will be whatever Rust uses to store the size of memory objects.</span></span>
+<span id="cb29-336"><a href="#cb29-336"></a><span class="st">    - Different computers have different ways of address memory...</span></span>
+<span id="cb29-337"><a href="#cb29-337"></a><span class="st">    - So we cannot make assumptions about the size of values which themselves store the size of memory.</span></span>
+<span id="cb29-338"><a href="#cb29-338"></a><span class="st">        - I wish I was kidding! I'</span>m not!</span>
 <span id="cb29-339"><a href="#cb29-339"></a></span>
-<span id="cb29-340"><a href="#cb29-340"></a><span class="fu">## 32 vs 64 bit</span></span>
+<span id="cb29-340"><a href="#cb29-340"></a><span class="co">## 32 vs 64 bit</span></span>
 <span id="cb29-341"><a href="#cb29-341"></a></span>
-<span id="cb29-342"><a href="#cb29-342"></a><span class="ss">- </span>For example, how many memory locations can be addressed by a 32 bit system?</span>
-<span id="cb29-343"><a href="#cb29-343"></a><span class="ss">- </span>How many on a 64 bit system?</span>
-<span id="cb29-344"><a href="#cb29-344"></a><span class="ss">- </span>Does your device potentially use 48 bit addresses?</span>
-<span id="cb29-345"><a href="#cb29-345"></a><span class="ss">- </span>How could you tell?</span>
-<span id="cb29-346"><a href="#cb29-346"></a><span class="ss">- </span>What if you run code on a 16 bit microcontroller?</span>
-<span id="cb29-347"><a href="#cb29-347"></a><span class="ss">- </span>Enter <span class="in">`usize`</span></span>
-<span id="cb29-348"><a href="#cb29-348"></a><span class="ss">    - </span>The unsigned value that is the right size to store a size.</span>
+<span id="cb29-342"><a href="#cb29-342"></a><span class="ex">-</span> For example, how many memory locations can be addressed by a 32 bit system<span class="pp">?</span></span>
+<span id="cb29-343"><a href="#cb29-343"></a><span class="ex">-</span> How many on a 64 bit system<span class="pp">?</span></span>
+<span id="cb29-344"><a href="#cb29-344"></a><span class="ex">-</span> Does your device potentially use 48 bit addresses<span class="pp">?</span></span>
+<span id="cb29-345"><a href="#cb29-345"></a><span class="ex">-</span> How could you tell<span class="pp">?</span></span>
+<span id="cb29-346"><a href="#cb29-346"></a><span class="ex">-</span> What if you run code on a 16 bit microcontroller<span class="pp">?</span></span>
+<span id="cb29-347"><a href="#cb29-347"></a><span class="ex">-</span> Enter <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span></span>
+<span id="cb29-348"><a href="#cb29-348"></a>    <span class="ex">-</span> The unsigned value that is the right size to store a size.</span>
 <span id="cb29-349"><a href="#cb29-349"></a>    </span>
-<span id="cb29-350"><a href="#cb29-350"></a><span class="fu">## `usize`</span></span>
+<span id="cb29-350"><a href="#cb29-350"></a><span class="co">## </span><span class="kw">`</span><span class="st">usize</span><span class="kw">`</span></span>
 <span id="cb29-351"><a href="#cb29-351"></a></span>
-<span id="cb29-352"><a href="#cb29-352"></a><span class="ss">- </span>We will use <span class="in">`usize`</span> by name twice:</span>
-<span id="cb29-353"><a href="#cb29-353"></a><span class="ss">    - </span>We need to read a random usize.</span>
-<span id="cb29-354"><a href="#cb29-354"></a><span class="ss">- </span>We can determine how many <span class="in">`u8`</span>s are required to make up a <span class="in">`usize`</span> by checking how many bits are in a <span class="in">`usize`</span>. and dividing by 8.</span>
-<span id="cb29-355"><a href="#cb29-355"></a><span class="in">```rs</span></span>
-<span id="cb29-356"><a href="#cb29-356"></a><span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span></span>
-<span id="cb29-357"><a href="#cb29-357"></a><span class="in">```</span></span>
-<span id="cb29-358"><a href="#cb29-358"></a><span class="ss">- </span>Only one problem - for some reason <span class="in">`usize`</span> stores *its* size as a <span class="in">`u32`</span>.</span>
-<span id="cb29-359"><a href="#cb29-359"></a><span class="ss">- </span>So to get enough bits to fill I <span class="in">`usize`</span>, I ended up doing... this?</span>
-<span id="cb29-360"><a href="#cb29-360"></a><span class="in">```rs</span></span>
-<span id="cb29-361"><a href="#cb29-361"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb29-362"><a href="#cb29-362"></a><span class="in">```</span></span>
+<span id="cb29-352"><a href="#cb29-352"></a><span class="ex">-</span> We will use <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span> <span class="ex">by</span> name twice:</span>
+<span id="cb29-353"><a href="#cb29-353"></a>    <span class="ex">-</span> We need to read a random usize.</span>
+<span id="cb29-354"><a href="#cb29-354"></a><span class="ex">-</span> We can determine how many <span class="kw">`</span><span class="st">u8</span><span class="kw">`</span><span class="ex">s</span> are required to make up a <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span> <span class="ex">by</span> checking how many bits are in a <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span><span class="bu">.</span> and dividing by 8.</span>
+<span id="cb29-355"><a href="#cb29-355"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-356"><a href="#cb29-356"></a><span class="st">usize::BITS / 8</span></span>
+<span id="cb29-357"><a href="#cb29-357"></a><span class="kw">```</span></span>
+<span id="cb29-358"><a href="#cb29-358"></a><span class="ex">-</span> Only one problem <span class="at">-</span> for some reason <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span> <span class="ex">stores</span> <span class="pp">*</span>its<span class="pp">*</span> size as a <span class="kw">`</span><span class="st">u32</span><span class="kw">`</span><span class="bu">.</span></span>
+<span id="cb29-359"><a href="#cb29-359"></a><span class="ex">-</span> So to get enough bits to fill I <span class="kw">`</span><span class="st">usize</span><span class="kw">`</span><span class="ex">,</span> I ended up doing... this<span class="pp">?</span></span>
+<span id="cb29-360"><a href="#cb29-360"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-361"><a href="#cb29-361"></a><span class="st">let mut buffer = [0u8; (usize::BITS / 8) as usize];</span></span>
+<span id="cb29-362"><a href="#cb29-362"></a><span class="kw">```</span></span>
 <span id="cb29-363"><a href="#cb29-363"></a></span>
-<span id="cb29-364"><a href="#cb29-364"></a><span class="al">![](https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif)</span></span>
+<span id="cb29-364"><a href="#cb29-364"></a><span class="ex">![]</span><span class="er">(</span><span class="ex">https://c.tenor.com/Xi9e2RhtY7kAAAAC/tenor.gif</span><span class="kw">)</span></span>
 <span id="cb29-365"><a href="#cb29-365"></a></span>
-<span id="cb29-366"><a href="#cb29-366"></a>*Presumably I'm doing this wrong.*</span>
+<span id="cb29-366"><a href="#cb29-366"></a><span class="ex">*Presumably</span> I<span class="st">'m doing this wrong.*</span></span>
 <span id="cb29-367"><a href="#cb29-367"></a></span>
-<span id="cb29-368"><a href="#cb29-368"></a><span class="fu">## Check in</span></span>
+<span id="cb29-368"><a href="#cb29-368"></a><span class="st">## Check in</span></span>
 <span id="cb29-369"><a href="#cb29-369"></a></span>
-<span id="cb29-370"><a href="#cb29-370"></a><span class="ss">- </span>I have this so far:</span>
+<span id="cb29-370"><a href="#cb29-370"></a><span class="st">- I have this so far:</span></span>
 <span id="cb29-371"><a href="#cb29-371"></a></span>
-<span id="cb29-372"><a href="#cb29-372"></a><span class="in">```rs</span></span>
-<span id="cb29-373"><a href="#cb29-373"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-374"><a href="#cb29-374"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb29-375"><a href="#cb29-375"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-376"><a href="#cb29-376"></a><span class="in">```</span></span>
+<span id="cb29-372"><a href="#cb29-372"></a><span class="st">```rs</span></span>
+<span id="cb29-373"><a href="#cb29-373"></a><span class="st">let mut devrnd = std::fs::File::open("/dev/urandom").unwrap();</span></span>
+<span id="cb29-374"><a href="#cb29-374"></a><span class="st">let mut buffer = [0u8; (usize::BITS / 8) as usize];</span></span>
+<span id="cb29-375"><a href="#cb29-375"></a><span class="st">std::io::Read::read_exact(&amp;mut devrnd, &amp;mut buffer).unwrap();</span></span>
+<span id="cb29-376"><a href="#cb29-376"></a><span class="st">```</span></span>
 <span id="cb29-377"><a href="#cb29-377"></a></span>
-<span id="cb29-378"><a href="#cb29-378"></a><span class="fu">## Candidate Answers</span></span>
+<span id="cb29-378"><a href="#cb29-378"></a><span class="st">## Candidate Answers</span></span>
 <span id="cb29-379"><a href="#cb29-379"></a></span>
-<span id="cb29-380"><a href="#cb29-380"></a><span class="ss">- </span>You can imagine testing with a smaller word list, like the words of the <span class="co">[</span><span class="ot">Sator Square</span><span class="co">](https://en.wikipedia.org/wiki/Sator_Square)</span></span>
+<span id="cb29-380"><a href="#cb29-380"></a><span class="st">- You can imagine testing with a smaller word list, like the words of the [Sator Square](https://en.wikipedia.org/wiki/Sator_Square)</span></span>
 <span id="cb29-381"><a href="#cb29-381"></a></span>
-<span id="cb29-382"><a href="#cb29-382"></a><span class="in">```rs</span></span>
-<span id="cb29-383"><a href="#cb29-383"></a><span class="kw">const</span> WORDS <span class="op">:</span> [<span class="op">&amp;</span><span class="dt">str</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="st">"rotas"</span><span class="op">,</span> <span class="st">"opera"</span><span class="op">,</span> <span class="st">"tenet"</span><span class="op">,</span> <span class="st">"arepo"</span><span class="op">,</span> <span class="st">"sator"</span>]<span class="op">;</span></span>
-<span id="cb29-384"><a href="#cb29-384"></a><span class="in">```</span></span>
+<span id="cb29-382"><a href="#cb29-382"></a><span class="st">```rs</span></span>
+<span id="cb29-383"><a href="#cb29-383"></a><span class="st">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
+<span id="cb29-384"><a href="#cb29-384"></a><span class="st">```</span></span>
 <span id="cb29-385"><a href="#cb29-385"></a></span>
-<span id="cb29-386"><a href="#cb29-386"></a><span class="ss">- </span>Here <span class="in">`&amp;str`</span> is used to refer to string literals, that is, *not* the <span class="in">`String`</span> quasi-data structure of arbitrary size.</span>
-<span id="cb29-387"><a href="#cb29-387"></a><span class="ss">    - </span>This was the type that e.g. <span class="in">`"hello world"`</span> had the whole time under the hood.</span>
+<span id="cb29-386"><a href="#cb29-386"></a><span class="st">- Here `&amp;str` is used to refer to string literals, that is, *not* the `String` quasi-data structure of arbitrary size.</span></span>
+<span id="cb29-387"><a href="#cb29-387"></a><span class="st">    - This was the type that e.g. `"hello world"` had the whole time under the hood.</span></span>
 <span id="cb29-388"><a href="#cb29-388"></a></span>
-<span id="cb29-389"><a href="#cb29-389"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-390"><a href="#cb29-390"></a><span class="in">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
+<span id="cb29-389"><a href="#cb29-389"></a><span class="st">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb29-390"><a href="#cb29-390"></a><span class="st">const WORDS : [&amp;str; 5] = ["rotas", "opera", "tenet", "arepo", "sator"];</span></span>
 <span id="cb29-391"><a href="#cb29-391"></a></span>
-<span id="cb29-392"><a href="#cb29-392"></a><span class="in">fn main() {</span></span>
-<span id="cb29-393"><a href="#cb29-393"></a><span class="in">    let i : u8 = 2;</span></span>
-<span id="cb29-394"><a href="#cb29-394"></a><span class="in">    println!("{:?}", WORDS[i]);</span></span>
-<span id="cb29-395"><a href="#cb29-395"></a><span class="in">}</span></span>
-<span id="cb29-396"><a href="#cb29-396"></a><span class="in">```</span></span>
-<span id="cb29-397"><a href="#cb29-397"></a><span class="ss">- </span>This doesn't work.</span>
+<span id="cb29-392"><a href="#cb29-392"></a><span class="st">fn main() {</span></span>
+<span id="cb29-393"><a href="#cb29-393"></a><span class="st">    let i : u8 = 2;</span></span>
+<span id="cb29-394"><a href="#cb29-394"></a><span class="st">    println!("{:?}", WORDS[i]);</span></span>
+<span id="cb29-395"><a href="#cb29-395"></a><span class="st">}</span></span>
+<span id="cb29-396"><a href="#cb29-396"></a><span class="st">```</span></span>
+<span id="cb29-397"><a href="#cb29-397"></a><span class="st">- This doesn'</span>t work.</span>
 <span id="cb29-398"><a href="#cb29-398"></a></span>
-<span id="cb29-399"><a href="#cb29-399"></a><span class="fu">## Indices</span></span>
+<span id="cb29-399"><a href="#cb29-399"></a><span class="co">## Indices</span></span>
 <span id="cb29-400"><a href="#cb29-400"></a></span>
-<span id="cb29-401"><a href="#cb29-401"></a><span class="ss">- </span>An array can be as large as memory.</span>
-<span id="cb29-402"><a href="#cb29-402"></a><span class="ss">- </span>So it's index can be as large as memory.</span>
-<span id="cb29-403"><a href="#cb29-403"></a><span class="ss">- </span>The thing as large memory is <span class="in">`usize`</span>.</span>
-<span id="cb29-404"><a href="#cb29-404"></a><span class="in">```bash</span></span>
-<span id="cb29-405"><a href="#cb29-405"></a><span class="va">error</span><span class="op">[</span>E0277<span class="op">]</span><span class="ex">:</span> the type <span class="kw">`</span><span class="ex">[</span><span class="kw">&amp;</span><span class="st">'static str]` cannot be indexed by `u8`</span></span>
+<span id="cb29-401"><a href="#cb29-401"></a><span class="ex">-</span> An array can be as large as memory.</span>
+<span id="cb29-402"><a href="#cb29-402"></a><span class="ex">-</span> So it<span class="st">'s index can be as large as memory.</span></span>
+<span id="cb29-403"><a href="#cb29-403"></a><span class="st">- The thing as large memory is `usize`.</span></span>
+<span id="cb29-404"><a href="#cb29-404"></a><span class="st">```bash</span></span>
+<span id="cb29-405"><a href="#cb29-405"></a><span class="st">error[E0277]: the type `[&amp;'</span>static str]<span class="kw">`</span><span class="st"> cannot be indexed by </span><span class="kw">`</span><span class="ex">u8</span><span class="kw">`</span></span>
 <span id="cb29-406"><a href="#cb29-406"></a><span class="st"> --&gt; src/main.rs:5:28</span></span>
 <span id="cb29-407"><a href="#cb29-407"></a><span class="st">  |</span></span>
-<span id="cb29-408"><a href="#cb29-408"></a><span class="st">5 |     println!("{:?}", WORDS[i]);</span></span>
-<span id="cb29-409"><a href="#cb29-409"></a><span class="st">  |                            ^ slice indices are of type `usize` or ranges of `usize`</span></span>
-<span id="cb29-410"><a href="#cb29-410"></a><span class="st">```</span></span>
+<span id="cb29-408"><a href="#cb29-408"></a><span class="st">5 |     println!("</span><span class="ex">{:?}</span><span class="st">", WORDS[i]);</span></span>
+<span id="cb29-409"><a href="#cb29-409"></a><span class="st">  |                            ^ slice indices are of type </span><span class="kw">`</span><span class="ex">usize</span><span class="kw">`</span><span class="st"> or ranges of </span><span class="kw">`</span><span class="ex">usize</span><span class="kw">`</span></span>
+<span id="cb29-410"><a href="#cb29-410"></a><span class="kw">```</span></span>
 <span id="cb29-411"><a href="#cb29-411"></a></span>
-<span id="cb29-412"><a href="#cb29-412"></a><span class="st">## Byte array to `usize`</span></span>
+<span id="cb29-412"><a href="#cb29-412"></a><span class="co">## Byte array to </span><span class="kw">`</span><span class="st">usize</span><span class="kw">`</span></span>
 <span id="cb29-413"><a href="#cb29-413"></a></span>
-<span id="cb29-414"><a href="#cb29-414"></a><span class="st">- Usize helpfully has "from bytes" methods.</span></span>
-<span id="cb29-415"><a href="#cb29-415"></a><span class="st">    - There are 3 such methods for different *endianness*es, a future topic.</span></span>
-<span id="cb29-416"><a href="#cb29-416"></a><span class="st">- I use little endianness because it doesn'</span><span class="ex">t</span> matter <span class="at">-</span> <span class="kw">`</span>le<span class="kw">`</span></span>
-<span id="cb29-417"><a href="#cb29-417"></a><span class="kw">```</span>rs</span>
-<span id="cb29-418"><a href="#cb29-418"></a><span class="bu">let</span> <span class="va">secret</span> <span class="op">=</span> <span class="va">usize</span><span class="op">::</span><span class="va">from_le_bytes</span><span class="er">(</span><span class="ex">buffer</span><span class="kw">);</span></span>
-<span id="cb29-419"><a href="#cb29-419"></a><span class="in">```</span></span>
-<span id="cb29-420"><a href="#cb29-420"></a><span class="ss">- </span>This can be used as an index, but it's probably too large.</span>
+<span id="cb29-414"><a href="#cb29-414"></a><span class="ex">-</span> Usize helpfully has <span class="st">"from bytes"</span> methods.</span>
+<span id="cb29-415"><a href="#cb29-415"></a>    <span class="ex">-</span> There are 3 such methods for different <span class="pp">*</span>endianness<span class="pp">*</span>es, a future topic.</span>
+<span id="cb29-416"><a href="#cb29-416"></a><span class="ex">-</span> I use little endianness because it doesn<span class="st">'t matter - `le`</span></span>
+<span id="cb29-417"><a href="#cb29-417"></a><span class="st">```rs</span></span>
+<span id="cb29-418"><a href="#cb29-418"></a><span class="st">let secret = usize::from_le_bytes(buffer);</span></span>
+<span id="cb29-419"><a href="#cb29-419"></a><span class="st">```</span></span>
+<span id="cb29-420"><a href="#cb29-420"></a><span class="st">- This can be used as an index, but it'</span>s probably too large.</span>
 <span id="cb29-421"><a href="#cb29-421"></a></span>
-<span id="cb29-422"><a href="#cb29-422"></a><span class="fu">## `.len()`</span></span>
+<span id="cb29-422"><a href="#cb29-422"></a><span class="co">## </span><span class="kw">`</span><span class="st">.len()</span><span class="kw">`</span></span>
 <span id="cb29-423"><a href="#cb29-423"></a></span>
-<span id="cb29-424"><a href="#cb29-424"></a><span class="ss">- </span>Rust furnishes the <span class="in">`.len()`</span> method of arrays to detect their type.</span>
-<span id="cb29-425"><a href="#cb29-425"></a><span class="in">```rs</span></span>
-<span id="cb29-426"><a href="#cb29-426"></a>WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()]</span>
-<span id="cb29-427"><a href="#cb29-427"></a><span class="in">```</span></span>
+<span id="cb29-424"><a href="#cb29-424"></a><span class="ex">-</span> Rust furnishes the <span class="kw">`</span><span class="st">.len()</span><span class="kw">`</span> <span class="ex">method</span> of arrays to detect their type.</span>
+<span id="cb29-425"><a href="#cb29-425"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-426"><a href="#cb29-426"></a><span class="st">WORDS[secret % WORDS.len()]</span></span>
+<span id="cb29-427"><a href="#cb29-427"></a><span class="kw">```</span></span>
 <span id="cb29-428"><a href="#cb29-428"></a></span>
-<span id="cb29-429"><a href="#cb29-429"></a><span class="fu">## Altogether</span></span>
+<span id="cb29-429"><a href="#cb29-429"></a><span class="co">## Altogether</span></span>
 <span id="cb29-430"><a href="#cb29-430"></a></span>
-<span id="cb29-431"><a href="#cb29-431"></a><span class="ss">- </span>We use <span class="in">`String::from()`</span> to get a <span class="in">`String`</span> from a <span class="in">`&amp;str`</span>, as the array contains fixed length strings and I use the <span class="in">`String`</span> type for consistency with lecture recommendations.</span>
+<span id="cb29-431"><a href="#cb29-431"></a><span class="ex">-</span> We use <span class="kw">`</span><span class="st">String::from()</span><span class="kw">`</span> <span class="ex">to</span> get a <span class="kw">`</span><span class="st">String</span><span class="kw">`</span> <span class="ex">from</span> a <span class="kw">`</span><span class="st">&amp;str</span><span class="kw">`</span><span class="ex">,</span> as the array contains fixed length strings and I use the <span class="kw">`</span><span class="st">String</span><span class="kw">`</span> <span class="bu">type</span> for consistency with lecture recommendations.</span>
 <span id="cb29-432"><a href="#cb29-432"></a></span>
-<span id="cb29-433"><a href="#cb29-433"></a><span class="in">```rs</span></span>
-<span id="cb29-434"><a href="#cb29-434"></a><span class="kw">let</span> <span class="kw">mut</span> devrnd <span class="op">=</span> <span class="pp">std::fs::File::</span>open(<span class="st">"/dev/urandom"</span>)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-435"><a href="#cb29-435"></a><span class="kw">let</span> <span class="kw">mut</span> buffer <span class="op">=</span> [<span class="dv">0u8</span><span class="op">;</span> (<span class="dt">usize</span><span class="pp">::</span>BITS <span class="op">/</span> <span class="dv">8</span>) <span class="kw">as</span> <span class="dt">usize</span>]<span class="op">;</span></span>
-<span id="cb29-436"><a href="#cb29-436"></a><span class="pp">std::io::</span><span class="bu">Read</span><span class="pp">::</span>read_exact(<span class="op">&amp;</span><span class="kw">mut</span> devrnd<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buffer)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-437"><a href="#cb29-437"></a><span class="kw">let</span> <span class="kw">mut</span> secret <span class="op">=</span> <span class="dt">usize</span><span class="pp">::</span>from_ne_bytes(buffer)<span class="op">;</span></span>
-<span id="cb29-438"><a href="#cb29-438"></a><span class="kw">let</span> answer <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(WORDS[secret <span class="op">%</span> WORDS<span class="op">.</span>len()])<span class="op">;</span></span>
-<span id="cb29-439"><a href="#cb29-439"></a><span class="in">```</span></span>
+<span id="cb29-433"><a href="#cb29-433"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-434"><a href="#cb29-434"></a><span class="st">let mut devrnd = std::fs::File::open("</span><span class="ex">/dev/urandom</span><span class="st">").unwrap();</span></span>
+<span id="cb29-435"><a href="#cb29-435"></a><span class="st">let mut buffer = [0u8; (usize::BITS / 8) as usize];</span></span>
+<span id="cb29-436"><a href="#cb29-436"></a><span class="st">std::io::Read::read_exact(&amp;mut devrnd, &amp;mut buffer).unwrap();</span></span>
+<span id="cb29-437"><a href="#cb29-437"></a><span class="st">let mut secret = usize::from_ne_bytes(buffer);</span></span>
+<span id="cb29-438"><a href="#cb29-438"></a><span class="st">let answer : String = String::from(WORDS[secret % WORDS.len()]);</span></span>
+<span id="cb29-439"><a href="#cb29-439"></a><span class="kw">```</span></span>
 <span id="cb29-440"><a href="#cb29-440"></a></span>
 <span id="cb29-441"><a href="#cb29-441"></a></span>
-<span id="cb29-442"><a href="#cb29-442"></a><span class="fu">## Today</span></span>
+<span id="cb29-442"><a href="#cb29-442"></a><span class="co">## Today</span></span>
 <span id="cb29-443"><a href="#cb29-443"></a></span>
-<span id="cb29-444"><a href="#cb29-444"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
-<span id="cb29-445"><a href="#cb29-445"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
-<span id="cb29-446"><a href="#cb29-446"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
-<span id="cb29-447"><a href="#cb29-447"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`stdin()`</span></span>
-<span id="cb29-448"><a href="#cb29-448"></a><span class="ss">- </span><span class="va">[ ]</span> "Fixes"</span>
+<span id="cb29-444"><a href="#cb29-444"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="kw">`</span><span class="st">const</span><span class="kw">`</span></span>
+<span id="cb29-445"><a href="#cb29-445"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> Character iteration</span>
+<span id="cb29-446"><a href="#cb29-446"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="kw">`</span><span class="st">/dev/urandom</span><span class="kw">`</span></span>
+<span id="cb29-447"><a href="#cb29-447"></a><span class="ex">-</span> [ ] <span class="kw">`</span><span class="st">stdin()</span><span class="kw">`</span></span>
+<span id="cb29-448"><a href="#cb29-448"></a><span class="ex">-</span> [ ] <span class="st">"Fixes"</span></span>
 <span id="cb29-449"><a href="#cb29-449"></a></span>
 <span id="cb29-450"><a href="#cb29-450"></a></span>
-<span id="cb29-451"><a href="#cb29-451"></a><span class="fu"># stdin</span></span>
+<span id="cb29-451"><a href="#cb29-451"></a><span class="co"># stdin</span></span>
 <span id="cb29-452"><a href="#cb29-452"></a></span>
-<span id="cb29-453"><a href="#cb29-453"></a><span class="fu">## `input()`</span></span>
+<span id="cb29-453"><a href="#cb29-453"></a><span class="co">## </span><span class="kw">`</span><span class="st">input()</span><span class="kw">`</span></span>
 <span id="cb29-454"><a href="#cb29-454"></a></span>
-<span id="cb29-455"><a href="#cb29-455"></a><span class="ss">- </span>Python furnishes the straight-forward <span class="in">`input()`</span> function.</span>
-<span id="cb29-456"><a href="#cb29-456"></a><span class="ss">- </span>We don't have that in rust, but we do have"</span>
-<span id="cb29-457"><a href="#cb29-457"></a><span class="ss">    - </span><span class="in">`stdin()`</span> - the "standard input" that represents text provided at terminal.</span>
-<span id="cb29-458"><a href="#cb29-458"></a><span class="ss">    - </span><span class="in">`.read_line()`</span> - like Python <span class="in">`.read_line()`</span> in that it reads to the next newline character, but a bit different in type.</span>
-<span id="cb29-459"><a href="#cb29-459"></a><span class="ss">- </span>Essentially, <span class="in">`stdin()`</span> is a function that returns a <span class="in">`File`</span> the refers to the terminal.</span>
+<span id="cb29-455"><a href="#cb29-455"></a><span class="ex">-</span> Python furnishes the straight-forward <span class="kw">`</span><span class="st">input()</span><span class="kw">`</span> <span class="ex">function.</span></span>
+<span id="cb29-456"><a href="#cb29-456"></a><span class="ex">-</span> We don<span class="st">'t have that in rust, but we do have"</span></span>
+<span id="cb29-457"><a href="#cb29-457"></a><span class="st">    - `stdin()` - the "standard input" that represents text provided at terminal.</span></span>
+<span id="cb29-458"><a href="#cb29-458"></a><span class="st">    - `.read_line()` - like Python `.read_line()` in that it reads to the next newline character, but a bit different in type.</span></span>
+<span id="cb29-459"><a href="#cb29-459"></a><span class="st">- Essentially, `stdin()` is a function that returns a `File` the refers to the terminal.</span></span>
 <span id="cb29-460"><a href="#cb29-460"></a></span>
-<span id="cb29-461"><a href="#cb29-461"></a><span class="in">```rs</span></span>
-<span id="cb29-462"><a href="#cb29-462"></a><span class="pp">std::io::</span>stdin()<span class="op">.</span>read_line(<span class="op">&amp;</span><span class="kw">mut</span> guess)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb29-463"><a href="#cb29-463"></a><span class="in">```</span></span>
+<span id="cb29-461"><a href="#cb29-461"></a><span class="st">```rs</span></span>
+<span id="cb29-462"><a href="#cb29-462"></a><span class="st">std::io::stdin().read_line(&amp;mut guess).unwrap();</span></span>
+<span id="cb29-463"><a href="#cb29-463"></a><span class="st">```</span></span>
 <span id="cb29-464"><a href="#cb29-464"></a></span>
-<span id="cb29-465"><a href="#cb29-465"></a><span class="ss">- </span>What happens if you don't unwrap?</span>
-<span id="cb29-466"><a href="#cb29-466"></a><span class="ss">- </span>What type is <span class="in">`guess`</span>? Array? <span class="in">`&amp;str`</span>? <span class="in">`String`</span>?</span>
-<span id="cb29-467"><a href="#cb29-467"></a><span class="in">```rs</span></span>
-<span id="cb29-468"><a href="#cb29-468"></a><span class="kw">let</span> <span class="kw">mut</span> guess <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb29-469"><a href="#cb29-469"></a><span class="in">```</span></span>
+<span id="cb29-465"><a href="#cb29-465"></a><span class="st">- What happens if you don'</span>t unwrap<span class="pp">?</span></span>
+<span id="cb29-466"><a href="#cb29-466"></a><span class="ex">-</span> What type is <span class="kw">`</span><span class="st">guess</span><span class="kw">`</span><span class="ex">?</span> Array<span class="pp">?</span> <span class="kw">`</span><span class="st">&amp;str</span><span class="kw">`</span><span class="ex">?</span> <span class="kw">`</span><span class="st">String</span><span class="kw">`</span><span class="ex">?</span></span>
+<span id="cb29-467"><a href="#cb29-467"></a><span class="kw">```</span><span class="st">rs</span></span>
+<span id="cb29-468"><a href="#cb29-468"></a><span class="st">let mut guess = String::new();</span></span>
+<span id="cb29-469"><a href="#cb29-469"></a><span class="kw">```</span></span>
 <span id="cb29-470"><a href="#cb29-470"></a></span>
-<span id="cb29-471"><a href="#cb29-471"></a><span class="fu">## `.trim()`</span></span>
+<span id="cb29-471"><a href="#cb29-471"></a><span class="co">## </span><span class="kw">`</span><span class="st">.trim()</span><span class="kw">`</span></span>
 <span id="cb29-472"><a href="#cb29-472"></a></span>
-<span id="cb29-473"><a href="#cb29-473"></a><span class="ss">- </span>Reading lines will return slightly longer strings that end with a newline character.</span>
-<span id="cb29-474"><a href="#cb29-474"></a><span class="ss">- </span>This can be removed with <span class="in">`.trim()`</span>.</span>
-<span id="cb29-475"><a href="#cb29-475"></a><span class="ss">- </span>Try reading in e.g. <span class="in">`opera`</span> or <span class="in">`tenet`</span> and seeing the trimmed vs. untrimmed versions.</span>
-<span id="cb29-476"><a href="#cb29-476"></a><span class="ss">    - </span>You may want to inspect their length, perhaps by converting to characters and using <span class="in">`.nth()`</span>.</span>
+<span id="cb29-473"><a href="#cb29-473"></a><span class="ex">-</span> Reading lines will return slightly longer strings that end with a newline character.</span>
+<span id="cb29-474"><a href="#cb29-474"></a><span class="ex">-</span> This can be removed with <span class="kw">`</span><span class="st">.trim()</span><span class="kw">`</span><span class="bu">.</span></span>
+<span id="cb29-475"><a href="#cb29-475"></a><span class="ex">-</span> Try reading in e.g. <span class="kw">`</span><span class="st">opera</span><span class="kw">`</span> <span class="ex">or</span> <span class="kw">`</span><span class="st">tenet</span><span class="kw">`</span> <span class="ex">and</span> seeing the trimmed vs. untrimmed versions.</span>
+<span id="cb29-476"><a href="#cb29-476"></a>    <span class="ex">-</span> You may want to inspect their length, perhaps by converting to characters and using <span class="kw">`</span><span class="st">.nth()</span><span class="kw">`</span><span class="bu">.</span></span>
 <span id="cb29-477"><a href="#cb29-477"></a></span>
-<span id="cb29-478"><a href="#cb29-478"></a><span class="fu">## `.contains()`</span></span>
+<span id="cb29-478"><a href="#cb29-478"></a><span class="co">## </span><span class="kw">`</span><span class="st">.contains()</span><span class="kw">`</span></span>
 <span id="cb29-479"><a href="#cb29-479"></a></span>
-<span id="cb29-480"><a href="#cb29-480"></a><span class="ss">- </span>You can check if a value is present in an array using <span class="in">`.contains()`</span>.</span>
-<span id="cb29-481"><a href="#cb29-481"></a><span class="ss">- </span>Check to see if the trimmed and untrimmed versions of <span class="in">`opera`</span> or <span class="in">`tenet`</span> are contained in the <span class="in">`WORDS`</span> array.</span>
-<span id="cb29-482"><a href="#cb29-482"></a><span class="ss">    - </span>You will need to fiddle with types a bit!</span>
-<span id="cb29-483"><a href="#cb29-483"></a><span class="ss">    - </span>Will you need to use <span class="in">`&amp;`</span>? <span class="in">`&amp;mut`</span>? <span class="in">`String::from()`</span>? Try each and see what happens - and consider why!</span>
+<span id="cb29-480"><a href="#cb29-480"></a><span class="ex">-</span> You can check if a value is present in an array using <span class="kw">`</span><span class="st">.contains()</span><span class="kw">`</span><span class="bu">.</span></span>
+<span id="cb29-481"><a href="#cb29-481"></a><span class="ex">-</span> Check to see if the trimmed and untrimmed versions of <span class="kw">`</span><span class="st">opera</span><span class="kw">`</span> <span class="ex">or</span> <span class="kw">`</span><span class="st">tenet</span><span class="kw">`</span> <span class="ex">are</span> contained in the <span class="kw">`</span><span class="st">WORDS</span><span class="kw">`</span> <span class="ex">array.</span></span>
+<span id="cb29-482"><a href="#cb29-482"></a>    <span class="ex">-</span> You will need to fiddle with types a bit!</span>
+<span id="cb29-483"><a href="#cb29-483"></a>    <span class="ex">-</span> Will you need to use <span class="kw">`</span><span class="st">&amp;</span><span class="kw">`</span><span class="ex">?</span> <span class="kw">`</span><span class="st">&amp;mut</span><span class="kw">`</span><span class="ex">?</span> <span class="kw">`</span><span class="st">String::from()</span><span class="kw">`</span><span class="ex">?</span> Try each and see what happens <span class="at">-</span> and consider why!</span>
 <span id="cb29-484"><a href="#cb29-484"></a></span>
-<span id="cb29-485"><a href="#cb29-485"></a><span class="fu">## `.clone()`</span></span>
+<span id="cb29-485"><a href="#cb29-485"></a><span class="co">## </span><span class="kw">`</span><span class="st">.clone()</span><span class="kw">`</span></span>
 <span id="cb29-486"><a href="#cb29-486"></a></span>
-<span id="cb29-487"><a href="#cb29-487"></a><span class="ss">- </span>Sometimes you will need to read a word from <span class="in">`stdin`</span> and perhaps both compare it some other word and also decompose it into characters.</span>
-<span id="cb29-488"><a href="#cb29-488"></a><span class="ss">- </span>If you need multiple copies, you may want to use <span class="in">`.clone()`</span> or <span class="in">`cargo`</span> may recommend use of <span class="in">`.clone()`</span>.</span>
+<span id="cb29-487"><a href="#cb29-487"></a><span class="ex">-</span> Sometimes you will need to read a word from <span class="kw">`</span><span class="st">stdin</span><span class="kw">`</span> <span class="ex">and</span> perhaps both compare it some other word and also decompose it into characters.</span>
+<span id="cb29-488"><a href="#cb29-488"></a><span class="ex">-</span> If you need multiple copies, you may want to use <span class="kw">`</span><span class="st">.clone()</span><span class="kw">`</span> <span class="ex">or</span> <span class="kw">`</span><span class="st">cargo</span><span class="kw">`</span> <span class="ex">may</span> recommend use of <span class="kw">`</span><span class="st">.clone()</span><span class="kw">`</span><span class="bu">.</span></span>
 <span id="cb29-489"><a href="#cb29-489"></a></span>
-<span id="cb29-490"><a href="#cb29-490"></a><span class="fu"># Closing Thoughts</span></span>
+<span id="cb29-490"><a href="#cb29-490"></a><span class="co"># Closing Thoughts</span></span>
 <span id="cb29-491"><a href="#cb29-491"></a></span>
-<span id="cb29-492"><a href="#cb29-492"></a><span class="fu">## `range()`</span></span>
+<span id="cb29-492"><a href="#cb29-492"></a><span class="co">## </span><span class="kw">`</span><span class="st">range()</span><span class="kw">`</span></span>
 <span id="cb29-493"><a href="#cb29-493"></a></span>
-<span id="cb29-494"><a href="#cb29-494"></a><span class="ss">- </span>You may benefit from using <span class="in">`for`</span> loops of fixed index.</span>
-<span id="cb29-495"><a href="#cb29-495"></a><span class="ss">- </span>Rust has a syntactical rather than functional range.</span>
-<span id="cb29-496"><a href="#cb29-496"></a><span class="ss">- </span>It follows the same start/stop rules as Python.</span>
+<span id="cb29-494"><a href="#cb29-494"></a><span class="ex">-</span> You may benefit from using <span class="kw">`</span><span class="st">for</span><span class="kw">`</span> <span class="ex">loops</span> of fixed index.</span>
+<span id="cb29-495"><a href="#cb29-495"></a><span class="ex">-</span> Rust has a syntactical rather than functional range.</span>
+<span id="cb29-496"><a href="#cb29-496"></a><span class="ex">-</span> It follows the same start/stop rules as Python.</span>
 <span id="cb29-497"><a href="#cb29-497"></a></span>
-<span id="cb29-498"><a href="#cb29-498"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb29-499"><a href="#cb29-499"></a><span class="in">fn main() {</span></span>
-<span id="cb29-500"><a href="#cb29-500"></a><span class="in">    for i in 1..5 {</span></span>
-<span id="cb29-501"><a href="#cb29-501"></a><span class="in">        println!("{:?}", i);</span></span>
-<span id="cb29-502"><a href="#cb29-502"></a><span class="in">    }</span></span>
-<span id="cb29-503"><a href="#cb29-503"></a><span class="in">}</span></span>
-<span id="cb29-504"><a href="#cb29-504"></a><span class="in">```</span></span>
+<span id="cb29-498"><a href="#cb29-498"></a><span class="kw">```</span><span class="st">{.rs filename="</span><span class="ex">src/main.rs</span><span class="st">"}</span></span>
+<span id="cb29-499"><a href="#cb29-499"></a><span class="st">fn main() {</span></span>
+<span id="cb29-500"><a href="#cb29-500"></a><span class="st">    for i in 1..5 {</span></span>
+<span id="cb29-501"><a href="#cb29-501"></a><span class="st">        println!("</span><span class="ex">{:?}</span><span class="st">", i);</span></span>
+<span id="cb29-502"><a href="#cb29-502"></a><span class="st">    }</span></span>
+<span id="cb29-503"><a href="#cb29-503"></a><span class="st">}</span></span>
+<span id="cb29-504"><a href="#cb29-504"></a><span class="kw">```</span></span>
 <span id="cb29-505"><a href="#cb29-505"></a></span>
-<span id="cb29-506"><a href="#cb29-506"></a><span class="fu">## Vectors</span></span>
+<span id="cb29-506"><a href="#cb29-506"></a><span class="co">## Vectors</span></span>
 <span id="cb29-507"><a href="#cb29-507"></a></span>
-<span id="cb29-508"><a href="#cb29-508"></a><span class="ss">- </span>A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</span>
-<span id="cb29-509"><a href="#cb29-509"></a><span class="ss">- </span>If you want to learn Vectors instead of arrays, simply consult this documentation.</span>
-<span id="cb29-510"><a href="#cb29-510"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Rust By Example: Vectors</span><span class="co">]</span></span>
-<span id="cb29-511"><a href="#cb29-511"></a><span class="ss">- </span>You will find them similar to Python <span class="in">`list`</span>.</span>
+<span id="cb29-508"><a href="#cb29-508"></a><span class="ex">-</span> A lot of Rust programmers are extremely fond of the Vector, which completely coincidentally was not necessary for Wordle as everything in Wordle is fixed size.</span>
+<span id="cb29-509"><a href="#cb29-509"></a><span class="ex">-</span> If you want to learn Vectors instead of arrays, simply consult this documentation.</span>
+<span id="cb29-510"><a href="#cb29-510"></a><span class="ex">-</span> [Rust By Example: Vectors]</span>
+<span id="cb29-511"><a href="#cb29-511"></a><span class="ex">-</span> You will find them similar to Python <span class="kw">`</span><span class="st">list</span><span class="kw">`</span><span class="bu">.</span></span>
 <span id="cb29-512"><a href="#cb29-512"></a></span>
-<span id="cb29-513"><a href="#cb29-513"></a><span class="fu">## Today</span></span>
+<span id="cb29-513"><a href="#cb29-513"></a><span class="co">## Today</span></span>
 <span id="cb29-514"><a href="#cb29-514"></a></span>
-<span id="cb29-515"><a href="#cb29-515"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`const`</span></span>
-<span id="cb29-516"><a href="#cb29-516"></a><span class="ss">- </span><span class="va">[x]</span> Character iteration</span>
-<span id="cb29-517"><a href="#cb29-517"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`/dev/urandom`</span></span>
-<span id="cb29-518"><a href="#cb29-518"></a><span class="ss">- </span><span class="va">[x]</span> <span class="in">`stdin()`</span></span>
-<span id="cb29-519"><a href="#cb29-519"></a><span class="ss">- </span><span class="va">[x]</span> "Fixes"</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb29-515"><a href="#cb29-515"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="kw">`</span><span class="st">const</span><span class="kw">`</span></span>
+<span id="cb29-516"><a href="#cb29-516"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> Character iteration</span>
+<span id="cb29-517"><a href="#cb29-517"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="kw">`</span><span class="st">/dev/urandom</span><span class="kw">`</span></span>
+<span id="cb29-518"><a href="#cb29-518"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="kw">`</span><span class="st">stdin()</span><span class="kw">`</span></span>
+<span id="cb29-519"><a href="#cb29-519"></a><span class="ex">-</span> <span class="pp">[</span><span class="ss">x</span><span class="pp">]</span> <span class="st">"Fixes"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

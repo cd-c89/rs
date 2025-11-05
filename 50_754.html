@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./51_f16.html" rel="next">
 <link href="./42_sha512.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b86297dc19107d1c9b1952b0f8e15fd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,7 +120,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -135,7 +138,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -158,9 +161,8 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Systems in Rust</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -665,14 +667,14 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 </ul></li>
 <li>Not a Number (NaN)</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">1</span>)<span class="op">/</span>f32(<span class="dv">0</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: divide by zero encountered <span class="kw">in</span> scalar divide</span>
 <span id="cb1-4"><a href="#cb1-4"></a>np.float32(inf)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a>Traceback (most recent call last):</span>
 <span id="cb1-7"><a href="#cb1-7"></a>  File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="pp">ZeroDivisionError</span>: division by zero</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="special-floats---inf" class="level2">
 <h2 class="anchored" data-anchor-id="special-floats---inf">Special Floats - inf</h2>
@@ -681,13 +683,13 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>Overflow protection</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;&gt;&gt;</span> f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="op">&lt;</span>stdin<span class="op">&gt;</span>:<span class="dv">1</span>: <span class="pp">RuntimeWarning</span>: overflow encountered <span class="kw">in</span> scalar power</span>
 <span id="cb2-3"><a href="#cb2-3"></a>np.float32(inf)</span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">10.0</span> <span class="op">**</span> <span class="dv">10000</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>Traceback (most recent call last):</span>
 <span id="cb2-6"><a href="#cb2-6"></a>File <span class="st">"&lt;stdin&gt;"</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="pp">OverflowError</span>: (<span class="dv">34</span>, <span class="st">'Numerical result out of range'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="pp">OverflowError</span>: (<span class="dv">34</span>, <span class="st">'Numerical result out of range'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
 <section id="infinity-is-signed" class="level2">
@@ -695,17 +697,17 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>We can get negative infinity through a variety of means.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span>(f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>))</span>
-<span id="cb3-2"><a href="#cb3-2"></a>np.float32(<span class="op">-</span>inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span>(f32(<span class="dv">10</span>) <span class="op">**</span> f32(<span class="dv">100</span>))</span>
+<span id="cb3-2"><a href="#cb3-2"></a>np.float32(<span class="op">-</span>inf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>We note that this suppresses the overflow error use <code>()</code></li>
 <li>In some languages this is not ever regarded as an overflow error, like Julia (where we have to use larger powers due to the f64 default)</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jl number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>julia<span class="op">&gt;</span> <span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jl number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>julia<span class="op">&gt;</span> <span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cn">Inf</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a>julia<span class="op">&gt;</span> <span class="fu">-</span>(<span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="op">-</span><span class="cn">Inf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="op">-</span><span class="cn">Inf</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="signed-zero" class="level2">
 <h2 class="anchored" data-anchor-id="signed-zero">Signed Zero</h2>
@@ -717,14 +719,14 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>0 =− 0</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">1000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">1000</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="op">-</span><span class="fl">0.0</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.0</span> <span class="op">==</span> (<span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">1000</span>)</span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="va">True</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">-</span><span class="fl">0.0</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="op">-</span><span class="fl">0.0</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.0</span> <span class="op">-</span> <span class="fl">0.0</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fl">0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li>Works in base Python (e.g.&nbsp;don’t need NumPy).</li>
 <li>Couldn’t get it to work in Julia actually (went to -inf or NaN)</li>
 </ul>
@@ -734,27 +736,27 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>Floating point is great because it will work exactly how you expect.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span> <span class="op">==</span> <span class="fl">0.3</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span> <span class="op">==</span> <span class="fl">0.3</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>More or less.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fl">0.30000000000000004</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fl">0.30000000000000004</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="simple-example-1" class="level2">
 <h2 class="anchored" data-anchor-id="simple-example-1">Simple Example</h2>
 <ul>
 <li>We shouldn’t be suprised by this!</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [<span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>f32(i<span class="op">/</span><span class="dv">10</span>)<span class="sc">:1.100}</span><span class="ss">"</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [<span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>f32(i<span class="op">/</span><span class="dv">10</span>)<span class="sc">:1.100}</span><span class="ss">"</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fl">0.100000001490116119384765625</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="fl">0.20000000298023223876953125</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="fl">0.300000011920928955078125</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">=</span> [<span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>f64(i<span class="op">/</span><span class="dv">10</span>)<span class="sc">:1.100}</span><span class="ss">"</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="fl">0.1000000000000000055511151231257827021181583404541015625</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="fl">0.200000000000000011102230246251565404236316680908203125</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="fl">0.299999999999999988897769753748434595763683319091796875</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fl">0.299999999999999988897769753748434595763683319091796875</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="storage-of-1." class="level2">
 <h2 class="anchored" data-anchor-id="storage-of-1.">Storage of 1.</h2>
@@ -775,7 +777,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>This is actually a little bit fake.</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">$</span> cat src<span class="op">/</span>main<span class="op">.</span>rs</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">$</span> cat src<span class="op">/</span>main<span class="op">.</span>rs</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">1.0</span><span class="op">;</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> x<span class="op">.</span>to_bits())<span class="op">;</span></span>
@@ -783,7 +785,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <span id="cb9-6"><a href="#cb9-6"></a><span class="op">$</span> cargo run</span>
 <span id="cb9-7"><a href="#cb9-7"></a>    Finished `dev` profile [unoptimized <span class="op">+</span> debuginfo] target(s) <span class="kw">in</span> <span class="dv">0</span><span class="op">.</span>00s</span>
 <span id="cb9-8"><a href="#cb9-8"></a>     Running `target<span class="op">/</span>debug<span class="op">/</span>bits`</span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="dv">00111111100000000000000000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="dv">00111111100000000000000000000000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>What is that?</li>
 </ul>
@@ -803,7 +805,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>Take the following:</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">00111111100000000000000000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">00111111100000000000000000000000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>That is:
 <ul>
@@ -827,13 +829,13 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <div class="code-with-filename-file">
 <pre><strong>main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">1.0</span><span class="op">;</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>    <span class="kw">let</span> <span class="kw">mut</span> b<span class="op">:</span><span class="dt">u32</span> <span class="op">=</span> x<span class="op">.</span>to_bits()<span class="op">;</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>    b <span class="op">|=</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb11-5"><a href="#cb11-5"></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> b)<span class="op">;</span></span>
 <span id="cb11-6"><a href="#cb11-6"></a>    <span class="pp">println!</span>(<span class="st">"{:1.32}"</span><span class="op">,</span> <span class="dt">f32</span><span class="pp">::</span>from_bits(b))<span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="epsilon" class="level2">
@@ -841,11 +843,11 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>What do we get?</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> cargo run</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">$</span> cargo run</span>
 <span id="cb12-2"><a href="#cb12-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/bits</span><span class="kw">`</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="ex">00111111100000000000000000000001</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">1.00000011920928955078125000000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">1.00000011920928955078125000000000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>We refer to this value (less one) as <a href="https://en.wikipedia.org/wiki/Machine_epsilon">machine epsilon</a>, or perhaps <span class="math inline">\(\varepsilon\)</span>.</li>
 <li>The difference between 1.0 and the next available floating point number.</li>
@@ -931,9 +933,9 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>For 32-bit floats, the minimum base 10 exponent is -36.</li>
 <li>How is <span class="math inline">\(1.0 \times 10^{-37}\)</span> represented?</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// In Rust, we may use '0b' prefix for binary representation.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// In Rust, we may use '0b' prefix for binary representation.</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">// In Rust, we may us underscores within numerical values.</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="dv">0b0_00000000_11011001110001111101110</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="dv">0b0_00000000_11011001110001111101110</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="test-it" class="level2">
 <h2 class="anchored" data-anchor-id="test-it">Test it</h2>
@@ -944,22 +946,22 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>    <span class="kw">let</span> b<span class="op">:</span><span class="dt">u32</span> <span class="op">=</span> <span class="dv">0b0_00000000_11011001110001111101110</span><span class="op">;</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> b)<span class="op">;</span></span>
 <span id="cb14-4"><a href="#cb14-4"></a>    <span class="pp">println!</span>(<span class="st">"{:1.100}"</span><span class="op">,</span> <span class="dt">f32</span><span class="pp">::</span>from_bits(b))<span class="op">;</span></span>
 <span id="cb14-5"><a href="#cb14-5"></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">10.0_f32</span><span class="op">.</span>powf(<span class="op">-</span><span class="dv">38.0_f32</span>)<span class="op">;</span></span>
 <span id="cb14-6"><a href="#cb14-6"></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> x<span class="op">.</span>to_bits())<span class="op">;</span></span>
 <span id="cb14-7"><a href="#cb14-7"></a>    <span class="pp">println!</span>(<span class="st">"{:1.100}"</span><span class="op">,</span> x)<span class="op">;</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Results are as expected.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">00000000011011001110001111101110</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">00000000011011001110001111101110</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="ex">0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ex">00000000011011001110001111101110</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="ex">0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ex">0.0000000000000000000000000000000000000099999993504564039245746141539976645128551939195729831580121175</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="denormalized-number" class="level2">
 <h2 class="anchored" data-anchor-id="denormalized-number">“Denormalized Number”</h2>
@@ -1003,12 +1005,12 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>Storage of <span class="math inline">\(\pi\)</span></li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> pi <span class="im">as</span> pi</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> pi <span class="im">as</span> pi</span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="op">&gt;&gt;&gt;</span> <span class="co"># copy paste Wolfram|Alpha</span></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">'3.14159265358979323846264338327950288419716939937510582097494459230781640628'</span></span>
 <span id="cb16-4"><a href="#cb16-4"></a><span class="co">'3.14159265358979323846264338327950288419716939937510582097494459230781640628'</span></span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="op">&gt;&gt;&gt;</span> <span class="ss">f'</span><span class="sc">{</span>pi<span class="sc">:1.100}</span><span class="ss">'</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">'3.141592653589793115997963468544185161590576171875'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">'3.141592653589793115997963468544185161590576171875'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>They differ fairly early on!</li>
 </ul>
@@ -1027,12 +1029,12 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>Usually ULP is taught using <a href="https://en.wikipedia.org/wiki/Unit_in_the_last_place#Example_1">Haskell</a>.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource haskell number-lines code-with-copy"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1"></a><span class="op">&gt;</span> <span class="fu">until</span> (\x <span class="ot">-&gt;</span> x <span class="op">==</span> x<span class="op">+</span><span class="dv">1</span>) (<span class="op">+</span><span class="dv">1</span>) <span class="dv">0</span><span class="ot"> ::</span> <span class="dt">Float</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource haskell number-lines code-with-copy"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1"></a><span class="op">&gt;</span> <span class="fu">until</span> (\x <span class="ot">-&gt;</span> x <span class="op">==</span> x<span class="op">+</span><span class="dv">1</span>) (<span class="op">+</span><span class="dv">1</span>) <span class="dv">0</span><span class="ot"> ::</span> <span class="dt">Float</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="fl">1.6777216e7</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="op">&gt;</span> it<span class="op">-</span><span class="dv">1</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a><span class="fl">1.6777215e7</span></span>
 <span id="cb17-5"><a href="#cb17-5"></a><span class="op">&gt;</span> it<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="fl">1.6777216e7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="fl">1.6777216e7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>I’ll translate to .py/.rs</li>
 </ul>
@@ -1043,27 +1045,27 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>By convention we check number theoretic results with lazily evaluated generator expressions in Python.</li>
 <li>The following generators all powers of two for a which adding one does not change the value within Python floating points.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
 <span id="cb18-2"><a href="#cb18-2"></a></span>
 <span id="cb18-3"><a href="#cb18-3"></a>gen <span class="op">=</span> (i <span class="cf">for</span> i <span class="kw">in</span> count() <span class="cf">if</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i))</span>
 <span id="cb18-4"><a href="#cb18-4"></a></span>
 <span id="cb18-5"><a href="#cb18-5"></a>x <span class="op">=</span> <span class="bu">next</span>(gen)</span>
 <span id="cb18-6"><a href="#cb18-6"></a></span>
 <span id="cb18-7"><a href="#cb18-7"></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 0.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="iterators" class="level2">
 <h2 class="anchored" data-anchor-id="iterators">Iterators</h2>
 <ul>
 <li>Rust doesn’t require iterators, supporting the infinite iterator by default using <code>unwrap</code>.</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> x <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i) <span class="op">+</span> <span class="dv">1.0</span> <span class="op">==</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i))<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> x <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i) <span class="op">+</span> <span class="dv">1.0</span> <span class="op">==</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> i))<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="kw">let</span> base <span class="op">=</span> <span class="dt">f64</span><span class="pp">::</span>powi(<span class="dv">2.0</span><span class="op">,</span> x)<span class="op">;</span></span>
 <span id="cb19-4"><a href="#cb19-4"></a></span>
 <span id="cb19-5"><a href="#cb19-5"></a><span class="co">// Prints the result (2^53 = 9007199254740992.0)</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span><span class="op">,</span> base)<span class="op">;</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span><span class="op">,</span> base <span class="op">+</span> <span class="dv">1.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="pp">println!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span><span class="op">,</span> base <span class="op">+</span> <span class="dv">1.0</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>I haven’t used <code>find</code> before, this is an LLM donation to our knowledge base.</li>
 <li>By the way, that is basically <code>2 ** 53</code> and there are 52 bits of mantissa precision.</li>
@@ -1077,9 +1079,9 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <blockquote class="blockquote">
 <p><a href="https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT">The gap between the two floating-point numbers nearest to x, even if x is one of )them.</a></p>
 </blockquote>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="op">&gt;&gt;&gt;</span> f64(pi) <span class="op">-</span> f64(f32(pi))</span>
-<span id="cb20-3"><a href="#cb20-3"></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3"></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="rounding" class="level2">
 <h2 class="anchored" data-anchor-id="rounding">Rounding</h2>
@@ -1100,8 +1102,8 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <ul>
 <li>The difference between the “real” number and the approximated number, divided by the “real” number.</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>np.float64(<span class="fl">1.0000000278275352</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>np.float64(<span class="fl">1.0000000278275352</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>So for <code>pi</code> in <code>f32</code>, around <span class="math inline">\(2.9 \times 10^{-8}\)</span></li>
 </ul>
@@ -1144,7 +1146,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li>The guard bits and round bits are extra precision</li>
 <li>The sticky bit is an OR of anything that shifts through it</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1"></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1"></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="special-bits" class="level2">
 <h2 class="anchored" data-anchor-id="special-bits">Special bits</h2>
@@ -1157,7 +1159,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <li><strong>[1][1][0]</strong> - Round Up</li>
 <li><strong>[1][1][1]</strong> - Round Up</li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1"></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1"></a>0_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="significance-error" class="level2">
 <h2 class="anchored" data-anchor-id="significance-error">Significance Error</h2>
@@ -1181,7 +1183,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <div class="code-with-filename-file">
 <pre><strong>src/lib.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb24" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">fn</span> heron(a<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> b<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> c<span class="op">:</span><span class="dt">f32</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">fn</span> heron(a<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> b<span class="op">:</span><span class="dt">f32</span><span class="op">,</span> c<span class="op">:</span><span class="dt">f32</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a>    <span class="kw">let</span> s <span class="op">=</span> (a <span class="op">+</span> b <span class="op">+</span> c)<span class="op">/</span><span class="dv">2.0_f32</span><span class="op">;</span></span>
 <span id="cb24-3"><a href="#cb24-3"></a>    <span class="cf">return</span> (s <span class="op">*</span> (s <span class="op">-</span> a) <span class="op">*</span> (s <span class="op">-</span> b) <span class="op">*</span> (s <span class="op">-</span> c))<span class="op">.</span>sqrt()<span class="op">;</span></span>
 <span id="cb24-4"><a href="#cb24-4"></a><span class="op">}</span></span>
@@ -1194,7 +1196,7 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <span id="cb24-11"><a href="#cb24-11"></a>    prod <span class="op">*=</span> s[<span class="dv">2</span>] <span class="op">+</span> (s[<span class="dv">0</span>] <span class="op">-</span> s[<span class="dv">1</span>])<span class="op">;</span></span>
 <span id="cb24-12"><a href="#cb24-12"></a>    prod <span class="op">*=</span> s[<span class="dv">0</span>] <span class="op">+</span> (s[<span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">2</span>])<span class="op">;</span></span>
 <span id="cb24-13"><a href="#cb24-13"></a>    <span class="cf">return</span> prod<span class="op">.</span>sqrt() <span class="op">/</span> <span class="dv">4.0</span><span class="op">;</span></span>
-<span id="cb24-14"><a href="#cb24-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="test-them" class="level2">
@@ -1203,22 +1205,22 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb25" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">fn</span> main()<span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">fn</span> main()<span class="op">{</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>    <span class="pp">dbg!</span>(heron(<span class="dv">3.0</span><span class="op">,</span><span class="dv">4.0</span><span class="op">,</span><span class="dv">5.0</span>))<span class="op">;</span></span>
 <span id="cb25-3"><a href="#cb25-3"></a>    <span class="pp">dbg!</span>(kahan(<span class="dv">3.0</span><span class="op">,</span><span class="dv">4.0</span><span class="op">,</span><span class="dv">5.0</span>))<span class="op">;</span></span>
 <span id="cb25-4"><a href="#cb25-4"></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="dv">100_000.0_f32</span><span class="op">;</span></span>
 <span id="cb25-5"><a href="#cb25-5"></a>    <span class="kw">let</span> c <span class="op">=</span> <span class="dv">0.01_f32</span><span class="op">;</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a>    <span class="pp">dbg!</span>(heron(a<span class="op">,</span>a<span class="op">,</span>c))<span class="op">;</span></span>
 <span id="cb25-7"><a href="#cb25-7"></a>    <span class="pp">dbg!</span>(kahan(a<span class="op">,</span>a<span class="op">,</span>c))<span class="op">;</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Oh what’s that?</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="ex">[src/main.rs:21:5]</span> heron<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="ex">[src/main.rs:21:5]</span> heron<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="ex">[src/main.rs:22:5]</span> kahan<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="ex">[src/main.rs:25:5]</span> heron<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 781.25006</span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="ex">[src/main.rs:26:5]</span> kahan<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 500.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="ex">[src/main.rs:26:5]</span> kahan<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 500.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Using <code>f64</code> (vs <code>f32</code>) we get 499.9999999999994</li>
 </ul>
@@ -1302,29 +1304,29 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 </section>
 <section id="distribution" class="level2">
 <h2 class="anchored" data-anchor-id="distribution">Distribution</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
 <span id="cb27-2"><a href="#cb27-2"></a>(np.float32(<span class="fl">1000000000.0</span>), np.float32(<span class="fl">1.0000005</span>), np.float32(<span class="fl">1.0</span>))</span>
 <span id="cb27-3"><a href="#cb27-3"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">*</span> y <span class="op">-</span> x <span class="op">*</span> z <span class="op">;</span> x <span class="op">*</span> (y <span class="op">-</span> z)</span>
 <span id="cb27-4"><a href="#cb27-4"></a>np.float32(<span class="fl">448.0</span>)</span>
-<span id="cb27-5"><a href="#cb27-5"></a>np.float32(<span class="fl">476.83716</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-5"><a href="#cb27-5"></a>np.float32(<span class="fl">476.83716</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="association" class="level2">
 <h2 class="anchored" data-anchor-id="association">Association</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
 <span id="cb28-2"><a href="#cb28-2"></a>(np.float32(<span class="fl">16777216.0</span>), np.float32(<span class="fl">1.0</span>), np.float32(<span class="fl">1.0</span>))</span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">+</span> (y <span class="op">+</span> z) <span class="op">;</span> (x <span class="op">+</span> y) <span class="op">+</span> z</span>
 <span id="cb28-4"><a href="#cb28-4"></a>np.float32(<span class="fl">16777218.0</span>)</span>
-<span id="cb28-5"><a href="#cb28-5"></a>np.float32(<span class="fl">16777216.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-5"><a href="#cb28-5"></a>np.float32(<span class="fl">16777216.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="interchange" class="level2">
 <h2 class="anchored" data-anchor-id="interchange">Interchange</h2>
 <ul>
 <li>Check last digit</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">100000000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">100000000</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="fl">1.4285714285714284e-09</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">100000000</span> <span class="op">/</span> <span class="dv">7</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="fl">1.4285714285714286e-09</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="fl">1.4285714285714286e-09</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="floating-point-exceptions" class="level2">
 <h2 class="anchored" data-anchor-id="floating-point-exceptions">Floating Point Exceptions</h2>
@@ -1424,290 +1426,294 @@ d_2 = d_1 - \sigma\sqrt{T - t} = \frac{1}{\sigma\sqrt{T - t}}\left[\ln\left(\fra
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
         }
-        return container.innerHTML
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1715,185 +1721,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./42_sha512.html" class="pagination-link" aria-label="SHA-512">
@@ -1906,7 +1888,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">---</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a><span class="an">title:</span><span class="co"> "IEEE 754"</span></span>
 <span id="cb30-3"><a href="#cb30-3"></a><span class="co">---</span></span>
 <span id="cb30-4"><a href="#cb30-4"></a></span>
@@ -2111,11 +2093,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-203"><a href="#cb30-203"></a><span class="ss">- </span>We note that this suppresses the overflow error use <span class="in">`()`</span></span>
 <span id="cb30-204"><a href="#cb30-204"></a><span class="ss">- </span>In some languages this is not ever regarded as an overflow error, like Julia (where we have to use larger powers due to the f64 default)</span>
 <span id="cb30-205"><a href="#cb30-205"></a><span class="in">```jl</span></span>
-<span id="cb30-206"><a href="#cb30-206"></a><span class="in">julia&gt; 10.0^10000</span></span>
-<span id="cb30-207"><a href="#cb30-207"></a><span class="in">Inf</span></span>
+<span id="cb30-206"><a href="#cb30-206"></a>julia<span class="op">&gt;</span> <span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span></span>
+<span id="cb30-207"><a href="#cb30-207"></a><span class="cn">Inf</span></span>
 <span id="cb30-208"><a href="#cb30-208"></a></span>
-<span id="cb30-209"><a href="#cb30-209"></a><span class="in">julia&gt; -(10.0^10000)</span></span>
-<span id="cb30-210"><a href="#cb30-210"></a><span class="in">-Inf</span></span>
+<span id="cb30-209"><a href="#cb30-209"></a>julia<span class="op">&gt;</span> <span class="fu">-</span>(<span class="fl">10.0</span><span class="op">^</span><span class="fl">10000</span>)</span>
+<span id="cb30-210"><a href="#cb30-210"></a><span class="op">-</span><span class="cn">Inf</span></span>
 <span id="cb30-211"><a href="#cb30-211"></a></span>
 <span id="cb30-212"><a href="#cb30-212"></a><span class="in">```</span></span>
 <span id="cb30-213"><a href="#cb30-213"></a></span>
@@ -2185,14 +2167,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-277"><a href="#cb30-277"></a></span>
 <span id="cb30-278"><a href="#cb30-278"></a><span class="ss">- </span>This is actually a little bit fake.</span>
 <span id="cb30-279"><a href="#cb30-279"></a><span class="in">```rs</span></span>
-<span id="cb30-280"><a href="#cb30-280"></a><span class="op">$</span> cat src<span class="op">/</span>main<span class="op">.</span>rs</span>
-<span id="cb30-281"><a href="#cb30-281"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb30-282"><a href="#cb30-282"></a>    <span class="kw">let</span> x<span class="op">:</span><span class="dt">f32</span> <span class="op">=</span> <span class="dv">1.0</span><span class="op">;</span></span>
-<span id="cb30-283"><a href="#cb30-283"></a>    <span class="pp">println!</span>(<span class="st">"{:032b}"</span><span class="op">,</span> x<span class="op">.</span>to_bits())<span class="op">;</span></span>
-<span id="cb30-284"><a href="#cb30-284"></a><span class="op">}</span></span>
-<span id="cb30-285"><a href="#cb30-285"></a><span class="op">$</span> cargo run</span>
-<span id="cb30-286"><a href="#cb30-286"></a>    Finished `dev` profile [unoptimized <span class="op">+</span> debuginfo] target(s) <span class="kw">in</span> <span class="dv">0</span><span class="op">.</span>00s</span>
-<span id="cb30-287"><a href="#cb30-287"></a>     Running `target<span class="op">/</span>debug<span class="op">/</span>bits`</span>
+<span id="cb30-280"><a href="#cb30-280"></a><span class="sc">$</span> cat src<span class="sc">/</span>main.rs</span>
+<span id="cb30-281"><a href="#cb30-281"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb30-282"><a href="#cb30-282"></a>    let x<span class="sc">:</span>f32 <span class="ot">=</span> <span class="fl">1.0</span>;</span>
+<span id="cb30-283"><a href="#cb30-283"></a>    println<span class="sc">!</span>(<span class="st">"{:032b}"</span>, <span class="fu">x.to_bits</span>());</span>
+<span id="cb30-284"><a href="#cb30-284"></a>}</span>
+<span id="cb30-285"><a href="#cb30-285"></a><span class="sc">$</span> cargo run</span>
+<span id="cb30-286"><a href="#cb30-286"></a>    Finished <span class="st">`</span><span class="at">dev</span><span class="st">`</span> profile [unoptimized <span class="sc">+</span> debuginfo] <span class="fu">target</span>(s) <span class="cf">in</span> <span class="fl">0.00</span>s</span>
+<span id="cb30-287"><a href="#cb30-287"></a>     Running <span class="st">`</span><span class="at">target/debug/bits</span><span class="st">`</span></span>
 <span id="cb30-288"><a href="#cb30-288"></a><span class="dv">00111111100000000000000000000000</span></span>
 <span id="cb30-289"><a href="#cb30-289"></a><span class="in">```</span></span>
 <span id="cb30-290"><a href="#cb30-290"></a><span class="ss">- </span>What is that?</span>
@@ -2222,13 +2204,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-314"><a href="#cb30-314"></a><span class="ss">- </span>How much precision is that?</span>
 <span id="cb30-315"><a href="#cb30-315"></a><span class="ss">- </span>Well, let's set the least significant bit of the mantissa to one.</span>
 <span id="cb30-316"><a href="#cb30-316"></a><span class="in">```{.rs filename="main.rs"}</span></span>
-<span id="cb30-317"><a href="#cb30-317"></a><span class="in">fn main() {</span></span>
-<span id="cb30-318"><a href="#cb30-318"></a><span class="in">    let x:f32 = 1.0;</span></span>
-<span id="cb30-319"><a href="#cb30-319"></a><span class="in">    let mut b:u32 = x.to_bits();</span></span>
-<span id="cb30-320"><a href="#cb30-320"></a><span class="in">    b |= 1;</span></span>
-<span id="cb30-321"><a href="#cb30-321"></a><span class="in">    println!("{:032b}", b);</span></span>
-<span id="cb30-322"><a href="#cb30-322"></a><span class="in">    println!("{:1.32}", f32::from_bits(b));</span></span>
-<span id="cb30-323"><a href="#cb30-323"></a><span class="in">}</span></span>
+<span id="cb30-317"><a href="#cb30-317"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb30-318"><a href="#cb30-318"></a>    let x<span class="sc">:</span>f32 <span class="ot">=</span> <span class="fl">1.0</span>;</span>
+<span id="cb30-319"><a href="#cb30-319"></a>    let mut b<span class="sc">:</span>u32 <span class="ot">=</span> <span class="fu">x.to_bits</span>();</span>
+<span id="cb30-320"><a href="#cb30-320"></a>    b <span class="sc">|</span><span class="er">=</span> <span class="dv">1</span>;</span>
+<span id="cb30-321"><a href="#cb30-321"></a>    println<span class="sc">!</span>(<span class="st">"{:032b}"</span>, b);</span>
+<span id="cb30-322"><a href="#cb30-322"></a>    println<span class="sc">!</span>(<span class="st">"{:1.32}"</span>, f32<span class="sc">::</span><span class="fu">from_bits</span>(b));</span>
+<span id="cb30-323"><a href="#cb30-323"></a>}</span>
 <span id="cb30-324"><a href="#cb30-324"></a><span class="in">```</span></span>
 <span id="cb30-325"><a href="#cb30-325"></a></span>
 <span id="cb30-326"><a href="#cb30-326"></a><span class="fu">## "Epsilon"</span></span>
@@ -2249,12 +2231,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-341"><a href="#cb30-341"></a></span>
 <span id="cb30-342"><a href="#cb30-342"></a><span class="fu">## Easier: "Sig figs"</span></span>
 <span id="cb30-343"><a href="#cb30-343"></a></span>
-<span id="cb30-344"><a href="#cb30-344"></a>| Format | Sign | Exp.  | Mant. | Bits  | Bias | Prec. | Significance |</span>
-<span id="cb30-345"><a href="#cb30-345"></a>| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |</span>
-<span id="cb30-346"><a href="#cb30-346"></a>| Half  | 1 | 5 | 10 | 16 | 15 | 11 | **3-4** |</span>
-<span id="cb30-347"><a href="#cb30-347"></a>| Single | 1 | 8 | 23 | 32 | 127 | 24 | **6-9** |</span>
-<span id="cb30-348"><a href="#cb30-348"></a>| Double | 1 | 11 | 52 | 64 | 1023 | 53 | **15-17** |</span>
-<span id="cb30-349"><a href="#cb30-349"></a>| Quad | 1 | 15 | 112 | 128 | 16383 | 113 | **33-36** |</span>
+<span id="cb30-344"><a href="#cb30-344"></a><span class="pp">|</span> Format <span class="pp">|</span> Sign <span class="pp">|</span> Exp.  <span class="pp">|</span> Mant. <span class="pp">|</span> Bits  <span class="pp">|</span> Bias <span class="pp">|</span> Prec. <span class="pp">|</span> Significance <span class="pp">|</span></span>
+<span id="cb30-345"><a href="#cb30-345"></a><span class="pp">| :---</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">| :---:</span> <span class="pp">|</span></span>
+<span id="cb30-346"><a href="#cb30-346"></a><span class="pp">|</span> Half  <span class="pp">|</span> 1 <span class="pp">|</span> 5 <span class="pp">|</span> 10 <span class="pp">|</span> 16 <span class="pp">|</span> 15 <span class="pp">|</span> 11 <span class="pp">|</span> **3-4** <span class="pp">|</span></span>
+<span id="cb30-347"><a href="#cb30-347"></a><span class="pp">|</span> Single <span class="pp">|</span> 1 <span class="pp">|</span> 8 <span class="pp">|</span> 23 <span class="pp">|</span> 32 <span class="pp">|</span> 127 <span class="pp">|</span> 24 <span class="pp">|</span> **6-9** <span class="pp">|</span></span>
+<span id="cb30-348"><a href="#cb30-348"></a><span class="pp">|</span> Double <span class="pp">|</span> 1 <span class="pp">|</span> 11 <span class="pp">|</span> 52 <span class="pp">|</span> 64 <span class="pp">|</span> 1023 <span class="pp">|</span> 53 <span class="pp">|</span> **15-17** <span class="pp">|</span></span>
+<span id="cb30-349"><a href="#cb30-349"></a><span class="pp">|</span> Quad <span class="pp">|</span> 1 <span class="pp">|</span> 15 <span class="pp">|</span> 112 <span class="pp">|</span> 128 <span class="pp">|</span> 16383 <span class="pp">|</span> 113 <span class="pp">|</span> **33-36** <span class="pp">|</span></span>
 <span id="cb30-350"><a href="#cb30-350"></a></span>
 <span id="cb30-351"><a href="#cb30-351"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Prof. Kahan, UCB EECS</span><span class="co">](https://people.eecs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF)</span></span>
 <span id="cb30-352"><a href="#cb30-352"></a></span>
@@ -2272,23 +2254,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-364"><a href="#cb30-364"></a><span class="ss">- </span>How is $1.0 \times 10^{-37}$ represented?</span>
 <span id="cb30-365"><a href="#cb30-365"></a></span>
 <span id="cb30-366"><a href="#cb30-366"></a><span class="in">```rs</span></span>
-<span id="cb30-367"><a href="#cb30-367"></a><span class="co">// In Rust, we may use '0b' prefix for binary representation.</span></span>
-<span id="cb30-368"><a href="#cb30-368"></a><span class="co">// In Rust, we may us underscores within numerical values.</span></span>
-<span id="cb30-369"><a href="#cb30-369"></a><span class="dv">0b0_00000000_11011001110001111101110</span></span>
+<span id="cb30-367"><a href="#cb30-367"></a><span class="sc">/</span><span class="er">/</span> In Rust, we may use <span class="st">'0b'</span> prefix <span class="cf">for</span> binary representation.</span>
+<span id="cb30-368"><a href="#cb30-368"></a><span class="sc">/</span><span class="er">/</span> In Rust, we may us underscores within numerical values.</span>
+<span id="cb30-369"><a href="#cb30-369"></a><span class="dv">0</span>b0_00000000_11011001110001111101110</span>
 <span id="cb30-370"><a href="#cb30-370"></a><span class="in">```</span></span>
 <span id="cb30-371"><a href="#cb30-371"></a></span>
 <span id="cb30-372"><a href="#cb30-372"></a><span class="fu">## Test it</span></span>
 <span id="cb30-373"><a href="#cb30-373"></a></span>
 <span id="cb30-374"><a href="#cb30-374"></a><span class="ss">- </span>Write a simple test...</span>
 <span id="cb30-375"><a href="#cb30-375"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb30-376"><a href="#cb30-376"></a><span class="in">fn main() {</span></span>
-<span id="cb30-377"><a href="#cb30-377"></a><span class="in">    let b:u32 = 0b0_00000000_11011001110001111101110;</span></span>
-<span id="cb30-378"><a href="#cb30-378"></a><span class="in">    println!("{:032b}", b);</span></span>
-<span id="cb30-379"><a href="#cb30-379"></a><span class="in">    println!("{:1.100}", f32::from_bits(b));</span></span>
-<span id="cb30-380"><a href="#cb30-380"></a><span class="in">    let x:f32 = 10.0_f32.powf(-38.0_f32);</span></span>
-<span id="cb30-381"><a href="#cb30-381"></a><span class="in">    println!("{:032b}", x.to_bits());</span></span>
-<span id="cb30-382"><a href="#cb30-382"></a><span class="in">    println!("{:1.100}", x);</span></span>
-<span id="cb30-383"><a href="#cb30-383"></a><span class="in">}</span></span>
+<span id="cb30-376"><a href="#cb30-376"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb30-377"><a href="#cb30-377"></a>    let b<span class="sc">:</span>u32 <span class="ot">=</span> <span class="dv">0</span>b0_00000000_11011001110001111101110;</span>
+<span id="cb30-378"><a href="#cb30-378"></a>    println<span class="sc">!</span>(<span class="st">"{:032b}"</span>, b);</span>
+<span id="cb30-379"><a href="#cb30-379"></a>    println<span class="sc">!</span>(<span class="st">"{:1.100}"</span>, f32<span class="sc">::</span><span class="fu">from_bits</span>(b));</span>
+<span id="cb30-380"><a href="#cb30-380"></a>    let x<span class="sc">:</span>f32 <span class="ot">=</span> <span class="fl">10.0</span><span class="fu">_f32.powf</span>(<span class="sc">-</span><span class="fl">38.0</span>_f32);</span>
+<span id="cb30-381"><a href="#cb30-381"></a>    println<span class="sc">!</span>(<span class="st">"{:032b}"</span>, <span class="fu">x.to_bits</span>());</span>
+<span id="cb30-382"><a href="#cb30-382"></a>    println<span class="sc">!</span>(<span class="st">"{:1.100}"</span>, x);</span>
+<span id="cb30-383"><a href="#cb30-383"></a>}</span>
 <span id="cb30-384"><a href="#cb30-384"></a><span class="in">```</span></span>
 <span id="cb30-385"><a href="#cb30-385"></a><span class="ss">- </span>Results are as expected.</span>
 <span id="cb30-386"><a href="#cb30-386"></a><span class="in">```sh</span></span>
@@ -2356,289 +2338,289 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-448"><a href="#cb30-448"></a><span class="ss">- </span>Usually ULP is taught using <span class="co">[</span><span class="ot">Haskell</span><span class="co">](https://en.wikipedia.org/wiki/Unit_in_the_last_place#Example_1)</span>.</span>
 <span id="cb30-449"><a href="#cb30-449"></a></span>
 <span id="cb30-450"><a href="#cb30-450"></a><span class="in">```haskell</span></span>
-<span id="cb30-451"><a href="#cb30-451"></a><span class="op">&gt;</span> <span class="fu">until</span> (\x <span class="ot">-&gt;</span> x <span class="op">==</span> x<span class="op">+</span><span class="dv">1</span>) (<span class="op">+</span><span class="dv">1</span>) <span class="dv">0</span><span class="ot"> ::</span> <span class="dt">Float</span></span>
+<span id="cb30-451"><a href="#cb30-451"></a><span class="op">&gt;</span> until <span class="op">(</span>\x <span class="op">-&gt;</span> x <span class="op">==</span> x<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">(+</span><span class="dv">1</span><span class="op">)</span> <span class="dv">0</span> <span class="op">::</span> Float</span>
 <span id="cb30-452"><a href="#cb30-452"></a><span class="fl">1.6777216e7</span></span>
 <span id="cb30-453"><a href="#cb30-453"></a><span class="op">&gt;</span> it<span class="op">-</span><span class="dv">1</span></span>
 <span id="cb30-454"><a href="#cb30-454"></a><span class="fl">1.6777215e7</span></span>
 <span id="cb30-455"><a href="#cb30-455"></a><span class="op">&gt;</span> it<span class="op">+</span><span class="dv">1</span></span>
 <span id="cb30-456"><a href="#cb30-456"></a><span class="fl">1.6777216e7</span></span>
-<span id="cb30-457"><a href="#cb30-457"></a><span class="ot">```</span></span>
+<span id="cb30-457"><a href="#cb30-457"></a><span class="in">```</span></span>
 <span id="cb30-458"><a href="#cb30-458"></a></span>
-<span id="cb30-459"><a href="#cb30-459"></a><span class="ot">- I'll translate to .py/.rs</span></span>
+<span id="cb30-459"><a href="#cb30-459"></a><span class="ss">- </span>I'll translate to .py/.rs</span>
 <span id="cb30-460"><a href="#cb30-460"></a></span>
-<span id="cb30-461"><a href="#cb30-461"></a><span class="ot">## Generators</span></span>
+<span id="cb30-461"><a href="#cb30-461"></a><span class="fu">## Generators</span></span>
 <span id="cb30-462"><a href="#cb30-462"></a></span>
-<span id="cb30-463"><a href="#cb30-463"></a><span class="ot">- By convention we check number theoretic results with lazily evaluated generator expressions in Python.</span></span>
-<span id="cb30-464"><a href="#cb30-464"></a><span class="ot">- The following generators all powers of two for a which adding one does not change the value within Python floating points.</span></span>
-<span id="cb30-465"><a href="#cb30-465"></a><span class="ot">```</span>py</span>
-<span id="cb30-466"><a href="#cb30-466"></a>from itertools <span class="kw">import</span> count</span>
+<span id="cb30-463"><a href="#cb30-463"></a><span class="ss">- </span>By convention we check number theoretic results with lazily evaluated generator expressions in Python.</span>
+<span id="cb30-464"><a href="#cb30-464"></a><span class="ss">- </span>The following generators all powers of two for a which adding one does not change the value within Python floating points.</span>
+<span id="cb30-465"><a href="#cb30-465"></a><span class="in">```py</span></span>
+<span id="cb30-466"><a href="#cb30-466"></a><span class="im">from</span> itertools <span class="im">import</span> count</span>
 <span id="cb30-467"><a href="#cb30-467"></a></span>
-<span id="cb30-468"><a href="#cb30-468"></a>gen <span class="ot">=</span> (i for i <span class="kw">in</span> count() <span class="kw">if</span> <span class="fl">2.0</span> <span class="op">**</span> float(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> float(i))</span>
+<span id="cb30-468"><a href="#cb30-468"></a>gen <span class="op">=</span> (i <span class="cf">for</span> i <span class="kw">in</span> count() <span class="cf">if</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span> <span class="fl">2.0</span> <span class="op">**</span> <span class="bu">float</span>(i))</span>
 <span id="cb30-469"><a href="#cb30-469"></a></span>
-<span id="cb30-470"><a href="#cb30-470"></a>x <span class="ot">=</span> next(gen)</span>
+<span id="cb30-470"><a href="#cb30-470"></a>x <span class="op">=</span> <span class="bu">next</span>(gen)</span>
 <span id="cb30-471"><a href="#cb30-471"></a></span>
-<span id="cb30-472"><a href="#cb30-472"></a><span class="fu">print</span>('<span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span> <span class="ot">=</span> ', <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
-<span id="cb30-473"><a href="#cb30-473"></a><span class="fu">print</span>('<span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span> <span class="ot">=</span> ', <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span>
-<span id="cb30-474"><a href="#cb30-474"></a><span class="ot">```</span></span>
+<span id="cb30-472"><a href="#cb30-472"></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 0.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">0.0</span>)</span>
+<span id="cb30-473"><a href="#cb30-473"></a><span class="bu">print</span>(<span class="st">'2.0 ** x + 1.0 = '</span>, <span class="fl">2.0</span> <span class="op">**</span> x <span class="op">+</span> <span class="fl">1.0</span>)</span>
+<span id="cb30-474"><a href="#cb30-474"></a><span class="in">```</span></span>
 <span id="cb30-475"><a href="#cb30-475"></a></span>
-<span id="cb30-476"><a href="#cb30-476"></a><span class="ot">## Iterators</span></span>
+<span id="cb30-476"><a href="#cb30-476"></a><span class="fu">## Iterators</span></span>
 <span id="cb30-477"><a href="#cb30-477"></a></span>
-<span id="cb30-478"><a href="#cb30-478"></a><span class="ot">- Rust doesn't require iterators, supporting the infinite iterator by default using `</span>unwrap<span class="ot">`.</span></span>
-<span id="cb30-479"><a href="#cb30-479"></a><span class="ot">```</span>rs</span>
-<span id="cb30-480"><a href="#cb30-480"></a><span class="kw">let</span> x <span class="ot">=</span> (<span class="dv">0</span><span class="op">..</span>)<span class="op">.</span>find(<span class="op">|&amp;</span>i<span class="op">|</span><span class="ot"> f64::</span>powi(<span class="fl">2.0</span>, i) <span class="op">+</span> <span class="fl">1.0</span> <span class="op">==</span><span class="ot"> f64::</span>powi(<span class="fl">2.0</span>, i))<span class="op">.</span>unwrap();</span>
+<span id="cb30-478"><a href="#cb30-478"></a><span class="ss">- </span>Rust doesn't require iterators, supporting the infinite iterator by default using <span class="in">`unwrap`</span>.</span>
+<span id="cb30-479"><a href="#cb30-479"></a><span class="in">```rs</span></span>
+<span id="cb30-480"><a href="#cb30-480"></a>let x <span class="ot">=</span> (<span class="dv">0</span>..)<span class="fu">.find</span>(<span class="sc">|</span><span class="er">&amp;</span>i<span class="sc">|</span> f64<span class="sc">::</span><span class="fu">powi</span>(<span class="fl">2.0</span>, i) <span class="sc">+</span> <span class="fl">1.0</span> <span class="sc">==</span> f64<span class="sc">::</span><span class="fu">powi</span>(<span class="fl">2.0</span>, i))<span class="fu">.unwrap</span>();</span>
 <span id="cb30-481"><a href="#cb30-481"></a></span>
-<span id="cb30-482"><a href="#cb30-482"></a><span class="kw">let</span> base <span class="ot">= f64::</span>powi(<span class="fl">2.0</span>, x);</span>
+<span id="cb30-482"><a href="#cb30-482"></a>let base <span class="ot">=</span> f64<span class="sc">::</span><span class="fu">powi</span>(<span class="fl">2.0</span>, x);</span>
 <span id="cb30-483"><a href="#cb30-483"></a></span>
-<span id="cb30-484"><a href="#cb30-484"></a><span class="op">//</span> <span class="dt">Prints</span> the result (<span class="dv">2</span><span class="op">^</span><span class="dv">53</span> <span class="ot">=</span> <span class="fl">9007199254740992.0</span>)</span>
-<span id="cb30-485"><a href="#cb30-485"></a>println<span class="op">!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span>, base);</span>
-<span id="cb30-486"><a href="#cb30-486"></a>println<span class="op">!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span>, base <span class="op">+</span> <span class="fl">1.0</span>);</span>
-<span id="cb30-487"><a href="#cb30-487"></a><span class="ot">```</span></span>
-<span id="cb30-488"><a href="#cb30-488"></a><span class="ot">- I haven't used `</span>find<span class="ot">` before, this is an LLM donation to our knowledge base.</span></span>
-<span id="cb30-489"><a href="#cb30-489"></a><span class="ot">- By the way, that is basically `</span><span class="dv">2</span> <span class="op">**</span> <span class="dv">53</span><span class="ot">` and there are 52 bits of mantissa precision.</span></span>
+<span id="cb30-484"><a href="#cb30-484"></a><span class="sc">/</span><span class="er">/</span> Prints the <span class="fu">result</span> (<span class="dv">2</span><span class="sc">^</span><span class="dv">53</span> <span class="ot">=</span> <span class="fl">9007199254740992.0</span>)</span>
+<span id="cb30-485"><a href="#cb30-485"></a>println<span class="sc">!</span>(<span class="st">"2.0 ** x + 0.0 = {:.1}"</span>, base);</span>
+<span id="cb30-486"><a href="#cb30-486"></a>println<span class="sc">!</span>(<span class="st">"2.0 ** x + 1.0 = {:.1}"</span>, base <span class="sc">+</span> <span class="fl">1.0</span>);</span>
+<span id="cb30-487"><a href="#cb30-487"></a><span class="in">```</span></span>
+<span id="cb30-488"><a href="#cb30-488"></a><span class="ss">- </span>I haven't used <span class="in">`find`</span> before, this is an LLM donation to our knowledge base.</span>
+<span id="cb30-489"><a href="#cb30-489"></a><span class="ss">- </span>By the way, that is basically <span class="in">`2 ** 53`</span> and there are 52 bits of mantissa precision.</span>
 <span id="cb30-490"><a href="#cb30-490"></a></span>
-<span id="cb30-491"><a href="#cb30-491"></a><span class="ot">## On "Ulps"</span></span>
+<span id="cb30-491"><a href="#cb30-491"></a><span class="fu">## On "Ulps"</span></span>
 <span id="cb30-492"><a href="#cb30-492"></a></span>
-<span id="cb30-493"><a href="#cb30-493"></a><span class="ot">- We can measure error using ULPs.</span></span>
+<span id="cb30-493"><a href="#cb30-493"></a><span class="ss">- </span>We can measure error using ULPs.</span>
 <span id="cb30-494"><a href="#cb30-494"></a></span>
-<span id="cb30-495"><a href="#cb30-495"></a><span class="ot">&gt; [The gap between the two floating-point numbers nearest to x, even if x is one of )them.](https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT)</span></span>
+<span id="cb30-495"><a href="#cb30-495"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">The gap between the two floating-point numbers nearest to x, even if x is one of )them.</span><span class="co">](https://www.cs.berkeley.edu/~wkahan/LOG10HAF.TXT)</span></span>
 <span id="cb30-496"><a href="#cb30-496"></a></span>
-<span id="cb30-497"><a href="#cb30-497"></a><span class="ot">```</span>py</span>
-<span id="cb30-498"><a href="#cb30-498"></a><span class="op">&gt;&gt;&gt;</span> from numpy <span class="kw">import</span> float32 <span class="kw">as</span> f32, pi <span class="kw">as</span> pi, float64 <span class="kw">as</span> f64</span>
-<span id="cb30-499"><a href="#cb30-499"></a><span class="op">&gt;&gt;&gt;</span> f64(<span class="fu">pi</span>) <span class="op">-</span> f64(f32(<span class="fu">pi</span>))</span>
-<span id="cb30-500"><a href="#cb30-500"></a>np<span class="op">.</span>float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span>
-<span id="cb30-501"><a href="#cb30-501"></a><span class="ot">```</span></span>
+<span id="cb30-497"><a href="#cb30-497"></a><span class="in">```py</span></span>
+<span id="cb30-498"><a href="#cb30-498"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> numpy <span class="im">import</span> float32 <span class="im">as</span> f32, pi <span class="im">as</span> pi, float64 <span class="im">as</span> f64</span>
+<span id="cb30-499"><a href="#cb30-499"></a><span class="op">&gt;&gt;&gt;</span> f64(pi) <span class="op">-</span> f64(f32(pi))</span>
+<span id="cb30-500"><a href="#cb30-500"></a>np.float64(<span class="op">-</span><span class="fl">8.742278012618954e-08</span>)</span>
+<span id="cb30-501"><a href="#cb30-501"></a><span class="in">```</span></span>
 <span id="cb30-502"><a href="#cb30-502"></a></span>
-<span id="cb30-503"><a href="#cb30-503"></a><span class="ot">## Rounding</span></span>
+<span id="cb30-503"><a href="#cb30-503"></a><span class="fu">## Rounding</span></span>
 <span id="cb30-504"><a href="#cb30-504"></a></span>
-<span id="cb30-505"><a href="#cb30-505"></a><span class="ot">- We have some guarantees:</span></span>
-<span id="cb30-506"><a href="#cb30-506"></a><span class="ot">    - IEEE 754 requires that that elementary arithmetic operations are correctly rounded to within 0.5 ulps</span></span>
-<span id="cb30-507"><a href="#cb30-507"></a><span class="ot">    - Transcendental functions are generally rounded to between 0.5 and 1.0 ulps</span></span>
-<span id="cb30-508"><a href="#cb30-508"></a><span class="ot">        - Transcendental as in $\pi$ or $e$</span></span>
+<span id="cb30-505"><a href="#cb30-505"></a><span class="ss">- </span>We have some guarantees:</span>
+<span id="cb30-506"><a href="#cb30-506"></a><span class="ss">    - </span>IEEE 754 requires that that elementary arithmetic operations are correctly rounded to within 0.5 ulps</span>
+<span id="cb30-507"><a href="#cb30-507"></a><span class="ss">    - </span>Transcendental functions are generally rounded to between 0.5 and 1.0 ulps</span>
+<span id="cb30-508"><a href="#cb30-508"></a><span class="ss">        - </span>Transcendental as in $\pi$ or $e$</span>
 <span id="cb30-509"><a href="#cb30-509"></a></span>
-<span id="cb30-510"><a href="#cb30-510"></a><span class="ot">- ~9 ulps</span></span>
+<span id="cb30-510"><a href="#cb30-510"></a><span class="ss">- </span>~9 ulps</span>
 <span id="cb30-511"><a href="#cb30-511"></a></span>
-<span id="cb30-512"><a href="#cb30-512"></a><span class="ot"># Relative Error</span></span>
+<span id="cb30-512"><a href="#cb30-512"></a><span class="fu"># Relative Error</span></span>
 <span id="cb30-513"><a href="#cb30-513"></a></span>
-<span id="cb30-514"><a href="#cb30-514"></a><span class="ot">- The difference between the "real" number and the approximated number, divided by the "real" number.</span></span>
+<span id="cb30-514"><a href="#cb30-514"></a><span class="ss">- </span>The difference between the "real" number and the approximated number, divided by the "real" number.</span>
 <span id="cb30-515"><a href="#cb30-515"></a></span>
-<span id="cb30-516"><a href="#cb30-516"></a><span class="ot">```</span>py</span>
-<span id="cb30-517"><a href="#cb30-517"></a><span class="op">&gt;&gt;&gt;</span> f64(f32(<span class="fu">pi</span>))<span class="op">/</span>f64(<span class="fu">pi</span>)</span>
-<span id="cb30-518"><a href="#cb30-518"></a>np<span class="op">.</span>float64(<span class="fl">1.0000000278275352</span>)</span>
-<span id="cb30-519"><a href="#cb30-519"></a><span class="ot">```</span></span>
+<span id="cb30-516"><a href="#cb30-516"></a><span class="in">```py</span></span>
+<span id="cb30-517"><a href="#cb30-517"></a><span class="op">&gt;&gt;&gt;</span> f64(f32(pi))<span class="op">/</span>f64(pi)</span>
+<span id="cb30-518"><a href="#cb30-518"></a>np.float64(<span class="fl">1.0000000278275352</span>)</span>
+<span id="cb30-519"><a href="#cb30-519"></a><span class="in">```</span></span>
 <span id="cb30-520"><a href="#cb30-520"></a></span>
-<span id="cb30-521"><a href="#cb30-521"></a><span class="ot">- So for `</span>pi<span class="ot">` in `</span>f32<span class="ot">`, around $2.9 \times 10^{-8}$</span></span>
+<span id="cb30-521"><a href="#cb30-521"></a><span class="ss">- </span>So for <span class="in">`pi`</span> in <span class="in">`f32`</span>, around $2.9 \times 10^{-8}$</span>
 <span id="cb30-522"><a href="#cb30-522"></a></span>
-<span id="cb30-523"><a href="#cb30-523"></a><span class="ot">## Rounding Error</span></span>
+<span id="cb30-523"><a href="#cb30-523"></a><span class="fu">## Rounding Error</span></span>
 <span id="cb30-524"><a href="#cb30-524"></a></span>
-<span id="cb30-525"><a href="#cb30-525"></a><span class="ot">- Induced by approximating an infinite range of numbers into a finite number of bits</span></span>
-<span id="cb30-526"><a href="#cb30-526"></a><span class="ot">- Rounding is:</span></span>
-<span id="cb30-527"><a href="#cb30-527"></a><span class="ot">    - Towards the nearest</span></span>
-<span id="cb30-528"><a href="#cb30-528"></a><span class="ot">    - Towards zero</span></span>
-<span id="cb30-529"><a href="#cb30-529"></a><span class="ot">    - Towards positive infinity (round up)</span></span>
-<span id="cb30-530"><a href="#cb30-530"></a><span class="ot">    - Towards negative infinity (round down)</span></span>
+<span id="cb30-525"><a href="#cb30-525"></a><span class="ss">- </span>Induced by approximating an infinite range of numbers into a finite number of bits</span>
+<span id="cb30-526"><a href="#cb30-526"></a><span class="ss">- </span>Rounding is:</span>
+<span id="cb30-527"><a href="#cb30-527"></a><span class="ss">    - </span>Towards the nearest</span>
+<span id="cb30-528"><a href="#cb30-528"></a><span class="ss">    - </span>Towards zero</span>
+<span id="cb30-529"><a href="#cb30-529"></a><span class="ss">    - </span>Towards positive infinity (round up)</span>
+<span id="cb30-530"><a href="#cb30-530"></a><span class="ss">    - </span>Towards negative infinity (round down)</span>
 <span id="cb30-531"><a href="#cb30-531"></a></span>
-<span id="cb30-532"><a href="#cb30-532"></a><span class="ot">## Rounding Error</span></span>
+<span id="cb30-532"><a href="#cb30-532"></a><span class="fu">## Rounding Error</span></span>
 <span id="cb30-533"><a href="#cb30-533"></a></span>
-<span id="cb30-534"><a href="#cb30-534"></a><span class="ot">- What about rounding the half-way case? (i.e. 0.5)</span></span>
-<span id="cb30-535"><a href="#cb30-535"></a><span class="ot">    - Round Up vs. Round Even</span></span>
-<span id="cb30-536"><a href="#cb30-536"></a><span class="ot">- Correct Rounding:</span></span>
-<span id="cb30-537"><a href="#cb30-537"></a><span class="ot">    - Basic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the</span></span>
-<span id="cb30-538"><a href="#cb30-538"></a><span class="ot">       mathematical result.</span></span>
-<span id="cb30-539"><a href="#cb30-539"></a><span class="ot">    - If there is a tie, round to the number with an even mantissa</span></span>
+<span id="cb30-534"><a href="#cb30-534"></a><span class="ss">- </span>What about rounding the half-way case? (i.e. 0.5)</span>
+<span id="cb30-535"><a href="#cb30-535"></a><span class="ss">    - </span>Round Up vs. Round Even</span>
+<span id="cb30-536"><a href="#cb30-536"></a><span class="ss">- </span>Correct Rounding:</span>
+<span id="cb30-537"><a href="#cb30-537"></a><span class="ss">    - </span>Basic operations (add, subtract, multiply, divide, sqrt) should return the number nearest the</span>
+<span id="cb30-538"><a href="#cb30-538"></a>       mathematical result.</span>
+<span id="cb30-539"><a href="#cb30-539"></a><span class="ss">    - </span>If there is a tie, round to the number with an even mantissa</span>
 <span id="cb30-540"><a href="#cb30-540"></a></span>
-<span id="cb30-541"><a href="#cb30-541"></a><span class="ot">## Implementation</span></span>
+<span id="cb30-541"><a href="#cb30-541"></a><span class="fu">## Implementation</span></span>
 <span id="cb30-542"><a href="#cb30-542"></a></span>
-<span id="cb30-543"><a href="#cb30-543"></a><span class="ot">- "Guard Bit", "Round Bit", "Sticky Bit"</span></span>
-<span id="cb30-544"><a href="#cb30-544"></a><span class="ot">- Only used while doing calculations</span></span>
-<span id="cb30-545"><a href="#cb30-545"></a><span class="ot">    - Not stored in the float itself</span></span>
-<span id="cb30-546"><a href="#cb30-546"></a><span class="ot">    - The mantissa is shifted in calculations to align radix</span></span>
-<span id="cb30-547"><a href="#cb30-547"></a><span class="ot">- The guard bits and round bits are extra precision</span></span>
-<span id="cb30-548"><a href="#cb30-548"></a><span class="ot">- The sticky bit is an OR of anything that shifts through it</span></span>
+<span id="cb30-543"><a href="#cb30-543"></a><span class="ss">- </span>"Guard Bit", "Round Bit", "Sticky Bit"</span>
+<span id="cb30-544"><a href="#cb30-544"></a><span class="ss">- </span>Only used while doing calculations</span>
+<span id="cb30-545"><a href="#cb30-545"></a><span class="ss">    - </span>Not stored in the float itself</span>
+<span id="cb30-546"><a href="#cb30-546"></a><span class="ss">    - </span>The mantissa is shifted in calculations to align radix</span>
+<span id="cb30-547"><a href="#cb30-547"></a><span class="ss">- </span>The guard bits and round bits are extra precision</span>
+<span id="cb30-548"><a href="#cb30-548"></a><span class="ss">- </span>The sticky bit is an OR of anything that shifts through it</span>
 <span id="cb30-549"><a href="#cb30-549"></a></span>
-<span id="cb30-550"><a href="#cb30-550"></a><span class="ot">```</span>rs</span>
-<span id="cb30-551"><a href="#cb30-551"></a><span class="dv">0</span>_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span>
-<span id="cb30-552"><a href="#cb30-552"></a><span class="ot">```</span></span>
+<span id="cb30-550"><a href="#cb30-550"></a><span class="in">```rs</span></span>
+<span id="cb30-551"><a href="#cb30-551"></a><span class="dv">0</span>_00000000_00000000000000000000000_G_R_S..</span>
+<span id="cb30-552"><a href="#cb30-552"></a><span class="in">```</span></span>
 <span id="cb30-553"><a href="#cb30-553"></a></span>
-<span id="cb30-554"><a href="#cb30-554"></a><span class="ot">## Special bits</span></span>
+<span id="cb30-554"><a href="#cb30-554"></a><span class="fu">## Special bits</span></span>
 <span id="cb30-555"><a href="#cb30-555"></a></span>
-<span id="cb30-556"><a href="#cb30-556"></a><span class="ot">- "Guard Bit", "Round Bit", "Sticky Bit"</span></span>
-<span id="cb30-557"><a href="#cb30-557"></a><span class="ot">- **[G][R][S]**</span></span>
-<span id="cb30-558"><a href="#cb30-558"></a><span class="ot">- **[0][-][-]** - Round Down (do nothing)</span></span>
-<span id="cb30-559"><a href="#cb30-559"></a><span class="ot">- **[1][0][0]** - Round Up if the mantissa LSB is 1</span></span>
-<span id="cb30-560"><a href="#cb30-560"></a><span class="ot">- **[1][0][1]** - Round Up</span></span>
-<span id="cb30-561"><a href="#cb30-561"></a><span class="ot">- **[1][1][0]** - Round Up</span></span>
-<span id="cb30-562"><a href="#cb30-562"></a><span class="ot">- **[1][1][1]** - Round Up</span></span>
+<span id="cb30-556"><a href="#cb30-556"></a><span class="ss">- </span>"Guard Bit", "Round Bit", "Sticky Bit"</span>
+<span id="cb30-557"><a href="#cb30-557"></a><span class="ss">- </span>**[G][R][S]**</span>
+<span id="cb30-558"><a href="#cb30-558"></a><span class="ss">- </span>**[0][-][-]** - Round Down (do nothing)</span>
+<span id="cb30-559"><a href="#cb30-559"></a><span class="ss">- </span>**[1][0][0]** - Round Up if the mantissa LSB is 1</span>
+<span id="cb30-560"><a href="#cb30-560"></a><span class="ss">- </span>**[1][0][1]** - Round Up</span>
+<span id="cb30-561"><a href="#cb30-561"></a><span class="ss">- </span>**[1][1][0]** - Round Up</span>
+<span id="cb30-562"><a href="#cb30-562"></a><span class="ss">- </span>**[1][1][1]** - Round Up</span>
 <span id="cb30-563"><a href="#cb30-563"></a></span>
-<span id="cb30-564"><a href="#cb30-564"></a><span class="ot">```</span>rs</span>
-<span id="cb30-565"><a href="#cb30-565"></a><span class="dv">0</span>_00000000_00000000000000000000000_G_R_S<span class="op">..</span></span>
-<span id="cb30-566"><a href="#cb30-566"></a><span class="ot">```</span></span>
+<span id="cb30-564"><a href="#cb30-564"></a><span class="in">```rs</span></span>
+<span id="cb30-565"><a href="#cb30-565"></a><span class="dv">0</span>_00000000_00000000000000000000000_G_R_S..</span>
+<span id="cb30-566"><a href="#cb30-566"></a><span class="in">```</span></span>
 <span id="cb30-567"><a href="#cb30-567"></a></span>
-<span id="cb30-568"><a href="#cb30-568"></a><span class="ot">## Significance Error</span></span>
+<span id="cb30-568"><a href="#cb30-568"></a><span class="fu">## Significance Error</span></span>
 <span id="cb30-569"><a href="#cb30-569"></a></span>
-<span id="cb30-570"><a href="#cb30-570"></a><span class="ot">- Compute the Area of a Triangle given side lengths</span></span>
-<span id="cb30-571"><a href="#cb30-571"></a><span class="ot">- [Hero(n)’s Formula](https://en.wikipedia.org/wiki/Heron%27s_formula):</span></span>
-<span id="cb30-572"><a href="#cb30-572"></a><span class="ot">    - Take $s = \frac{1}{2}(a + b + c)$</span></span>
-<span id="cb30-573"><a href="#cb30-573"></a><span class="ot">    - Then $\sqrt{s(s-a)(s-b)(s-c)}$</span></span>
+<span id="cb30-570"><a href="#cb30-570"></a><span class="ss">- </span>Compute the Area of a Triangle given side lengths</span>
+<span id="cb30-571"><a href="#cb30-571"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Hero(n)’s Formula</span><span class="co">](https://en.wikipedia.org/wiki/Heron%27s_formula)</span>:</span>
+<span id="cb30-572"><a href="#cb30-572"></a><span class="ss">    - </span>Take $s = \frac{1}{2}(a + b + c)$</span>
+<span id="cb30-573"><a href="#cb30-573"></a><span class="ss">    - </span>Then $\sqrt{s(s-a)(s-b)(s-c)}$</span>
 <span id="cb30-574"><a href="#cb30-574"></a></span>
-<span id="cb30-575"><a href="#cb30-575"></a><span class="ot">- [Kahan’s Algorithm](https://people.eecs.berkeley.edu/~wkahan/Triangle.pdf):</span></span>
-<span id="cb30-576"><a href="#cb30-576"></a><span class="ot">   - Take $((a, b, c) | a \leq b \leq c)$</span></span>
-<span id="cb30-577"><a href="#cb30-577"></a><span class="ot">   - Then $\sqrt{\frac{(x + (y + z)) \times (z - (x - y)) \times (z + (x - y)) \times (x + (y - z))}{4}}$</span></span>
+<span id="cb30-575"><a href="#cb30-575"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Kahan’s Algorithm</span><span class="co">](https://people.eecs.berkeley.edu/~wkahan/Triangle.pdf)</span>:</span>
+<span id="cb30-576"><a href="#cb30-576"></a><span class="ss">   - </span>Take $((a, b, c) | a \leq b \leq c)$</span>
+<span id="cb30-577"><a href="#cb30-577"></a><span class="ss">   - </span>Then $\sqrt{\frac{(x + (y + z)) \times (z - (x - y)) \times (z + (x - y)) \times (x + (y - z))}{4}}$</span>
 <span id="cb30-578"><a href="#cb30-578"></a></span>
-<span id="cb30-579"><a href="#cb30-579"></a><span class="ot">## Write them</span></span>
+<span id="cb30-579"><a href="#cb30-579"></a><span class="fu">## Write them</span></span>
 <span id="cb30-580"><a href="#cb30-580"></a></span>
-<span id="cb30-581"><a href="#cb30-581"></a><span class="ot">```</span>{<span class="op">.</span>rs filename<span class="ot">=</span><span class="st">"src/lib.rs"</span>}</span>
-<span id="cb30-582"><a href="#cb30-582"></a>fn heron(a<span class="op">:</span>f32, b<span class="op">:</span>f32, c<span class="op">:</span>f32) <span class="ot">-&gt;</span> f32 {</span>
-<span id="cb30-583"><a href="#cb30-583"></a>    <span class="kw">let</span> s <span class="ot">=</span> (a <span class="op">+</span> b <span class="op">+</span> c)<span class="op">/</span><span class="fl">2.0</span>_f32;</span>
-<span id="cb30-584"><a href="#cb30-584"></a>    <span class="fu">return</span> (s <span class="op">*</span> (s <span class="op">-</span> a) <span class="op">*</span> (s <span class="op">-</span> b) <span class="op">*</span> (s <span class="op">-</span> c))<span class="op">.</span><span class="fu">sqrt</span>();</span>
+<span id="cb30-581"><a href="#cb30-581"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb30-582"><a href="#cb30-582"></a>fn <span class="fu">heron</span>(a<span class="sc">:</span>f32, b<span class="sc">:</span>f32, c<span class="sc">:</span>f32) <span class="ot">-&gt;</span> f32 {</span>
+<span id="cb30-583"><a href="#cb30-583"></a>    let s <span class="ot">=</span> (a <span class="sc">+</span> b <span class="sc">+</span> c)<span class="sc">/</span><span class="fl">2.0</span>_f32;</span>
+<span id="cb30-584"><a href="#cb30-584"></a>    <span class="fu">return</span> (s <span class="sc">*</span> (s <span class="sc">-</span> a) <span class="sc">*</span> (s <span class="sc">-</span> b) <span class="sc">*</span> (s <span class="sc">-</span> c))<span class="fu">.sqrt</span>();</span>
 <span id="cb30-585"><a href="#cb30-585"></a>}</span>
 <span id="cb30-586"><a href="#cb30-586"></a></span>
-<span id="cb30-587"><a href="#cb30-587"></a>fn kahan(a<span class="op">:</span>f32, b<span class="op">:</span>f32, c<span class="op">:</span>f32) <span class="ot">-&gt;</span> f32 {</span>
-<span id="cb30-588"><a href="#cb30-588"></a>    <span class="kw">let</span> mut s <span class="ot">=</span> vec<span class="op">!</span>[a,b,c];</span>
-<span id="cb30-589"><a href="#cb30-589"></a>    s<span class="op">.</span>sort_by(<span class="op">|</span>a, b<span class="op">|</span> a<span class="op">.</span>partial_cmp(b)<span class="op">.</span>unwrap()); <span class="op">//</span> <span class="st">"partial"</span><span class="op">?</span> <span class="dt">Why</span> <span class="fu">not</span> <span class="ot">`.sort`</span><span class="op">?</span></span>
-<span id="cb30-590"><a href="#cb30-590"></a>    <span class="kw">let</span> mut prod <span class="ot">=</span> s[<span class="dv">0</span>] <span class="op">+</span> s[<span class="dv">1</span>] <span class="op">+</span> s[<span class="dv">2</span>];</span>
-<span id="cb30-591"><a href="#cb30-591"></a>    prod <span class="op">*=</span> s[<span class="dv">2</span>] <span class="op">-</span> (s[<span class="dv">0</span>] <span class="op">-</span> s[<span class="dv">1</span>]);</span>
-<span id="cb30-592"><a href="#cb30-592"></a>    prod <span class="op">*=</span> s[<span class="dv">2</span>] <span class="op">+</span> (s[<span class="dv">0</span>] <span class="op">-</span> s[<span class="dv">1</span>]);</span>
-<span id="cb30-593"><a href="#cb30-593"></a>    prod <span class="op">*=</span> s[<span class="dv">0</span>] <span class="op">+</span> (s[<span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">2</span>]);</span>
-<span id="cb30-594"><a href="#cb30-594"></a>    <span class="fu">return</span> prod<span class="op">.</span><span class="fu">sqrt</span>() <span class="op">/</span> <span class="fl">4.0</span>;</span>
+<span id="cb30-587"><a href="#cb30-587"></a>fn <span class="fu">kahan</span>(a<span class="sc">:</span>f32, b<span class="sc">:</span>f32, c<span class="sc">:</span>f32) <span class="ot">-&gt;</span> f32 {</span>
+<span id="cb30-588"><a href="#cb30-588"></a>    let mut s <span class="ot">=</span> vec<span class="sc">!</span>[a,b,c];</span>
+<span id="cb30-589"><a href="#cb30-589"></a>    <span class="fu">s.sort_by</span>(<span class="sc">|</span>a, b<span class="sc">|</span> <span class="fu">a.partial_cmp</span>(b)<span class="fu">.unwrap</span>()); <span class="sc">/</span><span class="er">/</span> <span class="st">"partial"</span>? Why not <span class="st">`</span><span class="at">.sort</span><span class="st">`</span>?</span>
+<span id="cb30-590"><a href="#cb30-590"></a>    let mut prod <span class="ot">=</span> s[<span class="dv">0</span>] <span class="sc">+</span> s[<span class="dv">1</span>] <span class="sc">+</span> s[<span class="dv">2</span>];</span>
+<span id="cb30-591"><a href="#cb30-591"></a>    prod <span class="sc">*</span><span class="er">=</span> s[<span class="dv">2</span>] <span class="sc">-</span> (s[<span class="dv">0</span>] <span class="sc">-</span> s[<span class="dv">1</span>]);</span>
+<span id="cb30-592"><a href="#cb30-592"></a>    prod <span class="sc">*</span><span class="er">=</span> s[<span class="dv">2</span>] <span class="sc">+</span> (s[<span class="dv">0</span>] <span class="sc">-</span> s[<span class="dv">1</span>]);</span>
+<span id="cb30-593"><a href="#cb30-593"></a>    prod <span class="sc">*</span><span class="er">=</span> s[<span class="dv">0</span>] <span class="sc">+</span> (s[<span class="dv">1</span>] <span class="sc">-</span> s[<span class="dv">2</span>]);</span>
+<span id="cb30-594"><a href="#cb30-594"></a>    return <span class="fu">prod.sqrt</span>() <span class="sc">/</span> <span class="fl">4.0</span>;</span>
 <span id="cb30-595"><a href="#cb30-595"></a>}</span>
-<span id="cb30-596"><a href="#cb30-596"></a><span class="ot">```</span></span>
+<span id="cb30-596"><a href="#cb30-596"></a><span class="in">```</span></span>
 <span id="cb30-597"><a href="#cb30-597"></a></span>
-<span id="cb30-598"><a href="#cb30-598"></a><span class="ot">## Test them</span></span>
+<span id="cb30-598"><a href="#cb30-598"></a><span class="fu">## Test them</span></span>
 <span id="cb30-599"><a href="#cb30-599"></a></span>
-<span id="cb30-600"><a href="#cb30-600"></a><span class="ot">```</span>{<span class="op">.</span>rs filename<span class="ot">=</span><span class="st">"src/main.rs"</span>}</span>
-<span id="cb30-601"><a href="#cb30-601"></a>fn main(){</span>
-<span id="cb30-602"><a href="#cb30-602"></a>    dbg<span class="op">!</span>(heron(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>));</span>
-<span id="cb30-603"><a href="#cb30-603"></a>    dbg<span class="op">!</span>(kahan(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>));</span>
-<span id="cb30-604"><a href="#cb30-604"></a>    <span class="kw">let</span> a <span class="ot">=</span> <span class="dv">100</span>_000<span class="op">.</span><span class="dv">0</span>_f32;</span>
-<span id="cb30-605"><a href="#cb30-605"></a>    <span class="kw">let</span> c <span class="ot">=</span> <span class="fl">0.01</span>_f32;</span>
-<span id="cb30-606"><a href="#cb30-606"></a>    dbg<span class="op">!</span>(heron(a,a,c));</span>
-<span id="cb30-607"><a href="#cb30-607"></a>    dbg<span class="op">!</span>(kahan(a,a,c));</span>
+<span id="cb30-600"><a href="#cb30-600"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb30-601"><a href="#cb30-601"></a>fn <span class="fu">main</span>(){</span>
+<span id="cb30-602"><a href="#cb30-602"></a>    dbg<span class="sc">!</span>(<span class="fu">heron</span>(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>));</span>
+<span id="cb30-603"><a href="#cb30-603"></a>    dbg<span class="sc">!</span>(<span class="fu">kahan</span>(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>));</span>
+<span id="cb30-604"><a href="#cb30-604"></a>    let a <span class="ot">=</span> <span class="dv">100</span>_000<span class="fl">.0</span>_f32;</span>
+<span id="cb30-605"><a href="#cb30-605"></a>    let c <span class="ot">=</span> <span class="fl">0.01</span>_f32;</span>
+<span id="cb30-606"><a href="#cb30-606"></a>    dbg<span class="sc">!</span>(<span class="fu">heron</span>(a,a,c));</span>
+<span id="cb30-607"><a href="#cb30-607"></a>    dbg<span class="sc">!</span>(<span class="fu">kahan</span>(a,a,c));</span>
 <span id="cb30-608"><a href="#cb30-608"></a>}</span>
-<span id="cb30-609"><a href="#cb30-609"></a><span class="ot">```</span></span>
-<span id="cb30-610"><a href="#cb30-610"></a><span class="ot">- Oh what's that?</span></span>
-<span id="cb30-611"><a href="#cb30-611"></a><span class="ot">```</span>sh</span>
-<span id="cb30-612"><a href="#cb30-612"></a>[src<span class="op">/</span>main<span class="op">.</span>rs<span class="op">:</span><span class="dv">21</span><span class="op">:</span><span class="dv">5</span>] heron(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>) <span class="ot">=</span> <span class="fl">6.0</span></span>
-<span id="cb30-613"><a href="#cb30-613"></a>[src<span class="op">/</span>main<span class="op">.</span>rs<span class="op">:</span><span class="dv">22</span><span class="op">:</span><span class="dv">5</span>] kahan(<span class="fl">3.0</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>) <span class="ot">=</span> <span class="fl">6.0</span></span>
-<span id="cb30-614"><a href="#cb30-614"></a>[src<span class="op">/</span>main<span class="op">.</span>rs<span class="op">:</span><span class="dv">25</span><span class="op">:</span><span class="dv">5</span>] heron(a,a,c) <span class="ot">=</span> <span class="fl">781.25006</span></span>
-<span id="cb30-615"><a href="#cb30-615"></a>[src<span class="op">/</span>main<span class="op">.</span>rs<span class="op">:</span><span class="dv">26</span><span class="op">:</span><span class="dv">5</span>] kahan(a,a,c) <span class="ot">=</span> <span class="fl">500.0</span></span>
-<span id="cb30-616"><a href="#cb30-616"></a><span class="ot">```</span></span>
-<span id="cb30-617"><a href="#cb30-617"></a><span class="ot">- Using `</span>f64<span class="ot">` (vs `</span>f32<span class="ot">`) we get 499.9999999999994</span></span>
+<span id="cb30-609"><a href="#cb30-609"></a><span class="in">```</span></span>
+<span id="cb30-610"><a href="#cb30-610"></a><span class="ss">- </span>Oh what's that?</span>
+<span id="cb30-611"><a href="#cb30-611"></a><span class="in">```sh</span></span>
+<span id="cb30-612"><a href="#cb30-612"></a><span class="ex">[src/main.rs:21:5]</span> heron<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
+<span id="cb30-613"><a href="#cb30-613"></a><span class="ex">[src/main.rs:22:5]</span> kahan<span class="er">(</span><span class="ex">3.0,4.0,5.0</span><span class="kw">)</span> <span class="ex">=</span> 6.0</span>
+<span id="cb30-614"><a href="#cb30-614"></a><span class="ex">[src/main.rs:25:5]</span> heron<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 781.25006</span>
+<span id="cb30-615"><a href="#cb30-615"></a><span class="ex">[src/main.rs:26:5]</span> kahan<span class="er">(</span><span class="ex">a,a,c</span><span class="kw">)</span> <span class="ex">=</span> 500.0</span>
+<span id="cb30-616"><a href="#cb30-616"></a><span class="in">```</span></span>
+<span id="cb30-617"><a href="#cb30-617"></a><span class="ss">- </span>Using <span class="in">`f64`</span> (vs <span class="in">`f32`</span>) we get 499.9999999999994</span>
 <span id="cb30-618"><a href="#cb30-618"></a></span>
-<span id="cb30-619"><a href="#cb30-619"></a><span class="ot">## Significance Error</span></span>
+<span id="cb30-619"><a href="#cb30-619"></a><span class="fu">## Significance Error</span></span>
 <span id="cb30-620"><a href="#cb30-620"></a></span>
-<span id="cb30-621"><a href="#cb30-621"></a><span class="ot">- Use Stable Algorithms</span></span>
-<span id="cb30-622"><a href="#cb30-622"></a><span class="ot">    - Keep big numbers with big numbers, little numbers with little numbers.</span></span>
-<span id="cb30-623"><a href="#cb30-623"></a><span class="ot">- Parentheses can help</span></span>
-<span id="cb30-624"><a href="#cb30-624"></a><span class="ot">- The compiler won’t re-arrange your math if it cannot prove it would yield the same!</span></span>
-<span id="cb30-625"><a href="#cb30-625"></a><span class="ot">    - E.g. you can't use `</span><span class="op">&lt;</span><span class="ot">` in Rust as you may provide a `</span><span class="dt">NaN</span><span class="ot">`.</span></span>
+<span id="cb30-621"><a href="#cb30-621"></a><span class="ss">- </span>Use Stable Algorithms</span>
+<span id="cb30-622"><a href="#cb30-622"></a><span class="ss">    - </span>Keep big numbers with big numbers, little numbers with little numbers.</span>
+<span id="cb30-623"><a href="#cb30-623"></a><span class="ss">- </span>Parentheses can help</span>
+<span id="cb30-624"><a href="#cb30-624"></a><span class="ss">- </span>The compiler won’t re-arrange your math if it cannot prove it would yield the same!</span>
+<span id="cb30-625"><a href="#cb30-625"></a><span class="ss">    - </span>E.g. you can't use <span class="in">`&lt;`</span> in Rust as you may provide a <span class="in">`NaN`</span>.</span>
 <span id="cb30-626"><a href="#cb30-626"></a></span>
 <span id="cb30-627"><a href="#cb30-627"></a></span>
-<span id="cb30-628"><a href="#cb30-628"></a><span class="ot">## Significance Error – Don’t floats?</span></span>
+<span id="cb30-628"><a href="#cb30-628"></a><span class="fu">## Significance Error – Don’t floats?</span></span>
 <span id="cb30-629"><a href="#cb30-629"></a></span>
-<span id="cb30-630"><a href="#cb30-630"></a><span class="ot">- Use integers</span></span>
-<span id="cb30-631"><a href="#cb30-631"></a><span class="ot">    - Very fast</span></span>
-<span id="cb30-632"><a href="#cb30-632"></a><span class="ot">    - Trade more precision for less range</span></span>
-<span id="cb30-633"><a href="#cb30-633"></a><span class="ot">    - Only input/output may be impacted by floating point conversions</span></span>
-<span id="cb30-634"><a href="#cb30-634"></a><span class="ot">    - Financial applications represent dollars as only cents or tenth’s of cents</span></span>
-<span id="cb30-635"><a href="#cb30-635"></a><span class="ot">    </span></span>
-<span id="cb30-636"><a href="#cb30-636"></a><span class="ot">## Significance Error – Don’t floats?</span></span>
+<span id="cb30-630"><a href="#cb30-630"></a><span class="ss">- </span>Use integers</span>
+<span id="cb30-631"><a href="#cb30-631"></a><span class="ss">    - </span>Very fast</span>
+<span id="cb30-632"><a href="#cb30-632"></a><span class="ss">    - </span>Trade more precision for less range</span>
+<span id="cb30-633"><a href="#cb30-633"></a><span class="ss">    - </span>Only input/output may be impacted by floating point conversions</span>
+<span id="cb30-634"><a href="#cb30-634"></a><span class="ss">    - </span>Financial applications represent dollars as only cents or tenth’s of cents</span>
+<span id="cb30-635"><a href="#cb30-635"></a>    </span>
+<span id="cb30-636"><a href="#cb30-636"></a><span class="fu">## Significance Error – Don’t floats?</span></span>
 <span id="cb30-637"><a href="#cb30-637"></a></span>
-<span id="cb30-638"><a href="#cb30-638"></a><span class="ot">- Use a math library</span></span>
-<span id="cb30-639"><a href="#cb30-639"></a><span class="ot">    - Slower</span></span>
-<span id="cb30-640"><a href="#cb30-640"></a><span class="ot">    - Define your own level of accuracy</span></span>
-<span id="cb30-641"><a href="#cb30-641"></a><span class="ot">    - Usually GMP or hardware specific.</span></span>
-<span id="cb30-642"><a href="#cb30-642"></a><span class="ot">    </span></span>
-<span id="cb30-643"><a href="#cb30-643"></a><span class="ot">## Significance Error – Don’t floats?</span></span>
+<span id="cb30-638"><a href="#cb30-638"></a><span class="ss">- </span>Use a math library</span>
+<span id="cb30-639"><a href="#cb30-639"></a><span class="ss">    - </span>Slower</span>
+<span id="cb30-640"><a href="#cb30-640"></a><span class="ss">    - </span>Define your own level of accuracy</span>
+<span id="cb30-641"><a href="#cb30-641"></a><span class="ss">    - </span>Usually GMP or hardware specific.</span>
+<span id="cb30-642"><a href="#cb30-642"></a>    </span>
+<span id="cb30-643"><a href="#cb30-643"></a><span class="fu">## Significance Error – Don’t floats?</span></span>
 <span id="cb30-644"><a href="#cb30-644"></a></span>
-<span id="cb30-645"><a href="#cb30-645"></a><span class="ot">- Execute symbolically</span></span>
-<span id="cb30-646"><a href="#cb30-646"></a><span class="ot">    - Slowest</span></span>
-<span id="cb30-647"><a href="#cb30-647"></a><span class="ot">    - Arbitrary accuracy</span></span>
-<span id="cb30-648"><a href="#cb30-648"></a><span class="ot">    - Round only at output</span></span>
-<span id="cb30-649"><a href="#cb30-649"></a><span class="ot">       </span></span>
-<span id="cb30-650"><a href="#cb30-650"></a><span class="ot">## Significance Error – Don’t floats?</span></span>
+<span id="cb30-645"><a href="#cb30-645"></a><span class="ss">- </span>Execute symbolically</span>
+<span id="cb30-646"><a href="#cb30-646"></a><span class="ss">    - </span>Slowest</span>
+<span id="cb30-647"><a href="#cb30-647"></a><span class="ss">    - </span>Arbitrary accuracy</span>
+<span id="cb30-648"><a href="#cb30-648"></a><span class="ss">    - </span>Round only at output</span>
+<span id="cb30-649"><a href="#cb30-649"></a>       </span>
+<span id="cb30-650"><a href="#cb30-650"></a><span class="fu">## Significance Error – Don’t floats?</span></span>
 <span id="cb30-651"><a href="#cb30-651"></a></span>
-<span id="cb30-652"><a href="#cb30-652"></a><span class="ot">- Write your own library?</span></span>
-<span id="cb30-653"><a href="#cb30-653"></a><span class="ot">    - Use vectors of bits or bytes.</span></span>
-<span id="cb30-654"><a href="#cb30-654"></a><span class="ot">    - Write your own arithmetic operations.</span></span>
-<span id="cb30-655"><a href="#cb30-655"></a><span class="ot">    - Test and debug your own implemention.</span></span>
-<span id="cb30-656"><a href="#cb30-656"></a><span class="ot">- Coming soon to a homework near you!</span></span>
+<span id="cb30-652"><a href="#cb30-652"></a><span class="ss">- </span>Write your own library?</span>
+<span id="cb30-653"><a href="#cb30-653"></a><span class="ss">    - </span>Use vectors of bits or bytes.</span>
+<span id="cb30-654"><a href="#cb30-654"></a><span class="ss">    - </span>Write your own arithmetic operations.</span>
+<span id="cb30-655"><a href="#cb30-655"></a><span class="ss">    - </span>Test and debug your own implemention.</span>
+<span id="cb30-656"><a href="#cb30-656"></a><span class="ss">- </span>Coming soon to a homework near you!</span>
 <span id="cb30-657"><a href="#cb30-657"></a></span>
-<span id="cb30-658"><a href="#cb30-658"></a><span class="ot">## Algebraic Assumption Error</span></span>
+<span id="cb30-658"><a href="#cb30-658"></a><span class="fu">## Algebraic Assumption Error</span></span>
 <span id="cb30-659"><a href="#cb30-659"></a></span>
-<span id="cb30-660"><a href="#cb30-660"></a><span class="ot">- Distributive Rule does not apply:</span></span>
-<span id="cb30-661"><a href="#cb30-661"></a><span class="ot">    - $a = x \times y - x \times z \nRightarrow a = x (y - z)$</span></span>
-<span id="cb30-662"><a href="#cb30-662"></a><span class="ot">- Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</span></span>
-<span id="cb30-663"><a href="#cb30-663"></a><span class="ot">    - $a = x + (y + z) \nRightarrow a = (x + y) + z$</span></span>
-<span id="cb30-664"><a href="#cb30-664"></a><span class="ot">- Cannot interchange division and multiplication:</span></span>
-<span id="cb30-665"><a href="#cb30-665"></a><span class="ot">    - $a = \frac{x}{10.0} \nRightarrow a = x \times 0.1$</span></span>
+<span id="cb30-660"><a href="#cb30-660"></a><span class="ss">- </span>Distributive Rule does not apply:</span>
+<span id="cb30-661"><a href="#cb30-661"></a><span class="ss">    - </span>$a = x \times y - x \times z \nRightarrow a = x (y - z)$</span>
+<span id="cb30-662"><a href="#cb30-662"></a><span class="ss">- </span>Associative Rule does not apply: 𝑥 + 𝑦 +𝑧 ≠ 𝑥 +𝑦 +𝑧</span>
+<span id="cb30-663"><a href="#cb30-663"></a><span class="ss">    - </span>$a = x + (y + z) \nRightarrow a = (x + y) + z$</span>
+<span id="cb30-664"><a href="#cb30-664"></a><span class="ss">- </span>Cannot interchange division and multiplication:</span>
+<span id="cb30-665"><a href="#cb30-665"></a><span class="ss">    - </span>$a = \frac{x}{10.0} \nRightarrow a = x \times 0.1$</span>
 <span id="cb30-666"><a href="#cb30-666"></a></span>
-<span id="cb30-667"><a href="#cb30-667"></a><span class="ot">## Distribution</span></span>
+<span id="cb30-667"><a href="#cb30-667"></a><span class="fu">## Distribution</span></span>
 <span id="cb30-668"><a href="#cb30-668"></a></span>
-<span id="cb30-669"><a href="#cb30-669"></a><span class="ot">```</span>py</span>
+<span id="cb30-669"><a href="#cb30-669"></a><span class="in">```py</span></span>
 <span id="cb30-670"><a href="#cb30-670"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
-<span id="cb30-671"><a href="#cb30-671"></a>(np<span class="op">.</span>float32(<span class="fl">1000000000.0</span>), np<span class="op">.</span>float32(<span class="fl">1.0000005</span>), np<span class="op">.</span>float32(<span class="fl">1.0</span>))</span>
-<span id="cb30-672"><a href="#cb30-672"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">*</span> y <span class="op">-</span> x <span class="op">*</span> z ; x <span class="op">*</span> (y <span class="op">-</span> z)</span>
-<span id="cb30-673"><a href="#cb30-673"></a>np<span class="op">.</span>float32(<span class="fl">448.0</span>)</span>
-<span id="cb30-674"><a href="#cb30-674"></a>np<span class="op">.</span>float32(<span class="fl">476.83716</span>)</span>
-<span id="cb30-675"><a href="#cb30-675"></a><span class="ot">```</span></span>
+<span id="cb30-671"><a href="#cb30-671"></a>(np.float32(<span class="fl">1000000000.0</span>), np.float32(<span class="fl">1.0000005</span>), np.float32(<span class="fl">1.0</span>))</span>
+<span id="cb30-672"><a href="#cb30-672"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">*</span> y <span class="op">-</span> x <span class="op">*</span> z <span class="op">;</span> x <span class="op">*</span> (y <span class="op">-</span> z)</span>
+<span id="cb30-673"><a href="#cb30-673"></a>np.float32(<span class="fl">448.0</span>)</span>
+<span id="cb30-674"><a href="#cb30-674"></a>np.float32(<span class="fl">476.83716</span>)</span>
+<span id="cb30-675"><a href="#cb30-675"></a><span class="in">```</span></span>
 <span id="cb30-676"><a href="#cb30-676"></a></span>
-<span id="cb30-677"><a href="#cb30-677"></a><span class="ot">## Association</span></span>
+<span id="cb30-677"><a href="#cb30-677"></a><span class="fu">## Association</span></span>
 <span id="cb30-678"><a href="#cb30-678"></a></span>
-<span id="cb30-679"><a href="#cb30-679"></a><span class="ot">```</span>py</span>
+<span id="cb30-679"><a href="#cb30-679"></a><span class="in">```py</span></span>
 <span id="cb30-680"><a href="#cb30-680"></a><span class="op">&gt;&gt;&gt;</span> x, y, z</span>
-<span id="cb30-681"><a href="#cb30-681"></a>(np<span class="op">.</span>float32(<span class="fl">16777216.0</span>), np<span class="op">.</span>float32(<span class="fl">1.0</span>), np<span class="op">.</span>float32(<span class="fl">1.0</span>))</span>
-<span id="cb30-682"><a href="#cb30-682"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">+</span> (y <span class="op">+</span> z) ; (x <span class="op">+</span> y) <span class="op">+</span> z</span>
-<span id="cb30-683"><a href="#cb30-683"></a>np<span class="op">.</span>float32(<span class="fl">16777218.0</span>)</span>
-<span id="cb30-684"><a href="#cb30-684"></a>np<span class="op">.</span>float32(<span class="fl">16777216.0</span>)</span>
-<span id="cb30-685"><a href="#cb30-685"></a><span class="ot">```</span></span>
+<span id="cb30-681"><a href="#cb30-681"></a>(np.float32(<span class="fl">16777216.0</span>), np.float32(<span class="fl">1.0</span>), np.float32(<span class="fl">1.0</span>))</span>
+<span id="cb30-682"><a href="#cb30-682"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">+</span> (y <span class="op">+</span> z) <span class="op">;</span> (x <span class="op">+</span> y) <span class="op">+</span> z</span>
+<span id="cb30-683"><a href="#cb30-683"></a>np.float32(<span class="fl">16777218.0</span>)</span>
+<span id="cb30-684"><a href="#cb30-684"></a>np.float32(<span class="fl">16777216.0</span>)</span>
+<span id="cb30-685"><a href="#cb30-685"></a><span class="in">```</span></span>
 <span id="cb30-686"><a href="#cb30-686"></a></span>
-<span id="cb30-687"><a href="#cb30-687"></a><span class="ot">## Interchange</span></span>
+<span id="cb30-687"><a href="#cb30-687"></a><span class="fu">## Interchange</span></span>
 <span id="cb30-688"><a href="#cb30-688"></a></span>
-<span id="cb30-689"><a href="#cb30-689"></a><span class="ot">- Check last digit</span></span>
+<span id="cb30-689"><a href="#cb30-689"></a><span class="ss">- </span>Check last digit</span>
 <span id="cb30-690"><a href="#cb30-690"></a></span>
-<span id="cb30-691"><a href="#cb30-691"></a><span class="ot">```</span>py</span>
+<span id="cb30-691"><a href="#cb30-691"></a><span class="in">```py</span></span>
 <span id="cb30-692"><a href="#cb30-692"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">100000000</span></span>
 <span id="cb30-693"><a href="#cb30-693"></a><span class="fl">1.4285714285714284e-09</span></span>
 <span id="cb30-694"><a href="#cb30-694"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">100000000</span> <span class="op">/</span> <span class="dv">7</span></span>
 <span id="cb30-695"><a href="#cb30-695"></a><span class="fl">1.4285714285714286e-09</span></span>
-<span id="cb30-696"><a href="#cb30-696"></a><span class="ot">```</span></span>
+<span id="cb30-696"><a href="#cb30-696"></a><span class="in">```</span></span>
 <span id="cb30-697"><a href="#cb30-697"></a></span>
-<span id="cb30-698"><a href="#cb30-698"></a><span class="ot">## Floating Point Exceptions</span></span>
+<span id="cb30-698"><a href="#cb30-698"></a><span class="fu">## Floating Point Exceptions</span></span>
 <span id="cb30-699"><a href="#cb30-699"></a></span>
-<span id="cb30-700"><a href="#cb30-700"></a><span class="ot">| IEEE 754 Exception | Result when traps disabled | Argument to trap handler |</span></span>
-<span id="cb30-701"><a href="#cb30-701"></a><span class="ot">| :------------------ | :------------------------- | :----------------------- |</span></span>
-<span id="cb30-702"><a href="#cb30-702"></a><span class="ot">| **overflow** | $\pm \infty$ or $\pm x_{\text{max}}$ | $\text{round}(x 2^{-a})$ |</span></span>
-<span id="cb30-703"><a href="#cb30-703"></a><span class="ot">| **underflow** | $0, \pm 2^{\text{min}}$ or denormalized | $\text{round}(x 2^{a})$ |</span></span>
-<span id="cb30-704"><a href="#cb30-704"></a><span class="ot">| **divide by zero** | $\pm \infty$               | invalid operation        |</span></span>
-<span id="cb30-705"><a href="#cb30-705"></a><span class="ot">| **invalid** | $\text{NaN}$               | invalid operation        |</span></span>
-<span id="cb30-706"><a href="#cb30-706"></a><span class="ot">| **inexact** | $\text{round}(x)$          | $\text{round}(x)$        |</span></span>
+<span id="cb30-700"><a href="#cb30-700"></a><span class="pp">|</span> IEEE 754 Exception <span class="pp">|</span> Result when traps disabled <span class="pp">|</span> Argument to trap handler <span class="pp">|</span></span>
+<span id="cb30-701"><a href="#cb30-701"></a><span class="pp">| :------------------</span> <span class="pp">| :-------------------------</span> <span class="pp">| :-----------------------</span> <span class="pp">|</span></span>
+<span id="cb30-702"><a href="#cb30-702"></a><span class="pp">|</span> **overflow** <span class="pp">|</span> $\pm \infty$ or $\pm x_{\text{max}}$ <span class="pp">|</span> $\text{round}(x 2^{-a})$ <span class="pp">|</span></span>
+<span id="cb30-703"><a href="#cb30-703"></a><span class="pp">|</span> **underflow** <span class="pp">|</span> $0, \pm 2^{\text{min}}$ or denormalized <span class="pp">|</span> $\text{round}(x 2^{a})$ <span class="pp">|</span></span>
+<span id="cb30-704"><a href="#cb30-704"></a><span class="pp">|</span> **divide by zero** <span class="pp">|</span> $\pm \infty$               <span class="pp">|</span> invalid operation        <span class="pp">|</span></span>
+<span id="cb30-705"><a href="#cb30-705"></a><span class="pp">|</span> **invalid** <span class="pp">|</span> $\text{NaN}$               <span class="pp">|</span> invalid operation        <span class="pp">|</span></span>
+<span id="cb30-706"><a href="#cb30-706"></a><span class="pp">|</span> **inexact** <span class="pp">|</span> $\text{round}(x)$          <span class="pp">|</span> $\text{round}(x)$        <span class="pp">|</span></span>
 <span id="cb30-707"><a href="#cb30-707"></a></span>
 <span id="cb30-708"><a href="#cb30-708"></a></span>
-<span id="cb30-709"><a href="#cb30-709"></a><span class="ot">## But Wait! There’s More!</span></span>
+<span id="cb30-709"><a href="#cb30-709"></a><span class="fu">## But Wait! There’s More!</span></span>
 <span id="cb30-710"><a href="#cb30-710"></a></span>
-<span id="cb30-711"><a href="#cb30-711"></a><span class="ot">- Binary to Decimal Conversion Error</span></span>
-<span id="cb30-712"><a href="#cb30-712"></a><span class="ot">- Summation Error</span></span>
-<span id="cb30-713"><a href="#cb30-713"></a><span class="ot">- Propagation Error</span></span>
-<span id="cb30-714"><a href="#cb30-714"></a><span class="ot">- Underflow, Overflow</span></span>
-<span id="cb30-715"><a href="#cb30-715"></a><span class="ot">- Type Narrowing/Widening Rules</span></span>
+<span id="cb30-711"><a href="#cb30-711"></a><span class="ss">- </span>Binary to Decimal Conversion Error</span>
+<span id="cb30-712"><a href="#cb30-712"></a><span class="ss">- </span>Summation Error</span>
+<span id="cb30-713"><a href="#cb30-713"></a><span class="ss">- </span>Propagation Error</span>
+<span id="cb30-714"><a href="#cb30-714"></a><span class="ss">- </span>Underflow, Overflow</span>
+<span id="cb30-715"><a href="#cb30-715"></a><span class="ss">- </span>Type Narrowing/Widening Rules</span>
 <span id="cb30-716"><a href="#cb30-716"></a></span>
-<span id="cb30-717"><a href="#cb30-717"></a><span class="ot">## Testing</span></span>
+<span id="cb30-717"><a href="#cb30-717"></a><span class="fu">## Testing</span></span>
 <span id="cb30-718"><a href="#cb30-718"></a></span>
-<span id="cb30-719"><a href="#cb30-719"></a><span class="ot">- Design for Numerical Stability</span></span>
-<span id="cb30-720"><a href="#cb30-720"></a><span class="ot">- Perform Meaningful Testing</span></span>
-<span id="cb30-721"><a href="#cb30-721"></a><span class="ot">- Document assumptions</span></span>
-<span id="cb30-722"><a href="#cb30-722"></a><span class="ot">- Track sources of approximation</span></span>
-<span id="cb30-723"><a href="#cb30-723"></a><span class="ot">- Quantify goodness</span></span>
-<span id="cb30-724"><a href="#cb30-724"></a><span class="ot">    - Well conditioned algorithms</span></span>
-<span id="cb30-725"><a href="#cb30-725"></a><span class="ot">- Backward error analysis</span></span>
-<span id="cb30-726"><a href="#cb30-726"></a><span class="ot">    - Are the outputs identical for slightly modified inputs?</span></span>
+<span id="cb30-719"><a href="#cb30-719"></a><span class="ss">- </span>Design for Numerical Stability</span>
+<span id="cb30-720"><a href="#cb30-720"></a><span class="ss">- </span>Perform Meaningful Testing</span>
+<span id="cb30-721"><a href="#cb30-721"></a><span class="ss">- </span>Document assumptions</span>
+<span id="cb30-722"><a href="#cb30-722"></a><span class="ss">- </span>Track sources of approximation</span>
+<span id="cb30-723"><a href="#cb30-723"></a><span class="ss">- </span>Quantify goodness</span>
+<span id="cb30-724"><a href="#cb30-724"></a><span class="ss">    - </span>Well conditioned algorithms</span>
+<span id="cb30-725"><a href="#cb30-725"></a><span class="ss">- </span>Backward error analysis</span>
+<span id="cb30-726"><a href="#cb30-726"></a><span class="ss">    - </span>Are the outputs identical for slightly modified inputs?</span>
 <span id="cb30-727"><a href="#cb30-727"></a></span>
-<span id="cb30-728"><a href="#cb30-728"></a><span class="ot">## Today</span></span>
+<span id="cb30-728"><a href="#cb30-728"></a><span class="fu">## Today</span></span>
 <span id="cb30-729"><a href="#cb30-729"></a></span>
-<span id="cb30-730"><a href="#cb30-730"></a><span class="ot">- Understand precision through the lens of floats.</span></span>
-<span id="cb30-731"><a href="#cb30-731"></a><span class="ot">    - Understand the basics of floats</span></span>
-<span id="cb30-732"><a href="#cb30-732"></a><span class="ot">    - Understand the language of floats</span></span>
-<span id="cb30-733"><a href="#cb30-733"></a><span class="ot">    - Get a feel for when further investigation is required</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb30-730"><a href="#cb30-730"></a><span class="ss">- </span>Understand precision through the lens of floats.</span>
+<span id="cb30-731"><a href="#cb30-731"></a><span class="ss">    - </span>Understand the basics of floats</span>
+<span id="cb30-732"><a href="#cb30-732"></a><span class="ss">    - </span>Understand the language of floats</span>
+<span id="cb30-733"><a href="#cb30-733"></a><span class="ss">    - </span>Get a feel for when further investigation is required</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
