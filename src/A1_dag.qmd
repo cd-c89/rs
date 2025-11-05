@@ -1,0 +1,187 @@
+---
+title: "DAG"
+format: 
+  html:
+    code-line-numbers: false
+---
+
+# Preamble
+
+You know what a DAG is. Now make one in Rust.
+
+- [ ] Implement a relatively non-trivial graph.
+- [ ] Review Rust `Box` to create a recursive data structure.
+- [ ] Review how to maintain references.
+- [ ] Review the CS major requirements.
+
+# The BS CS
+
+- New for 2025, the BS CS has a lot of classes in it (16, up from 10)
+- They form a DAG (so does the BA thanks to CS-351).
+- Instead of advising separately from teaching, let's just use advising as the application domain.
+- Here is a dot diagram of a simplified version of the degree.
+    - Basically, I picked the most common class within any possible distribution.
+    - So "Any Software Class" becomes CS-262: Web Development.
+
+```{dot}
+//| echo: false
+digraph CoursePrerequisites {
+    // Graph settings
+    rankdir=TB; // Top to Bottom
+    node [shape=box, style="filled"];
+    bgcolor="transparent";
+    edge [color = "#ffffff",fontcolor = "#ffffff"]
+
+    // CS
+    node [fillcolor="#CCE5FF", color="#4682B4"];
+    "CS 151:\n Intro to Programming in Python";
+    "CS 280:\n Human-Computer Int.";
+    "CS 152:\n Data Structures";
+    "CS 262:\n Web Development";
+    "CS 271:\n Systems Programming";
+    "CS 351:\n Analysis of Algorithms";
+    "CS 371:\n Adv. Systems Computing";
+    "CS 480:\n Project Development";
+    "CS 481:\n Project Deployment";
+
+    // Data
+    node [fillcolor="#FFCCCC", color="#800000"];
+    "DATA 351:\n Data Man. in SQL";
+
+    // Math
+    node [fillcolor="#CCFFCC", color="#006400"];
+    "MATH 150:\n Differential Calculus with Precalculus";
+    "MATH 251W:\n Fndns Adv Math";
+    "MATH 280:\n Math for Data Sci.";
+    "MATH 352:\n Linear Algebra";
+
+    // Science
+    node [fillcolor="#E6CCFF", color="#4B0082"];
+    "PHYS 221:\n Intro Physics 1";
+    "PHYS 222:\n Intro Physics 2";
+
+    // Define Edges (Prerequisites)
+    
+    // CS 151
+    "CS 151:\n Intro to Programming in Python" -> "CS 280:\n Human-Computer Int.";
+    "CS 151:\n Intro to Programming in Python" -> "CS 152:\n Data Structures";
+    "CS 151:\n Intro to Programming in Python" -> "DATA 351:\n Data Man. in SQL";
+
+    // CS 152
+    "CS 152:\n Data Structures" -> "CS 271:\n Systems Programming";
+    "CS 152:\n Data Structures" -> "CS 351:\n Analysis of Algorithms";
+    "CS 152:\n Data Structures" -> "CS 262:\n Web Development";
+
+    // MATH
+    "MATH 150:\n Differential Calculus with Precalculus" -> "MATH 251W:\n Fndns Adv Math";
+    "MATH 150:\n Differential Calculus with Precalculus" -> "MATH 280:\n Math for Data Sci.";
+    "MATH 150:\n Differential Calculus with Precalculus" -> "PHYS 221:\n Intro Physics 1"
+    "MATH 251W:\n Fndns Adv Math" -> "CS 351:\n Analysis of Algorithms";
+    "MATH 251W:\n Fndns Adv Math" -> "MATH 352:\n Linear Algebra";
+
+    // Systems
+    "CS 271:\n Systems Programming" -> "CS 371:\n Adv. Systems Computing";
+
+    // Capstone
+    "CS 351:\n Analysis of Algorithms" -> "CS 480:\n Project Development";
+    "CS 371:\n Adv. Systems Computing" -> "CS 480:\n Project Development";
+    "CS 480:\n Project Development" -> "CS 481:\n Project Deployment";
+    
+    // Physics
+    "PHYS 221:\n Intro Physics 1" -> "PHYS 222:\n Intro Physics 2";
+}
+```
+
+- You can see the code that made that in the source, but I also formulated it as concisely as I could manage here:
+```email
+C151:C280
+C151:C152
+C151:D351
+C152:C271
+C152:C351
+C152:C262
+C271:C371
+C351:C480
+C371:C480
+C480:C481
+M150:M251
+M150:M280
+M150:P221
+M251:C351
+M251:M352
+P221:P222
+
+```
+
+# Two Representations
+
+- Depending on the use case, it is not unreasonable to express such a graph as an ordered pair of a set of nodes and a set of edges (of which the above is the set of edges).
+    - Or even just a set of edges?
+- Depending on the use case, it is not unreasonable to create a `struct Node` for each course.
+    - Today we'll do this one (otherwise you just use a `Vec<T>` - yawn!)
+    - We'll do something much just, just still use a vector but use it to store a node's... postrequisities (I don't know the word).
+```{.rs filename="src/lib.rs"}
+#[derive(Debug)]
+struct Node {
+    data: String,
+    next: Vector<String>,
+}
+```
+
+# Implementation Detail
+
+- You will probably at some point want to use a dictionary or something a lot like that on this task.
+- The use of `std::collections::HashMap` should be basically familiar, and some helpful combinations of methods can be found on this page.
+    - [Struct HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
+- You certainly do not have to use a `HashMap`, and I had no intention of doing so until I realized I was lazy.
+
+# Your task
+
+- Load the prerequisite edges into Rust.
+    - Use `std::io:stdin::lock().lines()`
+    - I terminated on an empty line.
+- Build a DAG out of nodes.
+    - Basically, conditionally add a node.
+        - Look at `.or_insert_with(|| <thing you want to insert)`;        
+- Print it, somehow.
+    - `dbg!()` is fine but I wrote a loop over the hashmap.
+- Here's how it looked - I run, then copy+paste the edges, then press enter to generate an empty line.
+    - The output follows.
+    - You should have 14 lines - there are 16 courses and all but CS 151 and MATH 150 have pre-reqs.
+    
+```sh
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/dag`
+C151:C280
+C151:C152
+C151:D351
+C152:C271
+C152:C351
+C152:C262
+C271:C371
+C351:C480
+C371:C480
+C480:C481
+M150:M251
+M150:M280
+M150:P221
+M251:C351
+M251:M352
+P221:P222
+
+C152 requires C151
+D351 requires C151
+C480 requires C351,C371
+M251 requires M150
+C351 requires C152,M251
+C371 requires C271
+C280 requires C151
+C481 requires C480
+M352 requires M251
+P221 requires M150
+C271 requires C152
+P222 requires P221
+M280 requires M150
+C262 requires C152
+```

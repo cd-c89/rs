@@ -312,6 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#the-bs-cs" id="toc-the-bs-cs" class="nav-link" data-scroll-target="#the-bs-cs">The BS CS</a></li>
+  <li><a href="#two-representations" id="toc-two-representations" class="nav-link" data-scroll-target="#two-representations">Two Representations</a></li>
+  <li><a href="#implementation-detail" id="toc-implementation-detail" class="nav-link" data-scroll-target="#implementation-detail">Implementation Detail</a></li>
+  <li><a href="#your-task" id="toc-your-task" class="nav-link" data-scroll-target="#your-task">Your task</a></li>
   </ul>
 </nav>
     </div>
@@ -347,185 +351,361 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Review how to maintain references.</label></li>
 <li><label><input type="checkbox">Review the CS major requirements.</label></li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Review: Box
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+<section id="the-bs-cs" class="level1">
+<h1>The BS CS</h1>
 <ul>
-<li>To put some <code>x</code> in a <code>Box</code>, simply:</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li>New for 2025, the BS CS has a lot of classes in it (16, up from 10)</li>
+<li>They form a DAG (so does the BA thanks to CS-351).</li>
+<li>Instead of advising separately from teaching, let’s just use advising as the application domain.</li>
+<li>Here is a dot diagram of a simplified version of the degree.
 <ul>
-<li>To remove <code>x</code> from the `Box, simply use the special “unary asterisk” operator, also called “dereference”.</li>
+<li>Basically, I picked the most common class within any possible distribution.</li>
+<li>So “Any Software Class” becomes CS-262: Web Development.</li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--
-
-# The BS CS
-
-- New for 2025,
-
-## Starter Code
-
-### `src/main.rs`
-
-- A testing script:
-
-```{.rs filename="src/main.rs"}
-use stack::*;
-
-fn main() {
-    let mut s = init();
-    dbg!(&s);
-    s = push(String::from("0"), s);
-    dbg!(&s);
-    s = push(String::from("1"), s);
-    dbg!(&s);
-    let (popped, mut s) = pop(s);
-    dbg!(popped);
-    dbg!(&s);
-    s = push(String::from("n"), s);
-    dbg!(&s);
-}
-```
-
-- We note:
-    - Every stack operation returns the stack.
-    - `pop` returns a tuple to return the popped value and the stack.
-    - No references are used in computation.
-        - They are used for debug.
-
-### A `src/lib.rs` excerpt
-
-- You don't have to use this if the tester still works; it is simply what I used.
-
-```{.rs filename="src/lib.rs"}
-#[derive(Debug)]
-struct Node {
-    data: String,
-    next: Option<Box<Node>>,
-}
-
-#[derive(Debug)]
-pub struct Stack {
-    vals: Option<Node>,
-}
-
-pub fn init() -> Stack {
-    return Stack {
-        vals: None,
-    };
-}
-
-pub fn push(val: String, mut s: Stack) -> Stack {
-    todo!();
-}
-
-pub fn pop(mut s: Stack) -> (Option<String>, Stack) {
-    todo!();
-}
-```
-
-- We note:
-    - Every function returns its stack.
-
-### Sample output
-
-- It's not pretty because I didn't write a print formatter.
-    - I do not love doing that in Rust.
-    - You may.
-```sh
-[src/main.rs:5:5] &s = Stack {
-    vals: None,
-}
-[src/main.rs:7:5] &s = Stack {
-    vals: Some(
-        Node {
-            data: "0",
-            next: None,
-        },
-    ),
-}
-[src/main.rs:9:5] &s = Stack {
-    vals: Some(
-        Node {
-            data: "1",
-            next: Some(
-                Node {
-                    data: "0",
-                    next: None,
-                },
-            ),
-        },
-    ),
-}
-[src/main.rs:11:5] popped = Some(
-    "1",
-)
-[src/main.rs:12:5] &s = Stack {
-    vals: Some(
-        Node {
-            data: "0",
-            next: None,
-        },
-    ),
-}
-[src/main.rs:14:5] &s = Stack {
-    vals: Some(
-        Node {
-            data: "n",
-            next: Some(
-                Node {
-                    data: "0",
-                    next: None,
-                },
-            ),
-        },
-    ),
-}
-```
-
-### Python equivalent
-
-- This is object-oriented rather than functional.
-
-```py
->>> s = []
->>> s.append('0')
->>> s
-['0']
->>> s.append('1')
->>> s
-['0', '1']
->>> s.pop()
-'1'
->>> s
-['0']
->>> s.append('n')
->>> s
-['0', 'n']
-```
-
-- The functional implementation is left as an exercise to the interested student, beyond this snippet:
-
-```py
-push = lambda val, s : lambda a : val if a else s
-```
-
--->
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 836.17 437.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 433.6)">
+<title>CoursePrerequisites</title>
+<!-- CS 151:\n Intro to Programming in Python -->
+<g id="node1" class="node">
+<title>CS 151:\n Intro to Programming in Python</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="316.09,-429.4 116.76,-429.4 116.76,-388.2 316.09,-388.2 316.09,-429.4"></polygon>
+<text text-anchor="middle" x="216.42" y="-413" font-family="Times,serif" font-size="14.00">CS 151:</text>
+<text text-anchor="middle" x="216.42" y="-396.2" font-family="Times,serif" font-size="14.00"> Intro to Programming in Python</text>
+</g>
+<!-- CS 280:\n Human&#45;Computer Int. -->
+<g id="node2" class="node">
+<title>CS 280:\n Human-Computer Int.</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="145.35,-351.8 1.5,-351.8 1.5,-310.6 145.35,-310.6 145.35,-351.8"></polygon>
+<text text-anchor="middle" x="73.42" y="-335.4" font-family="Times,serif" font-size="14.00">CS 280:</text>
+<text text-anchor="middle" x="73.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Human-Computer Int.</text>
+</g>
+<!-- CS 151:\n Intro to Programming in Python&#45;&gt;CS 280:\n Human&#45;Computer Int. -->
+<g id="edge1" class="edge">
+<title>CS 151:\n Intro to Programming in Python-&gt;CS 280:\n Human-Computer Int.</title>
+<path fill="none" stroke="#ffffff" d="M179.23,-388.13C161.08,-378.54 139.07,-366.91 119.84,-356.74"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="121.41,-353.61 110.93,-352.03 118.14,-359.8 121.41,-353.61"></polygon>
+</g>
+<!-- CS 152:\n Data Structures -->
+<g id="node3" class="node">
+<title>CS 152:\n Data Structures</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="269.62,-351.8 163.23,-351.8 163.23,-310.6 269.62,-310.6 269.62,-351.8"></polygon>
+<text text-anchor="middle" x="216.42" y="-335.4" font-family="Times,serif" font-size="14.00">CS 152:</text>
+<text text-anchor="middle" x="216.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Data Structures</text>
+</g>
+<!-- CS 151:\n Intro to Programming in Python&#45;&gt;CS 152:\n Data Structures -->
+<g id="edge2" class="edge">
+<title>CS 151:\n Intro to Programming in Python-&gt;CS 152:\n Data Structures</title>
+<path fill="none" stroke="#ffffff" d="M216.42,-387.94C216.42,-380.04 216.42,-370.78 216.42,-362.1"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="219.92,-361.93 216.42,-351.93 212.92,-361.93 219.92,-361.93"></polygon>
+</g>
+<!-- DATA 351:\n Data Man. in SQL -->
+<g id="node10" class="node">
+<title>DATA 351:\n Data Man. in SQL</title>
+<polygon fill="#ffcccc" stroke="#800000" points="410.85,-351.8 288,-351.8 288,-310.6 410.85,-310.6 410.85,-351.8"></polygon>
+<text text-anchor="middle" x="349.42" y="-335.4" font-family="Times,serif" font-size="14.00">DATA 351:</text>
+<text text-anchor="middle" x="349.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Data Man. in SQL</text>
+</g>
+<!-- CS 151:\n Intro to Programming in Python&#45;&gt;DATA 351:\n Data Man. in SQL -->
+<g id="edge3" class="edge">
+<title>CS 151:\n Intro to Programming in Python-&gt;DATA 351:\n Data Man. in SQL</title>
+<path fill="none" stroke="#ffffff" d="M251.02,-388.13C267.67,-378.67 287.81,-367.22 305.53,-357.15"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="307.57,-360.01 314.54,-352.03 304.12,-353.93 307.57,-360.01"></polygon>
+</g>
+<!-- CS 262:\n Web Development -->
+<g id="node4" class="node">
+<title>CS 262:\n Web Development</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="124.77,-274.2 0.08,-274.2 0.08,-233 124.77,-233 124.77,-274.2"></polygon>
+<text text-anchor="middle" x="62.42" y="-257.8" font-family="Times,serif" font-size="14.00">CS 262:</text>
+<text text-anchor="middle" x="62.42" y="-241" font-family="Times,serif" font-size="14.00"> Web Development</text>
+</g>
+<!-- CS 152:\n Data Structures&#45;&gt;CS 262:\n Web Development -->
+<g id="edge6" class="edge">
+<title>CS 152:\n Data Structures-&gt;CS 262:\n Web Development</title>
+<path fill="none" stroke="#ffffff" d="M176.36,-310.53C156.57,-300.82 132.5,-289 111.6,-278.74"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="113.07,-275.56 102.55,-274.3 109.98,-281.85 113.07,-275.56"></polygon>
+</g>
+<!-- CS 271:\n Systems Programming -->
+<g id="node5" class="node">
+<title>CS 271:\n Systems Programming</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="289.59,-274.2 143.25,-274.2 143.25,-233 289.59,-233 289.59,-274.2"></polygon>
+<text text-anchor="middle" x="216.42" y="-257.8" font-family="Times,serif" font-size="14.00">CS 271:</text>
+<text text-anchor="middle" x="216.42" y="-241" font-family="Times,serif" font-size="14.00"> Systems Programming</text>
+</g>
+<!-- CS 152:\n Data Structures&#45;&gt;CS 271:\n Systems Programming -->
+<g id="edge4" class="edge">
+<title>CS 152:\n Data Structures-&gt;CS 271:\n Systems Programming</title>
+<path fill="none" stroke="#ffffff" d="M216.42,-310.34C216.42,-302.44 216.42,-293.18 216.42,-284.5"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="219.92,-284.33 216.42,-274.33 212.92,-284.33 219.92,-284.33"></polygon>
+</g>
+<!-- CS 351:\n Analysis of Algorithms -->
+<g id="node6" class="node">
+<title>CS 351:\n Analysis of Algorithms</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="458.87,-274.2 307.98,-274.2 307.98,-233 458.87,-233 458.87,-274.2"></polygon>
+<text text-anchor="middle" x="383.42" y="-257.8" font-family="Times,serif" font-size="14.00">CS 351:</text>
+<text text-anchor="middle" x="383.42" y="-241" font-family="Times,serif" font-size="14.00"> Analysis of Algorithms</text>
+</g>
+<!-- CS 152:\n Data Structures&#45;&gt;CS 351:\n Analysis of Algorithms -->
+<g id="edge5" class="edge">
+<title>CS 152:\n Data Structures-&gt;CS 351:\n Analysis of Algorithms</title>
+<path fill="none" stroke="#ffffff" d="M259.87,-310.53C281.53,-300.73 307.9,-288.79 330.71,-278.46"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="332.24,-281.61 339.91,-274.3 329.36,-275.23 332.24,-281.61"></polygon>
+</g>
+<!-- CS 371:\n Adv. Systems Computing -->
+<g id="node7" class="node">
+<title>CS 371:\n Adv. Systems Computing</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="326.22,-196.6 162.63,-196.6 162.63,-155.4 326.22,-155.4 326.22,-196.6"></polygon>
+<text text-anchor="middle" x="244.42" y="-180.2" font-family="Times,serif" font-size="14.00">CS 371:</text>
+<text text-anchor="middle" x="244.42" y="-163.4" font-family="Times,serif" font-size="14.00"> Adv. Systems Computing</text>
+</g>
+<!-- CS 271:\n Systems Programming&#45;&gt;CS 371:\n Adv. Systems Computing -->
+<g id="edge12" class="edge">
+<title>CS 271:\n Systems Programming-&gt;CS 371:\n Adv. Systems Computing</title>
+<path fill="none" stroke="#ffffff" d="M223.78,-232.74C226.77,-224.66 230.29,-215.17 233.56,-206.33"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="236.93,-207.32 237.12,-196.73 230.36,-204.89 236.93,-207.32"></polygon>
+</g>
+<!-- CS 480:\n Project Development -->
+<g id="node8" class="node">
+<title>CS 480:\n Project Development</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="368.5,-119 230.35,-119 230.35,-77.8 368.5,-77.8 368.5,-119"></polygon>
+<text text-anchor="middle" x="299.42" y="-102.6" font-family="Times,serif" font-size="14.00">CS 480:</text>
+<text text-anchor="middle" x="299.42" y="-85.8" font-family="Times,serif" font-size="14.00"> Project Development</text>
+</g>
+<!-- CS 351:\n Analysis of Algorithms&#45;&gt;CS 480:\n Project Development -->
+<g id="edge13" class="edge">
+<title>CS 351:\n Analysis of Algorithms-&gt;CS 480:\n Project Development</title>
+<path fill="none" stroke="#ffffff" d="M374.51,-232.85C365.32,-212.93 350.29,-181.44 335.42,-155.2 330.28,-146.12 324.27,-136.48 318.65,-127.81"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="321.41,-125.64 312.99,-119.2 315.56,-129.48 321.41,-125.64"></polygon>
+</g>
+<!-- CS 371:\n Adv. Systems Computing&#45;&gt;CS 480:\n Project Development -->
+<g id="edge14" class="edge">
+<title>CS 371:\n Adv. Systems Computing-&gt;CS 480:\n Project Development</title>
+<path fill="none" stroke="#ffffff" d="M258.87,-155.14C265.06,-146.63 272.4,-136.54 279.12,-127.31"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="282.02,-129.28 285.07,-119.13 276.36,-125.16 282.02,-129.28"></polygon>
+</g>
+<!-- CS 481:\n Project Deployment -->
+<g id="node9" class="node">
+<title>CS 481:\n Project Deployment</title>
+<polygon fill="#cce5ff" stroke="#4682b4" points="365.29,-41.4 233.56,-41.4 233.56,-0.2 365.29,-0.2 365.29,-41.4"></polygon>
+<text text-anchor="middle" x="299.42" y="-25" font-family="Times,serif" font-size="14.00">CS 481:</text>
+<text text-anchor="middle" x="299.42" y="-8.2" font-family="Times,serif" font-size="14.00"> Project Deployment</text>
+</g>
+<!-- CS 480:\n Project Development&#45;&gt;CS 481:\n Project Deployment -->
+<g id="edge15" class="edge">
+<title>CS 480:\n Project Development-&gt;CS 481:\n Project Deployment</title>
+<path fill="none" stroke="#ffffff" d="M299.42,-77.54C299.42,-69.64 299.42,-60.38 299.42,-51.7"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="302.92,-51.53 299.42,-41.53 295.92,-51.53 302.92,-51.53"></polygon>
+</g>
+<!-- MATH 150:\n Differential Calculus with Precalculus -->
+<g id="node11" class="node">
+<title>MATH 150:\n Differential Calculus with Precalculus</title>
+<polygon fill="#ccffcc" stroke="#006400" points="761.14,-429.4 527.71,-429.4 527.71,-388.2 761.14,-388.2 761.14,-429.4"></polygon>
+<text text-anchor="middle" x="644.42" y="-413" font-family="Times,serif" font-size="14.00">MATH 150:</text>
+<text text-anchor="middle" x="644.42" y="-396.2" font-family="Times,serif" font-size="14.00"> Differential Calculus with Precalculus</text>
+</g>
+<!-- MATH 251W:\n Fndns Adv Math -->
+<g id="node12" class="node">
+<title>MATH 251W:\n Fndns Adv Math</title>
+<polygon fill="#ccffcc" stroke="#006400" points="564.82,-351.8 450.03,-351.8 450.03,-310.6 564.82,-310.6 564.82,-351.8"></polygon>
+<text text-anchor="middle" x="507.42" y="-335.4" font-family="Times,serif" font-size="14.00">MATH 251W:</text>
+<text text-anchor="middle" x="507.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Fndns Adv Math</text>
+</g>
+<!-- MATH 150:\n Differential Calculus with Precalculus&#45;&gt;MATH 251W:\n Fndns Adv Math -->
+<g id="edge7" class="edge">
+<title>MATH 150:\n Differential Calculus with Precalculus-&gt;MATH 251W:\n Fndns Adv Math</title>
+<path fill="none" stroke="#ffffff" d="M608.79,-388.13C591.48,-378.58 570.51,-367.01 552.14,-356.88"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="553.81,-353.8 543.36,-352.03 550.42,-359.93 553.81,-353.8"></polygon>
+</g>
+<!-- MATH 280:\n Math for Data Sci. -->
+<g id="node13" class="node">
+<title>MATH 280:\n Math for Data Sci.</title>
+<polygon fill="#ccffcc" stroke="#006400" points="706.12,-351.8 582.73,-351.8 582.73,-310.6 706.12,-310.6 706.12,-351.8"></polygon>
+<text text-anchor="middle" x="644.42" y="-335.4" font-family="Times,serif" font-size="14.00">MATH 280:</text>
+<text text-anchor="middle" x="644.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Math for Data Sci.</text>
+</g>
+<!-- MATH 150:\n Differential Calculus with Precalculus&#45;&gt;MATH 280:\n Math for Data Sci. -->
+<g id="edge8" class="edge">
+<title>MATH 150:\n Differential Calculus with Precalculus-&gt;MATH 280:\n Math for Data Sci.</title>
+<path fill="none" stroke="#ffffff" d="M644.42,-387.94C644.42,-380.04 644.42,-370.78 644.42,-362.1"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="647.92,-361.93 644.42,-351.93 640.92,-361.93 647.92,-361.93"></polygon>
+</g>
+<!-- PHYS 221:\n Intro Physics 1 -->
+<g id="node15" class="node">
+<title>PHYS 221:\n Intro Physics 1</title>
+<polygon fill="#e6ccff" stroke="#4b0082" points="827.93,-351.8 724.92,-351.8 724.92,-310.6 827.93,-310.6 827.93,-351.8"></polygon>
+<text text-anchor="middle" x="776.42" y="-335.4" font-family="Times,serif" font-size="14.00">PHYS 221:</text>
+<text text-anchor="middle" x="776.42" y="-318.6" font-family="Times,serif" font-size="14.00"> Intro Physics 1</text>
+</g>
+<!-- MATH 150:\n Differential Calculus with Precalculus&#45;&gt;PHYS 221:\n Intro Physics 1 -->
+<g id="edge9" class="edge">
+<title>MATH 150:\n Differential Calculus with Precalculus-&gt;PHYS 221:\n Intro Physics 1</title>
+<path fill="none" stroke="#ffffff" d="M678.76,-388.13C695.28,-378.67 715.28,-367.22 732.86,-357.15"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="734.86,-360.04 741.8,-352.03 731.38,-353.96 734.86,-360.04"></polygon>
+</g>
+<!-- MATH 251W:\n Fndns Adv Math&#45;&gt;CS 351:\n Analysis of Algorithms -->
+<g id="edge10" class="edge">
+<title>MATH 251W:\n Fndns Adv Math-&gt;CS 351:\n Analysis of Algorithms</title>
+<path fill="none" stroke="#ffffff" d="M475.17,-310.53C459.79,-301.16 441.21,-289.83 424.81,-279.83"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="426.31,-276.65 415.95,-274.43 422.67,-282.62 426.31,-276.65"></polygon>
+</g>
+<!-- MATH 352:\n Linear Algebra -->
+<g id="node14" class="node">
+<title>MATH 352:\n Linear Algebra</title>
+<polygon fill="#ccffcc" stroke="#006400" points="581.55,-274.2 477.3,-274.2 477.3,-233 581.55,-233 581.55,-274.2"></polygon>
+<text text-anchor="middle" x="529.42" y="-257.8" font-family="Times,serif" font-size="14.00">MATH 352:</text>
+<text text-anchor="middle" x="529.42" y="-241" font-family="Times,serif" font-size="14.00"> Linear Algebra</text>
+</g>
+<!-- MATH 251W:\n Fndns Adv Math&#45;&gt;MATH 352:\n Linear Algebra -->
+<g id="edge11" class="edge">
+<title>MATH 251W:\n Fndns Adv Math-&gt;MATH 352:\n Linear Algebra</title>
+<path fill="none" stroke="#ffffff" d="M513.2,-310.34C515.53,-302.35 518.26,-292.97 520.81,-284.21"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="524.25,-284.91 523.68,-274.33 517.53,-282.95 524.25,-284.91"></polygon>
+</g>
+<!-- PHYS 222:\n Intro Physics 2 -->
+<g id="node16" class="node">
+<title>PHYS 222:\n Intro Physics 2</title>
+<polygon fill="#e6ccff" stroke="#4b0082" points="827.93,-274.2 724.92,-274.2 724.92,-233 827.93,-233 827.93,-274.2"></polygon>
+<text text-anchor="middle" x="776.42" y="-257.8" font-family="Times,serif" font-size="14.00">PHYS 222:</text>
+<text text-anchor="middle" x="776.42" y="-241" font-family="Times,serif" font-size="14.00"> Intro Physics 2</text>
+</g>
+<!-- PHYS 221:\n Intro Physics 1&#45;&gt;PHYS 222:\n Intro Physics 2 -->
+<g id="edge16" class="edge">
+<title>PHYS 221:\n Intro Physics 1-&gt;PHYS 222:\n Intro Physics 2</title>
+<path fill="none" stroke="#ffffff" d="M776.42,-310.34C776.42,-302.44 776.42,-293.18 776.42,-284.5"></path>
+<polygon fill="#ffffff" stroke="#ffffff" points="779.92,-284.33 776.42,-274.33 772.92,-284.33 779.92,-284.33"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li>You can see the code that made that in the source, but I also formulated it as concisely as I could manage here:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode email code-with-copy"><code class="sourceCode email"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>C151:C280</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>C151:C152</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>C151:D351</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>C152:C271</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>C152:C351</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>C152:C262</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>C271:C371</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>C351:C480</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>C371:C480</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C480:C481</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>M150:M251</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>M150:M280</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>M150:P221</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>M251:C351</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>M251:M352</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>P221:P222</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="two-representations" class="level1">
+<h1>Two Representations</h1>
+<ul>
+<li>Depending on the use case, it is not unreasonable to express such a graph as an ordered pair of a set of nodes and a set of edges (of which the above is the set of edges).
+<ul>
+<li>Or even just a set of edges?</li>
+</ul></li>
+<li>Depending on the use case, it is not unreasonable to create a <code>struct Node</code> for each course.
+<ul>
+<li>Today we’ll do this one (otherwise you just use a <code>Vec&lt;T&gt;</code> - yawn!)</li>
+<li>We’ll do something much just, just still use a vector but use it to store a node’s… postrequisities (I don’t know the word).</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/lib.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="src/lib.rs"><pre class="sourceCode rs code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Node <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  data<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  next<span class="op">:</span> Vector<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="implementation-detail" class="level1">
+<h1>Implementation Detail</h1>
+<ul>
+<li>You will probably at some point want to use a dictionary or something a lot like that on this task.</li>
+<li>The use of <code>std::collections::HashMap</code> should be basically familiar, and some helpful combinations of methods can be found on this page.
+<ul>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html">Struct HashMap</a></li>
+</ul></li>
+<li>You certainly do not have to use a <code>HashMap</code>, and I had no intention of doing so until I realized I was lazy.</li>
+</ul>
+</section>
+<section id="your-task" class="level1">
+<h1>Your task</h1>
+<ul>
+<li>Load the prerequisite edges into Rust.
+<ul>
+<li>Use <code>std::io:stdin::lock().lines()</code></li>
+<li>I terminated on an empty line.</li>
+</ul></li>
+<li>Build a DAG out of nodes.
+<ul>
+<li>Basically, conditionally add a node.
+<ul>
+<li>Look at <code>.or_insert_with(|| &lt;thing you want to insert)</code>;<br>
+</li>
+</ul></li>
+</ul></li>
+<li>Print it, somehow.
+<ul>
+<li><code>dbg!()</code> is fine but I wrote a loop over the hashmap.</li>
+</ul></li>
+<li>Here’s how it looked - I run, then copy+paste the edges, then press enter to generate an empty line.
+<ul>
+<li>The output follows.</li>
+<li>You should have 14 lines - there are 16 courses and all but CS 151 and MATH 150 have pre-reqs.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cargo run</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/dag</span><span class="kw">`</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:C280</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:C152</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:D351</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C271</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C351</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C262</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">C271:C371</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">C351:C480</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">C371:C480</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">C480:C481</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:M251</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:M280</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:P221</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">M251:C351</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ex">M251:M352</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">P221:P222</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">C152</span> requires C151</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">D351</span> requires C151</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ex">C480</span> requires C351,C371</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ex">M251</span> requires M150</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ex">C351</span> requires C152,M251</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ex">C371</span> requires C271</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ex">C280</span> requires C151</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ex">C481</span> requires C480</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ex">M352</span> requires M251</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ex">P221</span> requires M150</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ex">C271</span> requires C152</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="ex">P222</span> requires P221</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ex">M280</span> requires M150</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ex">C262</span> requires C152</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 <!-- -->
 
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -1009,188 +1189,194 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "DAG"</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">---</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu"># Preamble</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>You know what a DAG is. Now make one in Rust.</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="ss">- </span><span class="va">[ ]</span> Implement a relatively non-trivial graph.</span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ss">- </span><span class="va">[ ]</span> Review Rust <span class="in">`Box`</span> to create a recursive data structure.</span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">- </span><span class="va">[ ]</span> Review how to maintain references.</span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="ss">- </span><span class="va">[ ]</span> Review the CS major requirements.</span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a>::: {.callout-caution}</span>
-<span id="cb3-16"><a href="#cb3-16"></a></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="fu">## Review: Box</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="ss">- </span>To put some <span class="in">`x`</span> in a <span class="in">`Box`</span>, simply:</span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="in">```rs</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"I'm a capital-S String."</span>)<span class="op">;</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(x)<span class="op">;</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="in">```</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="ss">- </span>To remove <span class="in">`x`</span> from the `Box, simply use the special "unary asterisk" operator, also called "dereference".</span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="in">```rs</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="kw">let</span> s <span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="in">```</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="co">&lt;!--</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a></span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="co"># The BS CS</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a></span>
-<span id="cb3-33"><a href="#cb3-33"></a><span class="co">- New for 2025,</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a></span>
-<span id="cb3-35"><a href="#cb3-35"></a><span class="co">## Starter Code</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a><span class="al">###</span><span class="co"> `src/main.rs`</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="co">- A testing script:</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a></span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="co">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a><span class="co">use stack::*;</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="co">fn main() {</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="co">    let mut s = init();</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="co">    dbg!(&amp;s);</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="co">    s = push(String::from("0"), s);</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a><span class="co">    dbg!(&amp;s);</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="co">    s = push(String::from("1"), s);</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a><span class="co">    dbg!(&amp;s);</span></span>
-<span id="cb3-51"><a href="#cb3-51"></a><span class="co">    let (popped, mut s) = pop(s);</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a><span class="co">    dbg!(popped);</span></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="co">    dbg!(&amp;s);</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a><span class="co">    s = push(String::from("n"), s);</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a><span class="co">    dbg!(&amp;s);</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a><span class="co">}</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a><span class="co">```</span></span>
-<span id="cb3-58"><a href="#cb3-58"></a></span>
-<span id="cb3-59"><a href="#cb3-59"></a><span class="co">- We note:</span></span>
-<span id="cb3-60"><a href="#cb3-60"></a><span class="co">    - Every stack operation returns the stack.</span></span>
-<span id="cb3-61"><a href="#cb3-61"></a><span class="co">    - `pop` returns a tuple to return the popped value and the stack.</span></span>
-<span id="cb3-62"><a href="#cb3-62"></a><span class="co">    - No references are used in computation.</span></span>
-<span id="cb3-63"><a href="#cb3-63"></a><span class="co">        - They are used for debug.</span></span>
-<span id="cb3-64"><a href="#cb3-64"></a></span>
-<span id="cb3-65"><a href="#cb3-65"></a><span class="al">###</span><span class="co"> A `src/lib.rs` excerpt</span></span>
-<span id="cb3-66"><a href="#cb3-66"></a></span>
-<span id="cb3-67"><a href="#cb3-67"></a><span class="co">- You don't have to use this if the tester still works; it is simply what I used.</span></span>
-<span id="cb3-68"><a href="#cb3-68"></a></span>
-<span id="cb3-69"><a href="#cb3-69"></a><span class="co">```{.rs filename="src/lib.rs"}</span></span>
-<span id="cb3-70"><a href="#cb3-70"></a><span class="co">#[derive(Debug)]</span></span>
-<span id="cb3-71"><a href="#cb3-71"></a><span class="co">struct Node {</span></span>
-<span id="cb3-72"><a href="#cb3-72"></a><span class="co">    data: String,</span></span>
-<span id="cb3-73"><a href="#cb3-73"></a><span class="co">    next: Option&lt;Box&lt;Node&gt;&gt;,</span></span>
-<span id="cb3-74"><a href="#cb3-74"></a><span class="co">}</span></span>
-<span id="cb3-75"><a href="#cb3-75"></a></span>
-<span id="cb3-76"><a href="#cb3-76"></a><span class="co">#[derive(Debug)]</span></span>
-<span id="cb3-77"><a href="#cb3-77"></a><span class="co">pub struct Stack {</span></span>
-<span id="cb3-78"><a href="#cb3-78"></a><span class="co">    vals: Option&lt;Node&gt;,</span></span>
-<span id="cb3-79"><a href="#cb3-79"></a><span class="co">}</span></span>
-<span id="cb3-80"><a href="#cb3-80"></a></span>
-<span id="cb3-81"><a href="#cb3-81"></a><span class="co">pub fn init() -&gt; Stack {</span></span>
-<span id="cb3-82"><a href="#cb3-82"></a><span class="co">    return Stack {</span></span>
-<span id="cb3-83"><a href="#cb3-83"></a><span class="co">        vals: None,</span></span>
-<span id="cb3-84"><a href="#cb3-84"></a><span class="co">    };</span></span>
-<span id="cb3-85"><a href="#cb3-85"></a><span class="co">}</span></span>
-<span id="cb3-86"><a href="#cb3-86"></a></span>
-<span id="cb3-87"><a href="#cb3-87"></a><span class="co">pub fn push(val: String, mut s: Stack) -&gt; Stack {</span></span>
-<span id="cb3-88"><a href="#cb3-88"></a><span class="co">    todo!();</span></span>
-<span id="cb3-89"><a href="#cb3-89"></a><span class="co">}</span></span>
-<span id="cb3-90"><a href="#cb3-90"></a></span>
-<span id="cb3-91"><a href="#cb3-91"></a><span class="co">pub fn pop(mut s: Stack) -&gt; (Option&lt;String&gt;, Stack) {</span></span>
-<span id="cb3-92"><a href="#cb3-92"></a><span class="co">    todo!();</span></span>
-<span id="cb3-93"><a href="#cb3-93"></a><span class="co">}</span></span>
-<span id="cb3-94"><a href="#cb3-94"></a><span class="co">```</span></span>
-<span id="cb3-95"><a href="#cb3-95"></a></span>
-<span id="cb3-96"><a href="#cb3-96"></a><span class="co">- We note:</span></span>
-<span id="cb3-97"><a href="#cb3-97"></a><span class="co">    - Every function returns its stack.</span></span>
-<span id="cb3-98"><a href="#cb3-98"></a></span>
-<span id="cb3-99"><a href="#cb3-99"></a><span class="al">###</span><span class="co"> Sample output</span></span>
-<span id="cb3-100"><a href="#cb3-100"></a></span>
-<span id="cb3-101"><a href="#cb3-101"></a><span class="co">- It's not pretty because I didn't write a print formatter.</span></span>
-<span id="cb3-102"><a href="#cb3-102"></a><span class="co">    - I do not love doing that in Rust.</span></span>
-<span id="cb3-103"><a href="#cb3-103"></a><span class="co">    - You may.</span></span>
-<span id="cb3-104"><a href="#cb3-104"></a><span class="co">```sh</span></span>
-<span id="cb3-105"><a href="#cb3-105"></a><span class="co">[src/main.rs:5:5] &amp;s = Stack {</span></span>
-<span id="cb3-106"><a href="#cb3-106"></a><span class="co">    vals: None,</span></span>
-<span id="cb3-107"><a href="#cb3-107"></a><span class="co">}</span></span>
-<span id="cb3-108"><a href="#cb3-108"></a><span class="co">[src/main.rs:7:5] &amp;s = Stack {</span></span>
-<span id="cb3-109"><a href="#cb3-109"></a><span class="co">    vals: Some(</span></span>
-<span id="cb3-110"><a href="#cb3-110"></a><span class="co">        Node {</span></span>
-<span id="cb3-111"><a href="#cb3-111"></a><span class="co">            data: "0",</span></span>
-<span id="cb3-112"><a href="#cb3-112"></a><span class="co">            next: None,</span></span>
-<span id="cb3-113"><a href="#cb3-113"></a><span class="co">        },</span></span>
-<span id="cb3-114"><a href="#cb3-114"></a><span class="co">    ),</span></span>
-<span id="cb3-115"><a href="#cb3-115"></a><span class="co">}</span></span>
-<span id="cb3-116"><a href="#cb3-116"></a><span class="co">[src/main.rs:9:5] &amp;s = Stack {</span></span>
-<span id="cb3-117"><a href="#cb3-117"></a><span class="co">    vals: Some(</span></span>
-<span id="cb3-118"><a href="#cb3-118"></a><span class="co">        Node {</span></span>
-<span id="cb3-119"><a href="#cb3-119"></a><span class="co">            data: "1",</span></span>
-<span id="cb3-120"><a href="#cb3-120"></a><span class="co">            next: Some(</span></span>
-<span id="cb3-121"><a href="#cb3-121"></a><span class="co">                Node {</span></span>
-<span id="cb3-122"><a href="#cb3-122"></a><span class="co">                    data: "0",</span></span>
-<span id="cb3-123"><a href="#cb3-123"></a><span class="co">                    next: None,</span></span>
-<span id="cb3-124"><a href="#cb3-124"></a><span class="co">                },</span></span>
-<span id="cb3-125"><a href="#cb3-125"></a><span class="co">            ),</span></span>
-<span id="cb3-126"><a href="#cb3-126"></a><span class="co">        },</span></span>
-<span id="cb3-127"><a href="#cb3-127"></a><span class="co">    ),</span></span>
-<span id="cb3-128"><a href="#cb3-128"></a><span class="co">}</span></span>
-<span id="cb3-129"><a href="#cb3-129"></a><span class="co">[src/main.rs:11:5] popped = Some(</span></span>
-<span id="cb3-130"><a href="#cb3-130"></a><span class="co">    "1",</span></span>
-<span id="cb3-131"><a href="#cb3-131"></a><span class="co">)</span></span>
-<span id="cb3-132"><a href="#cb3-132"></a><span class="co">[src/main.rs:12:5] &amp;s = Stack {</span></span>
-<span id="cb3-133"><a href="#cb3-133"></a><span class="co">    vals: Some(</span></span>
-<span id="cb3-134"><a href="#cb3-134"></a><span class="co">        Node {</span></span>
-<span id="cb3-135"><a href="#cb3-135"></a><span class="co">            data: "0",</span></span>
-<span id="cb3-136"><a href="#cb3-136"></a><span class="co">            next: None,</span></span>
-<span id="cb3-137"><a href="#cb3-137"></a><span class="co">        },</span></span>
-<span id="cb3-138"><a href="#cb3-138"></a><span class="co">    ),</span></span>
-<span id="cb3-139"><a href="#cb3-139"></a><span class="co">}</span></span>
-<span id="cb3-140"><a href="#cb3-140"></a><span class="co">[src/main.rs:14:5] &amp;s = Stack {</span></span>
-<span id="cb3-141"><a href="#cb3-141"></a><span class="co">    vals: Some(</span></span>
-<span id="cb3-142"><a href="#cb3-142"></a><span class="co">        Node {</span></span>
-<span id="cb3-143"><a href="#cb3-143"></a><span class="co">            data: "n",</span></span>
-<span id="cb3-144"><a href="#cb3-144"></a><span class="co">            next: Some(</span></span>
-<span id="cb3-145"><a href="#cb3-145"></a><span class="co">                Node {</span></span>
-<span id="cb3-146"><a href="#cb3-146"></a><span class="co">                    data: "0",</span></span>
-<span id="cb3-147"><a href="#cb3-147"></a><span class="co">                    next: None,</span></span>
-<span id="cb3-148"><a href="#cb3-148"></a><span class="co">                },</span></span>
-<span id="cb3-149"><a href="#cb3-149"></a><span class="co">            ),</span></span>
-<span id="cb3-150"><a href="#cb3-150"></a><span class="co">        },</span></span>
-<span id="cb3-151"><a href="#cb3-151"></a><span class="co">    ),</span></span>
-<span id="cb3-152"><a href="#cb3-152"></a><span class="co">}</span></span>
-<span id="cb3-153"><a href="#cb3-153"></a><span class="co">```</span></span>
-<span id="cb3-154"><a href="#cb3-154"></a></span>
-<span id="cb3-155"><a href="#cb3-155"></a><span class="al">###</span><span class="co"> Python equivalent</span></span>
-<span id="cb3-156"><a href="#cb3-156"></a></span>
-<span id="cb3-157"><a href="#cb3-157"></a><span class="co">- This is object-oriented rather than functional.</span></span>
-<span id="cb3-158"><a href="#cb3-158"></a></span>
-<span id="cb3-159"><a href="#cb3-159"></a><span class="co">```py</span></span>
-<span id="cb3-160"><a href="#cb3-160"></a><span class="co">&gt;&gt;&gt; s = []</span></span>
-<span id="cb3-161"><a href="#cb3-161"></a><span class="co">&gt;&gt;&gt; s.append('0')</span></span>
-<span id="cb3-162"><a href="#cb3-162"></a><span class="co">&gt;&gt;&gt; s</span></span>
-<span id="cb3-163"><a href="#cb3-163"></a><span class="co">['0']</span></span>
-<span id="cb3-164"><a href="#cb3-164"></a><span class="co">&gt;&gt;&gt; s.append('1')</span></span>
-<span id="cb3-165"><a href="#cb3-165"></a><span class="co">&gt;&gt;&gt; s</span></span>
-<span id="cb3-166"><a href="#cb3-166"></a><span class="co">['0', '1']</span></span>
-<span id="cb3-167"><a href="#cb3-167"></a><span class="co">&gt;&gt;&gt; s.pop()</span></span>
-<span id="cb3-168"><a href="#cb3-168"></a><span class="co">'1'</span></span>
-<span id="cb3-169"><a href="#cb3-169"></a><span class="co">&gt;&gt;&gt; s</span></span>
-<span id="cb3-170"><a href="#cb3-170"></a><span class="co">['0']</span></span>
-<span id="cb3-171"><a href="#cb3-171"></a><span class="co">&gt;&gt;&gt; s.append('n')</span></span>
-<span id="cb3-172"><a href="#cb3-172"></a><span class="co">&gt;&gt;&gt; s</span></span>
-<span id="cb3-173"><a href="#cb3-173"></a><span class="co">['0', 'n']</span></span>
-<span id="cb3-174"><a href="#cb3-174"></a><span class="co">```</span></span>
-<span id="cb3-175"><a href="#cb3-175"></a></span>
-<span id="cb3-176"><a href="#cb3-176"></a><span class="co">- The functional implementation is left as an exercise to the interested student, beyond this snippet:</span></span>
-<span id="cb3-177"><a href="#cb3-177"></a></span>
-<span id="cb3-178"><a href="#cb3-178"></a><span class="co">```py</span></span>
-<span id="cb3-179"><a href="#cb3-179"></a><span class="co">push = lambda val, s : lambda a : val if a else s</span></span>
-<span id="cb3-180"><a href="#cb3-180"></a><span class="co">```</span></span>
-<span id="cb3-181"><a href="#cb3-181"></a></span>
-<span id="cb3-182"><a href="#cb3-182"></a><span class="co">--&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DAG"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-line-numbers: false</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>You know what a DAG is. Now make one in Rust.</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Implement a relatively non-trivial graph.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Review Rust <span class="in">`Box`</span> to create a recursive data structure.</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Review how to maintain references.</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Review the CS major requirements.</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># The BS CS</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>New for 2025, the BS CS has a lot of classes in it (16, up from 10)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They form a DAG (so does the BA thanks to CS-351).</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Instead of advising separately from teaching, let's just use advising as the application domain.</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Here is a dot diagram of a simplified version of the degree.</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Basically, I picked the most common class within any possible distribution.</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>So "Any Software Class" becomes CS-262: Web Development.</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{dot}</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="in">digraph CoursePrerequisites {</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">    // Graph settings</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">    rankdir=TB; // Top to Bottom</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="in">    node [shape=box, style="filled"];</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="in">    bgcolor="transparent";</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="in">    edge [color = "#ffffff",fontcolor = "#ffffff"]</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">    // CS</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="in">    node [fillcolor="#CCE5FF", color="#4682B4"];</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 151:\n Intro to Programming in Python";</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 280:\n Human-Computer Int.";</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 152:\n Data Structures";</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 262:\n Web Development";</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 271:\n Systems Programming";</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 351:\n Analysis of Algorithms";</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 371:\n Adv. Systems Computing";</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 480:\n Project Development";</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 481:\n Project Deployment";</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">    // Data</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="in">    node [fillcolor="#FFCCCC", color="#800000"];</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="in">    "DATA 351:\n Data Man. in SQL";</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="in">    // Math</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="in">    node [fillcolor="#CCFFCC", color="#006400"];</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 150:\n Differential Calculus with Precalculus";</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 251W:\n Fndns Adv Math";</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 280:\n Math for Data Sci.";</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 352:\n Linear Algebra";</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="in">    // Science</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">    node [fillcolor="#E6CCFF", color="#4B0082"];</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">    "PHYS 221:\n Intro Physics 1";</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="in">    "PHYS 222:\n Intro Physics 2";</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">    // Define Edges (Prerequisites)</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">    // CS 151</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 151:\n Intro to Programming in Python" -&gt; "CS 280:\n Human-Computer Int.";</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 151:\n Intro to Programming in Python" -&gt; "CS 152:\n Data Structures";</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 151:\n Intro to Programming in Python" -&gt; "DATA 351:\n Data Man. in SQL";</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="in">    // CS 152</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 152:\n Data Structures" -&gt; "CS 271:\n Systems Programming";</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 152:\n Data Structures" -&gt; "CS 351:\n Analysis of Algorithms";</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 152:\n Data Structures" -&gt; "CS 262:\n Web Development";</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="in">    // MATH</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 150:\n Differential Calculus with Precalculus" -&gt; "MATH 251W:\n Fndns Adv Math";</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 150:\n Differential Calculus with Precalculus" -&gt; "MATH 280:\n Math for Data Sci.";</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 150:\n Differential Calculus with Precalculus" -&gt; "PHYS 221:\n Intro Physics 1"</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 251W:\n Fndns Adv Math" -&gt; "CS 351:\n Analysis of Algorithms";</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="in">    "MATH 251W:\n Fndns Adv Math" -&gt; "MATH 352:\n Linear Algebra";</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="in">    // Systems</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 271:\n Systems Programming" -&gt; "CS 371:\n Adv. Systems Computing";</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="in">    // Capstone</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 351:\n Analysis of Algorithms" -&gt; "CS 480:\n Project Development";</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 371:\n Adv. Systems Computing" -&gt; "CS 480:\n Project Development";</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">    "CS 480:\n Project Development" -&gt; "CS 481:\n Project Deployment";</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="in">    // Physics</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="in">    "PHYS 221:\n Intro Physics 1" -&gt; "PHYS 222:\n Intro Physics 2";</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You can see the code that made that in the source, but I also formulated it as concisely as I could manage here:</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="in">```email</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>C151:C280</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>C151:C152</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>C151:D351</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>C152:C271</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>C152:C351</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>C152:C262</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>C271:C371</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>C351:C480</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>C371:C480</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>C480:C481</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>M150:M251</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>M150:M280</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>M150:P221</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>M251:C351</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>M251:M352</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>P221:P222</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="fu"># Two Representations</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depending on the use case, it is not unreasonable to express such a graph as an ordered pair of a set of nodes and a set of edges (of which the above is the set of edges).</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Or even just a set of edges?</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depending on the use case, it is not unreasonable to create a <span class="in">`struct Node`</span> for each course.</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Today we'll do this one (otherwise you just use a <span class="in">`Vec&lt;T&gt;`</span> - yawn!)</span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>We'll do something much just, just still use a vector but use it to store a node's... postrequisities (I don't know the word).</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="in">#[derive(Debug)]</span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="in">struct Node {</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="in">    data: String,</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="in">    next: Vector&lt;String&gt;,</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="fu"># Implementation Detail</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You will probably at some point want to use a dictionary or something a lot like that on this task.</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The use of <span class="in">`std::collections::HashMap`</span> should be basically familiar, and some helpful combinations of methods can be found on this page.</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">Struct HashMap</span><span class="co">](https://doc.rust-lang.org/std/collections/struct.HashMap.html)</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You certainly do not have to use a <span class="in">`HashMap`</span>, and I had no intention of doing so until I realized I was lazy.</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="fu"># Your task</span></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Load the prerequisite edges into Rust.</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Use <span class="in">`std::io:stdin::lock().lines()`</span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>I terminated on an empty line.</span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Build a DAG out of nodes.</span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Basically, conditionally add a node.</span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>Look at <span class="in">`.or_insert_with(|| &lt;thing you want to insert)`</span>;        </span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Print it, somehow.</span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`dbg!()`</span> is fine but I wrote a loop over the hashmap.</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Here's how it looked - I run, then copy+paste the edges, then press enter to generate an empty line.</span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The output follows.</span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>You should have 14 lines - there are 16 courses and all but CS 151 and MATH 150 have pre-reqs.</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cargo run</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/dag</span><span class="kw">`</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:C280</span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:C152</span></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a><span class="ex">C151:D351</span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C271</span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C351</span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a><span class="ex">C152:C262</span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="ex">C271:C371</span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="ex">C351:C480</span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="ex">C371:C480</span></span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a><span class="ex">C480:C481</span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:M251</span></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:M280</span></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a><span class="ex">M150:P221</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a><span class="ex">M251:C351</span></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="ex">M251:M352</span></span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a><span class="ex">P221:P222</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="ex">C152</span> requires C151</span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="ex">D351</span> requires C151</span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a><span class="ex">C480</span> requires C351,C371</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="ex">M251</span> requires M150</span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="ex">C351</span> requires C152,M251</span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="ex">C371</span> requires C271</span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="ex">C280</span> requires C151</span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a><span class="ex">C481</span> requires C480</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a><span class="ex">M352</span> requires M251</span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="ex">P221</span> requires M150</span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="ex">C271</span> requires C152</span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a><span class="ex">P222</span> requires P221</span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a><span class="ex">M280</span> requires M150</span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="ex">C262</span> requires C152</span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
