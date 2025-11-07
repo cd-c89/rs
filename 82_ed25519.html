@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,15 +68,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./90_stack.html" rel="next">
 <link href="./81_python.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b86297dc19107d1c9b1952b0f8e15fd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -130,9 +133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Systems in Rust</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -410,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">use</span> <span class="pp">num::</span><span class="op">*;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">use</span> <span class="pp">num::</span><span class="op">*;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">use</span> <span class="pp">num_bigint::</span>BigInt<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">use</span> <span class="pp">num_traits::</span>Euclid<span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
@@ -464,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-52"><a href="#cb1-52"></a>    </span>
 <span id="cb1-53"><a href="#cb1-53"></a>    <span class="co">// 5. Verify Signature</span></span>
 <span id="cb1-54"><a href="#cb1-54"></a>    <span class="pp">dbg!</span>(checkvalid(<span class="op">&amp;</span>sig<span class="op">,</span> m<span class="op">,</span> <span class="op">&amp;</span>pk<span class="op">,</span> B<span class="op">,</span> <span class="op">&amp;</span>q<span class="op">,</span> <span class="op">&amp;</span>d<span class="op">,</span> <span class="op">&amp;</span>i_const<span class="op">,</span> <span class="op">&amp;</span>b_point))<span class="op">;</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-55"><a href="#cb1-55"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="cargo" class="level2">
@@ -473,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Cargo.toml</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename="Cargo.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">[package]</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="Cargo.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">[package]</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"num"</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="dt">edition</span> <span class="op">=</span> <span class="st">"2024"</span></span>
@@ -483,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8"></a><span class="dt">num-bigint</span> <span class="op">=</span> <span class="st">"0.4.6"</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="dt">num-integer</span> <span class="op">=</span> <span class="st">"0.1.46"</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="dt">num-traits</span> <span class="op">=</span> <span class="st">"0.2.19"</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">sha2</span> <span class="op">=</span> <span class="st">"0.10.9"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">sha2</span> <span class="op">=</span> <span class="st">"0.10.9"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lib" class="level2">
@@ -495,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/lib.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb3" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="pp">num_bigint::</span>BigInt<span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="src/lib.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="pp">num_bigint::</span>BigInt<span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">use</span> <span class="pp">num_traits::</span><span class="op">{</span>Zero<span class="op">,</span> One<span class="op">,</span> ToPrimitive<span class="op">,</span> Euclid<span class="op">};</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw">use</span> <span class="pp">num_integer::</span>Integer<span class="op">;</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="kw">use</span> <span class="pp">sha2::</span><span class="op">{</span>Digest<span class="op">,</span> Sha512<span class="op">};</span></span>
@@ -539,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-42"><a href="#cb3-42"></a></span>
 <span id="cb3-43"><a href="#cb3-43"></a><span class="kw">fn</span> decodepoint(s<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> b<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> q<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> d<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> i_const<span class="op">:</span> <span class="op">&amp;</span>BigInt) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span>Point<span class="op">,</span> <span class="op">&amp;</span><span class="ot">'static</span> <span class="dt">str</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb3-44"><a href="#cb3-44"></a></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="kw">pub</span> <span class="kw">fn</span> checkvalid(s<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> m<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> pk<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> b<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> q<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> d<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> i_const<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> b_point<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span>BigInt<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="kw">pub</span> <span class="kw">fn</span> checkvalid(s<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> m<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> pk<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>]<span class="op">,</span> b<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> q<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> d<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> i_const<span class="op">:</span> <span class="op">&amp;</span>BigInt<span class="op">,</span> b_point<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span>BigInt<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -550,290 +552,294 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
         }
-        return container.innerHTML
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -841,185 +847,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./81_python.html" class="pagination-link" aria-label="Python">
@@ -1032,7 +1014,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> "Ed25519"</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="an">subtitle:</span><span class="co"> "Due Friday, 31 Oct. at 1440 ET."</span></span>
@@ -1071,61 +1053,61 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-37"><a href="#cb4-37"></a><span class="fu">## Main</span></span>
 <span id="cb4-38"><a href="#cb4-38"></a></span>
 <span id="cb4-39"><a href="#cb4-39"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="in">use num::*;</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="in">use num_bigint::BigInt;</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="in">use num_traits::Euclid;</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a>use num<span class="sc">::</span><span class="er">*</span>;</span>
+<span id="cb4-41"><a href="#cb4-41"></a>use num_bigint<span class="sc">::</span>BigInt;</span>
+<span id="cb4-42"><a href="#cb4-42"></a>use num_traits<span class="sc">::</span>Euclid;</span>
 <span id="cb4-43"><a href="#cb4-43"></a></span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="in">fn main() {</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="in">    // --- 1. Constant Setup  ---</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a><span class="in">    const B: usize = 256;</span></span>
-<span id="cb4-47"><a href="#cb4-47"></a><span class="in">    </span></span>
-<span id="cb4-48"><a href="#cb4-48"></a><span class="in">    // q: int = 2**255 - 19</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a><span class="in">    let q = BigInt::from(2).pow(255) - BigInt::from(19);</span></span>
+<span id="cb4-44"><a href="#cb4-44"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb4-45"><a href="#cb4-45"></a>    <span class="sc">/</span><span class="er">/</span> <span class="sc">---</span> <span class="fl">1.</span> Constant Setup  <span class="sc">---</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a>    const B<span class="sc">:</span> usize <span class="ot">=</span> <span class="dv">256</span>;</span>
+<span id="cb4-47"><a href="#cb4-47"></a>    </span>
+<span id="cb4-48"><a href="#cb4-48"></a>    <span class="sc">/</span><span class="er">/</span> q<span class="sc">:</span> int <span class="ot">=</span> <span class="dv">2</span><span class="sc">**</span><span class="dv">255</span> <span class="sc">-</span> <span class="dv">19</span></span>
+<span id="cb4-49"><a href="#cb4-49"></a>    let q <span class="ot">=</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">2</span>)<span class="fu">.pow</span>(<span class="dv">255</span>) <span class="sc">-</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">19</span>);</span>
 <span id="cb4-50"><a href="#cb4-50"></a></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="in">    // l: int = 2**252 + 27742317777372353535851937790883648493</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="in">    let l_suffix = BigInt::parse_bytes(b"27742317777372353535851937790883648493", 10).unwrap();</span></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="in">    let l = BigInt::from(2).pow(252) + l_suffix;</span></span>
+<span id="cb4-51"><a href="#cb4-51"></a>    <span class="sc">/</span><span class="er">/</span> l<span class="sc">:</span> int <span class="ot">=</span> <span class="dv">2</span><span class="sc">**</span><span class="dv">252</span> <span class="sc">+</span> <span class="dv">27742317777372353535851937790883648493</span></span>
+<span id="cb4-52"><a href="#cb4-52"></a>    let l_suffix <span class="ot">=</span> BigInt<span class="sc">::</span><span class="fu">parse_bytes</span>(b<span class="st">"27742317777372353535851937790883648493"</span>, <span class="dv">10</span>)<span class="fu">.unwrap</span>();</span>
+<span id="cb4-53"><a href="#cb4-53"></a>    let l <span class="ot">=</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">2</span>)<span class="fu">.pow</span>(<span class="dv">252</span>) <span class="sc">+</span> l_suffix;</span>
 <span id="cb4-54"><a href="#cb4-54"></a></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="in">    // d: int = -121665 * inv(121666)</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a><span class="in">    let n_d = BigInt::from(-121665);</span></span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="in">    let d_inv = inv(&amp;BigInt::from(121666), &amp;q);</span></span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="in">    let d = (n_d * d_inv).rem_euclid(&amp;q);</span></span>
+<span id="cb4-55"><a href="#cb4-55"></a>    <span class="sc">/</span><span class="er">/</span> d<span class="sc">:</span> int <span class="ot">=</span> <span class="sc">-</span><span class="dv">121665</span> <span class="sc">*</span> <span class="fu">inv</span>(<span class="dv">121666</span>)</span>
+<span id="cb4-56"><a href="#cb4-56"></a>    let n_d <span class="ot">=</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="sc">-</span><span class="dv">121665</span>);</span>
+<span id="cb4-57"><a href="#cb4-57"></a>    let d_inv <span class="ot">=</span> <span class="fu">inv</span>(<span class="sc">&amp;</span>BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">121666</span>), <span class="sc">&amp;</span>q);</span>
+<span id="cb4-58"><a href="#cb4-58"></a>    let d <span class="ot">=</span> (n_d <span class="sc">*</span> d_inv)<span class="fu">.rem_euclid</span>(<span class="sc">&amp;</span>q);</span>
 <span id="cb4-59"><a href="#cb4-59"></a></span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="in">    // I: int = expmod(2,(q-1)//4,q)</span></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="in">    let exponent_i = (&amp;q - BigInt::from(1)) / BigInt::from(4);</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="in">    let i_const = expmod(&amp;BigInt::from(2), &amp;exponent_i, &amp;q);</span></span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="in">    </span></span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="in">    // By : int = 4 * inv(5)</span></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="in">    let by = (BigInt::from(4) * inv(&amp;BigInt::from(5), &amp;q)).rem_euclid(&amp;q);</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="in">    </span></span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="in">    // Bx : int = xrecover(By)</span></span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="in">    let bx = xrecover(&amp;by, &amp;q, &amp;d, &amp;i_const);</span></span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="in">    </span></span>
-<span id="cb4-70"><a href="#cb4-70"></a><span class="in">    // B : List[int] = [Bx % q, By % q]</span></span>
-<span id="cb4-71"><a href="#cb4-71"></a><span class="in">    let b_point: Vec&lt;BigInt&gt; = vec![bx.rem_euclid(&amp;q), by.rem_euclid(&amp;q)];</span></span>
+<span id="cb4-60"><a href="#cb4-60"></a>    <span class="sc">/</span><span class="er">/</span> I<span class="sc">:</span> int <span class="ot">=</span> <span class="fu">expmod</span>(<span class="dv">2</span>,(q<span class="dv">-1</span>)<span class="sc">/</span><span class="er">/</span><span class="dv">4</span>,q)</span>
+<span id="cb4-61"><a href="#cb4-61"></a>    let exponent_i <span class="ot">=</span> (<span class="sc">&amp;</span>q <span class="sc">-</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">1</span>)) <span class="sc">/</span> BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">4</span>);</span>
+<span id="cb4-62"><a href="#cb4-62"></a>    let i_const <span class="ot">=</span> <span class="fu">expmod</span>(<span class="sc">&amp;</span>BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">2</span>), <span class="sc">&amp;</span>exponent_i, <span class="sc">&amp;</span>q);</span>
+<span id="cb4-63"><a href="#cb4-63"></a>    </span>
+<span id="cb4-64"><a href="#cb4-64"></a>    <span class="sc">/</span><span class="er">/</span> By <span class="sc">:</span> int <span class="ot">=</span> <span class="dv">4</span> <span class="sc">*</span> <span class="fu">inv</span>(<span class="dv">5</span>)</span>
+<span id="cb4-65"><a href="#cb4-65"></a>    let by <span class="ot">=</span> (BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">4</span>) <span class="sc">*</span> <span class="fu">inv</span>(<span class="sc">&amp;</span>BigInt<span class="sc">::</span><span class="fu">from</span>(<span class="dv">5</span>), <span class="sc">&amp;</span>q))<span class="fu">.rem_euclid</span>(<span class="sc">&amp;</span>q);</span>
+<span id="cb4-66"><a href="#cb4-66"></a>    </span>
+<span id="cb4-67"><a href="#cb4-67"></a>    <span class="sc">/</span><span class="er">/</span> Bx <span class="sc">:</span> int <span class="ot">=</span> <span class="fu">xrecover</span>(By)</span>
+<span id="cb4-68"><a href="#cb4-68"></a>    let bx <span class="ot">=</span> <span class="fu">xrecover</span>(<span class="sc">&amp;</span>by, <span class="sc">&amp;</span>q, <span class="sc">&amp;</span>d, <span class="sc">&amp;</span>i_const);</span>
+<span id="cb4-69"><a href="#cb4-69"></a>    </span>
+<span id="cb4-70"><a href="#cb4-70"></a>    <span class="sc">/</span><span class="er">/</span> B <span class="sc">:</span> List[int] <span class="ot">=</span> [Bx <span class="sc">% q, By %</span> q]</span>
+<span id="cb4-71"><a href="#cb4-71"></a>    let b_point<span class="sc">:</span> Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span> <span class="er">=</span> vec<span class="sc">!</span>[<span class="fu">bx.rem_euclid</span>(<span class="sc">&amp;</span>q), <span class="fu">by.rem_euclid</span>(<span class="sc">&amp;</span>q)];</span>
 <span id="cb4-72"><a href="#cb4-72"></a></span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="in">    // println!("Ed25519 Constant Initialization Complete.");</span></span>
-<span id="cb4-74"><a href="#cb4-74"></a><span class="in">    </span></span>
-<span id="cb4-75"><a href="#cb4-75"></a><span class="in">    // --- 2. Test Case ---</span></span>
-<span id="cb4-76"><a href="#cb4-76"></a><span class="in">    // Line 2 of this file. https://ed25519.cr.yp.to/python/sign.input</span></span>
-<span id="cb4-77"><a href="#cb4-77"></a><span class="in">    </span></span>
-<span id="cb4-78"><a href="#cb4-78"></a><span class="in">    // Secret Key (32-bytes, all zeros)</span></span>
-<span id="cb4-79"><a href="#cb4-79"></a><span class="in">    // 4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c</span></span>
-<span id="cb4-80"><a href="#cb4-80"></a><span class="in">    let sk = vec![0x4c, 0xcd, 0x08, 0x9b, 0x28, 0xff, 0x96, 0xda, 0x9d, 0xb6, 0xc3, 0x46, 0xec, 0x11, 0x4e, 0x0f, 0x5b, 0x8a, 0x31, 0x9f, 0x35, 0xab, 0xa6, 0x24, 0xda, 0x8c, 0xf6, 0xed, 0x4f, 0xb8, 0xa6, 0xfb, 0x3d, 0x40, 0x17, 0xc3, 0xe8, 0x43, 0x89, 0x5a, 0x92, 0xb7, 0x0a, 0xa7, 0x4d, 0x1b, 0x7e, 0xbc, 0x9c, 0x98, 0x2c, 0xcf, 0x2e, 0xc4, 0x96, 0x8c, 0xc0, 0xcd, 0x55, 0xf1, 0x2a, 0xf4, 0x66, 0x0c];</span></span>
+<span id="cb4-73"><a href="#cb4-73"></a>    <span class="sc">/</span><span class="er">/</span> println<span class="sc">!</span>(<span class="st">"Ed25519 Constant Initialization Complete."</span>);</span>
+<span id="cb4-74"><a href="#cb4-74"></a>    </span>
+<span id="cb4-75"><a href="#cb4-75"></a>    <span class="sc">/</span><span class="er">/</span> <span class="sc">---</span> <span class="fl">2.</span> Test Case <span class="sc">---</span></span>
+<span id="cb4-76"><a href="#cb4-76"></a>    <span class="er">//</span> Line <span class="dv">2</span> of this file. https<span class="sc">:</span><span class="er">//</span>ed25519.cr.yp.to<span class="sc">/</span>python<span class="sc">/</span>sign.input</span>
+<span id="cb4-77"><a href="#cb4-77"></a>    </span>
+<span id="cb4-78"><a href="#cb4-78"></a>    <span class="sc">/</span><span class="er">/</span> Secret <span class="fu">Key</span> (<span class="dv">32</span><span class="sc">-</span>bytes, all zeros)</span>
+<span id="cb4-79"><a href="#cb4-79"></a>    <span class="sc">/</span><span class="er">/</span> <span class="dv">4</span>ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c</span>
+<span id="cb4-80"><a href="#cb4-80"></a>    let sk <span class="ot">=</span> vec<span class="sc">!</span>[<span class="dv">0x4c</span>, <span class="dv">0xcd</span>, <span class="dv">0x08</span>, <span class="dv">0x9b</span>, <span class="dv">0x28</span>, <span class="dv">0xff</span>, <span class="dv">0x96</span>, <span class="dv">0xda</span>, <span class="dv">0x9d</span>, <span class="dv">0xb6</span>, <span class="dv">0xc3</span>, <span class="dv">0x46</span>, <span class="dv">0xec</span>, <span class="dv">0x11</span>, <span class="dv">0x4e</span>, <span class="dv">0x0f</span>, <span class="dv">0x5b</span>, <span class="dv">0x8a</span>, <span class="dv">0x31</span>, <span class="dv">0x9f</span>, <span class="dv">0x35</span>, <span class="dv">0xab</span>, <span class="dv">0xa6</span>, <span class="dv">0x24</span>, <span class="dv">0xda</span>, <span class="dv">0x8c</span>, <span class="dv">0xf6</span>, <span class="dv">0xed</span>, <span class="dv">0x4f</span>, <span class="dv">0xb8</span>, <span class="dv">0xa6</span>, <span class="dv">0xfb</span>, <span class="dv">0x3d</span>, <span class="dv">0x40</span>, <span class="dv">0x17</span>, <span class="dv">0xc3</span>, <span class="dv">0xe8</span>, <span class="dv">0x43</span>, <span class="dv">0x89</span>, <span class="dv">0x5a</span>, <span class="dv">0x92</span>, <span class="dv">0xb7</span>, <span class="dv">0x0a</span>, <span class="dv">0xa7</span>, <span class="dv">0x4d</span>, <span class="dv">0x1b</span>, <span class="dv">0x7e</span>, <span class="dv">0xbc</span>, <span class="dv">0x9c</span>, <span class="dv">0x98</span>, <span class="dv">0x2c</span>, <span class="dv">0xcf</span>, <span class="dv">0x2e</span>, <span class="dv">0xc4</span>, <span class="dv">0x96</span>, <span class="dv">0x8c</span>, <span class="dv">0xc0</span>, <span class="dv">0xcd</span>, <span class="dv">0x55</span>, <span class="dv">0xf1</span>, <span class="dv">0x2a</span>, <span class="dv">0xf4</span>, <span class="dv">0x66</span>, <span class="dv">0x0c</span>];</span>
 <span id="cb4-81"><a href="#cb4-81"></a></span>
-<span id="cb4-82"><a href="#cb4-82"></a><span class="in">    // Message</span></span>
-<span id="cb4-83"><a href="#cb4-83"></a><span class="in">    // 72</span></span>
-<span id="cb4-84"><a href="#cb4-84"></a><span class="in">    let m = 0x72;</span></span>
-<span id="cb4-85"><a href="#cb4-85"></a><span class="in">    </span></span>
-<span id="cb4-86"><a href="#cb4-86"></a><span class="in">    // 3. Generate Public Key</span></span>
-<span id="cb4-87"><a href="#cb4-87"></a><span class="in">    let pk = publickey(&amp;sk, B, &amp;q, &amp;d, &amp;b_point);</span></span>
+<span id="cb4-82"><a href="#cb4-82"></a>    <span class="sc">/</span><span class="er">/</span> Message</span>
+<span id="cb4-83"><a href="#cb4-83"></a>    <span class="sc">/</span><span class="er">/</span> <span class="dv">72</span></span>
+<span id="cb4-84"><a href="#cb4-84"></a>    let m <span class="ot">=</span> <span class="dv">0x72</span>;</span>
+<span id="cb4-85"><a href="#cb4-85"></a>    </span>
+<span id="cb4-86"><a href="#cb4-86"></a>    <span class="sc">/</span><span class="er">/</span> <span class="fl">3.</span> Generate Public Key</span>
+<span id="cb4-87"><a href="#cb4-87"></a>    let pk <span class="ot">=</span> <span class="fu">publickey</span>(<span class="sc">&amp;</span>sk, B, <span class="sc">&amp;</span>q, <span class="sc">&amp;</span>d, <span class="sc">&amp;</span>b_point);</span>
 <span id="cb4-88"><a href="#cb4-88"></a></span>
-<span id="cb4-89"><a href="#cb4-89"></a><span class="in">    // 4. Create Signature</span></span>
-<span id="cb4-90"><a href="#cb4-90"></a><span class="in">    let sig = signature(m, &amp;sk, &amp;pk, B, &amp;q, &amp;l, &amp;d, &amp;b_point);</span></span>
-<span id="cb4-91"><a href="#cb4-91"></a><span class="in">    </span></span>
-<span id="cb4-92"><a href="#cb4-92"></a><span class="in">    // 5. Verify Signature</span></span>
-<span id="cb4-93"><a href="#cb4-93"></a><span class="in">    dbg!(checkvalid(&amp;sig, m, &amp;pk, B, &amp;q, &amp;d, &amp;i_const, &amp;b_point));</span></span>
-<span id="cb4-94"><a href="#cb4-94"></a><span class="in">}</span></span>
+<span id="cb4-89"><a href="#cb4-89"></a>    <span class="sc">/</span><span class="er">/</span> <span class="fl">4.</span> Create Signature</span>
+<span id="cb4-90"><a href="#cb4-90"></a>    let sig <span class="ot">=</span> <span class="fu">signature</span>(m, <span class="sc">&amp;</span>sk, <span class="sc">&amp;</span>pk, B, <span class="sc">&amp;</span>q, <span class="sc">&amp;</span>l, <span class="sc">&amp;</span>d, <span class="sc">&amp;</span>b_point);</span>
+<span id="cb4-91"><a href="#cb4-91"></a>    </span>
+<span id="cb4-92"><a href="#cb4-92"></a>    <span class="sc">/</span><span class="er">/</span> <span class="fl">5.</span> Verify Signature</span>
+<span id="cb4-93"><a href="#cb4-93"></a>    dbg<span class="sc">!</span>(<span class="fu">checkvalid</span>(<span class="sc">&amp;</span>sig, m, <span class="sc">&amp;</span>pk, B, <span class="sc">&amp;</span>q, <span class="sc">&amp;</span>d, <span class="sc">&amp;</span>i_const, <span class="sc">&amp;</span>b_point));</span>
+<span id="cb4-94"><a href="#cb4-94"></a>}</span>
 <span id="cb4-95"><a href="#cb4-95"></a><span class="in">```</span></span>
 <span id="cb4-96"><a href="#cb4-96"></a></span>
 <span id="cb4-97"><a href="#cb4-97"></a><span class="fu">## Cargo</span></span>
@@ -1149,52 +1131,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-115"><a href="#cb4-115"></a><span class="ss">- </span>In this case, I do not provide function bodies, but provide types, imports, and constants.</span>
 <span id="cb4-116"><a href="#cb4-116"></a></span>
 <span id="cb4-117"><a href="#cb4-117"></a><span class="in">```{.rs filename="src/lib.rs"}</span></span>
-<span id="cb4-118"><a href="#cb4-118"></a><span class="in">use num_bigint::BigInt;</span></span>
-<span id="cb4-119"><a href="#cb4-119"></a><span class="in">use num_traits::{Zero, One, ToPrimitive, Euclid};</span></span>
-<span id="cb4-120"><a href="#cb4-120"></a><span class="in">use num_integer::Integer;</span></span>
-<span id="cb4-121"><a href="#cb4-121"></a><span class="in">use sha2::{Digest, Sha512};</span></span>
+<span id="cb4-118"><a href="#cb4-118"></a>use num_bigint<span class="sc">::</span>BigInt;</span>
+<span id="cb4-119"><a href="#cb4-119"></a>use num_traits<span class="sc">::</span>{Zero, One, ToPrimitive, Euclid};</span>
+<span id="cb4-120"><a href="#cb4-120"></a>use num_integer<span class="sc">::</span>Integer;</span>
+<span id="cb4-121"><a href="#cb4-121"></a>use sha2<span class="sc">::</span>{Digest, Sha512};</span>
 <span id="cb4-122"><a href="#cb4-122"></a></span>
-<span id="cb4-123"><a href="#cb4-123"></a><span class="in">// --- Global Helpers (No Dependencies) ---</span></span>
+<span id="cb4-123"><a href="#cb4-123"></a><span class="sc">/</span><span class="er">/</span> <span class="sc">---</span> Global <span class="fu">Helpers</span> (No Dependencies) <span class="sc">---</span></span>
 <span id="cb4-124"><a href="#cb4-124"></a></span>
-<span id="cb4-125"><a href="#cb4-125"></a><span class="in">// H(m: bytes) -&gt; bytes</span></span>
-<span id="cb4-126"><a href="#cb4-126"></a><span class="in">fn h(m: &amp;[u8]) -&gt; Vec&lt;u8&gt; {</span></span>
+<span id="cb4-125"><a href="#cb4-125"></a><span class="er">//</span> <span class="fu">H</span>(m<span class="sc">:</span> bytes) <span class="ot">-&gt;</span> bytes</span>
+<span id="cb4-126"><a href="#cb4-126"></a>fn <span class="fu">h</span>(m<span class="sc">:</span> <span class="er">&amp;</span>[u8]) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>u8<span class="sc">&gt;</span> {</span>
 <span id="cb4-127"><a href="#cb4-127"></a></span>
-<span id="cb4-128"><a href="#cb4-128"></a><span class="in">// bit(h: bytes, i: int) -&gt; int</span></span>
-<span id="cb4-129"><a href="#cb4-129"></a><span class="in">fn bit(h_val: &amp;[u8], i: usize) -&gt; u8 {</span></span>
+<span id="cb4-128"><a href="#cb4-128"></a><span class="sc">/</span><span class="er">/</span> <span class="fu">bit</span>(h<span class="sc">:</span> bytes, i<span class="sc">:</span> int) <span class="ot">-&gt;</span> int</span>
+<span id="cb4-129"><a href="#cb4-129"></a>fn <span class="fu">bit</span>(h_val<span class="sc">:</span> <span class="er">&amp;</span>[u8], i<span class="sc">:</span> usize) <span class="ot">-&gt;</span> u8 {</span>
 <span id="cb4-130"><a href="#cb4-130"></a></span>
-<span id="cb4-131"><a href="#cb4-131"></a><span class="in">// expmod(b:int,e:int,m:int) -&gt; int</span></span>
-<span id="cb4-132"><a href="#cb4-132"></a><span class="in">pub fn expmod(b_val: &amp;BigInt, e: &amp;BigInt, m: &amp;BigInt) -&gt; BigInt {</span></span>
+<span id="cb4-131"><a href="#cb4-131"></a><span class="sc">/</span><span class="er">/</span> <span class="fu">expmod</span>(b<span class="sc">:</span>int,e<span class="sc">:</span>int,m<span class="sc">:</span>int) <span class="ot">-&gt;</span> int</span>
+<span id="cb4-132"><a href="#cb4-132"></a>pub fn <span class="fu">expmod</span>(b_val<span class="sc">:</span> <span class="er">&amp;</span>BigInt, e<span class="sc">:</span> <span class="er">&amp;</span>BigInt, m<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> BigInt {</span>
 <span id="cb4-133"><a href="#cb4-133"></a></span>
-<span id="cb4-134"><a href="#cb4-134"></a><span class="in">// inv(x:int, q: &amp;BigInt) -&gt; int</span></span>
-<span id="cb4-135"><a href="#cb4-135"></a><span class="in">pub fn inv(x: &amp;BigInt, q: &amp;BigInt) -&gt; BigInt {</span></span>
+<span id="cb4-134"><a href="#cb4-134"></a><span class="sc">/</span><span class="er">/</span> <span class="fu">inv</span>(x<span class="sc">:</span>int, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> int</span>
+<span id="cb4-135"><a href="#cb4-135"></a>pub fn <span class="fu">inv</span>(x<span class="sc">:</span> <span class="er">&amp;</span>BigInt, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> BigInt {</span>
 <span id="cb4-136"><a href="#cb4-136"></a></span>
-<span id="cb4-137"><a href="#cb4-137"></a><span class="in">// xrecover helper (nested for local use in setup and decode)</span></span>
-<span id="cb4-138"><a href="#cb4-138"></a><span class="in">pub fn xrecover(y: &amp;BigInt, q: &amp;BigInt, d: &amp;BigInt, i_const: &amp;BigInt) -&gt; BigInt {</span></span>
+<span id="cb4-137"><a href="#cb4-137"></a><span class="sc">/</span><span class="er">/</span> xrecover <span class="fu">helper</span> (nested <span class="cf">for</span> local use <span class="cf">in</span> setup and decode)</span>
+<span id="cb4-138"><a href="#cb4-138"></a>pub fn <span class="fu">xrecover</span>(y<span class="sc">:</span> <span class="er">&amp;</span>BigInt, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt, i_const<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> BigInt {</span>
 <span id="cb4-139"><a href="#cb4-139"></a></span>
-<span id="cb4-140"><a href="#cb4-140"></a><span class="in">// --- Core Functions (Require Constants) ---</span></span>
+<span id="cb4-140"><a href="#cb4-140"></a><span class="sc">/</span><span class="er">/</span> <span class="sc">---</span> Core <span class="fu">Functions</span> (Require Constants) <span class="sc">---</span></span>
 <span id="cb4-141"><a href="#cb4-141"></a></span>
-<span id="cb4-142"><a href="#cb4-142"></a><span class="in">fn edwards(p: &amp;Vec&lt;BigInt&gt;, q_val: &amp;Vec&lt;BigInt&gt;, q: &amp;BigInt, d: &amp;BigInt) -&gt; Vec&lt;BigInt&gt; {</span></span>
+<span id="cb4-142"><a href="#cb4-142"></a>fn <span class="fu">edwards</span>(p<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>, q_val<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span> {</span>
 <span id="cb4-143"><a href="#cb4-143"></a></span>
-<span id="cb4-144"><a href="#cb4-144"></a><span class="in">fn scalarmult(p: &amp;Vec&lt;BigInt&gt;, e: &amp;BigInt, q: &amp;BigInt, d: &amp;BigInt) -&gt; Vec&lt;BigInt&gt; {</span></span>
+<span id="cb4-144"><a href="#cb4-144"></a>fn <span class="fu">scalarmult</span>(p<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>, e<span class="sc">:</span> <span class="er">&amp;</span>BigInt, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span> {</span>
 <span id="cb4-145"><a href="#cb4-145"></a></span>
-<span id="cb4-146"><a href="#cb4-146"></a><span class="in">fn encodeint(y: &amp;BigInt, b: usize) -&gt; Vec&lt;u8&gt; {</span></span>
+<span id="cb4-146"><a href="#cb4-146"></a>fn <span class="fu">encodeint</span>(y<span class="sc">:</span> <span class="er">&amp;</span>BigInt, b<span class="sc">:</span> usize) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>u8<span class="sc">&gt;</span> {</span>
 <span id="cb4-147"><a href="#cb4-147"></a></span>
-<span id="cb4-148"><a href="#cb4-148"></a><span class="in">fn encodepoint(p: &amp;Vec&lt;BigInt&gt;, b: usize) -&gt; Vec&lt;u8&gt; {</span></span>
+<span id="cb4-148"><a href="#cb4-148"></a>fn <span class="fu">encodepoint</span>(p<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>, b<span class="sc">:</span> usize) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>u8<span class="sc">&gt;</span> {</span>
 <span id="cb4-149"><a href="#cb4-149"></a></span>
-<span id="cb4-150"><a href="#cb4-150"></a><span class="in">pub fn publickey(sk: &amp;[u8], b: usize, q: &amp;BigInt, d: &amp;BigInt, b_point: &amp;Vec&lt;BigInt&gt;) -&gt; Vec&lt;u8&gt; {</span></span>
+<span id="cb4-150"><a href="#cb4-150"></a>pub fn <span class="fu">publickey</span>(sk<span class="sc">:</span> <span class="er">&amp;</span>[u8], b<span class="sc">:</span> usize, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt, b_point<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>u8<span class="sc">&gt;</span> {</span>
 <span id="cb4-151"><a href="#cb4-151"></a></span>
-<span id="cb4-152"><a href="#cb4-152"></a><span class="in">fn hint(m: &amp;[u8], b: usize) -&gt; BigInt {</span></span>
+<span id="cb4-152"><a href="#cb4-152"></a>fn <span class="fu">hint</span>(m<span class="sc">:</span> <span class="er">&amp;</span>[u8], b<span class="sc">:</span> usize) <span class="ot">-&gt;</span> BigInt {</span>
 <span id="cb4-153"><a href="#cb4-153"></a></span>
-<span id="cb4-154"><a href="#cb4-154"></a><span class="in">pub fn signature(m: &amp;[u8], sk: &amp;[u8], pk: &amp;[u8], b: usize, q: &amp;BigInt, l: &amp;BigInt, d: &amp;BigInt, b_point: &amp;Vec&lt;BigInt&gt;) -&gt; Vec&lt;u8&gt; {</span></span>
+<span id="cb4-154"><a href="#cb4-154"></a>pub fn <span class="fu">signature</span>(m<span class="sc">:</span> <span class="er">&amp;</span>[u8], sk<span class="sc">:</span> <span class="er">&amp;</span>[u8], pk<span class="sc">:</span> <span class="er">&amp;</span>[u8], b<span class="sc">:</span> usize, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, l<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt, b_point<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>) <span class="ot">-&gt;</span> Vec<span class="sc">&lt;</span>u8<span class="sc">&gt;</span> {</span>
 <span id="cb4-155"><a href="#cb4-155"></a></span>
-<span id="cb4-156"><a href="#cb4-156"></a><span class="in">fn isoncurve(p: &amp;Vec&lt;BigInt&gt;, q: &amp;BigInt, d: &amp;BigInt) -&gt; bool {</span></span>
+<span id="cb4-156"><a href="#cb4-156"></a>fn <span class="fu">isoncurve</span>(p<span class="sc">:</span> <span class="er">&amp;</span>Vec<span class="sc">&lt;</span>BigInt<span class="sc">&gt;</span>, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> bool {</span>
 <span id="cb4-157"><a href="#cb4-157"></a></span>
-<span id="cb4-158"><a href="#cb4-158"></a><span class="in">fn decodeint(s: &amp;[u8], b: usize) -&gt; BigInt {</span></span>
+<span id="cb4-158"><a href="#cb4-158"></a>fn <span class="fu">decodeint</span>(s<span class="sc">:</span> <span class="er">&amp;</span>[u8], b<span class="sc">:</span> usize) <span class="ot">-&gt;</span> BigInt {</span>
 <span id="cb4-159"><a href="#cb4-159"></a></span>
-<span id="cb4-160"><a href="#cb4-160"></a><span class="in">fn decodepoint(s: &amp;[u8], b: usize, q: &amp;BigInt, d: &amp;BigInt, i_const: &amp;BigInt) -&gt; Result&lt;Point, &amp;'static str&gt; {</span></span>
+<span id="cb4-160"><a href="#cb4-160"></a>fn <span class="fu">decodepoint</span>(s<span class="sc">:</span> <span class="er">&amp;</span>[u8], b<span class="sc">:</span> usize, q<span class="sc">:</span> <span class="er">&amp;</span>BigInt, d<span class="sc">:</span> <span class="er">&amp;</span>BigInt, i_const<span class="sc">:</span> <span class="er">&amp;</span>BigInt) <span class="ot">-&gt;</span> Result<span class="sc">&lt;</span>Point, <span class="sc">&amp;</span><span class="st">'static str&gt; {</span></span>
 <span id="cb4-161"><a href="#cb4-161"></a></span>
-<span id="cb4-162"><a href="#cb4-162"></a><span class="in">pub fn checkvalid(s: &amp;[u8], m: &amp;[u8], pk: &amp;[u8], b: usize, q: &amp;BigInt, d: &amp;BigInt, i_const: &amp;BigInt, b_point: &amp;Vec&lt;BigInt&gt;) -&gt; bool {</span></span>
-<span id="cb4-163"><a href="#cb4-163"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb4-162"><a href="#cb4-162"></a><span class="st">pub fn checkvalid(s: &amp;[u8], m: &amp;[u8], pk: &amp;[u8], b: usize, q: &amp;BigInt, d: &amp;BigInt, i_const: &amp;BigInt, b_point: &amp;Vec&lt;BigInt&gt;) -&gt; bool {</span></span>
+<span id="cb4-163"><a href="#cb4-163"></a><span class="st">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
