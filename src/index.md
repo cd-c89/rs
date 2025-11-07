@@ -42,7 +42,7 @@ format: html
 |0x8|10/20|[EdDSA](80_eddsa.qmd)|[Python](81_python.qmd)|[Ed25519](82_ed25519.md)|
 |0x9|10/27|[Stack](90_stack.qmd)|[Box](91_box.md)|[Traits](92_traits.md)|
 |0xA|11/03|[Graphs](A0_graph.qmd)|[DAG](A1_dag.md)|[Analysis](A2_analysis.md)|
-|0xB|11/10|Merkle|`None`||
+|0xB|11/10|Merkle|Rust L's||
 |0xC|11/17|VCS|| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
 |0xD|11/24|Spectre|`None`|`None`|
 |0xE|12/01|Meltdown|Hypers|VCS.rs|
