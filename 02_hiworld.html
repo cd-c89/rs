@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.6.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,9 +22,8 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -68,17 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./11_packages.html" rel="next">
 <link href="./01_rustup.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b86297dc19107d1c9b1952b0f8e15fd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -133,8 +130,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -305,6 +303,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">DAG</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A2_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -429,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Use:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> 02</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> 02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="new-file" class="level2">
 <h2 class="anchored" data-anchor-id="new-file">New File</h2>
@@ -437,12 +441,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You will need to edit a <code>hi_world.rs</code> file in the <code>02</code> folder.</li>
 <li>Use something like:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">vim</span> 02/hi_world.rs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">vim</span> 02/hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Or perhaps:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">cd</span> 02</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">vim</span> hi_world.rs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">cd</span> 02</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">vim</span> hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>We recall that to save and exit vim we press the ESC key then type <code>:x</code> then press ENTER.
 <ul>
@@ -457,17 +461,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>If I were you, I’d leave open a terminal window with <code>vim</code> and create another to use <code>rustc</code></li>
 <li>For example, when you first create and save an empty file as <code>hiworld.rs</code>, you can use <code>rustc</code>:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">rustc</span> hi_world.rs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">rustc</span> hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You’ll see the following:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="va">error</span><span class="op">[</span>E0601<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function not found in crate <span class="kw">`</span><span class="ex">hi_world</span><span class="kw">`</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="va">error</span><span class="op">[</span>E0601<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function not found in crate <span class="kw">`</span><span class="ex">hi_world</span><span class="kw">`</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">|</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>  <span class="ex">=</span> note: consider adding a <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function to <span class="kw">`</span><span class="ex">hi_world.rs</span><span class="kw">`</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="ex">error:</span> aborting due to 1 previous error</span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">For</span> more information about this error, try <span class="kw">`</span><span class="ex">rustc</span> <span class="at">--explain</span> E0601<span class="kw">`</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">For</span> more information about this error, try <span class="kw">`</span><span class="ex">rustc</span> <span class="at">--explain</span> E0601<span class="kw">`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>This is good enough for now.</li>
 </ul>
@@ -494,9 +498,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>hi_world.rs</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="hi_world.rs"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="sourceCode" id="cb6" data-filename="hi_world.rs"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>    <span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="rustc" class="level3">
@@ -505,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Save (ESC + <code>:w</code> in vim) the file and go back to your terminal window.</li>
 <li>Enter the following commands to compile the file:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">rustc</span> hi_world.rs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">rustc</span> hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -525,11 +529,11 @@ Note
 <ul>
 <li>Verify that compilation was successful by using <code>ls</code> to list the files in your folder.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You should see the following.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">hi_world</span>  hi_world.rs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">hi_world</span>  hi_world.rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>hi_world</code> is a program, and <code>hi_world.rs</code> is source code.</li>
 </ul>
@@ -543,10 +547,10 @@ Note
 <li><code>.</code> means use the current folder (should be <code>02</code>)</li>
 <li><code>/</code> means find the file by name in the current folder.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">./hi_world</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">./hi_world</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li>You should see:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">Hello,</span> world!</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">Hello,</span> world!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -567,9 +571,9 @@ Note
 <h1>Anatomy of a Rust Program</h1>
 <section id="the-first-piece" class="level2">
 <h2 class="anchored" data-anchor-id="the-first-piece">The first piece</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>These lines define a function named <code>main</code>.</li>
 <li>The <code>main</code> function is special:
@@ -582,9 +586,9 @@ Note
 </section>
 <section id="white-space-and" class="level2">
 <h2 class="anchored" data-anchor-id="white-space-and">White space and <code>{}</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The function body is wrapped in <code>{}</code>.</li>
 <li>Rust requires curly brackets around all function bodies. It’s good style to place the opening curly bracket on the same line as the function declaration, adding one space in between.</li>
@@ -601,7 +605,7 @@ Note
 <ul>
 <li>The body of the <code>main</code> function holds the following code:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>This line does all the work in this little program: it prints text to the screen.</li>
 <li>There are three important details to notice here.</li>
@@ -633,19 +637,19 @@ Note
 <li>An expression is the atomic unit of code.
 <ul>
 <li><p>This is an expression:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>x <span class="op">=</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>x <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>This is not, it is divisible into valid code (two expressions)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>THis is not, it is not independently valid code.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="op">=</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="op">=</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
 </ul></li>
 <li>Most lines of Rust code end with a semicolon.
 <ul>
 <li><p>This is legal in Python:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="bu">print</span>(x)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource py number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="bu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
 </ul>
 </section>
@@ -680,294 +684,290 @@ Note
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
     }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
     }
-    const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
         } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
-    }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
-    }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
+          window.location.href = sourceUrl;
         }
       } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
         }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
       }
     }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
           }
         } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
+          // See if we can fetch this
+          fetch(url.split('#')[0])
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
+            const note = htmlDoc.getElementById(id);
             if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
+              const html = processXRef(id, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -975,161 +975,185 @@ Note
             instance.show();
           });
         }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
       } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
         });
       }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
     }
-  });
-  </script>
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./01_rustup.html" class="pagination-link" aria-label="Rustup">
@@ -1142,7 +1166,7 @@ Note
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">---</span></span>
+<div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">---</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="an">title:</span><span class="co"> "Hi world"</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="an">author:</span><span class="co"> ""</span></span>
 <span id="cb19-4"><a href="#cb19-4"></a><span class="an">subtitle:</span><span class="co"> "Due 5 Sep 1440 ET"</span></span>
@@ -1185,7 +1209,7 @@ Note
 <span id="cb19-41"><a href="#cb19-41"></a><span class="ss">    - </span>Review the <span class="co">[</span><span class="ot">shell</span><span class="co">](https://cd-public.github.io/scicom/03_shell.html)</span>.</span>
 <span id="cb19-42"><a href="#cb19-42"></a><span class="ss">- </span>Use:</span>
 <span id="cb19-43"><a href="#cb19-43"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-44"><a href="#cb19-44"></a><span class="fu">mkdir</span> 02</span>
+<span id="cb19-44"><a href="#cb19-44"></a><span class="in">mkdir 02</span></span>
 <span id="cb19-45"><a href="#cb19-45"></a><span class="in">```</span></span>
 <span id="cb19-46"><a href="#cb19-46"></a></span>
 <span id="cb19-47"><a href="#cb19-47"></a><span class="fu">## New File</span></span>
@@ -1193,12 +1217,12 @@ Note
 <span id="cb19-49"><a href="#cb19-49"></a><span class="ss">- </span>You will need to edit a <span class="in">`hi_world.rs`</span> file in the <span class="in">`02`</span> folder.</span>
 <span id="cb19-50"><a href="#cb19-50"></a><span class="ss">- </span>Use something like:</span>
 <span id="cb19-51"><a href="#cb19-51"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-52"><a href="#cb19-52"></a><span class="ex">vim</span> 02/hi_world.rs</span>
+<span id="cb19-52"><a href="#cb19-52"></a><span class="in">vim 02/hi_world.rs</span></span>
 <span id="cb19-53"><a href="#cb19-53"></a><span class="in">```</span></span>
 <span id="cb19-54"><a href="#cb19-54"></a><span class="ss">- </span>Or perhaps:</span>
 <span id="cb19-55"><a href="#cb19-55"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-56"><a href="#cb19-56"></a><span class="bu">cd</span> 02</span>
-<span id="cb19-57"><a href="#cb19-57"></a><span class="ex">vim</span> hi_world.rs</span>
+<span id="cb19-56"><a href="#cb19-56"></a><span class="in">cd 02</span></span>
+<span id="cb19-57"><a href="#cb19-57"></a><span class="in">vim hi_world.rs</span></span>
 <span id="cb19-58"><a href="#cb19-58"></a><span class="in">```</span></span>
 <span id="cb19-59"><a href="#cb19-59"></a><span class="ss">- </span>We recall that to save and exit vim we press the ESC key then type <span class="in">`:x`</span> then press ENTER.</span>
 <span id="cb19-60"><a href="#cb19-60"></a><span class="ss">    - </span>Read more <span class="co">[</span><span class="ot">here</span><span class="co">](https://cd-public.github.io/scicom/02_neovim.html#modes)</span></span>
@@ -1209,17 +1233,17 @@ Note
 <span id="cb19-65"><a href="#cb19-65"></a><span class="ss">- </span>If I were you, I'd leave open a terminal window with <span class="in">`vim`</span> and create another to use <span class="in">`rustc`</span></span>
 <span id="cb19-66"><a href="#cb19-66"></a><span class="ss">- </span>For example, when you first create and save an empty file as <span class="in">`hiworld.rs`</span>, you can use <span class="in">`rustc`</span>:</span>
 <span id="cb19-67"><a href="#cb19-67"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-68"><a href="#cb19-68"></a><span class="ex">rustc</span> hi_world.rs</span>
+<span id="cb19-68"><a href="#cb19-68"></a><span class="in">rustc hi_world.rs</span></span>
 <span id="cb19-69"><a href="#cb19-69"></a><span class="in">```</span></span>
 <span id="cb19-70"><a href="#cb19-70"></a><span class="ss">- </span>You'll see the following:</span>
 <span id="cb19-71"><a href="#cb19-71"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-72"><a href="#cb19-72"></a><span class="va">error</span><span class="op">[</span>E0601<span class="op">]</span><span class="ex">:</span> <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function not found in crate <span class="kw">`</span><span class="ex">hi_world</span><span class="kw">`</span></span>
-<span id="cb19-73"><a href="#cb19-73"></a>  <span class="kw">|</span></span>
-<span id="cb19-74"><a href="#cb19-74"></a>  <span class="ex">=</span> note: consider adding a <span class="kw">`</span><span class="ex">main</span><span class="kw">`</span> function to <span class="kw">`</span><span class="ex">hi_world.rs</span><span class="kw">`</span></span>
+<span id="cb19-72"><a href="#cb19-72"></a><span class="in">error[E0601]: `main` function not found in crate `hi_world`</span></span>
+<span id="cb19-73"><a href="#cb19-73"></a><span class="in">  |</span></span>
+<span id="cb19-74"><a href="#cb19-74"></a><span class="in">  = note: consider adding a `main` function to `hi_world.rs`</span></span>
 <span id="cb19-75"><a href="#cb19-75"></a></span>
-<span id="cb19-76"><a href="#cb19-76"></a><span class="ex">error:</span> aborting due to 1 previous error</span>
+<span id="cb19-76"><a href="#cb19-76"></a><span class="in">error: aborting due to 1 previous error</span></span>
 <span id="cb19-77"><a href="#cb19-77"></a></span>
-<span id="cb19-78"><a href="#cb19-78"></a><span class="ex">For</span> more information about this error, try <span class="kw">`</span><span class="ex">rustc</span> <span class="at">--explain</span> E0601<span class="kw">`</span>.</span>
+<span id="cb19-78"><a href="#cb19-78"></a><span class="in">For more information about this error, try `rustc --explain E0601`.</span></span>
 <span id="cb19-79"><a href="#cb19-79"></a><span class="in">```</span></span>
 <span id="cb19-80"><a href="#cb19-80"></a><span class="ss">- </span>This is good enough for now.</span>
 <span id="cb19-81"><a href="#cb19-81"></a></span>
@@ -1240,9 +1264,9 @@ Note
 <span id="cb19-96"><a href="#cb19-96"></a><span class="ss">- </span>In <span class="in">`hi_world.rs`</span> enter the following:</span>
 <span id="cb19-97"><a href="#cb19-97"></a></span>
 <span id="cb19-98"><a href="#cb19-98"></a><span class="in">```{.rust filename="hi_world.rs"}</span></span>
-<span id="cb19-99"><a href="#cb19-99"></a>fn <span class="fu">main</span>() {</span>
-<span id="cb19-100"><a href="#cb19-100"></a>    println<span class="sc">!</span>(<span class="st">"Hello, world!"</span>);</span>
-<span id="cb19-101"><a href="#cb19-101"></a>}</span>
+<span id="cb19-99"><a href="#cb19-99"></a><span class="in">fn main() {</span></span>
+<span id="cb19-100"><a href="#cb19-100"></a><span class="in">    println!("Hello, world!");</span></span>
+<span id="cb19-101"><a href="#cb19-101"></a><span class="in">}</span></span>
 <span id="cb19-102"><a href="#cb19-102"></a><span class="in">```</span></span>
 <span id="cb19-103"><a href="#cb19-103"></a></span>
 <span id="cb19-104"><a href="#cb19-104"></a><span class="fu">### rustc</span></span>
@@ -1251,7 +1275,7 @@ Note
 <span id="cb19-107"><a href="#cb19-107"></a><span class="ss">- </span>Enter the following commands to compile the file:</span>
 <span id="cb19-108"><a href="#cb19-108"></a></span>
 <span id="cb19-109"><a href="#cb19-109"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-110"><a href="#cb19-110"></a><span class="ex">rustc</span> hi_world.rs</span>
+<span id="cb19-110"><a href="#cb19-110"></a><span class="in">rustc hi_world.rs</span></span>
 <span id="cb19-111"><a href="#cb19-111"></a><span class="in">```</span></span>
 <span id="cb19-112"><a href="#cb19-112"></a></span>
 <span id="cb19-113"><a href="#cb19-113"></a>::: {.callout-note}</span>
@@ -1262,12 +1286,12 @@ Note
 <span id="cb19-118"><a href="#cb19-118"></a></span>
 <span id="cb19-119"><a href="#cb19-119"></a><span class="ss">- </span>Verify that compilation was successful by using <span class="in">`ls`</span> to list the files in your folder.</span>
 <span id="cb19-120"><a href="#cb19-120"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-121"><a href="#cb19-121"></a><span class="fu">ls</span></span>
+<span id="cb19-121"><a href="#cb19-121"></a><span class="in">ls</span></span>
 <span id="cb19-122"><a href="#cb19-122"></a><span class="in">```</span></span>
 <span id="cb19-123"><a href="#cb19-123"></a><span class="ss">- </span>You should see the following.</span>
 <span id="cb19-124"><a href="#cb19-124"></a></span>
 <span id="cb19-125"><a href="#cb19-125"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-126"><a href="#cb19-126"></a><span class="ex">hi_world</span>  hi_world.rs</span>
+<span id="cb19-126"><a href="#cb19-126"></a><span class="in">hi_world  hi_world.rs</span></span>
 <span id="cb19-127"><a href="#cb19-127"></a><span class="in">```</span></span>
 <span id="cb19-128"><a href="#cb19-128"></a></span>
 <span id="cb19-129"><a href="#cb19-129"></a><span class="ss">- </span><span class="in">`hi_world`</span> is a program, and <span class="in">`hi_world.rs`</span> is source code.</span>
@@ -1279,11 +1303,11 @@ Note
 <span id="cb19-135"><a href="#cb19-135"></a><span class="ss">    - </span><span class="in">`.`</span> means use the current folder (should be <span class="in">`02`</span>)</span>
 <span id="cb19-136"><a href="#cb19-136"></a><span class="ss">    - </span><span class="in">`/`</span> means find the file by name in the current folder.</span>
 <span id="cb19-137"><a href="#cb19-137"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-138"><a href="#cb19-138"></a><span class="ex">./hi_world</span></span>
+<span id="cb19-138"><a href="#cb19-138"></a><span class="in">./hi_world</span></span>
 <span id="cb19-139"><a href="#cb19-139"></a><span class="in">```</span></span>
 <span id="cb19-140"><a href="#cb19-140"></a><span class="ss">- </span>You should see:</span>
 <span id="cb19-141"><a href="#cb19-141"></a><span class="in">```{.bash}</span></span>
-<span id="cb19-142"><a href="#cb19-142"></a><span class="ex">Hello,</span> world!</span>
+<span id="cb19-142"><a href="#cb19-142"></a><span class="in">Hello, world!</span></span>
 <span id="cb19-143"><a href="#cb19-143"></a><span class="in">```</span></span>
 <span id="cb19-144"><a href="#cb19-144"></a></span>
 <span id="cb19-145"><a href="#cb19-145"></a>::: {.callout-note}</span>
@@ -1295,9 +1319,9 @@ Note
 <span id="cb19-151"><a href="#cb19-151"></a><span class="fu">## The first piece</span></span>
 <span id="cb19-152"><a href="#cb19-152"></a></span>
 <span id="cb19-153"><a href="#cb19-153"></a><span class="in">```rust</span></span>
-<span id="cb19-154"><a href="#cb19-154"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb19-154"><a href="#cb19-154"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb19-155"><a href="#cb19-155"></a></span>
-<span id="cb19-156"><a href="#cb19-156"></a>}</span>
+<span id="cb19-156"><a href="#cb19-156"></a><span class="op">}</span></span>
 <span id="cb19-157"><a href="#cb19-157"></a><span class="in">```</span></span>
 <span id="cb19-158"><a href="#cb19-158"></a></span>
 <span id="cb19-159"><a href="#cb19-159"></a><span class="ss">- </span>These lines define a function named <span class="in">`main`</span>. </span>
@@ -1310,9 +1334,9 @@ Note
 <span id="cb19-166"><a href="#cb19-166"></a><span class="fu">## White space and `{}`</span></span>
 <span id="cb19-167"><a href="#cb19-167"></a></span>
 <span id="cb19-168"><a href="#cb19-168"></a><span class="in">```rust</span></span>
-<span id="cb19-169"><a href="#cb19-169"></a>fn <span class="fu">main</span>() {</span>
+<span id="cb19-169"><a href="#cb19-169"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb19-170"><a href="#cb19-170"></a></span>
-<span id="cb19-171"><a href="#cb19-171"></a>}</span>
+<span id="cb19-171"><a href="#cb19-171"></a><span class="op">}</span></span>
 <span id="cb19-172"><a href="#cb19-172"></a><span class="in">```</span></span>
 <span id="cb19-173"><a href="#cb19-173"></a></span>
 <span id="cb19-174"><a href="#cb19-174"></a><span class="ss">- </span>The function body is wrapped in <span class="in">`{}`</span>. </span>
@@ -1333,7 +1357,7 @@ Note
 <span id="cb19-189"><a href="#cb19-189"></a><span class="ss">- </span>The body of the <span class="in">`main`</span> function holds the following code:</span>
 <span id="cb19-190"><a href="#cb19-190"></a></span>
 <span id="cb19-191"><a href="#cb19-191"></a><span class="in">```rust</span></span>
-<span id="cb19-192"><a href="#cb19-192"></a>println<span class="sc">!</span>(<span class="st">"Hello, world!"</span>);</span>
+<span id="cb19-192"><a href="#cb19-192"></a><span class="pp">println!</span>(<span class="st">"Hello, world!"</span>)<span class="op">;</span></span>
 <span id="cb19-193"><a href="#cb19-193"></a><span class="in">```</span></span>
 <span id="cb19-194"><a href="#cb19-194"></a></span>
 <span id="cb19-195"><a href="#cb19-195"></a><span class="ss">- </span>This line does all the work in this little program: it prints text to the</span>
@@ -1364,26 +1388,26 @@ Note
 <span id="cb19-220"><a href="#cb19-220"></a><span class="ss">        - </span>This is an expression:</span>
 <span id="cb19-221"><a href="#cb19-221"></a>        </span>
 <span id="cb19-222"><a href="#cb19-222"></a>            <span class="in">```{.py}</span></span>
-<span id="cb19-223"><a href="#cb19-223"></a>            x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb19-224"><a href="#cb19-224"></a>            <span class="in">```</span></span>
+<span id="cb19-223"><a href="#cb19-223"></a><span class="in">            x = 1</span></span>
+<span id="cb19-224"><a href="#cb19-224"></a><span class="in">            ```</span></span>
 <span id="cb19-225"><a href="#cb19-225"></a><span class="ss">        - </span>This is not, it is divisible into valid code (two expressions)</span>
 <span id="cb19-226"><a href="#cb19-226"></a>        </span>
 <span id="cb19-227"><a href="#cb19-227"></a>            <span class="in">```{.py}</span></span>
-<span id="cb19-228"><a href="#cb19-228"></a>            x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb19-229"><a href="#cb19-229"></a>            <span class="bu">print</span>(x)</span>
-<span id="cb19-230"><a href="#cb19-230"></a>            <span class="in">```</span></span>
+<span id="cb19-228"><a href="#cb19-228"></a><span class="in">            x = 1</span></span>
+<span id="cb19-229"><a href="#cb19-229"></a><span class="in">            print(x)</span></span>
+<span id="cb19-230"><a href="#cb19-230"></a><span class="in">            ```</span></span>
 <span id="cb19-231"><a href="#cb19-231"></a><span class="ss">        - </span>THis is not, it is not independently valid code.</span>
 <span id="cb19-232"><a href="#cb19-232"></a>        </span>
 <span id="cb19-233"><a href="#cb19-233"></a>            <span class="in">```{.py}</span></span>
-<span id="cb19-234"><a href="#cb19-234"></a>            x <span class="op">=</span> </span>
-<span id="cb19-235"><a href="#cb19-235"></a>            <span class="in">```</span></span>
+<span id="cb19-234"><a href="#cb19-234"></a><span class="in">            x = </span></span>
+<span id="cb19-235"><a href="#cb19-235"></a><span class="in">            ```</span></span>
 <span id="cb19-236"><a href="#cb19-236"></a><span class="ss">- </span>Most lines of Rust code end with a semicolon.</span>
 <span id="cb19-237"><a href="#cb19-237"></a><span class="ss">    - </span>This is legal in Python:</span>
 <span id="cb19-238"><a href="#cb19-238"></a>    </span>
 <span id="cb19-239"><a href="#cb19-239"></a>        <span class="in">```{.py}</span></span>
-<span id="cb19-240"><a href="#cb19-240"></a>        x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb19-241"><a href="#cb19-241"></a>        <span class="bu">print</span>(x)<span class="op">;</span></span>
-<span id="cb19-242"><a href="#cb19-242"></a>        <span class="in">```</span></span>
+<span id="cb19-240"><a href="#cb19-240"></a><span class="in">        x = 1;</span></span>
+<span id="cb19-241"><a href="#cb19-241"></a><span class="in">        print(x);</span></span>
+<span id="cb19-242"><a href="#cb19-242"></a><span class="in">        ```</span></span>
 <span id="cb19-243"><a href="#cb19-243"></a>        </span>
 <span id="cb19-244"><a href="#cb19-244"></a><span class="fu"># Fin</span></span>
 <span id="cb19-245"><a href="#cb19-245"></a></span>
@@ -1396,7 +1420,7 @@ Note
 <span id="cb19-252"><a href="#cb19-252"></a><span class="ss">- </span>You are done with the *homework* once said <span class="in">`.rs`</span> file is:</span>
 <span id="cb19-253"><a href="#cb19-253"></a><span class="ss">    - </span>Visible, to me, </span>
 <span id="cb19-254"><a href="#cb19-254"></a><span class="ss">    - </span>On the GitHub <span class="in">`271rs`</span> repository you shared for the lab</span>
-<span id="cb19-255"><a href="#cb19-255"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb19-255"><a href="#cb19-255"></a><span class="ss">- </span>If you need to review how to get files onto GitHub, review <span class="co">[</span><span class="ot">the lab</span><span class="co">](01_rustup.md)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
