@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Dynamism – Systems in Rust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./B2_lcs.html" rel="next">
+<link href="./A2_analysis.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./B0_dynamic.html">Dynamism</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Systems in Rust</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_rustup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rustup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_hiworld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi world</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_hicargo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hi cargo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Options</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_guess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22_wordle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wordle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_bits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_hamming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hamming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32_macros.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Macros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_sha2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./41_constants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constants</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./42_sha512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SHA-512</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./50_754.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IEEE 754</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./51_f16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">f16</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./70_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numbers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./71_ix_io.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical I/O</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./72_ix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80_eddsa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EdDSA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./81_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./82_ed25519.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ed25519</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90_stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./91_box.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Box</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./92_traits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Traits</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A0_graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A1_dag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DAG</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A2_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./B0_dynamic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Dynamism</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./B2_lcs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LCS</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#motivating-problem" id="toc-motivating-problem" class="nav-link" data-scroll-target="#motivating-problem">Motivating Problem</a></li>
+  <li><a href="#editorial" id="toc-editorial" class="nav-link" data-scroll-target="#editorial">Editorial</a></li>
+  <li><a href="#baby-steps" id="toc-baby-steps" class="nav-link" data-scroll-target="#baby-steps">“Baby” Steps</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><code>git</code></a></li>
+  <li><a href="#git-1" id="toc-git-1" class="nav-link" data-scroll-target="#git-1"><code>git</code></a></li>
+  <li><a href="#git-2" id="toc-git-2" class="nav-link" data-scroll-target="#git-2"><code>git</code></a></li>
+  <li><a href="#quoth-wikipedia" id="toc-quoth-wikipedia" class="nav-link" data-scroll-target="#quoth-wikipedia">Quoth Wikipedia</a></li>
+  </ul></li>
+  <li><a href="#dynamic-programming" id="toc-dynamic-programming" class="nav-link" data-scroll-target="#dynamic-programming">Dynamic Programming</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#defintion" id="toc-defintion" class="nav-link" data-scroll-target="#defintion">Defintion</a></li>
+  <li><a href="#textbook" id="toc-textbook" class="nav-link" data-scroll-target="#textbook">Textbook</a></li>
+  <li><a href="#minimal-example" id="toc-minimal-example" class="nav-link" data-scroll-target="#minimal-example">Minimal example</a></li>
+  <li><a href="#a-note" id="toc-a-note" class="nav-link" data-scroll-target="#a-note">A Note</a></li>
+  <li><a href="#non-overlapping" id="toc-non-overlapping" class="nav-link" data-scroll-target="#non-overlapping">Non-overlapping</a></li>
+  <li><a href="#overlapping" id="toc-overlapping" class="nav-link" data-scroll-target="#overlapping">Overlapping</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
+  <li><a href="#aside" id="toc-aside" class="nav-link" data-scroll-target="#aside">Aside</a></li>
+  </ul></li>
+  <li><a href="#toy-example" id="toc-toy-example" class="nav-link" data-scroll-target="#toy-example">Toy Example</a>
+  <ul class="collapse">
+  <li><a href="#fibonacci" id="toc-fibonacci" class="nav-link" data-scroll-target="#fibonacci">Fibonacci</a></li>
+  <li><a href="#fibonacci-1" id="toc-fibonacci-1" class="nav-link" data-scroll-target="#fibonacci-1">Fibonacci</a></li>
+  <li><a href="#but-wait" id="toc-but-wait" class="nav-link" data-scroll-target="#but-wait">But wait!</a></li>
+  <li><a href="#memoize" id="toc-memoize" class="nav-link" data-scroll-target="#memoize">Memoize</a></li>
+  <li><a href="#do-we-memoize" id="toc-do-we-memoize" class="nav-link" data-scroll-target="#do-we-memoize">Do we memoize?</a></li>
+  <li><a href="#ingredients" id="toc-ingredients" class="nav-link" data-scroll-target="#ingredients">Ingredients</a></li>
+  <li><a href="#some-considerations" id="toc-some-considerations" class="nav-link" data-scroll-target="#some-considerations">Some considerations…</a></li>
+  <li><a href="#step-0" id="toc-step-0" class="nav-link" data-scroll-target="#step-0">Step 0</a></li>
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5</a></li>
+  <li><a href="#step-6" id="toc-step-6" class="nav-link" data-scroll-target="#step-6">Step 6</a></li>
+  <li><a href="#side-by-side" id="toc-side-by-side" class="nav-link" data-scroll-target="#side-by-side">Side-by-side</a></li>
+  <li><a href="#test-it" id="toc-test-it" class="nav-link" data-scroll-target="#test-it">Test it</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
+  <li><a href="#instrumentation" id="toc-instrumentation" class="nav-link" data-scroll-target="#instrumentation">Instrumentation</a></li>
+  <li><a href="#instrument-fib" id="toc-instrument-fib" class="nav-link" data-scroll-target="#instrument-fib">Instrument <code>fib</code></a></li>
+  <li><a href="#instrument-inner" id="toc-instrument-inner" class="nav-link" data-scroll-target="#instrument-inner">Instrument <code>inner</code></a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  <li><a href="#new-main" id="toc-new-main" class="nav-link" data-scroll-target="#new-main">New <code>main</code></a></li>
+  <li><a href="#check-it" id="toc-check-it" class="nav-link" data-scroll-target="#check-it">Check it</a></li>
+  <li><a href="#it-is" id="toc-it-is" class="nav-link" data-scroll-target="#it-is">It is</a></li>
+  <li><a href="#another" id="toc-another" class="nav-link" data-scroll-target="#another">Another</a></li>
+  <li><a href="#timing" id="toc-timing" class="nav-link" data-scroll-target="#timing">Timing</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#embed" id="toc-embed" class="nav-link" data-scroll-target="#embed">Embed</a></li>
+  <li><a href="#today-1" id="toc-today-1" class="nav-link" data-scroll-target="#today-1">Today</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="B0_dynamic.rjs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Dynamism</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Systems in Rust</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li><strong>Huge News</strong> Guest Speaker Wednesday.</li>
+<li>Jimmy Ostler, person who actually likes Rust and gotten paid to write it</li>
+<li>Regard attendance as mandatory. I will ask.</li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul>
+<li>Dynamic Programming</li>
+<li>Memoization
+<ul>
+<li>Cacheing</li>
+</ul></li>
+<li>More on Graphs</li>
+</ul>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<section id="motivating-problem" class="level2">
+<h2 class="anchored" data-anchor-id="motivating-problem">Motivating Problem</h2>
+<ul>
+<li>We are in a <em>systems</em> programming class.</li>
+<li>Vs. <em>software</em>, computer <em>systems</em> expand the functionality of computing hardware, rather directly solving an end user problem.
+<ul>
+<li>A word processor or spreadsheet is software.</li>
+<li>It saves spreadsheets to a file <em>system</em>
+<ul>
+<li>Or perhaps, now, to a cloud service</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="editorial" class="level2">
+<h2 class="anchored" data-anchor-id="editorial">Editorial</h2>
+<ul>
+<li>A comprehensive undergraduate computer science program covers:
+<ul>
+<li>Operating system (CS-371 Sp26)
+<ul>
+<li>To understand Linux</li>
+</ul></li>
+<li>Web-server or other network service (former CS-271 Sp24)
+<ul>
+<li>To understand NGINX</li>
+</ul></li>
+<li>Compiler (slated CS-371 Sp27)
+<ul>
+<li>To understand <code>gcc</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="baby-steps" class="level2">
+<h2 class="anchored" data-anchor-id="baby-steps">“Baby” Steps</h2>
+<ul>
+<li>Python linked list to OS is a big step.</li>
+<li>Instead we do “niche” systems:
+<ul>
+<li>Blockchain (CS-276 Sp25)
+<ul>
+<li>To understand Bitcoin</li>
+</ul></li>
+<li>Source Code Management or “SCM” (CS-271 Sp26)
+<ul>
+<li>Also called VCS (version control system)</li>
+<li>To understand <code>git</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="git" class="level2">
+<h2 class="anchored" data-anchor-id="git"><code>git</code></h2>
+<blockquote class="blockquote">
+<p><a href="https://www.youtube.com/watch?v=0wLidyXzFk8">Linus Torvalds: Known more for Git than Linux?</a></p>
+</blockquote>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0wLidyXzFk8?si=QXPd7ycbApz0gPCx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+</section>
+<section id="git-1" class="level2">
+<h2 class="anchored" data-anchor-id="git-1"><code>git</code></h2>
+<blockquote class="blockquote">
+<p><a href="https://www.reddit.com/r/compsci/comments/1cvrxwt/comment/l5a77sj/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">Just look at the very first git commit of git itself. It is small, so it is possible to understand it in full. Yet, it is capable enough to be used as a version control for git itself.</a></p>
+</blockquote>
+<ul>
+<li>There are easier things to find, but not by much, it is here:
+<ul>
+<li><a href="https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290">https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="git-2" class="level2">
+<h2 class="anchored" data-anchor-id="git-2"><code>git</code></h2>
+<ul>
+<li>As far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)
+<ul>
+<li>A Merkle tree or hash tree
+<ul>
+<li>Was scheduled for this week, delayed by this lecture</li>
+</ul></li>
+<li>A solution to the “longest common subsequence” (LCS) problem, which was dramatically harder in Rust than I thought.</li>
+</ul></li>
+</ul>
+</section>
+<section id="quoth-wikipedia" class="level2">
+<h2 class="anchored" data-anchor-id="quoth-wikipedia">Quoth Wikipedia</h2>
+<blockquote class="blockquote">
+<p><a href="https://en.wikipedia.org/wiki/Longest_common_subsequence">Because [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming.</p>
+</blockquote>
+</section>
+</section>
+<section id="dynamic-programming" class="level1">
+<h1>Dynamic Programming</h1>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<ul>
+<li>Wikipedia</li>
+</ul>
+<blockquote class="blockquote">
+<p>simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner.</p>
+</blockquote>
+</section>
+<section id="defintion" class="level2">
+<h2 class="anchored" data-anchor-id="defintion">Defintion</h2>
+<ul>
+<li><em>Dynamic Programming</em> (1957) by Richard Bellman</li>
+</ul>
+<blockquote class="blockquote">
+<p>The purpose of this work is to provide an introduction to the mathe- matical theory of multi-stage decision processes. Since these constitute a somewhat formidable set of terms we have coined the term ‘dynamic programming’ to describe the subject matter.</p>
+</blockquote>
+</section>
+<section id="textbook" class="level2">
+<h2 class="anchored" data-anchor-id="textbook">Textbook</h2>
+<ul>
+<li>I am in love with this book, available free online.</li>
+<li>More for applied math people than for us (it uses floating point numbers - ew!)</li>
+<li><a href="https://dp.quantecon.org/">Dynamic Programming</a> by Sargent and Stachurski</li>
+<li>I wanted to teach this next semester (vs.&nbsp;Understanding AI) but it has 1 billion pre-reqs lol.</li>
+</ul>
+</section>
+<section id="minimal-example" class="level2">
+<h2 class="anchored" data-anchor-id="minimal-example">Minimal example</h2>
+<ul>
+<li>What is a:
+<ul>
+<li>Complicated problem</li>
+<li>That can be broken down into simpler sub-problems</li>
+<li>In a recursive manner?</li>
+</ul></li>
+<li>Canonical example: Fibonacci</li>
+</ul>
+</section>
+<section id="a-note" class="level2">
+<h2 class="anchored" data-anchor-id="a-note">A Note</h2>
+<ul>
+<li>Vs. ENG, ECON, the <em>de facto</em> CS definition is more restrictive.</li>
+</ul>
+<blockquote class="blockquote">
+<p>If a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called “divide and conquer” instead. This is why merge sort and quick sort are not classified as dynamic programming problems.</p>
+</blockquote>
+<ul>
+<li>This basically per <a href="https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/">CLRS</a>, the only CS text that matters (according to me)</li>
+</ul>
+</section>
+<section id="non-overlapping" class="level2">
+<h2 class="anchored" data-anchor-id="non-overlapping">Non-overlapping</h2>
+<center>
+<a title="VineetKumar at English Wikipedia, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Merge_sort_algorithm_diagram.svg"><img style="filter:invert(.9);" width="50%" alt="A recursive merge sort algorithm used to sort an array of 7 integer values. These are the steps a human would take to emulate merge sort (top-down)." src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Merge_sort_algorithm_diagram.svg/512px-Merge_sort_algorithm_diagram.svg.png?20180709142035"></a>
+</center>
+</section>
+<section id="overlapping" class="level2">
+<h2 class="anchored" data-anchor-id="overlapping">Overlapping</h2>
+<center>
+<a title="en:User:Dcoatzee, traced by User:Stannered, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Fibonacci_dynamic_programming.svg"><img style="filter:invert(.9);" height="512px" alt="Fibonacci dynamic programming" src="https://upload.wikimedia.org/wikipedia/commons/0/06/Fibonacci_dynamic_programming.svg"></a>
+</center>
+</section>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
+<ul>
+<li>If Tree (e.g.&nbsp;can’t be a DAG)
+<ul>
+<li>“divide and conquer”</li>
+</ul></li>
+<li>Else
+<ul>
+<li>“dynamic programming”</li>
+</ul></li>
+</ul>
+</section>
+<section id="aside" class="level2">
+<h2 class="anchored" data-anchor-id="aside">Aside</h2>
+<ul>
+<li>Dynamic programming in the hardest and most important post-2020 problem</li>
+<li><a href="https://www.nature.com/articles/s41586-023-06127-z">Algorithm for optimized mRNA design improves stability and immunogenicity (Nature)</a>
+<ul>
+<li>“Next, we describe how to implement the <strong>dynamic programming</strong> algorithm behind lattice parsing…”</li>
+</ul></li>
+<li>Editorial: Post-2020, biotechnology is sole US industry strictly more advanced than all non-US competitors.</li>
+</ul>
+</section>
+</section>
+<section id="toy-example" class="level1">
+<h1>Toy Example</h1>
+<section id="fibonacci" class="level2">
+<h2 class="anchored" data-anchor-id="fibonacci">Fibonacci</h2>
+<ul>
+<li>In <span class="math inline">\(\LaTeX\)</span></li>
+</ul>
+<p><span class="math display">\[
+F_0 = 0
+F_1 = 1
+F_n = F_{n-1} + F_{n-2}
+\]</span></p>
+</section>
+<section id="fibonacci-1" class="level2">
+<h2 class="anchored" data-anchor-id="fibonacci-1">Fibonacci</h2>
+<ul>
+<li>In Rust</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">fn</span> fib(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>        n <span class="op">=&gt;</span> fib(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fib(n<span class="op">-</span><span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="op">}</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="but-wait" class="level2">
+<h2 class="anchored" data-anchor-id="but-wait">But wait!</h2>
+<ul>
+<li>What is the time complexity of <code>fib</code> <span class="math display">\[
+\mathcal{O}(n) = \mathcal{O}(n-1) + \mathcal{O}(n-2)
+\]</span></li>
+<li>Wait… isn’t that… really bad?
+<ul>
+<li>(Yes, it’s <span class="math inline">\(\mathcal{O}(2^n)\)</span>, basically nightmare fuel)</li>
+<li>(The Fibonacci sequence computes its own <em>naive</em> complexity)</li>
+</ul></li>
+</ul>
+</section>
+<section id="memoize" class="level2">
+<h2 class="anchored" data-anchor-id="memoize">Memoize</h2>
+<blockquote class="blockquote">
+<p><a href="https://en.wikipedia.org/wiki/Memoization">In computing, memoization or memoisation is an optimization technique used primarily to speed up computer programs. It works by storing the results of expensive calls to pure functions, so that these results can be returned quickly should the same inputs occur again. It is a type of caching, normally implemented using a hash table, and a typical example of a space–time tradeoff, where the runtime of a program is reduced by increasing its memory usage.</a></p>
+</blockquote>
+</section>
+<section id="do-we-memoize" class="level2">
+<h2 class="anchored" data-anchor-id="do-we-memoize">Do we memoize?</h2>
+<ul>
+<li>Apparently there’s a competing formulation called tabulation.</li>
+<li>I only learned memoization (by name) and will be teaching that.</li>
+<li>I’d used tabulation without knowing it until I read the definition (for prime generation)</li>
+<li>I don’t know if this is authoritative, but <a href="https://www.geeksforgeeks.org/dsa/tabulation-vs-memoization/">more</a>…</li>
+<li>The homework will not require a specific implementation.</li>
+</ul>
+</section>
+<section id="ingredients" class="level2">
+<h2 class="anchored" data-anchor-id="ingredients">Ingredients</h2>
+<ul>
+<li>A problem with overlapping recursive subproblems.</li>
+<li>An array (er, <code>Vec</code>, and definitely not a HashMap
+<ul>
+<li>HashMaps are for cowards, such as myself last week doing graph theory.</li>
+</ul></li>
+</ul>
+</section>
+<section id="some-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="some-considerations">Some considerations…</h2>
+<ul>
+<li>We need to index into an <s>array</s> <code>Vec</code> so we’ll use <code>usize</code>
+<ul>
+<li>Review: why are indices <code>usize</code>?</li>
+</ul></li>
+<li>To match the type of <code>fib</code> we’ll use a helper functions, which we wrap.</li>
+<li>It’s Rust, so to avoid thinking about ownership (hard, tedious, complicated)…</li>
+<li>Simply pass everything as arguments and return them back.</li>
+</ul>
+</section>
+<section id="step-0" class="level2">
+<h2 class="anchored" data-anchor-id="step-0">Step 0</h2>
+<ul>
+<li>Start here.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="co">// What goes here?</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1">Step 1</h2>
+<ul>
+<li>Make a <code>Vec</code> and cast <code>n</code> to <code>usize</code></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    n <span class="kw">as</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-2">Step 2</h2>
+<ul>
+<li>Helper function</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span>) <span class="op">-&gt;</span> <span class="dt">usize</span>) <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="co">// What goes here?</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span>) <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-3">Step 3</h2>
+<ul>
+<li>Pass everything, which is the memoizing <s>array</s> <code>Vec</code></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        <span class="co">// What goes here?</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-4" class="level2">
+<h2 class="anchored" data-anchor-id="step-4">Step 4</h2>
+<ul>
+<li>Dynamically check if the <code>Vec</code> contains the solution.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>        <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>            <span class="co">// save this for latter!</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>            ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>        <span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>        <span class="cf">return</span> (ret<span class="op">,</span> m)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-5" class="level2">
+<h2 class="anchored" data-anchor-id="step-5">Step 5</h2>
+<ul>
+<li>If not, recurse.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>        <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>            (_<span class="op">,</span> m) <span class="op">=</span> inner(x<span class="op">-</span><span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>            ret <span class="op">=</span> m[x<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>m[x<span class="op">-</span><span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>            ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="op">}</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>        <span class="cf">return</span> (ret<span class="op">,</span> m)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="op">}</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-6" class="level2">
+<h2 class="anchored" data-anchor-id="step-6">Step 6</h2>
+<ul>
+<li>Don’t forget to memoize the result!</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>        <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>            (_<span class="op">,</span> m) <span class="op">=</span> inner(x<span class="op">-</span><span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>            ret <span class="op">=</span> m[x<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>m[x<span class="op">-</span><span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>            m<span class="op">.</span>push(ret)<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>            ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="op">}</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="cf">return</span> (ret<span class="op">,</span> m)</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="side-by-side" class="level2">
+<h2 class="anchored" data-anchor-id="side-by-side">Side-by-side</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">fn</span> fib(n<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>        n <span class="op">=&gt;</span> fib(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="op">};</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">let</span> mem <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span><span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>        <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>            (_<span class="op">,</span> m) <span class="op">=</span> inner(x<span class="op">-</span><span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>            ret <span class="op">=</span> m[x<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>m[x<span class="op">-</span><span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>            m<span class="op">.</span>push(ret)<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>            ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>        <span class="op">}</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="cf">return</span> (ret<span class="op">,</span> m)</span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="op">}</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="test-it" class="level2">
+<h2 class="anchored" data-anchor-id="test-it">Test it</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span><span class="op">..</span><span class="dv">11</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>        <span class="pp">println!</span>(<span class="st">"fib({}) = {}, fib_fast({}) = {}"</span><span class="op">,</span> i<span class="op">,</span> fib(i)<span class="op">,</span> i<span class="op">,</span> fib_fast(i))<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="op">}</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>If you want to copy paste, here’s the whole thing which doesn’t gracefully fit on a slide…</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a>fn fib(n<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>        n <span class="op">=&gt;</span> fib(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="op">};</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="op">}</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">// We "cheat" using `usize` to avoid casting.</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="kw">fn</span> fib_fast(n<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="kw">let</span> mem<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="kw">fn</span> inner(x<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>        <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>            (_<span class="op">,</span> m) <span class="op">=</span> inner(x <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>            ret <span class="op">=</span> m[x <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> m[x <span class="op">-</span> <span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>            m<span class="op">.</span>push(ret)<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>            ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>        <span class="op">}</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>        <span class="cf">return</span> (ret<span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="op">}</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>    <span class="cf">return</span> inner(n <span class="kw">as</span> <span class="dt">usize</span><span class="op">,</span> mem)<span class="op">.</span><span class="dv">0</span> <span class="kw">as</span> <span class="dt">u64</span><span class="op">;</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="op">}</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span><span class="op">..</span><span class="dv">11</span> <span class="op">{</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>        <span class="pp">println!</span>(<span class="st">"fib({}) = {}, fib_fast({}) = {}"</span><span class="op">,</span> i<span class="op">,</span> fib(i)<span class="op">,</span> i<span class="op">,</span> fib_fast(i))<span class="op">;</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a>    <span class="op">}</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">Output</h2>
+<ul>
+<li>Is this… good?</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">$</span> cargo run</span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span><span class="kw">`</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">=</span> 0, fib_fast<span class="er">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">=</span> 1, fib_fast<span class="er">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">=</span> 1</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">=</span> 1, fib_fast<span class="er">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">=</span> 1</span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">=</span> 2, fib_fast<span class="er">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">=</span> 2</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">4</span><span class="kw">)</span> <span class="ex">=</span> 3, fib_fast<span class="er">(</span><span class="ex">4</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">5</span><span class="kw">)</span> <span class="ex">=</span> 5, fib_fast<span class="er">(</span><span class="ex">5</span><span class="kw">)</span> <span class="ex">=</span> 5</span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">6</span><span class="kw">)</span> <span class="ex">=</span> 8, fib_fast<span class="er">(</span><span class="ex">6</span><span class="kw">)</span> <span class="ex">=</span> 8</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">7</span><span class="kw">)</span> <span class="ex">=</span> 13, fib_fast<span class="er">(</span><span class="ex">7</span><span class="kw">)</span> <span class="ex">=</span> 13</span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">8</span><span class="kw">)</span> <span class="ex">=</span> 21, fib_fast<span class="er">(</span><span class="ex">8</span><span class="kw">)</span> <span class="ex">=</span> 21</span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">9</span><span class="kw">)</span> <span class="ex">=</span> 34, fib_fast<span class="er">(</span><span class="ex">9</span><span class="kw">)</span> <span class="ex">=</span> 34</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">10</span><span class="kw">)</span> <span class="ex">=</span> 55, fib_fast<span class="er">(</span><span class="ex">10</span><span class="kw">)</span> <span class="ex">=</span> 55</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="analyze" class="level2">
+<h2 class="anchored" data-anchor-id="analyze">Analyze</h2>
+<ul>
+<li>There’s many ways to analyze code performance.</li>
+<li>The problem with Fibonacci is it:
+<ul>
+<li>Grows fast</li>
+<li>Is easy</li>
+</ul></li>
+<li>So we won’t time, we’ll count additions.
+<ul>
+<li>Our complexity is the addition complexity.</li>
+<li>Addition is much cheaper than e.g.&nbsp;return, but, we could algorithmically factor out the returns (but not the additions)</li>
+</ul></li>
+</ul>
+</section>
+<section id="instrumentation" class="level2">
+<h2 class="anchored" data-anchor-id="instrumentation">Instrumentation</h2>
+<ul>
+<li>In my research, vs.&nbsp;measurement, we use <em>instrumentation</em>, additional logging code incorporated to the source that captured during execution.
+<ul>
+<li>More common in security than performance applications.</li>
+</ul></li>
+<li>I will <em>instrument</em> <code>fib</code> and <code>fib_fast</code> to print a line whenever performing an addition.</li>
+<li>We can then simply count the lines.</li>
+</ul>
+</section>
+<section id="instrument-fib" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-fib">Instrument <code>fib</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">fn</span> fib(n<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>        n <span class="op">=&gt;</span> fib(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>        <span class="co">// Tis I, an empty line</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>        <span class="co">// but for this comment!</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>        <span class="co">// Verily.</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="op">};</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">fn</span> fib(n<span class="op">:</span> <span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>        n <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>            <span class="pp">println!</span>(<span class="st">"slow"</span>)<span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>            fib(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="dv">2</span>)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>        <span class="op">},</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>    <span class="op">};</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="instrument-inner" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-inner">Instrument <code>inner</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">fn</span> inner(x<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>    <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>        (_<span class="op">,</span> m) <span class="op">=</span> inner(x <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>        <span class="co">// Skibidi</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>        ret <span class="op">=</span> m[x <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> m[x <span class="op">-</span> <span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>        m<span class="op">.</span>push(ret)<span class="op">;</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>        ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="op">}</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="cf">return</span> (ret<span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">fn</span> inner(x<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span> <span class="kw">mut</span> m<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span>) <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>    <span class="kw">let</span> ret<span class="op">:</span> <span class="dt">usize</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>    <span class="cf">if</span> x <span class="op">&gt;=</span> m<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>        (_<span class="op">,</span> m) <span class="op">=</span> inner(x <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>        <span class="pp">println!</span>(<span class="st">"fast"</span>)<span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>        ret <span class="op">=</span> m[x <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> m[x <span class="op">-</span> <span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>        m<span class="op">.</span>push(ret)<span class="op">;</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>        ret <span class="op">=</span> m[x]<span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="op">}</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>    <span class="cf">return</span> (ret<span class="op">,</span> m)<span class="op">;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<ul>
+<li>I additionally configure <code>main</code> to accept a command line <span class="math inline">\(n\)</span> rather than just looping.</li>
+<li>I additionally configure <code>main</code> to accept a fast or slow flag <code>f</code> or <code>s</code> - after the <span class="math inline">\(n\)</span>.</li>
+<li>You can use <code>cargo bench</code> for this, if you like <code>cargo</code> (I don’t)</li>
+</ul>
+</section>
+<section id="new-main" class="level2">
+<h2 class="anchored" data-anchor-id="new-main">New <code>main</code></h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="cf">if</span> args<span class="op">.</span>len() <span class="op">&gt;</span> <span class="dv">2</span> <span class="op">{</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>        <span class="kw">let</span> n<span class="op">:</span><span class="dt">u64</span> <span class="op">=</span> args[<span class="dv">1</span>]<span class="op">.</span>parse()<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>        <span class="kw">let</span> _ <span class="op">=</span> <span class="cf">match</span> args[<span class="dv">2</span>]<span class="op">.</span>chars()<span class="op">.</span>next()<span class="op">.</span>unwrap() <span class="op">{</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>            <span class="ch">'f'</span> <span class="op">=&gt;</span> fib_fast(n)<span class="op">,</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>            <span class="ch">'s'</span> <span class="op">=&gt;</span> fib(n)<span class="op">,</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>            _ <span class="op">=&gt;</span> <span class="pp">panic!</span>()<span class="op">,</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>        <span class="op">};</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>    <span class="op">};</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="check-it" class="level2">
+<h2 class="anchored" data-anchor-id="check-it">Check it</h2>
+<ul>
+<li>Simply try out a few values.</li>
+<li>Use <code>wc</code> to count lines.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">user@cd-desk:~/tmp/scratch$</span> cargo run 2 s <span class="kw">|</span> <span class="fu">wc</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>   <span class="ex">Compiling</span> scratch v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/scratch</span><span class="kw">)</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.21s</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span> 2 s<span class="kw">`</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>      <span class="ex">1</span>       1       5</span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="ex">user@cd-desk:~/tmp/scratch$</span> cargo run 2 f <span class="kw">|</span> <span class="fu">wc</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span> 2 f<span class="kw">`</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>      <span class="ex">1</span>       1       5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>That hardly seems worth it?</li>
+</ul>
+</section>
+<section id="it-is" class="level2">
+<h2 class="anchored" data-anchor-id="it-is">It is</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 10 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 10 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb20-2"><a href="#cb20-2"></a>     <span class="ex">88</span>      88     440</span>
+<span id="cb20-3"><a href="#cb20-3"></a>      <span class="ex">9</span>       9      45</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 30 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 30 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="ex">1346268</span> 1346268 6731340</span>
+<span id="cb20-6"><a href="#cb20-6"></a>     <span class="ex">29</span>      29     145</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="another" class="level2">
+<h2 class="anchored" data-anchor-id="another">Another</h2>
+<ul>
+<li>Slow 40 didn’t return before I had to go get lunch.</li>
+<li>I forgot it was running and when I came back:</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 40 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 40 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ex">165580140</span> 165580140 827900700</span>
+<span id="cb21-3"><a href="#cb21-3"></a>     <span class="ex">39</span>      39     195</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="ex">$</span> echo <span class="va">$((</span><span class="dv">165580140</span><span class="op">/</span><span class="dv">39</span><span class="va">))</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="ex">4245644</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Memoization performed 1 addition for every <em>4 million</em> performed by the naive approach.</li>
+</ul>
+</section>
+<section id="timing" class="level2">
+<h2 class="anchored" data-anchor-id="timing">Timing</h2>
+<ul>
+<li>You can get timing separation at around 40 as well</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">$</span> <span class="er">(</span><span class="bu">time</span> cargo run 40 s <span class="kw">;</span> <span class="bu">time</span> cargo run 40 f <span class="kw">)</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span> 40 s<span class="kw">`</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ex">real</span>    0m1.041s</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="ex">user</span>    0m1.058s</span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="ex">sys</span>     0m0.012s</span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span> 40 f<span class="kw">`</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="ex">real</span>    0m0.043s</span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="ex">user</span>    0m0.033s</span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="ex">sys</span>     0m0.012s</span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="ex">$</span> echo <span class="va">$((</span><span class="dv">1041</span><span class="op">/</span><span class="dv">43</span><span class="va">))</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="ex">24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<ul>
+<li>~24x speed-up, even with the memory costs and constant start-up time.
+<ul>
+<li>By the way - how much memory is used?</li>
+</ul></li>
+<li>Make sure you comment out the prints or they will dominate the time cost.
+<ul>
+<li>Printing is much harder than adding!</li>
+</ul></li>
+</ul>
+</section>
+<section id="embed" class="level2">
+<h2 class="anchored" data-anchor-id="embed">Embed</h2>
+<style>
+/* https://github.com/lonekorean/gist-syntax-themes */
+@import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+  font: 16px 'Open Sans', sans-serif;
+}
+body .gist .gist-file {
+  border-color: #555 #555 #444
+}
+body .gist .gist-data {
+  border-color: #555
+}
+body .gist .gist-meta {
+  color: #ffffff;
+  background: #373737; 
+}
+body .gist .gist-meta a {
+  color: #ffffff
+}
+body .gist .gist-data .pl-s .pl-s1 {
+  color: #a5c261
+}
+</style>
+<script src="your-gist-embed"></script>
+<script src="https://gist.github.com/cd-public/be1eb1297832bde71dc276990fb18ee8.js"></script>
+</section>
+<section id="today-1" class="level2">
+<h2 class="anchored" data-anchor-id="today-1">Today</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Dynamic Programming</label></li>
+<li><label><input type="checkbox" checked="">Memoization</label>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Cacheing</label></li>
+</ul></li>
+<li><label><input type="checkbox" checked="">More on Graphs</label></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./A2_analysis.html" class="pagination-link" aria-label="Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Analysis</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./B2_lcs.html" class="pagination-link" aria-label="LCS">
+        <span class="nav-page-text">LCS</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="an">title:</span><span class="co"> Dynamism</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">---</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="fu">## Announcements</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="ss">- </span>**Huge News** Guest Speaker Wednesday.</span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="ss">- </span>Jimmy Ostler, person who actually likes Rust and gotten paid to write it</span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="ss">- </span>Regard attendance as mandatory. I will ask.</span>
+<span id="cb23-10"><a href="#cb23-10"></a></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="fu">## Today</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="ss">- </span>Dynamic Programming</span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="ss">- </span>Memoization</span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="ss">    - </span>Cacheing</span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="ss">- </span>More on Graphs</span>
+<span id="cb23-17"><a href="#cb23-17"></a></span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="fu"># Background</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="fu">## Motivating Problem</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="ss">- </span>We are in a *systems* programming class.</span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="ss">- </span>Vs. *software*, computer *systems* expand the functionality of computing hardware, rather directly solving an end user problem.</span>
+<span id="cb23-24"><a href="#cb23-24"></a><span class="ss">    - </span>A word processor or spreadsheet is software.</span>
+<span id="cb23-25"><a href="#cb23-25"></a><span class="ss">    - </span>It saves spreadsheets to a file *system*</span>
+<span id="cb23-26"><a href="#cb23-26"></a><span class="ss">        - </span>Or perhaps, now, to a cloud service</span>
+<span id="cb23-27"><a href="#cb23-27"></a></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="fu">## Editorial</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a></span>
+<span id="cb23-30"><a href="#cb23-30"></a><span class="ss">- </span>A comprehensive undergraduate computer science program covers:</span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="ss">    - </span>Operating system (CS-371 Sp26)</span>
+<span id="cb23-32"><a href="#cb23-32"></a><span class="ss">        - </span>To understand Linux</span>
+<span id="cb23-33"><a href="#cb23-33"></a><span class="ss">    - </span>Web-server or other network service (former CS-271 Sp24)</span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="ss">        - </span>To understand NGINX</span>
+<span id="cb23-35"><a href="#cb23-35"></a><span class="ss">    - </span>Compiler (slated CS-371 Sp27)</span>
+<span id="cb23-36"><a href="#cb23-36"></a><span class="ss">        - </span>To understand <span class="in">`gcc`</span></span>
+<span id="cb23-37"><a href="#cb23-37"></a>    </span>
+<span id="cb23-38"><a href="#cb23-38"></a><span class="fu">## "Baby" Steps</span></span>
+<span id="cb23-39"><a href="#cb23-39"></a></span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="ss">- </span>Python linked list to OS is a big step.</span>
+<span id="cb23-41"><a href="#cb23-41"></a><span class="ss">- </span>Instead we do "niche" systems:</span>
+<span id="cb23-42"><a href="#cb23-42"></a><span class="ss">    - </span>Blockchain (CS-276 Sp25)</span>
+<span id="cb23-43"><a href="#cb23-43"></a><span class="ss">        - </span>To understand Bitcoin</span>
+<span id="cb23-44"><a href="#cb23-44"></a><span class="ss">    - </span>Source Code Management or "SCM" (CS-271 Sp26)</span>
+<span id="cb23-45"><a href="#cb23-45"></a><span class="ss">        - </span>Also called VCS (version control system)</span>
+<span id="cb23-46"><a href="#cb23-46"></a><span class="ss">        - </span>To understand <span class="in">`git`</span></span>
+<span id="cb23-47"><a href="#cb23-47"></a>    </span>
+<span id="cb23-48"><a href="#cb23-48"></a><span class="fu">## `git`</span></span>
+<span id="cb23-49"><a href="#cb23-49"></a></span>
+<span id="cb23-50"><a href="#cb23-50"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Linus Torvalds: Known more for Git than Linux?</span><span class="co">](https://www.youtube.com/watch?v=0wLidyXzFk8)</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a></span>
+<span id="cb23-52"><a href="#cb23-52"></a>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/0wLidyXzFk8?si=QXPd7ycbApz0gPCx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span>
+<span id="cb23-53"><a href="#cb23-53"></a></span>
+<span id="cb23-54"><a href="#cb23-54"></a><span class="fu">## `git`</span></span>
+<span id="cb23-55"><a href="#cb23-55"></a></span>
+<span id="cb23-56"><a href="#cb23-56"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Just look at the very first git commit of git itself. It is small, so it is possible to understand it in full. Yet, it is capable enough to be used as a version control for git itself.</span><span class="co">](https://www.reddit.com/r/compsci/comments/1cvrxwt/comment/l5a77sj/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button)</span></span>
+<span id="cb23-57"><a href="#cb23-57"></a></span>
+<span id="cb23-58"><a href="#cb23-58"></a><span class="ss">- </span>There are easier things to find, but not by much, it is here:</span>
+<span id="cb23-59"><a href="#cb23-59"></a><span class="ss">    - </span><span class="co">[</span><span class="ot">https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290</span><span class="co">](https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290)</span></span>
+<span id="cb23-60"><a href="#cb23-60"></a>    </span>
+<span id="cb23-61"><a href="#cb23-61"></a><span class="fu">## `git`</span></span>
+<span id="cb23-62"><a href="#cb23-62"></a></span>
+<span id="cb23-63"><a href="#cb23-63"></a><span class="ss">- </span>As far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)</span>
+<span id="cb23-64"><a href="#cb23-64"></a><span class="ss">    - </span>A Merkle tree or hash tree</span>
+<span id="cb23-65"><a href="#cb23-65"></a><span class="ss">        - </span>Was scheduled for this week, delayed by this lecture</span>
+<span id="cb23-66"><a href="#cb23-66"></a><span class="ss">    - </span>A solution to the "longest common subsequence" (LCS) problem, which was dramatically harder in Rust than I thought.</span>
+<span id="cb23-67"><a href="#cb23-67"></a></span>
+<span id="cb23-68"><a href="#cb23-68"></a><span class="fu">## Quoth Wikipedia</span></span>
+<span id="cb23-69"><a href="#cb23-69"></a></span>
+<span id="cb23-70"><a href="#cb23-70"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Because [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.</span><span class="co">](https://en.wikipedia.org/wiki/Longest_common_subsequence)</span></span>
+<span id="cb23-71"><a href="#cb23-71"></a></span>
+<span id="cb23-72"><a href="#cb23-72"></a><span class="at">&gt; For the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming. </span></span>
+<span id="cb23-73"><a href="#cb23-73"></a></span>
+<span id="cb23-74"><a href="#cb23-74"></a><span class="fu"># Dynamic Programming</span></span>
+<span id="cb23-75"><a href="#cb23-75"></a></span>
+<span id="cb23-76"><a href="#cb23-76"></a><span class="fu">## Definition</span></span>
+<span id="cb23-77"><a href="#cb23-77"></a></span>
+<span id="cb23-78"><a href="#cb23-78"></a><span class="ss">- </span>Wikipedia</span>
+<span id="cb23-79"><a href="#cb23-79"></a></span>
+<span id="cb23-80"><a href="#cb23-80"></a><span class="at">&gt; simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner.</span></span>
+<span id="cb23-81"><a href="#cb23-81"></a></span>
+<span id="cb23-82"><a href="#cb23-82"></a><span class="fu">## Defintion</span></span>
+<span id="cb23-83"><a href="#cb23-83"></a></span>
+<span id="cb23-84"><a href="#cb23-84"></a><span class="ss">- </span>*Dynamic Programming* (1957) by Richard Bellman</span>
+<span id="cb23-85"><a href="#cb23-85"></a></span>
+<span id="cb23-86"><a href="#cb23-86"></a><span class="at">&gt; The purpose of this work is to provide an introduction to the mathe-</span></span>
+<span id="cb23-87"><a href="#cb23-87"></a><span class="at">matical theory of multi-stage decision processes. Since these constitute</span></span>
+<span id="cb23-88"><a href="#cb23-88"></a><span class="at">a somewhat formidable set of terms we have coined the term 'dynamic</span></span>
+<span id="cb23-89"><a href="#cb23-89"></a><span class="at">programming' to describe the subject matter.</span></span>
+<span id="cb23-90"><a href="#cb23-90"></a></span>
+<span id="cb23-91"><a href="#cb23-91"></a><span class="fu">## Textbook</span></span>
+<span id="cb23-92"><a href="#cb23-92"></a></span>
+<span id="cb23-93"><a href="#cb23-93"></a><span class="ss">- </span>I am in love with this book, available free online.</span>
+<span id="cb23-94"><a href="#cb23-94"></a><span class="ss">- </span>More for applied math people than for us (it uses floating point numbers - ew!)</span>
+<span id="cb23-95"><a href="#cb23-95"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Dynamic Programming</span><span class="co">](https://dp.quantecon.org/)</span> by Sargent and Stachurski</span>
+<span id="cb23-96"><a href="#cb23-96"></a><span class="ss">- </span>I wanted to teach this next semester (vs. Understanding AI) but it has 1 billion pre-reqs lol.</span>
+<span id="cb23-97"><a href="#cb23-97"></a></span>
+<span id="cb23-98"><a href="#cb23-98"></a><span class="fu">## Minimal example</span></span>
+<span id="cb23-99"><a href="#cb23-99"></a></span>
+<span id="cb23-100"><a href="#cb23-100"></a><span class="ss">- </span>What is a:</span>
+<span id="cb23-101"><a href="#cb23-101"></a><span class="ss">    - </span>Complicated problem</span>
+<span id="cb23-102"><a href="#cb23-102"></a><span class="ss">    - </span>That can be broken down into simpler sub-problems</span>
+<span id="cb23-103"><a href="#cb23-103"></a><span class="ss">    - </span>In a recursive manner?</span>
+<span id="cb23-104"><a href="#cb23-104"></a><span class="ss">- </span>Canonical example: Fibonacci</span>
+<span id="cb23-105"><a href="#cb23-105"></a></span>
+<span id="cb23-106"><a href="#cb23-106"></a><span class="fu">## A Note</span></span>
+<span id="cb23-107"><a href="#cb23-107"></a></span>
+<span id="cb23-108"><a href="#cb23-108"></a><span class="ss">- </span>Vs. ENG, ECON, the *de facto* CS definition is more restrictive.</span>
+<span id="cb23-109"><a href="#cb23-109"></a></span>
+<span id="cb23-110"><a href="#cb23-110"></a><span class="at">&gt; If a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called "divide and conquer" instead. This is why merge sort and quick sort are not classified as dynamic programming problems. </span></span>
+<span id="cb23-111"><a href="#cb23-111"></a></span>
+<span id="cb23-112"><a href="#cb23-112"></a><span class="ss">- </span>This basically per <span class="co">[</span><span class="ot">CLRS</span><span class="co">](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)</span>, the only CS text that matters (according to me)</span>
+<span id="cb23-113"><a href="#cb23-113"></a></span>
+<span id="cb23-114"><a href="#cb23-114"></a></span>
+<span id="cb23-115"><a href="#cb23-115"></a><span class="fu">## Non-overlapping</span></span>
+<span id="cb23-116"><a href="#cb23-116"></a></span>
+<span id="cb23-117"><a href="#cb23-117"></a>&lt;center&gt;</span>
+<span id="cb23-118"><a href="#cb23-118"></a>&lt;a title="VineetKumar at English Wikipedia, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Merge_sort_algorithm_diagram.svg"&gt;&lt;img style="filter:invert(.9);" width="50%" alt="A recursive merge sort algorithm used to sort an array of 7 integer values. These are the steps a human would take to emulate merge sort (top-down)." src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Merge_sort_algorithm_diagram.svg/512px-Merge_sort_algorithm_diagram.svg.png?20180709142035"&gt;&lt;/a&gt;</span>
+<span id="cb23-119"><a href="#cb23-119"></a>&lt;/center&gt;</span>
+<span id="cb23-120"><a href="#cb23-120"></a></span>
+<span id="cb23-121"><a href="#cb23-121"></a><span class="fu">## Overlapping</span></span>
+<span id="cb23-122"><a href="#cb23-122"></a></span>
+<span id="cb23-123"><a href="#cb23-123"></a>&lt;center&gt;</span>
+<span id="cb23-124"><a href="#cb23-124"></a>&lt;a title="en:User:Dcoatzee, traced by User:Stannered, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Fibonacci_dynamic_programming.svg"&gt;&lt;img  style="filter:invert(.9);" height="512px" alt="Fibonacci dynamic programming" src="https://upload.wikimedia.org/wikipedia/commons/0/06/Fibonacci_dynamic_programming.svg"&gt;&lt;/a&gt;</span>
+<span id="cb23-125"><a href="#cb23-125"></a>&lt;/center&gt;</span>
+<span id="cb23-126"><a href="#cb23-126"></a></span>
+<span id="cb23-127"><a href="#cb23-127"></a><span class="fu">## Review</span></span>
+<span id="cb23-128"><a href="#cb23-128"></a></span>
+<span id="cb23-129"><a href="#cb23-129"></a><span class="ss">- </span>If Tree (e.g. can't be a DAG)</span>
+<span id="cb23-130"><a href="#cb23-130"></a><span class="ss">    - </span>"divide and conquer"</span>
+<span id="cb23-131"><a href="#cb23-131"></a><span class="ss">- </span>Else</span>
+<span id="cb23-132"><a href="#cb23-132"></a><span class="ss">    - </span>"dynamic programming"</span>
+<span id="cb23-133"><a href="#cb23-133"></a>    </span>
+<span id="cb23-134"><a href="#cb23-134"></a><span class="fu">## Aside</span></span>
+<span id="cb23-135"><a href="#cb23-135"></a></span>
+<span id="cb23-136"><a href="#cb23-136"></a><span class="ss">- </span>Dynamic programming in the  hardest and most important post-2020 problem</span>
+<span id="cb23-137"><a href="#cb23-137"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Algorithm for optimized mRNA design improves stability and immunogenicity (Nature)</span><span class="co">](https://www.nature.com/articles/s41586-023-06127-z)</span></span>
+<span id="cb23-138"><a href="#cb23-138"></a><span class="ss">    - </span>"Next, we describe how to implement the **dynamic programming** algorithm behind lattice parsing..."</span>
+<span id="cb23-139"><a href="#cb23-139"></a></span>
+<span id="cb23-140"><a href="#cb23-140"></a><span class="ss">- </span>Editorial: Post-2020, biotechnology is sole US industry strictly more advanced than all non-US competitors.</span>
+<span id="cb23-141"><a href="#cb23-141"></a></span>
+<span id="cb23-142"><a href="#cb23-142"></a><span class="fu"># Toy Example</span></span>
+<span id="cb23-143"><a href="#cb23-143"></a></span>
+<span id="cb23-144"><a href="#cb23-144"></a><span class="fu">## Fibonacci</span></span>
+<span id="cb23-145"><a href="#cb23-145"></a></span>
+<span id="cb23-146"><a href="#cb23-146"></a><span class="ss">- </span>In $\LaTeX$</span>
+<span id="cb23-147"><a href="#cb23-147"></a></span>
+<span id="cb23-148"><a href="#cb23-148"></a>$$</span>
+<span id="cb23-149"><a href="#cb23-149"></a>F_0 = 0</span>
+<span id="cb23-150"><a href="#cb23-150"></a>F_1 = 1</span>
+<span id="cb23-151"><a href="#cb23-151"></a>F_n = F_{n-1} + F_{n-2}</span>
+<span id="cb23-152"><a href="#cb23-152"></a>$$</span>
+<span id="cb23-153"><a href="#cb23-153"></a></span>
+<span id="cb23-154"><a href="#cb23-154"></a><span class="fu">## Fibonacci</span></span>
+<span id="cb23-155"><a href="#cb23-155"></a></span>
+<span id="cb23-156"><a href="#cb23-156"></a><span class="ss">- </span>In Rust</span>
+<span id="cb23-157"><a href="#cb23-157"></a></span>
+<span id="cb23-158"><a href="#cb23-158"></a><span class="in">```rs</span></span>
+<span id="cb23-159"><a href="#cb23-159"></a><span class="kw">fn</span> fib(n<span class="op">:</span><span class="dt">u64</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb23-160"><a href="#cb23-160"></a>    <span class="cf">return</span> <span class="cf">match</span> n <span class="op">{</span></span>
+<span id="cb23-161"><a href="#cb23-161"></a>        <span class="dv">0</span> <span class="op">=&gt;</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb23-162"><a href="#cb23-162"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb23-163"><a href="#cb23-163"></a>        n <span class="op">=&gt;</span> fib(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fib(n<span class="op">-</span><span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb23-164"><a href="#cb23-164"></a>    <span class="op">}</span></span>
+<span id="cb23-165"><a href="#cb23-165"></a><span class="op">}</span></span>
+<span id="cb23-166"><a href="#cb23-166"></a><span class="in">```</span></span>
+<span id="cb23-167"><a href="#cb23-167"></a></span>
+<span id="cb23-168"><a href="#cb23-168"></a><span class="fu">## But wait!</span></span>
+<span id="cb23-169"><a href="#cb23-169"></a></span>
+<span id="cb23-170"><a href="#cb23-170"></a><span class="ss">- </span>What is the time complexity of <span class="in">`fib`</span></span>
+<span id="cb23-171"><a href="#cb23-171"></a>$$</span>
+<span id="cb23-172"><a href="#cb23-172"></a>\mathcal{O}(n) = \mathcal{O}(n-1) + \mathcal{O}(n-2)</span>
+<span id="cb23-173"><a href="#cb23-173"></a>$$</span>
+<span id="cb23-174"><a href="#cb23-174"></a><span class="ss">- </span>Wait... isn't that... really bad?</span>
+<span id="cb23-175"><a href="#cb23-175"></a><span class="ss">    - </span>(Yes, it's $\mathcal{O}(2^n)$, basically nightmare fuel)</span>
+<span id="cb23-176"><a href="#cb23-176"></a><span class="ss">    - </span>(The Fibonacci sequence computes its own *naive* complexity)</span>
+<span id="cb23-177"><a href="#cb23-177"></a></span>
+<span id="cb23-178"><a href="#cb23-178"></a><span class="fu">## Memoize</span></span>
+<span id="cb23-179"><a href="#cb23-179"></a></span>
+<span id="cb23-180"><a href="#cb23-180"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">In computing, memoization or memoisation is an optimization technique used primarily to speed up computer programs. It works by storing the results of expensive calls to pure functions, so that these results can be returned quickly should the same inputs occur again. It is a type of caching, normally implemented using a hash table, and a typical example of a space–time tradeoff, where the runtime of a program is reduced by increasing its memory usage.</span><span class="co">](https://en.wikipedia.org/wiki/Memoization)</span></span>
+<span id="cb23-181"><a href="#cb23-181"></a></span>
+<span id="cb23-182"><a href="#cb23-182"></a><span class="fu">## Do we memoize?</span></span>
+<span id="cb23-183"><a href="#cb23-183"></a></span>
+<span id="cb23-184"><a href="#cb23-184"></a><span class="ss">- </span>Apparently there's a competing formulation called tabulation.</span>
+<span id="cb23-185"><a href="#cb23-185"></a><span class="ss">- </span>I only learned memoization (by name) and will be teaching that.</span>
+<span id="cb23-186"><a href="#cb23-186"></a><span class="ss">- </span>I'd used tabulation without knowing it until I read the definition (for prime generation)</span>
+<span id="cb23-187"><a href="#cb23-187"></a><span class="ss">- </span>I don't know if this is authoritative, but <span class="co">[</span><span class="ot">more</span><span class="co">](https://www.geeksforgeeks.org/dsa/tabulation-vs-memoization/)</span>...</span>
+<span id="cb23-188"><a href="#cb23-188"></a><span class="ss">- </span>The homework will not require a specific implementation.</span>
+<span id="cb23-189"><a href="#cb23-189"></a></span>
+<span id="cb23-190"><a href="#cb23-190"></a><span class="fu">## Ingredients</span></span>
+<span id="cb23-191"><a href="#cb23-191"></a></span>
+<span id="cb23-192"><a href="#cb23-192"></a><span class="ss">- </span>A problem with overlapping recursive subproblems.</span>
+<span id="cb23-193"><a href="#cb23-193"></a><span class="ss">- </span>An array (er, <span class="in">`Vec`</span>, and definitely not a HashMap</span>
+<span id="cb23-194"><a href="#cb23-194"></a><span class="ss">    - </span>HashMaps are for cowards, such as myself last week doing graph theory.</span>
+<span id="cb23-195"><a href="#cb23-195"></a></span>
+<span id="cb23-196"><a href="#cb23-196"></a><span class="fu">## Some considerations...</span></span>
+<span id="cb23-197"><a href="#cb23-197"></a></span>
+<span id="cb23-198"><a href="#cb23-198"></a><span class="ss">- </span>We need to index into an &lt;s&gt;array&lt;/s&gt; <span class="in">`Vec`</span> so we'll use <span class="in">`usize`</span></span>
+<span id="cb23-199"><a href="#cb23-199"></a><span class="ss">    - </span>Review: why are indices <span class="in">`usize`</span>?</span>
+<span id="cb23-200"><a href="#cb23-200"></a><span class="ss">- </span>To match the type of <span class="in">`fib`</span> we'll use a helper functions, which we wrap.</span>
+<span id="cb23-201"><a href="#cb23-201"></a><span class="ss">- </span>It's Rust, so to avoid thinking about ownership (hard, tedious, complicated)...</span>
+<span id="cb23-202"><a href="#cb23-202"></a><span class="ss">- </span>Simply pass everything as arguments and return them back.</span>
+<span id="cb23-203"><a href="#cb23-203"></a>    </span>
+<span id="cb23-204"><a href="#cb23-204"></a><span class="fu">## Step 0</span></span>
+<span id="cb23-205"><a href="#cb23-205"></a></span>
+<span id="cb23-206"><a href="#cb23-206"></a><span class="ss">- </span>Start here.</span>
+<span id="cb23-207"><a href="#cb23-207"></a></span>
+<span id="cb23-208"><a href="#cb23-208"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-209"><a href="#cb23-209"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-210"><a href="#cb23-210"></a><span class="in">    // What goes here?</span></span>
+<span id="cb23-211"><a href="#cb23-211"></a><span class="in">}</span></span>
+<span id="cb23-212"><a href="#cb23-212"></a><span class="in">```</span></span>
+<span id="cb23-213"><a href="#cb23-213"></a></span>
+<span id="cb23-214"><a href="#cb23-214"></a><span class="fu">## Step 1</span></span>
+<span id="cb23-215"><a href="#cb23-215"></a></span>
+<span id="cb23-216"><a href="#cb23-216"></a><span class="ss">- </span>Make a <span class="in">`Vec`</span> and cast <span class="in">`n`</span> to <span class="in">`usize`</span> </span>
+<span id="cb23-217"><a href="#cb23-217"></a></span>
+<span id="cb23-218"><a href="#cb23-218"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-219"><a href="#cb23-219"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-220"><a href="#cb23-220"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-221"><a href="#cb23-221"></a><span class="in">    n as usize;</span></span>
+<span id="cb23-222"><a href="#cb23-222"></a><span class="in">}</span></span>
+<span id="cb23-223"><a href="#cb23-223"></a><span class="in">```</span></span>
+<span id="cb23-224"><a href="#cb23-224"></a></span>
+<span id="cb23-225"><a href="#cb23-225"></a><span class="fu">## Step 2 </span></span>
+<span id="cb23-226"><a href="#cb23-226"></a></span>
+<span id="cb23-227"><a href="#cb23-227"></a><span class="ss">- </span>Helper function</span>
+<span id="cb23-228"><a href="#cb23-228"></a></span>
+<span id="cb23-229"><a href="#cb23-229"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-230"><a href="#cb23-230"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-231"><a href="#cb23-231"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-232"><a href="#cb23-232"></a><span class="in">    fn inner(x:usize) -&gt; usize) {</span></span>
+<span id="cb23-233"><a href="#cb23-233"></a><span class="in">        // What goes here?</span></span>
+<span id="cb23-234"><a href="#cb23-234"></a><span class="in">    }</span></span>
+<span id="cb23-235"><a href="#cb23-235"></a><span class="in">    return inner(n as usize) as u64;</span></span>
+<span id="cb23-236"><a href="#cb23-236"></a><span class="in">}</span></span>
+<span id="cb23-237"><a href="#cb23-237"></a><span class="in">```</span></span>
+<span id="cb23-238"><a href="#cb23-238"></a></span>
+<span id="cb23-239"><a href="#cb23-239"></a></span>
+<span id="cb23-240"><a href="#cb23-240"></a><span class="fu">## Step 3</span></span>
+<span id="cb23-241"><a href="#cb23-241"></a></span>
+<span id="cb23-242"><a href="#cb23-242"></a><span class="ss">- </span>Pass everything, which is the memoizing &lt;s&gt;array&lt;/s&gt; <span class="in">`Vec`</span></span>
+<span id="cb23-243"><a href="#cb23-243"></a></span>
+<span id="cb23-244"><a href="#cb23-244"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-245"><a href="#cb23-245"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-246"><a href="#cb23-246"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-247"><a href="#cb23-247"></a><span class="in">    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-248"><a href="#cb23-248"></a><span class="in">        // What goes here?</span></span>
+<span id="cb23-249"><a href="#cb23-249"></a><span class="in">    }</span></span>
+<span id="cb23-250"><a href="#cb23-250"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-251"><a href="#cb23-251"></a><span class="in">}</span></span>
+<span id="cb23-252"><a href="#cb23-252"></a><span class="in">```</span></span>
+<span id="cb23-253"><a href="#cb23-253"></a></span>
+<span id="cb23-254"><a href="#cb23-254"></a><span class="fu">## Step 4</span></span>
+<span id="cb23-255"><a href="#cb23-255"></a></span>
+<span id="cb23-256"><a href="#cb23-256"></a><span class="ss">- </span>Dynamically check if the <span class="in">`Vec`</span> contains the solution.</span>
+<span id="cb23-257"><a href="#cb23-257"></a></span>
+<span id="cb23-258"><a href="#cb23-258"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-259"><a href="#cb23-259"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-260"><a href="#cb23-260"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-261"><a href="#cb23-261"></a><span class="in">    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-262"><a href="#cb23-262"></a><span class="in">        let ret: usize;</span></span>
+<span id="cb23-263"><a href="#cb23-263"></a><span class="in">        if x &gt;= m.len() {</span></span>
+<span id="cb23-264"><a href="#cb23-264"></a><span class="in">            // save this for latter!</span></span>
+<span id="cb23-265"><a href="#cb23-265"></a><span class="in">        } else {</span></span>
+<span id="cb23-266"><a href="#cb23-266"></a><span class="in">            ret = m[x];</span></span>
+<span id="cb23-267"><a href="#cb23-267"></a><span class="in">        }</span></span>
+<span id="cb23-268"><a href="#cb23-268"></a><span class="in">        return (ret, m)</span></span>
+<span id="cb23-269"><a href="#cb23-269"></a><span class="in">    }</span></span>
+<span id="cb23-270"><a href="#cb23-270"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-271"><a href="#cb23-271"></a><span class="in">}</span></span>
+<span id="cb23-272"><a href="#cb23-272"></a><span class="in">```</span></span>
+<span id="cb23-273"><a href="#cb23-273"></a></span>
+<span id="cb23-274"><a href="#cb23-274"></a><span class="fu">## Step 5</span></span>
+<span id="cb23-275"><a href="#cb23-275"></a></span>
+<span id="cb23-276"><a href="#cb23-276"></a><span class="ss">- </span>If not, recurse.</span>
+<span id="cb23-277"><a href="#cb23-277"></a></span>
+<span id="cb23-278"><a href="#cb23-278"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-279"><a href="#cb23-279"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-280"><a href="#cb23-280"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-281"><a href="#cb23-281"></a><span class="in">    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-282"><a href="#cb23-282"></a><span class="in">        let ret: usize;</span></span>
+<span id="cb23-283"><a href="#cb23-283"></a><span class="in">        if x &gt;= m.len() {</span></span>
+<span id="cb23-284"><a href="#cb23-284"></a><span class="in">            (_, m) = inner(x-1, m);</span></span>
+<span id="cb23-285"><a href="#cb23-285"></a><span class="in">            ret = m[x-1]+m[x-2];</span></span>
+<span id="cb23-286"><a href="#cb23-286"></a><span class="in">        } else {</span></span>
+<span id="cb23-287"><a href="#cb23-287"></a><span class="in">            ret = m[x];</span></span>
+<span id="cb23-288"><a href="#cb23-288"></a><span class="in">        }</span></span>
+<span id="cb23-289"><a href="#cb23-289"></a><span class="in">        return (ret, m)</span></span>
+<span id="cb23-290"><a href="#cb23-290"></a><span class="in">    }</span></span>
+<span id="cb23-291"><a href="#cb23-291"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-292"><a href="#cb23-292"></a><span class="in">}</span></span>
+<span id="cb23-293"><a href="#cb23-293"></a><span class="in">```</span></span>
+<span id="cb23-294"><a href="#cb23-294"></a></span>
+<span id="cb23-295"><a href="#cb23-295"></a><span class="fu">## Step 6</span></span>
+<span id="cb23-296"><a href="#cb23-296"></a></span>
+<span id="cb23-297"><a href="#cb23-297"></a><span class="ss">- </span>Don't forget to memoize the result!</span>
+<span id="cb23-298"><a href="#cb23-298"></a></span>
+<span id="cb23-299"><a href="#cb23-299"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-300"><a href="#cb23-300"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-301"><a href="#cb23-301"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-302"><a href="#cb23-302"></a><span class="in">    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-303"><a href="#cb23-303"></a><span class="in">        let ret: usize;</span></span>
+<span id="cb23-304"><a href="#cb23-304"></a><span class="in">        if x &gt;= m.len() {</span></span>
+<span id="cb23-305"><a href="#cb23-305"></a><span class="in">            (_, m) = inner(x-1, m);</span></span>
+<span id="cb23-306"><a href="#cb23-306"></a><span class="in">            ret = m[x-1]+m[x-2];</span></span>
+<span id="cb23-307"><a href="#cb23-307"></a><span class="in">            m.push(ret);</span></span>
+<span id="cb23-308"><a href="#cb23-308"></a><span class="in">        } else {</span></span>
+<span id="cb23-309"><a href="#cb23-309"></a><span class="in">            ret = m[x];</span></span>
+<span id="cb23-310"><a href="#cb23-310"></a><span class="in">        }</span></span>
+<span id="cb23-311"><a href="#cb23-311"></a><span class="in">        return (ret, m)</span></span>
+<span id="cb23-312"><a href="#cb23-312"></a><span class="in">    }</span></span>
+<span id="cb23-313"><a href="#cb23-313"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-314"><a href="#cb23-314"></a><span class="in">}</span></span>
+<span id="cb23-315"><a href="#cb23-315"></a><span class="in">```</span></span>
+<span id="cb23-316"><a href="#cb23-316"></a></span>
+<span id="cb23-317"><a href="#cb23-317"></a><span class="fu">## Side-by-side</span></span>
+<span id="cb23-318"><a href="#cb23-318"></a></span>
+<span id="cb23-319"><a href="#cb23-319"></a>:::: {.columns}</span>
+<span id="cb23-320"><a href="#cb23-320"></a></span>
+<span id="cb23-321"><a href="#cb23-321"></a>::: {.column width="50%"}</span>
+<span id="cb23-322"><a href="#cb23-322"></a></span>
+<span id="cb23-323"><a href="#cb23-323"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-324"><a href="#cb23-324"></a><span class="in">fn fib(n: u64) -&gt; u64 {</span></span>
+<span id="cb23-325"><a href="#cb23-325"></a><span class="in">    return match n {</span></span>
+<span id="cb23-326"><a href="#cb23-326"></a><span class="in">        0 =&gt; 0,</span></span>
+<span id="cb23-327"><a href="#cb23-327"></a><span class="in">        1 =&gt; 1,</span></span>
+<span id="cb23-328"><a href="#cb23-328"></a><span class="in">        n =&gt; fib(n - 1) + fib(n - 2),</span></span>
+<span id="cb23-329"><a href="#cb23-329"></a><span class="in">    };</span></span>
+<span id="cb23-330"><a href="#cb23-330"></a><span class="in">}</span></span>
+<span id="cb23-331"><a href="#cb23-331"></a><span class="in">```</span></span>
+<span id="cb23-332"><a href="#cb23-332"></a></span>
+<span id="cb23-333"><a href="#cb23-333"></a>:::</span>
+<span id="cb23-334"><a href="#cb23-334"></a></span>
+<span id="cb23-335"><a href="#cb23-335"></a>::: {.column width="50%"}</span>
+<span id="cb23-336"><a href="#cb23-336"></a></span>
+<span id="cb23-337"><a href="#cb23-337"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-338"><a href="#cb23-338"></a><span class="in">fn fib_fast(n:u64) -&gt; u64 {</span></span>
+<span id="cb23-339"><a href="#cb23-339"></a><span class="in">    let mem : Vec&lt;usize&gt; = vec![0,1];</span></span>
+<span id="cb23-340"><a href="#cb23-340"></a><span class="in">    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-341"><a href="#cb23-341"></a><span class="in">        let ret: usize;</span></span>
+<span id="cb23-342"><a href="#cb23-342"></a><span class="in">        if x &gt;= m.len() {</span></span>
+<span id="cb23-343"><a href="#cb23-343"></a><span class="in">            (_, m) = inner(x-1, m);</span></span>
+<span id="cb23-344"><a href="#cb23-344"></a><span class="in">            ret = m[x-1]+m[x-2];</span></span>
+<span id="cb23-345"><a href="#cb23-345"></a><span class="in">            m.push(ret);</span></span>
+<span id="cb23-346"><a href="#cb23-346"></a><span class="in">        } else {</span></span>
+<span id="cb23-347"><a href="#cb23-347"></a><span class="in">            ret = m[x];</span></span>
+<span id="cb23-348"><a href="#cb23-348"></a><span class="in">        }</span></span>
+<span id="cb23-349"><a href="#cb23-349"></a><span class="in">        return (ret, m)</span></span>
+<span id="cb23-350"><a href="#cb23-350"></a><span class="in">    }</span></span>
+<span id="cb23-351"><a href="#cb23-351"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-352"><a href="#cb23-352"></a><span class="in">}</span></span>
+<span id="cb23-353"><a href="#cb23-353"></a><span class="in">```</span></span>
+<span id="cb23-354"><a href="#cb23-354"></a></span>
+<span id="cb23-355"><a href="#cb23-355"></a>:::</span>
+<span id="cb23-356"><a href="#cb23-356"></a></span>
+<span id="cb23-357"><a href="#cb23-357"></a>::::</span>
+<span id="cb23-358"><a href="#cb23-358"></a></span>
+<span id="cb23-359"><a href="#cb23-359"></a><span class="fu">## Test it</span></span>
+<span id="cb23-360"><a href="#cb23-360"></a></span>
+<span id="cb23-361"><a href="#cb23-361"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-362"><a href="#cb23-362"></a><span class="in">fn main() {</span></span>
+<span id="cb23-363"><a href="#cb23-363"></a><span class="in">    for i in 0..11 {</span></span>
+<span id="cb23-364"><a href="#cb23-364"></a><span class="in">        println!("fib({}) = {}, fib_fast({}) = {}", i, fib(i), i, fib_fast(i));</span></span>
+<span id="cb23-365"><a href="#cb23-365"></a><span class="in">    }</span></span>
+<span id="cb23-366"><a href="#cb23-366"></a><span class="in">}</span></span>
+<span id="cb23-367"><a href="#cb23-367"></a><span class="in">```</span></span>
+<span id="cb23-368"><a href="#cb23-368"></a><span class="ss">- </span>If you want to copy paste, here's the whole thing which doesn't gracefully fit on a slide...</span>
+<span id="cb23-369"><a href="#cb23-369"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb23-370"><a href="#cb23-370"></a><span class="in">fn fib(n: u64) -&gt; u64 {</span></span>
+<span id="cb23-371"><a href="#cb23-371"></a><span class="in">    return match n {</span></span>
+<span id="cb23-372"><a href="#cb23-372"></a><span class="in">        0 =&gt; 0,</span></span>
+<span id="cb23-373"><a href="#cb23-373"></a><span class="in">        1 =&gt; 1,</span></span>
+<span id="cb23-374"><a href="#cb23-374"></a><span class="in">        n =&gt; fib(n - 1) + fib(n - 2),</span></span>
+<span id="cb23-375"><a href="#cb23-375"></a><span class="in">    };</span></span>
+<span id="cb23-376"><a href="#cb23-376"></a><span class="in">}</span></span>
+<span id="cb23-377"><a href="#cb23-377"></a></span>
+<span id="cb23-378"><a href="#cb23-378"></a><span class="in">// We "cheat" using `usize` to avoid casting.</span></span>
+<span id="cb23-379"><a href="#cb23-379"></a><span class="in">fn fib_fast(n: u64) -&gt; u64 {</span></span>
+<span id="cb23-380"><a href="#cb23-380"></a><span class="in">    let mem: Vec&lt;usize&gt; = vec![0, 1];</span></span>
+<span id="cb23-381"><a href="#cb23-381"></a><span class="in">    fn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-382"><a href="#cb23-382"></a><span class="in">        let ret: usize;</span></span>
+<span id="cb23-383"><a href="#cb23-383"></a><span class="in">        if x &gt;= m.len() {</span></span>
+<span id="cb23-384"><a href="#cb23-384"></a><span class="in">            (_, m) = inner(x - 1, m);</span></span>
+<span id="cb23-385"><a href="#cb23-385"></a><span class="in">            ret = m[x - 1] + m[x - 2];</span></span>
+<span id="cb23-386"><a href="#cb23-386"></a><span class="in">            m.push(ret);</span></span>
+<span id="cb23-387"><a href="#cb23-387"></a><span class="in">        } else {</span></span>
+<span id="cb23-388"><a href="#cb23-388"></a><span class="in">            ret = m[x];</span></span>
+<span id="cb23-389"><a href="#cb23-389"></a><span class="in">        }</span></span>
+<span id="cb23-390"><a href="#cb23-390"></a><span class="in">        return (ret, m);</span></span>
+<span id="cb23-391"><a href="#cb23-391"></a><span class="in">    }</span></span>
+<span id="cb23-392"><a href="#cb23-392"></a><span class="in">    return inner(n as usize, mem).0 as u64;</span></span>
+<span id="cb23-393"><a href="#cb23-393"></a><span class="in">}</span></span>
+<span id="cb23-394"><a href="#cb23-394"></a></span>
+<span id="cb23-395"><a href="#cb23-395"></a><span class="in">fn main() {</span></span>
+<span id="cb23-396"><a href="#cb23-396"></a><span class="in">    for i in 0..11 {</span></span>
+<span id="cb23-397"><a href="#cb23-397"></a><span class="in">        println!("fib({}) = {}, fib_fast({}) = {}", i, fib(i), i, fib_fast(i));</span></span>
+<span id="cb23-398"><a href="#cb23-398"></a><span class="in">    }</span></span>
+<span id="cb23-399"><a href="#cb23-399"></a><span class="in">}</span></span>
+<span id="cb23-400"><a href="#cb23-400"></a><span class="in">```</span></span>
+<span id="cb23-401"><a href="#cb23-401"></a></span>
+<span id="cb23-402"><a href="#cb23-402"></a><span class="fu">## Output</span></span>
+<span id="cb23-403"><a href="#cb23-403"></a></span>
+<span id="cb23-404"><a href="#cb23-404"></a><span class="ss">- </span>Is this... good?</span>
+<span id="cb23-405"><a href="#cb23-405"></a></span>
+<span id="cb23-406"><a href="#cb23-406"></a><span class="in">```sh</span></span>
+<span id="cb23-407"><a href="#cb23-407"></a><span class="ex">$</span> cargo run</span>
+<span id="cb23-408"><a href="#cb23-408"></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.00s</span></span>
+<span id="cb23-409"><a href="#cb23-409"></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/scratch</span><span class="kw">`</span></span>
+<span id="cb23-410"><a href="#cb23-410"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">=</span> 0, fib_fast<span class="er">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb23-411"><a href="#cb23-411"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">=</span> 1, fib_fast<span class="er">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">=</span> 1</span>
+<span id="cb23-412"><a href="#cb23-412"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">=</span> 1, fib_fast<span class="er">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">=</span> 1</span>
+<span id="cb23-413"><a href="#cb23-413"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">=</span> 2, fib_fast<span class="er">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">=</span> 2</span>
+<span id="cb23-414"><a href="#cb23-414"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">4</span><span class="kw">)</span> <span class="ex">=</span> 3, fib_fast<span class="er">(</span><span class="ex">4</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb23-415"><a href="#cb23-415"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">5</span><span class="kw">)</span> <span class="ex">=</span> 5, fib_fast<span class="er">(</span><span class="ex">5</span><span class="kw">)</span> <span class="ex">=</span> 5</span>
+<span id="cb23-416"><a href="#cb23-416"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">6</span><span class="kw">)</span> <span class="ex">=</span> 8, fib_fast<span class="er">(</span><span class="ex">6</span><span class="kw">)</span> <span class="ex">=</span> 8</span>
+<span id="cb23-417"><a href="#cb23-417"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">7</span><span class="kw">)</span> <span class="ex">=</span> 13, fib_fast<span class="er">(</span><span class="ex">7</span><span class="kw">)</span> <span class="ex">=</span> 13</span>
+<span id="cb23-418"><a href="#cb23-418"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">8</span><span class="kw">)</span> <span class="ex">=</span> 21, fib_fast<span class="er">(</span><span class="ex">8</span><span class="kw">)</span> <span class="ex">=</span> 21</span>
+<span id="cb23-419"><a href="#cb23-419"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">9</span><span class="kw">)</span> <span class="ex">=</span> 34, fib_fast<span class="er">(</span><span class="ex">9</span><span class="kw">)</span> <span class="ex">=</span> 34</span>
+<span id="cb23-420"><a href="#cb23-420"></a><span class="ex">fib</span><span class="er">(</span><span class="ex">10</span><span class="kw">)</span> <span class="ex">=</span> 55, fib_fast<span class="er">(</span><span class="ex">10</span><span class="kw">)</span> <span class="ex">=</span> 55</span>
+<span id="cb23-421"><a href="#cb23-421"></a><span class="in">```</span></span>
+<span id="cb23-422"><a href="#cb23-422"></a></span>
+<span id="cb23-423"><a href="#cb23-423"></a><span class="fu">## Analyze</span></span>
+<span id="cb23-424"><a href="#cb23-424"></a></span>
+<span id="cb23-425"><a href="#cb23-425"></a><span class="ss">- </span>There's many ways to analyze code performance.</span>
+<span id="cb23-426"><a href="#cb23-426"></a><span class="ss">- </span>The problem with Fibonacci is it:</span>
+<span id="cb23-427"><a href="#cb23-427"></a><span class="ss">    - </span>Grows fast</span>
+<span id="cb23-428"><a href="#cb23-428"></a><span class="ss">    - </span>Is easy</span>
+<span id="cb23-429"><a href="#cb23-429"></a><span class="ss">- </span>So we won't time, we'll count additions.</span>
+<span id="cb23-430"><a href="#cb23-430"></a><span class="ss">    - </span>Our complexity is the addition complexity.</span>
+<span id="cb23-431"><a href="#cb23-431"></a><span class="ss">    - </span>Addition is much cheaper than e.g. return, but, we could algorithmically factor out the returns (but not the additions)</span>
+<span id="cb23-432"><a href="#cb23-432"></a>   </span>
+<span id="cb23-433"><a href="#cb23-433"></a><span class="fu">## Instrumentation</span></span>
+<span id="cb23-434"><a href="#cb23-434"></a></span>
+<span id="cb23-435"><a href="#cb23-435"></a><span class="ss">- </span>In my research, vs. measurement, we use *instrumentation*, additional logging code incorporated to the source that captured during execution.</span>
+<span id="cb23-436"><a href="#cb23-436"></a><span class="ss">    - </span>More common in security than performance applications.</span>
+<span id="cb23-437"><a href="#cb23-437"></a><span class="ss">- </span>I will *instrument* <span class="in">`fib`</span> and <span class="in">`fib_fast`</span> to print a line whenever performing an addition.</span>
+<span id="cb23-438"><a href="#cb23-438"></a><span class="ss">- </span>We can then simply count the lines.</span>
+<span id="cb23-439"><a href="#cb23-439"></a>    </span>
+<span id="cb23-440"><a href="#cb23-440"></a><span class="fu">## Instrument `fib`</span></span>
+<span id="cb23-441"><a href="#cb23-441"></a></span>
+<span id="cb23-442"><a href="#cb23-442"></a>:::: {.columns}</span>
+<span id="cb23-443"><a href="#cb23-443"></a></span>
+<span id="cb23-444"><a href="#cb23-444"></a>::: {.column width="50%"}</span>
+<span id="cb23-445"><a href="#cb23-445"></a></span>
+<span id="cb23-446"><a href="#cb23-446"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-447"><a href="#cb23-447"></a><span class="in">fn fib(n: u64) -&gt; u64 {</span></span>
+<span id="cb23-448"><a href="#cb23-448"></a><span class="in">    return match n {</span></span>
+<span id="cb23-449"><a href="#cb23-449"></a><span class="in">        0 =&gt; 0,</span></span>
+<span id="cb23-450"><a href="#cb23-450"></a><span class="in">        1 =&gt; 1,</span></span>
+<span id="cb23-451"><a href="#cb23-451"></a><span class="in">        n =&gt; fib(n - 1) + fib(n - 2),</span></span>
+<span id="cb23-452"><a href="#cb23-452"></a><span class="in">        // Tis I, an empty line</span></span>
+<span id="cb23-453"><a href="#cb23-453"></a><span class="in">        // but for this comment!</span></span>
+<span id="cb23-454"><a href="#cb23-454"></a><span class="in">        // Verily.</span></span>
+<span id="cb23-455"><a href="#cb23-455"></a><span class="in">    };</span></span>
+<span id="cb23-456"><a href="#cb23-456"></a><span class="in">}</span></span>
+<span id="cb23-457"><a href="#cb23-457"></a><span class="in">```</span></span>
+<span id="cb23-458"><a href="#cb23-458"></a></span>
+<span id="cb23-459"><a href="#cb23-459"></a>:::</span>
+<span id="cb23-460"><a href="#cb23-460"></a></span>
+<span id="cb23-461"><a href="#cb23-461"></a>::: {.column width="50%"}</span>
+<span id="cb23-462"><a href="#cb23-462"></a></span>
+<span id="cb23-463"><a href="#cb23-463"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-464"><a href="#cb23-464"></a><span class="in">fn fib(n: u64) -&gt; u64 {</span></span>
+<span id="cb23-465"><a href="#cb23-465"></a><span class="in">    return match n {</span></span>
+<span id="cb23-466"><a href="#cb23-466"></a><span class="in">        0 =&gt; 0,</span></span>
+<span id="cb23-467"><a href="#cb23-467"></a><span class="in">        1 =&gt; 1,</span></span>
+<span id="cb23-468"><a href="#cb23-468"></a><span class="in">        n =&gt; {</span></span>
+<span id="cb23-469"><a href="#cb23-469"></a><span class="in">            println!("slow");</span></span>
+<span id="cb23-470"><a href="#cb23-470"></a><span class="in">            fib(n - 1) + fib(n - 2)</span></span>
+<span id="cb23-471"><a href="#cb23-471"></a><span class="in">        },</span></span>
+<span id="cb23-472"><a href="#cb23-472"></a><span class="in">    };</span></span>
+<span id="cb23-473"><a href="#cb23-473"></a><span class="in">}</span></span>
+<span id="cb23-474"><a href="#cb23-474"></a><span class="in">```</span></span>
+<span id="cb23-475"><a href="#cb23-475"></a></span>
+<span id="cb23-476"><a href="#cb23-476"></a>:::</span>
+<span id="cb23-477"><a href="#cb23-477"></a></span>
+<span id="cb23-478"><a href="#cb23-478"></a>::::</span>
+<span id="cb23-479"><a href="#cb23-479"></a></span>
+<span id="cb23-480"><a href="#cb23-480"></a><span class="fu">## Instrument `inner`</span></span>
+<span id="cb23-481"><a href="#cb23-481"></a></span>
+<span id="cb23-482"><a href="#cb23-482"></a>:::: {.columns}</span>
+<span id="cb23-483"><a href="#cb23-483"></a></span>
+<span id="cb23-484"><a href="#cb23-484"></a>::: {.column width="50%"}</span>
+<span id="cb23-485"><a href="#cb23-485"></a></span>
+<span id="cb23-486"><a href="#cb23-486"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-487"><a href="#cb23-487"></a><span class="in">fn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-488"><a href="#cb23-488"></a><span class="in">    let ret: usize;</span></span>
+<span id="cb23-489"><a href="#cb23-489"></a><span class="in">    if x &gt;= m.len() {</span></span>
+<span id="cb23-490"><a href="#cb23-490"></a><span class="in">        (_, m) = inner(x - 1, m);</span></span>
+<span id="cb23-491"><a href="#cb23-491"></a><span class="in">        // Skibidi</span></span>
+<span id="cb23-492"><a href="#cb23-492"></a><span class="in">        ret = m[x - 1] + m[x - 2];</span></span>
+<span id="cb23-493"><a href="#cb23-493"></a><span class="in">        m.push(ret);</span></span>
+<span id="cb23-494"><a href="#cb23-494"></a><span class="in">    } else {</span></span>
+<span id="cb23-495"><a href="#cb23-495"></a><span class="in">        ret = m[x];</span></span>
+<span id="cb23-496"><a href="#cb23-496"></a><span class="in">    }</span></span>
+<span id="cb23-497"><a href="#cb23-497"></a><span class="in">    return (ret, m);</span></span>
+<span id="cb23-498"><a href="#cb23-498"></a><span class="in">}</span></span>
+<span id="cb23-499"><a href="#cb23-499"></a><span class="in">```</span></span>
+<span id="cb23-500"><a href="#cb23-500"></a></span>
+<span id="cb23-501"><a href="#cb23-501"></a>:::</span>
+<span id="cb23-502"><a href="#cb23-502"></a></span>
+<span id="cb23-503"><a href="#cb23-503"></a>::: {.column width="50%"}</span>
+<span id="cb23-504"><a href="#cb23-504"></a></span>
+<span id="cb23-505"><a href="#cb23-505"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-506"><a href="#cb23-506"></a><span class="in">fn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {</span></span>
+<span id="cb23-507"><a href="#cb23-507"></a><span class="in">    let ret: usize;</span></span>
+<span id="cb23-508"><a href="#cb23-508"></a><span class="in">    if x &gt;= m.len() {</span></span>
+<span id="cb23-509"><a href="#cb23-509"></a><span class="in">        (_, m) = inner(x - 1, m);</span></span>
+<span id="cb23-510"><a href="#cb23-510"></a><span class="in">        println!("fast");</span></span>
+<span id="cb23-511"><a href="#cb23-511"></a><span class="in">        ret = m[x - 1] + m[x - 2];</span></span>
+<span id="cb23-512"><a href="#cb23-512"></a><span class="in">        m.push(ret);</span></span>
+<span id="cb23-513"><a href="#cb23-513"></a><span class="in">    } else {</span></span>
+<span id="cb23-514"><a href="#cb23-514"></a><span class="in">        ret = m[x];</span></span>
+<span id="cb23-515"><a href="#cb23-515"></a><span class="in">    }</span></span>
+<span id="cb23-516"><a href="#cb23-516"></a><span class="in">    return (ret, m);</span></span>
+<span id="cb23-517"><a href="#cb23-517"></a><span class="in">}</span></span>
+<span id="cb23-518"><a href="#cb23-518"></a><span class="in">```</span></span>
+<span id="cb23-519"><a href="#cb23-519"></a></span>
+<span id="cb23-520"><a href="#cb23-520"></a>:::</span>
+<span id="cb23-521"><a href="#cb23-521"></a></span>
+<span id="cb23-522"><a href="#cb23-522"></a>::::</span>
+<span id="cb23-523"><a href="#cb23-523"></a></span>
+<span id="cb23-524"><a href="#cb23-524"></a><span class="fu">## Testing</span></span>
+<span id="cb23-525"><a href="#cb23-525"></a></span>
+<span id="cb23-526"><a href="#cb23-526"></a><span class="ss">- </span>I additionally configure <span class="in">`main`</span> to accept a command line $n$ rather than just looping.</span>
+<span id="cb23-527"><a href="#cb23-527"></a><span class="ss">- </span>I additionally configure <span class="in">`main`</span> to accept a fast or slow flag <span class="in">`f`</span> or <span class="in">`s`</span> - after the $n$.</span>
+<span id="cb23-528"><a href="#cb23-528"></a><span class="ss">- </span>You can use <span class="in">`cargo bench`</span> for this, if you like <span class="in">`cargo`</span> (I don't)</span>
+<span id="cb23-529"><a href="#cb23-529"></a></span>
+<span id="cb23-530"><a href="#cb23-530"></a><span class="fu">## New `main`</span></span>
+<span id="cb23-531"><a href="#cb23-531"></a></span>
+<span id="cb23-532"><a href="#cb23-532"></a><span class="in">```{.rs}</span></span>
+<span id="cb23-533"><a href="#cb23-533"></a><span class="in">fn main() {</span></span>
+<span id="cb23-534"><a href="#cb23-534"></a><span class="in">    let args: Vec&lt;String&gt; = std::env::args().collect();</span></span>
+<span id="cb23-535"><a href="#cb23-535"></a><span class="in">    if args.len() &gt; 2 {</span></span>
+<span id="cb23-536"><a href="#cb23-536"></a><span class="in">        let n:u64 = args[1].parse().unwrap();</span></span>
+<span id="cb23-537"><a href="#cb23-537"></a><span class="in">        let _ = match args[2].chars().next().unwrap() {</span></span>
+<span id="cb23-538"><a href="#cb23-538"></a><span class="in">            'f' =&gt; fib_fast(n),</span></span>
+<span id="cb23-539"><a href="#cb23-539"></a><span class="in">            's' =&gt; fib(n),</span></span>
+<span id="cb23-540"><a href="#cb23-540"></a><span class="in">            _ =&gt; panic!(),</span></span>
+<span id="cb23-541"><a href="#cb23-541"></a><span class="in">        };</span></span>
+<span id="cb23-542"><a href="#cb23-542"></a><span class="in">    };</span></span>
+<span id="cb23-543"><a href="#cb23-543"></a><span class="in">    return;</span></span>
+<span id="cb23-544"><a href="#cb23-544"></a><span class="in">}</span></span>
+<span id="cb23-545"><a href="#cb23-545"></a><span class="in">```</span></span>
+<span id="cb23-546"><a href="#cb23-546"></a></span>
+<span id="cb23-547"><a href="#cb23-547"></a><span class="fu">## Check it</span></span>
+<span id="cb23-548"><a href="#cb23-548"></a></span>
+<span id="cb23-549"><a href="#cb23-549"></a><span class="ss">- </span>Simply try out a few values.</span>
+<span id="cb23-550"><a href="#cb23-550"></a><span class="ss">- </span>Use <span class="in">`wc`</span> to count lines.</span>
+<span id="cb23-551"><a href="#cb23-551"></a></span>
+<span id="cb23-552"><a href="#cb23-552"></a><span class="in">```{.sh}</span></span>
+<span id="cb23-553"><a href="#cb23-553"></a><span class="in">user@cd-desk:~/tmp/scratch$ cargo run 2 s | wc</span></span>
+<span id="cb23-554"><a href="#cb23-554"></a><span class="in">   Compiling scratch v0.1.0 (/home/user/tmp/scratch)</span></span>
+<span id="cb23-555"><a href="#cb23-555"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s</span></span>
+<span id="cb23-556"><a href="#cb23-556"></a><span class="in">     Running `target/debug/scratch 2 s`</span></span>
+<span id="cb23-557"><a href="#cb23-557"></a><span class="in">      1       1       5</span></span>
+<span id="cb23-558"><a href="#cb23-558"></a><span class="in">user@cd-desk:~/tmp/scratch$ cargo run 2 f | wc</span></span>
+<span id="cb23-559"><a href="#cb23-559"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb23-560"><a href="#cb23-560"></a><span class="in">     Running `target/debug/scratch 2 f`</span></span>
+<span id="cb23-561"><a href="#cb23-561"></a><span class="in">      1       1       5</span></span>
+<span id="cb23-562"><a href="#cb23-562"></a><span class="in">```</span></span>
+<span id="cb23-563"><a href="#cb23-563"></a></span>
+<span id="cb23-564"><a href="#cb23-564"></a><span class="ss">- </span>That hardly seems worth it?</span>
+<span id="cb23-565"><a href="#cb23-565"></a></span>
+<span id="cb23-566"><a href="#cb23-566"></a><span class="fu">## It is</span></span>
+<span id="cb23-567"><a href="#cb23-567"></a></span>
+<span id="cb23-568"><a href="#cb23-568"></a><span class="in">```sh</span></span>
+<span id="cb23-569"><a href="#cb23-569"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 10 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 10 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb23-570"><a href="#cb23-570"></a>     <span class="ex">88</span>      88     440</span>
+<span id="cb23-571"><a href="#cb23-571"></a>      <span class="ex">9</span>       9      45</span>
+<span id="cb23-572"><a href="#cb23-572"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 30 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 30 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb23-573"><a href="#cb23-573"></a><span class="ex">1346268</span> 1346268 6731340</span>
+<span id="cb23-574"><a href="#cb23-574"></a>     <span class="ex">29</span>      29     145</span>
+<span id="cb23-575"><a href="#cb23-575"></a><span class="in">```</span></span>
+<span id="cb23-576"><a href="#cb23-576"></a></span>
+<span id="cb23-577"><a href="#cb23-577"></a><span class="fu">## Another</span></span>
+<span id="cb23-578"><a href="#cb23-578"></a></span>
+<span id="cb23-579"><a href="#cb23-579"></a><span class="ss">- </span>Slow 40 didn't return before I had to go get lunch.</span>
+<span id="cb23-580"><a href="#cb23-580"></a><span class="ss">- </span>I forgot it was running and when I came back:</span>
+<span id="cb23-581"><a href="#cb23-581"></a><span class="in">```sh</span></span>
+<span id="cb23-582"><a href="#cb23-582"></a><span class="ex">$</span> <span class="er">(</span><span class="ex">cargo</span> run 40 s <span class="kw">|</span> <span class="fu">wc</span> <span class="kw">;</span> <span class="ex">cargo</span> run 40 f <span class="kw">|</span> <span class="fu">wc</span><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb23-583"><a href="#cb23-583"></a><span class="ex">165580140</span> 165580140 827900700</span>
+<span id="cb23-584"><a href="#cb23-584"></a>     <span class="ex">39</span>      39     195</span>
+<span id="cb23-585"><a href="#cb23-585"></a><span class="ex">$</span> echo <span class="va">$((</span><span class="dv">165580140</span><span class="op">/</span><span class="dv">39</span><span class="va">))</span></span>
+<span id="cb23-586"><a href="#cb23-586"></a><span class="ex">4245644</span></span>
+<span id="cb23-587"><a href="#cb23-587"></a><span class="in">```</span></span>
+<span id="cb23-588"><a href="#cb23-588"></a><span class="ss">- </span>Memoization performed 1 addition for every *4 million* performed by the naive approach.</span>
+<span id="cb23-589"><a href="#cb23-589"></a></span>
+<span id="cb23-590"><a href="#cb23-590"></a><span class="fu">## Timing</span></span>
+<span id="cb23-591"><a href="#cb23-591"></a></span>
+<span id="cb23-592"><a href="#cb23-592"></a><span class="ss">- </span>You can get timing separation at around 40 as well</span>
+<span id="cb23-593"><a href="#cb23-593"></a></span>
+<span id="cb23-594"><a href="#cb23-594"></a><span class="in">```{.sh}</span></span>
+<span id="cb23-595"><a href="#cb23-595"></a><span class="in">$ (time cargo run 40 s ; time cargo run 40 f )</span></span>
+<span id="cb23-596"><a href="#cb23-596"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb23-597"><a href="#cb23-597"></a><span class="in">     Running `target/debug/scratch 40 s`</span></span>
+<span id="cb23-598"><a href="#cb23-598"></a></span>
+<span id="cb23-599"><a href="#cb23-599"></a><span class="in">real    0m1.041s</span></span>
+<span id="cb23-600"><a href="#cb23-600"></a><span class="in">user    0m1.058s</span></span>
+<span id="cb23-601"><a href="#cb23-601"></a><span class="in">sys     0m0.012s</span></span>
+<span id="cb23-602"><a href="#cb23-602"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s</span></span>
+<span id="cb23-603"><a href="#cb23-603"></a><span class="in">     Running `target/debug/scratch 40 f`</span></span>
+<span id="cb23-604"><a href="#cb23-604"></a></span>
+<span id="cb23-605"><a href="#cb23-605"></a><span class="in">real    0m0.043s</span></span>
+<span id="cb23-606"><a href="#cb23-606"></a><span class="in">user    0m0.033s</span></span>
+<span id="cb23-607"><a href="#cb23-607"></a><span class="in">sys     0m0.012s</span></span>
+<span id="cb23-608"><a href="#cb23-608"></a><span class="in">$ echo $((1041/43))</span></span>
+<span id="cb23-609"><a href="#cb23-609"></a><span class="in">24</span></span>
+<span id="cb23-610"><a href="#cb23-610"></a><span class="in">```</span></span>
+<span id="cb23-611"><a href="#cb23-611"></a></span>
+<span id="cb23-612"><a href="#cb23-612"></a><span class="fu">## Results</span></span>
+<span id="cb23-613"><a href="#cb23-613"></a></span>
+<span id="cb23-614"><a href="#cb23-614"></a><span class="ss">- </span>~24x speed-up, even with the memory costs and constant start-up time.</span>
+<span id="cb23-615"><a href="#cb23-615"></a><span class="ss">    - </span>By the way - how much memory is used?</span>
+<span id="cb23-616"><a href="#cb23-616"></a><span class="ss">- </span>Make sure you comment out the prints or they will dominate the time cost.</span>
+<span id="cb23-617"><a href="#cb23-617"></a><span class="ss">    - </span>Printing is much harder than adding!</span>
+<span id="cb23-618"><a href="#cb23-618"></a></span>
+<span id="cb23-619"><a href="#cb23-619"></a><span class="fu">## Embed</span></span>
+<span id="cb23-620"><a href="#cb23-620"></a></span>
+<span id="cb23-621"><a href="#cb23-621"></a>&lt;style&gt;</span>
+<span id="cb23-622"><a href="#cb23-622"></a><span class="co">/* https://github.com/lonekorean/gist-syntax-themes */</span></span>
+<span id="cb23-623"><a href="#cb23-623"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb23-624"><a href="#cb23-624"></a></span>
+<span id="cb23-625"><a href="#cb23-625"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">'https://fonts.googleapis.com/css?family=Open+Sans'</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb23-626"><a href="#cb23-626"></a>body {</span>
+<span id="cb23-627"><a href="#cb23-627"></a>  <span class="kw">font</span><span class="ch">:</span> <span class="dv">16</span><span class="dt">px</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb23-628"><a href="#cb23-628"></a>}</span>
+<span id="cb23-629"><a href="#cb23-629"></a>body <span class="fu">.gist</span> <span class="fu">.gist-file</span> {</span>
+<span id="cb23-630"><a href="#cb23-630"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span> <span class="cn">#555</span> <span class="cn">#444</span></span>
+<span id="cb23-631"><a href="#cb23-631"></a>}</span>
+<span id="cb23-632"><a href="#cb23-632"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> {</span>
+<span id="cb23-633"><a href="#cb23-633"></a>  <span class="kw">border-color</span><span class="ch">:</span> <span class="cn">#555</span></span>
+<span id="cb23-634"><a href="#cb23-634"></a>}</span>
+<span id="cb23-635"><a href="#cb23-635"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> {</span>
+<span id="cb23-636"><a href="#cb23-636"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb23-637"><a href="#cb23-637"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#373737</span><span class="op">;</span> </span>
+<span id="cb23-638"><a href="#cb23-638"></a>}</span>
+<span id="cb23-639"><a href="#cb23-639"></a>body <span class="fu">.gist</span> <span class="fu">.gist-meta</span> a {</span>
+<span id="cb23-640"><a href="#cb23-640"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#ffffff</span></span>
+<span id="cb23-641"><a href="#cb23-641"></a>}</span>
+<span id="cb23-642"><a href="#cb23-642"></a>body <span class="fu">.gist</span> <span class="fu">.gist-data</span> <span class="fu">.pl-s</span> <span class="fu">.pl-s1</span> {</span>
+<span id="cb23-643"><a href="#cb23-643"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#a5c261</span></span>
+<span id="cb23-644"><a href="#cb23-644"></a>}</span>
+<span id="cb23-645"><a href="#cb23-645"></a>&lt;/style&gt;</span>
+<span id="cb23-646"><a href="#cb23-646"></a>&lt;script src="your-gist-embed"&gt;&lt;/script&gt;</span>
+<span id="cb23-647"><a href="#cb23-647"></a>&lt;script src="https://gist.github.com/cd-public/be1eb1297832bde71dc276990fb18ee8.js"&gt;&lt;/script&gt;</span>
+<span id="cb23-648"><a href="#cb23-648"></a></span>
+<span id="cb23-649"><a href="#cb23-649"></a><span class="fu">## Today</span></span>
+<span id="cb23-650"><a href="#cb23-650"></a></span>
+<span id="cb23-651"><a href="#cb23-651"></a><span class="ss">- </span><span class="va">[x]</span> Dynamic Programming</span>
+<span id="cb23-652"><a href="#cb23-652"></a><span class="ss">- </span><span class="va">[x]</span> Memoization</span>
+<span id="cb23-653"><a href="#cb23-653"></a><span class="ss">    - </span><span class="va">[x]</span> Cacheing</span>
+<span id="cb23-654"><a href="#cb23-654"></a><span class="ss">- </span><span class="va">[x]</span> More on Graphs</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

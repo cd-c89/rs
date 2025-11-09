@@ -4,7 +4,833 @@
     "href": "index.html",
     "title": "Systems in Rust",
     "section": "",
-    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStack\nBox\nTraits\n\n\n0xA\n11/03\nGraphs\nDAG\nAnalysis\n\n\n0xB\n11/10\nMerkle\nNone\n\n\n\n0xC\n11/17\nVCS\n\n\n\n\n0xD\n11/24\nSpectre\nNone\nNone\n\n\n0xE\n12/01\nMeltdown\nHypers\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+    "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStack\nBox\nTraits\n\n\n0xA\n11/03\nGraphs\nDAG\nAnalysis\n\n\n0xB\n11/10\nDynamism\nGuest\nLCS\n\n\n0xC\n11/17\nMerkle\ndiff\npatch\n\n\n0xD\n11/24\nVCS\nNone\nNone\n\n\n0xE\n12/01\nArchitecture\n\nVCS.rs\n\n\n\n\n\n\nLecture Recordings"
+  },
+  {
+    "objectID": "B0_dynamic.html",
+    "href": "B0_dynamic.html",
+    "title": "Dynamism",
+    "section": "",
+    "text": "Huge News Guest Speaker Wednesday.\nJimmy Ostler, person who actually likes Rust and gotten paid to write it\nRegard attendance as mandatory. I will ask.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#announcements",
+    "href": "B0_dynamic.html#announcements",
+    "title": "Dynamism",
+    "section": "",
+    "text": "Huge News Guest Speaker Wednesday.\nJimmy Ostler, person who actually likes Rust and gotten paid to write it\nRegard attendance as mandatory. I will ask.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#today",
+    "href": "B0_dynamic.html#today",
+    "title": "Dynamism",
+    "section": "Today",
+    "text": "Today\n\nDynamic Programming\nMemoization\n\nCacheing\n\nMore on Graphs",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#motivating-problem",
+    "href": "B0_dynamic.html#motivating-problem",
+    "title": "Dynamism",
+    "section": "Motivating Problem",
+    "text": "Motivating Problem\n\nWe are in a systems programming class.\nVs. software, computer systems expand the functionality of computing hardware, rather directly solving an end user problem.\n\nA word processor or spreadsheet is software.\nIt saves spreadsheets to a file system\n\nOr perhaps, now, to a cloud service",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#editorial",
+    "href": "B0_dynamic.html#editorial",
+    "title": "Dynamism",
+    "section": "Editorial",
+    "text": "Editorial\n\nA comprehensive undergraduate computer science program covers:\n\nOperating system (CS-371 Sp26)\n\nTo understand Linux\n\nWeb-server or other network service (former CS-271 Sp24)\n\nTo understand NGINX\n\nCompiler (slated CS-371 Sp27)\n\nTo understand gcc",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#baby-steps",
+    "href": "B0_dynamic.html#baby-steps",
+    "title": "Dynamism",
+    "section": "“Baby” Steps",
+    "text": "“Baby” Steps\n\nPython linked list to OS is a big step.\nInstead we do “niche” systems:\n\nBlockchain (CS-276 Sp25)\n\nTo understand Bitcoin\n\nSource Code Management or “SCM” (CS-271 Sp26)\n\nAlso called VCS (version control system)\nTo understand git",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#git",
+    "href": "B0_dynamic.html#git",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nLinus Torvalds: Known more for Git than Linux?",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#git-1",
+    "href": "B0_dynamic.html#git-1",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nJust look at the very first git commit of git itself. It is small, so it is possible to understand it in full. Yet, it is capable enough to be used as a version control for git itself.\n\n\nThere are easier things to find, but not by much, it is here:\n\nhttps://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#git-2",
+    "href": "B0_dynamic.html#git-2",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nAs far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)\n\nA Merkle tree or hash tree\n\nWas scheduled for this week, delayed by this lecture\n\nA solution to the “longest common subsequence” (LCS) problem, which was dramatically harder in Rust than I thought.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#quoth-wikipedia",
+    "href": "B0_dynamic.html#quoth-wikipedia",
+    "title": "Dynamism",
+    "section": "Quoth Wikipedia",
+    "text": "Quoth Wikipedia\n\nBecause [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.\n\n\nFor the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#definition",
+    "href": "B0_dynamic.html#definition",
+    "title": "Dynamism",
+    "section": "Definition",
+    "text": "Definition\n\nWikipedia\n\n\nsimplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#defintion",
+    "href": "B0_dynamic.html#defintion",
+    "title": "Dynamism",
+    "section": "Defintion",
+    "text": "Defintion\n\nDynamic Programming (1957) by Richard Bellman\n\n\nThe purpose of this work is to provide an introduction to the mathe- matical theory of multi-stage decision processes. Since these constitute a somewhat formidable set of terms we have coined the term ‘dynamic programming’ to describe the subject matter.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#textbook",
+    "href": "B0_dynamic.html#textbook",
+    "title": "Dynamism",
+    "section": "Textbook",
+    "text": "Textbook\n\nI am in love with this book, available free online.\nMore for applied math people than for us (it uses floating point numbers - ew!)\nDynamic Programming by Sargent and Stachurski\nI wanted to teach this next semester (vs. Understanding AI) but it has 1 billion pre-reqs lol.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#minimal-example",
+    "href": "B0_dynamic.html#minimal-example",
+    "title": "Dynamism",
+    "section": "Minimal example",
+    "text": "Minimal example\n\nWhat is a:\n\nComplicated problem\nThat can be broken down into simpler sub-problems\nIn a recursive manner?\n\nCanonical example: Fibonacci",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#a-note",
+    "href": "B0_dynamic.html#a-note",
+    "title": "Dynamism",
+    "section": "A Note",
+    "text": "A Note\n\nVs. ENG, ECON, the de facto CS definition is more restrictive.\n\n\nIf a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called “divide and conquer” instead. This is why merge sort and quick sort are not classified as dynamic programming problems.\n\n\nThis basically per CLRS, the only CS text that matters (according to me)",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#non-overlapping",
+    "href": "B0_dynamic.html#non-overlapping",
+    "title": "Dynamism",
+    "section": "Non-overlapping",
+    "text": "Non-overlapping",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#overlapping",
+    "href": "B0_dynamic.html#overlapping",
+    "title": "Dynamism",
+    "section": "Overlapping",
+    "text": "Overlapping",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#review",
+    "href": "B0_dynamic.html#review",
+    "title": "Dynamism",
+    "section": "Review",
+    "text": "Review\n\nIf Tree (e.g. can’t be a DAG)\n\n“divide and conquer”\n\nElse\n\n“dynamic programming”",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#aside",
+    "href": "B0_dynamic.html#aside",
+    "title": "Dynamism",
+    "section": "Aside",
+    "text": "Aside\n\nDynamic programming in the hardest and most important post-2020 problem\nAlgorithm for optimized mRNA design improves stability and immunogenicity (Nature)\n\n“Next, we describe how to implement the dynamic programming algorithm behind lattice parsing…”\n\nEditorial: Post-2020, biotechnology is sole US industry strictly more advanced than all non-US competitors.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#fibonacci",
+    "href": "B0_dynamic.html#fibonacci",
+    "title": "Dynamism",
+    "section": "Fibonacci",
+    "text": "Fibonacci\n\nIn \\(\\LaTeX\\)\n\n\\[\nF_0 = 0\nF_1 = 1\nF_n = F_{n-1} + F_{n-2}\n\\]",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#fibonacci-1",
+    "href": "B0_dynamic.html#fibonacci-1",
+    "title": "Dynamism",
+    "section": "Fibonacci",
+    "text": "Fibonacci\n\nIn Rust\n\nfn fib(n:u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n-1) + fib(n-2),\n    }\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#but-wait",
+    "href": "B0_dynamic.html#but-wait",
+    "title": "Dynamism",
+    "section": "But wait!",
+    "text": "But wait!\n\nWhat is the time complexity of fib \\[\n\\mathcal{O}(n) = \\mathcal{O}(n-1) + \\mathcal{O}(n-2)\n\\]\nWait… isn’t that… really bad?\n\n(Yes, it’s \\(\\mathcal{O}(2^n)\\), basically nightmare fuel)\n(The Fibonacci sequence computes its own naive complexity)",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#memoize",
+    "href": "B0_dynamic.html#memoize",
+    "title": "Dynamism",
+    "section": "Memoize",
+    "text": "Memoize\n\nIn computing, memoization or memoisation is an optimization technique used primarily to speed up computer programs. It works by storing the results of expensive calls to pure functions, so that these results can be returned quickly should the same inputs occur again. It is a type of caching, normally implemented using a hash table, and a typical example of a space–time tradeoff, where the runtime of a program is reduced by increasing its memory usage.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#do-we-memoize",
+    "href": "B0_dynamic.html#do-we-memoize",
+    "title": "Dynamism",
+    "section": "Do we memoize?",
+    "text": "Do we memoize?\n\nApparently there’s a competing formulation called tabulation.\nI only learned memoization (by name) and will be teaching that.\nI’d used tabulation without knowing it until I read the definition (for prime generation)\nI don’t know if this is authoritative, but more…\nThe homework will not require a specific implementation.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#ingredients",
+    "href": "B0_dynamic.html#ingredients",
+    "title": "Dynamism",
+    "section": "Ingredients",
+    "text": "Ingredients\n\nA problem with overlapping recursive subproblems.\nAn array (er, Vec, and definitely not a HashMap\n\nHashMaps are for cowards, such as myself last week doing graph theory.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#some-considerations",
+    "href": "B0_dynamic.html#some-considerations",
+    "title": "Dynamism",
+    "section": "Some considerations…",
+    "text": "Some considerations…\n\nWe need to index into an array Vec so we’ll use usize\n\nReview: why are indices usize?\n\nTo match the type of fib we’ll use a helper functions, which we wrap.\nIt’s Rust, so to avoid thinking about ownership (hard, tedious, complicated)…\nSimply pass everything as arguments and return them back.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-0",
+    "href": "B0_dynamic.html#step-0",
+    "title": "Dynamism",
+    "section": "Step 0",
+    "text": "Step 0\n\nStart here.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    // What goes here?\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-1",
+    "href": "B0_dynamic.html#step-1",
+    "title": "Dynamism",
+    "section": "Step 1",
+    "text": "Step 1\n\nMake a Vec and cast n to usize\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    n as usize;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-2",
+    "href": "B0_dynamic.html#step-2",
+    "title": "Dynamism",
+    "section": "Step 2",
+    "text": "Step 2\n\nHelper function\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize) -&gt; usize) {\n        // What goes here?\n    }\n    return inner(n as usize) as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-3",
+    "href": "B0_dynamic.html#step-3",
+    "title": "Dynamism",
+    "section": "Step 3",
+    "text": "Step 3\n\nPass everything, which is the memoizing array Vec\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        // What goes here?\n    }\n    return inner(n as usize, mem).0 as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-4",
+    "href": "B0_dynamic.html#step-4",
+    "title": "Dynamism",
+    "section": "Step 4",
+    "text": "Step 4\n\nDynamically check if the Vec contains the solution.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            // save this for latter!\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-5",
+    "href": "B0_dynamic.html#step-5",
+    "title": "Dynamism",
+    "section": "Step 5",
+    "text": "Step 5\n\nIf not, recurse.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#step-6",
+    "href": "B0_dynamic.html#step-6",
+    "title": "Dynamism",
+    "section": "Step 6",
+    "text": "Step 6\n\nDon’t forget to memoize the result!\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#side-by-side",
+    "href": "B0_dynamic.html#side-by-side",
+    "title": "Dynamism",
+    "section": "Side-by-side",
+    "text": "Side-by-side\n\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n    };\n}\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#test-it",
+    "href": "B0_dynamic.html#test-it",
+    "title": "Dynamism",
+    "section": "Test it",
+    "text": "Test it\nfn main() {\n    for i in 0..11 {\n        println!(\"fib({}) = {}, fib_fast({}) = {}\", i, fib(i), i, fib_fast(i));\n    }\n}\n\nIf you want to copy paste, here’s the whole thing which doesn’t gracefully fit on a slide…\n\n\n\nsrc/main.rs\n\n\u0016\u0016fn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n    };\n}\n\n// We \"cheat\" using `usize` to avoid casting.\nfn fib_fast(n: u64) -&gt; u64 {\n    let mem: Vec&lt;usize&gt; = vec![0, 1];\n    fn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x - 1, m);\n            ret = m[x - 1] + m[x - 2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m);\n    }\n    return inner(n as usize, mem).0 as u64;\n}\n\nfn main() {\n    for i in 0..11 {\n        println!(\"fib({}) = {}, fib_fast({}) = {}\", i, fib(i), i, fib_fast(i));\n    }\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#output",
+    "href": "B0_dynamic.html#output",
+    "title": "Dynamism",
+    "section": "Output",
+    "text": "Output\n\nIs this… good?\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch`\nfib(0) = 0, fib_fast(0) = 0\nfib(1) = 1, fib_fast(1) = 1\nfib(2) = 1, fib_fast(2) = 1\nfib(3) = 2, fib_fast(3) = 2\nfib(4) = 3, fib_fast(4) = 3\nfib(5) = 5, fib_fast(5) = 5\nfib(6) = 8, fib_fast(6) = 8\nfib(7) = 13, fib_fast(7) = 13\nfib(8) = 21, fib_fast(8) = 21\nfib(9) = 34, fib_fast(9) = 34\nfib(10) = 55, fib_fast(10) = 55",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#analyze",
+    "href": "B0_dynamic.html#analyze",
+    "title": "Dynamism",
+    "section": "Analyze",
+    "text": "Analyze\n\nThere’s many ways to analyze code performance.\nThe problem with Fibonacci is it:\n\nGrows fast\nIs easy\n\nSo we won’t time, we’ll count additions.\n\nOur complexity is the addition complexity.\nAddition is much cheaper than e.g. return, but, we could algorithmically factor out the returns (but not the additions)",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#instrumentation",
+    "href": "B0_dynamic.html#instrumentation",
+    "title": "Dynamism",
+    "section": "Instrumentation",
+    "text": "Instrumentation\n\nIn my research, vs. measurement, we use instrumentation, additional logging code incorporated to the source that captured during execution.\n\nMore common in security than performance applications.\n\nI will instrument fib and fib_fast to print a line whenever performing an addition.\nWe can then simply count the lines.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#instrument-fib",
+    "href": "B0_dynamic.html#instrument-fib",
+    "title": "Dynamism",
+    "section": "Instrument fib",
+    "text": "Instrument fib\n\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n        // Tis I, an empty line\n        // but for this comment!\n        // Verily.\n    };\n}\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; {\n            println!(\"slow\");\n            fib(n - 1) + fib(n - 2)\n        },\n    };\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#instrument-inner",
+    "href": "B0_dynamic.html#instrument-inner",
+    "title": "Dynamism",
+    "section": "Instrument inner",
+    "text": "Instrument inner\n\n\nfn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n    let ret: usize;\n    if x &gt;= m.len() {\n        (_, m) = inner(x - 1, m);\n        // Skibidi\n        ret = m[x - 1] + m[x - 2];\n        m.push(ret);\n    } else {\n        ret = m[x];\n    }\n    return (ret, m);\n}\n\nfn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n    let ret: usize;\n    if x &gt;= m.len() {\n        (_, m) = inner(x - 1, m);\n        println!(\"fast\");\n        ret = m[x - 1] + m[x - 2];\n        m.push(ret);\n    } else {\n        ret = m[x];\n    }\n    return (ret, m);\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#testing",
+    "href": "B0_dynamic.html#testing",
+    "title": "Dynamism",
+    "section": "Testing",
+    "text": "Testing\n\nI additionally configure main to accept a command line \\(n\\) rather than just looping.\nI additionally configure main to accept a fast or slow flag f or s - after the \\(n\\).\nYou can use cargo bench for this, if you like cargo (I don’t)",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#new-main",
+    "href": "B0_dynamic.html#new-main",
+    "title": "Dynamism",
+    "section": "New main",
+    "text": "New main\nfn main() {\n    let args: Vec&lt;String&gt; = std::env::args().collect();\n    if args.len() &gt; 2 {\n        let n:u64 = args[1].parse().unwrap();\n        let _ = match args[2].chars().next().unwrap() {\n            'f' =&gt; fib_fast(n),\n            's' =&gt; fib(n),\n            _ =&gt; panic!(),\n        };\n    };\n    return;\n}",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#check-it",
+    "href": "B0_dynamic.html#check-it",
+    "title": "Dynamism",
+    "section": "Check it",
+    "text": "Check it\n\nSimply try out a few values.\nUse wc to count lines.\n\nuser@cd-desk:~/tmp/scratch$ cargo run 2 s | wc\n   Compiling scratch v0.1.0 (/home/user/tmp/scratch)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s\n     Running `target/debug/scratch 2 s`\n      1       1       5\nuser@cd-desk:~/tmp/scratch$ cargo run 2 f | wc\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 2 f`\n      1       1       5\n\nThat hardly seems worth it?",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#it-is",
+    "href": "B0_dynamic.html#it-is",
+    "title": "Dynamism",
+    "section": "It is",
+    "text": "It is\n$ (cargo run 10 s | wc ; cargo run 10 f | wc) 2&gt;/dev/null\n     88      88     440\n      9       9      45\n$ (cargo run 30 s | wc ; cargo run 30 f | wc) 2&gt;/dev/null\n1346268 1346268 6731340\n     29      29     145",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#another",
+    "href": "B0_dynamic.html#another",
+    "title": "Dynamism",
+    "section": "Another",
+    "text": "Another\n\nSlow 40 didn’t return before I had to go get lunch.\nI forgot it was running and when I came back:\n\n$ (cargo run 40 s | wc ; cargo run 40 f | wc) 2&gt;/dev/null\n165580140 165580140 827900700\n     39      39     195\n$ echo $((165580140/39))\n4245644\n\nMemoization performed 1 addition for every 4 million performed by the naive approach.",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#timing",
+    "href": "B0_dynamic.html#timing",
+    "title": "Dynamism",
+    "section": "Timing",
+    "text": "Timing\n\nYou can get timing separation at around 40 as well\n\n$ (time cargo run 40 s ; time cargo run 40 f )\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 40 s`\n\nreal    0m1.041s\nuser    0m1.058s\nsys     0m0.012s\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 40 f`\n\nreal    0m0.043s\nuser    0m0.033s\nsys     0m0.012s\n$ echo $((1041/43))\n24",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#results",
+    "href": "B0_dynamic.html#results",
+    "title": "Dynamism",
+    "section": "Results",
+    "text": "Results\n\n~24x speed-up, even with the memory costs and constant start-up time.\n\nBy the way - how much memory is used?\n\nMake sure you comment out the prints or they will dominate the time cost.\n\nPrinting is much harder than adding!",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#embed",
+    "href": "B0_dynamic.html#embed",
+    "title": "Dynamism",
+    "section": "Embed",
+    "text": "Embed",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.html#today-1",
+    "href": "B0_dynamic.html#today-1",
+    "title": "Dynamism",
+    "section": "Today",
+    "text": "Today\n\nDynamic Programming\nMemoization\n\nCacheing\n\nMore on Graphs",
+    "crumbs": [
+      "Dynamism"
+    ]
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#announcements",
+    "href": "B0_dynamic.rjs.html#announcements",
+    "title": "Dynamism",
+    "section": "Announcements",
+    "text": "Announcements\n\nHuge News Guest Speaker Wednesday.\nJimmy Ostler, person who actually likes Rust and gotten paid to write it\nRegard attendance as mandatory. I will ask."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#today",
+    "href": "B0_dynamic.rjs.html#today",
+    "title": "Dynamism",
+    "section": "Today",
+    "text": "Today\n\nDynamic Programming\nMemoization\n\nCacheing\n\nMore on Graphs"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#motivating-problem",
+    "href": "B0_dynamic.rjs.html#motivating-problem",
+    "title": "Dynamism",
+    "section": "Motivating Problem",
+    "text": "Motivating Problem\n\nWe are in a systems programming class.\nVs. software, computer systems expand the functionality of computing hardware, rather directly solving an end user problem.\n\nA word processor or spreadsheet is software.\nIt saves spreadsheets to a file system\n\nOr perhaps, now, to a cloud service"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#editorial",
+    "href": "B0_dynamic.rjs.html#editorial",
+    "title": "Dynamism",
+    "section": "Editorial",
+    "text": "Editorial\n\nA comprehensive undergraduate computer science program covers:\n\nOperating system (CS-371 Sp26)\n\nTo understand Linux\n\nWeb-server or other network service (former CS-271 Sp24)\n\nTo understand NGINX\n\nCompiler (slated CS-371 Sp27)\n\nTo understand gcc"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#baby-steps",
+    "href": "B0_dynamic.rjs.html#baby-steps",
+    "title": "Dynamism",
+    "section": "“Baby” Steps",
+    "text": "“Baby” Steps\n\nPython linked list to OS is a big step.\nInstead we do “niche” systems:\n\nBlockchain (CS-276 Sp25)\n\nTo understand Bitcoin\n\nSource Code Management or “SCM” (CS-271 Sp26)\n\nAlso called VCS (version control system)\nTo understand git"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#git",
+    "href": "B0_dynamic.rjs.html#git",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nLinus Torvalds: Known more for Git than Linux?"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#git-1",
+    "href": "B0_dynamic.rjs.html#git-1",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nJust look at the very first git commit of git itself. It is small, so it is possible to understand it in full. Yet, it is capable enough to be used as a version control for git itself.\n\n\nThere are easier things to find, but not by much, it is here:\n\nhttps://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#git-2",
+    "href": "B0_dynamic.rjs.html#git-2",
+    "title": "Dynamism",
+    "section": "git",
+    "text": "git\n\nAs far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)\n\nA Merkle tree or hash tree\n\nWas scheduled for this week, delayed by this lecture\n\nA solution to the “longest common subsequence” (LCS) problem, which was dramatically harder in Rust than I thought."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#quoth-wikipedia",
+    "href": "B0_dynamic.rjs.html#quoth-wikipedia",
+    "title": "Dynamism",
+    "section": "Quoth Wikipedia",
+    "text": "Quoth Wikipedia\n\nBecause [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.\n\n\nFor the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#definition",
+    "href": "B0_dynamic.rjs.html#definition",
+    "title": "Dynamism",
+    "section": "Definition",
+    "text": "Definition\n\nWikipedia\n\n\nsimplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#defintion",
+    "href": "B0_dynamic.rjs.html#defintion",
+    "title": "Dynamism",
+    "section": "Defintion",
+    "text": "Defintion\n\nDynamic Programming (1957) by Richard Bellman\n\n\nThe purpose of this work is to provide an introduction to the mathe- matical theory of multi-stage decision processes. Since these constitute a somewhat formidable set of terms we have coined the term ‘dynamic programming’ to describe the subject matter."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#textbook",
+    "href": "B0_dynamic.rjs.html#textbook",
+    "title": "Dynamism",
+    "section": "Textbook",
+    "text": "Textbook\n\nI am in love with this book, available free online.\nMore for applied math people than for us (it uses floating point numbers - ew!)\nDynamic Programming by Sargent and Stachurski\nI wanted to teach this next semester (vs. Understanding AI) but it has 1 billion pre-reqs lol."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#minimal-example",
+    "href": "B0_dynamic.rjs.html#minimal-example",
+    "title": "Dynamism",
+    "section": "Minimal example",
+    "text": "Minimal example\n\nWhat is a:\n\nComplicated problem\nThat can be broken down into simpler sub-problems\nIn a recursive manner?\n\nCanonical example: Fibonacci"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#a-note",
+    "href": "B0_dynamic.rjs.html#a-note",
+    "title": "Dynamism",
+    "section": "A Note",
+    "text": "A Note\n\nVs. ENG, ECON, the de facto CS definition is more restrictive.\n\n\nIf a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called “divide and conquer” instead. This is why merge sort and quick sort are not classified as dynamic programming problems.\n\n\nThis basically per CLRS, the only CS text that matters (according to me)"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#non-overlapping",
+    "href": "B0_dynamic.rjs.html#non-overlapping",
+    "title": "Dynamism",
+    "section": "Non-overlapping",
+    "text": "Non-overlapping"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#overlapping",
+    "href": "B0_dynamic.rjs.html#overlapping",
+    "title": "Dynamism",
+    "section": "Overlapping",
+    "text": "Overlapping"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#review",
+    "href": "B0_dynamic.rjs.html#review",
+    "title": "Dynamism",
+    "section": "Review",
+    "text": "Review\n\nIf Tree (e.g. can’t be a DAG)\n\n“divide and conquer”\n\nElse\n\n“dynamic programming”"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#aside",
+    "href": "B0_dynamic.rjs.html#aside",
+    "title": "Dynamism",
+    "section": "Aside",
+    "text": "Aside\n\nDynamic programming in the hardest and most important post-2020 problem\nAlgorithm for optimized mRNA design improves stability and immunogenicity (Nature)\n\n“Next, we describe how to implement the dynamic programming algorithm behind lattice parsing…”\n\nEditorial: Post-2020, biotechnology is sole US industry strictly more advanced than all non-US competitors."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#fibonacci",
+    "href": "B0_dynamic.rjs.html#fibonacci",
+    "title": "Dynamism",
+    "section": "Fibonacci",
+    "text": "Fibonacci\n\nIn \\(\\LaTeX\\)\n\n\\[\nF_0 = 0\nF_1 = 1\nF_n = F_{n-1} + F_{n-2}\n\\]"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#fibonacci-1",
+    "href": "B0_dynamic.rjs.html#fibonacci-1",
+    "title": "Dynamism",
+    "section": "Fibonacci",
+    "text": "Fibonacci\n\nIn Rust\n\nfn fib(n:u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n-1) + fib(n-2),\n    }\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#but-wait",
+    "href": "B0_dynamic.rjs.html#but-wait",
+    "title": "Dynamism",
+    "section": "But wait!",
+    "text": "But wait!\n\nWhat is the time complexity of fib \\[\n\\mathcal{O}(n) = \\mathcal{O}(n-1) + \\mathcal{O}(n-2)\n\\]\nWait… isn’t that… really bad?\n\n(Yes, it’s \\(\\mathcal{O}(2^n)\\), basically nightmare fuel)\n(The Fibonacci sequence computes its own naive complexity)"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#memoize",
+    "href": "B0_dynamic.rjs.html#memoize",
+    "title": "Dynamism",
+    "section": "Memoize",
+    "text": "Memoize\n\nIn computing, memoization or memoisation is an optimization technique used primarily to speed up computer programs. It works by storing the results of expensive calls to pure functions, so that these results can be returned quickly should the same inputs occur again. It is a type of caching, normally implemented using a hash table, and a typical example of a space–time tradeoff, where the runtime of a program is reduced by increasing its memory usage."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#do-we-memoize",
+    "href": "B0_dynamic.rjs.html#do-we-memoize",
+    "title": "Dynamism",
+    "section": "Do we memoize?",
+    "text": "Do we memoize?\n\nApparently there’s a competing formulation called tabulation.\nI only learned memoization (by name) and will be teaching that.\nI’d used tabulation without knowing it until I read the definition (for prime generation)\nI don’t know if this is authoritative, but more…\nThe homework will not require a specific implementation."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#ingredients",
+    "href": "B0_dynamic.rjs.html#ingredients",
+    "title": "Dynamism",
+    "section": "Ingredients",
+    "text": "Ingredients\n\nA problem with overlapping recursive subproblems.\nAn array (er, Vec, and definitely not a HashMap\n\nHashMaps are for cowards, such as myself last week doing graph theory."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#some-considerations",
+    "href": "B0_dynamic.rjs.html#some-considerations",
+    "title": "Dynamism",
+    "section": "Some considerations…",
+    "text": "Some considerations…\n\nWe need to index into an array Vec so we’ll use usize\n\nReview: why are indices usize?\n\nTo match the type of fib we’ll use a helper functions, which we wrap.\nIt’s Rust, so to avoid thinking about ownership (hard, tedious, complicated)…\nSimply pass everything as arguments and return them back."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-0",
+    "href": "B0_dynamic.rjs.html#step-0",
+    "title": "Dynamism",
+    "section": "Step 0",
+    "text": "Step 0\n\nStart here.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    // What goes here?\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-1",
+    "href": "B0_dynamic.rjs.html#step-1",
+    "title": "Dynamism",
+    "section": "Step 1",
+    "text": "Step 1\n\nMake a Vec and cast n to usize\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    n as usize;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-2",
+    "href": "B0_dynamic.rjs.html#step-2",
+    "title": "Dynamism",
+    "section": "Step 2",
+    "text": "Step 2\n\nHelper function\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize) -&gt; usize) {\n        // What goes here?\n    }\n    return inner(n as usize) as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-3",
+    "href": "B0_dynamic.rjs.html#step-3",
+    "title": "Dynamism",
+    "section": "Step 3",
+    "text": "Step 3\n\nPass everything, which is the memoizing array Vec\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        // What goes here?\n    }\n    return inner(n as usize, mem).0 as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-4",
+    "href": "B0_dynamic.rjs.html#step-4",
+    "title": "Dynamism",
+    "section": "Step 4",
+    "text": "Step 4\n\nDynamically check if the Vec contains the solution.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            // save this for latter!\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-5",
+    "href": "B0_dynamic.rjs.html#step-5",
+    "title": "Dynamism",
+    "section": "Step 5",
+    "text": "Step 5\n\nIf not, recurse.\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#step-6",
+    "href": "B0_dynamic.rjs.html#step-6",
+    "title": "Dynamism",
+    "section": "Step 6",
+    "text": "Step 6\n\nDon’t forget to memoize the result!\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#side-by-side",
+    "href": "B0_dynamic.rjs.html#side-by-side",
+    "title": "Dynamism",
+    "section": "Side-by-side",
+    "text": "Side-by-side\n\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n    };\n}\n\nfn fib_fast(n:u64) -&gt; u64 {\n    let mem : Vec&lt;usize&gt; = vec![0,1];\n    fn inner(x:usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x-1, m);\n            ret = m[x-1]+m[x-2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m)\n    }\n    return inner(n as usize, mem).0 as u64;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#test-it",
+    "href": "B0_dynamic.rjs.html#test-it",
+    "title": "Dynamism",
+    "section": "Test it",
+    "text": "Test it\nfn main() {\n    for i in 0..11 {\n        println!(\"fib({}) = {}, fib_fast({}) = {}\", i, fib(i), i, fib_fast(i));\n    }\n}\n\nIf you want to copy paste, here’s the whole thing which doesn’t gracefully fit on a slide…\n\n\n\nsrc/main.rs\n\n\u0016\u0016fn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n    };\n}\n\n// We \"cheat\" using `usize` to avoid casting.\nfn fib_fast(n: u64) -&gt; u64 {\n    let mem: Vec&lt;usize&gt; = vec![0, 1];\n    fn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n        let ret: usize;\n        if x &gt;= m.len() {\n            (_, m) = inner(x - 1, m);\n            ret = m[x - 1] + m[x - 2];\n            m.push(ret);\n        } else {\n            ret = m[x];\n        }\n        return (ret, m);\n    }\n    return inner(n as usize, mem).0 as u64;\n}\n\nfn main() {\n    for i in 0..11 {\n        println!(\"fib({}) = {}, fib_fast({}) = {}\", i, fib(i), i, fib_fast(i));\n    }\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#output",
+    "href": "B0_dynamic.rjs.html#output",
+    "title": "Dynamism",
+    "section": "Output",
+    "text": "Output\n\nIs this… good?\n\n$ cargo run\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch`\nfib(0) = 0, fib_fast(0) = 0\nfib(1) = 1, fib_fast(1) = 1\nfib(2) = 1, fib_fast(2) = 1\nfib(3) = 2, fib_fast(3) = 2\nfib(4) = 3, fib_fast(4) = 3\nfib(5) = 5, fib_fast(5) = 5\nfib(6) = 8, fib_fast(6) = 8\nfib(7) = 13, fib_fast(7) = 13\nfib(8) = 21, fib_fast(8) = 21\nfib(9) = 34, fib_fast(9) = 34\nfib(10) = 55, fib_fast(10) = 55"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#analyze",
+    "href": "B0_dynamic.rjs.html#analyze",
+    "title": "Dynamism",
+    "section": "Analyze",
+    "text": "Analyze\n\nThere’s many ways to analyze code performance.\nThe problem with Fibonacci is it:\n\nGrows fast\nIs easy\n\nSo we won’t time, we’ll count additions.\n\nOur complexity is the addition complexity.\nAddition is much cheaper than e.g. return, but, we could algorithmically factor out the returns (but not the additions)"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#instrumentation",
+    "href": "B0_dynamic.rjs.html#instrumentation",
+    "title": "Dynamism",
+    "section": "Instrumentation",
+    "text": "Instrumentation\n\nIn my research, vs. measurement, we use instrumentation, additional logging code incorporated to the source that captured during execution.\n\nMore common in security than performance applications.\n\nI will instrument fib and fib_fast to print a line whenever performing an addition.\nWe can then simply count the lines."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#instrument-fib",
+    "href": "B0_dynamic.rjs.html#instrument-fib",
+    "title": "Dynamism",
+    "section": "Instrument fib",
+    "text": "Instrument fib\n\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; fib(n - 1) + fib(n - 2),\n        // Tis I, an empty line\n        // but for this comment!\n        // Verily.\n    };\n}\n\nfn fib(n: u64) -&gt; u64 {\n    return match n {\n        0 =&gt; 0,\n        1 =&gt; 1,\n        n =&gt; {\n            println!(\"slow\");\n            fib(n - 1) + fib(n - 2)\n        },\n    };\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#instrument-inner",
+    "href": "B0_dynamic.rjs.html#instrument-inner",
+    "title": "Dynamism",
+    "section": "Instrument inner",
+    "text": "Instrument inner\n\n\nfn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n    let ret: usize;\n    if x &gt;= m.len() {\n        (_, m) = inner(x - 1, m);\n        // Skibidi\n        ret = m[x - 1] + m[x - 2];\n        m.push(ret);\n    } else {\n        ret = m[x];\n    }\n    return (ret, m);\n}\n\nfn inner(x: usize, mut m: Vec&lt;usize&gt;) -&gt; (usize, Vec&lt;usize&gt;) {\n    let ret: usize;\n    if x &gt;= m.len() {\n        (_, m) = inner(x - 1, m);\n        println!(\"fast\");\n        ret = m[x - 1] + m[x - 2];\n        m.push(ret);\n    } else {\n        ret = m[x];\n    }\n    return (ret, m);\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#testing",
+    "href": "B0_dynamic.rjs.html#testing",
+    "title": "Dynamism",
+    "section": "Testing",
+    "text": "Testing\n\nI additionally configure main to accept a command line \\(n\\) rather than just looping.\nI additionally configure main to accept a fast or slow flag f or s - after the \\(n\\).\nYou can use cargo bench for this, if you like cargo (I don’t)"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#new-main",
+    "href": "B0_dynamic.rjs.html#new-main",
+    "title": "Dynamism",
+    "section": "New main",
+    "text": "New main\nfn main() {\n    let args: Vec&lt;String&gt; = std::env::args().collect();\n    if args.len() &gt; 2 {\n        let n:u64 = args[1].parse().unwrap();\n        let _ = match args[2].chars().next().unwrap() {\n            'f' =&gt; fib_fast(n),\n            's' =&gt; fib(n),\n            _ =&gt; panic!(),\n        };\n    };\n    return;\n}"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#check-it",
+    "href": "B0_dynamic.rjs.html#check-it",
+    "title": "Dynamism",
+    "section": "Check it",
+    "text": "Check it\n\nSimply try out a few values.\nUse wc to count lines.\n\nuser@cd-desk:~/tmp/scratch$ cargo run 2 s | wc\n   Compiling scratch v0.1.0 (/home/user/tmp/scratch)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s\n     Running `target/debug/scratch 2 s`\n      1       1       5\nuser@cd-desk:~/tmp/scratch$ cargo run 2 f | wc\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 2 f`\n      1       1       5\n\nThat hardly seems worth it?"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#it-is",
+    "href": "B0_dynamic.rjs.html#it-is",
+    "title": "Dynamism",
+    "section": "It is",
+    "text": "It is\n$ (cargo run 10 s | wc ; cargo run 10 f | wc) 2&gt;/dev/null\n     88      88     440\n      9       9      45\n$ (cargo run 30 s | wc ; cargo run 30 f | wc) 2&gt;/dev/null\n1346268 1346268 6731340\n     29      29     145"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#another",
+    "href": "B0_dynamic.rjs.html#another",
+    "title": "Dynamism",
+    "section": "Another",
+    "text": "Another\n\nSlow 40 didn’t return before I had to go get lunch.\nI forgot it was running and when I came back:\n\n$ (cargo run 40 s | wc ; cargo run 40 f | wc) 2&gt;/dev/null\n165580140 165580140 827900700\n     39      39     195\n$ echo $((165580140/39))\n4245644\n\nMemoization performed 1 addition for every 4 million performed by the naive approach."
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#timing",
+    "href": "B0_dynamic.rjs.html#timing",
+    "title": "Dynamism",
+    "section": "Timing",
+    "text": "Timing\n\nYou can get timing separation at around 40 as well\n\n$ (time cargo run 40 s ; time cargo run 40 f )\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 40 s`\n\nreal    0m1.041s\nuser    0m1.058s\nsys     0m0.012s\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s\n     Running `target/debug/scratch 40 f`\n\nreal    0m0.043s\nuser    0m0.033s\nsys     0m0.012s\n$ echo $((1041/43))\n24"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#results",
+    "href": "B0_dynamic.rjs.html#results",
+    "title": "Dynamism",
+    "section": "Results",
+    "text": "Results\n\n~24x speed-up, even with the memory costs and constant start-up time.\n\nBy the way - how much memory is used?\n\nMake sure you comment out the prints or they will dominate the time cost.\n\nPrinting is much harder than adding!"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#embed",
+    "href": "B0_dynamic.rjs.html#embed",
+    "title": "Dynamism",
+    "section": "Embed",
+    "text": "Embed"
+  },
+  {
+    "objectID": "B0_dynamic.rjs.html#today-1",
+    "href": "B0_dynamic.rjs.html#today-1",
+    "title": "Dynamism",
+    "section": "Today",
+    "text": "Today\n\nDynamic Programming\nMemoization\n\nCacheing\n\nMore on Graphs"
   },
   {
     "objectID": "A1_dag.html",
@@ -12466,6 +13292,56 @@
     "text": "Preamble\nThis builds off the DAG lab.\n\nImplement graph algorithms.\n\nBasically, after completing the lab, implement functions to compute the height and depth of nodes.\nAs a bonus problem, compute the height and depth of the entire graph (optional).\n\n\nReview: The BS CS\n\nNew for 2025, the BS CS has a lot of classes in it (16, up from 10)\nThey form a DAG (so does the BA thanks to CS-351).\nInstead of advising separately from teaching, let’s just use advising as the application domain.\nHere is a dot diagram of a simplified version of the degree.\n\nBasically, I picked the most common class within any possible distribution.\nSo “Any Software Class” becomes CS-262: Web Development.\n\n\n\n\n\n\n\n\n\nCoursePrerequisites\n\n\nCS 151:\\n Intro to Programming in Python\n\nCS 151:\n Intro to Programming in Python\n\n\n\nCS 280:\\n Human-Computer Int.\n\nCS 280:\n Human-Computer Int.\n\n\n\nCS 151:\\n Intro to Programming in Python-&gt;CS 280:\\n Human-Computer Int.\n\n\n\n\n\nCS 152:\\n Data Structures\n\nCS 152:\n Data Structures\n\n\n\nCS 151:\\n Intro to Programming in Python-&gt;CS 152:\\n Data Structures\n\n\n\n\n\nDATA 351:\\n Data Man. in SQL\n\nDATA 351:\n Data Man. in SQL\n\n\n\nCS 151:\\n Intro to Programming in Python-&gt;DATA 351:\\n Data Man. in SQL\n\n\n\n\n\nCS 262:\\n Web Development\n\nCS 262:\n Web Development\n\n\n\nCS 152:\\n Data Structures-&gt;CS 262:\\n Web Development\n\n\n\n\n\nCS 271:\\n Systems Programming\n\nCS 271:\n Systems Programming\n\n\n\nCS 152:\\n Data Structures-&gt;CS 271:\\n Systems Programming\n\n\n\n\n\nCS 351:\\n Analysis of Algorithms\n\nCS 351:\n Analysis of Algorithms\n\n\n\nCS 152:\\n Data Structures-&gt;CS 351:\\n Analysis of Algorithms\n\n\n\n\n\nCS 371:\\n Adv. Systems Computing\n\nCS 371:\n Adv. Systems Computing\n\n\n\nCS 271:\\n Systems Programming-&gt;CS 371:\\n Adv. Systems Computing\n\n\n\n\n\nCS 480:\\n Project Development\n\nCS 480:\n Project Development\n\n\n\nCS 351:\\n Analysis of Algorithms-&gt;CS 480:\\n Project Development\n\n\n\n\n\nCS 371:\\n Adv. Systems Computing-&gt;CS 480:\\n Project Development\n\n\n\n\n\nCS 481:\\n Project Deployment\n\nCS 481:\n Project Deployment\n\n\n\nCS 480:\\n Project Development-&gt;CS 481:\\n Project Deployment\n\n\n\n\n\nMATH 150:\\n Differential Calculus with Precalculus\n\nMATH 150:\n Differential Calculus with Precalculus\n\n\n\nMATH 251W:\\n Fndns Adv Math\n\nMATH 251W:\n Fndns Adv Math\n\n\n\nMATH 150:\\n Differential Calculus with Precalculus-&gt;MATH 251W:\\n Fndns Adv Math\n\n\n\n\n\nMATH 280:\\n Math for Data Sci.\n\nMATH 280:\n Math for Data Sci.\n\n\n\nMATH 150:\\n Differential Calculus with Precalculus-&gt;MATH 280:\\n Math for Data Sci.\n\n\n\n\n\nPHYS 221:\\n Intro Physics 1\n\nPHYS 221:\n Intro Physics 1\n\n\n\nMATH 150:\\n Differential Calculus with Precalculus-&gt;PHYS 221:\\n Intro Physics 1\n\n\n\n\n\nMATH 251W:\\n Fndns Adv Math-&gt;CS 351:\\n Analysis of Algorithms\n\n\n\n\n\nMATH 352:\\n Linear Algebra\n\nMATH 352:\n Linear Algebra\n\n\n\nMATH 251W:\\n Fndns Adv Math-&gt;MATH 352:\\n Linear Algebra\n\n\n\n\n\nPHYS 222:\\n Intro Physics 2\n\nPHYS 222:\n Intro Physics 2\n\n\n\nPHYS 221:\\n Intro Physics 1-&gt;PHYS 222:\\n Intro Physics 2\n\n\n\n\n\n\n\n\n\n\n\nYou can see the code that made that in the source, but I also formulated it as concisely as I could manage here:\n\nC151:C280\nC151:C152\nC151:D351\nC152:C271\nC152:C351\nC152:C262\nC271:C371\nC351:C480\nC371:C480\nC480:C481\nM150:M251\nM150:M280\nM150:P221\nM251:C351\nM251:M352\nP221:P222\n\n\nReview: Two Representations\n\nDo something like this.\n\n\n\nsrc/lib.rs\n\n#[derive(Debug)]\nstruct Node {\n    data: String,\n    next: Vector&lt;String&gt;,\n}\n\n\nYou will probably at some point want to use a dictionary or something a lot like that on this task.\nThe use of std::collections::HashMap should be basically familiar, and some helpful combinations of methods can be found on this page.\n\n\u0016\u0016\u0016Struct HashMap\n\nYou certainly do not have to use a HashMap, and I had no intention of doing so until I realized I was lazy.\n\n\n\nAn Aside\n\nYou can probably improve your quality of life with a type alias.\n\ntype Graph = std::collections::HashMap&lt;String, Node&gt;;\n\n\nYour task\n\nLoad the prerequisite edges into Rust.\n\nUse std::io:stdin::lock().lines()\nI terminated on an empty line.\n\nBuild a DAG out of nodes.\n\nBasically, conditionally add a node.\n\nLook at .or_insert_with(|| &lt;thing you want to insert);\n\n\n\nCompute the height and depth of two non-trivial nodes, I choose CS 152 and CS 371.\n\nI stored the inputs in data.txt.\n\n\n\n$ cargo run -- &lt; data.txt\n   Compiling dag v0.1.0 (/home/user/tmp/dag)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s\n     Running `target/debug/dag`\n[src/main.rs:61:13] depth(String::from(\"C152\"), &graph) = 1\n[src/main.rs:62:13] depth(String::from(\"C371\"), &graph) = 3\n[src/main.rs:63:13] height(String::from(\"C152\"), &graph) = 4\n[src/main.rs:64:13] height(String::from(\"C371\"), &graph) = 2",
     "crumbs": [
       "Analysis"
+    ]
+  },
+  {
+    "objectID": "B2_lcs.html",
+    "href": "B2_lcs.html",
+    "title": "LCS",
+    "section": "",
+    "text": "Implement Longest Common Subsequence over strings in Rust.\nUse dynamic programming.\n\nNow in two dimensions.\n\nLCS is not to be confused with LCS.\n\n\n\n\nAs far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)\n\nA Merkle tree or hash tree\n\nWas scheduled for this week, delayed by this lecture\n\nA solution to the “longest common subsequence” (LCS) problem, which was dramatically harder in Rust than I thought.\n\n\n\nBecause [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.\n\n\nFor the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming.\n\n\n\n\n\nI am frequently confused with international superstar and great driver Vin Diesel due to:\n\nMy behavior, which is not at all problematic or a cause for concern, while commuting to Willamette on I-5, and\nThe importance I place on family, for which I would go so far as to say I could deserve major accolades.\n\nUnsurprisingly, Vin Diesel and I share a relatively long common subsequence.\n\n$ cargo run \"calvin deu\" \"vin diesel\"\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s\n     Running `target/debug/scratch 'calvin deu' 'vin diesel'`\n[src/main.rs:48:5] lcs(&ss.next().unwrap(), &ss.next().unwrap()) = \"vin de\"\n\n\n\n\nCalculating these is fairly simple.\n\n\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nv\n\n\n\n\n\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\ns\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\nl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStart at top right with a zero\nCompare the row letter and column letter.\nIf they differ:\n\nPick the highest number above or left.\nPoint an arrow that direction.\nPlace that arrow in the box.\n\nIf they are the same.\n\nAdd one two the letter diagonally above and left.\nPlace an arrow in that direction.\n\nI don’t use arrow, they look messing.\n\nIf you want arrows, try Wikipedia with a bioinformatics worked example.\n\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\nv\n0\n0\n0\n0\n1\n1\n1\n1\n1\n1\n1\n\n\ni\n0\n0\n0\n0\n1\n2\n2\n2\n2\n2\n2\n\n\nn\n0\n0\n0\n0\n1\n2\n3\n3\n3\n3\n3\n\n\n\n0\n0\n0\n0\n1\n2\n3\n4\n4\n4\n4\n\n\nd\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ni\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ns\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\nl\n0\n0\n0\n1\n1\n2\n3\n4\n5\n6\n6\n\n\n\n\n\n\n\nCollect all letters along diagonals/incrementations.\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nv\n\n\n\n\nx\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\nx\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\nx\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\n\n\n\nx\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\nx\n\n\n\ns\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\nl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsrc/main.rs\n\nfn lcs(s1: &str, s2: &str) -&gt; String {\n    todo!();\n}\n\nfn main() {\n    let mut ss = std::env::args();\n    let _ = &ss.next();\n    dbg!(lcs(&ss.next().unwrap(), &ss.next().unwrap()));\n    return;\n}",
+    "crumbs": [
+      "LCS"
+    ]
+  },
+  {
+    "objectID": "B2_lcs.html#recall",
+    "href": "B2_lcs.html#recall",
+    "title": "LCS",
+    "section": "",
+    "text": "As far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)\n\nA Merkle tree or hash tree\n\nWas scheduled for this week, delayed by this lecture\n\nA solution to the “longest common subsequence” (LCS) problem, which was dramatically harder in Rust than I thought.\n\n\n\nBecause [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.\n\n\nFor the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming.",
+    "crumbs": [
+      "LCS"
+    ]
+  },
+  {
+    "objectID": "B2_lcs.html#example",
+    "href": "B2_lcs.html#example",
+    "title": "LCS",
+    "section": "",
+    "text": "I am frequently confused with international superstar and great driver Vin Diesel due to:\n\nMy behavior, which is not at all problematic or a cause for concern, while commuting to Willamette on I-5, and\nThe importance I place on family, for which I would go so far as to say I could deserve major accolades.\n\nUnsurprisingly, Vin Diesel and I share a relatively long common subsequence.\n\n$ cargo run \"calvin deu\" \"vin diesel\"\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s\n     Running `target/debug/scratch 'calvin deu' 'vin diesel'`\n[src/main.rs:48:5] lcs(&ss.next().unwrap(), &ss.next().unwrap()) = \"vin de\"",
+    "crumbs": [
+      "LCS"
+    ]
+  },
+  {
+    "objectID": "B2_lcs.html#overview",
+    "href": "B2_lcs.html#overview",
+    "title": "LCS",
+    "section": "",
+    "text": "Calculating these is fairly simple.\n\n\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nv\n\n\n\n\n\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\ns\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\nl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStart at top right with a zero\nCompare the row letter and column letter.\nIf they differ:\n\nPick the highest number above or left.\nPoint an arrow that direction.\nPlace that arrow in the box.\n\nIf they are the same.\n\nAdd one two the letter diagonally above and left.\nPlace an arrow in that direction.\n\nI don’t use arrow, they look messing.\n\nIf you want arrows, try Wikipedia with a bioinformatics worked example.\n\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\nv\n0\n0\n0\n0\n1\n1\n1\n1\n1\n1\n1\n\n\ni\n0\n0\n0\n0\n1\n2\n2\n2\n2\n2\n2\n\n\nn\n0\n0\n0\n0\n1\n2\n3\n3\n3\n3\n3\n\n\n\n0\n0\n0\n0\n1\n2\n3\n4\n4\n4\n4\n\n\nd\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ni\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ns\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\nl\n0\n0\n0\n1\n1\n2\n3\n4\n5\n6\n6\n\n\n\n\n\n\n\nCollect all letters along diagonals/incrementations.\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nv\n\n\n\n\nx\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\nx\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\nx\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\n\n\n\nx\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\nx\n\n\n\ns\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\nl",
+    "crumbs": [
+      "LCS"
+    ]
+  },
+  {
+    "objectID": "B2_lcs.html#template",
+    "href": "B2_lcs.html#template",
+    "title": "LCS",
+    "section": "",
+    "text": "src/main.rs\n\nfn lcs(s1: &str, s2: &str) -&gt; String {\n    todo!();\n}\n\nfn main() {\n    let mut ss = std::env::args();\n    let _ = &ss.next();\n    dbg!(lcs(&ss.next().unwrap(), &ss.next().unwrap()));\n    return;\n}",
+    "crumbs": [
+      "LCS"
     ]
   }
 ]

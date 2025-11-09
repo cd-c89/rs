@@ -1,0 +1,654 @@
+---
+title: Dynamism
+---
+
+## Announcements
+
+- **Huge News** Guest Speaker Wednesday.
+- Jimmy Ostler, person who actually likes Rust and gotten paid to write it
+- Regard attendance as mandatory. I will ask.
+
+## Today
+
+- Dynamic Programming
+- Memoization
+    - Cacheing
+- More on Graphs
+
+# Background
+
+## Motivating Problem
+
+- We are in a *systems* programming class.
+- Vs. *software*, computer *systems* expand the functionality of computing hardware, rather directly solving an end user problem.
+    - A word processor or spreadsheet is software.
+    - It saves spreadsheets to a file *system*
+        - Or perhaps, now, to a cloud service
+
+## Editorial
+
+- A comprehensive undergraduate computer science program covers:
+    - Operating system (CS-371 Sp26)
+        - To understand Linux
+    - Web-server or other network service (former CS-271 Sp24)
+        - To understand NGINX
+    - Compiler (slated CS-371 Sp27)
+        - To understand `gcc`
+    
+## "Baby" Steps
+
+- Python linked list to OS is a big step.
+- Instead we do "niche" systems:
+    - Blockchain (CS-276 Sp25)
+        - To understand Bitcoin
+    - Source Code Management or "SCM" (CS-271 Sp26)
+        - Also called VCS (version control system)
+        - To understand `git`
+    
+## `git`
+
+> [Linus Torvalds: Known more for Git than Linux?](https://www.youtube.com/watch?v=0wLidyXzFk8)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0wLidyXzFk8?si=QXPd7ycbApz0gPCx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## `git`
+
+> [Just look at the very first git commit of git itself. It is small, so it is possible to understand it in full. Yet, it is capable enough to be used as a version control for git itself.](https://www.reddit.com/r/compsci/comments/1cvrxwt/comment/l5a77sj/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+
+- There are easier things to find, but not by much, it is here:
+    - [https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290](https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290)
+    
+## `git`
+
+- As far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)
+    - A Merkle tree or hash tree
+        - Was scheduled for this week, delayed by this lecture
+    - A solution to the "longest common subsequence" (LCS) problem, which was dramatically harder in Rust than I thought.
+
+## Quoth Wikipedia
+
+> [Because [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.](https://en.wikipedia.org/wiki/Longest_common_subsequence)
+
+> For the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming. 
+
+# Dynamic Programming
+
+## Definition
+
+- Wikipedia
+
+> simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner.
+
+## Defintion
+
+- *Dynamic Programming* (1957) by Richard Bellman
+
+> The purpose of this work is to provide an introduction to the mathe-
+matical theory of multi-stage decision processes. Since these constitute
+a somewhat formidable set of terms we have coined the term 'dynamic
+programming' to describe the subject matter.
+
+## Textbook
+
+- I am in love with this book, available free online.
+- More for applied math people than for us (it uses floating point numbers - ew!)
+- [Dynamic Programming](https://dp.quantecon.org/) by Sargent and Stachurski
+- I wanted to teach this next semester (vs. Understanding AI) but it has 1 billion pre-reqs lol.
+
+## Minimal example
+
+- What is a:
+    - Complicated problem
+    - That can be broken down into simpler sub-problems
+    - In a recursive manner?
+- Canonical example: Fibonacci
+
+## A Note
+
+- Vs. ENG, ECON, the *de facto* CS definition is more restrictive.
+
+> If a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called "divide and conquer" instead. This is why merge sort and quick sort are not classified as dynamic programming problems. 
+
+- This basically per [CLRS](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/), the only CS text that matters (according to me)
+
+
+## Non-overlapping
+
+<center>
+<a title="VineetKumar at English Wikipedia, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Merge_sort_algorithm_diagram.svg"><img style="filter:invert(.9);" width="50%" alt="A recursive merge sort algorithm used to sort an array of 7 integer values. These are the steps a human would take to emulate merge sort (top-down)." src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Merge_sort_algorithm_diagram.svg/512px-Merge_sort_algorithm_diagram.svg.png?20180709142035"></a>
+</center>
+
+## Overlapping
+
+<center>
+<a title="en:User:Dcoatzee, traced by User:Stannered, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Fibonacci_dynamic_programming.svg"><img  style="filter:invert(.9);" height="512px" alt="Fibonacci dynamic programming" src="https://upload.wikimedia.org/wikipedia/commons/0/06/Fibonacci_dynamic_programming.svg"></a>
+</center>
+
+## Review
+
+- If Tree (e.g. can't be a DAG)
+    - "divide and conquer"
+- Else
+    - "dynamic programming"
+    
+## Aside
+
+- Dynamic programming in the  hardest and most important post-2020 problem
+- [Algorithm for optimized mRNA design improves stability and immunogenicity (Nature)](https://www.nature.com/articles/s41586-023-06127-z)
+    - "Next, we describe how to implement the **dynamic programming** algorithm behind lattice parsing..."
+
+- Editorial: Post-2020, biotechnology is sole US industry strictly more advanced than all non-US competitors.
+
+# Toy Example
+
+## Fibonacci
+
+- In $\LaTeX$
+
+$$
+F_0 = 0
+F_1 = 1
+F_n = F_{n-1} + F_{n-2}
+$$
+
+## Fibonacci
+
+- In Rust
+
+```rs
+fn fib(n:u64) -> u64 {
+    return match n {
+        0 => 0,
+        1 => 1,
+        n => fib(n-1) + fib(n-2),
+    }
+}
+```
+
+## But wait!
+
+- What is the time complexity of `fib`
+$$
+\mathcal{O}(n) = \mathcal{O}(n-1) + \mathcal{O}(n-2)
+$$
+- Wait... isn't that... really bad?
+    - (Yes, it's $\mathcal{O}(2^n)$, basically nightmare fuel)
+    - (The Fibonacci sequence computes its own *naive* complexity)
+
+## Memoize
+
+> [In computing, memoization or memoisation is an optimization technique used primarily to speed up computer programs. It works by storing the results of expensive calls to pure functions, so that these results can be returned quickly should the same inputs occur again. It is a type of caching, normally implemented using a hash table, and a typical example of a space–time tradeoff, where the runtime of a program is reduced by increasing its memory usage.](https://en.wikipedia.org/wiki/Memoization)
+
+## Do we memoize?
+
+- Apparently there's a competing formulation called tabulation.
+- I only learned memoization (by name) and will be teaching that.
+- I'd used tabulation without knowing it until I read the definition (for prime generation)
+- I don't know if this is authoritative, but [more](https://www.geeksforgeeks.org/dsa/tabulation-vs-memoization/)...
+- The homework will not require a specific implementation.
+
+## Ingredients
+
+- A problem with overlapping recursive subproblems.
+- An array (er, `Vec`, and definitely not a HashMap
+    - HashMaps are for cowards, such as myself last week doing graph theory.
+
+## Some considerations...
+
+- We need to index into an <s>array</s> `Vec` so we'll use `usize`
+    - Review: why are indices `usize`?
+- To match the type of `fib` we'll use a helper functions, which we wrap.
+- It's Rust, so to avoid thinking about ownership (hard, tedious, complicated)...
+- Simply pass everything as arguments and return them back.
+    
+## Step 0
+
+- Start here.
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    // What goes here?
+}
+```
+
+## Step 1
+
+- Make a `Vec` and cast `n` to `usize` 
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    n as usize;
+}
+```
+
+## Step 2 
+
+- Helper function
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize) -> usize) {
+        // What goes here?
+    }
+    return inner(n as usize) as u64;
+}
+```
+
+
+## Step 3
+
+- Pass everything, which is the memoizing <s>array</s> `Vec`
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        // What goes here?
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+```
+
+## Step 4
+
+- Dynamically check if the `Vec` contains the solution.
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        let ret: usize;
+        if x >= m.len() {
+            // save this for latter!
+        } else {
+            ret = m[x];
+        }
+        return (ret, m)
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+```
+
+## Step 5
+
+- If not, recurse.
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        let ret: usize;
+        if x >= m.len() {
+            (_, m) = inner(x-1, m);
+            ret = m[x-1]+m[x-2];
+        } else {
+            ret = m[x];
+        }
+        return (ret, m)
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+```
+
+## Step 6
+
+- Don't forget to memoize the result!
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        let ret: usize;
+        if x >= m.len() {
+            (_, m) = inner(x-1, m);
+            ret = m[x-1]+m[x-2];
+            m.push(ret);
+        } else {
+            ret = m[x];
+        }
+        return (ret, m)
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+```
+
+## Side-by-side
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{.rs}
+fn fib(n: u64) -> u64 {
+    return match n {
+        0 => 0,
+        1 => 1,
+        n => fib(n - 1) + fib(n - 2),
+    };
+}
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{.rs}
+fn fib_fast(n:u64) -> u64 {
+    let mem : Vec<usize> = vec![0,1];
+    fn inner(x:usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        let ret: usize;
+        if x >= m.len() {
+            (_, m) = inner(x-1, m);
+            ret = m[x-1]+m[x-2];
+            m.push(ret);
+        } else {
+            ret = m[x];
+        }
+        return (ret, m)
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+```
+
+:::
+
+::::
+
+## Test it
+
+```{.rs}
+fn main() {
+    for i in 0..11 {
+        println!("fib({}) = {}, fib_fast({}) = {}", i, fib(i), i, fib_fast(i));
+    }
+}
+```
+- If you want to copy paste, here's the whole thing which doesn't gracefully fit on a slide...
+```{.rs filename="src/main.rs"}
+fn fib(n: u64) -> u64 {
+    return match n {
+        0 => 0,
+        1 => 1,
+        n => fib(n - 1) + fib(n - 2),
+    };
+}
+
+// We "cheat" using `usize` to avoid casting.
+fn fib_fast(n: u64) -> u64 {
+    let mem: Vec<usize> = vec![0, 1];
+    fn inner(x: usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+        let ret: usize;
+        if x >= m.len() {
+            (_, m) = inner(x - 1, m);
+            ret = m[x - 1] + m[x - 2];
+            m.push(ret);
+        } else {
+            ret = m[x];
+        }
+        return (ret, m);
+    }
+    return inner(n as usize, mem).0 as u64;
+}
+
+fn main() {
+    for i in 0..11 {
+        println!("fib({}) = {}, fib_fast({}) = {}", i, fib(i), i, fib_fast(i));
+    }
+}
+```
+
+## Output
+
+- Is this... good?
+
+```sh
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch`
+fib(0) = 0, fib_fast(0) = 0
+fib(1) = 1, fib_fast(1) = 1
+fib(2) = 1, fib_fast(2) = 1
+fib(3) = 2, fib_fast(3) = 2
+fib(4) = 3, fib_fast(4) = 3
+fib(5) = 5, fib_fast(5) = 5
+fib(6) = 8, fib_fast(6) = 8
+fib(7) = 13, fib_fast(7) = 13
+fib(8) = 21, fib_fast(8) = 21
+fib(9) = 34, fib_fast(9) = 34
+fib(10) = 55, fib_fast(10) = 55
+```
+
+## Analyze
+
+- There's many ways to analyze code performance.
+- The problem with Fibonacci is it:
+    - Grows fast
+    - Is easy
+- So we won't time, we'll count additions.
+    - Our complexity is the addition complexity.
+    - Addition is much cheaper than e.g. return, but, we could algorithmically factor out the returns (but not the additions)
+   
+## Instrumentation
+
+- In my research, vs. measurement, we use *instrumentation*, additional logging code incorporated to the source that captured during execution.
+    - More common in security than performance applications.
+- I will *instrument* `fib` and `fib_fast` to print a line whenever performing an addition.
+- We can then simply count the lines.
+    
+## Instrument `fib`
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{.rs}
+fn fib(n: u64) -> u64 {
+    return match n {
+        0 => 0,
+        1 => 1,
+        n => fib(n - 1) + fib(n - 2),
+        // Tis I, an empty line
+        // but for this comment!
+        // Verily.
+    };
+}
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{.rs}
+fn fib(n: u64) -> u64 {
+    return match n {
+        0 => 0,
+        1 => 1,
+        n => {
+            println!("slow");
+            fib(n - 1) + fib(n - 2)
+        },
+    };
+}
+```
+
+:::
+
+::::
+
+## Instrument `inner`
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{.rs}
+fn inner(x: usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+    let ret: usize;
+    if x >= m.len() {
+        (_, m) = inner(x - 1, m);
+        // Skibidi
+        ret = m[x - 1] + m[x - 2];
+        m.push(ret);
+    } else {
+        ret = m[x];
+    }
+    return (ret, m);
+}
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{.rs}
+fn inner(x: usize, mut m: Vec<usize>) -> (usize, Vec<usize>) {
+    let ret: usize;
+    if x >= m.len() {
+        (_, m) = inner(x - 1, m);
+        println!("fast");
+        ret = m[x - 1] + m[x - 2];
+        m.push(ret);
+    } else {
+        ret = m[x];
+    }
+    return (ret, m);
+}
+```
+
+:::
+
+::::
+
+## Testing
+
+- I additionally configure `main` to accept a command line $n$ rather than just looping.
+- I additionally configure `main` to accept a fast or slow flag `f` or `s` - after the $n$.
+- You can use `cargo bench` for this, if you like `cargo` (I don't)
+
+## New `main`
+
+```{.rs}
+fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() > 2 {
+        let n:u64 = args[1].parse().unwrap();
+        let _ = match args[2].chars().next().unwrap() {
+            'f' => fib_fast(n),
+            's' => fib(n),
+            _ => panic!(),
+        };
+    };
+    return;
+}
+```
+
+## Check it
+
+- Simply try out a few values.
+- Use `wc` to count lines.
+
+```{.sh}
+user@cd-desk:~/tmp/scratch$ cargo run 2 s | wc
+   Compiling scratch v0.1.0 (/home/user/tmp/scratch)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+     Running `target/debug/scratch 2 s`
+      1       1       5
+user@cd-desk:~/tmp/scratch$ cargo run 2 f | wc
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch 2 f`
+      1       1       5
+```
+
+- That hardly seems worth it?
+
+## It is
+
+```sh
+$ (cargo run 10 s | wc ; cargo run 10 f | wc) 2>/dev/null
+     88      88     440
+      9       9      45
+$ (cargo run 30 s | wc ; cargo run 30 f | wc) 2>/dev/null
+1346268 1346268 6731340
+     29      29     145
+```
+
+## Another
+
+- Slow 40 didn't return before I had to go get lunch.
+- I forgot it was running and when I came back:
+```sh
+$ (cargo run 40 s | wc ; cargo run 40 f | wc) 2>/dev/null
+165580140 165580140 827900700
+     39      39     195
+$ echo $((165580140/39))
+4245644
+```
+- Memoization performed 1 addition for every *4 million* performed by the naive approach.
+
+## Timing
+
+- You can get timing separation at around 40 as well
+
+```{.sh}
+$ (time cargo run 40 s ; time cargo run 40 f )
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch 40 s`
+
+real    0m1.041s
+user    0m1.058s
+sys     0m0.012s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/scratch 40 f`
+
+real    0m0.043s
+user    0m0.033s
+sys     0m0.012s
+$ echo $((1041/43))
+24
+```
+
+## Results
+
+- ~24x speed-up, even with the memory costs and constant start-up time.
+    - By the way - how much memory is used?
+- Make sure you comment out the prints or they will dominate the time cost.
+    - Printing is much harder than adding!
+
+## Embed
+
+<style>
+/* https://github.com/lonekorean/gist-syntax-themes */
+@import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+  font: 16px 'Open Sans', sans-serif;
+}
+body .gist .gist-file {
+  border-color: #555 #555 #444
+}
+body .gist .gist-data {
+  border-color: #555
+}
+body .gist .gist-meta {
+  color: #ffffff;
+  background: #373737; 
+}
+body .gist .gist-meta a {
+  color: #ffffff
+}
+body .gist .gist-data .pl-s .pl-s1 {
+  color: #a5c261
+}
+</style>
+<script src="your-gist-embed"></script>
+<script src="https://gist.github.com/cd-public/be1eb1297832bde71dc276990fb18ee8.js"></script>
+
+## Today
+
+- [x] Dynamic Programming
+- [x] Memoization
+    - [x] Cacheing
+- [x] More on Graphs

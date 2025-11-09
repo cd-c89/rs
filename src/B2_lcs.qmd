@@ -1,0 +1,116 @@
+---
+title: "LCS"
+format: html
+---
+
+# Preamble
+
+- Implement **L**ongest **C**ommon **S**ubsequence over strings in Rust.
+- Use dynamic programming.
+    - Now in two dimensions.
+- [LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence) is not to be confused with [LCS](https://en.wikipedia.org/wiki/Longest_common_substring).
+
+## Recall
+
+- As far as I can tell, to make a minimal SCM we need pretty much two more things (since we have SHA and Ed25519)
+    - A Merkle tree or hash tree
+        - Was scheduled for this week, delayed by this lecture
+    - A solution to the "longest common subsequence" (LCS) problem, which was dramatically harder in Rust than I thought.
+
+> [Because [LCS] is polynomial and has an efficient algorithm to solve it, it is employed to compare data and merge changes to files in programs such as the diff utility and revision control systems such as Git.](https://en.wikipedia.org/wiki/Longest_common_subsequence)
+
+> For the general case of an arbitrary number of input sequences, the problem is NP-hard. When the number of sequences is constant, the problem is solvable in polynomial time by dynamic programming. 
+
+## Example
+
+- I am frequently confused with international superstar and great driver Vin Diesel due to:
+    - My behavior, which is not at all problematic or a cause for concern, while commuting to Willamette on I-5, and
+    - The importance I place on family, for which I would go so far as to say I could deserve major accolades.
+- Unsurprisingly, Vin Diesel and I share a relatively long common subsequence.
+```sh
+$ cargo run "calvin deu" "vin diesel"
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/scratch 'calvin deu' 'vin diesel'`
+[src/main.rs:48:5] lcs(&ss.next().unwrap(), &ss.next().unwrap()) = "vin de"
+```
+
+## Overview
+
+- Calculating these is fairly simple.
+
+### Create a table
+
+|   |   | c | a | l | v | i | n |   | d | e | u |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| v |   |   |   |   |   |   |   |   |   |   |   |
+| i |   |   |   |   |   |   |   |   |   |   |   |
+| n |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| d |   |   |   |   |   |   |   |   |   |   |   |
+| i |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   |   |   |
+| s |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   |   |   |
+| l |   |   |   |   |   |   |   |   |   |   |   |
+
+### Compare
+
+- Start at top right with a zero
+- Compare the row letter and column letter.
+- If they differ:
+    - Pick the highest number above or left.
+    - Point an arrow that direction.
+    - Place that arrow in the box.
+- If they are the same.
+    - Add one two the letter diagonally above and left.
+    - Place an arrow in that direction.
+- I don't use arrow, they look messing.
+    - If you want arrows, try Wikipedia with a [bioinformatics worked example](https://en.wikipedia.org/wiki/Longest_common_subsequence#Worked_example).
+
+| | | c | a | l | v | i | n |   | d | e | u |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| v | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| i | 0 | 0 | 0 | 0 | 1 | 2 | 2 | 2 | 2 | 2 | 2 |
+| n | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 3 | 3 | 3 | 3 |
+|   | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 4 | 4 | 4 |
+| d | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 5 | 5 |
+| i | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 5 | 5 |
+| e | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| s | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| e | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| l | 0 | 0 | 0 | 1 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+
+### Reconstruct
+
+- Collect all letters along diagonals/incrementations.
+
+|   |   | c | a | l | v | i | n |   | d | e | u |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| v |   |   |   |   | x |   |   |   |   |   |   |
+| i |   |   |   |   |   | x |   |   |   |   |   |
+| n |   |   |   |   |   |   | x |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| d |   |   |   |   |   |   |   |   | x |   |   |
+| i |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   | x |   |
+| s |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   |   |   |
+| l |   |   |   |   |   |   |   |   |   |   |   |
+
+## Template
+
+```{.rs filename="src/main.rs"}
+fn lcs(s1: &str, s2: &str) -> String {
+    todo!();
+}
+
+fn main() {
+    let mut ss = std::env::args();
+    let _ = &ss.next();
+    dbg!(lcs(&ss.next().unwrap(), &ss.next().unwrap()));
+    return;
+}
+```
