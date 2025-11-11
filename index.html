@@ -490,9 +490,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;"><a href="A1_dag.md">DAG</a></td>
 <td style="text-align: left;"><a href="A2_analysis.md">Analysis</a></td>
 </tr>
+<tr class="even">
+<td style="text-align: center;">0xB</td>
+<td style="text-align: left;">11/10</td>
+<td style="text-align: left;"><a href="./B0_dynamic.html">Dynamism</a></td>
+<td style="text-align: left;">Guest</td>
+<td style="text-align: left;"><a href="./B2_lcs.html">LCS</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0xC</td>
+<td style="text-align: left;">11/17</td>
+<td style="text-align: left;">Merkle</td>
+<td style="text-align: left;">diff</td>
+<td style="text-align: left;">patch</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0xD</td>
+<td style="text-align: left;">11/24</td>
+<td style="text-align: left;">VCS</td>
+<td style="text-align: left;"><code>None</code></td>
+<td style="text-align: left;"><code>None</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0xE</td>
+<td style="text-align: left;">12/01</td>
+<td style="text-align: left;">Architecture</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">VCS.rs</td>
+</tr>
 </tbody>
 </table>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD |0xB|11/10|<a href="./B0_dynamic.html">Dynamism</a>|Guest|<a href="./B2_lcs.html">LCS</a>| |0xC|11/17|Merkle|diff|patch| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 --> |0xD|11/24|VCS|<code>None</code>|<code>None</code>| |0xE|12/01|Architecture||VCS.rs| ======= |0xB|11/10|Merkle|Rust L’s|| |0xC|11/17|VCS|| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 --> |0xD|11/24|Spectre|<code>None</code>|<code>None</code>| |0xE|12/01|Meltdown|Hypers|VCS.rs| &gt;&gt;&gt;&gt;&gt;&gt;&gt; e0fce2508a04a0987e23c1aad91671becfe6ade5</p>
 <!--
 Think I need string edit distance or patches somewhere. 
 
@@ -1025,27 +1052,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-42"><a href="#cb1-42"></a>|0x8|10/20|<span class="co">[</span><span class="ot">EdDSA</span><span class="co">](80_eddsa.qmd)</span>|<span class="co">[</span><span class="ot">Python</span><span class="co">](81_python.qmd)</span>|<span class="co">[</span><span class="ot">Ed25519</span><span class="co">](82_ed25519.md)</span>|</span>
 <span id="cb1-43"><a href="#cb1-43"></a>|0x9|10/27|<span class="co">[</span><span class="ot">Stack</span><span class="co">](90_stack.qmd)</span>|<span class="co">[</span><span class="ot">Box</span><span class="co">](91_box.md)</span>|<span class="co">[</span><span class="ot">Traits</span><span class="co">](92_traits.md)</span>|</span>
 <span id="cb1-44"><a href="#cb1-44"></a>|0xA|11/03|<span class="co">[</span><span class="ot">Graphs</span><span class="co">](A0_graph.qmd)</span>|<span class="co">[</span><span class="ot">DAG</span><span class="co">](A1_dag.md)</span>|<span class="co">[</span><span class="ot">Analysis</span><span class="co">](A2_analysis.md)</span>|</span>
-<span id="cb1-45"><a href="#cb1-45"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-<span id="cb1-46"><a href="#cb1-46"></a>|0xB|11/10|<span class="co">[</span><span class="ot">Dynamism</span><span class="co">](B0_dynamic.qmd)</span>|Guest|<span class="co">[</span><span class="ot">LCS</span><span class="co">](B2_lcs.qmd)</span>|</span>
-<span id="cb1-47"><a href="#cb1-47"></a>|0xC|11/17|Merkle|diff|patch| <span class="co">&lt;!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 --&gt;</span></span>
-<span id="cb1-48"><a href="#cb1-48"></a>|0xD|11/24|VCS|<span class="in">`None`</span>|<span class="in">`None`</span>|</span>
-<span id="cb1-49"><a href="#cb1-49"></a>|0xE|12/01|Architecture||VCS.rs|</span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="fu">=======</span></span>
-<span id="cb1-51"><a href="#cb1-51"></a>|0xB|11/10|Merkle|Rust L's||</span>
-<span id="cb1-52"><a href="#cb1-52"></a>|0xC|11/17|VCS|| <span class="co">&lt;!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 --&gt;</span></span>
-<span id="cb1-53"><a href="#cb1-53"></a>|0xD|11/24|Spectre|<span class="in">`None`</span>|<span class="in">`None`</span>|</span>
-<span id="cb1-54"><a href="#cb1-54"></a>|0xE|12/01|Meltdown|Hypers|VCS.rs|</span>
-<span id="cb1-55"><a href="#cb1-55"></a><span class="at">&gt;&gt;&gt;&gt;&gt;&gt;&gt; e0fce2508a04a0987e23c1aad91671becfe6ade5</span></span>
-<span id="cb1-56"><a href="#cb1-56"></a></span>
-<span id="cb1-57"><a href="#cb1-57"></a><span class="co">&lt;!--</span></span>
-<span id="cb1-58"><a href="#cb1-58"></a><span class="co">Think I need string edit distance or patches somewhere. </span></span>
-<span id="cb1-59"><a href="#cb1-59"></a></span>
-<span id="cb1-60"><a href="#cb1-60"></a><span class="co">Hamming teases it at least.</span></span>
-<span id="cb1-61"><a href="#cb1-61"></a><span class="co">--&gt;</span></span>
-<span id="cb1-62"><a href="#cb1-62"></a></span>
-<span id="cb1-63"><a href="#cb1-63"></a><span class="fu"># Lecture Recordings</span></span>
-<span id="cb1-64"><a href="#cb1-64"></a></span>
-<span id="cb1-65"><a href="#cb1-65"></a>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D<span class="dv">&amp;amp;</span>list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-45"><a href="#cb1-45"></a>|0xB|11/10|<span class="co">[</span><span class="ot">Dynamism</span><span class="co">](B0_dynamic.qmd)</span>|Guest|<span class="co">[</span><span class="ot">LCS</span><span class="co">](B2_lcs.qmd)</span>|</span>
+<span id="cb1-46"><a href="#cb1-46"></a>|0xC|11/17|Merkle|diff|patch| <span class="co">&lt;!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 --&gt;</span></span>
+<span id="cb1-47"><a href="#cb1-47"></a>|0xD|11/24|VCS|<span class="in">`None`</span>|<span class="in">`None`</span>|</span>
+<span id="cb1-48"><a href="#cb1-48"></a>|0xE|12/01|Architecture||VCS.rs|</span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-50"><a href="#cb1-50"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="co">Think I need string edit distance or patches somewhere. </span></span>
+<span id="cb1-52"><a href="#cb1-52"></a></span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="co">Hamming teases it at least.</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a><span class="co">--&gt;</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a></span>
+<span id="cb1-56"><a href="#cb1-56"></a><span class="fu"># Lecture Recordings</span></span>
+<span id="cb1-57"><a href="#cb1-57"></a></span>
+<span id="cb1-58"><a href="#cb1-58"></a>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=1a4ELI_Ic8Bn1r0D<span class="dv">&amp;amp;</span>list=PLu3KAnn4RkAQK97lZJCE_SD_BSihq3mYL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
