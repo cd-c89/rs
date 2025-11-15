@@ -1,0 +1,2176 @@
+---
+title: Merkle
+---
+
+# Announcements
+
+- Trees, ish
+  - Heaps
+  - Merkle Trees
+
+## Today
+
+- Trees, ish
+  - Heaps
+  - Merkle Trees
+
+# Trees
+
+## $n$-ary Trees
+
+- A tree is a type of graph.
+- A graph is a pair of
+    - A set of "nodes" or "vertices" (or "vertexes")
+    - A set of "edges" which are pairs of nodes
+        - They may be ordered pairs or not.
+
+## Link List
+
+- Link list is a 1-ary tree
+    - Usually called a link(ed) list in computing
+    - Sometimes called a sequence, depending on which mathematical object.
+
+```{dot}
+//| echo: false
+//| fig-height: 200px
+digraph finite_automata {
+  rankdir=LR;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+    0 [label="RED"];
+    1 [label="GRN"];
+    2 [label="BLU"];
+    
+    0 -> 1
+    1 -> 2
+}
+```
+
+## Link list
+
+- A systems-level link list is a 1-ary tree.
+
+```{dot}
+//| echo: false
+//| fig-height: 200px
+digraph finite_automata {
+  rankdir=LR;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+    0 [label="data|Some(Box)"];
+    1 [label="data|Some(Box)"];
+    2 [label="data|None"];
+
+    0 -> 1
+    1 -> 2
+}
+```
+
+## mocha 2-tree
+
+- A decision tree is a 2-ary tree.
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=LR;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+    0 [label="hot?"];
+    11 [label="small?"];
+    12 [label="small?"];
+    21 [label="togo?"];
+    22 [label="togo?"];
+    23 [label="togo?"];
+    24 [label="togo?"];
+
+    0 -> 11 [label="y"]
+    0 -> 12 [label="n"]
+    11 -> 21 [label="y"]
+    11 -> 22 [label="n"]
+    12 -> 23 [label="y"]
+    12 -> 24 [label="n"]
+}
+```
+
+## Common Case
+
+- Usually in computing, I use trees to store "stuff"
+    - In a SQL database, I used a b-tree to store... data, I guess
+    - In a binary search tree, I sort elements of sets with total orders, like integers or words
+    - In OS page table, I store memory locations.
+
+## Our Case
+
+- Motivated by source control.
+- We will store differences between versions.
+- We will hash these differences to ensure the *integrity* of the code base.
+
+## LCS Review
+
+- Recall:
+    - We can see how close to strings are too each other.
+    - Many changes to code bases are small changes to one character or line.
+    - Think of these differences as the data in the leaves of a tree.
+
+
+## How do ensure?
+
+- We want to have confidence in these changes.
+- Easy - hash them, and save the hashes. 
+- But wait - that's a lot of hashes to hold onto...
+- And it is unreasonable to store potentially thousands of hashes for tiny changes!
+
+## Hash tree
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+    0 [label="Merkle Root"];
+    11 [label="SHA digest"];
+    12 [label="SHA digest"];
+    21 [label="SHA digest"];
+    22 [label="SHA digest"];
+    23 [label="SHA digest"];
+    24 [label="SHA digest"];
+    31 [label="commit_0"];
+    32 [label="commit_1"];
+    33 [label="commit_2"];
+    34 [label="commit_3"];
+
+    0 -> 11 
+    0 -> 12 
+    11 -> 21 
+    11 -> 22 
+    12 -> 23 
+    12 -> 24 
+    21 -> 31 
+    22 -> 32 
+    23 -> 33 
+    24 -> 34 
+}
+```
+
+## In practice
+
+1. Place on commit in linear data structure, like a stack or array list or `Vec`
+1. Hash each commit, store the results (!!! non-trivial)
+1. For each pair of hashes, compute the hash of the concatenation of the two hashes and store the results
+1. Repeat until there is a single hash, the "Merkle root"
+
+## Tree Terms
+
+- [Complete](https://xlinux.nist.gov/dads/HTML/completetree.html)
+
+- **Definition**: A tree in which every level, except possibly the deepest, is entirely filled. At depth n, the height of the tree, all nodes are as far left as possible. 
+
+## Tree Terms
+
+- [Perfect](https://xlinux.nist.gov/dads/HTML/completetree.html)
+
+- **Definition**: A k-ary tree with all leaf nodes at same depth. All internal nodes have degree k. 
+- *Note: Authors differ in their definitions. This is called "complete" by [CLR90, page 95].*
+- I take CLR as ground truth (more often 2nd+ edition as "CLRS")
+
+
+## Complete
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  5 -> 3
+  5 -> 7
+  3 -> 2
+  3 -> 4
+  7 -> 6
+  7 -> 8
+
+}
+```
+
+## Complete
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  5 -> 3
+  5 -> 7
+  3 -> 2
+  3 -> 4
+  7 -> 6
+
+}
+```
+
+## Complete
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  5 -> 3
+  5 -> 7
+  3 -> 2
+  3 -> 4
+  7 -> 6
+  7 -> 8
+  2 -> 1
+
+}
+```
+## Incomplete
+
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  5 -> 3
+  5 -> 7
+  3 -> 2
+  7 -> 6
+  7 -> 8
+
+}
+```
+
+## Takeaway
+
+- In a complete tree, we can always place all leafves in a linear data structure, like an array.
+- In a complete binary (2-ary) tree, there will be (roughly) the same number of non-leaf and leaf nodes
+
+## Naive
+
+- We may be tempted to do this 
+
+```{.c}
+struct HashTree {
+    data: String; // Is it a string?
+    left: Option<Box<HashTree>>;
+    rite: Option<Box<HashTree>>;
+}
+```
+
+- This could in fact work, mostly, but leads to some problems.
+    - How do you tell if a pointer points to a leaf or not?
+
+    
+## Today
+
+- &check; Trees, ish
+  - Heaps
+  - Merkle Trees
+  
+# Heaps
+
+## Heaps
+
+- To motivate our technique for Merkle trees, we are going to make a digression to the heap abstract data type, also called a priority queue.
+- Vs. other graph representations, heaps can be implemented by store nodes *only* and deriving edges from a e.g.  node's index in an array.
+
+## Why "Priority"
+
+- A heap is a nonlinear (but linearizable*) data structure which *sorts* data... kinda.
+- A heap always has some minimal or maximal value, within the the collection, in its initial position, or root.
+
+## Empty Heap
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- Heaps are usually based on binary trees so we'll make an example.
+- Start with an empty heap it looks like this:
+
+:::
+
+:::{.column width=50%}
+
+- There's nothing here
+
+:::
+
+::::
+
+## Initial Value
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- Insert `128` as an initial value
+- `128` is the maximium, and also the root/initial value
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  128
+
+}
+```
+
+:::
+
+::::
+
+
+## Insert 64
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.
+- In this case, in a binary tree, the first "child" of `128`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  empty [label=""]
+
+  128 -> empty
+
+}
+```
+
+:::
+
+::::
+
+
+
+## Insert 64
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- Place `64` here
+- `64` is $\leq$ `128` so this is "A-OK"
+    - "A-OK" is short for "Ada, Oklahoma" in honor of Ada Lovelace, the first computer scientist
+    - (This isn't true)
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  128 -> 064
+
+}
+```
+
+:::
+
+::::
+
+## Insert 192
+
+::::{columns}
+
+:::{.column width=50%}
+  
+
+- To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.
+- In this case, in a binary tree, the second "child" of `128`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  128 -> 064
+  empty [label=""]
+  128 -> empty
+
+}
+```
+
+:::
+
+::::
+
+## Insert 192
+
+::::{columns}
+
+:::{.column width=50%}
+  
+
+- Place `192` here.
+- Big "uh oh"
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  128 -> 064
+  128 -> 192
+
+}
+```
+
+:::
+
+::::
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+  
+
+- We do an operation often called "heapify"
+- In a loop
+    - Swap new value with its parent
+    - Terminate when (1) parent is greater or (2) no parent.
+- So swap `192` and `128`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 064
+  192 -> 128
+
+}
+```
+
+:::
+
+::::
+
+
+
+
+## Insert 96
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.
+- In this case, in a binary tree, the first "child" of `064`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 064
+  192 -> 128
+  empty [label=""]
+  064 -> empty
+
+}
+```
+
+:::
+
+::::
+
+
+## Insert 96
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- Place `96` here.
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 064
+  192 -> 128
+  064 -> 096
+
+}
+```
+
+:::
+
+::::
+
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+  
+- `96` $\gt$ `64` so swap
+- `96` $\leq$ `192` so terminate
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 096
+  192 -> 128
+  096 -> 064
+
+}
+```
+
+:::
+
+::::
+
+## Aside: Structs
+
+- It is possible to implement a heap like so:
+
+```{.c}
+struct Heap {
+    data: String; // Is it a string?
+    left: Option<Box<Heap>>;
+    rite: Option<Box<Heap>>;
+}
+```
+
+- In this case, we have to store around one box for every data entry!
+- This is very vastful!
+
+## Aside: Arrays
+
+- Instead, realize we always insert new elements to the... next available position.
+- This is a stack push, usually implemented on top of a list or array or `Vec`.
+
+```{.def}
+typedef heap = Vec<String>; // Are we for sure that's a string?
+```
+
+- Overhead of zero.  `0`. $0$. 
+
+
+## Use a vector
+
+::::{columns}
+
+:::{.column width=50%}
+
+- In theory
+  
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 096
+  192 -> 128
+  096 -> 064
+
+}
+```
+:::
+
+:::{.column width=50%}
+
+
+- In practice
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="192|096|128|064"]
+
+}
+```
+
+:::
+
+::::
+
+## Insert 160
+
+::::{columns}
+
+:::{.column width=50%}
+
+- In theory
+  
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 096
+  192 -> 128
+  096 -> 064
+  empty [label="",color = "#ffa07a",fontcolor = "#ffa07a"]
+  096 -> empty
+
+}
+```
+:::
+
+:::{.column width=50%}
+
+
+- In practice
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="192|096|128|064|"]
+
+}
+```
+
+:::
+
+::::
+
+
+## Insert 160
+
+::::{columns}
+
+:::{.column width=50%}
+
+- In theory
+  
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  192 -> 096
+  192 -> 128
+  096 -> 064
+  160 [color = "#ffa07a",fontcolor = "#ffa07a"]
+  096 -> 160
+
+}
+```
+:::
+
+:::{.column width=50%}
+
+
+- In practice
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="192|096|128|064|160"]
+
+}
+```
+
+:::
+
+::::
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+
+- In theory
+  
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  160 [color = "#ffa07a",fontcolor = "#ffa07a"]
+
+  192 -> 160
+  192 -> 128
+  160 -> 064
+  160 -> 096
+
+}
+```
+:::
+
+:::{.column width=50%}
+
+
+- In practice
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="192|<new> 160|128|064|<old> 096"]
+
+  heap:old -> heap:new [color = "#ffa07a",fontcolor = "#ffa07a"]
+
+}
+```
+
+:::
+
+::::
+
+## On Indices
+
+::::{columns}
+
+:::{.column width=50%}
+
+- Consider what happens here with respect to indices
+- `160` is Inserted as the element at zero-index location `4`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{0|192}|{1|096}|{2|128}|{3|064}|{4|160}"]
+
+
+}
+```
+
+:::
+
+::::
+
+
+## On Indices
+
+::::{columns}
+
+:::{.column width=50%}
+
+- After swap, `160` is at swaps at zero-index location `1`
+    - No particularly clear pattern here, to me
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{0|192}|{1|160}|{2|128}|{3|064}|{4|096}"]
+
+
+}
+```
+
+:::
+
+::::
+
+
+
+## 1-Index
+
+::::{columns}
+
+:::{.column width=50%}
+
+- `3` also would've swapped to `1`
+    - Floor/int div by 2
+    - Wait, `4 -> 1` is an off-by-one int div
+- Index by one (`1`), not zero (`0`).
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{1|192}|{2|160}|{3|128}|{4|064}|{5|096}"]
+}
+```
+
+:::
+
+::::
+
+
+
+## Insert 224
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`.
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{1|192}|{2|160}|{3|128}|{4|064}|{5|096}|{6|}"]
+}
+```
+
+:::
+
+::::
+
+## Insert 224
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{1|192}|{2|160}|{3|128}|{4|064}|{5|096}|{6|224}"]
+}
+```
+
+:::
+
+::::
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+3. Check `3 = 6/2`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+
+  heap [label="{1|192}|{2|160}|{<three> 3|128}|{4|064}|{5|096}|{<six> 6|224}"]
+
+  heap:six -> heap:three [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+
+:::
+
+::::
+
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+3. Check `3 = 6/2`
+4. Swap
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{1|192}|{2|160}|{<three> 3|224}|{4|064}|{5|096}|{<six> 6|128}"]
+
+  heap:six -> heap:three [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+
+:::
+
+::::
+
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+3. Check `3 = 6/2`
+4. Swap
+3. Check `1 = 3/2`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{<one> 1|192}|{2|160}|{<three> 3|224}|{4|064}|{5|096}|{<six> 6|128}"]
+
+  heap:three -> heap:one [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+
+:::
+
+::::
+
+
+## Heapify
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+3. Check `3 = 6/2`
+4. Swap
+3. Check `1 = 3/2`
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{<one> 1|192}|{2|160}|{<three> 3|224}|{4|064}|{5|096}|{<six> 6|128}"]
+
+  heap:three -> heap:one [color = "#ffa07a",fontcolor = "#ffa07a"]
+}
+```
+
+:::
+
+::::
+
+
+## Heapified
+
+::::{columns}
+
+:::{.column width=50%}
+
+1. Next index is `6`
+2. Insert `224` there
+3. Check `3 = 6/2`
+4. Swap
+5. Check `1 = 3/2`
+6. Swap
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{<one> 1|224}|{2|160}|{<three> 3|192}|{4|064}|{5|096}|{<six> 6|128}"]
+
+}
+```
+
+:::
+
+::::
+
+
+## Heapified
+
+::::{columns}
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label="{1|224}"]
+  2 [label="{2|160}"]
+  3 [label="{3|192}"] 
+  4 [label="{4|064}"]
+  5 [label="{5|096}"]
+  6 [label="{6|128}"]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+
+}
+```
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{<one> 1|224}|{2|160}|{<three> 3|192}|{4|064}|{5|096}|{<six> 6|128}"]
+
+}
+```
+
+:::
+
+::::
+
+## Today
+
+- &check; Trees, ish
+  - &check; Heaps
+  - Merkle Trees
+  
+# Merkle Trees
+
+## Merkle
+
+- To create a Merkle tree, or hash tree, all non-leaf nodes are hashes and all leaf nodes are what the data type is.
+- Store the data type in array of length $n$
+- The tree requires $n-1$ non-leaf nodes
+
+## Example
+
+- Suppose these are your commits
+    - Stored in an array (or a `Vec`!)
+
+
+
+
+```{dot}
+//| echo: false
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="{id|user|before|after}|{A|cd|x+=1|x=x+1}|{B|profc|if True| if 1}|{C|calvin|i = 0|val = 0}|{D|cd|x=x+1|i=i+1}|{E|profc|if 1|if x}|{F|calvin|val = 0|i=0}"]
+
+}
+```
+
+
+## Example
+
+
+- In a complete binary tree, the last row is a power of 2 in size.
+    - We have 6 entries, so we will need part of a row of size 8 and part of a row of size 4
+    
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="id|A|B|C|D|E|F"]
+
+}
+```
+
+
+
+## Example
+
+- Fill out the tree to get up to the 4-row.
+
+::::{columns}
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label=""]
+  7 [label=""]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="id|A|B|C|D|E|F"]
+
+}
+```
+
+
+:::
+
+::::
+
+
+
+## Example
+
+- Add additional leaves until there's enough...
+
+::::{columns}
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label=""]
+  7 [label=""]
+  8 [label=""]
+  9 [label=""]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  4 -> 8
+  4 -> 9
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="id|A|B|C|D|E|F"]
+
+}
+```
+
+
+:::
+
+::::
+
+
+
+## Example
+
+- More...
+
+::::{columns}
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label=""]
+  7 [label=""]
+  8 [label=""]
+  9 [label=""]
+  A [label=""]
+  B [label=""]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  4 -> 8
+  4 -> 9
+  5 -> A
+  5 -> B
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  heap [label="id|A|B|C|D|E|F"]
+
+}
+```
+
+
+:::
+
+::::
+
+
+
+## Example
+
+
+::::{columns}
+
+:::{.column width=50%}
+
+
+1. Relate commits to leaves.
+    
+
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label=""]
+  7 [label=""]
+  8 [label=""]
+  9 [label=""]
+  A [label=""]
+  B [label=""]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  4 -> 8
+  4 -> 9
+  5 -> A
+  5 -> B
+  
+  heap [shape=record, label="{<a> A}|{<b> B}|{<c> C}|{<d> D}|{<e> E}|{<f> F}"]
+
+  7 -> heap:f
+  6 -> heap:e
+  B -> heap:d
+  A -> heap:c
+  9 -> heap:b
+  8 -> heap:a
+
+}
+```
+
+
+:::
+
+::::
+
+
+# Hash Commits
+
+
+```{dot}
+//| echo: false
+//| fig-width: 800px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label="h(E)"]
+  7 [label="h(F)"]
+  8 [label="h(A)"]
+  9 [label="h(B)"]
+  A [label="h(C)"]
+  B [label="h(D)"]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  4 -> 8
+  4 -> 9
+  5 -> A
+  5 -> B
+  
+  heap [shape=record, label="{<a> A}|{<b> B}|{<c> C}|{<d> D}|{<e> E}|{<f> F}"]
+
+  7 -> heap:f
+  6 -> heap:e
+  B -> heap:d
+  A -> heap:c
+  9 -> heap:b
+  8 -> heap:a
+
+}
+```
+
+
+
+
+# Hash Hashes
+
+
+```{dot}
+//| echo: false
+//| fig-width: 800px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label="{0x1|h(*0x2,*0x3)}"]
+  2 [label="{0x2|h(*0x4,*0x5)}"]
+  3 [label="{0x3|h(*0x6,*0x7)}"] 
+  4 [label="{0x4|h(*0xA,*0xB)}"]
+  5 [label="{0x5|h(*0x8,*0x9)}"]
+  6 [label="{0x6|h(E)}"]
+  7 [label="{0x7|h(F)}"]
+  8 [label="{0x8|h(A)}"]
+  9 [label="{0x9|h(B)}"]
+  A [label="{0xA|h(C)}"]
+  B [label="{0xB|h(D)}"]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  4 -> 8
+  4 -> 9
+  5 -> A
+  5 -> B
+  
+  heap [shape=record, label="{<a> A}|{<b> B}|{<c> C}|{<d> D}|{<e> E}|{<f> F}"]
+
+  7 -> heap:f
+  6 -> heap:e
+  B -> heap:d
+  A -> heap:c
+  9 -> heap:b
+  8 -> heap:a
+
+}
+```
+
+## Merkle Root
+
+- The root of the tree contains a hash known as the "Merkle root".
+- It is sufficient to check *only this hash* to know you have an untampered repository.
+
+
+# Today
+
+- &check; Trees, ish
+  - &check; Heaps
+  - &check; Merkle Trees
+
