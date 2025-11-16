@@ -41,17 +41,11 @@ format: html
 |0x7|10/13|[Numbers](70_numbers.md)|[I/O](71_ix_io.md)|[`ix`](72_ix.md)|
 |0x8|10/20|[EdDSA](80_eddsa.qmd)|[Python](81_python.qmd)|[Ed25519](82_ed25519.md)|
 |0x9|10/27|[Stack](90_stack.qmd)|[Box](91_box.md)|[Traits](92_traits.md)|
-|0xA|11/03|[Graphs](A0_graph.qmd)|[DAG](A1_dag.md)|[Analysis](A2_analysis.md)|
+|0xA|11/03|[Graphs](A0_graph.qmd)|[DAG](A1_dag.qmd)|[Analysis](A2_analysis.qmd)|
 |0xB|11/10|[Dynamism](B0_dynamic.qmd)|Guest|[LCS](B2_lcs.qmd)|
-|0xC|11/17|Merkle|diff|patch| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
+|0xC|11/17|[Merkle](C0_merkle.qmd)|diff|patch| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
 |0xD|11/24|VCS|`None`|`None`|
 |0xE|12/01|Architecture||VCS.rs|
-
-<!--
-Think I need string edit distance or patches somewhere. 
-
-Hamming teases it at least.
--->
 
 # Lecture Recordings
 
