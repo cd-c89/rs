@@ -7,6 +7,16 @@
     "text": "CS 271 “Systems in Rust”\n\nCalled:\n\nCS 271: Systems Programming\nCS 271: Sys Programming, Computer Arch\n\nThe first semester class in a:\n\nCompiled language, with\nNo garbage collector.\n\nTerm these “systems” languages.\n\nSuitable to write an operating system.\n\nTaught this year in Rust.\n\nSo to me, “Systems in Rust”\n\n\n\nMW 1310-1440\n\n\nProf. Calvin\n\n\nSyllabus\n\nUngrade selected by a comfortable super majority.\nSyllabus link\n\n\n\n\nCalendar\n\n\n\nWeek\nDate (M)\nLecture (M)\nLab (W)\nHW (F)\n\n\n\n\n0x0\n08/25\nWelcome\nRustup\nHi world\n\n\n0x1\n09/01\nNone\nPackages\nHi cargo\n\n\n0x2\n09/08\nOptions\nGuess\nWordle\n\n\n0x3\n09/15\nBits\nHamming\nMacros\n\n\n0x4\n09/22\nSHA2\nConstants\nSHA512\n\n\n0x5\n09/29\nIEEE754\nf16\nSHA512\n\n\n0x6\n10/06\nPractice\nMidterm\nNone\n\n\n0x7\n10/13\nNumbers\nI/O\nix\n\n\n0x8\n10/20\nEdDSA\nPython\nEd25519\n\n\n0x9\n10/27\nStack\nBox\nTraits\n\n\n0xA\n11/03\nGraphs\nDAG\nAnalysis\n\n\n0xB\n11/10\nDynamism\nGuest\nLCS\n\n\n0xC\n11/17\nMerkle\ndiff\npatch\n\n\n0xD\n11/24\nVCS\nNone\nNone\n\n\n0xE\n12/01\nArchitecture\n\nVCS.rs\n\n\n\n\n\nLecture Recordings"
   },
   {
+    "objectID": "C1_heap.html",
+    "href": "C1_heap.html",
+    "title": "Heap",
+    "section": "",
+    "text": "Preamble\nYou know what a heap is. Now make one in Rust.\n\nSerialize a deserialized data structure.\nReview indexing in a low level, zero-indexed language for a high level, one-indexed algorithm.\nReview an \\(n\\log(n)\\) sorting algorithm.\n\n\n\nHints\n\nA few hints.\n\nIt may be helpful to implement this over u64 or i32 before implementing generically over T\nIt may be helpful to implement using &lt; then get used to using the “function pointer” f/gt\nWhile you can go in any order, it is much easier to do vec-to-heap first, since the hard part is going the other way.\nThose Vec’s are zero-indexed! This is extremely annoying!\n\nAnd about as annoying to change as to deal with!\n\n\n\n\n\nTemplate\n\n\nsrc/main.rs\n\ntype Heap&lt;T&gt; = Vec&lt;T&gt;;\n\nfn heapify&lt;T&gt;(mut h: Heap&lt;T&gt;, i: usize, gt: fn(&T, &T) -&gt; bool) -&gt; Heap&lt;T&gt; {\n    todo!();\n}\n\nfn reheapify&lt;T&gt;(mut h: Heap&lt;T&gt;, i: usize, gt: fn(&T, &T) -&gt; bool) -&gt; Heap&lt;T&gt; {\n    todo!();\n}\n\nfn vec_to_heap&lt;T&gt;(xs: Vec&lt;T&gt;, gt: fn(&T, &T) -&gt; bool) -&gt; Heap&lt;T&gt; {\n    todo!();\n}\n\nfn heap_to_vec&lt;T&gt;(mut h: Heap&lt;T&gt;, gt: fn(&T, &T) -&gt; bool) -&gt; Vec&lt;T&gt; {\n    todo!();\n}\n\nfn hsort&lt;T&gt;(xs: Vec&lt;T&gt;, gt: fn(&T, &T) -&gt; bool) -&gt; Vec&lt;T&gt; {\n    return heap_to_vec(vec_to_heap(xs, gt), gt);\n}\n\nfn main() {\n    let xs: Vec&lt;u64&gt; = vec![2, 4, 6, 8, 5, 3, 7];\n    fn f(x: &u64, y: &u64) -&gt; bool {\n        return x &gt; y;\n    }\n    dbg!(&xs);\n    let sorted: Vec&lt;u64&gt; = hsort(xs, f);\n    dbg!(&sorted);\n    return;\n}\n\n\n\nSample Out\n[src/main.rs:63:5] &xs = [\n    2,\n    4,\n    6,\n    8,\n    5,\n    3,\n    7,\n]\n[src/main.rs:65:5] &sorted = [\n    8,\n    7,\n    6,\n    5,\n    4,\n    3,\n    2,\n]\n\n\nNotes\n\nMy solution was 69 LoC and completed in 75 minutes, but I did not start with the template.\n\nI was pretty focused and had a plan when I started though.\n\nThe hardest part was reheapify with zero-indexing.\n\nIf you get a “subtraction underflow error” this is a sign you should adjust the index.\n\nThis felt a lot like an interview question to me!\nI live-coded it on stream which you can watch if you don’t care about spoilers.\n\n\n\nI’m a spoiler tag.\n\nI’m a YouTube link you should watch on at least 2x",
+    "crumbs": [
+      "Heap"
+    ]
+  },
+  {
     "objectID": "B2_lcs.html",
     "href": "B2_lcs.html",
     "title": "LCS",
@@ -1979,7 +1989,7 @@
     "href": "80_eddsa.html#visualize",
     "title": "EdDSA",
     "section": "Visualize",
-    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]\n\n\n\n&lt;lambdifygenerated-2&gt;:2: RuntimeWarning: invalid value encountered in sqrt\n  return [-sqrt(x*(x**2 + 486662*x + 1)), sqrt(x*(x**2 + 486662*x + 1))]",
+    "text": "Visualize\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sympy\nfrom sympy.abc import x, y\n\ncurve = sympy.Eq(y*y, x**3 + 486662*x*x + x)\nfor_y = sympy.solve(curve, y)\nf = sympy.lambdify(x, for_y)\n\nx = np.linspace(-.00001, .00001, 1000)\n\n_ = [plt.plot(x, y) for y in f(x)]\n\n\n\n&lt;lambdifygenerated-2&gt;:2: RuntimeWarning:\n\ninvalid value encountered in sqrt",
     "crumbs": [
       "EdDSA"
     ]
@@ -13985,7 +13995,7 @@
     "href": "C0_merkle.html#empty-heap",
     "title": "Merkle",
     "section": "Empty Heap",
-    "text": "Empty Heap\n\n\n\nHeaps are usually based on binary trees so we’ll make an example.\nStart with an empty heap it looks like this:\n\n\n\n\nThere’s nothing here",
+    "text": "Empty Heap\n\n\n\nHeaps are usually based on binary trees so we’ll make an example.\nStart with an empty heap it looks like this:\n\n\n\nThere’s nothing here",
     "crumbs": [
       "Merkle"
     ]
@@ -13995,7 +14005,7 @@
     "href": "C0_merkle.html#initial-value",
     "title": "Merkle",
     "section": "Initial Value",
-    "text": "Initial Value\n\n\n\nInsert 128 as an initial value\n128 is the maximium, and also the root/initial value\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128",
+    "text": "Initial Value\n\n\n\nInsert 128 as an initial value\n128 is the maximium, and also the root/initial value\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128",
     "crumbs": [
       "Merkle"
     ]
@@ -14005,7 +14015,7 @@
     "href": "C0_merkle.html#insert-64",
     "title": "Merkle",
     "section": "Insert 64",
-    "text": "Insert 64\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the first “child” of 128\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nempty\n\n\n\n\n128\n\n128\n\n\n\n128-&gt;empty",
+    "text": "Insert 64\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the first “child” of 128\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nempty\n\n\n\n\n128\n\n128\n\n\n\n128-&gt;empty",
     "crumbs": [
       "Merkle"
     ]
@@ -14015,7 +14025,7 @@
     "href": "C0_merkle.html#insert-64-1",
     "title": "Merkle",
     "section": "Insert 64",
-    "text": "Insert 64\n\n\n\nPlace 64 here\n64 is \\(\\leq\\) 128 so this is “A-OK”\n\n“A-OK” is short for “Ada, Oklahoma” in honor of Ada Lovelace, the first computer scientist\n(This isn’t true)\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064",
+    "text": "Insert 64\n\n\n\nPlace 64 here\n64 is \\(\\leq\\) 128 so this is “A-OK”\n\n“A-OK” is short for “Ada, Oklahoma” in honor of Ada Lovelace, the first computer scientist\n(This isn’t true)\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064",
     "crumbs": [
       "Merkle"
     ]
@@ -14025,7 +14035,7 @@
     "href": "C0_merkle.html#insert-192",
     "title": "Merkle",
     "section": "Insert 192",
-    "text": "Insert 192\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the second “child” of 128\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064\n\n\n\n\n\nempty\n\n\n\n\n128-&gt;empty",
+    "text": "Insert 192\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the second “child” of 128\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064\n\n\n\n\n\nempty\n\n\n\n\n128-&gt;empty",
     "crumbs": [
       "Merkle"
     ]
@@ -14035,7 +14045,7 @@
     "href": "C0_merkle.html#insert-192-1",
     "title": "Merkle",
     "section": "Insert 192",
-    "text": "Insert 192\n\n\n\nPlace 192 here.\nBig “uh oh”\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064\n\n\n\n\n\n192\n\n192\n\n\n\n128-&gt;192",
+    "text": "Insert 192\n\n\n\nPlace 192 here.\nBig “uh oh”\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n128\n\n128\n\n\n\n064\n\n064\n\n\n\n128-&gt;064\n\n\n\n\n\n192\n\n192\n\n\n\n128-&gt;192",
     "crumbs": [
       "Merkle"
     ]
@@ -14045,7 +14055,7 @@
     "href": "C0_merkle.html#heapify",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nWe do an operation often called “heapify”\nIn a loop\n\nSwap new value with its parent\nTerminate when (1) parent is greater or (2) no parent.\n\nSo swap 192 and 128\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128",
+    "text": "Heapify\n\n\n\nWe do an operation often called “heapify”\nIn a loop\n\nSwap new value with its parent\nTerminate when (1) parent is greater or (2) no parent.\n\nSo swap 192 and 128\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128",
     "crumbs": [
       "Merkle"
     ]
@@ -14055,7 +14065,7 @@
     "href": "C0_merkle.html#insert-96",
     "title": "Merkle",
     "section": "Insert 96",
-    "text": "Insert 96\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the first “child” of 064\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\nempty\n\n\n\n\n064-&gt;empty",
+    "text": "Insert 96\n\n\n\nTo Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.\nIn this case, in a binary tree, the first “child” of 064\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\nempty\n\n\n\n\n064-&gt;empty",
     "crumbs": [
       "Merkle"
     ]
@@ -14065,7 +14075,7 @@
     "href": "C0_merkle.html#insert-96-1",
     "title": "Merkle",
     "section": "Insert 96",
-    "text": "Insert 96\n\n\n\nPlace 96 here.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n096\n\n096\n\n\n\n064-&gt;096",
+    "text": "Insert 96\n\n\n\nPlace 96 here.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n064\n\n064\n\n\n\n192-&gt;064\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n096\n\n096\n\n\n\n064-&gt;096",
     "crumbs": [
       "Merkle"
     ]
@@ -14075,7 +14085,7 @@
     "href": "C0_merkle.html#heapify-1",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\n96 \\(\\gt\\) 64 so swap\n96 \\(\\leq\\) 192 so terminate\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064",
+    "text": "Heapify\n\n\n\n96 \\(\\gt\\) 64 so swap\n96 \\(\\leq\\) 192 so terminate\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064",
     "crumbs": [
       "Merkle"
     ]
@@ -14105,7 +14115,7 @@
     "href": "C0_merkle.html#use-a-vector",
     "title": "Merkle",
     "section": "Use a vector",
-    "text": "Use a vector\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064",
+    "text": "Use a vector\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064",
     "crumbs": [
       "Merkle"
     ]
@@ -14115,7 +14125,7 @@
     "href": "C0_merkle.html#insert-160",
     "title": "Merkle",
     "section": "Insert 160",
-    "text": "Insert 160\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\nempty\n\n\n\n\n096-&gt;empty\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064",
+    "text": "Insert 160\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\nempty\n\n\n\n\n096-&gt;empty\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064",
     "crumbs": [
       "Merkle"
     ]
@@ -14125,7 +14135,7 @@
     "href": "C0_merkle.html#insert-160-1",
     "title": "Merkle",
     "section": "Insert 160",
-    "text": "Insert 160\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\n160\n\n160\n\n\n\n096-&gt;160\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064\n\n160",
+    "text": "Insert 160\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n192\n\n192\n\n\n\n096\n\n096\n\n\n\n192-&gt;096\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n064\n\n064\n\n\n\n096-&gt;064\n\n\n\n\n\n160\n\n160\n\n\n\n096-&gt;160\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n096\n\n128\n\n064\n\n160",
     "crumbs": [
       "Merkle"
     ]
@@ -14135,7 +14145,7 @@
     "href": "C0_merkle.html#heapify-2",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n160\n\n160\n\n\n\n064\n\n064\n\n\n\n160-&gt;064\n\n\n\n\n\n096\n\n096\n\n\n\n160-&gt;096\n\n\n\n\n\n192\n\n192\n\n\n\n192-&gt;160\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n160\n\n128\n\n064\n\n096\n\n\n\nheap:old-&gt;heap:new",
+    "text": "Heapify\n\n\n\nIn theory\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n160\n\n160\n\n\n\n064\n\n064\n\n\n\n160-&gt;064\n\n\n\n\n\n096\n\n096\n\n\n\n160-&gt;096\n\n\n\n\n\n192\n\n192\n\n\n\n192-&gt;160\n\n\n\n\n\n128\n\n128\n\n\n\n192-&gt;128\n\n\n\n\n\n\n\n\n\n\n\n\nIn practice\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n192\n\n160\n\n128\n\n064\n\n096\n\n\n\nheap:old-&gt;heap:new",
     "crumbs": [
       "Merkle"
     ]
@@ -14145,7 +14155,7 @@
     "href": "C0_merkle.html#on-indices",
     "title": "Merkle",
     "section": "On Indices",
-    "text": "On Indices\n\n\n\nConsider what happens here with respect to indices\n160 is Inserted as the element at zero-index location 4\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n0\n\n192\n\n1\n\n096\n\n2\n\n128\n\n3\n\n064\n\n4\n\n160",
+    "text": "On Indices\n\n\n\nConsider what happens here with respect to indices\n160 is Inserted as the element at zero-index location 4\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n0\n\n192\n\n1\n\n096\n\n2\n\n128\n\n3\n\n064\n\n4\n\n160",
     "crumbs": [
       "Merkle"
     ]
@@ -14155,7 +14165,7 @@
     "href": "C0_merkle.html#on-indices-1",
     "title": "Merkle",
     "section": "On Indices",
-    "text": "On Indices\n\n\n\nAfter swap, 160 is at swaps at zero-index location 1\n\nNo particularly clear pattern here, to me\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n0\n\n192\n\n1\n\n160\n\n2\n\n128\n\n3\n\n064\n\n4\n\n096",
+    "text": "On Indices\n\n\n\nAfter swap, 160 is at swaps at zero-index location 1\n\nNo particularly clear pattern here, to me\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n0\n\n192\n\n1\n\n160\n\n2\n\n128\n\n3\n\n064\n\n4\n\n096",
     "crumbs": [
       "Merkle"
     ]
@@ -14165,7 +14175,7 @@
     "href": "C0_merkle.html#index",
     "title": "Merkle",
     "section": "1-Index",
-    "text": "1-Index\n\n\n\n3 also would’ve swapped to 1\n\nFloor/int div by 2\nWait, 4 -&gt; 1 is an off-by-one int div\n\nIndex by one (1), not zero (0).\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096",
+    "text": "1-Index\n\n\n\n3 also would’ve swapped to 1\n\nFloor/int div by 2\nWait, 4 -&gt; 1 is an off-by-one int div\n\nIndex by one (1), not zero (0).\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096",
     "crumbs": [
       "Merkle"
     ]
@@ -14175,7 +14185,7 @@
     "href": "C0_merkle.html#insert-224",
     "title": "Merkle",
     "section": "Insert 224",
-    "text": "Insert 224\n\n\n\nNext index is 6.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6",
+    "text": "Insert 224\n\n\n\nNext index is 6.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6",
     "crumbs": [
       "Merkle"
     ]
@@ -14185,7 +14195,7 @@
     "href": "C0_merkle.html#insert-224-1",
     "title": "Merkle",
     "section": "Insert 224",
-    "text": "Insert 224\n\n\n\nNext index is 6\nInsert 224 there\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6\n\n224",
+    "text": "Insert 224\n\n\n\nNext index is 6\nInsert 224 there\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6\n\n224",
     "crumbs": [
       "Merkle"
     ]
@@ -14195,7 +14205,7 @@
     "href": "C0_merkle.html#heapify-3",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6\n\n224\n\n\n\nheap:six-&gt;heap:three",
+    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n128\n\n4\n\n064\n\n5\n\n096\n\n6\n\n224\n\n\n\nheap:six-&gt;heap:three",
     "crumbs": [
       "Merkle"
     ]
@@ -14205,7 +14215,7 @@
     "href": "C0_merkle.html#heapify-4",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:six-&gt;heap:three",
+    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:six-&gt;heap:three",
     "crumbs": [
       "Merkle"
     ]
@@ -14215,7 +14225,7 @@
     "href": "C0_merkle.html#heapify-5",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:three-&gt;heap:one",
+    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:three-&gt;heap:one",
     "crumbs": [
       "Merkle"
     ]
@@ -14225,7 +14235,7 @@
     "href": "C0_merkle.html#heapify-6",
     "title": "Merkle",
     "section": "Heapify",
-    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:three-&gt;heap:one",
+    "text": "Heapify\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n192\n\n2\n\n160\n\n3\n\n224\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128\n\n\n\nheap:three-&gt;heap:one",
     "crumbs": [
       "Merkle"
     ]
@@ -14235,7 +14245,7 @@
     "href": "C0_merkle.html#heapified",
     "title": "Merkle",
     "section": "Heapified",
-    "text": "Heapified\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\nSwap\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n224\n\n2\n\n160\n\n3\n\n192\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128",
+    "text": "Heapified\n\n\n\nNext index is 6\nInsert 224 there\nCheck 3 = 6/2\nSwap\nCheck 1 = 3/2\nSwap\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n224\n\n2\n\n160\n\n3\n\n192\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128",
     "crumbs": [
       "Merkle"
     ]
@@ -14245,7 +14255,7 @@
     "href": "C0_merkle.html#heapified-1",
     "title": "Merkle",
     "section": "Heapified",
-    "text": "Heapified\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n1\n\n224\n\n\n\n2\n\n2\n\n160\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n3\n\n192\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n4\n\n064\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n5\n\n096\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n6\n\n128\n\n\n\n3-&gt;6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n224\n\n2\n\n160\n\n3\n\n192\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128",
+    "text": "Heapified\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n1\n\n224\n\n\n\n2\n\n2\n\n160\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n3\n\n192\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n4\n\n064\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n5\n\n096\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n6\n\n128\n\n\n\n3-&gt;6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\n1\n\n224\n\n2\n\n160\n\n3\n\n192\n\n4\n\n064\n\n5\n\n096\n\n6\n\n128",
     "crumbs": [
       "Merkle"
     ]
@@ -14295,7 +14305,7 @@
     "href": "C0_merkle.html#example-2",
     "title": "Merkle",
     "section": "Example",
-    "text": "Example\n\nFill out the tree to get up to the 4-row.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
+    "text": "Example\n\nFill out the tree to get up to the 4-row.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
     "crumbs": [
       "Merkle"
     ]
@@ -14305,7 +14315,7 @@
     "href": "C0_merkle.html#example-3",
     "title": "Merkle",
     "section": "Example",
-    "text": "Example\n\nAdd additional leaves until there’s enough…\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
+    "text": "Example\n\nAdd additional leaves until there’s enough…\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
     "crumbs": [
       "Merkle"
     ]
@@ -14315,7 +14325,7 @@
     "href": "C0_merkle.html#example-4",
     "title": "Merkle",
     "section": "Example",
-    "text": "Example\n\nMore…\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\nA\n\n\n\n\n5-&gt;A\n\n\n\n\n\nB\n\n\n\n\n5-&gt;B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
+    "text": "Example\n\nMore…\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\nA\n\n\n\n\n5-&gt;A\n\n\n\n\n\nB\n\n\n\n\n5-&gt;B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\nheap\n\nid\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF",
     "crumbs": [
       "Merkle"
     ]
@@ -14325,7 +14335,7 @@
     "href": "C0_merkle.html#example-5",
     "title": "Merkle",
     "section": "Example",
-    "text": "Example\n\n\n\nRelate commits to leaves.\n\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\nA\n\n\n\n\n5-&gt;A\n\n\n\n\n\nB\n\n\n\n\n5-&gt;B\n\n\n\n\n\nheap\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF\n\n\n\n6-&gt;heap:e\n\n\n\n\n\n7-&gt;heap:f\n\n\n\n\n\n8-&gt;heap:a\n\n\n\n\n\n9-&gt;heap:b\n\n\n\n\n\nA-&gt;heap:c\n\n\n\n\n\nB-&gt;heap:d",
+    "text": "Example\n\n\n\nRelate commits to leaves.\n\n\n\n\n\n\n\n\n\nfinite_automata\n\n\n1\n\n\n\n\n2\n\n\n\n\n1-&gt;2\n\n\n\n\n\n3\n\n\n\n\n1-&gt;3\n\n\n\n\n\n4\n\n\n\n\n2-&gt;4\n\n\n\n\n\n5\n\n\n\n\n2-&gt;5\n\n\n\n\n\n6\n\n\n\n\n3-&gt;6\n\n\n\n\n\n7\n\n\n\n\n3-&gt;7\n\n\n\n\n\n8\n\n\n\n\n4-&gt;8\n\n\n\n\n\n9\n\n\n\n\n4-&gt;9\n\n\n\n\n\nA\n\n\n\n\n5-&gt;A\n\n\n\n\n\nB\n\n\n\n\n5-&gt;B\n\n\n\n\n\nheap\n\nA\n\nB\n\nC\n\nD\n\nE\n\nF\n\n\n\n6-&gt;heap:e\n\n\n\n\n\n7-&gt;heap:f\n\n\n\n\n\n8-&gt;heap:a\n\n\n\n\n\n9-&gt;heap:b\n\n\n\n\n\nA-&gt;heap:c\n\n\n\n\n\nB-&gt;heap:d",
     "crumbs": [
       "Merkle"
     ]
@@ -14338,6 +14348,36 @@
     "text": "Merkle Root\n\nThe root of the tree contains a hash known as the “Merkle root”.\nIt is sufficient to check only this hash to know you have an untampered repository.",
     "crumbs": [
       "Merkle"
+    ]
+  },
+  {
+    "objectID": "C2_diff.html",
+    "href": "C2_diff.html",
+    "title": "diff",
+    "section": "",
+    "text": "Apply Longest Common Subsequence over stringslines in Rust.\nImplement your first system call\n\ndiff\n\nWikipedia - pretty good.\nMan page - authoritative.\n\n(but not first command line utility!)\n(you did base64 and sha512sum!)\n\nTo make a minimal SCM we need a solution to the “longest common subsequence” (LCS) problem, but not the common sequence.",
+    "crumbs": [
+      "diff"
+    ]
+  },
+  {
+    "objectID": "C2_diff.html#overview",
+    "href": "C2_diff.html#overview",
+    "title": "diff",
+    "section": "Overview",
+    "text": "Overview\n\nCalculating these is fairly simple.",
+    "crumbs": [
+      "diff"
+    ]
+  },
+  {
+    "objectID": "C2_diff.html#compare",
+    "href": "C2_diff.html#compare",
+    "title": "diff",
+    "section": "Compare",
+    "text": "Compare\n\nStart at top right with a zero\nCompare the row letter and column letter.\nIf they differ:\n\nPick the highest number above or left.\nPoint an arrow that direction.\nPlace that arrow in the box.\n\nIf they are the same.\n\nAdd one two the letter diagonally above and left.\nPlace an arrow in that direction.\n\nI don’t use arrow, they look messing.\n\nIf you want arrows, try Wikipedia with a bioinformatics worked example.\n\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\nv\n0\n0\n0\n0\n1\n1\n1\n1\n1\n1\n1\n\n\ni\n0\n0\n0\n0\n1\n2\n2\n2\n2\n2\n2\n\n\nn\n0\n0\n0\n0\n1\n2\n3\n3\n3\n3\n3\n\n\n\n0\n0\n0\n0\n1\n2\n3\n4\n4\n4\n4\n\n\nd\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ni\n0\n0\n0\n0\n1\n2\n3\n4\n5\n5\n5\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ns\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\ne\n0\n0\n0\n0\n1\n2\n3\n4\n5\n6\n6\n\n\nl\n0\n0\n0\n1\n1\n2\n3\n4\n5\n6\n6\n\n\n\n\nReconstruct\n\nCollect all letters along diagonals/incrementations.\n\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nv\n\n\n\n\nx\n\n\n\n\n\n\n\n\ni\n\n\n\n\n\nx\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\nx\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\n\n\n\nx\n\n\n\n\ni\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\nx\n\n\n\ns\n\n\n\n\n\n\n\n\n\n\n\n\n\ne\n\n\n\n\n\n\n\n\n\n\n\n\n\nl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFind difference.\n\nCollect all letters for which there is no corresponding mark:\n\n\n\n\n\nc\na\nl\nv\ni\nn\n\nd\n\ne\nu\n\n\n\n\n\n-\n\n\n\nv\ni\nn\n\nd\ni\ne\n\ns\ne\nl\n\n\n=\nc\na\nl\n\n\n\n\n\ni\n\nu\ns\ne\nl\n\n\n\n\n\nTemplate\n\n\n\n\ncal.txt\n\nc\na\nl\nv\ni\nn\n\nd\ne\nu\n\n\n\n\nvin.txt\n\nv\ni\nn\n\nd\ni\ne\ns\ne\nl\n\n\n\n\n\nCheck it\n$ diff cal.txt vin.txt\n1,3d0\n&lt; c\n&lt; a\n&lt; l\n8a6\n&gt; i\n10c8,10\n&lt; u\n---\n&gt; s\n&gt; e\n&gt; l\n\nWe note:\n\nEntries present only in the leftmost file are denoted on lines prefixed with &lt;\n\nThese changes are denotes as d for deletion.\n\nEntries present only in the ritemost file are denoted on lines prefixed with &gt;\n\nThese changes are denotes as a for addition.\n\nIn the event alterations are made in both files at the same location, this is denoted as c for change.\nAll changes provide line numbers for both files, with the leftmost line numbers precede, and the ritemost line numbers postceding the type (a, d, or c).\nIn the special case of a change, there is a triple-dash delineated line-break separating the two changes, and the leftmost changes are provided first.",
+    "crumbs": [
+      "diff"
     ]
   }
 ]

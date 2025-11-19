@@ -1,0 +1,246 @@
+---
+title: "diff"
+format: 
+  html:
+    code-line-numbers: false
+---
+
+# Preamble
+
+- Apply **L**ongest **C**ommon **S**ubsequence over ~~strings~~*lines* in Rust.
+- Implement your first system call 
+    - `diff`
+        - [Wikipedia](https://en.wikipedia.org/wiki/Diff) - pretty good.
+        - [Man page](https://man7.org/linux/man-pages/man1/diff.1.html) - authoritative.
+    - (but not first command line utility!)
+    - (you did `base64` and `sha512sum`!)
+- To make a minimal SCM we need a solution to the "longest common subsequence" (LCS) problem, but *not* the common sequence.
+
+# Example
+
+- I am frequently confused with international superstar and great driver Vin Diesel due to:
+    - My behavior, which is not at all problematic or a cause for concern, while commuting to Willamette on I-5, and
+    - The importance I place on family, for which I would go so far as to say I could deserve major accolades.
+- Despite our similarities, the namesake of many Calvin-relevant subjects remains Calvin-only
+    - Calvintine's Day, on February 14
+    - Calvinories, which I eat every day to continue living
+    - Calvindar, which I use to remember to come to class.
+    - Calvinmber, the 11th month of the year, named for containing Calvin Day (Nov 12)
+    - Calvinterviews, the way Calvin's get cool gigs as assistant professors of computer science.
+- I don't remember where I was going with that.
+
+## Overview
+
+- Calculating these is fairly simple.
+
+
+## Compare
+
+- Start at top right with a zero
+- Compare the row letter and column letter.
+- If they differ:
+    - Pick the highest number above or left.
+    - Point an arrow that direction.
+    - Place that arrow in the box.
+- If they are the same.
+    - Add one two the letter diagonally above and left.
+    - Place an arrow in that direction.
+- I don't use arrow, they look messing.
+    - If you want arrows, try Wikipedia with a [bioinformatics worked example](https://en.wikipedia.org/wiki/Longest_common_subsequence#Worked_example).
+
+| | | c | a | l | v | i | n |   | d | e | u |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| v | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| i | 0 | 0 | 0 | 0 | 1 | 2 | 2 | 2 | 2 | 2 | 2 |
+| n | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 3 | 3 | 3 | 3 |
+|   | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 4 | 4 | 4 |
+| d | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 5 | 5 |
+| i | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 5 | 5 |
+| e | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| s | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| e | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+| l | 0 | 0 | 0 | 1 | 1 | 2 | 3 | 4 | 5 | 6 | 6 |
+
+### Reconstruct
+
+- Collect all letters along diagonals/incrementations.
+
+|   |   | c | a | l | v | i | n |   | d | e | u |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| v |   |   |   |   | x |   |   |   |   |   |   |
+| i |   |   |   |   |   | x |   |   |   |   |   |
+| n |   |   |   |   |   |   | x |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+| d |   |   |   |   |   |   |   |   | x |   |   |
+| i |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   | x |   |
+| s |   |   |   |   |   |   |   |   |   |   |   |
+| e |   |   |   |   |   |   |   |   |   |   |   |
+| l |   |   |   |   |   |   |   |   |   |   |   |
+
+### Find difference.
+
+- Collect all letters for which there is no corresponding mark:
+
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|   | c | a | l | v | i | n |   | d |   | e | u |   |   |   |
+| - |   |   |   | v | i | n |   | d | i | e |   | s | e | l |
+| = | c | a | l |   |   |   |   |   | i |   | u | s | e | l |
+
+
+### Template
+
+
+::::{.columns}
+
+:::{.column width=50%}
+
+```{.txt filename="cal.txt"}
+c
+a
+l
+v
+i
+n
+
+d
+e
+u
+```
+
+:::
+
+:::{.column width=50%}
+
+```{.txt filename="vin.txt"}
+v
+i
+n
+
+d
+i
+e
+s
+e
+l
+```
+
+:::
+
+::::
+
+
+### Check it
+
+```{.sh}
+$ diff cal.txt vin.txt
+1,3d0
+< c
+< a
+< l
+8a6
+> i
+10c8,10
+< u
+---
+> s
+> e
+> l
+```
+
+- We note:
+    - Entries present only in the leftmost file are denoted on lines prefixed with `< `
+        - These changes are denotes as `d` for deletion.
+    - Entries present only in the ritemost file are denoted on lines prefixed with `> `
+        - These changes are denotes as `a` for addition.
+    - In the event alterations are made in both files at the same location, this is denoted as `c` for change.
+    - All changes provide line numbers for both files, with the leftmost line numbers precede, and the ritemost line numbers postceding the type (`a`, `d`, or `c`).
+    - In the special case of a change, there is a triple-dash delineated line-break separating the two changes, and the leftmost changes are provided first.
+
+
+# Hints
+
+- Use `format!()` - it is like print, but returns a string rather than printing.
+- You will probably want to build the diff in a string vector then reverse the vector.
+    - We built the subsequence by going backwards, we build the diff the same way.
+- Do not stress about exactly matching `diff` formatting (unless you want to) but you minimally need the relevant lines and line numbers to be able to track changes.
+
+# Notes
+
+- My solution was 107 LoC and completed in around 4 hours while volunteering so hard to say how high-effort it was.
+- I completed the "algorithmic task" in around 2 hours then spent 2 hours on strings.
+    - Skip string formatting this if you aren't having a good time, but I learned a lot.
+    - Don't skip tracking line numbers - you'll need those.
+- Be lazy - I used `Vec`'s all over the place where I didn't need them to avoid thinking harder.
+    - This isn't production code and it's *much* easier to fix once it works.
+- Advanced students will want additionally want to support JSON output using `serde` rather than use a simple text stream. 
+    - This left as an exercise to the interested students.
+    - Publicly post Rust using `serde` to instantly get a job offer (I hope)
+- I have never once in my life used `diff -u` but some friends told me they use it.
+    - You are welcome to implement `diff -u` instead, likely skipping the timestamps.
+    - You are responsible for figuring out line numbers in that case yourself.
+    
+```{.sh}
+$ diff -u cal.txt vin.txt
+--- cal.txt     2025-11-18 17:58:11.214673157 -0800
++++ vin.txt     2025-11-18 18:15:14.774673609 -0800
+@@ -1,10 +1,10 @@
+-c
+-a
+-l
+ v
+ i
+ n
+
+ d
++i
+ e
+-u
++s
++e
++l
+```
+
+# Help
+
+- You can use this:
+    - It is the example of how *not* to read lines from "Rust by Example".
+
+```{.rs filename="fname_to_lines"}
+fn fname_to_lines(fname: &str) -> Vec<String> {
+    let mut lines: Vec<String> = Vec::new();
+    for line in std::fs::read_to_string(fname).unwrap().lines() {
+        lines.push(String::from(line));
+    }
+    return lines;
+}
+```
+
+- You can use this, but it will need some edits depending on your implementation.
+
+```{.rs filename="sets_to_shorthand"}
+// I just kept vectors of impacted line numbers. This isn't good, it's just what I did.
+fn sets_to_shorthand(i: usize, j: usize, ln: Vec<usize>, rn: Vec<usize>) -> String {
+    
+    fn side(i: usize, n: Vec<usize>) -> String {
+        return match n.len() {
+            // I couldn't print a `usize` so I turned them into `u64`'s and hoped for the best.
+            0 => format!("{}", i as u64),
+            1 => format!("{}", n[0]),
+            // By the way - those vectors are backwards! Think about why they would be!
+            _ => format!("{},{}", n[n.len()-1] as u64, n[0] as u64),
+        }
+    }
+    
+    let letter = match (&ln.len(), &rn.len()) {
+        (0, _) => "a",
+        (_, 0) => "d",
+        (_, _) => "c",
+    };
+
+    return format!("{}{}{}", side(i, ln), letter, side(j, rn));
+}
+```

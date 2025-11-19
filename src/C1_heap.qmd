@@ -1,0 +1,98 @@
+---
+title: "Heap"
+format: 
+  html:
+    code-line-numbers: false
+---
+
+# Preamble
+
+You know what a heap is. Now make one in Rust.
+
+- [ ] Serialize a deserialized data structure.
+- [ ] Review indexing in a low level, zero-indexed language for a high level, one-indexed algorithm.
+- [ ] Review an $n\log(n)$ sorting algorithm.
+
+
+# Hints
+
+- A few hints.
+    - It may be helpful to implement this over `u64` or `i32` before implementing generically over `T`
+    - It may be helpful to implement using `<` then get used to using the "function pointer" `f`/`gt`
+    - While you can go in any order, it is much easier to do vec-to-heap first, since the hard part is going the other way.
+    - Those `Vec`'s are zero-indexed! This is extremely annoying!
+        - And about as annoying to change as to deal with!
+        
+# Template
+        
+```{.rs filename="src/main.rs"}
+type Heap<T> = Vec<T>;
+
+fn heapify<T>(mut h: Heap<T>, i: usize, gt: fn(&T, &T) -> bool) -> Heap<T> {
+    todo!();
+}
+
+fn reheapify<T>(mut h: Heap<T>, i: usize, gt: fn(&T, &T) -> bool) -> Heap<T> {
+    todo!();
+}
+
+fn vec_to_heap<T>(xs: Vec<T>, gt: fn(&T, &T) -> bool) -> Heap<T> {
+    todo!();
+}
+
+fn heap_to_vec<T>(mut h: Heap<T>, gt: fn(&T, &T) -> bool) -> Vec<T> {
+    todo!();
+}
+
+fn hsort<T>(xs: Vec<T>, gt: fn(&T, &T) -> bool) -> Vec<T> {
+    return heap_to_vec(vec_to_heap(xs, gt), gt);
+}
+
+fn main() {
+    let xs: Vec<u64> = vec![2, 4, 6, 8, 5, 3, 7];
+    fn f(x: &u64, y: &u64) -> bool {
+        return x > y;
+    }
+    dbg!(&xs);
+    let sorted: Vec<u64> = hsort(xs, f);
+    dbg!(&sorted);
+    return;
+}
+```
+
+# Sample Out
+
+```{.sh}
+[src/main.rs:63:5] &xs = [
+    2,
+    4,
+    6,
+    8,
+    5,
+    3,
+    7,
+]
+[src/main.rs:65:5] &sorted = [
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+]
+```
+
+# Notes
+
+- My solution was 69 LoC and completed in 75 minutes, but I did not start with the template.
+    - I was pretty focused and had a plan when I started though.
+- The hardest part was reheapify with zero-indexing.
+    - If you get a "subtraction underflow error" this is a sign you should adjust the index.
+- This felt a lot like an interview question to me!
+- I live-coded it on stream which you can watch if you don't care about spoilers.
+
+<details>
+  <summary>I'm a spoiler tag.</summary>
+  [I'm a YouTube link you should watch on *at least* 2x](https://www.youtube.com/live/2k5mu02vu4I)
+</details>

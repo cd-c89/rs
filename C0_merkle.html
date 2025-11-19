@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -64,16 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./C1_heap.html" rel="next">
 <link href="./B2_lcs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a4a11d514c7d463668e07712114998e6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c0540d70757568125a93df1c170a0a73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70c9a4798e5f6abb0636bcdc3eed0e90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -352,6 +353,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./C0_merkle.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Merkle</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./C1_heap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Heap</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./C2_diff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">diff</span></a>
   </div>
 </li>
     </ul>
@@ -1351,14 +1364,13 @@ window.Quarto = {
 </section>
 <section id="empty-heap" class="level2">
 <h2 class="anchored" data-anchor-id="empty-heap">Empty Heap</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Heaps are usually based on binary trees so we’ll make an example.</li>
 <li>Start with an empty heap it looks like this:</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>There’s nothing here</li>
 </ul>
@@ -1367,14 +1379,13 @@ window.Quarto = {
 </section>
 <section id="initial-value" class="level2">
 <h2 class="anchored" data-anchor-id="initial-value">Initial Value</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Insert <code>128</code> as an initial value</li>
 <li><code>128</code> is the maximium, and also the root/initial value</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1401,14 +1412,13 @@ window.Quarto = {
 </section>
 <section id="insert-64" class="level2">
 <h2 class="anchored" data-anchor-id="insert-64">Insert 64</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.</li>
 <li>In this case, in a binary tree, the first “child” of <code>128</code></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1446,7 +1456,7 @@ window.Quarto = {
 </section>
 <section id="insert-64-1" class="level2">
 <h2 class="anchored" data-anchor-id="insert-64-1">Insert 64</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Place <code>64</code> here</li>
@@ -1456,8 +1466,7 @@ window.Quarto = {
 <li>(This isn’t true)</li>
 </ul></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1496,14 +1505,13 @@ window.Quarto = {
 </section>
 <section id="insert-192" class="level2">
 <h2 class="anchored" data-anchor-id="insert-192">Insert 192</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.</li>
 <li>In this case, in a binary tree, the second “child” of <code>128</code></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1553,14 +1561,13 @@ window.Quarto = {
 </section>
 <section id="insert-192-1" class="level2">
 <h2 class="anchored" data-anchor-id="insert-192-1">Insert 192</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Place <code>192</code> here.</li>
 <li>Big “uh oh”</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1611,7 +1618,7 @@ window.Quarto = {
 </section>
 <section id="heapify" class="level2">
 <h2 class="anchored" data-anchor-id="heapify">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>We do an operation often called “heapify”</li>
@@ -1622,8 +1629,7 @@ window.Quarto = {
 </ul></li>
 <li>So swap <code>192</code> and <code>128</code></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1674,14 +1680,13 @@ window.Quarto = {
 </section>
 <section id="insert-96" class="level2">
 <h2 class="anchored" data-anchor-id="insert-96">Insert 96</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>To Insert a value, we Insert an unpopulated node that would make a complete tree of appropriate size.</li>
 <li>In this case, in a binary tree, the first “child” of <code>064</code></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1743,13 +1748,12 @@ window.Quarto = {
 </section>
 <section id="insert-96-1" class="level2">
 <h2 class="anchored" data-anchor-id="insert-96-1">Insert 96</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Place <code>96</code> here.</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1812,14 +1816,13 @@ window.Quarto = {
 </section>
 <section id="heapify-1" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-1">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><code>96</code> <span class="math inline">\(\gt\)</span> <code>64</code> so swap</li>
 <li><code>96</code> <span class="math inline">\(\leq\)</span> <code>192</code> so terminate</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1908,7 +1911,7 @@ window.Quarto = {
 </section>
 <section id="use-a-vector" class="level2">
 <h2 class="anchored" data-anchor-id="use-a-vector">Use a vector</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>In theory</li>
@@ -1970,8 +1973,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>In practice</li>
 </ul>
@@ -2007,7 +2009,7 @@ window.Quarto = {
 </section>
 <section id="insert-160" class="level2">
 <h2 class="anchored" data-anchor-id="insert-160">Insert 160</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>In theory</li>
@@ -2080,8 +2082,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>In practice</li>
 </ul>
@@ -2119,7 +2120,7 @@ window.Quarto = {
 </section>
 <section id="insert-160-1" class="level2">
 <h2 class="anchored" data-anchor-id="insert-160-1">Insert 160</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>In theory</li>
@@ -2193,8 +2194,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>In practice</li>
 </ul>
@@ -2232,7 +2232,7 @@ window.Quarto = {
 </section>
 <section id="heapify-2" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-2">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>In theory</li>
@@ -2306,8 +2306,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>In practice</li>
 </ul>
@@ -2351,14 +2350,13 @@ window.Quarto = {
 </section>
 <section id="on-indices" class="level2">
 <h2 class="anchored" data-anchor-id="on-indices">On Indices</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Consider what happens here with respect to indices</li>
 <li><code>160</code> is Inserted as the element at zero-index location <code>4</code></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2403,7 +2401,7 @@ window.Quarto = {
 </section>
 <section id="on-indices-1" class="level2">
 <h2 class="anchored" data-anchor-id="on-indices-1">On Indices</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>After swap, <code>160</code> is at swaps at zero-index location <code>1</code>
@@ -2411,8 +2409,7 @@ window.Quarto = {
 <li>No particularly clear pattern here, to me</li>
 </ul></li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2457,7 +2454,7 @@ window.Quarto = {
 </section>
 <section id="index" class="level2">
 <h2 class="anchored" data-anchor-id="index">1-Index</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><code>3</code> also would’ve swapped to <code>1</code>
@@ -2467,8 +2464,7 @@ window.Quarto = {
 </ul></li>
 <li>Index by one (<code>1</code>), not zero (<code>0</code>).</li>
 </ul>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2513,13 +2509,12 @@ window.Quarto = {
 </section>
 <section id="insert-224" class="level2">
 <h2 class="anchored" data-anchor-id="insert-224">Insert 224</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code>.</li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2568,14 +2563,13 @@ window.Quarto = {
 </section>
 <section id="insert-224-1" class="level2">
 <h2 class="anchored" data-anchor-id="insert-224-1">Insert 224</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
 <li>Insert <code>224</code> there</li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2624,15 +2618,14 @@ window.Quarto = {
 </section>
 <section id="heapify-3" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-3">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
 <li>Insert <code>224</code> there</li>
 <li>Check <code>3 = 6/2</code></li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2687,7 +2680,7 @@ window.Quarto = {
 </section>
 <section id="heapify-4" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-4">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
@@ -2695,8 +2688,7 @@ window.Quarto = {
 <li>Check <code>3 = 6/2</code></li>
 <li>Swap</li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2751,7 +2743,7 @@ window.Quarto = {
 </section>
 <section id="heapify-5" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-5">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
@@ -2760,8 +2752,7 @@ window.Quarto = {
 <li>Swap</li>
 <li>Check <code>1 = 3/2</code></li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2816,7 +2807,7 @@ window.Quarto = {
 </section>
 <section id="heapify-6" class="level2">
 <h2 class="anchored" data-anchor-id="heapify-6">Heapify</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
@@ -2825,8 +2816,7 @@ window.Quarto = {
 <li>Swap</li>
 <li>Check <code>1 = 3/2</code></li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2881,7 +2871,7 @@ window.Quarto = {
 </section>
 <section id="heapified" class="level2">
 <h2 class="anchored" data-anchor-id="heapified">Heapified</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Next index is <code>6</code></li>
@@ -2891,8 +2881,7 @@ window.Quarto = {
 <li>Check <code>1 = 3/2</code></li>
 <li>Swap</li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2941,7 +2930,7 @@ window.Quarto = {
 </section>
 <section id="heapified-1" class="level2">
 <h2 class="anchored" data-anchor-id="heapified-1">Heapified</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
@@ -3036,8 +3025,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -3236,7 +3224,7 @@ window.Quarto = {
 <ul>
 <li>Fill out the tree to get up to the 4-row.</li>
 </ul>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
@@ -3324,8 +3312,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -3367,7 +3354,7 @@ window.Quarto = {
 <ul>
 <li>Add additional leaves until there’s enough…</li>
 </ul>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
@@ -3477,8 +3464,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -3520,7 +3506,7 @@ window.Quarto = {
 <ul>
 <li>More…</li>
 </ul>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
@@ -3652,8 +3638,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -3692,13 +3677,12 @@ window.Quarto = {
 </section>
 <section id="example-5" class="level2">
 <h2 class="anchored" data-anchor-id="example-5">Example</h2>
-<div class="{columns}">
+<div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
 <li>Relate commits to leaves.</li>
 </ol>
-</div>
-<div class="column" style="width:50%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-fig-width="400px" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -4399,6 +4383,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -4560,6 +4546,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -4792,6 +4779,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./C1_heap.html" class="pagination-link" aria-label="Heap">
+        <span class="nav-page-text">Heap</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
@@ -5180,7 +5170,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-400"><a href="#cb4-400"></a></span>
 <span id="cb4-401"><a href="#cb4-401"></a><span class="fu">## Empty Heap</span></span>
 <span id="cb4-402"><a href="#cb4-402"></a></span>
-<span id="cb4-403"><a href="#cb4-403"></a>::::{columns}</span>
+<span id="cb4-403"><a href="#cb4-403"></a>::::{.columns}</span>
 <span id="cb4-404"><a href="#cb4-404"></a></span>
 <span id="cb4-405"><a href="#cb4-405"></a>:::{.column width=50%}</span>
 <span id="cb4-406"><a href="#cb4-406"></a>  </span>
@@ -5199,7 +5189,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-419"><a href="#cb4-419"></a></span>
 <span id="cb4-420"><a href="#cb4-420"></a><span class="fu">## Initial Value</span></span>
 <span id="cb4-421"><a href="#cb4-421"></a></span>
-<span id="cb4-422"><a href="#cb4-422"></a>::::{columns}</span>
+<span id="cb4-422"><a href="#cb4-422"></a>::::{.columns}</span>
 <span id="cb4-423"><a href="#cb4-423"></a></span>
 <span id="cb4-424"><a href="#cb4-424"></a>:::{.column width=50%}</span>
 <span id="cb4-425"><a href="#cb4-425"></a>  </span>
@@ -5241,7 +5231,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-463"><a href="#cb4-463"></a></span>
 <span id="cb4-464"><a href="#cb4-464"></a><span class="fu">## Insert 64</span></span>
 <span id="cb4-465"><a href="#cb4-465"></a></span>
-<span id="cb4-466"><a href="#cb4-466"></a>::::{columns}</span>
+<span id="cb4-466"><a href="#cb4-466"></a>::::{.columns}</span>
 <span id="cb4-467"><a href="#cb4-467"></a></span>
 <span id="cb4-468"><a href="#cb4-468"></a>:::{.column width=50%}</span>
 <span id="cb4-469"><a href="#cb4-469"></a>  </span>
@@ -5286,7 +5276,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-510"><a href="#cb4-510"></a></span>
 <span id="cb4-511"><a href="#cb4-511"></a><span class="fu">## Insert 64</span></span>
 <span id="cb4-512"><a href="#cb4-512"></a></span>
-<span id="cb4-513"><a href="#cb4-513"></a>::::{columns}</span>
+<span id="cb4-513"><a href="#cb4-513"></a>::::{.columns}</span>
 <span id="cb4-514"><a href="#cb4-514"></a></span>
 <span id="cb4-515"><a href="#cb4-515"></a>:::{.column width=50%}</span>
 <span id="cb4-516"><a href="#cb4-516"></a>  </span>
@@ -5329,7 +5319,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-555"><a href="#cb4-555"></a></span>
 <span id="cb4-556"><a href="#cb4-556"></a><span class="fu">## Insert 192</span></span>
 <span id="cb4-557"><a href="#cb4-557"></a></span>
-<span id="cb4-558"><a href="#cb4-558"></a>::::{columns}</span>
+<span id="cb4-558"><a href="#cb4-558"></a>::::{.columns}</span>
 <span id="cb4-559"><a href="#cb4-559"></a></span>
 <span id="cb4-560"><a href="#cb4-560"></a>:::{.column width=50%}</span>
 <span id="cb4-561"><a href="#cb4-561"></a>  </span>
@@ -5374,7 +5364,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-602"><a href="#cb4-602"></a></span>
 <span id="cb4-603"><a href="#cb4-603"></a><span class="fu">## Insert 192</span></span>
 <span id="cb4-604"><a href="#cb4-604"></a></span>
-<span id="cb4-605"><a href="#cb4-605"></a>::::{columns}</span>
+<span id="cb4-605"><a href="#cb4-605"></a>::::{.columns}</span>
 <span id="cb4-606"><a href="#cb4-606"></a></span>
 <span id="cb4-607"><a href="#cb4-607"></a>:::{.column width=50%}</span>
 <span id="cb4-608"><a href="#cb4-608"></a>  </span>
@@ -5419,7 +5409,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-649"><a href="#cb4-649"></a></span>
 <span id="cb4-650"><a href="#cb4-650"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-651"><a href="#cb4-651"></a></span>
-<span id="cb4-652"><a href="#cb4-652"></a>::::{columns}</span>
+<span id="cb4-652"><a href="#cb4-652"></a>::::{.columns}</span>
 <span id="cb4-653"><a href="#cb4-653"></a></span>
 <span id="cb4-654"><a href="#cb4-654"></a>:::{.column width=50%}</span>
 <span id="cb4-655"><a href="#cb4-655"></a>  </span>
@@ -5469,7 +5459,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-701"><a href="#cb4-701"></a></span>
 <span id="cb4-702"><a href="#cb4-702"></a><span class="fu">## Insert 96</span></span>
 <span id="cb4-703"><a href="#cb4-703"></a></span>
-<span id="cb4-704"><a href="#cb4-704"></a>::::{columns}</span>
+<span id="cb4-704"><a href="#cb4-704"></a>::::{.columns}</span>
 <span id="cb4-705"><a href="#cb4-705"></a></span>
 <span id="cb4-706"><a href="#cb4-706"></a>:::{.column width=50%}</span>
 <span id="cb4-707"><a href="#cb4-707"></a>  </span>
@@ -5515,7 +5505,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-749"><a href="#cb4-749"></a></span>
 <span id="cb4-750"><a href="#cb4-750"></a><span class="fu">## Insert 96</span></span>
 <span id="cb4-751"><a href="#cb4-751"></a></span>
-<span id="cb4-752"><a href="#cb4-752"></a>::::{columns}</span>
+<span id="cb4-752"><a href="#cb4-752"></a>::::{.columns}</span>
 <span id="cb4-753"><a href="#cb4-753"></a></span>
 <span id="cb4-754"><a href="#cb4-754"></a>:::{.column width=50%}</span>
 <span id="cb4-755"><a href="#cb4-755"></a>  </span>
@@ -5560,7 +5550,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-796"><a href="#cb4-796"></a></span>
 <span id="cb4-797"><a href="#cb4-797"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-798"><a href="#cb4-798"></a></span>
-<span id="cb4-799"><a href="#cb4-799"></a>::::{columns}</span>
+<span id="cb4-799"><a href="#cb4-799"></a>::::{.columns}</span>
 <span id="cb4-800"><a href="#cb4-800"></a></span>
 <span id="cb4-801"><a href="#cb4-801"></a>:::{.column width=50%}</span>
 <span id="cb4-802"><a href="#cb4-802"></a>  </span>
@@ -5631,7 +5621,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-869"><a href="#cb4-869"></a></span>
 <span id="cb4-870"><a href="#cb4-870"></a><span class="fu">## Use a vector</span></span>
 <span id="cb4-871"><a href="#cb4-871"></a></span>
-<span id="cb4-872"><a href="#cb4-872"></a>::::{columns}</span>
+<span id="cb4-872"><a href="#cb4-872"></a>::::{.columns}</span>
 <span id="cb4-873"><a href="#cb4-873"></a></span>
 <span id="cb4-874"><a href="#cb4-874"></a>:::{.column width=50%}</span>
 <span id="cb4-875"><a href="#cb4-875"></a></span>
@@ -5700,7 +5690,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-942"><a href="#cb4-942"></a></span>
 <span id="cb4-943"><a href="#cb4-943"></a><span class="fu">## Insert 160</span></span>
 <span id="cb4-944"><a href="#cb4-944"></a></span>
-<span id="cb4-945"><a href="#cb4-945"></a>::::{columns}</span>
+<span id="cb4-945"><a href="#cb4-945"></a>::::{.columns}</span>
 <span id="cb4-946"><a href="#cb4-946"></a></span>
 <span id="cb4-947"><a href="#cb4-947"></a>:::{.column width=50%}</span>
 <span id="cb4-948"><a href="#cb4-948"></a></span>
@@ -5772,7 +5762,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1018"><a href="#cb4-1018"></a></span>
 <span id="cb4-1019"><a href="#cb4-1019"></a><span class="fu">## Insert 160</span></span>
 <span id="cb4-1020"><a href="#cb4-1020"></a></span>
-<span id="cb4-1021"><a href="#cb4-1021"></a>::::{columns}</span>
+<span id="cb4-1021"><a href="#cb4-1021"></a>::::{.columns}</span>
 <span id="cb4-1022"><a href="#cb4-1022"></a></span>
 <span id="cb4-1023"><a href="#cb4-1023"></a>:::{.column width=50%}</span>
 <span id="cb4-1024"><a href="#cb4-1024"></a></span>
@@ -5844,7 +5834,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1094"><a href="#cb4-1094"></a></span>
 <span id="cb4-1095"><a href="#cb4-1095"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-1096"><a href="#cb4-1096"></a></span>
-<span id="cb4-1097"><a href="#cb4-1097"></a>::::{columns}</span>
+<span id="cb4-1097"><a href="#cb4-1097"></a>::::{.columns}</span>
 <span id="cb4-1098"><a href="#cb4-1098"></a></span>
 <span id="cb4-1099"><a href="#cb4-1099"></a>:::{.column width=50%}</span>
 <span id="cb4-1100"><a href="#cb4-1100"></a></span>
@@ -5918,7 +5908,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1172"><a href="#cb4-1172"></a></span>
 <span id="cb4-1173"><a href="#cb4-1173"></a><span class="fu">## On Indices</span></span>
 <span id="cb4-1174"><a href="#cb4-1174"></a></span>
-<span id="cb4-1175"><a href="#cb4-1175"></a>::::{columns}</span>
+<span id="cb4-1175"><a href="#cb4-1175"></a>::::{.columns}</span>
 <span id="cb4-1176"><a href="#cb4-1176"></a></span>
 <span id="cb4-1177"><a href="#cb4-1177"></a>:::{.column width=50%}</span>
 <span id="cb4-1178"><a href="#cb4-1178"></a></span>
@@ -5962,7 +5952,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1218"><a href="#cb4-1218"></a></span>
 <span id="cb4-1219"><a href="#cb4-1219"></a><span class="fu">## On Indices</span></span>
 <span id="cb4-1220"><a href="#cb4-1220"></a></span>
-<span id="cb4-1221"><a href="#cb4-1221"></a>::::{columns}</span>
+<span id="cb4-1221"><a href="#cb4-1221"></a>::::{.columns}</span>
 <span id="cb4-1222"><a href="#cb4-1222"></a></span>
 <span id="cb4-1223"><a href="#cb4-1223"></a>:::{.column width=50%}</span>
 <span id="cb4-1224"><a href="#cb4-1224"></a></span>
@@ -6007,7 +5997,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1265"><a href="#cb4-1265"></a></span>
 <span id="cb4-1266"><a href="#cb4-1266"></a><span class="fu">## 1-Index</span></span>
 <span id="cb4-1267"><a href="#cb4-1267"></a></span>
-<span id="cb4-1268"><a href="#cb4-1268"></a>::::{columns}</span>
+<span id="cb4-1268"><a href="#cb4-1268"></a>::::{.columns}</span>
 <span id="cb4-1269"><a href="#cb4-1269"></a></span>
 <span id="cb4-1270"><a href="#cb4-1270"></a>:::{.column width=50%}</span>
 <span id="cb4-1271"><a href="#cb4-1271"></a></span>
@@ -6052,7 +6042,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1312"><a href="#cb4-1312"></a></span>
 <span id="cb4-1313"><a href="#cb4-1313"></a><span class="fu">## Insert 224</span></span>
 <span id="cb4-1314"><a href="#cb4-1314"></a></span>
-<span id="cb4-1315"><a href="#cb4-1315"></a>::::{columns}</span>
+<span id="cb4-1315"><a href="#cb4-1315"></a>::::{.columns}</span>
 <span id="cb4-1316"><a href="#cb4-1316"></a></span>
 <span id="cb4-1317"><a href="#cb4-1317"></a>:::{.column width=50%}</span>
 <span id="cb4-1318"><a href="#cb4-1318"></a></span>
@@ -6092,7 +6082,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1354"><a href="#cb4-1354"></a></span>
 <span id="cb4-1355"><a href="#cb4-1355"></a><span class="fu">## Insert 224</span></span>
 <span id="cb4-1356"><a href="#cb4-1356"></a></span>
-<span id="cb4-1357"><a href="#cb4-1357"></a>::::{columns}</span>
+<span id="cb4-1357"><a href="#cb4-1357"></a>::::{.columns}</span>
 <span id="cb4-1358"><a href="#cb4-1358"></a></span>
 <span id="cb4-1359"><a href="#cb4-1359"></a>:::{.column width=50%}</span>
 <span id="cb4-1360"><a href="#cb4-1360"></a></span>
@@ -6134,7 +6124,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1398"><a href="#cb4-1398"></a></span>
 <span id="cb4-1399"><a href="#cb4-1399"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-1400"><a href="#cb4-1400"></a></span>
-<span id="cb4-1401"><a href="#cb4-1401"></a>::::{columns}</span>
+<span id="cb4-1401"><a href="#cb4-1401"></a>::::{.columns}</span>
 <span id="cb4-1402"><a href="#cb4-1402"></a></span>
 <span id="cb4-1403"><a href="#cb4-1403"></a>:::{.column width=50%}</span>
 <span id="cb4-1404"><a href="#cb4-1404"></a></span>
@@ -6180,7 +6170,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1446"><a href="#cb4-1446"></a></span>
 <span id="cb4-1447"><a href="#cb4-1447"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-1448"><a href="#cb4-1448"></a></span>
-<span id="cb4-1449"><a href="#cb4-1449"></a>::::{columns}</span>
+<span id="cb4-1449"><a href="#cb4-1449"></a>::::{.columns}</span>
 <span id="cb4-1450"><a href="#cb4-1450"></a></span>
 <span id="cb4-1451"><a href="#cb4-1451"></a>:::{.column width=50%}</span>
 <span id="cb4-1452"><a href="#cb4-1452"></a></span>
@@ -6226,7 +6216,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1494"><a href="#cb4-1494"></a></span>
 <span id="cb4-1495"><a href="#cb4-1495"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-1496"><a href="#cb4-1496"></a></span>
-<span id="cb4-1497"><a href="#cb4-1497"></a>::::{columns}</span>
+<span id="cb4-1497"><a href="#cb4-1497"></a>::::{.columns}</span>
 <span id="cb4-1498"><a href="#cb4-1498"></a></span>
 <span id="cb4-1499"><a href="#cb4-1499"></a>:::{.column width=50%}</span>
 <span id="cb4-1500"><a href="#cb4-1500"></a></span>
@@ -6272,7 +6262,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1542"><a href="#cb4-1542"></a></span>
 <span id="cb4-1543"><a href="#cb4-1543"></a><span class="fu">## Heapify</span></span>
 <span id="cb4-1544"><a href="#cb4-1544"></a></span>
-<span id="cb4-1545"><a href="#cb4-1545"></a>::::{columns}</span>
+<span id="cb4-1545"><a href="#cb4-1545"></a>::::{.columns}</span>
 <span id="cb4-1546"><a href="#cb4-1546"></a></span>
 <span id="cb4-1547"><a href="#cb4-1547"></a>:::{.column width=50%}</span>
 <span id="cb4-1548"><a href="#cb4-1548"></a></span>
@@ -6318,7 +6308,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1590"><a href="#cb4-1590"></a></span>
 <span id="cb4-1591"><a href="#cb4-1591"></a><span class="fu">## Heapified</span></span>
 <span id="cb4-1592"><a href="#cb4-1592"></a></span>
-<span id="cb4-1593"><a href="#cb4-1593"></a>::::{columns}</span>
+<span id="cb4-1593"><a href="#cb4-1593"></a>::::{.columns}</span>
 <span id="cb4-1594"><a href="#cb4-1594"></a></span>
 <span id="cb4-1595"><a href="#cb4-1595"></a>:::{.column width=50%}</span>
 <span id="cb4-1596"><a href="#cb4-1596"></a></span>
@@ -6364,7 +6354,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1638"><a href="#cb4-1638"></a></span>
 <span id="cb4-1639"><a href="#cb4-1639"></a><span class="fu">## Heapified</span></span>
 <span id="cb4-1640"><a href="#cb4-1640"></a></span>
-<span id="cb4-1641"><a href="#cb4-1641"></a>::::{columns}</span>
+<span id="cb4-1641"><a href="#cb4-1641"></a>::::{.columns}</span>
 <span id="cb4-1642"><a href="#cb4-1642"></a></span>
 <span id="cb4-1643"><a href="#cb4-1643"></a>:::{.column width=50%}</span>
 <span id="cb4-1644"><a href="#cb4-1644"></a></span>
@@ -6516,7 +6506,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1798"><a href="#cb4-1798"></a></span>
 <span id="cb4-1799"><a href="#cb4-1799"></a><span class="ss">- </span>Fill out the tree to get up to the 4-row.</span>
 <span id="cb4-1800"><a href="#cb4-1800"></a></span>
-<span id="cb4-1801"><a href="#cb4-1801"></a>::::{columns}</span>
+<span id="cb4-1801"><a href="#cb4-1801"></a>::::{.columns}</span>
 <span id="cb4-1802"><a href="#cb4-1802"></a></span>
 <span id="cb4-1803"><a href="#cb4-1803"></a>:::{.column width=50%}</span>
 <span id="cb4-1804"><a href="#cb4-1804"></a></span>
@@ -6597,7 +6587,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1883"><a href="#cb4-1883"></a></span>
 <span id="cb4-1884"><a href="#cb4-1884"></a><span class="ss">- </span>Add additional leaves until there's enough...</span>
 <span id="cb4-1885"><a href="#cb4-1885"></a></span>
-<span id="cb4-1886"><a href="#cb4-1886"></a>::::{columns}</span>
+<span id="cb4-1886"><a href="#cb4-1886"></a>::::{.columns}</span>
 <span id="cb4-1887"><a href="#cb4-1887"></a></span>
 <span id="cb4-1888"><a href="#cb4-1888"></a>:::{.column width=50%}</span>
 <span id="cb4-1889"><a href="#cb4-1889"></a></span>
@@ -6682,7 +6672,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-1972"><a href="#cb4-1972"></a></span>
 <span id="cb4-1973"><a href="#cb4-1973"></a><span class="ss">- </span>More...</span>
 <span id="cb4-1974"><a href="#cb4-1974"></a></span>
-<span id="cb4-1975"><a href="#cb4-1975"></a>::::{columns}</span>
+<span id="cb4-1975"><a href="#cb4-1975"></a>::::{.columns}</span>
 <span id="cb4-1976"><a href="#cb4-1976"></a></span>
 <span id="cb4-1977"><a href="#cb4-1977"></a>:::{.column width=50%}</span>
 <span id="cb4-1978"><a href="#cb4-1978"></a></span>
@@ -6770,7 +6760,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-2064"><a href="#cb4-2064"></a><span class="fu">## Example</span></span>
 <span id="cb4-2065"><a href="#cb4-2065"></a></span>
 <span id="cb4-2066"><a href="#cb4-2066"></a></span>
-<span id="cb4-2067"><a href="#cb4-2067"></a>::::{columns}</span>
+<span id="cb4-2067"><a href="#cb4-2067"></a>::::{.columns}</span>
 <span id="cb4-2068"><a href="#cb4-2068"></a></span>
 <span id="cb4-2069"><a href="#cb4-2069"></a>:::{.column width=50%}</span>
 <span id="cb4-2070"><a href="#cb4-2070"></a></span>
