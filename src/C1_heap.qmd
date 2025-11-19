@@ -96,3 +96,8 @@ fn main() {
   <summary>I'm a spoiler tag.</summary>
   [I'm a YouTube link you should watch on *at least* 2x](https://www.youtube.com/live/2k5mu02vu4I)
 </details>
+
+# Challenge Mode
+
+- Exceedingly ambitious students will implement the sort "in-place" using a single vector at most one larger the number of elements being sorted.
+- If you do this I will be genuinely impressed so please let me know if it happens.
