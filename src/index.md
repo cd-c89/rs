@@ -43,7 +43,7 @@ format: html
 |0x9|10/27|[Stack](90_stack.qmd)|[Box](91_box.md)|[Traits](92_traits.md)|
 |0xA|11/03|[Graphs](A0_graph.qmd)|[DAG](A1_dag.qmd)|[Analysis](A2_analysis.qmd)|
 |0xB|11/10|[Dynamism](B0_dynamic.qmd)|Guest|[LCS](B2_lcs.qmd)|
-|0xC|11/17|[Merkle](C0_merkle.qmd)|diff|patch| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
+|0xC|11/17|[Merkle](C0_merkle.qmd)|[Heap](C1_heap.qmd)|[`diff`](C2_diff.qmd)| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
 |0xD|11/24|VCS|`None`|`None`|
 |0xE|12/01|Architecture||VCS.rs|
 
