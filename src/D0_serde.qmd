@@ -1,0 +1,572 @@
+---
+title: Serde
+---
+
+# Announcements
+
+- Source Control Management
+  - LCS / `diff` ongoing
+  - Hash Trees covered, not yet deployed
+  - We introduce a helpful crate
+    - Sufficiently involved we delay introducing SCM.
+    - We will shift hash usage to extra credit accordingly.
+    - You can get started, I'm building a [reference solution](https://github.com/cd-c89/scmpy/tree/main).
+
+## Today
+
+- Motivation
+- `serde`
+
+# Motivation
+
+## Rustic JSON
+
+- Working with JSON in Rust is, in a word, painful.
+    - JSON's nested type structure is essentially incompatible with the Rust type system.
+- To bridge the gap, `serde`, on the most popular Rust crates
+    - We get to learn to use a popular crate.
+    - We get to learn JSON
+    - We get to avoid spending time `String` parsing.
+
+## Alternatives
+
+- I will not compel you to use JSON for the final, but if you do you are on your own.
+    - The competing formulation is nesting via the file system in a hidden folder.
+    - This is what `git` does
+
+## Git Example
+    
+```{.sh}
+$ tree .git
+.git
+├── COMMIT_EDITMSG
+├── HEAD
+├── branches
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   └── update.sample
+├── index
+├── info
+│   └── exclude
+├── logs
+│   ├── HEAD
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       └── remotes
+│           └── origin
+│               ├── HEAD
+│               └── main
+├── objects
+│   ├── 14
+│   │   └── 699a133ae84e6c922ca69ffa74d4df47eae49f
+│   ├── 4b
+│   │   └── 41ec9ea0317e27beac7c2d77945e542c26f943
+│   ├── a3
+│   │   └── 1c05f02ab1855a2f7e420ee0f5b28c2d8c1008
+│   ├── b9
+│   │   └── 1bf6a71c95a125d9e0cd59e1149ad022b8baeb
+│   ├── info
+│   └── pack
+│       ├── pack-6fbf46b3e979d9d021e11db53f6959e1178cbd97.idx
+│       └── pack-6fbf46b3e979d9d021e11db53f6959e1178cbd97.pack
+├── packed-refs
+└── refs
+    ├── heads
+    │   └── main
+    ├── remotes
+    │   └── origin
+    │       ├── HEAD
+    │       └── main
+    └── tags
+
+20 directories, 33 files
+```
+
+- "Everything is a file" - Linux
+
+## Counter proposal
+
+- Via `python3 -m json.tool .scm`
+
+```{.json}
+{
+    "latest": {
+        "/home/user/tmp/scmpy/scm.py": [
+            "import os, sys, json, subprocess, difflib",
+            "",
+            "# diff helper",
+            "diff_lines = lambda ls_0, ls_1: \"\".join([line for line in difflib.unified_diff(ls_0, ls_1)])",
+            "",
+            "# Get all files that aren't hidden",
+            "tree = [node for node in os.walk(os.getcwd()) if \".\" not in node[0]]",
+            "fs = [os.path.join(node[0],n) for node in tree for n in node[2] if n[0] != \".\"]   ",
+            "",
+            "# Get or create .scm file",
+            "if not os.path.isfile(\".scm\") or os.path.getsize(\".scm\") == 0:",
+            "    # create",
+            "    latest = {f:open(f).read().splitlines() for f in fs}",
+            "    json.dump({\"latest\": latest, \"commit\":[{\"init\":latest, \"diff\":{}}]}, open(\".scm\", \"w\"))",
+            "else:",
+            "    # get",
+            "    scm = json.loads(open(\".scm\",\"r\").read())",
+            "    late = scm[\"latest\"]",
+            "    curr = scm[\"commit\"]",
+            "    old_fs = [f for f in curr[-1][\"init\"]] + [f for f in curr[-1][\"diff\"]]",
+            "    new_fs = [f for f in fs if fs not in old_fs]",
+            "    init = {f:open(f).read().splitlines() for f in new_fs if f not in old_fs}",
+            "    # We use unified diff from difflib since it still works with patch.",
+            "    diff = {f:diff_lines(late[f],open(f).read().splitlines()) for f in old_fs}",
+            "    scm[\"latest\"] = {f:open(f).read().splitlines() for f in fs}",
+            "    scm[\"commit\"].append({\"init\":init,\"diff\":diff})",
+            "    json.dump(scm, open(\".scm\",\"w\"))",
+            "    ",
+            "# Trivial comment"
+        ]
+    },
+    "commit": [
+        {
+            "init": {
+                "/home/user/tmp/scmpy/scm.py": [
+                    "import os, sys, json, subprocess, difflib",
+                    "",
+                    "# diff helper",
+                    "diff_lines = lambda ls_0, ls_1: \"\".join([line for line in difflib.unified_diff(ls_0, ls_1)])",
+                    "",
+                    "# Get all files that aren't hidden",
+                    "tree = [node for node in os.walk(os.getcwd()) if \".\" not in node[0]]",
+                    "fs = [os.path.join(node[0],n) for node in tree for n in node[2] if n[0] != \".\"]   ",
+                    "",
+                    "# Get or create .scm file",
+                    "if not os.path.isfile(\".scm\") or os.path.getsize(\".scm\") == 0:",
+                    "    # create",
+                    "    latest = {f:open(f).read().splitlines() for f in fs}",
+                    "    json.dump({\"latest\": latest, \"commit\":[{\"init\":latest, \"diff\":{}}]}, open(\".scm\", \"w\"))",
+                    "else:",
+                    "    # get",
+                    "    scm = json.loads(open(\".scm\",\"r\").read())",
+                    "    late = scm[\"latest\"]",
+                    "    curr = scm[\"commit\"]",
+                    "    old_fs = [f for f in curr[-1][\"init\"]] + [f for f in curr[-1][\"diff\"]]",
+                    "    new_fs = [f for f in fs if fs not in old_fs]",
+                    "    init = {f:open(f).read().splitlines() for f in new_fs if f not in old_fs}",
+                    "    # We use unified diff from difflib since it still works with patch.",
+                    "    diff = {f:diff_lines(late[f],open(f).read().splitlines()) for f in old_fs}",
+                    "    scm[\"latest\"] = {f:open(f).read().splitlines() for f in fs}",
+                    "    scm[\"commit\"].append({\"init\":init,\"diff\":diff})",
+                    "    json.dump(scm, open(\".scm\",\"w\"))"
+                ]
+            },
+            "diff": {}
+        },
+        {
+            "init": {},
+            "diff": {
+                "/home/user/tmp/scmpy/scm.py": "--- \n+++ \n@@ -25,3 +25,5 @@\n     scm[\"latest\"] = {f:open(f).read().splitlines() for f in fs}     scm[\"commit\"].append({\"init\":init,\"diff\":diff})     json.dump(scm, open(\".scm\",\"w\"))+    +# Trivial comment"
+            }
+        }
+    ]
+}
+```
+
+## Design Decision
+
+> Decide whether you want to navigate a file system and crush text and be rad as heck, or learn `serde`, toss everything in a single file, and be cool as heck
+
+- Not much of a decision if I don't teach `serde`
+
+# Serde
+
+## Using crates
+
+- `serde` basically implements some hacked-together types that mostly work, and also isn't as slow and heavyweight as `polars`
+    - Stands for "SERialize/DEserialize" - the verbs for turning a JSON in a string and back.
+- It's good to learn to use some crate, so we'll do this one.
+- Here's how I got started.
+```{.sh}
+cargo new deser # serde is taken
+cd deser
+cargo add serde serde_json
+```
+
+## JSON
+
+- I learned JSON last week in a panic due to some changes to CS-151 curriculum.
+- Here's the notes I took, which I then taught a class on.
+    - [Linkeroni](https://cd-public.github.io/scicom/0F_json.html)
+- Despite the name, JSON feels as-or-more Python than JavaScript to me.
+- It does *not* feel Rust.
+
+## helium.json
+
+- For that lecture, I made a cute lil JSON file, inspired by applications in the sciences.
+- It looks like this:
+
+```{.json filename="helium.json"}
+{
+    "symbol": "He",
+    "phase_stp": "gas",
+    "group": 18,
+    "period": 1,
+    "boiling_point": {
+        "K": 4.222,
+        "C": -268.928,
+        "F": -452.070
+     }
+}
+```
+
+## Getting your own
+
+- It lives at this link.
+    - [https://cd-public.github.io/scicom/helium.json](https://cd-public.github.io/scicom/helium.json)
+- I have typed the following about 40 times in the past 3 weeks.
+```{.sh}
+curl https://cd-public.github.io/scicom/helium.json -o helium.json
+```
+
+## Using `serde`
+
+- With JSON in hand and `serde` added to our crate, all that remains is to use it.
+- Citation [Stack OverFlow User Shepmaster](https://stackoverflow.com/a/49950214)
+
+```{.rs}
+use serde::{Deserialize, Serialize};
+use serde_json;
+
+fn main() {
+    let he: String = std::fs::read_to_string("helium.json").expect("Probably curl from https://cd-public.github.io/scicom/helium.json");
+    dbg!(&he);
+    let json: serde_json::Value = serde_json::from_str(&he).unwrap();
+    dbg!(&json);
+}
+```
+
+## Checkpoint
+
+- By the way, this is what my directory looked like.
+
+```{.sh}
+$ tree
+.
+├── Cargo.lock
+├── Cargo.toml
+├── helium.json
+└── src
+    └── main.rs
+
+1 directory, 4 files
+```
+
+## Print it
+
+```{.sh}
+$ time cargo run
+   Compiling serde_core v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling serde v1.0.228
+   Compiling itoa v1.0.15
+   Compiling memchr v2.7.6
+   Compiling ryu v1.0.20
+   Compiling deser v0.1.0 (/home/user/tmp/deser)
+warning: unused imports: `Deserialize` and `Serialize`
+ --> src/main.rs:1:13
+  |
+1 | use serde::{Deserialize, Serialize};
+  |             ^^^^^^^^^^^  ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `deser` (bin "deser") generated 1 warning (run `cargo fix --bin "deser"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.50s
+     Running `target/debug/deser`
+[src/main.rs:6:5] &he = "{\n    \"symbol\": \"He\",\n    \"phase_stp\": \"gas\",\n    \"group\": 18,\n    \"period\": 1,\n    \"boiling_point\": {\n        \"K\": 4.222,\n        \"C\": -268.928,\n        \"F\": -452.070\n     }\n}\n"
+[src/main.rs:8:5] &json = Object {
+    "boiling_point": Object {
+        "C": Number(-268.928),
+        "F": Number(-452.07),
+        "K": Number(4.222),
+    },
+    "group": Number(18),
+    "period": Number(1),
+    "phase_stp": String("gas"),
+    "symbol": String("He"),
+}
+
+real    0m2.540s
+user    0m3.458s
+sys     0m0.537s
+```
+
+## Cleaner
+
+- Comment out the unused `use` and run twice.
+
+```{.sh}
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/deser`
+[src/main.rs:6:5] &he = "{\n    \"symbol\": \"He\",\n    \"phase_stp\": \"gas\",\n    \"group\": 18,\n    \"period\": 1,\n    \"boiling_point\": {\n        \"K\": 4.222,\n        \"C\": -268.928,\n        \"F\": -452.070\n     }\n}\n"
+[src/main.rs:8:5] &json = Object {
+    "boiling_point": Object {
+        "C": Number(-268.928),
+        "F": Number(-452.07),
+        "K": Number(4.222),
+    },
+    "group": Number(18),
+    "period": Number(1),
+    "phase_stp": String("gas"),
+    "symbol": String("He"),
+}
+```
+
+## By the way
+
+- That long string may look silly, but...
+
+```{.sh}
+$ python3 -c 'print("{\n    \"symbol\": \"He\",\n    \"phase_stp\": \"gas\",\n    \"group\": 18,\n    \"period\": 1,\n    \"boiling_point\": {\n        \"K\": 4.222,\n        \"C\": -268.928,\n        \"F\": -452.070\n     }\n}\n")'
+{
+    "symbol": "He",
+    "phase_stp": "gas",
+    "group": 18,
+    "period": 1,
+    "boiling_point": {
+        "K": 4.222,
+        "C": -268.928,
+        "F": -452.070
+     }
+}
+```
+
+- Mostly an artifact of how `dbg!(x)` works. `print("{}", x)` looks fine, but it is, after all, a `String`.
+
+## Traverse
+
+- You can traverse the JSON and/or `serde` object using the expected indexing techniques.
+
+```{.sh}
+[src/main.rs:9:5] &json["symbol"] = String("He")
+[src/main.rs:10:5] &json["boiling_point"] = Object {
+    "C": Number(-268.928),
+    "F": Number(-452.07),
+    "K": Number(4.222),
+}
+[src/main.rs:11:5] &json["boiling_point"]["K"] = Number(4.222)
+```
+
+## New fields
+
+- This would be nice:  
+
+```{.rs}
+json["number"] = 2;
+```
+
+- This does *not* work.
+
+```{.sh}
+$ cargo run
+   Compiling deser v0.1.0 (/home/user/tmp/deser)
+error[E0308]: mismatched types
+  --> src/main.rs:12:22
+   |
+12 |     json["number"] = 2;
+   |     --------------   ^ expected `Value`, found integer
+   |     |
+   |     expected due to the type of this binding
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `deser` (bin "deser") due to 1 previous error
+```
+
+
+## Number
+
+- We use `from` to take a value, such as an `i32`, to a `serde` type, like `Number`
+- We take the `Number` and package it into a `Value`.
+    - This is so JSON can hold things of any type!
+- We place that value within the JSON (which now needs to be `mut`!)
+
+```{.rs}
+    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();
+    json["number"] = serde_json::Value::Number(serde_json::Number::from(2));
+```
+
+## In General
+
+- Easy enough to just start work in a `serde_json::map`
+    - I have no idea if this is what you are supposed to do!
+    - It works though!
+- Just reams of text around inserting values of varying sorts.
+
+## Neon Naive
+
+- Not too bad to make Neon quickly... if we use `String`...
+
+```{.rs filename="src/main.rs"}
+fn main() {
+    let mut ne: std::collections::HashMap<String, String> = std::collections::HashMap::new();
+
+    ne.insert(String::from("symbol"), String::from("Ne"));
+    ne.insert(String::from("phase_stp"), String::from("gas"));
+    ne.insert(String::from("group"), String::from("18"));
+    ne.insert(String::from("period"), String::from("2"));
+
+    dbg!(ne);
+}
+```
+
+## Peep it
+
+```{.sh}
+$ cargo run
+   Compiling deser v0.1.0 (/home/user/tmp/deser)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+     Running `target/debug/deser`
+[src/main.rs:9:5] ne = {
+    "group": "18",
+    "period": "2",
+    "symbol": "Ne",
+    "phase_stp": "gas",
+}
+```
+
+## Serde it
+
+- I love typing (coding in Rust)
+
+```{.rs filename="src/main.rs"}
+use serde_json;
+
+fn main() {
+    let mut ne: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+
+    ne.insert(String::from("symbol"), serde_json::Value::String(String::from("Ne")));
+    ne.insert(String::from("phase_stp"), serde_json::Value::String(String::from("gas")));
+    ne.insert(String::from("group"), serde_json::Value::Number(serde_json::Number::from(18)));
+    ne.insert(String::from("period"), serde_json::Value::Number(serde_json::Number::from(2)));
+
+    dbg!(ne);
+}
+```
+
+## Pop Thy Peepers Upon It
+
+```{.sh}
+$ cargo r
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/deser`
+[src/main.rs:11:5] ne = {
+    "group": Number(18),
+    "period": Number(2),
+    "phase_stp": String("gas"),
+    "symbol": String("Ne"),
+}
+```
+
+## Nest it
+
+- When I want to nest I:
+1. Make another HashMap (or Vector, your life your choices)
+2. Do it serde-style
+3. Convert the HashMap to an "Object", the JSON name for a dictionary. (Presumably Vectors are called "Array" - I didn't check)
+4. Simply use the `.insert` method as per usual.
+
+## Example
+
+```{.rs}
+    let mut bp: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+    // I'm truncating to avoid using floats (ew)
+    bp.insert(String::from("K"), serde_json::Value::Number(serde_json::Number::from(27)));
+    bp.insert(String::from("C"), serde_json::Value::Number(serde_json::Number::from(-246)));
+    bp.insert(String::from("F"), serde_json::Value::Number(serde_json::Number::from(-410)));
+
+    ne.insert(String::from("boiling_point"), serde_json::Value::Object(bp));
+```
+
+## Feast Your Eyes
+
+```{.sh}
+$ cargo r
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/deser`
+[src/main.rs:19:5] ne = {
+    "boiling_point": Object {
+        "C": Number(-246),
+        "F": Number(-410),
+        "K": Number(27),
+    },
+    "group": Number(18),
+    "period": Number(2),
+    "phase_stp": String("gas"),
+    "symbol": String("Ne"),
+}
+```
+
+## Use use
+
+- Can't say why I detest `use`, but I didn't use (ha) it.
+
+```{.rs filename="src/main.rs"}
+use serde_json::{Map, Value, Number};
+
+fn main() {
+    let mut ne: Map<String, Value> = Map::new();
+
+    ne.insert(String::from("symbol"), Value::String(String::from("Ne")));
+    ne.insert(String::from("phase_stp"), Value::String(String::from("gas")));
+
+    ne.insert(String::from("group"), Value::Number(Number::from(18)));
+    ne.insert(String::from("period"), Value::Number(Number::from(2)));
+
+    dbg!(ne);
+}
+```
+
+## Or Macros
+
+- This seems okay to me.
+
+```{.rs}
+macro_rules! v_string {
+    ($s:expr) => {
+        Value::String(String::from($s))
+    };
+}
+
+macro_rules! v_number {
+    ($n:expr) => {
+        Value::Number(Number::from($n))
+    };
+}
+
+fn main() {
+    let mut ne: Map<String, Value> = Map::new();
+
+    ne.insert(String::from("symbol"), v_string!("Ne"));
+    ne.insert(String::from("group"), v_number!(18));
+```
+
+## Closing thought
+
+- It is a bit of an anti-pattern but if you are implementing an SCM for your own purposes, you don't need to use any key-value pairs at all and can exclusively use vectors/arrays.
+    - I shouldn't tell you that you are allowed to do this, but I did it for years and only stopped because other people had to start using my code.
+- You can, of course, just manipulate your design decision to use hash maps or vectors of equal depth, and cram any remaining requirements into strings.
+    - This is objectively bad, but also the historical norm (see `diff`)
+- Think about how *you* would want to receive, into Rust, the information in a `diff`, and just implement that!
+
+# SCM Beckons
