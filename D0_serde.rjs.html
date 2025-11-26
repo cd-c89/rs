@@ -945,11 +945,7 @@
 <h2>Use indexes</h2>
 <ul>
 <li>Using <code>.insert</code> doesn’t do it for me.</li>
-<li>I turn the map <em>itself</em> into a JSON value, then use indices.
-<ul>
-<li>Basically “Map” is a Rust thing and “Value” is a JSON thing.</li>
-<li>We insert in Rust or, perhaps “update” in JSON.</li>
-</ul></li>
+<li>I turn the map <em>itself</em> into a JSON value, then use indices.</li>
 </ul>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -958,7 +954,7 @@
 <div class="sourceCode" id="cb22" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
 <span id="cb22-2"><a></a></span>
 <span id="cb22-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb22-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
+<span id="cb22-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">json!</span>(<span class="pp">serde_json::Map::</span>new())<span class="op">;</span></span>
 <span id="cb22-5"><a></a></span>
 <span id="cb22-6"><a></a>    ne[<span class="st">"symbol"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>)<span class="op">;</span></span>
 <span id="cb22-7"><a></a>    ne[<span class="st">"phase_stp"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"gas"</span>)<span class="op">;</span></span>

@@ -964,11 +964,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="use-indexes">Use indexes</h2>
 <ul>
 <li>Using <code>.insert</code> doesn’t do it for me.</li>
-<li>I turn the map <em>itself</em> into a JSON value, then use indices.
-<ul>
-<li>Basically “Map” is a Rust thing and “Value” is a JSON thing.</li>
-<li>We insert in Rust or, perhaps “update” in JSON.</li>
-</ul></li>
+<li>I turn the map <em>itself</em> into a JSON value, then use indices.</li>
 </ul>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -977,7 +973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb22" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">json!</span>(<span class="pp">serde_json::Map::</span>new())<span class="op">;</span></span>
 <span id="cb22-5"><a href="#cb22-5"></a></span>
 <span id="cb22-6"><a href="#cb22-6"></a>    ne[<span class="st">"symbol"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>)<span class="op">;</span></span>
 <span id="cb22-7"><a href="#cb22-7"></a>    ne[<span class="st">"phase_stp"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"gas"</span>)<span class="op">;</span></span>
@@ -2086,112 +2082,110 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb27-512"><a href="#cb27-512"></a></span>
 <span id="cb27-513"><a href="#cb27-513"></a><span class="ss">- </span>Using <span class="in">`.insert`</span> doesn't do it for me.</span>
 <span id="cb27-514"><a href="#cb27-514"></a><span class="ss">- </span>I turn the map *itself* into a JSON value, then use indices.</span>
-<span id="cb27-515"><a href="#cb27-515"></a><span class="ss">    - </span>Basically "Map" is a Rust thing and "Value" is a JSON thing.</span>
-<span id="cb27-516"><a href="#cb27-516"></a><span class="ss">    - </span>We insert in Rust or, perhaps "update" in JSON.</span>
-<span id="cb27-517"><a href="#cb27-517"></a></span>
-<span id="cb27-518"><a href="#cb27-518"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb27-519"><a href="#cb27-519"></a><span class="in">use serde_json;</span></span>
-<span id="cb27-520"><a href="#cb27-520"></a></span>
-<span id="cb27-521"><a href="#cb27-521"></a><span class="in">fn main() {</span></span>
-<span id="cb27-522"><a href="#cb27-522"></a><span class="in">    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();</span></span>
-<span id="cb27-523"><a href="#cb27-523"></a></span>
-<span id="cb27-524"><a href="#cb27-524"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
-<span id="cb27-525"><a href="#cb27-525"></a><span class="in">    ne["phase_stp"] = json!("gas");</span></span>
-<span id="cb27-526"><a href="#cb27-526"></a><span class="in">    ne["group"] = json!(18);</span></span>
-<span id="cb27-527"><a href="#cb27-527"></a><span class="in">    ne["period"] = json!(2);</span></span>
-<span id="cb27-528"><a href="#cb27-528"></a></span>
-<span id="cb27-529"><a href="#cb27-529"></a><span class="in">    dbg!(ne);</span></span>
-<span id="cb27-530"><a href="#cb27-530"></a><span class="in">}</span></span>
-<span id="cb27-531"><a href="#cb27-531"></a><span class="in">```</span></span>
+<span id="cb27-515"><a href="#cb27-515"></a></span>
+<span id="cb27-516"><a href="#cb27-516"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb27-517"><a href="#cb27-517"></a><span class="in">use serde_json;</span></span>
+<span id="cb27-518"><a href="#cb27-518"></a></span>
+<span id="cb27-519"><a href="#cb27-519"></a><span class="in">fn main() {</span></span>
+<span id="cb27-520"><a href="#cb27-520"></a><span class="in">    let mut ne: serde_json::Value = json!(serde_json::Map::new());</span></span>
+<span id="cb27-521"><a href="#cb27-521"></a></span>
+<span id="cb27-522"><a href="#cb27-522"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
+<span id="cb27-523"><a href="#cb27-523"></a><span class="in">    ne["phase_stp"] = json!("gas");</span></span>
+<span id="cb27-524"><a href="#cb27-524"></a><span class="in">    ne["group"] = json!(18);</span></span>
+<span id="cb27-525"><a href="#cb27-525"></a><span class="in">    ne["period"] = json!(2);</span></span>
+<span id="cb27-526"><a href="#cb27-526"></a></span>
+<span id="cb27-527"><a href="#cb27-527"></a><span class="in">    dbg!(ne);</span></span>
+<span id="cb27-528"><a href="#cb27-528"></a><span class="in">}</span></span>
+<span id="cb27-529"><a href="#cb27-529"></a><span class="in">```</span></span>
+<span id="cb27-530"><a href="#cb27-530"></a></span>
+<span id="cb27-531"><a href="#cb27-531"></a><span class="fu">## Pop Thy Peepers Upon It</span></span>
 <span id="cb27-532"><a href="#cb27-532"></a></span>
-<span id="cb27-533"><a href="#cb27-533"></a><span class="fu">## Pop Thy Peepers Upon It</span></span>
-<span id="cb27-534"><a href="#cb27-534"></a></span>
-<span id="cb27-535"><a href="#cb27-535"></a><span class="in">```{.sh}</span></span>
-<span id="cb27-536"><a href="#cb27-536"></a><span class="in">$ cargo r</span></span>
-<span id="cb27-537"><a href="#cb27-537"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s</span></span>
-<span id="cb27-538"><a href="#cb27-538"></a><span class="in">     Running `target/debug/deser`</span></span>
-<span id="cb27-539"><a href="#cb27-539"></a><span class="in">[src/main.rs:11:5] ne = {</span></span>
-<span id="cb27-540"><a href="#cb27-540"></a><span class="in">    "group": Number(18),</span></span>
-<span id="cb27-541"><a href="#cb27-541"></a><span class="in">    "period": Number(2),</span></span>
-<span id="cb27-542"><a href="#cb27-542"></a><span class="in">    "phase_stp": String("gas"),</span></span>
-<span id="cb27-543"><a href="#cb27-543"></a><span class="in">    "symbol": String("Ne"),</span></span>
-<span id="cb27-544"><a href="#cb27-544"></a><span class="in">}</span></span>
-<span id="cb27-545"><a href="#cb27-545"></a><span class="in">```</span></span>
+<span id="cb27-533"><a href="#cb27-533"></a><span class="in">```{.sh}</span></span>
+<span id="cb27-534"><a href="#cb27-534"></a><span class="in">$ cargo r</span></span>
+<span id="cb27-535"><a href="#cb27-535"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s</span></span>
+<span id="cb27-536"><a href="#cb27-536"></a><span class="in">     Running `target/debug/deser`</span></span>
+<span id="cb27-537"><a href="#cb27-537"></a><span class="in">[src/main.rs:11:5] ne = {</span></span>
+<span id="cb27-538"><a href="#cb27-538"></a><span class="in">    "group": Number(18),</span></span>
+<span id="cb27-539"><a href="#cb27-539"></a><span class="in">    "period": Number(2),</span></span>
+<span id="cb27-540"><a href="#cb27-540"></a><span class="in">    "phase_stp": String("gas"),</span></span>
+<span id="cb27-541"><a href="#cb27-541"></a><span class="in">    "symbol": String("Ne"),</span></span>
+<span id="cb27-542"><a href="#cb27-542"></a><span class="in">}</span></span>
+<span id="cb27-543"><a href="#cb27-543"></a><span class="in">```</span></span>
+<span id="cb27-544"><a href="#cb27-544"></a></span>
+<span id="cb27-545"><a href="#cb27-545"></a><span class="fu">## Nest it</span></span>
 <span id="cb27-546"><a href="#cb27-546"></a></span>
-<span id="cb27-547"><a href="#cb27-547"></a><span class="fu">## Nest it</span></span>
-<span id="cb27-548"><a href="#cb27-548"></a></span>
-<span id="cb27-549"><a href="#cb27-549"></a><span class="ss">- </span>When I want to nest I:</span>
-<span id="cb27-550"><a href="#cb27-550"></a><span class="ss">1. </span>Make another HashMap (or Vector, your life your choices)</span>
-<span id="cb27-551"><a href="#cb27-551"></a><span class="ss">2. </span>Do it serde-style</span>
-<span id="cb27-552"><a href="#cb27-552"></a><span class="ss">3. </span>Convert the HashMap to an "Object", the JSON name for a dictionary. (Presumably Vectors are called "Array" - I didn't check) (It doesn't matter they're all <span class="in">`Value`</span>s)</span>
-<span id="cb27-553"><a href="#cb27-553"></a><span class="ss">4. </span>Simply insert/update method as per usual.</span>
+<span id="cb27-547"><a href="#cb27-547"></a><span class="ss">- </span>When I want to nest I:</span>
+<span id="cb27-548"><a href="#cb27-548"></a><span class="ss">1. </span>Make another HashMap (or Vector, your life your choices)</span>
+<span id="cb27-549"><a href="#cb27-549"></a><span class="ss">2. </span>Do it serde-style</span>
+<span id="cb27-550"><a href="#cb27-550"></a><span class="ss">3. </span>Convert the HashMap to an "Object", the JSON name for a dictionary. (Presumably Vectors are called "Array" - I didn't check) (It doesn't matter they're all <span class="in">`Value`</span>s)</span>
+<span id="cb27-551"><a href="#cb27-551"></a><span class="ss">4. </span>Simply insert/update method as per usual.</span>
+<span id="cb27-552"><a href="#cb27-552"></a></span>
+<span id="cb27-553"><a href="#cb27-553"></a><span class="fu">## Example</span></span>
 <span id="cb27-554"><a href="#cb27-554"></a></span>
-<span id="cb27-555"><a href="#cb27-555"></a><span class="fu">## Example</span></span>
-<span id="cb27-556"><a href="#cb27-556"></a></span>
-<span id="cb27-557"><a href="#cb27-557"></a><span class="in">```{.rs}</span></span>
-<span id="cb27-558"><a href="#cb27-558"></a><span class="in">    let mut bp: serde_json::Value = json!(serde_json::Map::new());</span></span>
-<span id="cb27-559"><a href="#cb27-559"></a><span class="in">    // I'm truncating to avoid using floats (ew)</span></span>
-<span id="cb27-560"><a href="#cb27-560"></a><span class="in">    bp["K"] = json!(27);</span></span>
-<span id="cb27-561"><a href="#cb27-561"></a><span class="in">    bp["C"] = json!(-246);</span></span>
-<span id="cb27-562"><a href="#cb27-562"></a><span class="in">    bp["F"] = json!(-410);</span></span>
-<span id="cb27-563"><a href="#cb27-563"></a></span>
-<span id="cb27-564"><a href="#cb27-564"></a><span class="in">    ne["boiling_point"] = bp; // why don't we need json! here?</span></span>
-<span id="cb27-565"><a href="#cb27-565"></a><span class="in">```</span></span>
+<span id="cb27-555"><a href="#cb27-555"></a><span class="in">```{.rs}</span></span>
+<span id="cb27-556"><a href="#cb27-556"></a><span class="in">    let mut bp: serde_json::Value = json!(serde_json::Map::new());</span></span>
+<span id="cb27-557"><a href="#cb27-557"></a><span class="in">    // I'm truncating to avoid using floats (ew)</span></span>
+<span id="cb27-558"><a href="#cb27-558"></a><span class="in">    bp["K"] = json!(27);</span></span>
+<span id="cb27-559"><a href="#cb27-559"></a><span class="in">    bp["C"] = json!(-246);</span></span>
+<span id="cb27-560"><a href="#cb27-560"></a><span class="in">    bp["F"] = json!(-410);</span></span>
+<span id="cb27-561"><a href="#cb27-561"></a></span>
+<span id="cb27-562"><a href="#cb27-562"></a><span class="in">    ne["boiling_point"] = bp; // why don't we need json! here?</span></span>
+<span id="cb27-563"><a href="#cb27-563"></a><span class="in">```</span></span>
+<span id="cb27-564"><a href="#cb27-564"></a></span>
+<span id="cb27-565"><a href="#cb27-565"></a><span class="fu">## Feast Your Eyes</span></span>
 <span id="cb27-566"><a href="#cb27-566"></a></span>
-<span id="cb27-567"><a href="#cb27-567"></a><span class="fu">## Feast Your Eyes</span></span>
-<span id="cb27-568"><a href="#cb27-568"></a></span>
-<span id="cb27-569"><a href="#cb27-569"></a><span class="in">```{.sh}</span></span>
-<span id="cb27-570"><a href="#cb27-570"></a><span class="in">$ cargo r</span></span>
-<span id="cb27-571"><a href="#cb27-571"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s</span></span>
-<span id="cb27-572"><a href="#cb27-572"></a><span class="in">     Running `target/debug/deser`</span></span>
-<span id="cb27-573"><a href="#cb27-573"></a><span class="in">[src/main.rs:19:5] ne = {</span></span>
-<span id="cb27-574"><a href="#cb27-574"></a><span class="in">    "boiling_point": Object {</span></span>
-<span id="cb27-575"><a href="#cb27-575"></a><span class="in">        "C": Number(-246),</span></span>
-<span id="cb27-576"><a href="#cb27-576"></a><span class="in">        "F": Number(-410),</span></span>
-<span id="cb27-577"><a href="#cb27-577"></a><span class="in">        "K": Number(27),</span></span>
-<span id="cb27-578"><a href="#cb27-578"></a><span class="in">    },</span></span>
-<span id="cb27-579"><a href="#cb27-579"></a><span class="in">    "group": Number(18),</span></span>
-<span id="cb27-580"><a href="#cb27-580"></a><span class="in">    "period": Number(2),</span></span>
-<span id="cb27-581"><a href="#cb27-581"></a><span class="in">    "phase_stp": String("gas"),</span></span>
-<span id="cb27-582"><a href="#cb27-582"></a><span class="in">    "symbol": String("Ne"),</span></span>
-<span id="cb27-583"><a href="#cb27-583"></a><span class="in">}</span></span>
-<span id="cb27-584"><a href="#cb27-584"></a><span class="in">```</span></span>
+<span id="cb27-567"><a href="#cb27-567"></a><span class="in">```{.sh}</span></span>
+<span id="cb27-568"><a href="#cb27-568"></a><span class="in">$ cargo r</span></span>
+<span id="cb27-569"><a href="#cb27-569"></a><span class="in">    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s</span></span>
+<span id="cb27-570"><a href="#cb27-570"></a><span class="in">     Running `target/debug/deser`</span></span>
+<span id="cb27-571"><a href="#cb27-571"></a><span class="in">[src/main.rs:19:5] ne = {</span></span>
+<span id="cb27-572"><a href="#cb27-572"></a><span class="in">    "boiling_point": Object {</span></span>
+<span id="cb27-573"><a href="#cb27-573"></a><span class="in">        "C": Number(-246),</span></span>
+<span id="cb27-574"><a href="#cb27-574"></a><span class="in">        "F": Number(-410),</span></span>
+<span id="cb27-575"><a href="#cb27-575"></a><span class="in">        "K": Number(27),</span></span>
+<span id="cb27-576"><a href="#cb27-576"></a><span class="in">    },</span></span>
+<span id="cb27-577"><a href="#cb27-577"></a><span class="in">    "group": Number(18),</span></span>
+<span id="cb27-578"><a href="#cb27-578"></a><span class="in">    "period": Number(2),</span></span>
+<span id="cb27-579"><a href="#cb27-579"></a><span class="in">    "phase_stp": String("gas"),</span></span>
+<span id="cb27-580"><a href="#cb27-580"></a><span class="in">    "symbol": String("Ne"),</span></span>
+<span id="cb27-581"><a href="#cb27-581"></a><span class="in">}</span></span>
+<span id="cb27-582"><a href="#cb27-582"></a><span class="in">```</span></span>
+<span id="cb27-583"><a href="#cb27-583"></a></span>
+<span id="cb27-584"><a href="#cb27-584"></a><span class="fu">## Full Code Reference</span></span>
 <span id="cb27-585"><a href="#cb27-585"></a></span>
-<span id="cb27-586"><a href="#cb27-586"></a><span class="fu">## Full Code Reference</span></span>
-<span id="cb27-587"><a href="#cb27-587"></a></span>
-<span id="cb27-588"><a href="#cb27-588"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
-<span id="cb27-589"><a href="#cb27-589"></a><span class="in">use serde_json::json;</span></span>
-<span id="cb27-590"><a href="#cb27-590"></a></span>
-<span id="cb27-591"><a href="#cb27-591"></a><span class="in">fn main() {</span></span>
-<span id="cb27-592"><a href="#cb27-592"></a><span class="in">    let mut ne: serde_json::Value = json!(serde_json::Map::new());</span></span>
-<span id="cb27-593"><a href="#cb27-593"></a></span>
-<span id="cb27-594"><a href="#cb27-594"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
-<span id="cb27-595"><a href="#cb27-595"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
-<span id="cb27-596"><a href="#cb27-596"></a><span class="in">    ne["phase_stp"] = json!("gas");</span></span>
-<span id="cb27-597"><a href="#cb27-597"></a><span class="in">    ne["group"] = json!(18);</span></span>
-<span id="cb27-598"><a href="#cb27-598"></a><span class="in">    ne["period"] = json!(2);</span></span>
-<span id="cb27-599"><a href="#cb27-599"></a></span>
-<span id="cb27-600"><a href="#cb27-600"></a><span class="in">    let mut bp: serde_json::Value = json!(serde_json::Map::new());</span></span>
-<span id="cb27-601"><a href="#cb27-601"></a><span class="in">    // I'm truncating to avoid using floats (ew)</span></span>
-<span id="cb27-602"><a href="#cb27-602"></a><span class="in">    bp["K"] = json!(27);</span></span>
-<span id="cb27-603"><a href="#cb27-603"></a><span class="in">    bp["C"] = json!(-246);</span></span>
-<span id="cb27-604"><a href="#cb27-604"></a><span class="in">    bp["F"] = json!(-410);</span></span>
+<span id="cb27-586"><a href="#cb27-586"></a><span class="in">```{.rs filename="src/main.rs"}</span></span>
+<span id="cb27-587"><a href="#cb27-587"></a><span class="in">use serde_json::json;</span></span>
+<span id="cb27-588"><a href="#cb27-588"></a></span>
+<span id="cb27-589"><a href="#cb27-589"></a><span class="in">fn main() {</span></span>
+<span id="cb27-590"><a href="#cb27-590"></a><span class="in">    let mut ne: serde_json::Value = json!(serde_json::Map::new());</span></span>
+<span id="cb27-591"><a href="#cb27-591"></a></span>
+<span id="cb27-592"><a href="#cb27-592"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
+<span id="cb27-593"><a href="#cb27-593"></a><span class="in">    ne["symbol"] = json!("Ne");</span></span>
+<span id="cb27-594"><a href="#cb27-594"></a><span class="in">    ne["phase_stp"] = json!("gas");</span></span>
+<span id="cb27-595"><a href="#cb27-595"></a><span class="in">    ne["group"] = json!(18);</span></span>
+<span id="cb27-596"><a href="#cb27-596"></a><span class="in">    ne["period"] = json!(2);</span></span>
+<span id="cb27-597"><a href="#cb27-597"></a></span>
+<span id="cb27-598"><a href="#cb27-598"></a><span class="in">    let mut bp: serde_json::Value = json!(serde_json::Map::new());</span></span>
+<span id="cb27-599"><a href="#cb27-599"></a><span class="in">    // I'm truncating to avoid using floats (ew)</span></span>
+<span id="cb27-600"><a href="#cb27-600"></a><span class="in">    bp["K"] = json!(27);</span></span>
+<span id="cb27-601"><a href="#cb27-601"></a><span class="in">    bp["C"] = json!(-246);</span></span>
+<span id="cb27-602"><a href="#cb27-602"></a><span class="in">    bp["F"] = json!(-410);</span></span>
+<span id="cb27-603"><a href="#cb27-603"></a></span>
+<span id="cb27-604"><a href="#cb27-604"></a><span class="in">    ne["boiling_point"] = bp;</span></span>
 <span id="cb27-605"><a href="#cb27-605"></a></span>
-<span id="cb27-606"><a href="#cb27-606"></a><span class="in">    ne["boiling_point"] = bp;</span></span>
-<span id="cb27-607"><a href="#cb27-607"></a></span>
-<span id="cb27-608"><a href="#cb27-608"></a><span class="in">    dbg!(ne);</span></span>
-<span id="cb27-609"><a href="#cb27-609"></a><span class="in">}</span></span>
-<span id="cb27-610"><a href="#cb27-610"></a><span class="in">```</span></span>
+<span id="cb27-606"><a href="#cb27-606"></a><span class="in">    dbg!(ne);</span></span>
+<span id="cb27-607"><a href="#cb27-607"></a><span class="in">}</span></span>
+<span id="cb27-608"><a href="#cb27-608"></a><span class="in">```</span></span>
+<span id="cb27-609"><a href="#cb27-609"></a></span>
+<span id="cb27-610"><a href="#cb27-610"></a><span class="fu">## Closing thought</span></span>
 <span id="cb27-611"><a href="#cb27-611"></a></span>
-<span id="cb27-612"><a href="#cb27-612"></a><span class="fu">## Closing thought</span></span>
-<span id="cb27-613"><a href="#cb27-613"></a></span>
-<span id="cb27-614"><a href="#cb27-614"></a><span class="ss">- </span>It is a bit of an anti-pattern but if you are implementing an SCM for your own purposes, you don't need to use any key-value pairs at all and can exclusively use vectors/arrays.</span>
-<span id="cb27-615"><a href="#cb27-615"></a><span class="ss">    - </span>I shouldn't tell you that you are allowed to do this, but I did it for years and only stopped because other people had to start using my code.</span>
-<span id="cb27-616"><a href="#cb27-616"></a><span class="ss">- </span>You can, of course, just manipulate your design decision to use hash maps or vectors of equal depth, and cram any remaining requirements into strings.</span>
-<span id="cb27-617"><a href="#cb27-617"></a><span class="ss">    - </span>This is objectively bad, but also the historical norm (see <span class="in">`diff`</span>)</span>
-<span id="cb27-618"><a href="#cb27-618"></a><span class="ss">- </span>Think about how *you* would want to receive, into Rust, the information in a <span class="in">`diff`</span>, and just implement that!</span>
-<span id="cb27-619"><a href="#cb27-619"></a></span>
-<span id="cb27-620"><a href="#cb27-620"></a><span class="fu"># SCM Beckons</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb27-612"><a href="#cb27-612"></a><span class="ss">- </span>It is a bit of an anti-pattern but if you are implementing an SCM for your own purposes, you don't need to use any key-value pairs at all and can exclusively use vectors/arrays.</span>
+<span id="cb27-613"><a href="#cb27-613"></a><span class="ss">    - </span>I shouldn't tell you that you are allowed to do this, but I did it for years and only stopped because other people had to start using my code.</span>
+<span id="cb27-614"><a href="#cb27-614"></a><span class="ss">- </span>You can, of course, just manipulate your design decision to use hash maps or vectors of equal depth, and cram any remaining requirements into strings.</span>
+<span id="cb27-615"><a href="#cb27-615"></a><span class="ss">    - </span>This is objectively bad, but also the historical norm (see <span class="in">`diff`</span>)</span>
+<span id="cb27-616"><a href="#cb27-616"></a><span class="ss">- </span>Think about how *you* would want to receive, into Rust, the information in a <span class="in">`diff`</span>, and just implement that!</span>
+<span id="cb27-617"><a href="#cb27-617"></a></span>
+<span id="cb27-618"><a href="#cb27-618"></a><span class="fu"># SCM Beckons</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

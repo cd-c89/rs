@@ -512,14 +512,12 @@ fn main() {
 
 - Using `.insert` doesn't do it for me.
 - I turn the map *itself* into a JSON value, then use indices.
-    - Basically "Map" is a Rust thing and "Value" is a JSON thing.
-    - We insert in Rust or, perhaps "update" in JSON.
 
 ```{.rs filename="src/main.rs"}
 use serde_json;
 
 fn main() {
-    let mut ne: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+    let mut ne: serde_json::Value = json!(serde_json::Map::new());
 
     ne["symbol"] = json!("Ne");
     ne["phase_stp"] = json!("gas");

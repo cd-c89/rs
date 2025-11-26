@@ -14560,7 +14560,7 @@
     "href": "D0_serde.rjs.html#use-indexes",
     "title": "Serde",
     "section": "Use indexes",
-    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\nBasically “Map” is a Rust thing and “Value” is a JSON thing.\nWe insert in Rust or, perhaps “update” in JSON.\n\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}"
+    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Value = json!(serde_json::Map::new());\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}"
   },
   {
     "objectID": "D0_serde.rjs.html#pop-thy-peepers-upon-it",
@@ -14869,7 +14869,7 @@
     "href": "D0_serde.html#use-indexes",
     "title": "Serde",
     "section": "Use indexes",
-    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\nBasically “Map” is a Rust thing and “Value” is a JSON thing.\nWe insert in Rust or, perhaps “update” in JSON.\n\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}",
+    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Value = json!(serde_json::Map::new());\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}",
     "crumbs": [
       "Serde"
     ]
