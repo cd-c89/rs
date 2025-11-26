@@ -245,7 +245,7 @@ curl https://cd-public.github.io/scicom/helium.json -o helium.json
 
 ```{.rs}
 use serde::{Deserialize, Serialize};
-use serde_json;
+use serde_json::json;
 
 fn main() {
     let he: String = std::fs::read_to_string("helium.json").expect("Probably curl from https://cd-public.github.io/scicom/helium.json");
@@ -406,6 +406,31 @@ error: could not compile `deser` (bin "deser") due to 1 previous error
     json["number"] = serde_json::Value::Number(serde_json::Number::from(2));
 ```
 
+
+## Value
+
+- Well - actually those are just JSON values, so....
+
+```{.rs}
+    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();
+    json["number"] = serde_json::Value::Number::from(2);
+```
+
+
+
+## Value
+
+- Well - actually we can use a macro, so...
+- Make sure you have this line - it refers to `json!`
+```{.rs}
+use serde_json::json;
+```
+- It takes care of everything.
+```{.rs}
+    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();
+    json["number"] = json!(2);
+```
+
 ## In General
 
 - Easy enough to just start work in a `serde_json::map`
@@ -464,6 +489,47 @@ fn main() {
 }
 ```
 
+## `json!` it
+
+- Much nicer!
+
+```{.rs filename="src/main.rs"}
+use serde_json;
+
+fn main() {
+    let mut ne: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+
+    ne.insert(String::from("symbol"), json!("Ne"));
+    ne.insert(String::from("phase_stp"), json!("gas"));
+    ne.insert(String::from("group"), json!(18));
+    ne.insert(String::from("period"), json!(2));
+
+    dbg!(ne);
+}
+```
+
+## Use indexes
+
+- Using `.insert` doesn't do it for me.
+- I turn the map *itself* into a JSON value, then use indices.
+    - Basically "Map" is a Rust thing and "Value" is a JSON thing.
+    - We insert in Rust or, perhaps "update" in JSON.
+
+```{.rs filename="src/main.rs"}
+use serde_json;
+
+fn main() {
+    let mut ne: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+
+    ne["symbol"] = json!("Ne");
+    ne["phase_stp"] = json!("gas");
+    ne["group"] = json!(18);
+    ne["period"] = json!(2);
+
+    dbg!(ne);
+}
+```
+
 ## Pop Thy Peepers Upon It
 
 ```{.sh}
@@ -483,19 +549,19 @@ $ cargo r
 - When I want to nest I:
 1. Make another HashMap (or Vector, your life your choices)
 2. Do it serde-style
-3. Convert the HashMap to an "Object", the JSON name for a dictionary. (Presumably Vectors are called "Array" - I didn't check)
-4. Simply use the `.insert` method as per usual.
+3. Convert the HashMap to an "Object", the JSON name for a dictionary. (Presumably Vectors are called "Array" - I didn't check) (It doesn't matter they're all `Value`s)
+4. Simply insert/update method as per usual.
 
 ## Example
 
 ```{.rs}
-    let mut bp: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
+    let mut bp: serde_json::Value = json!(serde_json::Map::new());
     // I'm truncating to avoid using floats (ew)
-    bp.insert(String::from("K"), serde_json::Value::Number(serde_json::Number::from(27)));
-    bp.insert(String::from("C"), serde_json::Value::Number(serde_json::Number::from(-246)));
-    bp.insert(String::from("F"), serde_json::Value::Number(serde_json::Number::from(-410)));
+    bp["K"] = json!(27);
+    bp["C"] = json!(-246);
+    bp["F"] = json!(-410);
 
-    ne.insert(String::from("boiling_point"), serde_json::Value::Object(bp));
+    ne["boiling_point"] = bp; // why don't we need json! here?
 ```
 
 ## Feast Your Eyes
@@ -517,48 +583,30 @@ $ cargo r
 }
 ```
 
-## Use use
-
-- Can't say why I detest `use`, but I didn't use (ha) it.
+## Full Code Reference
 
 ```{.rs filename="src/main.rs"}
-use serde_json::{Map, Value, Number};
+use serde_json::json;
 
 fn main() {
-    let mut ne: Map<String, Value> = Map::new();
+    let mut ne: serde_json::Value = json!(serde_json::Map::new());
 
-    ne.insert(String::from("symbol"), Value::String(String::from("Ne")));
-    ne.insert(String::from("phase_stp"), Value::String(String::from("gas")));
+    ne["symbol"] = json!("Ne");
+    ne["symbol"] = json!("Ne");
+    ne["phase_stp"] = json!("gas");
+    ne["group"] = json!(18);
+    ne["period"] = json!(2);
 
-    ne.insert(String::from("group"), Value::Number(Number::from(18)));
-    ne.insert(String::from("period"), Value::Number(Number::from(2)));
+    let mut bp: serde_json::Value = json!(serde_json::Map::new());
+    // I'm truncating to avoid using floats (ew)
+    bp["K"] = json!(27);
+    bp["C"] = json!(-246);
+    bp["F"] = json!(-410);
+
+    ne["boiling_point"] = bp;
 
     dbg!(ne);
 }
-```
-
-## Or Macros
-
-- This seems okay to me.
-
-```{.rs}
-macro_rules! v_string {
-    ($s:expr) => {
-        Value::String(String::from($s))
-    };
-}
-
-macro_rules! v_number {
-    ($n:expr) => {
-        Value::Number(Number::from($n))
-    };
-}
-
-fn main() {
-    let mut ne: Map<String, Value> = Map::new();
-
-    ne.insert(String::from("symbol"), v_string!("Ne"));
-    ne.insert(String::from("group"), v_number!(18));
 ```
 
 ## Closing thought

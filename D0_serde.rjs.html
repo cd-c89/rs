@@ -677,7 +677,7 @@
 <li>Citation <a href="https://stackoverflow.com/a/49950214">Stack OverFlow User Shepmaster</a></li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">use</span> <span class="pp">serde::</span><span class="op">{</span>Deserialize<span class="op">,</span> Serialize<span class="op">};</span></span>
-<span id="cb6-2"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
+<span id="cb6-2"><a></a><span class="kw">use</span> <span class="pp">serde_json::</span>json<span class="op">;</span></span>
 <span id="cb6-3"><a></a></span>
 <span id="cb6-4"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb6-5"><a></a>    <span class="kw">let</span> he<span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> <span class="pp">std::fs::</span>read_to_string(<span class="st">"helium.json"</span>)<span class="op">.</span>expect(<span class="st">"Probably curl from https://cd-public.github.io/scicom/helium.json"</span>)<span class="op">;</span></span>
@@ -829,6 +829,27 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> json<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">serde_json::</span>from_str(<span class="op">&amp;</span>he)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb14-2"><a></a>    json[<span class="st">"number"</span>] <span class="op">=</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">2</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="value" class="slide level2">
+<h2>Value</h2>
+<ul>
+<li>Well - actually those are just JSON values, so….</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> json<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">serde_json::</span>from_str(<span class="op">&amp;</span>he)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb15-2"><a></a>    json[<span class="st">"number"</span>] <span class="op">=</span> <span class="pp">serde_json::Value::Number::</span>from(<span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="value-1" class="slide level2">
+<h2>Value</h2>
+<ul>
+<li>Well - actually we can use a macro, so…</li>
+<li>Make sure you have this line - it refers to <code>json!</code></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a></a><span class="kw">use</span> <span class="pp">serde_json::</span>json<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It takes care of everything.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> json<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">serde_json::</span>from_str(<span class="op">&amp;</span>he)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb17-2"><a></a>    json[<span class="st">"number"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="in-general" class="slide level2">
 <h2>In General</h2>
 <ul>
@@ -849,30 +870,30 @@
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb15" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a></a>fn main() <span class="op">{</span></span>
-<span id="cb15-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">std::collections::</span>HashMap<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::collections::HashMap::</span>new()<span class="op">;</span></span>
-<span id="cb15-3"><a></a></span>
-<span id="cb15-4"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Ne"</span>))<span class="op">;</span></span>
-<span id="cb15-5"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"gas"</span>))<span class="op">;</span></span>
-<span id="cb15-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"18"</span>))<span class="op">;</span></span>
-<span id="cb15-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"2"</span>))<span class="op">;</span></span>
-<span id="cb15-8"><a></a></span>
-<span id="cb15-9"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
-<span id="cb15-10"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a></a>fn main() <span class="op">{</span></span>
+<span id="cb18-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">std::collections::</span>HashMap<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">std::collections::HashMap::</span>new()<span class="op">;</span></span>
+<span id="cb18-3"><a></a></span>
+<span id="cb18-4"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Ne"</span>))<span class="op">;</span></span>
+<span id="cb18-5"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"gas"</span>))<span class="op">;</span></span>
+<span id="cb18-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"18"</span>))<span class="op">;</span></span>
+<span id="cb18-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"2"</span>))<span class="op">;</span></span>
+<span id="cb18-8"><a></a></span>
+<span id="cb18-9"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
+<span id="cb18-10"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="peep-it" class="slide level2">
 <h2>Peep it</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a></a><span class="ex">$</span> cargo run</span>
-<span id="cb16-2"><a></a>   <span class="ex">Compiling</span> deser v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/deser</span><span class="kw">)</span></span>
-<span id="cb16-3"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.26s</span></span>
-<span id="cb16-4"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
-<span id="cb16-5"><a></a><span class="ex">[src/main.rs:9:5]</span> ne = {</span>
-<span id="cb16-6"><a></a>    <span class="st">"group"</span><span class="ex">:</span> <span class="st">"18"</span>,</span>
-<span id="cb16-7"><a></a>    <span class="st">"period"</span><span class="ex">:</span> <span class="st">"2"</span>,</span>
-<span id="cb16-8"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> <span class="st">"Ne"</span>,</span>
-<span id="cb16-9"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> <span class="st">"gas"</span>,</span>
-<span id="cb16-10"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a></a><span class="ex">$</span> cargo run</span>
+<span id="cb19-2"><a></a>   <span class="ex">Compiling</span> deser v0.1.0 <span class="er">(</span><span class="ex">/home/user/tmp/deser</span><span class="kw">)</span></span>
+<span id="cb19-3"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.26s</span></span>
+<span id="cb19-4"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
+<span id="cb19-5"><a></a><span class="ex">[src/main.rs:9:5]</span> ne = {</span>
+<span id="cb19-6"><a></a>    <span class="st">"group"</span><span class="ex">:</span> <span class="st">"18"</span>,</span>
+<span id="cb19-7"><a></a>    <span class="st">"period"</span><span class="ex">:</span> <span class="st">"2"</span>,</span>
+<span id="cb19-8"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> <span class="st">"Ne"</span>,</span>
+<span id="cb19-9"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> <span class="st">"gas"</span>,</span>
+<span id="cb19-10"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="serde-it" class="slide level2">
 <h2>Serde it</h2>
@@ -883,31 +904,82 @@
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
-<span id="cb17-2"><a></a></span>
-<span id="cb17-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb17-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
-<span id="cb17-5"><a></a></span>
-<span id="cb17-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Ne"</span>)))<span class="op">;</span></span>
-<span id="cb17-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"gas"</span>)))<span class="op">;</span></span>
-<span id="cb17-8"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">18</span>)))<span class="op">;</span></span>
-<span id="cb17-9"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">2</span>)))<span class="op">;</span></span>
-<span id="cb17-10"><a></a></span>
-<span id="cb17-11"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
-<span id="cb17-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
+<span id="cb20-2"><a></a></span>
+<span id="cb20-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb20-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
+<span id="cb20-5"><a></a></span>
+<span id="cb20-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Ne"</span>)))<span class="op">;</span></span>
+<span id="cb20-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"gas"</span>)))<span class="op">;</span></span>
+<span id="cb20-8"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">18</span>)))<span class="op">;</span></span>
+<span id="cb20-9"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">2</span>)))<span class="op">;</span></span>
+<span id="cb20-10"><a></a></span>
+<span id="cb20-11"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
+<span id="cb20-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="json-it" class="slide level2">
+<h2><code>json!</code> it</h2>
+<ul>
+<li>Much nicer!</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb21" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
+<span id="cb21-2"><a></a></span>
+<span id="cb21-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb21-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
+<span id="cb21-5"><a></a></span>
+<span id="cb21-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>))<span class="op">;</span></span>
+<span id="cb21-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="pp">json!</span>(<span class="st">"gas"</span>))<span class="op">;</span></span>
+<span id="cb21-8"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="pp">json!</span>(<span class="dv">18</span>))<span class="op">;</span></span>
+<span id="cb21-9"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="pp">json!</span>(<span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb21-10"><a></a></span>
+<span id="cb21-11"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
+<span id="cb21-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="use-indexes" class="slide level2">
+<h2>Use indexes</h2>
+<ul>
+<li>Using <code>.insert</code> doesn’t do it for me.</li>
+<li>I turn the map <em>itself</em> into a JSON value, then use indices.
+<ul>
+<li>Basically “Map” is a Rust thing and “Value” is a JSON thing.</li>
+<li>We insert in Rust or, perhaps “update” in JSON.</li>
+</ul></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/main.rs</strong></pre>
+</div>
+<div class="sourceCode" id="cb22" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a><span class="kw">use</span> serde_json<span class="op">;</span></span>
+<span id="cb22-2"><a></a></span>
+<span id="cb22-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb22-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
+<span id="cb22-5"><a></a></span>
+<span id="cb22-6"><a></a>    ne[<span class="st">"symbol"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>)<span class="op">;</span></span>
+<span id="cb22-7"><a></a>    ne[<span class="st">"phase_stp"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"gas"</span>)<span class="op">;</span></span>
+<span id="cb22-8"><a></a>    ne[<span class="st">"group"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">18</span>)<span class="op">;</span></span>
+<span id="cb22-9"><a></a>    ne[<span class="st">"period"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb22-10"><a></a></span>
+<span id="cb22-11"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
+<span id="cb22-12"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pop-thy-peepers-upon-it" class="slide level2">
 <h2>Pop Thy Peepers Upon It</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="ex">$</span> cargo r</span>
-<span id="cb18-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.01s</span></span>
-<span id="cb18-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
-<span id="cb18-4"><a></a><span class="ex">[src/main.rs:11:5]</span> ne = {</span>
-<span id="cb18-5"><a></a>    <span class="st">"group"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">18</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb18-6"><a></a>    <span class="st">"period"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">2</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb18-7"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"gas"</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb18-8"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"Ne"</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb18-9"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a></a><span class="ex">$</span> cargo r</span>
+<span id="cb23-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.01s</span></span>
+<span id="cb23-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
+<span id="cb23-4"><a></a><span class="ex">[src/main.rs:11:5]</span> ne = {</span>
+<span id="cb23-5"><a></a>    <span class="st">"group"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">18</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb23-6"><a></a>    <span class="st">"period"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">2</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb23-7"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"gas"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb23-8"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"Ne"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb23-9"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nest-it" class="slide level2">
 <h2>Nest it</h2>
@@ -917,83 +989,65 @@
 <ol type="1">
 <li>Make another HashMap (or Vector, your life your choices)</li>
 <li>Do it serde-style</li>
-<li>Convert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check)</li>
-<li>Simply use the <code>.insert</code> method as per usual.</li>
+<li>Convert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check) (It doesn’t matter they’re all <code>Value</code>s)</li>
+<li>Simply insert/update method as per usual.</li>
 </ol>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> bp<span class="op">:</span> <span class="pp">serde_json::</span>Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">serde_json::</span>Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">serde_json::Map::</span>new()<span class="op">;</span></span>
-<span id="cb19-2"><a></a>    <span class="co">// I'm truncating to avoid using floats (ew)</span></span>
-<span id="cb19-3"><a></a>    bp<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"K"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="dv">27</span>)))<span class="op">;</span></span>
-<span id="cb19-4"><a></a>    bp<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"C"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="op">-</span><span class="dv">246</span>)))<span class="op">;</span></span>
-<span id="cb19-5"><a></a>    bp<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"F"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Number(<span class="pp">serde_json::Number::</span>from(<span class="op">-</span><span class="dv">410</span>)))<span class="op">;</span></span>
-<span id="cb19-6"><a></a></span>
-<span id="cb19-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"boiling_point"</span>)<span class="op">,</span> <span class="pp">serde_json::Value::</span>Object(bp))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> bp<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">json!</span>(<span class="pp">serde_json::Map::</span>new())<span class="op">;</span></span>
+<span id="cb24-2"><a></a>    <span class="co">// I'm truncating to avoid using floats (ew)</span></span>
+<span id="cb24-3"><a></a>    bp[<span class="st">"K"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">27</span>)<span class="op">;</span></span>
+<span id="cb24-4"><a></a>    bp[<span class="st">"C"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="op">-</span><span class="dv">246</span>)<span class="op">;</span></span>
+<span id="cb24-5"><a></a>    bp[<span class="st">"F"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="op">-</span><span class="dv">410</span>)<span class="op">;</span></span>
+<span id="cb24-6"><a></a></span>
+<span id="cb24-7"><a></a>    ne[<span class="st">"boiling_point"</span>] <span class="op">=</span> bp<span class="op">;</span> <span class="co">// why don't we need json! here?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="feast-your-eyes" class="slide level2">
 <h2>Feast Your Eyes</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="ex">$</span> cargo r</span>
-<span id="cb20-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.01s</span></span>
-<span id="cb20-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
-<span id="cb20-4"><a></a><span class="ex">[src/main.rs:19:5]</span> ne = {</span>
-<span id="cb20-5"><a></a>    <span class="st">"boiling_point"</span><span class="ex">:</span> Object {</span>
-<span id="cb20-6"><a></a>        <span class="st">"C"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">-246</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-7"><a></a>        <span class="st">"F"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">-410</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-8"><a></a>        <span class="st">"K"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">27</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-9"><a></a>    <span class="er">}</span><span class="ex">,</span></span>
-<span id="cb20-10"><a></a>    <span class="st">"group"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">18</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-11"><a></a>    <span class="st">"period"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">2</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-12"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"gas"</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-13"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"Ne"</span><span class="kw">)</span><span class="ex">,</span></span>
-<span id="cb20-14"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a></a><span class="ex">$</span> cargo r</span>
+<span id="cb25-2"><a></a>    <span class="ex">Finished</span> <span class="kw">`</span><span class="ex">dev</span><span class="kw">`</span> profile [unoptimized + debuginfo] target<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="er">in</span> <span class="ex">0.01s</span></span>
+<span id="cb25-3"><a></a>     <span class="ex">Running</span> <span class="kw">`</span><span class="ex">target/debug/deser</span><span class="kw">`</span></span>
+<span id="cb25-4"><a></a><span class="ex">[src/main.rs:19:5]</span> ne = {</span>
+<span id="cb25-5"><a></a>    <span class="st">"boiling_point"</span><span class="ex">:</span> Object {</span>
+<span id="cb25-6"><a></a>        <span class="st">"C"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">-246</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-7"><a></a>        <span class="st">"F"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">-410</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-8"><a></a>        <span class="st">"K"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">27</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-9"><a></a>    <span class="er">}</span><span class="ex">,</span></span>
+<span id="cb25-10"><a></a>    <span class="st">"group"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">18</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-11"><a></a>    <span class="st">"period"</span><span class="ex">:</span> Number<span class="er">(</span><span class="ex">2</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-12"><a></a>    <span class="st">"phase_stp"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"gas"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-13"><a></a>    <span class="st">"symbol"</span><span class="ex">:</span> String<span class="er">(</span><span class="st">"Ne"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb25-14"><a></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="use-use" class="slide level2">
-<h2>Use use</h2>
-<ul>
-<li>Can’t say why I detest <code>use</code>, but I didn’t use (ha) it.</li>
-</ul>
+<section id="full-code-reference" class="slide level2">
+<h2>Full Code Reference</h2>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>src/main.rs</strong></pre>
 </div>
-<div class="sourceCode" id="cb21" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a>use <span class="pp">serde_json::</span><span class="op">{</span>Map<span class="op">,</span> Value<span class="op">,</span> Number<span class="op">};</span></span>
-<span id="cb21-2"><a></a></span>
-<span id="cb21-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb21-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">Map::</span>new()<span class="op">;</span></span>
-<span id="cb21-5"><a></a></span>
-<span id="cb21-6"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="pp">Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Ne"</span>)))<span class="op">;</span></span>
-<span id="cb21-7"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"phase_stp"</span>)<span class="op">,</span> <span class="pp">Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"gas"</span>)))<span class="op">;</span></span>
-<span id="cb21-8"><a></a></span>
-<span id="cb21-9"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="pp">Value::</span>Number(<span class="pp">Number::</span>from(<span class="dv">18</span>)))<span class="op">;</span></span>
-<span id="cb21-10"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"period"</span>)<span class="op">,</span> <span class="pp">Value::</span>Number(<span class="pp">Number::</span>from(<span class="dv">2</span>)))<span class="op">;</span></span>
-<span id="cb21-11"><a></a></span>
-<span id="cb21-12"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
-<span id="cb21-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26" data-filename="src/main.rs"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a></a>use <span class="pp">serde_json::</span>json<span class="op">;</span></span>
+<span id="cb26-2"><a></a></span>
+<span id="cb26-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb26-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">json!</span>(<span class="pp">serde_json::Map::</span>new())<span class="op">;</span></span>
+<span id="cb26-5"><a></a></span>
+<span id="cb26-6"><a></a>    ne[<span class="st">"symbol"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>)<span class="op">;</span></span>
+<span id="cb26-7"><a></a>    ne[<span class="st">"symbol"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"Ne"</span>)<span class="op">;</span></span>
+<span id="cb26-8"><a></a>    ne[<span class="st">"phase_stp"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="st">"gas"</span>)<span class="op">;</span></span>
+<span id="cb26-9"><a></a>    ne[<span class="st">"group"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">18</span>)<span class="op">;</span></span>
+<span id="cb26-10"><a></a>    ne[<span class="st">"period"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb26-11"><a></a></span>
+<span id="cb26-12"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> bp<span class="op">:</span> <span class="pp">serde_json::</span>Value <span class="op">=</span> <span class="pp">json!</span>(<span class="pp">serde_json::Map::</span>new())<span class="op">;</span></span>
+<span id="cb26-13"><a></a>    <span class="co">// I'm truncating to avoid using floats (ew)</span></span>
+<span id="cb26-14"><a></a>    bp[<span class="st">"K"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="dv">27</span>)<span class="op">;</span></span>
+<span id="cb26-15"><a></a>    bp[<span class="st">"C"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="op">-</span><span class="dv">246</span>)<span class="op">;</span></span>
+<span id="cb26-16"><a></a>    bp[<span class="st">"F"</span>] <span class="op">=</span> <span class="pp">json!</span>(<span class="op">-</span><span class="dv">410</span>)<span class="op">;</span></span>
+<span id="cb26-17"><a></a></span>
+<span id="cb26-18"><a></a>    ne[<span class="st">"boiling_point"</span>] <span class="op">=</span> bp<span class="op">;</span></span>
+<span id="cb26-19"><a></a></span>
+<span id="cb26-20"><a></a>    <span class="pp">dbg!</span>(ne)<span class="op">;</span></span>
+<span id="cb26-21"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="or-macros" class="slide level2">
-<h2>Or Macros</h2>
-<ul>
-<li>This seems okay to me.</li>
-</ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rs number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a><span class="pp">macro_rules!</span> v_string <span class="op">{</span></span>
-<span id="cb22-2"><a></a>    (<span class="op">$</span>s<span class="op">:</span>expr) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb22-3"><a></a>        <span class="pp">Value::</span><span class="dt">String</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="op">$</span>s))</span>
-<span id="cb22-4"><a></a>    <span class="op">};</span></span>
-<span id="cb22-5"><a></a><span class="op">}</span></span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a><span class="pp">macro_rules!</span> v_number <span class="op">{</span></span>
-<span id="cb22-8"><a></a>    (<span class="op">$</span>n<span class="op">:</span>expr) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb22-9"><a></a>        <span class="pp">Value::</span>Number(<span class="pp">Number::</span>from(<span class="op">$</span>n))</span>
-<span id="cb22-10"><a></a>    <span class="op">};</span></span>
-<span id="cb22-11"><a></a><span class="op">}</span></span>
-<span id="cb22-12"><a></a></span>
-<span id="cb22-13"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb22-14"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> ne<span class="op">:</span> Map<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> Value<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">Map::</span>new()<span class="op">;</span></span>
-<span id="cb22-15"><a></a></span>
-<span id="cb22-16"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"symbol"</span>)<span class="op">,</span> <span class="pp">v_string!</span>(<span class="st">"Ne"</span>))<span class="op">;</span></span>
-<span id="cb22-17"><a></a>    ne<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"group"</span>)<span class="op">,</span> <span class="pp">v_number!</span>(<span class="dv">18</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="closing-thought" class="slide level2">
 <h2>Closing thought</h2>

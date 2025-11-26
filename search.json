@@ -14455,7 +14455,7 @@
     "href": "D0_serde.rjs.html#using-serde",
     "title": "Serde",
     "section": "Using serde",
-    "text": "Using serde\n\nWith JSON in hand and serde added to our crate, all that remains is to use it.\nCitation Stack OverFlow User Shepmaster\n\nuse serde::{Deserialize, Serialize};\nuse serde_json;\n\nfn main() {\n    let he: String = std::fs::read_to_string(\"helium.json\").expect(\"Probably curl from https://cd-public.github.io/scicom/helium.json\");\n    dbg!(&he);\n    let json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    dbg!(&json);\n}"
+    "text": "Using serde\n\nWith JSON in hand and serde added to our crate, all that remains is to use it.\nCitation Stack OverFlow User Shepmaster\n\nuse serde::{Deserialize, Serialize};\nuse serde_json::json;\n\nfn main() {\n    let he: String = std::fs::read_to_string(\"helium.json\").expect(\"Probably curl from https://cd-public.github.io/scicom/helium.json\");\n    dbg!(&he);\n    let json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    dbg!(&json);\n}"
   },
   {
     "objectID": "D0_serde.rjs.html#checkpoint",
@@ -14507,6 +14507,20 @@
     "text": "Number\n\nWe use from to take a value, such as an i32, to a serde type, like Number\nWe take the Number and package it into a Value.\n\nThis is so JSON can hold things of any type!\n\nWe place that value within the JSON (which now needs to be mut!)\n\n    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    json[\"number\"] = serde_json::Value::Number(serde_json::Number::from(2));"
   },
   {
+    "objectID": "D0_serde.rjs.html#value",
+    "href": "D0_serde.rjs.html#value",
+    "title": "Serde",
+    "section": "Value",
+    "text": "Value\n\nWell - actually those are just JSON values, so….\n\n    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    json[\"number\"] = serde_json::Value::Number::from(2);"
+  },
+  {
+    "objectID": "D0_serde.rjs.html#value-1",
+    "href": "D0_serde.rjs.html#value-1",
+    "title": "Serde",
+    "section": "Value",
+    "text": "Value\n\nWell - actually we can use a macro, so…\nMake sure you have this line - it refers to json!\n\nuse serde_json::json;\n\nIt takes care of everything.\n\n    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    json[\"number\"] = json!(2);"
+  },
+  {
     "objectID": "D0_serde.rjs.html#in-general",
     "href": "D0_serde.rjs.html#in-general",
     "title": "Serde",
@@ -14535,6 +14549,20 @@
     "text": "Serde it\n\nI love typing (coding in Rust)\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne.insert(String::from(\"symbol\"), serde_json::Value::String(String::from(\"Ne\")));\n    ne.insert(String::from(\"phase_stp\"), serde_json::Value::String(String::from(\"gas\")));\n    ne.insert(String::from(\"group\"), serde_json::Value::Number(serde_json::Number::from(18)));\n    ne.insert(String::from(\"period\"), serde_json::Value::Number(serde_json::Number::from(2)));\n\n    dbg!(ne);\n}"
   },
   {
+    "objectID": "D0_serde.rjs.html#json-it",
+    "href": "D0_serde.rjs.html#json-it",
+    "title": "Serde",
+    "section": "json! it",
+    "text": "json! it\n\nMuch nicer!\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne.insert(String::from(\"symbol\"), json!(\"Ne\"));\n    ne.insert(String::from(\"phase_stp\"), json!(\"gas\"));\n    ne.insert(String::from(\"group\"), json!(18));\n    ne.insert(String::from(\"period\"), json!(2));\n\n    dbg!(ne);\n}"
+  },
+  {
+    "objectID": "D0_serde.rjs.html#use-indexes",
+    "href": "D0_serde.rjs.html#use-indexes",
+    "title": "Serde",
+    "section": "Use indexes",
+    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\nBasically “Map” is a Rust thing and “Value” is a JSON thing.\nWe insert in Rust or, perhaps “update” in JSON.\n\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}"
+  },
+  {
     "objectID": "D0_serde.rjs.html#pop-thy-peepers-upon-it",
     "href": "D0_serde.rjs.html#pop-thy-peepers-upon-it",
     "title": "Serde",
@@ -14546,14 +14574,14 @@
     "href": "D0_serde.rjs.html#nest-it",
     "title": "Serde",
     "section": "Nest it",
-    "text": "Nest it\n\nWhen I want to nest I:\n\n\nMake another HashMap (or Vector, your life your choices)\nDo it serde-style\nConvert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check)\nSimply use the .insert method as per usual."
+    "text": "Nest it\n\nWhen I want to nest I:\n\n\nMake another HashMap (or Vector, your life your choices)\nDo it serde-style\nConvert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check) (It doesn’t matter they’re all Values)\nSimply insert/update method as per usual."
   },
   {
     "objectID": "D0_serde.rjs.html#example",
     "href": "D0_serde.rjs.html#example",
     "title": "Serde",
     "section": "Example",
-    "text": "Example\n    let mut bp: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n    // I'm truncating to avoid using floats (ew)\n    bp.insert(String::from(\"K\"), serde_json::Value::Number(serde_json::Number::from(27)));\n    bp.insert(String::from(\"C\"), serde_json::Value::Number(serde_json::Number::from(-246)));\n    bp.insert(String::from(\"F\"), serde_json::Value::Number(serde_json::Number::from(-410)));\n\n    ne.insert(String::from(\"boiling_point\"), serde_json::Value::Object(bp));"
+    "text": "Example\n    let mut bp: serde_json::Value = json!(serde_json::Map::new());\n    // I'm truncating to avoid using floats (ew)\n    bp[\"K\"] = json!(27);\n    bp[\"C\"] = json!(-246);\n    bp[\"F\"] = json!(-410);\n\n    ne[\"boiling_point\"] = bp; // why don't we need json! here?"
   },
   {
     "objectID": "D0_serde.rjs.html#feast-your-eyes",
@@ -14563,18 +14591,11 @@
     "text": "Feast Your Eyes\n$ cargo r\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s\n     Running `target/debug/deser`\n[src/main.rs:19:5] ne = {\n    \"boiling_point\": Object {\n        \"C\": Number(-246),\n        \"F\": Number(-410),\n        \"K\": Number(27),\n    },\n    \"group\": Number(18),\n    \"period\": Number(2),\n    \"phase_stp\": String(\"gas\"),\n    \"symbol\": String(\"Ne\"),\n}"
   },
   {
-    "objectID": "D0_serde.rjs.html#use-use",
-    "href": "D0_serde.rjs.html#use-use",
+    "objectID": "D0_serde.rjs.html#full-code-reference",
+    "href": "D0_serde.rjs.html#full-code-reference",
     "title": "Serde",
-    "section": "Use use",
-    "text": "Use use\n\nCan’t say why I detest use, but I didn’t use (ha) it.\n\n\n\nsrc/main.rs\n\n\u0016use serde_json::{Map, Value, Number};\n\nfn main() {\n    let mut ne: Map&lt;String, Value&gt; = Map::new();\n\n    ne.insert(String::from(\"symbol\"), Value::String(String::from(\"Ne\")));\n    ne.insert(String::from(\"phase_stp\"), Value::String(String::from(\"gas\")));\n\n    ne.insert(String::from(\"group\"), Value::Number(Number::from(18)));\n    ne.insert(String::from(\"period\"), Value::Number(Number::from(2)));\n\n    dbg!(ne);\n}"
-  },
-  {
-    "objectID": "D0_serde.rjs.html#or-macros",
-    "href": "D0_serde.rjs.html#or-macros",
-    "title": "Serde",
-    "section": "Or Macros",
-    "text": "Or Macros\n\nThis seems okay to me.\n\nmacro_rules! v_string {\n    ($s:expr) =&gt; {\n        Value::String(String::from($s))\n    };\n}\n\nmacro_rules! v_number {\n    ($n:expr) =&gt; {\n        Value::Number(Number::from($n))\n    };\n}\n\nfn main() {\n    let mut ne: Map&lt;String, Value&gt; = Map::new();\n\n    ne.insert(String::from(\"symbol\"), v_string!(\"Ne\"));\n    ne.insert(String::from(\"group\"), v_number!(18));"
+    "section": "Full Code Reference",
+    "text": "Full Code Reference\n\n\nsrc/main.rs\n\n\u0016use serde_json::json;\n\nfn main() {\n    let mut ne: serde_json::Value = json!(serde_json::Map::new());\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    let mut bp: serde_json::Value = json!(serde_json::Map::new());\n    // I'm truncating to avoid using floats (ew)\n    bp[\"K\"] = json!(27);\n    bp[\"C\"] = json!(-246);\n    bp[\"F\"] = json!(-410);\n\n    ne[\"boiling_point\"] = bp;\n\n    dbg!(ne);\n}"
   },
   {
     "objectID": "D0_serde.rjs.html#closing-thought",
@@ -14698,7 +14719,7 @@
     "href": "D0_serde.html#using-serde",
     "title": "Serde",
     "section": "Using serde",
-    "text": "Using serde\n\nWith JSON in hand and serde added to our crate, all that remains is to use it.\nCitation Stack OverFlow User Shepmaster\n\nuse serde::{Deserialize, Serialize};\nuse serde_json;\n\nfn main() {\n    let he: String = std::fs::read_to_string(\"helium.json\").expect(\"Probably curl from https://cd-public.github.io/scicom/helium.json\");\n    dbg!(&he);\n    let json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    dbg!(&json);\n}",
+    "text": "Using serde\n\nWith JSON in hand and serde added to our crate, all that remains is to use it.\nCitation Stack OverFlow User Shepmaster\n\nuse serde::{Deserialize, Serialize};\nuse serde_json::json;\n\nfn main() {\n    let he: String = std::fs::read_to_string(\"helium.json\").expect(\"Probably curl from https://cd-public.github.io/scicom/helium.json\");\n    dbg!(&he);\n    let json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    dbg!(&json);\n}",
     "crumbs": [
       "Serde"
     ]
@@ -14774,6 +14795,26 @@
     ]
   },
   {
+    "objectID": "D0_serde.html#value",
+    "href": "D0_serde.html#value",
+    "title": "Serde",
+    "section": "Value",
+    "text": "Value\n\nWell - actually those are just JSON values, so….\n\n    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    json[\"number\"] = serde_json::Value::Number::from(2);",
+    "crumbs": [
+      "Serde"
+    ]
+  },
+  {
+    "objectID": "D0_serde.html#value-1",
+    "href": "D0_serde.html#value-1",
+    "title": "Serde",
+    "section": "Value",
+    "text": "Value\n\nWell - actually we can use a macro, so…\nMake sure you have this line - it refers to json!\n\nuse serde_json::json;\n\nIt takes care of everything.\n\n    let mut json: serde_json::Value = serde_json::from_str(&he).unwrap();\n    json[\"number\"] = json!(2);",
+    "crumbs": [
+      "Serde"
+    ]
+  },
+  {
     "objectID": "D0_serde.html#in-general",
     "href": "D0_serde.html#in-general",
     "title": "Serde",
@@ -14814,6 +14855,26 @@
     ]
   },
   {
+    "objectID": "D0_serde.html#json-it",
+    "href": "D0_serde.html#json-it",
+    "title": "Serde",
+    "section": "json! it",
+    "text": "json! it\n\nMuch nicer!\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne.insert(String::from(\"symbol\"), json!(\"Ne\"));\n    ne.insert(String::from(\"phase_stp\"), json!(\"gas\"));\n    ne.insert(String::from(\"group\"), json!(18));\n    ne.insert(String::from(\"period\"), json!(2));\n\n    dbg!(ne);\n}",
+    "crumbs": [
+      "Serde"
+    ]
+  },
+  {
+    "objectID": "D0_serde.html#use-indexes",
+    "href": "D0_serde.html#use-indexes",
+    "title": "Serde",
+    "section": "Use indexes",
+    "text": "Use indexes\n\nUsing .insert doesn’t do it for me.\nI turn the map itself into a JSON value, then use indices.\n\nBasically “Map” is a Rust thing and “Value” is a JSON thing.\nWe insert in Rust or, perhaps “update” in JSON.\n\n\n\n\nsrc/main.rs\n\nuse serde_json;\n\nfn main() {\n    let mut ne: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    dbg!(ne);\n}",
+    "crumbs": [
+      "Serde"
+    ]
+  },
+  {
     "objectID": "D0_serde.html#pop-thy-peepers-upon-it",
     "href": "D0_serde.html#pop-thy-peepers-upon-it",
     "title": "Serde",
@@ -14828,7 +14889,7 @@
     "href": "D0_serde.html#nest-it",
     "title": "Serde",
     "section": "Nest it",
-    "text": "Nest it\n\nWhen I want to nest I:\n\n\nMake another HashMap (or Vector, your life your choices)\nDo it serde-style\nConvert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check)\nSimply use the .insert method as per usual.",
+    "text": "Nest it\n\nWhen I want to nest I:\n\n\nMake another HashMap (or Vector, your life your choices)\nDo it serde-style\nConvert the HashMap to an “Object”, the JSON name for a dictionary. (Presumably Vectors are called “Array” - I didn’t check) (It doesn’t matter they’re all Values)\nSimply insert/update method as per usual.",
     "crumbs": [
       "Serde"
     ]
@@ -14838,7 +14899,7 @@
     "href": "D0_serde.html#example",
     "title": "Serde",
     "section": "Example",
-    "text": "Example\n    let mut bp: serde_json::Map&lt;String, serde_json::Value&gt; = serde_json::Map::new();\n    // I'm truncating to avoid using floats (ew)\n    bp.insert(String::from(\"K\"), serde_json::Value::Number(serde_json::Number::from(27)));\n    bp.insert(String::from(\"C\"), serde_json::Value::Number(serde_json::Number::from(-246)));\n    bp.insert(String::from(\"F\"), serde_json::Value::Number(serde_json::Number::from(-410)));\n\n    ne.insert(String::from(\"boiling_point\"), serde_json::Value::Object(bp));",
+    "text": "Example\n    let mut bp: serde_json::Value = json!(serde_json::Map::new());\n    // I'm truncating to avoid using floats (ew)\n    bp[\"K\"] = json!(27);\n    bp[\"C\"] = json!(-246);\n    bp[\"F\"] = json!(-410);\n\n    ne[\"boiling_point\"] = bp; // why don't we need json! here?",
     "crumbs": [
       "Serde"
     ]
@@ -14854,21 +14915,11 @@
     ]
   },
   {
-    "objectID": "D0_serde.html#use-use",
-    "href": "D0_serde.html#use-use",
+    "objectID": "D0_serde.html#full-code-reference",
+    "href": "D0_serde.html#full-code-reference",
     "title": "Serde",
-    "section": "Use use",
-    "text": "Use use\n\nCan’t say why I detest use, but I didn’t use (ha) it.\n\n\n\nsrc/main.rs\n\n\u0016use serde_json::{Map, Value, Number};\n\nfn main() {\n    let mut ne: Map&lt;String, Value&gt; = Map::new();\n\n    ne.insert(String::from(\"symbol\"), Value::String(String::from(\"Ne\")));\n    ne.insert(String::from(\"phase_stp\"), Value::String(String::from(\"gas\")));\n\n    ne.insert(String::from(\"group\"), Value::Number(Number::from(18)));\n    ne.insert(String::from(\"period\"), Value::Number(Number::from(2)));\n\n    dbg!(ne);\n}",
-    "crumbs": [
-      "Serde"
-    ]
-  },
-  {
-    "objectID": "D0_serde.html#or-macros",
-    "href": "D0_serde.html#or-macros",
-    "title": "Serde",
-    "section": "Or Macros",
-    "text": "Or Macros\n\nThis seems okay to me.\n\nmacro_rules! v_string {\n    ($s:expr) =&gt; {\n        Value::String(String::from($s))\n    };\n}\n\nmacro_rules! v_number {\n    ($n:expr) =&gt; {\n        Value::Number(Number::from($n))\n    };\n}\n\nfn main() {\n    let mut ne: Map&lt;String, Value&gt; = Map::new();\n\n    ne.insert(String::from(\"symbol\"), v_string!(\"Ne\"));\n    ne.insert(String::from(\"group\"), v_number!(18));",
+    "section": "Full Code Reference",
+    "text": "Full Code Reference\n\n\nsrc/main.rs\n\n\u0016use serde_json::json;\n\nfn main() {\n    let mut ne: serde_json::Value = json!(serde_json::Map::new());\n\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"symbol\"] = json!(\"Ne\");\n    ne[\"phase_stp\"] = json!(\"gas\");\n    ne[\"group\"] = json!(18);\n    ne[\"period\"] = json!(2);\n\n    let mut bp: serde_json::Value = json!(serde_json::Map::new());\n    // I'm truncating to avoid using floats (ew)\n    bp[\"K\"] = json!(27);\n    bp[\"C\"] = json!(-246);\n    bp[\"F\"] = json!(-410);\n\n    ne[\"boiling_point\"] = bp;\n\n    dbg!(ne);\n}",
     "crumbs": [
       "Serde"
     ]
