@@ -45,7 +45,7 @@ format: html
 |0xB|11/10|[Dynamism](B0_dynamic.qmd)|Guest|[LCS](B2_lcs.qmd)|
 |0xC|11/17|[Merkle](C0_merkle.qmd)|[Heap](C1_heap.qmd)|[`diff`](C2_diff.qmd)| <!-- https://github.com/git/git/tree/e83c5163316f89bfbde7d9ab23ca2e25604af290 -->
 |0xD|11/24|[`serde`](D0_serde.qmd)|`None`|`None`|
-|0xE|12/01|SCM|SCM|SCM|
+|0xE|12/01|[SCM](E0_scm.md)|`patch`||
 
 SCM due 9 Dec @ 5 PM PT - Office hours begin at 2 PM - I'll probably go live on YT and just livecode in response to Discord questions.
 
