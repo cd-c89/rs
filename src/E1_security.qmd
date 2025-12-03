@@ -1,0 +1,1173 @@
+---
+title: Security
+---
+
+# Announcements
+
+- Source Control Management
+  - LCS / `diff` ongoing
+  - Hash Trees covered, not yet deployed
+  - A Pythonic (ew!) [reference solution](https://github.com/cd-c89/scmpy/tree/main).
+    - No hashing in the reference solution.
+    
+## ~~Never~~ Now
+
+- Hashing
+- Signatures
+- ~~Branches~~ Application
+
+# Hashing
+
+## Problem Statement
+
+- Basically, you don't want alterations to any source code.
+    - Easy for bugs or worse, vulnerabilities, to arise.
+    - Either from an adversary or just emergent.
+    
+## Security    
+    
+- There are two big risks.
+    - **Integrity** - Once some code is placed under control, the code is unaltered.
+    - **Confidentiality** - Any alterations made to code base must be made by some known user.
+- Together with **Availability**, these form the "CIA Triad", the basis of modern cybersecurity.
+    - We achieve availability via our performance engineering solutions, like caching latest.
+    
+## Hashes
+
+- This term, we have introduced state-of-the-art technologies to address integrity and confidentiality.
+    - SHA2 is the standard for ensuring digitial information is tamper-free.
+    - Ed25519 is the standard for ensuring digital information comes from the specified source.
+- Both are widely used with no known weakness, and are open-source.
+
+## Example
+
+- We have covered these security topics in passing as motivating examples.
+    - For SHA2/Integrity, downloading an operating system and verifying that its signature matches a trusted signature.
+    - For Ed25519/Confidentiality, transmitting sensitive information to a journalist while under surveillance.
+- The integrity example is virtually identical to our SCM use case.
+- The confidentiality example is wildly distinct.
+
+    
+## On Ed25519
+
+- Vs. RSA, the old confidentiality technology, Ed25519 is optimized to serve as a **digital signature**
+
+> [**Fast single-signature verification.** The software takes only 273364 cycles to verify...](https://ed25519.cr.yp.to/)
+
+> [**Very fast signing.** The software takes only 87548 cycles to sign a message.](https://ed25519.cr.yp.to/)
+
+> [**Small signatures.** Signatures fit into 64 bytes.](https://ed25519.cr.yp.to/)
+
+## Two cases
+
+- Suppose I want to whistle-blow without being caught.
+    - I take a payload, like some classified document.
+    - I look up a journalists **public key**
+    - I encrypt the payload, then transmit.
+- The contents of the payload are confidential - only the journalist may read them.
+
+## Two cases
+
+- Suppose I want to whistle-blow and people be able to know it was me.
+    - I encrypt it using my own **private key**
+    - I encrypt the payload, then transmit.
+    - I release my **public key**, and the public can only decrypt using these keys.
+    - No one else may have released the document.
+- The ownership of the payload is confidential - only I may have generated them.
+
+## Digital Signatures
+
+- We term this "confidentiality of ownership" as a digital signature, and introduce it use the [Cryptobook](https://toc.cryptobook.us/book.pdf) "attack game".
+- This will show what we are trying to do and what we are trying to prevent.
+
+# Signatures
+    
+## [Cryptobook](https://toc.cryptobook.us/book.pdf):
+
+> We give
+the adversary the power to mount a **chosen message attack**, namely the attacker can request the
+signature on any message of his choice. Even with such power, the adversary should not be able
+to create an **existential forgery**, namely the attacker cannot output a valid message-signature
+pair $(m, \omega)$ for some new message $m$. 
+
+## [Cryptobook](https://toc.cryptobook.us/book.pdf):
+
+**Attack Game 13.1 (Signature security).** For a given signature scheme $\mathcal{S} = (\mathcal{G}, \mathcal{S}, \mathcal{V})$, (generate, sign, verify) defined over $(\mathcal{M}, \Sigma)$, (messages, signatures), and a given adversary $\mathcal{A}$, the attack game runs as follows:
+
+* The challenger runs $(pk, sk) \leftarrow \mathcal{G}()$ (private signing key, public verifying key) and sends $pk$ to $\mathcal{A}$.
+
+## [Cryptobook](https://toc.cryptobook.us/book.pdf):
+
+**Attack Game 13.1 (Signature security).** For a given signature scheme $\mathcal{S} = (\mathcal{G}, \mathcal{S}, \mathcal{V})$, (generate, sign, verify) defined over $(\mathcal{M}, \Sigma)$, (messages, signatures), and a given adversary $\mathcal{A}$, the attack game runs as follows:
+
+* $\mathcal{A}$ queries the challenger several times. For $i = 1, 2, \dots$, the $i^{th}$ signing query is a message $m_i \in \mathcal{M}$. Given $m_i$, the challenger computes $\sigma_i \leftarrow \mathcal{S}(sk, m_i)$, and then gives $\sigma_i$ to $\mathcal{A}$.
+
+
+## [Cryptobook](https://toc.cryptobook.us/book.pdf):
+
+**Attack Game 13.1 (Signature security).** For a given signature scheme $\mathcal{S} = (\mathcal{G}, \mathcal{S}, \mathcal{V})$, (generate, sign, verify) defined over $(\mathcal{M}, \Sigma)$, (messages, signatures), and a given adversary $\mathcal{A}$, the attack game runs as follows:
+
+* Eventually $\mathcal{A}$ outputs a candidate forgery pair $(m, \sigma) \in \mathcal{M} \times \Sigma$.
+
+## [Cryptobook](https://toc.cryptobook.us/book.pdf):
+
+**Attack Game 13.1 (Signature security).** For a given signature scheme $\mathcal{S} = (\mathcal{G}, \mathcal{S}, \mathcal{V})$, (generate, sign, verify) defined over $(\mathcal{M}, \Sigma)$, (messages, signatures), and a given adversary $\mathcal{A}$, the attack game runs as follows:
+
+* We say that the adversary wins the game if the following two conditions hold:
+
+$$
+\mathcal{V}(pk, m, \sigma) = \text{accept}
+$$
+
+# Application
+
+## Merkle Tree
+
+- The standard for an SCM is to use a Merkle Tree for integrity.
+- We explore how.
+
+## Risk
+
+- The big thing that can go wrong with an SCM is version corrruption.
+    - I write some code.
+    - I commit said code.
+    - I keep writing code.
+    - Whoops! I decide to go back.
+    - I don't *quite* get back my old code.
+    
+## What could happen?
+
+- Say you're missing a line in a diff or something.
+    - Maybe it has an `unwrap` in it that causes runtime instability.
+        - Just happened to [Cloudflare](https://blog.cloudflare.com/18-november-2025-outage/#memory-preallocation)
+    - Maybe it uses a hard-coded plaintext private key.
+    - Maybe a single character can be changed to use a malicious rather then intended library.
+        - This happens a lot I think. [More](https://medium.com/cloud-security/security-flaws-due-to-incorrectly-imported-libraries-c6ba7c3cb947)
+        
+## Verify
+
+- It is a simple matter to compute and save the hash of a commit.
+    - But don't make a silly mistake!
+- We **should not** hash any internal SCM contents.
+    - If we do so, our security is reliant on the SCM containing no bugs!
+    - We would have to verify this.
+
+## Process
+
+- Easier to give a demo.
+
+```{.sh}
+cat `find * -type f` | sha512sum
+```
+
+- What does this do?
+
+## Example
+
+- I'll use the answer key repo, which has a nice structure.
+
+```{.sh}
+$ tree
+.
+├── ans_ix
+│   ├── lib.rs
+│   └── main.rs
+├── dag.rs
+├── sha_rs.rs
+├── stacks
+│   ├── lib.rs
+│   └── main.rs
+└── word_l.rs
+
+2 directories, 7 files
+```
+
+## Find
+
+- `find` is great, it lists files.
+
+```{.sh}
+$ find
+.
+./sha_rs.rs
+./ans_ix
+./ans_ix/lib.rs
+./ans_ix/main.rs
+./stacks
+./stacks/lib.rs
+./stacks/main.rs
+./word_l.rs
+./dag.rs
+./.git
+./.git/FETCH_HEAD
+./.git/description
+./.git/ORIG_HEAD
+./.git/objects
+./.git/objects/67
+./.git/objects/67/af462a42ab77b0ff61b8f3da14b1bf97d204c0
+./.git/objects/f2
+./.git/objects/f2/36bc0898f13dd4a823e643c7b2862f0c8795f7
+./.git/objects/28
+./.git/objects/28/d7ebdcfea37db01f0e2c953c57ba6d15c17302
+./.git/objects/b2
+./.git/objects/b2/cb5c74cc2917399a2e4030378141c01dba8d73
+./.git/objects/32
+./.git/objects/32/3c45e2fa23dfe26cfa79a32bb32d21a9eaae29
+./.git/objects/82
+./.git/objects/82/ae49927c6b8dffc113483d36e68be702e5ceb8
+./.git/objects/22
+./.git/objects/22/d0122e182ab99f72cec88833546e8502bc4be4
+./.git/objects/6d
+./.git/objects/6d/f021fc12b401ee7f25230603d26c6726ce7e19
+./.git/objects/d7
+./.git/objects/d7/53904589571673128ce8b917056a618a0b4d76
+./.git/objects/c1
+./.git/objects/c1/d4a8a17f89ac970a679dee5f489882e8413a0d
+./.git/objects/ee
+./.git/objects/ee/e6ea95792470aee2bc5d66186294f08baaeae5
+./.git/objects/8f
+./.git/objects/8f/82d5253b893daa42cc757f5d6348fa41c476c4
+./.git/objects/fe
+./.git/objects/fe/19e9a45e1b67bdc830729da65f232400658d25
+./.git/objects/db
+./.git/objects/db/8d69275eda159eec35c3fc964f4c4f2823defc
+./.git/objects/68
+./.git/objects/68/9b27713f40572265c47b51f4e72cb7c74d7590
+./.git/objects/68/51d6f17a0dbaf9645aed4ffd6824f42bbe19c0
+./.git/objects/68/dad04fdfcffe335502f270ca725005d82c6c50
+./.git/objects/23
+./.git/objects/23/4f1ac2a8f54af7c8bf9ef39efec2747a52d5db
+./.git/objects/23/a682fe5d4177fef56a53b380a8830a71e47469
+./.git/objects/42
+./.git/objects/42/d16d182e3a6dacb1bd25109f51ff5021bda639
+./.git/objects/77
+./.git/objects/77/697e7c490287926943bf7778a48cbaa2fefe45
+./.git/objects/02
+./.git/objects/02/0779b1919c5668f6fbc5f79b2dee2b9b0734cc
+./.git/objects/97
+./.git/objects/97/5fed60b7c65b41cb47c6548f390107fd342190
+./.git/objects/8d
+./.git/objects/8d/555a9c0c44de1128c2e1fbfa9f9f883ffe6a9b
+./.git/objects/78
+./.git/objects/78/b09d75e0d00328e208654e7dfb905eabc91de4
+./.git/objects/8c
+./.git/objects/8c/6b1ba0f5022a31c453220b24635b67cbf1c95d
+./.git/objects/8c/36528a46b7933446bcfa876124bdd1976d8bcd
+./.git/objects/5e
+./.git/objects/5e/db170479c37dd3fe548ac059be9331eecb59cc
+./.git/objects/4d
+./.git/objects/4d/21834cb64562cbd6548632d08577bf0009a955
+./.git/objects/4d/dd94bb6ebd4f94e0411a94327d2d8e0d7edf17
+./.git/objects/37
+./.git/objects/37/fea19126dbe8b37e765e9433a47856984fca30
+./.git/objects/cc
+./.git/objects/cc/2d3b39e2ca046d3cd2fd03f7b900fe2b71931f
+./.git/objects/c9
+./.git/objects/c9/02dd9814b5e90cf7413a4fc1da83ac400d1f79
+./.git/objects/ed
+./.git/objects/ed/98eb9db1de5f3e0b6a216c1d13593b06f303ea
+./.git/objects/ed/aefb99e95d315b10064587f94aa4e2fe8e983f
+./.git/objects/45
+./.git/objects/45/7be444ade1cd9845f1104a1918be14d7e7ef1c
+./.git/objects/45/99e597af062fe2c50437dc5b564ddd72dc778f
+./.git/objects/87
+./.git/objects/87/bd976f442464852c41af5e10c9464e556287a6
+./.git/objects/61
+./.git/objects/61/95b209f282246ed431d528efdec75ebff4d60b
+./.git/objects/6b
+./.git/objects/6b/1316f4a9f03329818406bc6b450dfb4798ab74
+./.git/objects/71
+./.git/objects/71/611a35b1c8befc57aec30ab4486f3750119542
+./.git/objects/71/9cd079e58021780fc654c46fc106a93317d853
+./.git/objects/06
+./.git/objects/06/a2c9074c48b1f4a21d16ecf0556af4476ec57e
+./.git/objects/06/5447a03ab73684d259ae6423058603d2cb9dd2
+./.git/objects/f7
+./.git/objects/f7/df926a023f9363c169b34c491e088b9e295d08
+./.git/objects/cd
+./.git/objects/cd/ad824ff43c7955e02e4f9debea95bc2073f51d
+./.git/objects/cd/19cac96df41bc090c177a452cef7881df0a26a
+./.git/objects/cd/587c0b76267009e32d07a1ea35da6e6b9f8e55
+./.git/objects/9e
+./.git/objects/9e/9cb71220911392ef33fe2895af8cda75e8d4b9
+./.git/objects/6a
+./.git/objects/6a/b7b5337e1cdbbf841e761c80eae9d4dd638b03
+./.git/objects/81
+./.git/objects/81/06a18832f1aee79c115186327de6f16c52f9d9
+./.git/objects/20
+./.git/objects/20/d7c319cda945dc07729797750a49b232206ab5
+./.git/objects/20/8c568f21df1a1566f0ce4acae4472c99dc0f1e
+./.git/objects/7a
+./.git/objects/7a/c70aab4f3e0f18b7cce147468d48ee4b2f4b04
+./.git/objects/24
+./.git/objects/24/9a27147cb285ee9f1dc3c753fefc11a9738058
+./.git/objects/24/46a649c9de0f94d692e315fded268174653a53
+./.git/objects/24/98b9818720d58014eabf3379c446b86849c4ec
+./.git/objects/0c
+./.git/objects/0c/387b67529e34ad4a9f168e0098c861a6321b02
+./.git/objects/info
+./.git/objects/6c
+./.git/objects/6c/7124841c3b97fcd6f786f35d3c4488149617ff
+./.git/objects/38
+./.git/objects/38/96017c232bcd9d17240ceec476cc4348c3f5d3
+./.git/objects/38/7134b0ab18d30968ce3355031b5d8c4f984d96
+./.git/objects/0b
+./.git/objects/0b/33b6ab664c8ff9ecbc262131ceb78eccd2fd62
+./.git/objects/0b/73fc9f6a6b9016932e24f8941f07e4233285f9
+./.git/objects/08
+./.git/objects/08/8fa9c79868958330dc1011efba5ff913558460
+./.git/objects/d3
+./.git/objects/d3/89bebccf1bbde276912731fe956f418aba1436
+./.git/objects/d3/e5bbe1d1b10c4bfd1a7b1049d6608653995332
+./.git/objects/a2
+./.git/objects/a2/056e8eadc638c7511295d07c3769d12d8fd916
+./.git/objects/a2/854a8188ce32ca6e3fea9ea56ae8b9cdc20876
+./.git/objects/d4
+./.git/objects/d4/d7b640f84728f1e00ee1773b07e107d2cd99b3
+./.git/objects/1e
+./.git/objects/1e/f3bb2c8ca015dbede10c1fba52a4d52eabbd21
+./.git/objects/d2
+./.git/objects/d2/01db6757edeb49fe6eb65fce00103a744cbc0d
+./.git/objects/ef
+./.git/objects/ef/24820bb836d2ffe3f0906de6977a46f242a35b
+./.git/objects/2b
+./.git/objects/2b/a4ff5527209a4724dfe1b2362815500ed32af1
+./.git/objects/e4
+./.git/objects/e4/55afda0a9c6b1bf2465c29a1c0e387eae4f427
+./.git/objects/c3
+./.git/objects/c3/29ae44429111645a5ead5349689db659f51e0b
+./.git/objects/c3/a6ab60322f696cbfca6b8b3c2ed375ebdadf23
+./.git/objects/pack
+./.git/objects/a6
+./.git/objects/a6/5926637dfb51b691d6c99cc4e0976410e55d4a
+./.git/objects/a6/564cc1e3ebafce2cfa8a16d3e5c570c5eea22d
+./.git/objects/ce
+./.git/objects/ce/b64bf5209b8da86f5853e06c6868b7c7bac4cf
+./.git/objects/be
+./.git/objects/be/8c204f7712f84a4360e7e2e2e4dc6750970dbb
+./.git/objects/65
+./.git/objects/65/ba38d821f268c3caf2e399e1fa3dbf5b22e620
+./.git/objects/c0
+./.git/objects/c0/163bbeaabf716c61676470ad686da4426b5dcc
+./.git/objects/2c
+./.git/objects/2c/a77de92a4b69b18ff46802d5c4f0e2caf15a76
+./.git/objects/f3
+./.git/objects/f3/68da2899e7c075d366a7abe21a58b45fce4a82
+./.git/objects/5c
+./.git/objects/5c/54f74a99114dbe9324f717bdccb4490efa0e4f
+./.git/objects/5c/98fd7b0000b5b2210f28a9366dcbcb890bfc6e
+./.git/objects/11
+./.git/objects/11/82de79e07ea2b0c6da3fcea81d81062a89b895
+./.git/objects/9f
+./.git/objects/9f/92217cd55d7c72d5e276d949215fda3d62f777
+./.git/objects/52
+./.git/objects/52/51078b447ed268ca25388e614b89fd02823223
+./.git/objects/a9
+./.git/objects/a9/819958d9d31168d5302fca64497049ddae1fca
+./.git/objects/35
+./.git/objects/35/8764c5eae54a0639c3e566179a5c7b6f109a07
+./.git/objects/0a
+./.git/objects/0a/1681daaeedd48b283617144b0106f1d5d2a3b6
+./.git/objects/73
+./.git/objects/73/2a0405b94cfa5386905e080812a8cc6d6b0c2e
+./.git/objects/dd
+./.git/objects/dd/8c701dcc859f67d53178f4b9dda79ffe4ef53f
+./.git/objects/4a
+./.git/objects/4a/b8b0fd243cd9cfdd61456df94e0bc90b76fc82
+./.git/objects/e6
+./.git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+./.git/objects/bd
+./.git/objects/bd/4e4099a40b5585dfd436e329b298fb68b3c3df
+./.git/objects/f5
+./.git/objects/f5/b208e9a2b49424027059b208fc1a96f1238fb1
+./.git/objects/d9
+./.git/objects/d9/f8b93e8b5419a19a4cfbfa0768cecbcf2c584e
+./.git/objects/6f
+./.git/objects/6f/d1d37e5c95b642ff2a9117f195857b9977490d
+./.git/objects/6f/50c7840e97bf30e4e595dc15c488d0df0f837d
+./.git/objects/51
+./.git/objects/51/5824d41b2c2350bd0c417c3736f44bb64c11b8
+./.git/objects/f4
+./.git/objects/f4/611b934eb0e87e9aeea80077b05e2119c5988b
+./.git/objects/7e
+./.git/objects/7e/028ee4f1fff44a0fdf1af43b6ac6b21b1cd0cb
+./.git/objects/b7
+./.git/objects/b7/f26d6eab0f11a4586f0df93fa05a842d5d37d2
+./.git/objects/09
+./.git/objects/09/396888b480d8a8d718abba4bae434a667db728
+./.git/objects/01
+./.git/objects/01/69dea033fa7e1911abb8abbb6168ac1c0ffacf
+./.git/objects/e9
+./.git/objects/e9/7d3f93b4afd9dc2fcc297653e6dcdb126b4261
+./.git/objects/e9/81528b271f5cda061c072971a0644d2b425b4d
+./.git/objects/46
+./.git/objects/46/4c5c9c97a3432bca0f5232d580b911dfe678c7
+./.git/objects/46/c0a2afbb8d3476ec432c742c0574402c9c8ad6
+./.git/objects/b0
+./.git/objects/b0/1696b76a3b505bad849d1198ad78a2a39cc1f6
+./.git/objects/72
+./.git/objects/72/0618c7dbbb2185365529e45530cd3e200da5ce
+./.git/objects/2a
+./.git/objects/2a/712f1b01bfe84527bb33502e38eb131d926f30
+./.git/objects/e7
+./.git/objects/e7/7c53056e8fecefdea3648f8ace93cc504ace7e
+./.git/objects/17
+./.git/objects/17/3e0b53ab794fe7df89aebdc6639e8e48373ec2
+./.git/objects/34
+./.git/objects/34/309e5aef2939d6668ba0db4043eb9dbea93c22
+./.git/objects/05
+./.git/objects/05/05157dcab90a4a7de2c720db62bc062fdeb56f
+./.git/objects/19
+./.git/objects/19/5252518a6fdb6f535b8c475691e85da73e4cd2
+./.git/objects/60
+./.git/objects/60/e5f362f63bcfdcc1609cc38aea90686d0cbbe9
+./.git/objects/39
+./.git/objects/39/112d61de1dd0211460e67f37bf176e55a7ab5d
+./.git/objects/29
+./.git/objects/29/c15c73e35f5a9fc98699f923d321e9a8897280
+./.git/objects/5a
+./.git/objects/5a/7b24f0107da88e7b5bd170916a976627490e53
+./.git/objects/47
+./.git/objects/47/5bcd060acf669a3928d66498c3dcbadf5a60c9
+./.git/objects/1c
+./.git/objects/1c/b1a707d7f16875187e823c234da22c6fe50283
+./.git/objects/e0
+./.git/objects/e0/0328da5aa8e7fba830f8cc8d04777646c36cff
+./.git/objects/e0/424becff3b6e6181d41ffc3db96d4d7d0c180b
+./.git/objects/1a
+./.git/objects/1a/17d71f0cf51c92d39754ce0f20c81ecdd16bf9
+./.git/objects/31
+./.git/objects/31/07eb6a98ef864699aff8ab493219ec4fcaff60
+./.git/objects/31/4a3e2c2a1af5f225fa22e1d9db1e9a7978fcb4
+./.git/objects/31/8443a6e155e1a36c0b1e139feb965fd116070b
+./.git/refs
+./.git/refs/heads
+./.git/refs/heads/main
+./.git/refs/remotes
+./.git/refs/remotes/origin
+./.git/refs/remotes/origin/main
+./.git/refs/tags
+./.git/index
+./.git/COMMIT_EDITMSG
+./.git/info
+./.git/info/exclude
+./.git/hooks
+./.git/hooks/pre-merge-commit.sample
+./.git/hooks/fsmonitor-watchman.sample
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/push-to-checkout.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/pre-receive.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/post-update.sample
+./.git/hooks/update.sample
+./.git/hooks/commit-msg.sample
+./.git/hooks/prepare-commit-msg.sample
+./.git/hooks/pre-push.sample
+./.git/branches
+./.git/config
+./.git/HEAD
+./.git/logs
+./.git/logs/refs
+./.git/logs/refs/heads
+./.git/logs/refs/heads/main
+./.git/logs/refs/remotes
+./.git/logs/refs/remotes/origin
+./.git/logs/refs/remotes/origin/main
+./.git/logs/HEAD
+```
+
+## Too many
+
+- Let's use `find *` instead, which lists files which match `*`, that is, non-hidden.
+
+```{.sh}
+$ find *
+ans_ix
+ans_ix/lib.rs
+ans_ix/main.rs
+dag.rs
+sha_rs.rs
+stacks
+stacks/lib.rs
+stacks/main.rs
+word_l.rs
+```
+
+- Better, but...
+
+## Files only
+
+- We only want to look at files.
+
+```{.sh}
+$ find * -type f
+ans_ix/lib.rs
+ans_ix/main.rs
+dag.rs
+sha_rs.rs
+stacks/lib.rs
+stacks/main.rs
+word_l.rs
+```
+
+- Perfect! Now, to hash them all...
+
+## Simpler example
+
+- That would be a lot of text so swap to simpler example.
+
+```{.sh}
+$ ls
+cal.txt  dev  snap  tmp  vin.txt
+$ find *.*
+cal.txt
+vin.txt
+```
+
+## Cat them
+
+- We place the `find` with in backticks (by tilde) to make it be the argument of cat.
+
+```{.sh}
+$ cat `find *.*`
+c
+a
+l
+v
+i
+n
+
+d
+e
+u
+v
+i
+n
+
+d
+i
+e
+s
+e
+l
+```
+
+## Then hash!
+
+- We "pipe" the lines of text into `sha512sum`
+
+```{.sh}
+$ cat `find *.*` | sha512sum
+25afaadaa10cbc1af5870a6101370d4aa448bebe9ea309be0002a462205a7ac22a0612f0e564c732c24bb80213b53fd3653bf7422c3377d570be20962a4de113  -
+```
+
+## It Changes
+
+- But wait - we are now adding empty lines to end of all of our files.
+- Add the lines, the hash changes.
+
+```{.sh}
+$ cat `find *.*` | sha512sum
+92aa6e716cd4ddb91fd618628d406495b9dde1f12f9a3392413a345580bdebc2f1ca558fb060653fb270492c39ed517d5b57aa7ddb6e5b225b978193dfbc486c  -
+$ cat `find *.*`
+c
+a
+l
+v
+i
+n
+
+d
+e
+u
+
+v
+i
+n
+
+d
+i
+e
+s
+e
+l
+
+```
+
+## How to use?
+
+- These hashes are the keys to which the commits were the values:
+- Previously:
+```{.py}
+scm["commit"].append({"init": init, "diff": diff})
+```
+- Now:
+```{.py}
+h = compute_hash(fs) # left as an exercise
+scm["commit"][h] = {"init": init, "diff": diff}
+```
+- But wait!
+
+
+## Ordering
+
+- Dictionaries, HashMaps, Maps, and Objects aren't ordered.
+    - Lists, Vectors, and Arrays are.
+- Uh oh!
+    - Also store a an array of hashes!
+```{.py}
+h = compute_hash(fs)
+scm["commit"][h] = {"init": init, "diff": diff}
+scm["hashes"].append(h)
+```
+
+## Visually
+
+```{dot}
+digraph json {
+  rankdir=TD;
+  bgcolor="transparent"
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label="latest|<other> commit|<here> hashes"]
+  
+  merkle [label="{0|<0> hash(0)}|{<1> 1|hash(1)}|{2|hash(2)}|{3|...}"]
+  commit [label="{hash(1)|{init|diff}}|{hash(0)|{init|diff}}"]
+  
+  1:here -> merkle
+  1:other -> commit
+
+}
+```
+
+## Simply...
+
+- Check the array of ordered hashes to get the relevant hash, and...
+- Look up the relevant hash in key-value storage of hashes-commit.
+- Surely this is good enough (it's not).
+
+## Merkle Tree
+
+- We don't have a Merkle root.
+    - *Way* to easy for some to just alter a commit and its hash at the same time.
+- Many implementations, I show an easy one.
+
+## Easy Style
+
+
+::::{.columns}
+
+:::{.column width=50%}
+
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph json {
+  rankdir=TD;
+  bgcolor="transparent"
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+ 
+  merkle [label="{0|<0> hash(0)}|{<1> 1|hash(1)}|{2|hash(2)}|{3|hash(3)}}"]
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  4 [label=""]
+  5 [label=""]
+  6 [label=""]
+  7 [label=""]
+  
+  merkle [shape=record, label="{<0>0| hash(0)}|{<1> 1|hash(1)}|{<2> 2|hash(2)}|{<3> 3|hash(3)}}"]
+
+  1 -> 2
+  1 -> 3
+  2 -> 4
+  2 -> 5
+  3 -> 6
+  3 -> 7
+  
+  
+  4 -> merkle:0
+  5 -> merkle:1
+  6 -> merkle:2
+  7 -> merkle:3
+
+}
+```
+
+
+:::
+
+::::
+
+## Don't need leafves
+
+
+::::{.columns}
+
+:::{.column width=50%}
+
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph json {
+  rankdir=TD;
+  bgcolor="transparent"
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+ 
+  merkle [label="{0|<0> hash(0)}|{<1> 1|hash(1)}|{2|hash(2)}|{3|hash(3)}}"]
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label=""]
+  2 [label=""]
+  3 [label=""] 
+  
+  merkle [shape=record, label="{<0>0| hash(0)}|{<1> 1|hash(1)}|{<2> 2|hash(2)}|{<3> 3|hash(3)}}"]
+
+  1 -> 2
+  1 -> 3
+  
+  
+  2 -> merkle:0
+  2 -> merkle:1
+  3 -> merkle:2
+  3 -> merkle:3
+
+}
+```
+
+
+:::
+
+::::
+
+## Serialize Rows
+
+
+::::{.columns}
+
+:::{.column width=50%}
+
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph json {
+  rankdir=TD;
+  bgcolor="transparent"
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+ 
+  merkle [label="{0|<0> hash(0)}|{<1> 1|hash(1)}|{2|hash(2)}|{3|hash(3)}}"]
+
+}
+```
+    
+
+
+:::
+
+:::{.column width=50%}
+
+
+```{dot}
+//| echo: false
+//| fig-width: 400px
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=circle
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  1 [label="Merkle Root"]
+  
+  row [shape=record, label="<0> h(h(0),h(1))|<1> h(h(2),h(3))"]
+  merkle [shape=record, label="<0> hash(0)|<1> hash(1)|<2> hash(2)|<3> hash(3)"]
+
+  1 -> row
+  row:0 -> merkle:0
+  row:0 -> merkle:1
+  row:1 -> merkle:2
+  row:1 -> merkle:3
+
+}
+```
+
+
+:::
+
+::::
+
+## It's a 2d array
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{Root|h(h(0),h(1))|hash(0)}|{|h(h(2),h(3))|hash(1)}|{||hash(2)}|{||hash(3)}"]
+
+}
+```
+
+## I put the commits first
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Root}|{hash(1)|h(h(2),h(3))|}|{hash(2)||}|{hash(3)||}"]
+
+}
+```
+
+## Basically
+
+- Latest commit is always
+
+```{.py}
+scm["merkle"][0][-1]
+```
+
+- Root is always
+
+```{.py}
+scm["merkle"][-1][0]
+```
+
+- You can head append commits (why not) to get latest as
+
+```{.py}
+scm["merkle"][0][0]
+```
+
+- Just makes growing the tree harder.
+
+## Insert Example
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Root}|{hash(1)|h(h(2),h(3))|}|{hash(2)||}|{hash(3)||}|{hash(4)||}"]
+
+}
+```
+
+## Hash Upward
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Root}|{hash(1)|h(h(2),h(3))|}|{hash(2)|h(h(4),null)|}|{hash(3)||}|{hash(4)||}"]
+
+}
+```
+
+## Add Row
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Old Root|}|{hash(1)|h(h(2),h(3))||}|{hash(2)|h(h(4),null)||}|{hash(3)|||}|{hash(4)|||}"]
+
+}
+```
+
+## Fill Row
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Old Root|}|{hash(1)|h(h(2),h(3))|h(h(h(4),null))|}|{hash(2)|h(h(4),null)||}|{hash(3)|||}|{hash(4)|||}"]
+
+}
+```
+
+
+## New Root
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  merkle [label="{hash(0)|h(h(0),h(1))|Old Root|Root}|{hash(1)|h(h(2),h(3))|h(h(h(4),null))|}|{hash(2)|h(h(4),null)||}|{hash(3)|||}|{hash(4)|||}"]
+
+}
+```
+
+## Separate Arrays
+
+```{dot}
+digraph finite_automata {
+  rankdir=TD;
+  bgcolor="transparent";
+
+  node [
+      fontcolor = "#ffffff",
+      color = "#ffffff",
+      shape=record
+  ]
+
+  edge [
+      color = "#ffffff",
+      fontcolor = "#ffffff"
+  ]
+
+  
+  0 [label="hash(0)|hash(1)|hash(2)|hash(3)|hash(4)"]
+  1 [label="h(h(0),h(1))|h(h(2),h(3))|h(h(4),null)"]
+  2 [label="h(h(h(0),h(1)),h(h(2),h(3)))|h(h(h(4),null))"]
+  3 [label="h(h(h(h(0),h(1)),h(h(2),h(3))),h(h(h(4),null)))"]
+  
+  0 -> 1
+  1 -> 2
+  2 -> 3
+}
+```
+
+## You can serialize
+
+- It's fine to do this heap style, I just didn't.
+- It was really nice to have a separate list of all commits I found.
+- Also made it easy to update the tree - you always update the last element of each array.
+
+# Application
+
+## Signatures
+
+- Signing is "easy"
+    - Once you've done Ed25519
+- To each commit add:
+    - The public key of whoever signed it, and
+    - The hash of the commit encrypted by the corresponding private key.
+
+```{.py}
+pubk = 1234
+sign = ed25519(h, pubk)
+scm["commit"][h] = {"init": init, "diff": diff, "user":pubk, "sign": sign}
+```
+
+## Trust but verify
+
+- Whenever doing a `revert` you should now:
+    - Recompute the hash
+    - Decrypt the signature.
+    - Check each against the known hash.
+    
+# Fin
+
+## Bonus
+
+- I am seeking exactly 4 researchers next term and next summer.
+    - Next term: 2 credit hour remote synchronous research training course.
+    - Summer: Apply to this course's organization for research funding.
+- Read more: [UR2PhD](https://cra.org/ur2phd/for-undergraduate-students/research-training-course/)
+    - I will also work on helping you connect with other faculty. Reach out soon.
+    
+# Thank you!
+
+
