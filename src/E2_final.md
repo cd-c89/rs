@@ -5,7 +5,7 @@ format:
     code-line-numbers: false
 ---
 
-**Due 09 Dec '25 @ 5 PM PT**
+**Due 09 Dec @ 5 PM PT**
 
 # A Simple SCM
 
