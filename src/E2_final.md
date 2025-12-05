@@ -3,8 +3,9 @@ title: Final
 format: 
   html:
     code-line-numbers: false
-date: 09 Dec '25
 ---
+
+**Due 09 Dec '25 @ 5 PM PT**
 
 # A Simple SCM
 
