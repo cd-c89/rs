@@ -50,7 +50,7 @@ In each case you should only allow an `scm revert` if the integrity and/or confi
 
 For the sakes of this demonstration, after creating a binary - which in my case was named `scm` - I added it to "path" variable `PATH` which allows using it directly from terminal.
 
-For example, say beginning in my home directory I made a a new crate named `scmrs` then used `cargo build release` to create the binary.
+For example, say beginning in my home directory I made a a new crate named `scm` then used `cargo build release` to create the binary.
 
 ```{.sh}
 export PATH=~/scm/target/release/:$PATH

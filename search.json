@@ -16584,7 +16584,7 @@
     "href": "E2_final.html#on-path",
     "title": "Final",
     "section": "On PATH",
-    "text": "On PATH\nFor the sakes of this demonstration, after creating a binary - which in my case was named scm - I added it to “path” variable PATH which allows using it directly from terminal.\nFor example, say beginning in my home directory I made a a new crate named scmrs then used cargo build release to create the binary.\nexport PATH=~/scm/target/release/:$PATH\nRead more on Stack Overflow.",
+    "text": "On PATH\nFor the sakes of this demonstration, after creating a binary - which in my case was named scm - I added it to “path” variable PATH which allows using it directly from terminal.\nFor example, say beginning in my home directory I made a a new crate named scm then used cargo build release to create the binary.\nexport PATH=~/scm/target/release/:$PATH\nRead more on Stack Overflow.",
     "crumbs": [
       "Final"
     ]
